@@ -193,7 +193,7 @@ const ContactUs = () => {
                   <br />
                   Sector 89,
                   <br />
-                  Gurugram, 122505
+                  Gurugram, Haryana - 122505
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
