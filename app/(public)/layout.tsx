@@ -31,9 +31,9 @@ export default function RootLayout({
     { text: 'Home', href: '/' },
     { text: 'About Us', href: '/about-us' },
     { text: 'Pricing', href: '/pricing' },
-    { text: 'Resources', href: '/resources' },
+    // { text: 'Resources', href: '/resources' },
     { text: 'Affiliate', href: '/affiliate' },
-    { text: 'Demo', href: '/demo' },
+    // { text: 'Demo', href: '/demo' },
     { text: 'Contact Us', href: '/contact-us' },
     { text: 'Login', href: '/login' }
   ];

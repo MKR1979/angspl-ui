@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'bizcomrade-server.onrender.com',
+        hostname: 'Adhyayan NextGen Solution Pvt. Ltd.-server.onrender.com',
         port: '',
         pathname: '/uploads/**'
       }

@@ -189,20 +189,20 @@ const ContactUs = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                 <FaMapMarkerAlt size={24} style={{ marginRight: '1rem', color: '#1976d2' }} />
                 <Typography>
-                  123 Business Avenue,
+                  H.N. 301D4, GariHarsharu
                   <br />
-                  Suite 100,
+                  Sector 89,
                   <br />
-                  New York, NY 10001
+                  Gurugram, 122505
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                 <FaPhone size={24} style={{ marginRight: '1rem', color: '#1976d2' }} />
-                <Typography>+1 (555) 123-4567</Typography>
+                <Typography>+91 9522933330</Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <FaEnvelope size={24} style={{ marginRight: '1rem', color: '#1976d2' }} />
-                <Typography>info@company.com</Typography>
+                <Typography>anspl.help@gmail.com</Typography>
               </Box>
             </Box>
           </StyledPaper>

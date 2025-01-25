@@ -27,7 +27,7 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  At BizComrade, we are passionate about helping businesses build lasting relationships with their customers through the
+                  At Adhyayan NextGen Solution Pvt. Ltd., we are passionate about helping businesses build lasting relationships with their customers through the
                   power of innovation. As a leading provider of cutting-edge CRM solutions, we empower organizations of all sizes to
                   streamline their customer interactions, enhance productivity, and drive business growth. Our mission is to revolutionize
                   the way businesses manage customer data, making it easier to engage, understand, and retain their clients.
@@ -158,7 +158,7 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  Behind every great solution is a team of passionate professionals. At BizComrade, our team is composed of industry experts
+                  Behind every great solution is a team of passionate professionals. At Adhyayan NextGen Solution Pvt. Ltd., our team is composed of industry experts
                   in CRM, technology, data analytics, customer service, and business strategy. Together, we work hard to deliver products
                   and services that help you achieve your business objectives.
                 </MyCardContent>
