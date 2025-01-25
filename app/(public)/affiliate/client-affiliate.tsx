@@ -47,9 +47,9 @@ const ClientAffiliate = () => {
               AFFILIATE PROGRAM
             </MyTypography>
             <MyBox sx={{ width: '100%', display: 'flex', justifyContent: 'center', mb: 3 }}>
-              Affiliate with BizComrade and earn a huge recurring commission.
+              Affiliate with Adhyayan NextGen Solution Pvt. Ltd. and earn a huge recurring commission.
             </MyBox>
-            Who can join the BizComrade Affiliate Program?
+            Who can join the Adhyayan NextGen Solution Pvt. Ltd. Affiliate Program?
             <MyGrid container spacing={2} alignItems="stretch">
               <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                 <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>

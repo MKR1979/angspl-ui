@@ -31,8 +31,7 @@ export default function Home() {
               <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
                 <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                   <MyCardContent>
-                    Customer Relationship Management (CRM) systems offer numerous benefits for businesses, enabling them to effectively
-                    manage interactions with current and potential customers. Here are some of the key benefits:
+                   Welcome to Adhyayan NextGen Solutions. At Adhyayan NextGen Solutions, we are at the forefront of delivering cutting-edge technology services tailored to elevate your business to the next level. Our expertise spans across a range of domains, ensuring that we cater to every aspect of your digital transformation journey
                   </MyCardContent>
                 </MyCard>
               </MyGrid>
@@ -204,7 +203,7 @@ export default function Home() {
       </div>
       <div className={styles.container}>
         <div className={styles.vertical_center}>
-          <p>© Copyright 2024 BizComrade Pvt. Ltd., All rights reserved.</p>
+          <p>© Copyright 2025 Adhyayan NextGen Solution Pvt. Ltd., All rights reserved.</p>
         </div>
       </div>
       {/* <main className={styles.main}>
