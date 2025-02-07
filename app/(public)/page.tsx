@@ -5,6 +5,7 @@ import MyCardContent from '../custom-components/MyCardContent';
 import MyGrid from '../custom-components/MyGrid';
 import { CardHeader } from '@mui/material';
 import MyCheckCircleIcon from '../custom-components/MyCheckCircleIcon';
+import MyApiIcon from '../custom-components/MyApiIcon';
 export default function Home() {
   return (
     <div style={{ width: '100%', padding: '0px' }}>
@@ -21,7 +22,7 @@ export default function Home() {
         }}
       >
         <div className={styles.hero_text}>
-          <h1 style={{ fontSize: '50px' }}>Empower Connections, Elevate Success</h1>
+          <h1 style={{ fontSize: '50px' }}>Next-Gen Technology for Next-Level Growth</h1>
         </div>
       </div>
       <div>
@@ -29,11 +30,19 @@ export default function Home() {
           <MyCard>
             <MyCardContent>
               <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-                <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                  <MyCardContent>
-                   Welcome to Adhyayan NextGen Solutions. At Adhyayan NextGen Solutions, we are at the forefront of delivering cutting-edge technology services tailored to elevate your business to the next level. Our expertise spans across a range of domains, ensuring that we cater to every aspect of your digital transformation journey
-                  </MyCardContent>
-                </MyCard>
+                 <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                   <CardHeader
+                     avatar={<MyApiIcon></MyApiIcon>}
+                     title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Welcome to Adhyayan NextGen Solutions Pvt. Ltd.</span>}
+                     sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                   />
+                   <MyCardContent>
+                    At Adhyayan NextGen Solutions Pvt. Ltd., we are committed to driving digital transformation by delivering 
+                    innovative, scalable, and industry-focused technology solutions. Our expertise spans ERP, CRM, 
+                    AI-powered automation, e-learning, billing systems, cloud solutions, and cybersecurity—helping businesses 
+                    optimize operations, enhance customer engagement, and accelerate growth.
+                   </MyCardContent>
+                 </MyCard>
               </MyGrid>
               <MyGrid container spacing={2} alignItems="stretch">
                 <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
@@ -43,14 +52,14 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Customer Relationships</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Streamlined Business Operations</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
-                        <li>Centralizes customer data, providing a complete view of customer interactions.</li>
-                        <li>Improves customer service by ensuring quick and personalized responses to inquiries.</li>
-                        <li>Strengthens customer loyalty through targeted communication and engagement.</li>
+                        <li>Automate workflows with ERP solutions tailored for enterprises, colleges, and universities.</li>
+                        <li>Simplify stock & inventory management with real-time tracking.</li>
+                        <li>Enhance billing & payment processing with secure, automated invoicing.</li>
                       </ul>
                     </MyCardContent>
                   </MyCard>
@@ -62,17 +71,14 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Improved Sales Performance</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Customer Engagement & Sales Performance</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
-                        <li>Helps track leads, prospects, and opportunities, streamlining the sales pipeline.</li>
-                        <li>Offers data-driven insights to identify upselling and cross-selling opportunities.</li>
-                        <li>
-                          Automates repetitive tasks like follow-ups and appointment scheduling, allowing sales teams to focus on closing
-                          deals.
-                        </li>
+                        <li>Intelligent CRM solutions for tracking leads, customer interactions, and sales pipelines.</li>
+                        <li>Data-driven insights for upselling and cross-selling opportunities.</li>
+                        <li>Automated follow-ups and appointment scheduling, freeing up sales teams for high-value tasks.</li>
                       </ul>
                     </MyCardContent>
                   </MyCard>
@@ -84,14 +90,14 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Better Data Organization and Accessibility</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Revolutionizing Education with Digital Solutions</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
-                        <li>Consolidates customer information in one place for easy access by all relevant teams.</li>
-                        <li>Provides secure storage of customer data, reducing the risk of data loss.</li>
-                        <li>Enables seamless collaboration across departments like marketing, sales, and customer support.</li>
+                        <li>AI-powered admission systems that cut manual work by 80% and boost enrollments.</li>
+                        <li>E-learning platforms for seamless digital education.</li>
+                        <li>College & university ERP for efficient administration and student management.</li>
                       </ul>
                     </MyCardContent>
                   </MyCard>
@@ -103,14 +109,14 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Marketing Campaigns</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}> Data-Driven Decision Making & Analytics</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
-                        <li>Allows segmentation of customers based on demographics, preferences, or behavior.</li>
-                        <li>Tracks campaign performance metrics to optimize future marketing efforts.</li>
-                        <li>Facilitates personalized marketing strategies that resonate with target audiences.</li>
+                        <li>Gain real-time insights into customer behavior, market trends, and business performance.</li>
+                        <li>AI-powered analytics & predictive modeling for proactive decision-making.</li>
+                        <li>Secure and centralized data storage, ensuring seamless collaboration across departments.</li>
                       </ul>
                     </MyCardContent>
                   </MyCard>
@@ -123,14 +129,14 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Increased Productivity and Efficiency</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Cybersecurity & Compliance</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
-                        <li>Automates routine tasks like data entry, reporting, and lead tracking.</li>
-                        <li>Provides real-time analytics and dashboards for informed decision-making.</li>
-                        <li>Streamlines workflows and reduces redundancies, saving time and resources.</li>
+                        <li>Protect critical business data with cutting-edge security solutions.</li>
+                        <li>Ensure regulatory compliance with secure document management.</li>
+                        <li>Prevent fraud and cyber threats with advanced risk monitoring tools.</li>
                       </ul>
                     </MyCardContent>
                   </MyCard>
@@ -142,14 +148,14 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Improved Customer Retention</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Scalable & Future-Ready Solutions</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
-                        <li>Helps identify customer pain points and proactively addresses issues.</li>
-                        <li>Tracks customer satisfaction metrics, enabling timely interventions to retain valuable clients.</li>
-                        <li>Encourages long-term customer relationships through loyalty programs and consistent communication.</li>
+                        <li>Cloud-based architecture that grows with your business.</li>
+                        <li>Integration with ERP, CRM, marketing, and helpdesk platforms for a seamless experience.</li>
+                        <li>AI-driven automation for smarter business processes and customer interactions.</li>
                       </ul>
                     </MyCardContent>
                   </MyCard>
@@ -180,19 +186,11 @@ export default function Home() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Decision-Making</span>}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Innovative Solutions for a Digital-First Future</span>}
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
+                    /> 
                     <MyCardContent>
-                      <ul style={{ paddingLeft: '20px' }}>
-                        <li>Provides actionable insights through real-time data analysis and reporting.</li>
-                        <li>Helps identify trends, customer behavior patterns, and opportunities for growth.</li>
-                        <li>
-                          Enables data-driven strategies for sales, marketing, and customer service initiatives. A CRM system is a valuable
-                          tool for businesses looking to improve efficiency, customer satisfaction, and overall profitability. Would you
-                          like more details about specific CRM solutions or features?
-                        </li>
-                      </ul>
+                      At Adhyayan NextGen Solutions Pvt Ltd, we don’t just build software—we create impact. Whether you're a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>

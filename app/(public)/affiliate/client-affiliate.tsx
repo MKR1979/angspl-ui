@@ -13,11 +13,12 @@ import MyAutocomplete from '@/app/custom-components/MyAutocomplete';
 import MyFormControl from '@/app/custom-components/MyFormControl';
 import MyDivider from '@/app/custom-components/MyDivider';
 import MyCardActions from '@/app/custom-components/MyCardActions';
-
+//import ClientAboutUs from '@app/public/about-us/client-about-us'
 import useAffiliate from './useAffiliate';
 import MyInputLabel from '@/app/custom-components/MyInputLabel';
 import MySelect from '@/app/custom-components/MySelect';
 import { arrUserStatus } from '@/app/common/Configuration';
+import { useRouter } from "next/navigation";
 
 const ClientAffiliate = () => {
   const {
@@ -37,7 +38,7 @@ const ClientAffiliate = () => {
     setOpen1,
     setClose1
   } = useAffiliate();
-
+  const router = useRouter();
   return (
     <div style={{ width: '100%', paddingTop: '0px' }}>
       <MyBox>
@@ -232,6 +233,9 @@ const ClientAffiliate = () => {
         <MyDivider></MyDivider>
         <MyCardActions>
           <MyButton onClick={onSaveClick}>Submit</MyButton>
+        </MyCardActions>
+        <MyCardActions>
+        <MyButton onClick={() => router.push("/about-us/client-about-us")}>Redirect</MyButton>          
         </MyCardActions>
       </MyCard>
     </div>
