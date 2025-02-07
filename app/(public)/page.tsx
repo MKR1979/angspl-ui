@@ -190,7 +190,7 @@ export default function Home() {
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     /> 
                     <MyCardContent>
-                      At Adhyayan NextGen Solutions Pvt Ltd, we don’t just build software—we create impact. Whether you're a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
+                      At Adhyayan NextGen Solutions Pvt Ltd, we donot just build software—we create impact. Whether you are a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
@@ -204,35 +204,7 @@ export default function Home() {
           <p>© Copyright 2025 Adhyayan NextGen Solution Pvt. Ltd., All rights reserved.</p>
         </div>
       </div>
-      {/* <main className={styles.main}>
-        <Button variant="contained">Hello world</Button>
-      </main> */}
-      {/* <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-          Go to nextjs.org →
-        </a>
-      </footer> */}
+      
     </div>
   );
 }
