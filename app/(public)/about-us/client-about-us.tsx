@@ -27,10 +27,9 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  At Adhyayan NextGen Solution Pvt. Ltd., we are passionate about helping businesses build lasting relationships with their customers through the
-                  power of innovation. As a leading provider of cutting-edge CRM solutions, we empower organizations of all sizes to
-                  streamline their customer interactions, enhance productivity, and drive business growth. Our mission is to revolutionize
-                  the way businesses manage customer data, making it easier to engage, understand, and retain their clients.
+                At Adhyayan NextGen Solutions Pvt. Ltd., we are dedicated to driving digital transformation through cutting-edge technology. 
+                We specialize in ERP, CRM, cloud solutions, DevOps, cybersecurity, and custom enterprise applications, helping businesses optimize operations, enhance customer engagement, and scale efficiently. 
+                Our expertise spans across education, healthcare, retail, e-commerce, and manufacturing, where we deliver tailored solutions to streamline workflows and accelerate growth..
                 </MyCardContent>
               </MyCard>
             </MyGrid>
@@ -42,9 +41,9 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  Our mission is simple: to help businesses succeed by enabling them to manage and nurture customer relationships more
-                  effectively. By providing state-of-the-art CRM software, we help our clients gain deeper insights into customer behavior,
-                  improve sales processes, and deliver personalized experiences that create lasting loyalty.
+                Our mission is to empower businesses with smart, scalable, and secure technology solutions that improve efficiency and drive success. Whether it’s ERP for seamless business automation, 
+                AI-powered admission systems, secure payment processing,
+                 or cloud-based hospital management, we ensure our clients stay ahead in a rapidly evolving digital landscape.
                 </MyCardContent>
               </MyCard>
             </MyGrid>
@@ -56,9 +55,8 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  We envision a world where businesses no longer struggle with fragmented customer data and disconnected communication
-                  channels. Our vision is to make CRM solutions accessible, adaptable, and intuitive, ensuring businesses can focus on what
-                  matters most: creating exceptional customer experiences.
+                We envision a world where technology bridges the gap between business challenges and success—where enterprises, educational institutions, 
+                and industries operate with seamless automation, data-driven insights, and secure, integrated systems.
                 </MyCardContent>
               </MyCard>
             </MyGrid>
@@ -70,23 +68,25 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  We offer a comprehensive suite of CRM tools designed to meet the unique needs of businesses in every industry. Our
-                  platform provides powerful features that include:
+                  We provide comprehensive technology solutions tailored to industry-specific needs:
                   <ul>
                     <li>
-                      <b>Contact Management</b> – Easily store and manage customer information.
+                      <b>Enterprise Resource Planning (ERP)</b> – Automating business processes for operational efficiency.
                     </li>
                     <li>
-                      <b>Sales Automation</b> – Streamline sales processes and increase efficiency.
+                      <b>Customer Relationship Management (CRM)</b> – Enhancing sales, customer engagement, and data-driven decision-making.
                     </li>
                     <li>
-                      <b>Customer Service Tools</b> – Offer superior customer support through ticketing, live chat, and helpdesk features.
+                      <b>Education Solutions (College & School ERP, E-Learning)</b> – Smart learning platforms and digital admission systems.
                     </li>
                     <li>
-                      <b>Analytics and Reporting</b> – Gain actionable insights into customer behavior and business performance.
+                      <b>Billing & Payment Processing</b> – Secure financial transactions with automated invoicing.
                     </li>
                     <li>
-                      <b>Marketing Automation</b> – Create and track campaigns that drive engagement and lead generation.
+                      <b>Inventory & Supply Chain Management</b> – Real-time tracking for optimized logistics.
+                    </li>
+                    <li>
+                      <b>Cybersecurity & Compliance</b> – Protecting business data with advanced security frameworks.
                     </li>
                   </ul>
                 </MyCardContent>
@@ -102,20 +102,16 @@ const ClientAboutUs = () => {
                 <MyCardContent>
                   <ul>
                     <li>
-                      <b>Innovation:</b> We’re committed to constantly evolving our CRM solutions to meet the ever-changing needs of
-                      businesses.
+                      <b>Innovation:</b> Constantly evolving to meet dynamic industry demands.
                     </li>
                     <li>
-                      <b>Customer Success:</b> Our clients’ success is our success. We go above and beyond to help businesses achieve their
-                      goals.
+                      <b>Customer Success:</b> Prioritizing client growth and satisfaction.
                     </li>
                     <li>
-                      <b>Integrity:</b> We believe in building relationships based on trust and transparency, both with our clients and
-                      within our team.
+                      <b>Integrity:</b> Building trust through transparency and reliability.
                     </li>
                     <li>
-                      <b>Collaboration:</b> Working together with clients and partners to create impactful solutions is at the heart of
-                      everything we do.
+                      <b>Collaboration:</b>Partnering with businesses to create impactful solutions.
                     </li>
                   </ul>
                 </MyCardContent>
@@ -131,20 +127,41 @@ const ClientAboutUs = () => {
                 <MyCardContent>
                   <ul>
                     <li>
-                      <b>Customizable Solutions:</b> Our CRM platform is designed to adapt to your specific business needs, ensuring
-                      seamless integration and maximum impact.
+                      <b>Custom-Built Solutions:</b>Tailored to fit diverse business needs..
                     </li>
                     <li>
-                      <b>User-Friendly Interface:</b> We prioritize ease of use, making our CRM solution simple to implement and navigate,
-                      even for those without a technical background.
+                      <b>User-Centric Approach:</b>Intuitive platforms designed for seamless adoption.
                     </li>
                     <li>
-                      <b>Exceptional Support:</b> Our customer support team is always ready to assist you, ensuring your experience with our
-                      platform is smooth and successful.
+                      <b>End-to-End Support:</b>Dedicated assistance to ensure business success.
                     </li>
                     <li>
-                      <b>Proven Success:</b> Trusted by thousands of businesses around the world, we have a proven track record of driving
-                      customer success.
+                      <b>Proven Impact:</b>Trusted by leading enterprises, educational institutions, and startups.
+                    </li>
+                  </ul>
+                </MyCardContent>
+              </MyCard>
+            </MyGrid>
+            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+              <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                <CardHeader
+                  avatar={<MyApiIcon></MyApiIcon>}
+                  title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Success Stories: Driving Transformation</span>}
+                  sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                />
+                <MyCardContent>
+                  <ul>
+                    <li>
+                      <b>Education:</b>TImplemented an AI-powered admission system, reducing manual workload by 80% and boosting enrollments.
+                    </li>
+                    <li>
+                      <b>Retail & E-Commerce:</b>Developed a custom CRM, increasing sales by 30% through automated customer engagement.
+                    </li>
+                    <li>
+                      <b>Healthcare:</b>Built a cloud-based billing & hospital management system (HMS), streamlining operations and ensuring compliance.
+                    </li>
+                    <li>
+                      <b>Manufacturing:</b>Designed a real-time inventory solution, cutting costs by 25% and improving efficiency.
                     </li>
                   </ul>
                 </MyCardContent>
@@ -158,9 +175,9 @@ const ClientAboutUs = () => {
                   sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                 />
                 <MyCardContent>
-                  Behind every great solution is a team of passionate professionals. At Adhyayan NextGen Solution Pvt. Ltd., our team is composed of industry experts
-                  in CRM, technology, data analytics, customer service, and business strategy. Together, we work hard to deliver products
-                  and services that help you achieve your business objectives.
+                  Behind every great innovation is a team of passionate engineers, cloud architects, cybersecurity experts,
+                   and business strategists. At Adhyayan NextGen Solutions Pvt. Ltd., we work together to deliver powerful, 
+                   scalable, and secure technology solutions that redefine business success.
                 </MyCardContent>
               </MyCard>
             </MyGrid>
