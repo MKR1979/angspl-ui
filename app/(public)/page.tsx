@@ -190,7 +190,7 @@ export default function Home() {
                       sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
                     /> 
                     <MyCardContent>
-                      At Adhyayan NextGen Solutions Pvt Ltd, we don’t just build software—we create impact. Whether you're a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
+                      At Adhyayan NextGen Solutions Pvt Ltd, we donot just build software—we create impact. Whether you are a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
