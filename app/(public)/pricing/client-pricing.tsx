@@ -11,12 +11,21 @@ import { CardHeader, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import MyTabPanel from '@/app/custom-components/MyTabPanel';
 import MyTabs from '@/app/custom-components/MyTabs';
 import MyTab from '@/app/custom-components/MyTab';
+import './pricing.css';
+import { COMPANY } from '.././constants/constants';
 
 import usePricing from './usePricing';
 
 const ClientPricing = () => {
   const { state, handleTabChange } = usePricing();
   const rows = [
+    {
+      name: 'Public Site',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
+    },
     {
       name: 'Admission',
       calories: '✔',
@@ -25,23 +34,58 @@ const ClientPricing = () => {
       protein: '✔'
     },
     {
-      name: 'Payment Gateway',
+      name: 'Payment Collections',
       calories: '✔',
       fat: '✔',
       carbs: '✔',
       protein: '✔'
     },
     {
-      name: 'Admin Dashboard',
+      name: 'Account Creation',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Login',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Role Creation',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'User Creation',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Profile Management',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Course Creation',
       calories: '✘',
-      fat: '✘',
+      fat: '✔',
       carbs: '✔',
       protein: '✔'
     },
     {
       name: 'Student Dashboard',
       calories: '✘',
-      fat: '✘',
+      fat: '✔',
       carbs: '✔',
       protein: '✔'
     },
@@ -50,6 +94,62 @@ const ClientPricing = () => {
       calories: '✘',
       fat: '✔',
       carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Import Quiz',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Study Notes',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Video',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✔',
+      protein: '✔'
+    },
+    {
+      name: 'Location Based Attendance',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✘',
+      protein: '✔'
+    },
+    {
+      name: 'WhatsApp integration',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✘',
+      protein: '✔'
+    },
+    {
+      name: 'Facebook integrations',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✘',
+      protein: '✔'
+    },
+    {
+      name: 'AI integration',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✘',
+      protein: '✔'
+    },
+    {
+      name: 'Student Info',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✘',
       protein: '✔'
     }
   ];
@@ -730,6 +830,16 @@ const ClientPricing = () => {
           </MyCardContent>
         </MyCard>
       </MyBox>
+      <div className="container">
+        <div className="vertical_center">
+          <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
+          <div className="vertical_center">
+            ||
+            <a href="/terms">Terms of use</a>||
+            <a href="/privacy-policy">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
