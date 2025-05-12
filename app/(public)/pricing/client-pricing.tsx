@@ -285,8 +285,8 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        "Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
-                        demanding teams of up to <strong>150 Users</strong>."
+                        Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
+                        demanding teams of up to <strong>150 Users</strong>.
                       </div>
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
@@ -338,8 +338,8 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        "Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
-                        ideal for large organizations with complex requirements."
+                        Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
+                        ideal for large organizations with complex requirements.
                       </div>
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
@@ -611,8 +611,8 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        "Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
-                        demanding teams of up to 150 users."
+                        Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
+                        demanding teams of up to 150 users.
                       </div>
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
@@ -663,8 +663,8 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        "Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
-                        ideal for large organizations with complex requirements."
+                        Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
+                        ideal for large organizations with complex requirements.
                       </div>
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
