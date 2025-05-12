@@ -20,7 +20,7 @@ export default async function ViewUserPage({ params }: Props) {
     const result = apolloClient.query({
       query: GET_USER,
       variables: {
-        id: parseInt(id)
+        id: parseInt(id),
       }
     });
     const results = await Promise.all([result]);

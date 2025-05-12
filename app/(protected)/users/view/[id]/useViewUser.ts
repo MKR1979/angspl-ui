@@ -34,10 +34,10 @@ const useViewUser = ({ dtoUser }: Props) => {
     let dtoUser: UserDTO = {} as UserDTO;
     const { error, data } = await getUser({
       variables: {
-        id: state.dtoUser.id
+        id: state.dtoUser.id,
       }
     });
-    if (!error && data?.getUser) {
+    if (!error && data) {
       dtoUser = data.getUser;
     }
     setState({ dtoUser: dtoUser } as StateType);

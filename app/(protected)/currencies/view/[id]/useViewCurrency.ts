@@ -37,7 +37,7 @@ const useViewCurrency = ({ dtoCurrency }: Props) => {
         id: state.dtoCurrency.id
       }
     });
-    if (!error && data?.getCurrency) {
+    if (!error && data) {
       dtoCurrency = data.getCurrency;
     }
     setState({ dtoCurrency: dtoCurrency } as StateType);

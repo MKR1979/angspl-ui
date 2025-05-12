@@ -13,7 +13,7 @@ export const UPDATE_ROLE = gql`
 
 export const DELETE_ROLE = gql`
   mutation deleteRole($ids: [Int]!) {
-    deleteRole(deleteRoleInput: { ids: $ids })
+    deleteRole(deleteRoleInput: { ids: $ids})
   }
 `;
 

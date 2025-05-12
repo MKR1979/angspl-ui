@@ -1,0 +1,25 @@
+.mycard {
+  font-size: 14px;
+  margin: 100px auto ;
+  width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 3px solid rgb(238, 242, 246);
+}
+
+
+.pay-now-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.pay-now-button:hover {
+  background-color: #1565c0;
+}

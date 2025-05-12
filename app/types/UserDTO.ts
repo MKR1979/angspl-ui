@@ -13,6 +13,7 @@ export default interface UserDTO extends BaseDTO {
   role_id: number;
   role_name: string;
   image_url: string;
+  admission_id: number;
 }
 
 export const USER: UserDTO = Object.freeze({
@@ -29,6 +30,7 @@ export const USER: UserDTO = Object.freeze({
   role_id: 0,
   role_name: '',
   image_url: '',
+  admission_id: 0,
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

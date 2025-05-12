@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery } from '@apollo/client';
-import CountryDTO, { COUNTRY } from '@/app/types/CountryDTO';
+import CountryDTO from '@/app/types/CountryDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_COUNTRY } from '@/app/graphql/Country';
 type StateType = {
@@ -31,13 +31,13 @@ const useViewCountry = ({ dtoCountry }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoCountry: CountryDTO = COUNTRY;
+    let dtoCountry: CountryDTO = {} as CountryDTO;
     const { error, data } = await getCountry({
       variables: {
         id: state.dtoCountry.id
       }
     });
-    if (!error && data?.getCountry) {
+    if (!error && data) {
       dtoCountry = data.getCountry;
     }
     setState({ dtoCountry: dtoCountry } as StateType);

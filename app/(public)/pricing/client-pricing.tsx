@@ -18,39 +18,39 @@ const ClientPricing = () => {
   const { state, handleTabChange } = usePricing();
   const rows = [
     {
-      name: 'Frozen yoghurt',
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0
+      name: 'Admission',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
     },
     {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3
+      name: 'Payment Gateway',
+      calories: '✔',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
     },
     {
-      name: 'Eclair',
-      calories: 262,
-      fat: 16.0,
-      carbs: 24,
-      protein: 6.0
+      name: 'Admin Dashboard',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✔',
+      protein: '✔'
     },
     {
-      name: 'Cupcake',
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3
+      name: 'Student Dashboard',
+      calories: '✘',
+      fat: '✘',
+      carbs: '✔',
+      protein: '✔'
     },
     {
-      name: 'Gingerbread',
-      calories: 356,
-      fat: 16.0,
-      carbs: 49,
-      protein: 3.9
+      name: 'SmartExam',
+      calories: '✘',
+      fat: '✔',
+      carbs: '✔',
+      protein: '✔'
     }
   ];
   return (
@@ -58,10 +58,10 @@ const ClientPricing = () => {
       <MyBox>
         <MyCard>
           <MyCardContent>
-            <MyTypography sx={{ width: '100%', display: 'flex', justifyContent: 'center' }} component="h1" variant="h4" gutterBottom>
+            <MyTypography variant="h4" component="h1" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
               Choose Your Plan
             </MyTypography>
-            <MyBox sx={{ width: '100%', display: 'flex', justifyContent: 'center', mb: 3 }}>Select the perfect plan for your needs</MyBox>
+            <MyBox sx={{ mb: 1, fontSize: '20px', textAlign: 'center' }}>Smart Plans for Every Need — Pick Yours Today!</MyBox>
             <MyBox sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
               <MyTabs value={state.tabIndex} onChange={handleTabChange}>
                 <MyTab label="Monthly Billing" />
@@ -71,62 +71,125 @@ const ClientPricing = () => {
             <MyTabPanel value={state.tabIndex} index={0}>
               <MyGrid container spacing={2} alignItems="stretch">
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
                     <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Basic</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
                     />
                     <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
                     >
-                      <div style={{ fontSize: '26px' }}>$130.00</div>
-                      <div>Per Month</div>
-                      <br></br>
-                      <div>Billed Monthly Excludes VAT</div>
-                      <br></br>
-                      <div>
-                        Entry level, fully managed and supported shared hosting for organisations with limited CRM data and automation
-                        requirements. Recommended for up to 10 Users.
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹3000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        An entry-level, fully managed hosting solution designed for schools, colleges, and universities with limited data
+                        and automation needs. Ideal for up to <strong>10 users</strong>.
                       </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton fullWidth>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Try It Free</MyButton>
-                      </div>
+                      <MyButton
+                        variant="outlined"
+                        fullWidth
+                        style={{
+                          marginBottom: '12px',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center'
+                        }}
+                      >
+                        Compare Plans&nbsp;➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth style={{ fontWeight: 'bold' }}>
+                        Try It Free
+                      </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
+
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
                     <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Professional</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
                     />
                     <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
                     >
-                      <div style={{ fontSize: '26px' }}>$180.00</div>
-                      <div>Per Month</div>
-                      <br></br>
-                      <div>Billed Monthly Excludes VAT</div>
-                      <br></br>
-                      <div>
-                        Shared hosting with enhanced performance, additional storage and business focused features. Recommended for up to 50
-                        Users.
+                      <div style={{ fontSize: '25px', fontWeight: '600', color: '#2d3748' }}>₹5000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        Advanced shared hosting with improved performance, expanded storage, and business-centric features. Best suited for
+                        teams of up to
+                        <strong>50 users</strong>.
                       </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Try It Free</MyButton>
-                      </div>
+                      <MyButton
+                        variant="outlined"
+                        style={{ marginBottom: '12px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                      >
+                        Compare Plans&nbsp;➡️
+                      </MyButton>
+                      <MyButton variant="contained" style={{ width: '100%', fontWeight: 'bold' }}>
+                        Try It Free
+                      </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+
+                {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <CardHeader
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Premium</span>}
@@ -179,6 +242,111 @@ const ClientPricing = () => {
                       <div>
                         <MyButton>Contact Us</MyButton>
                       </div>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid> */}
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹7000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        "Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
+                        demanding teams of up to <strong>150 Users</strong>."
+                      </div>
+                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                        Compare Plans&nbsp;➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth>
+                        Try It Free
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
+
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹99000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        "Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
+                        ideal for large organizations with complex requirements."
+                      </div>
+                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                        Compare Plans&nbsp;➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth>
+                        Contact Us
+                      </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
@@ -186,7 +354,7 @@ const ClientPricing = () => {
             </MyTabPanel>
             <MyTabPanel value={state.tabIndex} index={1}>
               <MyGrid container spacing={2} alignItems="stretch">
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <CardHeader
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Basic</span>}
@@ -241,8 +409,113 @@ const ClientPricing = () => {
                       </div>
                     </MyCardContent>
                   </MyCard>
+                </MyGrid> */}
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹30000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        An entry-level, fully managed hosting solution designed for schools, colleges, and universities with limited data
+                        and automation needs. Ideal for up to <strong>10 users</strong>.
+                      </div>
+                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                        Compare Plans ➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth>
+                        Try It Free
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹55000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        Advanced shared hosting with improved performance, expanded storage, and business-centric features. Best suited for
+                        teams of up to 50 users
+                      </div>
+                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                        Compare Plans ➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth>
+                        Try It Free
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
+
+                {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <CardHeader
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Premium</span>}
@@ -295,6 +568,110 @@ const ClientPricing = () => {
                       <div>
                         <MyButton>Contact Us</MyButton>
                       </div>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid> */}
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹80000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        "Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
+                        demanding teams of up to 150 users."
+                      </div>
+                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                        Compare Plans ➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth>
+                        Try It Free
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '60px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '24px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹99000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+                        "Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
+                        ideal for large organizations with complex requirements."
+                      </div>
+                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                        Compare Plans ➡️
+                      </MyButton>
+                      <MyButton variant="contained" fullWidth>
+                        Contact Us
+                      </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
@@ -308,27 +685,41 @@ const ClientPricing = () => {
           <MyCardContent>
             <MyGrid container spacing={2} alignItems="stretch">
               <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableContainer component={Paper} sx={{ mt: 4 }}>
+                  <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
                     <TableHead>
-                      <TableRow>
-                        <TableCell>Features</TableCell>
-                        <TableCell align="right">Basic</TableCell>
-                        <TableCell align="right">Professional</TableCell>
-                        <TableCell align="right">Premium</TableCell>
-                        <TableCell align="right">Dedicated</TableCell>
+                      <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
+                        <TableCell sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>Features</TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
+                          Basic
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
+                          Professional
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
+                          Premium
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
+                          Dedicated
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {rows.map((row) => (
-                        <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                          <TableCell component="th" scope="row">
-                            {row.name}
+                        <TableRow key={row.name}>
+                          <TableCell sx={{ border: '1px solid #e0e0e0' }}>{row.name}</TableCell>
+                          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+                            {row.calories}
                           </TableCell>
-                          <TableCell align="right">{row.calories}</TableCell>
-                          <TableCell align="right">{row.fat}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
-                          <TableCell align="right">{row.protein}</TableCell>
+                          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+                            {row.fat}
+                          </TableCell>
+                          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+                            {row.carbs}
+                          </TableCell>
+                          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+                            {row.protein}
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

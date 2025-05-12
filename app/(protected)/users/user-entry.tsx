@@ -20,6 +20,7 @@ import MyAutocomplete from '@/app/custom-components/MyAutocomplete';
 import MyBox from '@/app/custom-components/MyBox';
 import MyImage from '@/app/custom-components/MyImage';
 import MyPhoneNumber from '@/app/custom-components/MyPhoneNumber';
+import * as gConstants from '../../constants/constants';
 
 type UserEntryProps = {
   dtoUser: UserDTO;
@@ -40,7 +41,9 @@ const UserEntry = (props: UserEntryProps) => {
     onUserNameBlur,
     onPasswordBlur,
     onStatusBlur,
+    onRoleBlur,
     onSaveClick,
+    onClearClick,
     onCancelClick,
     setOpen1,
     setClose1,
@@ -90,6 +93,10 @@ const UserEntry = (props: UserEntryProps) => {
                   name="first_name"
                   value={state.dtoUser.first_name}
                   onChange={onInputChange}
+                  inputProps={{
+                    maxLength: gConstants.FIRST_NAME_LENGTH, // Restricts input to two characters
+                    pattern: '^[A-Za-z]{1,2}$' // Allows only up to two letters (A-Z, a-z)
+                  }}
                   onBlur={onFirstNameBlur}
                   error={state.errorMessages.first_name ? true : false}
                 />
@@ -101,6 +108,10 @@ const UserEntry = (props: UserEntryProps) => {
                   name="last_name"
                   value={state.dtoUser.last_name}
                   onChange={onInputChange}
+                  inputProps={{
+                    maxLength: gConstants.LAST_NAME_LENGTH, // Restricts input to two characters
+                    pattern: '^[A-Za-z]{1,2}$' // Allows only up to two letters (A-Z, a-z)
+                  }}
                   onBlur={onLastNameBlur}
                   error={state.errorMessages.last_name ? true : false}
                 />
@@ -112,21 +123,16 @@ const UserEntry = (props: UserEntryProps) => {
                   name="email"
                   value={state.dtoUser.email}
                   onChange={onInputChange}
+                  inputProps={{
+                    maxLength: gConstants.EMAIL_LENGTH, // Restricts input to two characters
+                    pattern: '^[A-Za-z]{1,2}$' // Allows only up to two letters (A-Z, a-z)
+                  }}
                   onBlur={onEMailIdBlur}
                   error={state.errorMessages.email ? true : false}
                 />
                 <MyTypography className="error"> {state.errorMessages.email}</MyTypography>
               </MyGrid>
               <MyGrid size={{ xs: 12, sm: 6 }}>
-                {/* <MyTextField
-                  autoComplete="new-mobile"
-                  label="Mobile #"
-                  name="mobile_no"
-                  value={state.dtoUser.mobile_no}
-                  onChange={onInputChange}
-                  onBlur={onMobileNoBlur}
-                  error={state.errorMessages.mobile_no ? true : false}
-                /> */}
                 <MyPhoneNumber
                   label="Mobile #"
                   onChange={onMobileNoChange}
@@ -143,6 +149,10 @@ const UserEntry = (props: UserEntryProps) => {
                   name="user_name"
                   value={state.dtoUser.user_name}
                   onChange={onInputChange}
+                  inputProps={{
+                    maxLength: gConstants.USER_NAME_LENGTH, // Restricts input to two characters
+                    pattern: '^[A-Za-z]{1,2}$' // Allows only up to two letters (A-Z, a-z)
+                  }}
                   onBlur={onUserNameBlur}
                   error={state.errorMessages.user_name ? true : false}
                 />
@@ -158,6 +168,11 @@ const UserEntry = (props: UserEntryProps) => {
                   onChange={onInputChange}
                   onBlur={onPasswordBlur}
                   error={state.errorMessages.password ? true : false}
+                  inputProps={{
+                    minLength: gConstants.PASSWORD_MIN_LENGTH,
+                    maxLength: gConstants.PASSWORD_MAX_LENGTH
+                  }}
+                  required
                 />
                 <MyTypography className="error"> {state.errorMessages.password}</MyTypography>
               </MyGrid>
@@ -174,6 +189,9 @@ const UserEntry = (props: UserEntryProps) => {
                   firstitem={{ id: 0, text: '' }}
                   options={state.arrRoleLookup}
                   onChange={onRoleNameChange}
+                  filterOptions={(
+                    options // to remove the empty selectable string in the lookup
+                  ) => options.filter((option: any) => option.text && option.text.trim() !== '')}
                   renderInput={(params) => (
                     <MyTextField
                       {...params}
@@ -181,9 +199,12 @@ const UserEntry = (props: UserEntryProps) => {
                       slotProps={{
                         inputLabel: { shrink: true }
                       }}
+                      onBlur={onRoleBlur}
+                      error={state.errorMessages.role_name ? true : false}
                     />
                   )}
                 />
+                <MyTypography className="error"> {state.errorMessages.role_id}</MyTypography>
               </MyGrid>
               <MyGrid size={{ xs: 12, sm: 6 }}>
                 <MyFormControl error={state.errorMessages.status ? true : false} fullWidth>
@@ -192,22 +213,34 @@ const UserEntry = (props: UserEntryProps) => {
                     label="Status"
                     name="status"
                     value={state.dtoUser.status.trim() === '' ? ' ' : state.dtoUser.status.trim()}
-                    dataSource={arrUserStatus}
+                    dataSource={arrUserStatus.filter((status) => status.trim() !== '')} //  to remove the empty selectable string in the lookup
+                    // dataSource={arrUserStatus}
                     onChange={onSelectChange}
                     onBlur={onStatusBlur}
                   />
                 </MyFormControl>
                 <MyTypography className="error"> {state.errorMessages.status}</MyTypography>
               </MyGrid>
+              {state.dtoUser?.role_id === 6 && (
+                <MyGrid size={{ xs: 12, sm: 6 }}>
+                  <MyTextField
+                    label="Admission Id"
+                    name="admission_id"
+                    value={state.dtoUser.admission_id}
+                    onChange={onInputChange}
+                    error={state.errorMessages.admission_id ? true : false}
+                  />
+                  <MyTypography className="error"> {state.errorMessages.admission_id}</MyTypography>
+                </MyGrid>
+              )}
             </MyGrid>
           </MyGrid>
         </MyGrid>
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick} disabled={state.saveDisabled}>
-          Save
-        </MyButton>
+        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>
     </MyCard>

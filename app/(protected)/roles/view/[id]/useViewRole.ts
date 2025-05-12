@@ -37,7 +37,7 @@ const useViewRole = ({ dtoRole }: Props) => {
         id: state.dtoRole.id
       }
     });
-    if (!error && data?.getRole) {
+    if (!error && data) {
       dtoRole = data.getRole;
     }
     setState({ dtoRole: dtoRole } as StateType);

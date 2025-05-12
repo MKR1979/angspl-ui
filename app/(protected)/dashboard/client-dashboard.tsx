@@ -15,5 +15,5 @@ const ClientDashboard = () => {
 };
 
 export default memo(ClientDashboard, (prevProps, nextProps) => {
-  return eq(prevProps, nextProps); // Don't re-render!
+  return eq(prevProps, nextProps); 
 });

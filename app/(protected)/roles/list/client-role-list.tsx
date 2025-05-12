@@ -59,7 +59,7 @@ const ClientRoleList = ({ arrRoleDTO, total_records }: Props) => {
       )
     }
   ];
-
+  console.log('hello', state.arrRoleDTO);
   return (
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>

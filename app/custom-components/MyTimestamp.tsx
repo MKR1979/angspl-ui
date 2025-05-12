@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import eq from 'lodash/eq';
 import MyGrid from './MyGrid';
+import MyBox from './MyBox';
 import MyTypography from './MyTypography';
 import { getLocalTime } from '../common/Configuration';
 import dayjs from 'dayjs';
@@ -21,28 +22,36 @@ const MyTimeStamp = ({ createdBy, createdAt, modifiedBy, modifiedAt }: MyTimeSta
       <MyCardContent>
         <MyGrid container spacing={2}>
           <MyGrid size={{ xs: 12, md: 6 }}>
-            <MyTypography variant="subtitle2">Created By:</MyTypography>
-            <MyTypography>{createdBy}</MyTypography>
+            <MyBox sx={{ mb: 0 }}>
+              <MyTypography>Created By:</MyTypography>
+              <MyTypography variant="subtitle2">{createdBy}</MyTypography>
+            </MyBox>
           </MyGrid>
           <MyGrid size={{ xs: 12, md: 6 }}>
-            <MyTypography variant="subtitle2">Created At:</MyTypography>
-            <MyTypography>
-              {dayjs(getLocalTime(createdAt)).format('MM/DD/YYYY') != '12/31/1899'
-                ? dayjs(getLocalTime(createdAt)).format('MM/DD/YYYY hh:mm:ss A')
-                : ''}
-            </MyTypography>
+            <MyBox sx={{ mb: 0 }}>
+              <MyTypography>Created At:</MyTypography>
+              <MyTypography variant="subtitle2">
+                {dayjs(getLocalTime(createdAt)).format('MM/DD/YYYY') != '12/31/1899'
+                  ? dayjs(getLocalTime(createdAt)).format('MM/DD/YYYY hh:mm:ss A')
+                  : ''}
+              </MyTypography>
+            </MyBox>
           </MyGrid>
           <MyGrid size={{ xs: 12, md: 6 }}>
-            <MyTypography variant="subtitle2">Last Modified By:</MyTypography>
-            <MyTypography>{modifiedBy}</MyTypography>
+            <MyBox sx={{ mb: 0 }}>
+              <MyTypography>Last Modified By:</MyTypography>
+              <MyTypography variant="subtitle2">{modifiedBy}</MyTypography>
+            </MyBox>
           </MyGrid>
           <MyGrid size={{ xs: 12, md: 6 }}>
-            <MyTypography variant="subtitle2">Last Modified At:</MyTypography>
-            <MyTypography>
-              {dayjs(getLocalTime(modifiedAt)).format('MM/DD/YYYY') != '12/31/1899'
-                ? dayjs(getLocalTime(modifiedAt)).format('MM/DD/YYYY hh:mm:ss A')
-                : ''}
-            </MyTypography>
+            <MyBox sx={{ mb: 0 }}>
+              <MyTypography>Last Modified At:</MyTypography>
+              <MyTypography variant="subtitle2">
+                {dayjs(getLocalTime(modifiedAt)).format('MM/DD/YYYY') != '12/31/1899'
+                  ? dayjs(getLocalTime(modifiedAt)).format('MM/DD/YYYY hh:mm:ss A')
+                  : ''}
+              </MyTypography>
+            </MyBox>
           </MyGrid>
         </MyGrid>
       </MyCardContent>

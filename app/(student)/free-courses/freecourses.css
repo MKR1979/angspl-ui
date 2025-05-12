@@ -1,0 +1,157 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.free-course-container {
+  max-width: 1200px;
+  margin: 5px auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  gap: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  background-attachment: scroll;
+}
+
+@media (max-width: 768px) {
+  .free-course-container {
+    padding: 7px;
+    grid-template-columns: 1fr;
+  }
+}
+
+.free-course-boxes {
+  width: 320px;
+  padding: 20px;
+  border: 2px solid #d1d1d1;
+  background-color: #f0f0f0;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 17px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .free-course-boxes {
+    width: 100%;
+    margin: 5px 0;
+    padding: 15px;
+  }
+}
+
+.free-course-boxes:hover {
+  background-color: #add8e6;
+  border-color: #87cefa;
+  box-shadow: 0 0 15px rgba(173, 216, 230, 0.5);
+  transform: scale(1.05);
+}
+
+.header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.free-course-category {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.free-course-data {
+  font-size: 12px;
+}
+
+.free-course-name {
+  font-size: 18px;
+}
+
+.free-course-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.free-course-category h3 {
+  font-size: 14px;
+}
+
+.free-course-category p,
+.free-course-category a {
+  font-size: 11px;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  max-width: 500px;
+  display: flex;
+  margin: 0 auto;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  margin-top: 4px;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:hover {
+  border-color: #007bff;
+}
+
+/* Spinner style */
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

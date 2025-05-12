@@ -20,7 +20,7 @@ type StateEntryProps = {
 };
 
 const StateEntry = (props: StateEntryProps) => {
-  const { state, onInputChange, onCountryNameChange, onStateNameBlur, onCountryNameBlur, onSaveClick, onCancelClick } =
+  const { state, onInputChange, onCountryNameChange, onStateNameBlur, onCountryNameBlur, onSaveClick, onClearClick, onCancelClick } =
     useStateEntry(props);
 
   return (
@@ -34,12 +34,25 @@ const StateEntry = (props: StateEntryProps) => {
               value={state.dtoState.state_name}
               onChange={onInputChange}
               onBlur={onStateNameBlur}
+              inputProps={{
+                maxLength: 30, 
+                pattern: "^[A-Za-z]{1,2}$", 
+              }}
               error={state.errorMessages.state_name ? true : false}
             />
             <MyTypography className="error"> {state.errorMessages.state_name}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField label="State Code" name="state_code" value={state.dtoState.state_code} onChange={onInputChange} />
+            <MyTextField 
+            label="State Code" 
+            name="state_code" 
+            value={state.dtoState.state_code} 
+            onChange={onInputChange}
+            inputProps={{
+              maxLength: 10, 
+              pattern: "^[A-Za-z]{1,2}$", 
+            }}
+            />
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyAutocomplete
@@ -49,6 +62,9 @@ const StateEntry = (props: StateEntryProps) => {
               options={state.arrCountryLookup}
               onChange={onCountryNameChange}
               onBlur={onCountryNameBlur}
+                filterOptions={(options) => // to remove the empty selectable string in the lookup
+                options.filter((option: any) => option.text && option.text.trim() !== '')
+              }
               renderInput={(params) => (
                 <MyTextField
                   {...params}
@@ -67,9 +83,8 @@ const StateEntry = (props: StateEntryProps) => {
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick} disabled={state.saveDisabled}>
-          Save
-        </MyButton>
+        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>
     </MyCard>

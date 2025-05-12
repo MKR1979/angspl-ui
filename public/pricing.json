@@ -1,0 +1,143 @@
+{
+  "training": [
+    {
+      "training": "Training & Guidance",
+      "items": [
+        {
+          "name": "Internships for B.Tech (CS), MCA, and M.Sc. (IT)",
+          "price": 11000,
+          "duration": "3 Months",
+          "discount": true
+        },
+        {
+          "name": "IT Job Placement Assistance",
+          "price": 3000,
+          "duration": "5 Weeks",
+          "discount": false
+        },
+        {
+          "name": "Job Interview Prep with IT Industry Insights",
+          "price": 2000,
+          "duration": "5 Weeks",
+          "discount": false
+        },
+        {
+          "name": "Web App Development with Cloud and DevOps",
+          "price": 10000,
+          "duration": "3 Months",
+          "discount": true
+        },
+        {
+          "name": "Mobile App Development",
+          "price": 15000,
+          "duration": "3 Months",
+          "discount": true
+        },
+        {
+          "name": "Software Architecture and Cybersecurity",
+          "price": 10000,
+          "duration": "3 Months",
+          "discount": false
+        }
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "category": "Cloud & DevOps",
+      "items": [
+        {
+          "name": "Azure, AWS and Google cloud",
+          "price": 9000,
+          "duration": "2 Months",
+          "discount": true
+        },
+        {
+          "name": "CI/CD, Git/Github, Azure DevOps, YAML",
+          "price": 5000,
+          "duration": "6 Weeks",
+          "discount": false
+        },
+        {
+          "name": "Terraform, Helm, Docker, Container, Kubernetes",
+          "price": 12000,
+          "duration": "3 Months",
+          "discount": true
+        }
+      ]
+    },
+    {
+      "category": "AI & Data Science",
+      "items": [
+        {
+          "name": "AI, ML, Gen AI, and Data Science",
+          "price": 10000,
+          "duration": "3 Months",
+          "discount": false
+        },
+        {
+          "name": "OpenAI and ChatGPT Applications",
+          "price": 3000,
+          "duration": "6 Weeks",
+          "discount": false
+        }
+      ]
+    },
+    {
+      "category": "Web App Development",
+      "items": [
+        {
+          "name": "React js, Next js, Redux, Angular",
+          "price": 11000,
+          "duration": "3 Months",
+          "discount": true
+        },
+        {
+          "name": "JavaScript, TypeScript, CSS, HTML",
+          "price": 4000,
+          "duration": "2 Months",
+          "discount": false
+        }
+      ]
+    },
+    {
+      "category": "Backend Development",
+      "items": [
+        {
+          "name": "Node.js, GraphQL, Python, .NET Core, C#, C/C++",
+          "price": 12000,
+          "duration": "3 Months",
+          "discount": true
+        }
+      ]
+    },
+    {
+      "category": "Database Management",
+      "items": [
+        {
+          "name": "PostgreSQL, Azure SQL Server, Cosmos, MongoDB",
+          "price": 9000,
+          "duration": "3 Months",
+          "discount": true
+        }
+      ]
+    },
+    {
+      "category": "Academic Preparation Programs",
+      "items": [
+        {
+          "name": "PGDCA",
+          "price": 16000,
+          "duration": "12 Months",
+          "discount": true
+        },
+        {
+          "name": "DCA",
+          "price": 14000,
+          "duration": "12 Months",
+          "discount": true
+        }
+      ]
+    }
+  ]
+}

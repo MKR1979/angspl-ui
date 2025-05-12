@@ -1,0 +1,58 @@
+{
+    "training": [
+      {
+        "title": "IT Job Placement Assistance",
+        "description": "Guidance on job applications, resume building, and career counseling to help secure IT job opportunities."
+      },
+      {
+        "title": "Job Interview Prep with IT Industry Insights",
+        "description": "Mock interviews, common IT interview questions, and expert insights to improve interview performance."
+      },
+      {
+        "title": "Web App Development with Cloud and DevOps",
+        "description": "Comprehensive training on building modern web applications using cloud platforms and DevOps methodologies."
+      },
+      {
+        "title": "Mobile App Development",
+        "description": "Hands-on training in developing mobile applications for iOS and Android using modern frameworks."
+      },
+      {
+        "title": "Software Architecture and Cybersecurity",
+        "description": "In-depth knowledge of designing secure software architectures and implementing cybersecurity best practices."
+      }
+    ],
+    "courses": [
+      {
+        "category": "Academic Preparation Programs",
+        "items": ["B.Tech (Comp.)", "BE (Comp.)", "M.Sc. (IT)", "B.Sc. (IT)", "BCA", "PGDCA"]
+      },
+      {
+        "category": " DevOps",
+        "items": [ "CI/CD", "Git/Github", "Azure DevOps", "YAM", "Terraform", "Helm", "Docker", "Container", "Kubernetes"]
+      },
+      {
+        "category": "Web App Development",
+        "items": ["React js", "Next js", "Redux", "Angular", "JavaScript", "Typescript", "CSS", "HTML"]
+      },
+      {
+        "category": "AI & Data Science",
+        "items": ["OpenAI & ChatGPT Applications","AI", "ML", "Gen AI"]
+      },
+      {
+        "category": "Backend Development",
+        "items": ["Node.js", "GraphQL", "C#", ".NET Core", "Python", "C/C++"]
+      },
+      {
+        "category": "Database Management",
+        "items": ["Azure SQL Server", "Cosmos", "MongoDB", "PostgreSQL"]
+      },
+      {
+        "category": "Cloud",
+        "items": ["AWS and Google cloud", "Azure DevOps",  "Azure" ]
+      },{
+        "category": "Data Science",
+        "items": ["Data Science"]
+      }
+    ]
+  }
+  

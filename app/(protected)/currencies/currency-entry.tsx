@@ -17,7 +17,7 @@ type CurrencyEntryProps = {
 };
 
 const CurrencyEntry = (props: CurrencyEntryProps) => {
-  const { state, onInputChange, onCurrencyNameBlur, onCurrencyCodeBlur, onCurrencySymbolBlur, onSaveClick, onCancelClick } =
+  const { state, onInputChange, onCurrencyNameBlur, onCurrencyCodeBlur, onCurrencySymbolBlur, onSaveClick, onClearClick, onCancelClick } =
     useCurrencyEntry(props);
 
   return (
@@ -61,9 +61,8 @@ const CurrencyEntry = (props: CurrencyEntryProps) => {
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick} disabled={state.saveDisabled}>
-          Save
-        </MyButton>
+        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>
     </MyCard>

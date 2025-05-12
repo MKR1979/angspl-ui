@@ -17,7 +17,7 @@ type CountryEntryProps = {
 };
 
 const CountryEntry = (props: CountryEntryProps) => {
-  const { state, onInputChange, onCountryNameBlur, onSaveClick, onCancelClick } = useCountryEntry(props);
+  const { state, onInputChange, onCountryNameBlur, onSaveClick, onClearClick, onCancelClick } = useCountryEntry(props);
 
   return (
     <MyCard>
@@ -30,6 +30,10 @@ const CountryEntry = (props: CountryEntryProps) => {
               value={state.dtoCountry.country_name}
               onChange={onInputChange}
               onBlur={onCountryNameBlur}
+              inputProps={{
+                maxLength: 30, 
+                pattern: "^[A-Za-z]{1,2}$", 
+              }}
               error={state.errorMessages.country_name ? true : false}
             />
             <MyTypography className="error"> {state.errorMessages.country_name}</MyTypography>
@@ -38,9 +42,8 @@ const CountryEntry = (props: CountryEntryProps) => {
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick} disabled={state.saveDisabled}>
-          Save
-        </MyButton>
+        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>
     </MyCard>

@@ -32,6 +32,106 @@ export const arrTaskStatus: any[] = [
   { text: 'Pending Input' },
   { text: 'Deferred' }
 ];
+
+export const arrCourseStatus: any[] = [
+  { text: 'Active' },
+  { text: 'Expired' },
+  { text: 'Coming soon'}
+];
+
+export const arrCompanyStatus: any[] = [
+  { text: 'Active' },
+  { text: 'In-active' },
+  { text: 'Expired' },
+  { text: 'Coming soon'}
+];
+
+export const arrSiteConfigStatus: any[] = [
+  { text: 'Active' },
+  { text: 'Expired' },
+  { text: 'Coming soon'}
+];
+
+export const arrSiteConfigType: any[] = [
+  { text: 'boolean' },
+  { text: 'string' },
+  { text: 'number'}
+];
+
+export const arrQuizStatus: any[] = [
+  { text: 'Active' },
+  { text: 'Expired' },
+  { text: 'In-active' },
+  { text: 'Coming soon'}
+];
+
+export const arrCodeProjectStatus: any[] = [
+  { text: 'Active' },
+  { text: 'Expired' },
+  { text: 'In-active' },
+  { text: 'Coming soon'}
+];
+
+export const arrStudyNotesStatus: any[] = [
+  { text: 'Active' },
+  { text: 'Expired' },
+  { text: 'In-active' },
+  { text: 'Coming soon'}
+];
+
+export const arrVideoUploadsStatus: any[] = [
+  { text: 'Active' },
+  { text: 'Expired' },
+  { text: 'In-active' },
+  { text: 'Coming soon'}
+];
+
+export const arrQuiz: any[] = [
+  { text: 'React' },
+  { text: 'Java' },
+];
+
+export const arrQuestionLookup: any[] = [
+  { text: 'React' },
+  { text: 'Java' },
+];
+
+export const arrAdmissionStatus: any[] = [
+  { text: 'submitted' },
+  { text: 'Verified' },
+];
+
+export const arrCourseCategory: any[] = [
+{ text: 'AIML' },
+{ text: 'Cloud' },
+{ text: 'DevOps' },
+{ text: 'Infra As Code' },
+{ text: 'Dockerization' },
+{ text: 'Data Science' },
+{ text: 'Kubernetes Orchestration' },
+{ text: 'Web App Development' },
+{ text: 'Mobile App Development' },
+{ text: 'Backend/API Development' },
+{ text: 'Database Management' },
+{ text: 'GraphQL'},
+{ text: 'Registration'},
+];
+
+export const arrCompanyType: any[] = [
+{ text: 'School' },
+{ text: 'College' },
+{ text: 'Universities' },
+{ text: 'Institute' },
+{ text: 'Coaching Centre' },
+{ text: 'Liberary' },
+];
+
+export const arrGenderType: any[] = [
+  { text: 'Male' },
+  { text: 'Female' },
+  { text: 'Other'}
+];
+
 export const arrCasePriority: any[] = [{ text: 'High' }, { text: 'Medium' }, { text: 'Low' }];
 export const arrCaseStatus: any[] = [{ text: 'New' }, { text: 'Assigned' }, { text: 'Pending Input' }];
 export const arrCaseState: any[] = [{ text: 'Open' }, { text: 'Closed' }];
@@ -59,8 +159,6 @@ export const arrDocumentStatus: any[] = [
   { text: 'Under Review' },
   { text: 'Pending' }
 ];
-export const arrDiscountType: any[] = [{ text: 'Fixed' }, { text: 'Percentage' }];
-
 export const textToHTML = (value: string | null | undefined) => {
   return value ? value.replaceAll('\n\r', '</br>').replaceAll('\n', '</br>') : '';
 };
@@ -90,31 +188,3 @@ export const arrLeadTime: string[] = [
   '15 Weeks',
   '16 Weeks'
 ];
-export const arrQuoteStatus: any[] = [
-  { text: 'Draft' },
-  { text: 'Negotiation' },
-  { text: 'Delivered' },
-  { text: 'On Hold' },
-  { text: 'Confirmed' },
-  { text: 'Closed Accepted' },
-  { text: 'Closed Lost' },
-  { text: 'Closed Dead' }
-];
-export const arrQuoteApprovalStatus: any[] = [{ text: 'Approved' }, { text: 'Not Approved' }];
-export const arrOrderStatus: any[] = [{ text: 'Open' }, { text: 'Cancelled' }, { text: 'Invoiced' }, { text: 'Closed' }];
-export const arrProvisionalInvoiceStatus: any[] = [{ text: 'Draft' }, { text: 'Cancelled' }, { text: 'Delivered' }];
-export const arrInvoiceStatus: any[] = [{ text: 'Open' }, { text: 'Cancelled' }, { text: 'Closed' }];
-export const arrDeliverySlipStatus: any[] = [{ text: 'Open' }, { text: 'Cancelled' }, { text: 'Closed' }];
-
-export const numberFormat = (value: number, decimalPlaces: number) => {
-  const p = value.toFixed(decimalPlaces).split('.');
-  return (
-    p[0].split('').reduceRight(function (acc, num, i, orig) {
-      if ('-' === num && 0 === i) {
-        return num + acc;
-      }
-      const pos = orig.length - i - 1;
-      return num + (pos && !(pos % 3) ? ',' : '') + acc;
-    }, '') + (p[1] ? '.' + p[1] : '')
-  );
-};
