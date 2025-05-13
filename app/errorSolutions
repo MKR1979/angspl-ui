@@ -1,0 +1,31 @@
+#---------------------------------------------Error and Solution ---------------------------------#
+
+1. Error :- "404-Bad Input request"
+Solution :- "Method / Columns or fields name must be match with Type, Graphql, APi , PSQL."
+
+2. Error :- "400: Cannot query with Method Name."
+Solution :- "New module needs to be added in the "index.js" of Type and Resolver "
+
+3. Error :- "List is not populating any data"
+solution :- "1. Where clause of function count and Page/List must be Identical."
+             2. Your schema and resolver variable must be identical/ in the api
+             3. Same variable must be match at client side while reading data
+
+3. Error :- "Pgcatelog Btrim"
+solution :- "Whem you apply trim on any fields which are not being passed from client/api(i.e. undefined)"
+
+4. (a) Error :- "Reading trim issue"
+solution :- "Trim cannot be applied on Integer/Number/undefined/null."
+
+4. (b) Error :- "Undefined Reading trim"
+Solution :- "All the attributes/ fields with trim must be passed from resolver/Api"
+
+4. (c) Error :- "Unknown Parameters"
+solution :- Among (UI's, GraphQl, APi, PSQL)
+        (1) Number of columns must be matched.
+        (2) Type of columns must be matched.
+        (3) Sequence of columns must be matched.
+
+5. Error :- API not calling in code-project view and when we provide hardcoaded value of id api calling starts, then solves backend 
+            errors and then restore the code to get dynamic values of id, API calling starts without any changes in the actual code.
+   Solution :- 

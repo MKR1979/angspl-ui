@@ -10,6 +10,7 @@ import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyDivider from '@/app/custom-components/MyDivider';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyGrid from '@/app/custom-components/MyGrid';
+import MyBox from '@/app/custom-components/MyBox';
 import CurrencyDTO from '@/app/types/CurrencyDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
 
@@ -27,16 +28,22 @@ const ClientViewCurrency = ({ dtoCurrency }: Props) => {
         <MyCardContent>
           <MyGrid container spacing={2}>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">Currency Name:</MyTypography>
-              <MyTypography>{state.dtoCurrency.currency_name}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Currency Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoCurrency.currency_name}</MyTypography>
+              </MyBox>
             </MyGrid>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">Currency Code:</MyTypography>
-              <MyTypography>{state.dtoCurrency.currency_code}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Currency Code:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoCurrency.currency_code}</MyTypography>
+              </MyBox>
             </MyGrid>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">Currency Symbol:</MyTypography>
-              <MyTypography>{state.dtoCurrency.currency_symbol}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Currency Symbol:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoCurrency.currency_symbol}</MyTypography>
+              </MyBox>
             </MyGrid>
           </MyGrid>
         </MyCardContent>

@@ -50,29 +50,49 @@ const ClientViewUser = ({ dtoUser }: Props) => {
             <MyGrid size={{ xs: 12, sm: 10 }}>
               <MyGrid container spacing={2}>
                 <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyTypography variant="subtitle2">First Name:</MyTypography>
-                  <MyTypography>{state.dtoUser.first_name}</MyTypography>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">First Name:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.first_name}</MyTypography>
+                  </MyBox>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyTypography variant="subtitle2">Last Name:</MyTypography>
-                  <MyTypography>{state.dtoUser.last_name}</MyTypography>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">Last Name:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.last_name}</MyTypography>
+                  </MyBox>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyTypography variant="subtitle2">E-Mail:</MyTypography>
-                  <MyTypography>{state.dtoUser.email}</MyTypography>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">E-Mail:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.email}</MyTypography>
+                  </MyBox>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyTypography variant="subtitle2">Mobile #:</MyTypography>
-                  <MyTypography>{state.dtoUser.mobile_no}</MyTypography>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">Mobile #:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.mobile_no}</MyTypography>
+                  </MyBox>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyTypography variant="subtitle2">Role:</MyTypography>
-                  <MyTypography>{state.dtoUser.role_name}</MyTypography>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">Role:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.role_name}</MyTypography>
+                  </MyBox>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyTypography variant="subtitle2">Status:</MyTypography>
-                  <MyTypography>{state.dtoUser.status}</MyTypography>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">Status:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.status}</MyTypography>
+                  </MyBox>
                 </MyGrid>
+                {state.dtoUser.role_name === 'student' && (
+                <MyGrid size={{ xs: 12, md: 6 }}>
+                  <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">Admission Id:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.admission_id}</MyTypography>
+                  </MyBox>
+                </MyGrid>
+                )}
               </MyGrid>
             </MyGrid>
           </MyGrid>

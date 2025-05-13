@@ -10,6 +10,7 @@ export const ADD_USER = gql`
     $status: String
     $role_id: Int
     $image_url: String
+    $admission_id: Int
   ) {
     addUser(
       addUserInput: {
@@ -22,6 +23,7 @@ export const ADD_USER = gql`
         status: $status
         role_id: $role_id
         image_url: $image_url
+        admission_id: $admission_id
       }
     )
   }
@@ -39,6 +41,7 @@ export const UPDATE_USER = gql`
     $status: String
     $role_id: Int
     $image_url: String
+    $admission_id: Int
   ) {
     updateUser(
       updateUserInput: {
@@ -52,6 +55,7 @@ export const UPDATE_USER = gql`
         status: $status
         role_id: $role_id
         image_url: $image_url
+        admission_id: $admission_id
       }
     )
   }
@@ -59,7 +63,7 @@ export const UPDATE_USER = gql`
 
 export const DELETE_USER = gql`
   mutation deleteUser($ids: [Int]!) {
-    deleteUser(deleteUserInput: { ids: $ids })
+    deleteUser(deleteUserInput: { ids: $ids})
   }
 `;
 
@@ -73,7 +77,7 @@ export const USER_LOOKUP = gql`
 `;
 
 export const USER_LIST = gql`
-  query getUserList($filter_text: String, $sort_direction: String, $sort_field: String, $offset: Int, $limit: Int) {
+  query getUserList( $filter_text: String, $sort_direction: String, $sort_field: String, $offset: Int, $limit: Int) {
     getUserList(
       getUserListInput: {
         filter_text: $filter_text
@@ -95,6 +99,7 @@ export const USER_LIST = gql`
         role_id
         role_name
         image_url
+        admission_id
         created_by
         created_by_first_name
         created_by_last_name
@@ -112,7 +117,7 @@ export const USER_LIST = gql`
 
 export const GET_USER = gql`
   query getUser($id: Int!) {
-    getUser(getUserInput: { id: $id }) {
+    getUser(getUserInput: { id: $id}) {
       id
       first_name
       last_name
@@ -124,6 +129,35 @@ export const GET_USER = gql`
       role_id
       role_name
       image_url
+      admission_id
+      created_by
+      created_by_first_name
+      created_by_last_name
+      created_by_user_name
+      created_at
+      modified_by
+      modified_by_first_name
+      modified_by_last_name
+      modified_by_user_name
+      modified_at
+    }
+  }
+`;
+export const GET_USER_BY_NAME = gql`
+  query getUserByName(  $user_name: String!) {
+    getUserByName(getUserInput: { user_name: $user_name }) {
+      id
+      first_name
+      last_name
+      email
+      mobile_no
+      user_name
+      password
+      status
+      role_id
+      role_name
+      image_url
+      admission_id
       created_by
       created_by_first_name
       created_by_last_name
@@ -138,22 +172,28 @@ export const GET_USER = gql`
   }
 `;
 
-// export const GET_USER_BY_USER_NAME = gql`
-//   query getUserByUserName($user_name: String!) {
-//     getUserByUserName(getUserByUserNameInput: { user_name: $user_name }) {
-//       id
-//       first_name
-//       last_name
-//       email
-//       mobile_no
-//       user_name
-//     }
-//   }
-// `;
+export const GET_USER_BY_USER_NAME = gql`
+  query getUserByUserName( $user_name: String!) {
+    getUserByUserName(getUserByUserNameInput: {user_name: $user_name }) {
+      id
+      first_name
+      last_name
+      email
+      mobile_no
+      user_name
+      password
+      status
+      role_id
+      role_name
+      image_url
+      admission_id
+    }
+  }
+`;
 
 export const LOGIN_USER = gql`
-  mutation login($user_name: String!, $password: String!) {
-    login(user_name: $user_name, password: $password)
+  mutation login( $user_name: String!, $password: String!) {
+    login( user_name: $user_name, password: $password)
   }
 `;
 
@@ -164,14 +204,14 @@ export const GET_USER_EMAIL_EXIST = gql`
 `;
 
 export const GET_USER_USER_NAME_EXIST = gql`
-  query getUserUserNameExist($id: Int!, $user_name: String!) {
+  query getUserUserNameExist($id: Int!,  $user_name: String!) {
     getUserUserNameExist(id: $id, user_name: $user_name)
   }
 `;
 
 export const GET_USER_MOBILE_NO_EXIST = gql`
   query getUserMobileNoExist($id: Int!, $mobile_no: String!) {
-    getUserMobileNoExist(id: $id, mobile_no: $mobile_no)
+    getUserMobileNoExist(id: $id,  mobile_no: $mobile_no)
   }
 `;
 
@@ -189,6 +229,7 @@ export const GET_USER_MY_PROFILE = gql`
       role_id
       role_name
       image_url
+      admission_id
       created_by
       created_by_first_name
       created_by_last_name
@@ -217,6 +258,7 @@ export const UPDATE_USER_PROFILE = gql`
     $mobile_no: String!
     $status: String
     $image_url: String
+    $admission_id: Int
   ) {
     updateUserProfile(
       updateUserProfileInput: {
@@ -226,14 +268,21 @@ export const UPDATE_USER_PROFILE = gql`
         mobile_no: $mobile_no
         status: $status
         image_url: $image_url
+        admission_id: $admission_id
       }
     )
   }
 `;
 
 export const UPDATE_USER_PASSWORD = gql`
-  mutation updateUserPassword($old_password: String!, $password: String!) {
+  mutation updateUserPassword( $old_password: String!, $password: String!) {
     updateUserPassword(updateUserPasswordInput: { old_password: $old_password, password: $password })
+  }
+`;
+
+export const FORGET_USER_PASSWORD = gql`
+  mutation forgetUserPassword( $user_name: String!, $email: String!, $password: String!) {
+    forgetUserPassword(forgetUserPasswordInput: { user_name: $user_name, email: $email, password: $password })
   }
 `;
 

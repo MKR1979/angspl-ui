@@ -1,0 +1,50 @@
+{
+    "data": {
+      "AddQuizData": [
+        {
+          "quiz_name": "6React Basics",
+          "quiz_code": "6REACT001",
+          "status": "Active",
+          "created_by": 1,
+          "created_at": "2025-04-17 03:55:55",
+          "modified_by": 1,
+          "modified_at": "2025-04-17 09:30:51.71",
+          "questions": [
+            {
+              "question": "6What is Virtual DOM?",
+              "status": "Active",
+              "options": [
+                {
+                  "option_text": "Real DOM",
+                  "is_correct": false,
+                  "explanation": "Incorrect - Real DOM is slower."
+                },
+                {
+                  "option_text": "Virtual DOM",
+                  "is_correct": true,
+                  "explanation": "Correct - Virtual DOM allows efficient updates."
+                }
+              ]
+            },
+            {
+              "question": "6Which language is used with React?",
+              "status": "Active",
+              "options": [
+                {
+                  "option_text": "PHP",
+                  "is_correct": false,
+                  "explanation": "Incorrect - React uses JSX, not PHP."
+                },
+                {
+                  "option_text": "JSX",
+                  "is_correct": true,
+                  "explanation": "Correct - JSX blends JS with HTML."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+  

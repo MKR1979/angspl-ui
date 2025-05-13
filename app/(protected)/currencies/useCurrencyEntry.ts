@@ -4,7 +4,6 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import CurrencyDTO, { CURRENCY } from '@/app/types/CurrencyDTO';
 import { ADD_CURRENCY, UPDATE_CURRENCY, GET_CURRENCY } from '@/app/graphql/Currency';
 import { GET_CURRENCY_CURRENCY_CODE_EXIST, GET_CURRENCY_CURRENCY_NAME_EXIST } from '@/app/graphql/Currency';
-import toast from 'react-hot-toast';
 
 type ErrorMessageType = {
   currency_name: string | null;
@@ -14,7 +13,6 @@ type ErrorMessageType = {
 
 type StateType = {
   dtoCurrency: CurrencyDTO;
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -32,7 +30,6 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoCurrency: dtoCurrency,
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   });
 
@@ -65,7 +62,7 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
         id: state.dtoCurrency.id
       }
     });
-    if (!error && data?.getCurrency) {
+    if (!error && data) {
       dtoCurrency = data.getCurrency;
     }
     setState({ dtoCurrency: dtoCurrency } as StateType);
@@ -79,7 +76,7 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
         currency_code: state.dtoCurrency.currency_code
       }
     });
-    if (!error && data?.getCurrencyCurrencyCodeExist) {
+    if (!error && data) {
       exist = data.getCurrencyCurrencyCodeExist;
     }
     return exist;
@@ -93,7 +90,7 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
         currency_name: state.dtoCurrency.currency_name
       }
     });
-    if (!error && data?.getCurrencyCurrencyNameExist) {
+    if (!error && data) {
       exist = data.getCurrencyCurrencyNameExist;
     }
     return exist;
@@ -185,49 +182,41 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          if (state.dtoCurrency.id === 0) {
-            const { data } = await addCurrency({
-              variables: {
-                currency_code: state.dtoCurrency.currency_code,
-                currency_name: state.dtoCurrency.currency_name,
-                currency_symbol: state.dtoCurrency.currency_symbol
-              }
-            });
-            if (data?.addCurrency) {
-              toast.success('record saved successfully');
-              router.push('/currencies/list');
-            } else {
-              toast.error('Failed to save the record');
+      event.preventDefault();
+      if (await validateForm()) {
+        if (state.dtoCurrency.id === 0) {
+          const { data } = await addCurrency({
+            variables: {
+              ...state.dtoCurrency
             }
-          } else {
-            const { data } = await updateCurrency({
-              variables: {
-                id: state.dtoCurrency.id,
-                currency_code: state.dtoCurrency.currency_code,
-                currency_name: state.dtoCurrency.currency_name,
-                currency_symbol: state.dtoCurrency.currency_symbol
-              }
-            });
-            if (data?.updateCurrency) {
-              toast.success('record saved successfully');
-              router.push('/currencies/list');
-            } else {
-              toast.error('Failed to save the record');
+          });
+          if (data) {
+            router.push('/currencies/list');
+          }
+        } else {
+          const { data } = await updateCurrency({
+            variables: {
+              ...state.dtoCurrency
             }
+          });
+          if (data) {
+            router.push('/currencies/list');
           }
         }
-      } catch {
-        toast.error('Failed to save the record');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, addCurrency, state.dtoCurrency, router, updateCurrency]
+  );
+
+  const onClearClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      setState({
+        dtoCurrency: { ...CURRENCY, id: state.dtoCurrency.id },
+        errorMessages: { ...ERROR_MESSAGES }
+      } as StateType);
+    },
+    [state.dtoCurrency.id, ERROR_MESSAGES]
   );
 
   const onCancelClick = useCallback(
@@ -245,6 +234,7 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
     onCurrencyCodeBlur,
     onCurrencySymbolBlur,
     onSaveClick,
+    onClearClick,
     onCancelClick
   };
 };

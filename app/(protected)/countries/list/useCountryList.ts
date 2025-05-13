@@ -15,7 +15,7 @@ import CountryDTO from '@/app/types/CountryDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { COUNTRY_LIST, DELETE_COUNTRY } from '@/app/graphql/Country';
 
-type visibleDialog1Type = { id: number; visibility: boolean };
+type visibleDialog1Type = { id: string; visibility: boolean };
 
 type StateType = {
   isLoading: boolean;
@@ -26,7 +26,7 @@ type StateType = {
   sort_direction: SortDirectionType;
   visibleDialog: boolean;
   visibleDialog1: visibleDialog1Type;
-  selectedRow: number;
+  selectedRow: string;
   arrSelectedId: string[];
   contextMenu: ContextMenuType | null;
   initialState: GridInitialState;
@@ -48,8 +48,8 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
     sort_field: 'id',
     sort_direction: 'desc',
     visibleDialog: false,
-    visibleDialog1: { id: 0, visibility: false },
-    selectedRow: 0,
+    visibleDialog1: { id: '', visibility: false },
+    selectedRow: '',
     arrSelectedId: [],
     contextMenu: null,
     initialState: {
@@ -89,13 +89,11 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
     let arrCountryDTO: CountryDTO[] = [];
     let total_records: number = 0;
     const { error, data } = await getCountryList();
-    if (!error && data?.getCountryList?.countries) {
+    if (!error && data) {
       arrCountryDTO = data.getCountryList.countries.map((item: CountryDTO) => {
         return { ...item, id: parseInt(item.id.toString()) };
       });
-      if (data?.getCountryList?.total_records) {
-        total_records = data.getCountryList.total_records;
-      }
+      total_records = data.getCountryList.total_records;
     }
     setState({
       arrCountryDTO: arrCountryDTO,
@@ -118,7 +116,7 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
   }, [state.visibleDialog]);
 
   const toggleDialog1 = useCallback(
-    async (id: number): Promise<void> => {
+    async (id: string): Promise<void> => {
       setState({ visibleDialog1: { id: id, visibility: !state.visibleDialog1.visibility } } as StateType);
     },
     [state.visibleDialog1.visibility]
@@ -140,7 +138,7 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
       event.preventDefault();
       setState({
-        selectedRow: Number(event.currentTarget.getAttribute('data-id')),
+        selectedRow: event.currentTarget.getAttribute('data-id') as string,
         contextMenu: state.contextMenu === null ? { mouseX: event.clientX - 2, mouseY: event.clientY - 4 } : null
       } as StateType);
     },
@@ -177,23 +175,19 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      try {
-        event.preventDefault();
-        const params = [Number(state.visibleDialog1.id)];
-        const { data } = await deleteCountry({
-          variables: {
-            ids: params
-          }
-        });
-        await toggleDialog1(0);
-        if (data?.deleteCountry) {
-          getData();
-          toast.success('record(s) deleted successfully');
-        } else {
-          toast.error('Error occured while deleting record(s)');
+      event.preventDefault();
+      const params = [Number(state.visibleDialog1.id)];
+      const { data } = await deleteCountry({
+        variables: {
+          ids: params
         }
-      } catch {
-        toast.error('Error occured while deleting record(s)');
+      });
+      await toggleDialog1('');
+      if (data) {
+        getData();
+        toast.success('record(s) deleted successfully');
+      } else {
+        toast.error('Error occured while deleting record');
       }
     },
     [deleteCountry, getData, state.visibleDialog1.id, toggleDialog1]
@@ -227,21 +221,17 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      try {
-        event.preventDefault();
-        const { data } = await deleteCountry({
-          variables: {
-            ids: state.arrSelectedId
-          }
-        });
-        await toggleDialog();
-        if (data?.deleteCountry) {
-          getData();
-          toast.success('record(s) deleted successfully');
-        } else {
-          toast.error('Error occured while deleting record(s)');
+      event.preventDefault();
+      const { data } = await deleteCountry({
+        variables: {
+          ids: state.arrSelectedId
         }
-      } catch {
+      });
+      await toggleDialog();
+      if (data) {
+        getData();
+        toast.success('record(s) deleted successfully');
+      } else {
         toast.error('Error occured while deleting record(s)');
       }
     },
@@ -269,7 +259,7 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
   );
 
   const onDeleteSingleClose = useCallback(async () => {
-    toggleDialog1(0);
+    toggleDialog1('');
   }, [toggleDialog1]);
 
   return {

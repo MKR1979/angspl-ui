@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'Adhyayan NextGen Solution Pvt. Ltd.-server.onrender.com',
+        hostname: 'adhyayan-server.onrender.com',
         port: '',
         pathname: '/uploads/**'
       }

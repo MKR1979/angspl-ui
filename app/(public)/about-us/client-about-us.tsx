@@ -6,20 +6,28 @@ import MyCard from '@/app/custom-components/MyCard';
 import { CardHeader } from '@mui/material';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyApiIcon from '@/app/custom-components/MyApiIcon';
-import MyInfoIcon from '@/app/custom-components/MyInfoIcon';
+import './about-us.css';
+// import MyInfoIcon from '@/app/custom-components/MyInfoIcon';
+// import { COMPANY, SHORT_FORM } from '../../constants/constants';
+import { COMPANY } from '.././constants/constants';
 
 const ClientAboutUs = () => {
   return (
     <>
-      <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <CardHeader
+      <div>
+        <div className="about-content">
+          <br></br>
+          <br></br>
+        </div>
+        <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        {/* <CardHeader
           avatar={<MyInfoIcon></MyInfoIcon>}
           title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>About Us</span>}
           sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-        />
+        /> */}
         <MyCardContent>
           <MyGrid container spacing={2} alignItems="stretch">
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -33,7 +41,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -47,7 +55,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -60,7 +68,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -92,7 +100,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -117,7 +125,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -142,7 +150,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -167,7 +175,7 @@ const ClientAboutUs = () => {
                 </MyCardContent>
               </MyCard>
             </MyGrid>
-            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+            <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
               <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <CardHeader
                   avatar={<MyApiIcon></MyApiIcon>}
@@ -184,6 +192,17 @@ const ClientAboutUs = () => {
           </MyGrid>
         </MyCardContent>
       </MyCard>
+        <div className="container">
+          <div className="vertical_center">
+            <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
+            <div className="vertical_center">
+              ||
+              <a href="/terms">Terms of use</a>||
+              <a href="/privacy-policy">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

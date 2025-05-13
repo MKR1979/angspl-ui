@@ -17,7 +17,7 @@ export default async function RoleListPage() {
     const apolloClient = await createServerApolloClient();
     const result = apolloClient.query({
       query: ROLE_LIST,
-      variables: {
+      variables: {       
         filter_text: '',
         sort_field: 'id',
         sort_direction: 'desc',

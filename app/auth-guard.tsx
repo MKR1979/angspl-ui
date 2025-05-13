@@ -12,7 +12,6 @@ const AuthGuard = ({ children }: any) => {
       router.push('/login');
     }
   }, [token, router]);
-
   return <>{children}</>;
 };
 

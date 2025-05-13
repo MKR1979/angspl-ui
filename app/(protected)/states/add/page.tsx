@@ -23,6 +23,7 @@ export default async function AddStatePage() {
     if (results[0]?.data?.getCountryLookup) {
       arrCountryLookup = results[0].data.getCountryLookup;
     }
+    console.log('hello', JSON.stringify(arrCountryLookup));
   } catch (e) {
     console.log('hello', JSON.stringify(e));
   }

@@ -1,0 +1,121 @@
+{
+  "training": [
+    {
+      "title": "Internships for B.Tech (CS), MCA, and M.Sc. (IT)",
+      "price": 6000,
+      "description": "Guidance on job applications, resume building, and career counseling to help secure IT job opportunities."
+    },
+    {
+      "title": "IT Job Placement Assistance",
+      "price": 3000,
+      "description": "Guidance on job applications, resume building, and career counseling to help secure IT job opportunities."
+    },
+    {
+      "title": "Job Interview Prep with IT Industry Insights",
+      "price": 3000,
+      "description": "Mock interviews, common IT interview questions, and expert insights to improve interview performance."
+    },
+    {
+      "title": "Web App Development with Cloud and DevOps",
+      "price": 11000,
+      "description": "Comprehensive training on building modern web applications using cloud platforms and DevOps methodologies."
+    },
+    {
+      "title": "Software Architecture and Cybersecurity",
+      "price": 4000,
+      "description": "In-depth knowledge of designing secure software architectures and implementing cybersecurity best practices."
+    }
+  ],
+  "courses": [
+    {
+      "category": "DevOps",
+       "price": 6000,
+       "image":"imgPrograms/DevOps.png",
+      "items": ["Azure DevOps", "CI/CD", "Git/Github", "YAML"]
+    },
+    {
+      "category": "DevOps",
+      "price": 4000,
+      "image":"imgPrograms/DevOps.png",
+      "items": ["Git/Github", "YAML", "CI/CD","Gitbash"]
+    },
+    {
+      "category": "Infra As Code",
+      "price": 5000,
+      "image":"imgPrograms/infra AS Code.jpg",
+      "items": ["Terraform", "Bicep"]
+    },
+    {
+      "category": "Dockerization and Kubernetes Orchestration",
+      "price": 9000,
+      "image":"imgPrograms/dockerization.png",
+      "items": ["docker,container", "node,pod", "Kubernetes", "helm"]
+    },
+    {
+      "category": "Cloud",
+      "price": 5000,
+      "image":"imgPrograms/Cloud.png",
+      "items": ["AWS/Google/Azure Cloud"]
+    },
+    {
+      "category": "Web App Development",
+      "price": 11000,
+      "image": "imgPrograms/web app development.png",
+      "items": ["React.js, Redux", "Next.js", "TypeScript, JavaScript", "HTML,CSS"]
+    },
+    {
+      "category": "Web App Development",
+      "price": 12000,
+      "image": "imgPrograms/web app development.png",
+      "items": ["Angular", "TypeScript, JavaScript", "HTML,CSS"]
+    },
+    {
+      "category": "Mobile App Development",
+      "price": 15000,
+      "image": "imgPrograms/mobile app develoment.png",
+      "items": ["React Native", "TypeScript, JavaScript", "HTML,CSS"]
+    }, 
+    {
+      "category": "Backend Development",
+      "price": 5000,
+      "image":"imgPrograms/backend development.png",
+      "items": ["Node.js", "GraphQL"]
+    },
+    {
+      "category": "Backend Development",
+      "price": 4000,
+      "image":"imgPrograms/backend development.png",
+      "items": ["C#,.NET Core"]
+    },
+    {
+      "category": "Backend Development",
+      "price": 9000,
+      "image":"imgPrograms/backend development.png",
+      "items": ["Python", "C/C++"]
+    },
+    {
+      "category": "Database Management",
+      "price": 5000,
+      "image":"imgPrograms/database management.png",
+      "items": ["Azure SQL Server", "PostgreSQL"]
+    },
+    {
+      "category": "Database Management",
+      "price": 9000,
+      "image":"imgPrograms/database management.png",
+      "items": ["Cosmos DB", "MongoDB"]
+    },
+    {
+      "category": "AI & Data Science",
+      "price": 6000,
+      "image":"imgPrograms/Ai data science.png",
+      "items": ["OpenAI & ChatGPT Applications", "AI, ML", "Generative AI"]
+    },    
+    {
+      "category": "Academic Preparation Programs",
+      "price": 5000,
+      "image":"imgPrograms/academic preparation programs.png",
+      "items": ["B.Tech (Comp.)", "MCA", "M.Sc. (IT)", "B.Sc. (IT), BCA", "PGDCA"]
+    }
+  ]
+}
