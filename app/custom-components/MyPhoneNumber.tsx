@@ -6,7 +6,7 @@ type MyPhoneNumberProps = MuiPhoneNumberProps & {};
 
 const MyPhoneNumber = ({ ...props }: MyPhoneNumberProps) => {
   console.log('MyPhoneNumber rendered');
-  return <MuiPhoneNumber InputLabelProps={{ shrink: true }} size="small" variant="outlined" fullWidth defaultCountry={'us'} {...props} />;
+  return <MuiPhoneNumber InputLabelProps={{ shrink: true }} size="small" variant="outlined" fullWidth defaultCountry={'in'} {...props} />;
 };
 
 export default memo(MyPhoneNumber, (prevProps, nextProps) => {

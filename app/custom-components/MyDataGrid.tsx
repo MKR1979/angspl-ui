@@ -11,7 +11,6 @@ import {
   GridPagination,
   useGridSelector,
   useGridApiContext
-  //GridToolbarContainer
 } from '@mui/x-data-grid';
 import { defaultPageSize, density, pageSizes } from '../common/Configuration';
 //import {} from '@mui/material';
@@ -84,7 +83,7 @@ const CustomToolbar = memo(
         <MyGrid size={{ xs: 12, md: 9, lg: 9 }}>
           {showAddButton && <GridToolbarAddButton onAddClick={props.onAddClick} />}
           {showDeleteButton && <GridToolbarDeleteButton onDeleteClick={props.onDeleteClick} />}
-          <GridToolbarColumnsButton slotProps={{ button: { sx: { color: 'primary' } } }} />
+          <GridToolbarColumnsButton />
         </MyGrid>
         <MyGrid size={{ xs: 12, md: 3, lg: 3 }}>
           <GridToolbarQuickFilter />
@@ -106,7 +105,7 @@ const Pagination = memo(
     console.log('Pagination rendered');
     return (
       <MyMuiPagination
-        color="standard"
+        color="primary"
         className={className}
         count={pageCount}
         showFirstButton

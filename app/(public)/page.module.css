@@ -95,24 +95,20 @@ a.secondary {
 .footer {
   height: 100px;
   margin: 0;
-
   text-align: center;
 }
 .container {
   height: 70px;
-  /* Use a flexbox layout */
-
-  /* Make a horizontal flexbox (the default) */
-
-  /* The important part: vertically center the items */
-
   text-align: center;
   display: flex;
   align-items: center;
+  background-color: lightsteelblue;
 }
 
 .vertical_center {
   margin: auto;
+  display: flex;
+  gap: 10px;
 }
 .hero_text {
   text-align: center;
@@ -190,3 +186,6 @@ a.secondary {
     filter: invert();
   }
 }
+
+
+

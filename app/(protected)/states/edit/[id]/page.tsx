@@ -34,7 +34,7 @@ export default async function EditStatePage({ params }: Props) {
       dtoState = { ...results[0].data.getState };
       dtoState.countryLookupDTO = { id: dtoState.country_id, text: dtoState.country_name };
     }
-    if (results[1]?.data?.getCountryLookup) {
+    if (results[1]?.data) {
       arrCountryLookup = results[1].data.getCountryLookup;
     }
   } catch {}

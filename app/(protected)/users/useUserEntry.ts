@@ -2,6 +2,8 @@ import React, { ChangeEvent, useCallback, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import UserDTO, { USER } from '@/app/types/UserDTO';
+import * as gConstants from '../../constants/constants';
+
 import {
   ADD_USER,
   UPDATE_USER,
@@ -15,7 +17,6 @@ import { regExEMail } from '@/app/common/Configuration';
 import { SelectChangeEvent } from '@mui/material/Select';
 import LookupDTO from '@/app/types/LookupDTO';
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import toast from 'react-hot-toast';
 type ErrorMessageType = {
   first_name: string | null;
   last_name: string | null;
@@ -24,13 +25,15 @@ type ErrorMessageType = {
   user_name: string | null;
   password: string | null;
   status: string | null;
-};
+  role_id: number | null;
+  role_name: string | null;
+  admission_id: number | null;
+ };
 
 type StateType = {
   dtoUser: UserDTO;
   arrRoleLookup: LookupDTO[];
   open1: boolean;
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -48,21 +51,24 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
     mobile_no: null,
     user_name: null,
     password: null,
-    status: null
+    status: null,
+    role_id: null,
+    role_name: null,
+    admission_id: null,
   });
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoUser: dtoUser,
+    
     arrRoleLookup: arrRoleLookup,
     open1: false,
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   });
 
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+ 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const [addUser] = useMutation(ADD_USER, {});
@@ -91,10 +97,10 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
     let dtoUser: UserDTO = USER;
     const { error, data } = await getUser({
       variables: {
-        id: state.dtoUser.id
-      }
+        id: state.dtoUser.id,
+        }
     });
-    if (!error && data?.getUser) {
+    if (!error && data) {
       dtoUser = data.getUser;
     }
     setState({ dtoUser: dtoUser } as StateType);
@@ -108,7 +114,7 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
         email: state.dtoUser.email
       }
     });
-    if (!error && data?.getUserEMailExist) {
+    if (!error && data) {
       exist = data.getUserEMailExist;
     }
     return exist;
@@ -122,7 +128,7 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
         user_name: state.dtoUser.user_name
       }
     });
-    if (!error && data?.getUserUserNameExist) {
+    if (!error && data) {
       exist = data.getUserUserNameExist;
     }
     return exist;
@@ -136,7 +142,7 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
         mobile_no: state.dtoUser.mobile_no
       }
     });
-    if (!error && data?.getUserMobileNoExist) {
+    if (!error && data) {
       exist = data.getUserMobileNoExist;
     }
     return exist;
@@ -153,12 +159,14 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
       setState({
         dtoUser: {
           ...state.dtoUser,
-          [event.target.name]: event.target.value
+          [event.target.name]: event.target.name === "admission_id" ? Number(event.target.value) : event.target.value
         }
       } as StateType);
     },
     [state.dtoUser]
   );
+
+  
 
   const onMobileNoChange = useCallback(
     async (value: string | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -200,6 +208,14 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
       return null;
     }
   }, [state.dtoUser.first_name]);
+
+  const validateRoleId = useCallback(async () => {
+    if (state.dtoUser.role_name.trim() === '') {
+      return 'Role Name is required';
+    } else {
+      return null;
+    }
+  }, [state.dtoUser.role_name]);
 
   const validateLastName = useCallback(async () => {
     if (state.dtoUser.last_name.trim() === '') {
@@ -244,9 +260,15 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
   const validatePassword = useCallback(async () => {
     if (state.dtoUser.password.trim() === '') {
       return 'Password is required';
-    } else {
-      return null;
+    }  
+     else if (state.dtoUser.password.length < gConstants.PASSWORD_MIN_LENGTH) {
+      return `Password must be at least ${gConstants.PASSWORD_MIN_LENGTH} characters.`;
     }
+    else if (state.dtoUser.password.length > gConstants.PASSWORD_MAX_LENGTH) {
+      return `Password must be no more than ${gConstants.PASSWORD_MAX_LENGTH} characters.`;
+    }
+    return null;
+  
   }, [state.dtoUser.password]);
 
   const validateStatus = useCallback(async () => {
@@ -258,49 +280,49 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
   }, [state.dtoUser.status]);
 
   const onFirstNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
+     {
       const first_name = await validateFirstName();
       setState({ errorMessages: { ...state.errorMessages, first_name: first_name } } as StateType);
     }, [validateFirstName, state.errorMessages]);
 
+    const onRoleBlur = useCallback(async () =>
+       {
+        const role_name = await validateRoleId();
+        setState({ errorMessages: { ...state.errorMessages, role_name: role_name } } as StateType);
+      }, [validateRoleId, state.errorMessages]);
+  
+
   const onLastNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const last_name = await validateLastName();
       setState({ errorMessages: { ...state.errorMessages, last_name: last_name } } as StateType);
     }, [validateLastName, state.errorMessages]);
 
   const onEMailIdBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
+   {
       const email = await validateEMailId();
       setState({ errorMessages: { ...state.errorMessages, email: email } } as StateType);
     }, [validateEMailId, state.errorMessages]);
 
   const onMobileNoBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const mobile_no = await validateMobileNo();
       setState({ errorMessages: { ...state.errorMessages, mobile_no: mobile_no } } as StateType);
     }, [validateMobileNo, state.errorMessages]);
 
   const onUserNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const user_name = await validateUserName();
       setState({ errorMessages: { ...state.errorMessages, user_name: user_name } } as StateType);
     }, [validateUserName, state.errorMessages]);
 
   const onPasswordBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
+     {
       const password = await validatePassword();
       setState({ errorMessages: { ...state.errorMessages, password: password } } as StateType);
     }, [validatePassword, state.errorMessages]);
 
   const onStatusBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const status = await validateStatus();
       setState({ errorMessages: { ...state.errorMessages, status: status } } as StateType);
@@ -311,6 +333,10 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
     const errorMessages: ErrorMessageType = { ...ERROR_MESSAGES };
     errorMessages.first_name = await validateFirstName();
     if (errorMessages.first_name) {
+      isFormValid = false;
+    }
+    errorMessages.role_name = await validateRoleId();
+    if (errorMessages.role_name) {
       isFormValid = false;
     }
     errorMessages.last_name = await validateLastName();
@@ -347,68 +373,63 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
     validateMobileNo,
     validateUserName,
     validatePassword,
-    validateStatus
+    validateStatus,
+    validateRoleId
   ]);
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          if (state.dtoUser.id === 0) {
-            const { data } = await addUser({
-              variables: {
-                first_name: state.dtoUser.first_name,
-                last_name: state.dtoUser.last_name,
-                email: state.dtoUser.email,
-                mobile_no: state.dtoUser.mobile_no,
-                user_name: state.dtoUser.user_name,
-                password: state.dtoUser.password,
-                confirm_password: state.dtoUser.confirm_password,
-                status: state.dtoUser.status,
-                role_id: state.dtoUser.role_id,
-                image_url: state.dtoUser.image_url
-              }
-            });
-            if (data?.addUser) {
-              toast.success('record saved successfully');
-              router.push('/users/list');
-            } else {
-              toast.error('Failed to save the record');
+      event.preventDefault();
+      if (await validateForm()) {
+        if (state.dtoUser.id === 0) {
+          const { data } = await addUser({
+            variables: { 
+              first_name:state.dtoUser.first_name,
+              last_name: state.dtoUser.last_name,
+              email: state.dtoUser.email,
+              mobile_no: state.dtoUser.mobile_no,
+              user_name: state.dtoUser.user_name.replace(/\s+/g, ""),
+              password: state.dtoUser.password,
+              status: state.dtoUser.status,
+              role_id: state.dtoUser.role_id,
+              role_name: state.dtoUser.role_name,
+              admission_id: state.dtoUser.admission_id,
             }
-          } else {
-            const { data } = await updateUser({
-              variables: {
-                id: state.dtoUser.id,
-                first_name: state.dtoUser.first_name,
-                last_name: state.dtoUser.last_name,
-                email: state.dtoUser.email,
-                mobile_no: state.dtoUser.mobile_no,
-                user_name: state.dtoUser.user_name,
-                password: state.dtoUser.password,
-                confirm_password: state.dtoUser.confirm_password,
-                status: state.dtoUser.status,
-                role_id: state.dtoUser.role_id,
-                image_url: state.dtoUser.image_url
-              }
-            });
-            if (data?.updateUser) {
-              toast.success('record saved successfully');
-              router.push('/users/list');
-            } else {
-              toast.error('Failed to save the record');
+          });
+          if (data) {
+            router.push('/users/list');
+          }
+        } else {
+          const { data } = await updateUser({
+            variables: {
+              id: state.dtoUser.id,
+              first_name:state.dtoUser.first_name,
+              last_name: state.dtoUser.last_name,
+              email: state.dtoUser.email,
+              mobile_no: state.dtoUser.mobile_no,
+              user_name: state.dtoUser.user_name,
+              password: state.dtoUser.password,
+              status: state.dtoUser.status,
+              role_id: state.dtoUser.role_id,
+              role_name: state.dtoUser.role_name,
+              admission_id: state.dtoUser.admission_id,
             }
+          });
+          if (data) {
+            router.push('/users/list');
           }
         }
-      } catch {
-        toast.error('Failed to save the record');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, addUser, state.dtoUser, router, updateUser]
+  );
+
+  const onClearClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      setState({ dtoUser: { ...USER, id: state.dtoUser.id }, errorMessages: { ...ERROR_MESSAGES } } as StateType);
+    },
+    [state.dtoUser.id, ERROR_MESSAGES]
   );
 
   const onCancelClick = useCallback(
@@ -449,7 +470,7 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
         files: files
       }
     });
-    if (data?.singleUpload) {
+    if (data) {
       setState({ dtoUser: { ...state.dtoUser, image_url: data.singleUpload[0].filename } } as StateType);
     }
   }, [singleUpload, state.dtoUser]);
@@ -463,11 +484,13 @@ const useUserEntry = ({ dtoUser, arrRoleLookup }: Props) => {
     onFirstNameBlur,
     onLastNameBlur,
     onEMailIdBlur,
+    onRoleBlur,
     onMobileNoBlur,
     onUserNameBlur,
     onPasswordBlur,
     onStatusBlur,
     onSaveClick,
+    onClearClick,
     onCancelClick,
     setOpen1,
     setClose1,

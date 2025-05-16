@@ -8,8 +8,6 @@ interface MyAutocompleteProps extends AutocompleteProps<unknown, boolean | undef
 }
 
 const MyAutocomplete = (props: MyAutocompleteProps) => {
-  console.log('MyAutocomplete rendered');
-  console.log('test', props.options);
   const options = [...props.options];
   if (props.firstitem) {
     options.unshift(props.firstitem);

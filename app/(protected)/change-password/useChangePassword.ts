@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { UPDATE_USER_PASSWORD, VALIDATE_USER_PASSWORD } from '@/app/graphql/User';
-import toast from 'react-hot-toast';
 
 type ErrorMessageType = {
   old_password: string | null;
@@ -16,7 +15,6 @@ type StateType = {
   old_password: string;
   password: string;
   confirm_password: string;
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -33,7 +31,6 @@ const useChangePassword = () => {
     old_password: '',
     password: '',
     confirm_password: '',
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   });
 
@@ -56,7 +53,7 @@ const useChangePassword = () => {
         password: state.old_password
       }
     });
-    if (!error && data?.validateUserPassword) {
+    if (!error && data) {
       exist = data.validateUserPassword;
     }
     return exist;
@@ -78,12 +75,10 @@ const useChangePassword = () => {
     }
   }, [state.old_password, IsPasswordExist]);
 
-  const onOldPasswordBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const old_password = await validateOldPassword();
-      setState({ errorMessages: { ...state.errorMessages, old_password: old_password } } as StateType);
-    }, [validateOldPassword, state.errorMessages]);
+  const onOldPasswordBlur = useCallback(async () => {
+    const old_password = await validateOldPassword();
+    setState({ errorMessages: { ...state.errorMessages, old_password: old_password } } as StateType);
+  }, [validateOldPassword, state.errorMessages]);
 
   const validatePassword = useCallback(async () => {
     if (state.password.trim() === '') {
@@ -93,12 +88,10 @@ const useChangePassword = () => {
     }
   }, [state.password]);
 
-  const onPasswordBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const password = await validatePassword();
-      setState({ errorMessages: { ...state.errorMessages, password: password } } as StateType);
-    }, [validatePassword, state.errorMessages]);
+  const onPasswordBlur = useCallback(async () => {
+    const password = await validatePassword();
+    setState({ errorMessages: { ...state.errorMessages, password: password } } as StateType);
+  }, [validatePassword, state.errorMessages]);
 
   const validateConfirmPassword = useCallback(async () => {
     if (state.confirm_password.trim() === '') {
@@ -110,12 +103,10 @@ const useChangePassword = () => {
     }
   }, [state.confirm_password, state.password]);
 
-  const onConfirmPasswordBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const confirm_password = await validateConfirmPassword();
-      setState({ errorMessages: { ...state.errorMessages, confirm_password: confirm_password } } as StateType);
-    }, [validateConfirmPassword, state.errorMessages]);
+  const onConfirmPasswordBlur = useCallback(async () => {
+    const confirm_password = await validateConfirmPassword();
+    setState({ errorMessages: { ...state.errorMessages, confirm_password: confirm_password } } as StateType);
+  }, [validateConfirmPassword, state.errorMessages]);
 
   const validateForm = useCallback(async () => {
     let isFormValid = true;
@@ -138,28 +129,17 @@ const useChangePassword = () => {
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          const { data } = await updateUserPassword({
-            variables: {
-              old_password: state.old_password,
-              password: state.password
-            }
-          });
-          if (data?.updateUserPassword) {
-            toast.success('Password updated successfully');
-            router.push('/dashboard');
-          } else {
-            toast.error('Failed to update the password');
+      event.preventDefault();
+      if (await validateForm()) {
+        const { data } = await updateUserPassword({
+          variables: {
+            old_password: state.old_password,
+            password: state.password
           }
+        });
+        if (data) {
+          router.push('/login');
         }
-      } catch {
-        toast.error('Failed to update the password');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, state.old_password, state.password, router, updateUserPassword]

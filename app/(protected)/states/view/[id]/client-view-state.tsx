@@ -10,6 +10,7 @@ import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyDivider from '@/app/custom-components/MyDivider';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyGrid from '@/app/custom-components/MyGrid';
+import MyBox from '@/app/custom-components/MyBox';
 import StateDTO from '@/app/types/stateDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
 
@@ -27,16 +28,22 @@ const ClientViewState = ({ dtoState }: Props) => {
         <MyCardContent>
           <MyGrid container spacing={2}>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">State Name:</MyTypography>
-              <MyTypography>{state.dtoState.state_name}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography variant="subtitle1">State Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoState.state_name}</MyTypography>
+              </MyBox>
             </MyGrid>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">State Code:</MyTypography>
-              <MyTypography>{state.dtoState.state_code}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography variant="subtitle1">State Code:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoState.state_code}</MyTypography>
+              </MyBox>
             </MyGrid>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">Country Name:</MyTypography>
-              <MyTypography>{state.dtoState.country_name}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography variant="subtitle1">Country Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoState.country_name}</MyTypography>
+              </MyBox>
             </MyGrid>
           </MyGrid>
         </MyCardContent>

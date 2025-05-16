@@ -1,0 +1,44 @@
+.document-selector {
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: sans-serif;
+  }
+  
+  .document-selector h2 {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px; /* space between checkboxes */
+    margin-bottom: 10px;
+  }
+  
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+  }
+  
+  .checkbox-item input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    accent-color: green; /* nice blue */
+  }
+  .isPaiddiv{
+    max-width: 680px;
+    width: auto;
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-top: 8px;
+  }
+  

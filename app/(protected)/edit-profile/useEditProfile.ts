@@ -2,17 +2,10 @@ import React, { ChangeEvent, useCallback, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import UserDTO, { USER } from '@/app/types/UserDTO';
-import {
-  GET_USER_MY_PROFILE,
-  GET_USER_EMAIL_EXIST,
-  GET_USER_MOBILE_NO_EXIST,
-  UPLOAD_USER_IMAGE,
-  UPDATE_USER_PROFILE
-} from '@/app/graphql/User';
+import { GET_USER_MY_PROFILE, GET_USER_EMAIL_EXIST, GET_USER_MOBILE_NO_EXIST, UPLOAD_USER_IMAGE, UPDATE_USER } from '@/app/graphql/User';
 import { regExEMail } from '@/app/common/Configuration';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
-import toast from 'react-hot-toast';
 
 type ErrorMessageType = {
   first_name: string | null;
@@ -25,7 +18,6 @@ type ErrorMessageType = {
 type StateType = {
   breadcrumbsItems: BreadcrumbsItem[];
   dtoUser: UserDTO;
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -46,7 +38,6 @@ const useEditProfile = ({ dtoUser }: Props) => {
   const INITIAL_STATE: StateType = Object.freeze({
     breadcrumbsItems: [{ label: 'Edit Profile' }],
     dtoUser: dtoUser,
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   });
 
@@ -60,7 +51,7 @@ const useEditProfile = ({ dtoUser }: Props) => {
     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
   });
 
-  const [updateUserProfile] = useMutation(UPDATE_USER_PROFILE, {});
+  const [updateUserProfile] = useMutation(UPDATE_USER, {});
 
   const [getUserEMailExist] = useLazyQuery(GET_USER_EMAIL_EXIST, {
     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
@@ -75,7 +66,7 @@ const useEditProfile = ({ dtoUser }: Props) => {
   const getData = useCallback(async (): Promise<void> => {
     let dtoUser: UserDTO = USER;
     const { error, data } = await getUserMyProfile();
-    if (!error && data?.getUserMyProfile) {
+    if (!error && data) {
       dtoUser = data.getUserMyProfile;
     }
     setState({ dtoUser: dtoUser } as StateType);
@@ -89,7 +80,7 @@ const useEditProfile = ({ dtoUser }: Props) => {
         email: state.dtoUser.email
       }
     });
-    if (!error && data?.getUserEMailExist) {
+    if (!error && data) {
       exist = data.getUserEMailExist;
     }
     return exist;
@@ -103,7 +94,7 @@ const useEditProfile = ({ dtoUser }: Props) => {
         mobile_no: state.dtoUser.mobile_no
       }
     });
-    if (!error && data?.getUserMobileNoExist) {
+    if (!error && data) {
       exist = data.getUserMobileNoExist;
     }
     return exist;
@@ -247,32 +238,16 @@ const useEditProfile = ({ dtoUser }: Props) => {
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          const { data } = await updateUserProfile({
-            variables: {
-              first_name: state.dtoUser.first_name,
-              last_name: state.dtoUser.last_name,
-              email: state.dtoUser.email,
-              mobile_no: state.dtoUser.mobile_no,
-              status: state.dtoUser.status,
-              image_url: state.dtoUser.image_url
-            }
-          });
-          if (data?.updateUserProfile) {
-            toast.success('Profile updated successfully');
-            router.push('/profile');
-          } else {
-            toast.error('Failed to update profile');
+      event.preventDefault();
+      if (await validateForm()) {
+        const { data } = await updateUserProfile({
+          variables: {
+            ...state.dtoUser
           }
+        });
+        if (data) {
+          router.push('/profile');
         }
-      } catch {
-        toast.error('Failed to update profile');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, state.dtoUser, router, updateUserProfile]
@@ -308,7 +283,7 @@ const useEditProfile = ({ dtoUser }: Props) => {
         files: files
       }
     });
-    if (data?.singleUpload) {
+    if (data) {
       setState({ dtoUser: { ...state.dtoUser, image_url: data.singleUpload[0].filename } } as StateType);
     }
   }, [singleUpload, state.dtoUser]);

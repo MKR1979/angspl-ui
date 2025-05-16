@@ -1,0 +1,64 @@
+.google-button {
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  display: inline-block;
+  color: #333;
+  width: 170px;
+  border-radius: 30px;
+}
+
+.facebook-button {
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  display: inline-block;
+  color: #333;
+  width: 170px;
+  border-radius: 30px;
+}
+
+
+.google-logo {
+  align-items: center;
+  gap: 8px;
+}
+
+.button-logo {
+  display: inline-block;
+}
+
+.button-text {
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.already-msg {
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.mycard {
+  font-size: 14px;
+  margin: 100px auto ;
+  width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 3px solid rgb(238, 242, 246);
+}
+
+.latter {
+  font-size: 12px;
+  margin-top: 3px;
+ justify-content: center;
+ margin-left: 46%;
+}

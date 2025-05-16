@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import RoleDTO, { ROLE } from '@/app/types/RoleDTO';
 import { ADD_ROLE, UPDATE_ROLE, GET_ROLE, GET_ROLE_ROLE_NAME_EXIST } from '@/app/graphql/Role';
-import toast from 'react-hot-toast';
 
 type ErrorMessageType = {
   role_name: string | null;
@@ -11,7 +10,6 @@ type ErrorMessageType = {
 
 type StateType = {
   dtoRole: RoleDTO;
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -27,7 +25,6 @@ const useRoleEntry = ({ dtoRole }: Props) => {
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoRole: dtoRole,
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   } as StateType);
 
@@ -53,10 +50,10 @@ const useRoleEntry = ({ dtoRole }: Props) => {
     let dtoRole: RoleDTO = ROLE;
     const { error, data } = await getRole({
       variables: {
-        id: state.dtoRole.id
+        id: state.dtoRole.id        
       }
     });
-    if (!error && data?.getRole) {
+    if (!error && data) {
       dtoRole = data.getRole;
     }
     setState({ dtoRole: dtoRole } as StateType);
@@ -66,11 +63,11 @@ const useRoleEntry = ({ dtoRole }: Props) => {
     let exist: boolean = false;
     const { error, data } = await getRoleRoleNameExist({
       variables: {
-        id: state.dtoRole.id,
+        id: state.dtoRole.id,        
         role_name: state.dtoRole.role_name
       }
     });
-    if (!error && data?.getRoleRoleNameExist) {
+    if (!error && data) {
       exist = data.getRoleRoleNameExist;
     }
     return exist;
@@ -106,7 +103,6 @@ const useRoleEntry = ({ dtoRole }: Props) => {
   }, [state.dtoRole.role_name, IsRoleNameExist]);
 
   const onRoleNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const role_name = await validateRoleName();
       setState({ errorMessages: { ...state.errorMessages, role_name: role_name } } as StateType);
@@ -125,45 +121,41 @@ const useRoleEntry = ({ dtoRole }: Props) => {
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          if (state.dtoRole.id === 0) {
-            const { data } = await addRole({
-              variables: {
-                role_name: state.dtoRole.role_name
-              }
-            });
-            if (data?.addRole) {
-              toast.success('record saved successfully');
-              router.push('/roles/list');
-            } else {
-              toast.error('Failed to save the record');
+      event.preventDefault();
+      if (await validateForm()) {
+        if (state.dtoRole.id === 0) {
+          const { data } = await addRole({
+            variables: {
+              ...state.dtoRole
             }
-          } else {
-            const { data } = await updateRole({
-              variables: {
-                id: state.dtoRole.id,
-                role_name: state.dtoRole.role_name
-              }
-            });
-            if (data?.updateRole) {
-              toast.success('record saved successfully');
-              router.push('/roles/list');
-            } else {
-              toast.error('Failed to save the record');
+          });
+          if (data) {
+            router.push('/roles/list');
+          }
+        } else {
+          const { data } = await updateRole({
+            variables: {
+              ...state.dtoRole
             }
+          });
+          if (data) {
+            router.push('/roles/list');
           }
         }
-      } catch {
-        toast.error('Failed to save the record');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, addRole, state.dtoRole, router, updateRole]
+  );
+
+  const onClearClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      setState({
+        dtoRole: { ...ROLE, id: state.dtoRole.id },
+        errorMessages: { ...ERROR_MESSAGES }
+      } as StateType);
+    },
+    [state.dtoRole.id, ERROR_MESSAGES]
   );
 
   const onCancelClick = useCallback(
@@ -179,6 +171,7 @@ const useRoleEntry = ({ dtoRole }: Props) => {
     onInputChange,
     onRoleNameBlur,
     onSaveClick,
+    onClearClick,
     onCancelClick
   };
 };

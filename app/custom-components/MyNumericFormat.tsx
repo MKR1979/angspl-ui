@@ -6,7 +6,6 @@ import React from 'react';
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
-  prefix: string;
 }
 const MyNumericFormat = React.forwardRef<NumericFormatProps, CustomProps>(function NumericFormatCustom(props, ref) {
   const { onChange, ...other } = props;
@@ -24,10 +23,8 @@ const MyNumericFormat = React.forwardRef<NumericFormatProps, CustomProps>(functi
       }}
       thousandSeparator
       valueIsNumericString
-      decimalScale={2}
-      maxLength={18}
+      prefix="$"
       {...other}
-      prefix={props.prefix}
     />
   );
 });

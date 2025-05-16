@@ -10,6 +10,7 @@ import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyDivider from '@/app/custom-components/MyDivider';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyGrid from '@/app/custom-components/MyGrid';
+import MyBox from '@/app/custom-components/MyBox';
 import CountryDTO from '@/app/types/CountryDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
 
@@ -27,8 +28,10 @@ const ClientViewCountry = ({ dtoCountry }: Props) => {
         <MyCardContent>
           <MyGrid container spacing={2}>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">Country Name:</MyTypography>
-              <MyTypography>{state.dtoCountry.country_name}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Country Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoCountry.country_name}</MyTypography>
+              </MyBox>
             </MyGrid>
           </MyGrid>
         </MyCardContent>

@@ -15,7 +15,7 @@ import {
   Toolbar,
   Typography
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyLink from '../custom-components/MyLink';
 import MyLogo from '../custom-components/MyLogo';
 import MyButton from '../custom-components/MyButton';
@@ -26,23 +26,45 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [container, setContainer] = useState<HTMLElement | null>(null); // ✅ Use state for reactivity
+
+  const formatUrl = (url: any) =>
+  url.startsWith("http://") || url.startsWith("https://")
+    ? url
+    : `https://${url}`;
+
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
     { text: 'About Us', href: '/about-us' },
     { text: 'Pricing', href: '/pricing' },
-    // { text: 'Resources', href: '/resources' },
-    { text: 'Affiliate', href: '/affiliate' },
-    // { text: 'Demo', href: '/demo' },
     { text: 'Contact Us', href: '/contact-us' },
-    { text: 'Login', href: '/login' }
+    { text: 'affiliate', href: '/affiliate' },
+     { text: 'Our Service', href: '/our-service' },
+    { text: 'Demo', href: formatUrl('adhyayan.online')}
   ];
 
+  // Toggle Drawer
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setMobileOpen((prev) => !prev);
   };
+
+  const handleCloseDrawer = () => {
+    setMobileOpen(false);
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setContainer(window.document.body); // ✅ Correctly setting container inside useEffect
+    }
+  }, []);
+
   const drawer = (
-    <Box onClick={handleDrawerToggle}>
+    <Box
+      sx={{ width: drawerWidth }}
+      role="presentation"
+      onClick={handleCloseDrawer} // Close drawer on clicking anywhere inside
+    >
       <Typography variant="h6" sx={{ my: 2 }}>
         <MyBox
           sx={{
@@ -62,20 +84,23 @@ export default function RootLayout({
       <List>
         {navItems.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={item.text} />
+            <ListItemButton onClick={handleCloseDrawer}>
+              <MyLink href={item.href} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <ListItemText primary={item.text} />
+              </MyLink>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </Box>
   );
-  const container = typeof window !== undefined ? () => window.document.body : undefined;
+
   const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+
   return (
     <>
       <MyBox sx={{ display: 'flex' }}>
-        <AppBar component="nav" elevation={1} sx={{ backgroundColor: '#fff', color: '#000' }}>
+        <AppBar component="nav" elevation={1} sx={{ backgroundColor: '#fff', color: '#000' }} position="fixed">
           <Toolbar>
             <IconButton
               color="inherit"
@@ -104,7 +129,7 @@ export default function RootLayout({
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
                 <MyButton variant="outlined" key={item.text} sx={{ backgroundColor: '#fff', border: 'none' }}>
-                  <MyLink style={{ color: '#000', marginLeft: '0px' }} href={item.href}>
+                  <MyLink href={item.href} style={{ color: '#000' }}>
                     {item.text}
                   </MyLink>
                 </MyButton>
@@ -118,9 +143,9 @@ export default function RootLayout({
             container={container}
             variant="temporary"
             open={mobileOpen}
-            onClose={handleDrawerToggle}
+            onClose={handleCloseDrawer} // Close drawer when clicking outside
             ModalProps={{
-              keepMounted: true // Better open performance on mobile.
+              keepMounted: true
             }}
             sx={{
               display: { xs: 'block', sm: 'none' },
@@ -131,7 +156,6 @@ export default function RootLayout({
           </Drawer>
         </nav>
       </MyBox>
-
       <MyBox sx={{ display: 'flex' }}>{children}</MyBox>
     </>
   );

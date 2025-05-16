@@ -1,5 +1,4 @@
 import BaseDTO from './BaseDTO';
-
 export default interface CountryDTO extends BaseDTO {
   country_name: string;
 }

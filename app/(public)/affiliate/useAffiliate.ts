@@ -1,53 +1,72 @@
 import React, { ChangeEvent, useCallback, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
-import UserDTO, { USER } from '@/app/types/UserDTO';
+import AffiliateDTO, { AFFILIATE } from '@/app/types/AffiliateDTO';
+import { COUNTRY_LOOKUP } from '@/app/graphql/Country';
+import { STATE_LOOKUP } from '@/app/graphql/state';
 import {
-  ADD_USER,
-  UPDATE_USER,
-  GET_USER,
-  GET_USER_EMAIL_EXIST,
-  GET_USER_USER_NAME_EXIST,
-  GET_USER_MOBILE_NO_EXIST,
-  UPLOAD_USER_IMAGE
-} from '@/app/graphql/User';
+  ADD_AFFILIATE,
+  GET_AFFILIATE_EMAIL_EXIST,
+  GET_AFFILIATE_USER_NAME_EXIST,
+  GET_AFFILIATE_PHONE_NO_EXIST,
+  UPLOAD_AFFILIATE_IMAGE
+} from '@/app/graphql/Affiliate';
 import { regExEMail } from '@/app/common/Configuration';
 import { SelectChangeEvent } from '@mui/material/Select';
 import LookupDTO from '@/app/types/LookupDTO';
 import { isValidPhoneNumber } from 'libphonenumber-js';
+
 type ErrorMessageType = {
   first_name: string | null;
   last_name: string | null;
   email: string | null;
-  mobile_no: string | null;
+  phone_no: string | null;
   user_name: string | null;
   password: string | null;
-  status: string | null;
+  address : string | null;
+  city_name : string | null;
+  state_id : string | null;
+  state_name : string | null;
+  country_id: number | null;
+  country_name: number | null;
+  zip_code : string | null;
+  photo_id_url : string | null;
 };
 
 type StateType = {
-  dtoUser: UserDTO;
-  arrRoleLookup: LookupDTO[];
+  dtoAffiliate: AffiliateDTO;
+  arrStateLookup: LookupDTO[];
+  arrCountryLookup: LookupDTO[];
   open1: boolean;
+  open2: boolean;
   errorMessages: ErrorMessageType;
 };
 
 const useAffiliate = () => {
   const router = useRouter();
   const ERROR_MESSAGES: ErrorMessageType = Object.freeze({
-    first_name: null,
+    first_name:  null,
     last_name: null,
-    email: null,
-    mobile_no: null,
+    email:  null,
+    phone_no: null,
     user_name: null,
     password: null,
-    status: null
+    address : null,
+    city_name : null,
+    state_id : null,
+    state_name : null,
+    country_id: null,
+    country_name: null,
+    zip_code : null,
+    photo_id_url : null,
   });
 
   const INITIAL_STATE: StateType = Object.freeze({
-    dtoUser: USER,
-    arrRoleLookup: [] as LookupDTO[],
+    dtoAffiliate: AFFILIATE,
+    arrStateLookup: [] as LookupDTO[],
+    arrCountryLookup: [] as LookupDTO[],
     open1: false,
+    open2: false,
     errorMessages: { ...ERROR_MESSAGES }
   });
 
@@ -57,247 +76,183 @@ const useAffiliate = () => {
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
-  const [addUser] = useMutation(ADD_USER, {});
+  const [addAffiliate] = useMutation(ADD_AFFILIATE, {});
 
-  const [updateUser] = useMutation(UPDATE_USER, {});
-
-  const [getUser] = useLazyQuery(GET_USER, {
+  const [getAffiliateEMailExist] = useLazyQuery(GET_AFFILIATE_EMAIL_EXIST, {
     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
   });
 
-  const [getUserEMailExist] = useLazyQuery(GET_USER_EMAIL_EXIST, {
+  const [getAffiliateUserNameExist] = useLazyQuery(GET_AFFILIATE_USER_NAME_EXIST, {
     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
   });
 
-  const [getUserUserNameExist] = useLazyQuery(GET_USER_USER_NAME_EXIST, {
+  const [getAffiliatePhoneNoExist] = useLazyQuery(GET_AFFILIATE_PHONE_NO_EXIST, {
     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
   });
 
-  const [getUserMobileNoExist] = useLazyQuery(GET_USER_MOBILE_NO_EXIST, {
-    fetchPolicy: 'network-only' // Doesn't check cache before making a network request
-  });
-
-  const [singleUpload] = useMutation(UPLOAD_USER_IMAGE, {});
-
-  const getData = useCallback(async (): Promise<void> => {
-    let dtoUser: UserDTO = USER;
-    const { error, data } = await getUser({
-      variables: {
-        id: state.dtoUser.id
-      }
-    });
-    if (!error && data) {
-      dtoUser = data.getUser;
-    }
-    setState({ dtoUser: dtoUser } as StateType);
-  }, [getUser, state.dtoUser.id]);
+  const [singleUpload] = useMutation(UPLOAD_AFFILIATE_IMAGE, {}); 
 
   const IsEMailExist = useCallback(async (): Promise<boolean> => {
     let exist: boolean = false;
-    const { error, data } = await getUserEMailExist({
+    const { error, data } = await getAffiliateEMailExist({
       variables: {
-        id: state.dtoUser.id,
-        email: state.dtoUser.email
+        id: state.dtoAffiliate.id,
+        email: state.dtoAffiliate.email
       }
     });
     if (!error && data) {
-      exist = data.getUserEMailExist;
+      exist = data.getAffiliateEMailExist;
     }
     return exist;
-  }, [getUserEMailExist, state.dtoUser.id, state.dtoUser.email]);
+  }, [getAffiliateEMailExist, state.dtoAffiliate.id, state.dtoAffiliate.email]);
 
   const IsUserNameExist = useCallback(async (): Promise<boolean> => {
     let exist: boolean = false;
-    const { error, data } = await getUserUserNameExist({
+    const { error, data } = await getAffiliateUserNameExist({
       variables: {
-        id: state.dtoUser.id,
-        user_name: state.dtoUser.user_name
+        id: state.dtoAffiliate.id,
+        user_name: state.dtoAffiliate.user_name
       }
     });
     if (!error && data) {
-      exist = data.getUserUserNameExist;
+      exist = data.getAffiliateUserNameExist;
     }
     return exist;
-  }, [getUserUserNameExist, state.dtoUser.id, state.dtoUser.user_name]);
+  }, [getAffiliateUserNameExist, state.dtoAffiliate.id, state.dtoAffiliate.user_name]);
 
-  const IsMobileNoExist = useCallback(async (): Promise<boolean> => {
-    let exist: boolean = false;
-    const { error, data } = await getUserMobileNoExist({
-      variables: {
-        id: state.dtoUser.id,
-        mobile_no: state.dtoUser.mobile_no
+  const [getStateLookup] = useLazyQuery(STATE_LOOKUP, {
+    fetchPolicy: 'network-only' // Doesn't check cache before making a network request
+  });
+
+   const [getCountryLookup] = useLazyQuery(COUNTRY_LOOKUP, {
+     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
+   });
+
+  //----------Lookups---------
+   const getData1 = useCallback(async (): Promise<void> => {
+      let arrCountryLookup: LookupDTO[] = [];
+      const { error, data } = await getCountryLookup();
+      if (!error && data) {
+        arrCountryLookup = data.getCountryLookup;
       }
-    });
-    if (!error && data) {
-      exist = data.getUserMobileNoExist;
-    }
-    return exist;
-  }, [getUserMobileNoExist, state.dtoUser.id, state.dtoUser.mobile_no]);
+      setState({ arrCountryLookup: arrCountryLookup } as StateType);
+    }, [getCountryLookup]);
 
-  useEffect(() => {
-    if (state.dtoUser.id > 0) {
-      getData();
-    }
-  }, [state.dtoUser.id, getData]);
+  
+    const getData2 = useCallback(async (): Promise<void> => {
+        let arrStateLookup: LookupDTO[] = [];
+        const { error, data } = await getStateLookup({
+          variables: {
+            country_id: state.dtoAffiliate.country_id
+          }
+        });
+        if (!error && data) {
+          arrStateLookup = data.getStateLookup;
+        }
+        setState({ arrStateLookup: arrStateLookup } as StateType);
+      }, [getStateLookup, state.dtoAffiliate.country_id]);
 
+  //-------------------------
   const onInputChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       setState({
-        dtoUser: {
-          ...state.dtoUser,
+        dtoAffiliate: {
+          ...state.dtoAffiliate,
           [event.target.name]: event.target.value
         }
       } as StateType);
     },
-    [state.dtoUser]
-  );
-
-  const onMobileNoChange = useCallback(
-    async (value: string | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setState({
-        dtoUser: {
-          ...state.dtoUser,
-          mobile_no: value
-        }
-      } as StateType);
-    },
-    [state.dtoUser]
-  );
-
-  const onRoleNameChange = useCallback(
-    async (event: any, value: unknown) => {
-      setState({
-        dtoUser: { ...state.dtoUser, role_id: (value as LookupDTO).id, role_name: (value as LookupDTO).text }
-      } as StateType);
-    },
-    [state.dtoUser]
+    [state.dtoAffiliate]
   );
 
   const onSelectChange = useCallback(
     async (event: SelectChangeEvent<unknown>) => {
       setState({
-        dtoUser: {
-          ...state.dtoUser,
+        dtoAffiliate: {
+          ...state.dtoAffiliate,
           [event.target.name]: event.target.value
         }
       } as StateType);
     },
-    [state.dtoUser]
+    [state.dtoAffiliate]
   );
 
   const validateFirstName = useCallback(async () => {
-    if (state.dtoUser.first_name.trim() === '') {
+    if (state.dtoAffiliate.first_name.trim() === '') {
       return 'First Name is required';
     } else {
       return null;
     }
-  }, [state.dtoUser.first_name]);
+  }, [state.dtoAffiliate.first_name]);
 
   const validateLastName = useCallback(async () => {
-    if (state.dtoUser.last_name.trim() === '') {
+    if (state.dtoAffiliate.last_name.trim() === '') {
       return 'Last Name is required';
     } else {
       return null;
     }
-  }, [state.dtoUser.last_name]);
+  }, [state.dtoAffiliate.last_name]);
 
   const validateEMailId = useCallback(async () => {
-    if (state.dtoUser.email.trim() === '') {
+    if (state.dtoAffiliate.email.trim() === '') {
       return 'E-Mail is required';
-    } else if (!state.dtoUser.email.trim().match(regExEMail)) {
+    } else if (!state.dtoAffiliate.email.trim().match(regExEMail)) {
       return 'E-Mail is invalid';
     } else if (await IsEMailExist()) {
       return 'E-Mail already exists';
     } else {
       return null;
     }
-  }, [state.dtoUser.email, IsEMailExist]);
-
-  const validateMobileNo = useCallback(async () => {
-    if (!isValidPhoneNumber(state.dtoUser.mobile_no.trim())) {
-      return 'Mobile # is invalid';
-    } else if (await IsMobileNoExist()) {
-      return 'Mobile # already exists';
-    } else {
-      return null;
-    }
-  }, [state.dtoUser.mobile_no, IsMobileNoExist]);
+  }, [state.dtoAffiliate.email, IsEMailExist]);
 
   const validateUserName = useCallback(async () => {
-    if (state.dtoUser.user_name.trim() === '') {
+    if (state.dtoAffiliate.user_name.trim() === '') {
       return 'Username is required';
     } else if (await IsUserNameExist()) {
       return 'Username already exists';
     } else {
       return null;
     }
-  }, [state.dtoUser.user_name, IsUserNameExist]);
+  }, [state.dtoAffiliate.user_name, IsUserNameExist]);
 
   const validatePassword = useCallback(async () => {
-    if (state.dtoUser.password.trim() === '') {
+    if (state.dtoAffiliate.password.trim() === '') {
       return 'Password is required';
     } else {
       return null;
     }
-  }, [state.dtoUser.password]);
-
-  const validateStatus = useCallback(async () => {
-    if (state.dtoUser.status.trim() === '') {
-      return 'Status is required';
-    } else {
-      return null;
-    }
-  }, [state.dtoUser.status]);
+  }, [state.dtoAffiliate.password]);
 
   const onFirstNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const first_name = await validateFirstName();
       setState({ errorMessages: { ...state.errorMessages, first_name: first_name } } as StateType);
     }, [validateFirstName, state.errorMessages]);
 
   const onLastNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const last_name = await validateLastName();
       setState({ errorMessages: { ...state.errorMessages, last_name: last_name } } as StateType);
     }, [validateLastName, state.errorMessages]);
 
   const onEMailIdBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const email = await validateEMailId();
       setState({ errorMessages: { ...state.errorMessages, email: email } } as StateType);
     }, [validateEMailId, state.errorMessages]);
 
-  const onMobileNoBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const mobile_no = await validateMobileNo();
-      setState({ errorMessages: { ...state.errorMessages, mobile_no: mobile_no } } as StateType);
-    }, [validateMobileNo, state.errorMessages]);
-
   const onUserNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const user_name = await validateUserName();
       setState({ errorMessages: { ...state.errorMessages, user_name: user_name } } as StateType);
     }, [validateUserName, state.errorMessages]);
 
   const onPasswordBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const password = await validatePassword();
       setState({ errorMessages: { ...state.errorMessages, password: password } } as StateType);
     }, [validatePassword, state.errorMessages]);
-
-  const onStatusBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const status = await validateStatus();
-      setState({ errorMessages: { ...state.errorMessages, status: status } } as StateType);
-    }, [validateStatus, state.errorMessages]);
-
+  
   const validateForm = useCallback(async () => {
     let isFormValid = true;
     const errorMessages: ErrorMessageType = { ...ERROR_MESSAGES };
@@ -313,20 +268,12 @@ const useAffiliate = () => {
     if (errorMessages.email) {
       isFormValid = false;
     }
-    errorMessages.mobile_no = await validateMobileNo();
-    if (errorMessages.mobile_no) {
-      isFormValid = false;
-    }
     errorMessages.user_name = await validateUserName();
     if (errorMessages.user_name) {
       isFormValid = false;
     }
     errorMessages.password = await validatePassword();
     if (errorMessages.password) {
-      isFormValid = false;
-    }
-    errorMessages.status = await validateStatus();
-    if (errorMessages.status) {
       isFormValid = false;
     }
     setState({ errorMessages: errorMessages } as StateType);
@@ -336,44 +283,46 @@ const useAffiliate = () => {
     validateFirstName,
     validateLastName,
     validateEMailId,
-    validateMobileNo,
     validateUserName,
     validatePassword,
-    validateStatus
   ]);
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      if (await validateForm()) {
-        if (state.dtoUser.id === 0) {
-          const { data } = await addUser({
+      // if (await validateForm()) {
+        if (state.dtoAffiliate.id === 0) {
+          const { data } = await addAffiliate({
             variables: {
-              ...state.dtoUser
+              first_name: state.dtoAffiliate.first_name,
+              last_name: state.dtoAffiliate.last_name,
+              email: state.dtoAffiliate.email,
+              phone_no: state.dtoAffiliate.phone_no,
+              user_name: state.dtoAffiliate.user_name,
+              password: state.dtoAffiliate.password,
+              address: state.dtoAffiliate.address,
+              city_name: state.dtoAffiliate.city_name,
+              country_id: state.dtoAffiliate.country_id,
+              state_id: state.dtoAffiliate.state_id,
+              zip_code: state.dtoAffiliate.zip_code,
+              status: state.dtoAffiliate.status,
+              photo_id_url: state.dtoAffiliate.photo_id_url,
             }
           });
           if (data) {
-            router.push('/users/list');
-          }
-        } else {
-          const { data } = await updateUser({
-            variables: {
-              ...state.dtoUser
-            }
-          });
-          if (data) {
-            router.push('/users/list');
-          }
-        }
-      }
+            // toast.success(constants.SUCCESS)
+            router.push('/thankyou')
+          }        
+        } 
+      //}
     },
-    [validateForm, addUser, state.dtoUser, router, updateUser]
+    [validateForm, addAffiliate, state.dtoAffiliate, router, ]
   );
 
   const onCancelClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      router.push('/users/list');
+      router.push('/Affiliates/list');
     },
     [router]
   );
@@ -381,59 +330,111 @@ const useAffiliate = () => {
   const setOpen1 = useCallback(async (): Promise<void> => {
     setState({ open1: true } as StateType);
   }, []);
+  const setOpen2 = useCallback(async (): Promise<void> => {
+    setState({ open2: true } as StateType);
+  }, []);
 
   const setClose1 = useCallback(async (): Promise<void> => {
     setState({ open1: false } as StateType);
   }, []);
+  const setClose2 = useCallback(async (): Promise<void> => {
+    setState({ open2: false } as StateType);
+  }, []);
 
-  const onImageError = useCallback(
-    async (event: any) => {
-      console.log(event);
-      setState({ dtoUser: { ...state.dtoUser, image_url: '' } } as StateType);
-    },
-    [state.dtoUser]
-  );
+  const validatePhoneNo = useCallback(async () => {
+    if (!isValidPhoneNumber(state.dtoAffiliate.phone_no.trim())) {
+      return 'Phone # is invalid';
+    } else {
+      return null;
+    }
+  }, [state.dtoAffiliate.phone_no]);  
+
+  const onPhoneNoChange = useCallback(
+      async (value: string | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setState({
+          dtoAffiliate: {
+            ...state.dtoAffiliate,
+            phone_no: value
+          }
+        } as StateType);
+      },
+      [state.dtoAffiliate]
+    );
+
+  const onPhoneNoBlur = useCallback(async () =>
+      {
+        const phone_no = await validatePhoneNo();
+        setState({ errorMessages: { ...state.errorMessages, phone_no: phone_no } } as StateType);
+      }, [validatePhoneNo, state.errorMessages]);
+    
   const onImageClick = useCallback(async () => {
     document.getElementById('user_image')!.click();
   }, []);
 
-  const UploadImage = useCallback(async () => {
-    const files = (document.getElementById('user_image') as any)!.files;
-    console.log(files);
-    if (files.length == 0) {
-      return;
-    }
-    const { data } = await singleUpload({
+   const onCountryNameChange = useCallback(
+      async (event: any, value: unknown) => {
+        setState({
+          dtoAffiliate: { ...state.dtoAffiliate, country_id: (value as LookupDTO).id, country_name: (value as LookupDTO).text }
+        } as StateType);
+      },
+      [state.dtoAffiliate]
+    );
+  
+    const onStateNameChange = useCallback(
+      async (event: any, value: unknown) => {
+        setState({
+          dtoAffiliate: { ...state.dtoAffiliate, state_id: (value as LookupDTO).id, state_name: (value as LookupDTO).text }
+        } as StateType);
+      },
+      [state.dtoAffiliate]
+    );
+
+    const IsPhoneNoExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getAffiliatePhoneNoExist({
       variables: {
-        files: files
+        id: state.dtoAffiliate.id,
+        mobile_no: state.dtoAffiliate.phone_no
       }
     });
-    if (data) {
-      setState({ dtoUser: { ...state.dtoUser, image_url: data.singleUpload[0].filename } } as StateType);
+    if (!error && data) {
+      exist = data.getAffiliatePhoneNoExist;
     }
-  }, [singleUpload, state.dtoUser]);
+    return exist;
+  }, [getAffiliatePhoneNoExist, state.dtoAffiliate.id, state.dtoAffiliate.phone_no]);
+
+  useEffect(() => {
+    getData1();
+  },[getData1]);
+
+  useEffect(() => {
+    getData2();
+  },[getData2,state.dtoAffiliate.country_id]);
 
   return {
     state,
-    onInputChange,
-    onMobileNoChange,
-    onRoleNameChange,
-    onSelectChange,
-    onFirstNameBlur,
-    onLastNameBlur,
-    onEMailIdBlur,
-    onMobileNoBlur,
-    onUserNameBlur,
     onPasswordBlur,
-    onStatusBlur,
-    onSaveClick,
-    onCancelClick,
+    onUserNameBlur,
+    onEMailIdBlur,
+    onLastNameBlur,
+    onFirstNameBlur,   
+    onSelectChange,
+    onInputChange,
+    onCountryNameChange,
+    onStateNameChange,
+    IsUserNameExist,
+    IsEMailExist,
     setOpen1,
     setClose1,
-    onImageError,
-    onImageClick,
-    UploadImage
+    setOpen2,
+    setClose2,
+    onPhoneNoChange,
+    onPhoneNoBlur,
+    IsPhoneNoExist,
+    singleUpload,
+    onSaveClick,
+    onCancelClick,
+    onImageClick
   };
-};
-
+}
 export default useAffiliate;
