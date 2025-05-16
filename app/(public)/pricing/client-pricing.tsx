@@ -153,6 +153,12 @@ const ClientPricing = () => {
       protein: '✔'
     }
   ];
+
+   const formatUrl = (url: any) =>
+  url.startsWith("http://") || url.startsWith("https://")
+    ? url
+    : `https://${url}`;
+
   return (
     <div style={{ width: '100%', paddingTop: '0px' }}>
       <MyBox>
@@ -225,13 +231,18 @@ const ClientPricing = () => {
                       >
                         Compare Plans&nbsp;➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth style={{ fontWeight: 'bold' }}>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('adhyayan.online'), '_blank');
+                        }}
+                      >
                         Try It Free
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
@@ -282,69 +293,18 @@ const ClientPricing = () => {
                       >
                         Compare Plans&nbsp;➡️
                       </MyButton>
-                      <MyButton variant="contained" style={{ width: '100%', fontWeight: 'bold' }}>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('adhyayan.online'), '_blank');
+                        }}
+                      >
                         Try It Free
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-
-                {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Premium</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <div style={{ fontSize: '26px' }}>$280.00</div>
-                      <div>Per Month</div>
-                      <br></br>
-                      <div>Billed Monthly Excludes VAT</div>
-                      <br></br>
-                      <div>
-                        Our highest performance shared hosting package with a large storage capacity and greater flexibility. Recommended
-                        for up to 150 Users.
-                      </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Try It Free</MyButton>
-                      </div>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Dedicated</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <div style={{ fontSize: '26px' }}>from $3200</div>
-                      <div>Per Year</div>
-                      <br></br>
-                      <div>Excludes VAT & Application Support</div>
-                      <br></br>
-                      <div>
-                        Enterprise grade, fully managed instance with dedicated resources, scalable performance and the ultimate
-                        flexability.
-                      </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Contact Us</MyButton>
-                      </div>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid> */}
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
@@ -391,13 +351,18 @@ const ClientPricing = () => {
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('adhyayan.online'), '_blank');
+                        }}
+                      >
                         Try It Free
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
@@ -444,7 +409,13 @@ const ClientPricing = () => {
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.location.href = '/contact-us'; 
+                        }}
+                      >
                         Contact Us
                       </MyButton>
                     </MyCardContent>
@@ -454,62 +425,6 @@ const ClientPricing = () => {
             </MyTabPanel>
             <MyTabPanel value={state.tabIndex} index={1}>
               <MyGrid container spacing={2} alignItems="stretch">
-                {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Basic</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <div style={{ fontSize: '26px' }}>$130.00</div>
-                      <div>Per Year</div>
-                      <br></br>
-                      <div>Billed Annually Excludes VAT</div>
-                      <br></br>
-                      <div>
-                        Entry level, fully managed and supported shared hosting for organisations with limited CRM data and automation
-                        requirements. Recommended for up to 10 Users.
-                      </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton fullWidth>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Try It Free</MyButton>
-                      </div>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Professional</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <div style={{ fontSize: '26px' }}>$180.00</div>
-                      <div>Per Year</div>
-                      <br></br>
-                      <div>Billed Annually Excludes VAT</div>
-                      <br></br>
-                      <div>
-                        Shared hosting with enhanced performance, additional storage and business focused features. Recommended for up to 50
-                        Users.
-                      </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Try It Free</MyButton>
-                      </div>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid> */}
                 <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
@@ -556,7 +471,13 @@ const ClientPricing = () => {
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('adhyayan.online'), '_blank');
+                        }}
+                      >
                         Try It Free
                       </MyButton>
                     </MyCardContent>
@@ -608,13 +529,18 @@ const ClientPricing = () => {
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('adhyayan.online'), '_blank');
+                        }}
+                      >
                         Try It Free
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-
                 {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <CardHeader
@@ -717,9 +643,15 @@ const ClientPricing = () => {
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth>
-                        Try It Free
-                      </MyButton>
+                        <MyButton
+                          variant="contained"
+                          fullWidth
+                          onClick={() => {
+                            window.open(formatUrl('adhyayan.online'), '_blank');
+                          }}
+                        >
+                          Try It Free
+                        </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
@@ -769,7 +701,13 @@ const ClientPricing = () => {
                       <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
                       </MyButton>
-                      <MyButton variant="contained" fullWidth>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.location.href = '/contact-us'; // ya koi external link bhi de sakte ho
+                        }}
+                      >
                         Contact Us
                       </MyButton>
                     </MyCardContent>
