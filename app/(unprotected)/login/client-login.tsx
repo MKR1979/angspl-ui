@@ -9,15 +9,24 @@ import MyStack from '@/app/custom-components/MyStack';
 import useLogin from './useLogin';
 import MyBox from '@/app/custom-components/MyBox';
 import MyLogo from '@/app/custom-components/MyLogo';
-
+import './login.css';
+import MyCard from '@/app/custom-components/MyCard';
+import * as gConstants from '../../constants/constants';
 const ClientLogin = () => {
   const { state, onInputChange, onUserNameBlur, onPasswordBlur, onLoginClick, matchDownSM } = useLogin();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === 'Enter'){
+      onLoginClick(event);
+    }
+  };
   return (
-    <MyBox sx={{ minHeight: '100vh' }}>
-      <MyGrid container sx={{ minHeight: 'calc(100vh - 68px)', justifyContent: 'center', alignItems: 'center' }}>
+    <MyCard className='mycard'>
+    <MyBox>
+      <MyGrid container sx={{ marginTop:'10px', justifyContent: 'center', alignItems: 'center' }}>
         <MyGrid sx={{ width: 350, m: { xs: 1, sm: 0 }, mb: 0 }}>
           <MyGrid container spacing={2} alignItems="center" justifyContent="center">
-            <MyGrid sx={{ mb: 3 }}>
+            <MyGrid>
               <MyLogo />
             </MyGrid>
             <MyGrid size={{ xs: 12 }}>
@@ -27,10 +36,10 @@ const ClientLogin = () => {
                     <MyTypography
                       sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
                       component="h1"
-                      variant="h4"
+                      variant="h6"
                       gutterBottom
                     >
-                      Sign in
+                      Welcome !
                     </MyTypography>
                   </MyStack>
                 </MyGrid>
@@ -46,6 +55,10 @@ const ClientLogin = () => {
                     autoComplete="new-password"
                     value={state.dtoUser.user_name}
                     onChange={onInputChange}
+                    inputProps={{
+                      maxLength: gConstants.USER_NAME_LENGTH, // Restricts input to two characters
+                      pattern: "^[A-Za-z]{1,2}$", // Allows only up to two letters (A-Z, a-z)
+                    }}
                     onBlur={onUserNameBlur}
                     error={state.errorMessages.user_name ? true : false}
                   />
@@ -61,28 +74,34 @@ const ClientLogin = () => {
                     autoComplete="new-password"
                     value={state.dtoUser.password}
                     onChange={onInputChange}
+                    inputProps={{
+                      maxLength: gConstants.PASSWORD_MAX_LENGTH, // Restricts input to two characters
+                      pattern: "^[A-Za-z]{1,2}$", // Allows only up to two letters (A-Z, a-z)
+                    }}
                     onBlur={onPasswordBlur}
+                    onKeyDown={handleKeyDown}
                     error={state.errorMessages.password ? true : false}
                   />
                   <MyTypography className="error" sx={{ textAlign: 'left' }}>
                     {state.errorMessages.password}
                   </MyTypography>
                 </MyGrid>
+               <p className='already-msg2'><a href="/forgot-password">Forgot Password</a></p>
                 <MyGrid size={{ xs: 12 }} sx={{ mt: 1 }}>
                   <MyButton onClick={onLoginClick} fullWidth>
                     Sign in
                   </MyButton>
                 </MyGrid>
-                {/* <MyGrid size={{ xs: 12 }}>
-                  Don&#39;t have an account?
-                  <MyLink href="/signup">Sign Up</MyLink>
-                </MyGrid> */}
+                <p className='already-msg'> Do not have an account? <a href="/sign-up">Sign Up</a></p>
+               <p className='already-msg2'>By proceeding, you agree to the <a href="/terms">Terms of use</a> and  <a href="/privacy-policy">Privacy Policy</a>
+               </p>
               </MyGrid>
             </MyGrid>
           </MyGrid>
         </MyGrid>
       </MyGrid>
     </MyBox>
+    </MyCard>
   );
 };
 

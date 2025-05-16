@@ -28,40 +28,33 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   };
 }) as typeof Chip; // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
 
-export default function MyBreadcrumbs({ items, secondary }: { items: BreadcrumbsItem[]; secondary?: React.ReactNode }) {
+export default function MyBreadcrumbs({ items }: { items: BreadcrumbsItem[] }) {
   return (
-    <div style={{ paddingBottom: '7px', borderBottom: '1px solid #CED0CE', width: '100%' }}>
-      <MyTypography component="div">
-        <MyTypography
-          sx={{ fontSize: '20px', fontWeight: 'bold', borderBottom: '1px solid #CED0CE', marginBottom: '5px', paddingBottom: '5px' }}
-        >
-          {items[items.length - 1].label}
-        </MyTypography>
+    <div role="presentation" style={{ paddingBottom: '7px', borderBottom: '1px solid #CED0CE' }}>
+      <MyTypography
+        sx={{ fontSize: '20px', fontWeight: 'bold', borderBottom: '1px solid #CED0CE', marginBottom: '5px', paddingBottom: '5px' }}
+      >
+        {items[items.length - 1].label}
       </MyTypography>
-      <div style={{ width: '100%', display: 'inline-block' }}>
-        <div style={{ float: 'left', display: 'inline-block' }}>
-          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-            <Link href="/dashboard">
-              <StyledBreadcrumb label="Home" icon={<MyHomeIcon fontSize="small" />} style={{ cursor: 'pointer' }} />
-            </Link>
-            {items.map((item, index) => {
-              if (index < items.length - 1) {
-                return (
-                  <Link key={item.label} href={{ pathname: item.href }}>
-                    <StyledBreadcrumb key={item.label} label={item.label} style={{ cursor: 'pointer' }} />
-                  </Link>
-                );
-              }
-              return (
-                <MyTypography key={item.label} variant="body2">
-                  {item.label}
-                </MyTypography>
-              );
-            })}
-          </Breadcrumbs>
-        </div>
-        <div style={{ float: 'right', display: 'inline-block' }}>{secondary}</div>
-      </div>
+      <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+        <Link href="/dashboard">
+          <StyledBreadcrumb label="Home" icon={<MyHomeIcon fontSize="small" />} style={{ cursor: 'pointer' }} />
+        </Link>
+        {items.map((item, index) => {
+          if (index < items.length - 1) {
+            return (
+              <Link key={item.label} href={{ pathname: item.href }}>
+                <StyledBreadcrumb key={item.label} label={item.label} style={{ cursor: 'pointer' }} />
+              </Link>
+            );
+          }
+          return (
+            <MyTypography key={item.label} variant="body2">
+              {item.label}
+            </MyTypography>
+          );
+        })}
+      </Breadcrumbs>
     </div>
   );
 }

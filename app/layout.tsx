@@ -31,11 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" type="image/x-icon" href="/logo.png" />
-        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
-        <meta name="robots" content="noindex,follow" />
-      </head>
+      <head>{/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}</head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <CssBaseline />
         <GlobalStateProvider>

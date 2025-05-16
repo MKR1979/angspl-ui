@@ -1,0 +1,25 @@
+{
+    "admissionTitle":"Course Admission Form",
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "language": "Language",
+    "home": "Home",
+    "profile": "Profile",
+    "settings": "Settings",
+    "help": "Help",
+    "search": "Search",
+    "error": {
+      "404": "Page not found",
+      "500": "Internal server error",
+      "form": {
+        "required": "This field is required",
+        "invalidEmail": "Please enter a valid email address"
+      }
+    }
+  }
+  

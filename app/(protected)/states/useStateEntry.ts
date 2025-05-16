@@ -5,7 +5,6 @@ import StateDTO, { STATE } from '@/app/types/stateDTO';
 import { ADD_STATE, UPDATE_STATE, GET_STATE } from '@/app/graphql/state';
 import { COUNTRY_LOOKUP } from '@/app/graphql/Country';
 import LookupDTO from '@/app/types/LookupDTO';
-import toast from 'react-hot-toast';
 
 type ErrorMessageType = {
   state_name: string | null;
@@ -16,7 +15,6 @@ type ErrorMessageType = {
 type StateType = {
   dtoState: StateDTO;
   arrCountryLookup: LookupDTO[];
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -36,7 +34,6 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
   const INITIAL_STATE: StateType = Object.freeze({
     dtoState: dtoState,
     arrCountryLookup: arrCountryLookup,
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   } as StateType);
 
@@ -61,7 +58,7 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
   const getData1 = useCallback(async (): Promise<void> => {
     let arrCountryLookup: LookupDTO[] = [];
     const { error, data } = await getCountryLookup();
-    if (!error && data?.getCountryLookup) {
+    if (!error && data) {
       arrCountryLookup = data.getCountryLookup;
     }
     setState({ arrCountryLookup: arrCountryLookup } as StateType);
@@ -74,7 +71,7 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
         id: state.dtoState.id
       }
     });
-    if (!error && data?.getState) {
+    if (!error && data) {
       dtoState = { ...data.getState };
       dtoState.countryLookupDTO = { id: dtoState.country_id, text: dtoState.country_name };
     }
@@ -117,12 +114,10 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     }
   }, [state.dtoState.state_name]);
 
-  const onStateNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const state_name = await validateStateName();
-      setState({ errorMessages: { ...state.errorMessages, state_name: state_name } } as StateType);
-    }, [validateStateName, state.errorMessages]);
+  const onStateNameBlur = useCallback(async () => {
+    const state_name = await validateStateName();
+    setState({ errorMessages: { ...state.errorMessages, state_name: state_name } } as StateType);
+  }, [validateStateName, state.errorMessages]);
 
   const validateCountryName = useCallback(async () => {
     if (state.dtoState.country_id === 0) {
@@ -132,12 +127,10 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     }
   }, [state.dtoState.country_id]);
 
-  const onCountryNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const country_id = await validateCountryName();
-      setState({ errorMessages: { ...state.errorMessages, country_id: country_id } } as StateType);
-    }, [validateCountryName, state.errorMessages]);
+  const onCountryNameBlur = useCallback(async () => {
+    const country_id = await validateCountryName();
+    setState({ errorMessages: { ...state.errorMessages, country_id: country_id } } as StateType);
+  }, [validateCountryName, state.errorMessages]);
 
   const validateForm = useCallback(async () => {
     let isFormValid = true;
@@ -157,49 +150,38 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          if (state.dtoState.id === 0) {
-            const { data } = await addState({
-              variables: {
-                state_name: state.dtoState.state_name,
-                state_code: state.dtoState.state_code,
-                country_id: state.dtoState.country_id
-              }
-            });
-            if (data?.addState) {
-              toast.success('record saved successfully');
-              router.push('/states/list');
-            } else {
-              toast.error('Failed to save the record');
+      event.preventDefault();
+      if (await validateForm()) {
+        if (state.dtoState.id === 0) {
+          const { data } = await addState({
+            variables: {
+              ...state.dtoState
             }
-          } else {
-            const { data } = await updateState({
-              variables: {
-                id: state.dtoState.id,
-                state_name: state.dtoState.state_name,
-                state_code: state.dtoState.state_code,
-                country_id: state.dtoState.country_id
-              }
-            });
-            if (data?.updateState) {
-              toast.success('record saved successfully');
-              router.push('/states/list');
-            } else {
-              toast.error('Failed to save the record');
+          });
+          if (data) {
+            router.push('/states/list');
+          }
+        } else {
+          const { data } = await updateState({
+            variables: {
+              ...state.dtoState
             }
+          });
+          if (data) {
+            router.push('/states/list');
           }
         }
-      } catch {
-        toast.error('Failed to save the record');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, addState, state.dtoState, router, updateState]
+  );
+
+  const onClearClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      setState({ dtoState: { ...STATE, id: state.dtoState.id }, errorMessages: { ...ERROR_MESSAGES } } as StateType);
+    },
+    [state.dtoState.id, ERROR_MESSAGES]
   );
 
   const onCancelClick = useCallback(
@@ -216,6 +198,7 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     onStateNameBlur,
     onCountryNameBlur,
     onSaveClick,
+    onClearClick,
     onCancelClick
   };
 };

@@ -37,7 +37,7 @@ const useViewState = ({ dtoState }: Props) => {
         id: state.dtoState.id
       }
     });
-    if (!error && data?.getState) {
+    if (!error && data) {
       dtoState = data.getState;
     }
     setState({ dtoState: dtoState } as StateType);

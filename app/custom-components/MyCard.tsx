@@ -1,20 +1,12 @@
-import { memo, ReactElement } from 'react';
+import { memo } from 'react';
 import Card, { CardProps } from '@mui/material/Card';
 import eq from 'lodash/eq';
-import MyCardHeader from './MyCardHeader';
 
-interface MyCardProps extends CardProps {
-  title?: string;
-  secondary?: ReactElement;
-}
+interface MyCardProps extends CardProps {}
 
 const MyCard = ({ children, ...props }: MyCardProps) => {
   console.log('MyCard rendered');
-  return (
-    <Card {...props}>
-      {(props.secondary || props.title) && <MyCardHeader action={props.secondary} title={props.title} />} {children}
-    </Card>
-  );
+  return <Card {...props}> {children}</Card>;
 };
 
 export default memo(MyCard, (prevProps, nextProps) => {

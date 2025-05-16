@@ -11,13 +11,14 @@ import MyDivider from '@/app/custom-components/MyDivider';
 import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import RoleDTO from '@/app/types/RoleDTO';
+import * as gConstants from '../../constants/constants';
 
 type RoleEntryProps = {
   dtoRole: RoleDTO;
 };
 
 const RoleEntry = (props: RoleEntryProps) => {
-  const { state, onInputChange, onRoleNameBlur, onSaveClick, onCancelClick } = useRoleEntry(props);
+  const { state, onInputChange, onRoleNameBlur, onSaveClick, onClearClick, onCancelClick } = useRoleEntry(props);
 
   return (
     <MyCard>
@@ -29,6 +30,10 @@ const RoleEntry = (props: RoleEntryProps) => {
               name="role_name"
               value={state.dtoRole.role_name}
               onChange={onInputChange}
+              inputProps={{
+                maxLength: gConstants.FIRST_NAME_LENGTH, // Restricts input to two characters
+                pattern: "^[A-Za-z]{1,2}$", // Allows only up to two letters (A-Z, a-z)
+              }}
               onBlur={onRoleNameBlur}
               error={state.errorMessages.role_name ? true : false}
             />
@@ -38,9 +43,8 @@ const RoleEntry = (props: RoleEntryProps) => {
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick} disabled={state.saveDisabled}>
-          Save
-        </MyButton>
+        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>
     </MyCard>

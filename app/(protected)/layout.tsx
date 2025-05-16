@@ -30,50 +30,29 @@ import MyMenu from '../custom-components/MyMenu';
 import MyMenuItem from '../custom-components/MyMenuItem';
 import MyTypography from '../custom-components/MyTypography';
 import MyMailIcon from '../custom-components/MyMailIcon';
-import MyHomeIcon from '../custom-components/MyHomeIcon';
 import MyBadge from '../custom-components/MyBadge';
-//import MyLabelIcon from '../custom-components/MyLabelIcon';
 import MySupervisorAccountIcon from '../custom-components/MySupervisorAccountIcon';
-//import MyInfoIcon from '../custom-components/MyInfoIcon';
-//import MyForumIcon from '../custom-components/MyForumIcon';
 import MyNotificationsIcon from '../custom-components/MyNotificationsIcon';
 import MyMoreVertIcon from '../custom-components/MyMoreVertIcon';
-//import MyLocalOfferIcon from '../custom-components/MyLocalOfferIcon';
 import MyArrowDropDownIcon from '../custom-components/MyArrowDropDownIcon';
 import MyArrowRightIcon from '../custom-components/MyArrowRightIcon';
 import MySimpleTreeView from '../custom-components/MySimpleTreeView';
 import { useFirstRender } from '../hooks/useFirstRender';
 import AuthGuard from '../auth-guard';
-import { useDispatch } from '../store';
+import { useDispatch, useSelector } from '../store';
 import { setToken } from '../store/slices/globalState';
-import MyFactoryIcon from '../custom-components/MyFactoryIcon';
 import MyCurrencyExcangeIcon from '../custom-components/MyCurrencyExcangeIcon';
-import MyAdsClickIcon from '../custom-components/MyAdsClickIcon';
-import MySwitchAccountIcon from '../custom-components/MySwitchAccountIcon';
-import MyApiIcon from '../custom-components/MyApiIcon';
-import MyFormatAlignJustifyIcon from '../custom-components/MyFormatAlignJustifyIcon';
 import MyControlCameraIcon from '../custom-components/MyControlCameraIcon';
-import MyCategoryIcon from '../custom-components/MyCategoryIcon';
+import MyIconDashboard from '../custom-components/MyIconDashboard';
 import MyFlagIcon from '../custom-components/MyFlagIcon';
 import MyCorporateFareIcon from '../custom-components/MyCorporateFareIcon';
-import MyInventoryIcon from '../custom-components/MyInventoryIcon';
-import MyBusinessIcon from '../custom-components/MyBusinessIcon';
-import MyPersonOutlineIcon from '../custom-components/MyPersonOutlineIcon';
-import MyCropPortraitIcon from '../custom-components/MyCropPortraitIcon';
-import MyClearHandsIcon from '../custom-components/MyClearHandsIcon';
-import MyWhatsAppIcon from '../custom-components/MyWhatsAppIcon';
-import { Toaster } from 'react-hot-toast';
-// import MyPopper from '../custom-components/MyPopper';
-// import MyClickAwayListener from '../custom-components/MyClickAwayListener';
-// import MyFade from '../custom-components/MyFade';
-// import MyCheckbox from '../custom-components/MyCheckbox';
-// import MyList from '../custom-components/MyList';
-// import MyListItem from '../custom-components/MyListItem';
-// import MyListItemButton from '../custom-components/MyListItemButton ';
-// import MyListItemIcon from '../custom-components/MyListItemIcon ';
-// import MyListItemText from '../custom-components/MyListItemText ';
-//import GlobalSearchDTO from '../types/GlobalSearchDTO';
-//import MyTransitions from '../custom-components/MyTransitions';
+import MyIconBook from '../custom-components/MyIconBook';
+import MyIconUsers from '../custom-components/MyIconUsers';
+import MyIconMailbox from '../custom-components/MyIconMailbox';
+import MyIconPackage from '../custom-components/MyIconPackage';
+import MyIconTallymark1 from '../custom-components/MyIconTallymark1';
+import MyIconActivity from '../custom-components/MyIconActivity';
+
 declare module 'react' {
   interface CSSProperties {
     '--tree-view-color'?: string;
@@ -81,13 +60,14 @@ declare module 'react' {
   }
 }
 
-interface StyledTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef'>, React.HTMLAttributes<HTMLLIElement> {
+interface StyledTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef' | 'children'>, React.HTMLAttributes<HTMLLIElement> {
   bgColor?: string;
   bgColorForDarkMode?: string;
   color?: string;
   colorForDarkMode?: string;
   labelIcon: React.ElementType<SvgIconProps>;
   labelInfo?: string;
+  children?: React.ReactNode; // Explicitly define `children` to resolve conflict
 }
 
 const CustomTreeItemRoot = styled(TreeItem2Root)(({ theme }) => ({
@@ -199,17 +179,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(props: StyledTreeItemP
 function EndIcon() {
   return <div style={{ width: 24 }} />;
 }
-// type StateType = {
-//   open: boolean;
-//   open1: boolean;
-//   value: string;
-//   groups: string[];
-//   groupCounts: number[];
-//   items: GlobalSearchDTO[];
-//   queryItems: any[];
-//   checkAll: boolean;
-//   isLoading: boolean;
-// };
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -224,96 +194,6 @@ export default function RootLayout({
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  //const anchorRef1 = useRef<any>(null);
-  // const [state, setState] = useState<StateType>({
-  //   open: false,
-  //   open1: false,
-  //   value: '',
-  //   groups: [],
-  //   groupCounts: [],
-  //   items: [],
-  //   queryItems: [
-  //     { id: 0, name: 'Order # - Orders', checked: true },
-  //     { id: 1, name: 'Quote # - Quotes', checked: true },
-  //     { id: 2, name: 'Quote # - Orders', checked: true },
-  //     { id: 3, name: 'Job # - Jobs', checked: true },
-  //     { id: 4, name: 'Job # - Heat Treat', checked: true },
-  //     { id: 5, name: 'Job # - Purchase Orders', checked: true },
-  //     { id: 6, name: 'Part # - Inventory (Part List)', checked: true },
-  //     { id: 7, name: 'Part # - Jobs', checked: true },
-  //     { id: 8, name: 'Part # - Purchase Orders', checked: true },
-  //     { id: 9, name: 'Purchase Order # - Purchase Orders', checked: true },
-  //     { id: 10, name: 'Purchase Order # - Orders', checked: true },
-  //     { id: 11, name: 'Invoice # - Invoices', checked: true },
-  //     { id: 12, name: 'Customer Company Name - Customers', checked: true },
-  //     { id: 13, name: 'Customer Company Name - Orders', checked: true },
-  //     { id: 14, name: 'Customer Company Name - Quotes', checked: true },
-  //     { id: 15, name: 'Customer Company Name - Invoices', checked: true },
-  //     { id: 16, name: 'Heat Treat # - Heat Treat', checked: true },
-  //     { id: 17, name: 'Heat Treat # - Jobs', checked: true },
-  //     { id: 18, name: 'Bin - Inventory', checked: true },
-  //     { id: 19, name: 'Bin - Job Materials', checked: true },
-  //     { id: 20, name: 'Bin - Jobs', checked: true },
-  //     { id: 21, name: 'Customer Contact Name - Contacts', checked: true },
-  //     { id: 22, name: 'Customer Contact Name - Orders', checked: true },
-  //     { id: 23, name: 'Customer Contact Name - Quotes', checked: true },
-  //     { id: 24, name: 'Vendor Name - Vendors', checked: true },
-  //     { id: 25, name: 'Vendor Name - Purchase Orders', checked: true },
-  //     { id: 26, name: "Hide Empty Part #'s", checked: true }
-  //   ],
-  //   checkAll: true,
-  //   isLoading: false
-  // });
-  // const onQSettingsClick = useCallback(async (event: any) => {
-  //   setState((prevState: StateType): StateType => {
-  //     return {
-  //       ...prevState,
-  //       open1: !prevState.open1
-  //     };
-  //   });
-  // }, []);
-
-  // const handleClose1 = useCallback(
-  //   (event: React.MouseEvent<HTMLDivElement> | MouseEvent | TouchEvent) => {
-  //     if (anchorRef1.current && anchorRef1.current.contains(event.target)) {
-  //       return;
-  //     }
-
-  //     setState((prevState: StateType): StateType => {
-  //       return {
-  //         ...prevState,
-  //         open1: false
-  //       };
-  //     });
-  //   },
-  //   [anchorRef1.current]
-  // );
-  // const onQueryItemClick = useCallback(async (event: any) => {
-  //   setState((prevState: StateType): StateType => {
-  //     return {
-  //       ...prevState,
-  //       checkAll: !prevState.checkAll
-  //     };
-  //   });
-  // }, []);
-  // const handleToggle = useCallback(
-  //   async (id: number) => {
-  //     const queryItems = [...state.queryItems];
-  //     for (let i = 0; i < queryItems.length; i++) {
-  //       if (queryItems[i].id == id) {
-  //         queryItems[i].checked = !queryItems[i].checked;
-  //         break;
-  //       }
-  //     }
-  //     setState((prevState: StateType): StateType => {
-  //       return {
-  //         ...prevState,
-  //         queryItems: queryItems
-  //       };
-  //     });
-  //   },
-  //   [state.queryItems]
-  // );
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -342,7 +222,7 @@ export default function RootLayout({
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const logout = useCallback(async () => {
-    removeCookie('biz-comrade-token', { path: '/' });
+    removeCookie('Adhyayan-token', { path: '/' });
     dispatch(setToken(''));
   }, [removeCookie, dispatch]);
 
@@ -433,7 +313,109 @@ export default function RootLayout({
       setOpen(false);
     }
   };
+  const { loginUser } = useSelector((state) => state.globalState);
+  const { siteConfig } = useSelector((state) => state.globalState);
+  // Initialize all menus as visible by default
+  const menuFlags = {
+    dashboard: true,
+    courses: true,
+    admissions: true,
+    user: true,
+    roles: true,
+    quizzes: true,
+    quizQuestions: true,
+    questionOptions: true,
+    importQuizzes: true,
+    codeProjects: true,
+    videoUploads: true,
+    studyNotes: true,
+    siteConfigs: true,
+    emails: true,
+    compaigns: true,
+    currencies: true,
+    events: true,
+    surveys: true,
+    countries: true,
+    states: true,
+    reports: true,
+    companies:true,
+    // Add more keys as needed...
+  };
 
+  // Apply switch-case to disable menus when value is 'false'
+  if (siteConfig) {
+    switch (siteConfig.key) {
+      case 'enable_dashboard':
+        menuFlags.dashboard = siteConfig.value == 'true';
+        break;
+      case 'enable_course':
+        menuFlags.courses = siteConfig.value == 'true';
+        break;
+      case 'enable_admissions':
+        menuFlags.admissions = siteConfig.value == 'true';
+        break;
+      case 'enable_user':
+        menuFlags.user = siteConfig.value == 'true';
+        break;
+      case 'enable_roles':
+        menuFlags.roles = siteConfig.value == 'true';
+        break;
+      case 'enable_quizzes':
+        menuFlags.quizzes = siteConfig.value == 'true';
+        break;
+      case 'enable_quiz_questions':
+        menuFlags.quizQuestions = siteConfig.value == 'true';
+        break;
+      case 'enable_question_options':
+        menuFlags.questionOptions = siteConfig.value == 'true';
+        break;
+      case 'enable_import_quizzes':
+        menuFlags.importQuizzes = siteConfig.value == 'true';
+        break;
+      case 'enable_code_projects':
+        menuFlags.codeProjects = siteConfig.value == 'true';
+        break;
+      case 'enable_video_uploads':
+        menuFlags.videoUploads = siteConfig.value == 'true';
+        break;
+      case 'enable_study_notes':
+        menuFlags.studyNotes = siteConfig.value == 'true';
+        break;
+      case 'enable_site_configs':
+        menuFlags.siteConfigs = siteConfig.value == 'true';
+        break;
+        case 'enable_companies':
+        menuFlags.companies = siteConfig.value == 'true';
+        break;
+      case 'enable_emails':
+        menuFlags.emails = siteConfig.value == 'true';
+        break;
+      case 'enable_compaigns':
+        menuFlags.compaigns = siteConfig.value == 'true';
+        break;
+      case 'enable_events':
+        menuFlags.events = siteConfig.value == 'true';
+        break;
+      case 'enable_surveys':
+        menuFlags.surveys = siteConfig.value == 'true';
+        break;
+      case 'enable_countries':
+        menuFlags.countries = siteConfig.value == 'true';
+        break;
+      case 'enable_currencies':
+        menuFlags.currencies = siteConfig.value == 'true';
+        break;
+      case 'enable_states':
+        menuFlags.states = siteConfig.value == 'true';
+        break;
+      case 'enable_reports':
+        menuFlags.reports = siteConfig.value == 'true';
+        break;
+      // Add remaining 13+ cases here
+      default:
+        break;
+    }
+  }
   return (
     <AuthGuard>
       <MyBox>
@@ -443,12 +425,6 @@ export default function RootLayout({
               <MyIconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} onClick={toggleDrawer()}>
                 <MyMenuIcon />
               </MyIconButton>
-              {/* <MyTypography
-              variant="h1"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            > */}
               <MyBox
                 sx={{
                   textShadow: '2px 2px 5px black',
@@ -468,19 +444,13 @@ export default function RootLayout({
               <MyTextField
                 id="input-search-header"
                 sx={{ width: '325px' }}
-                //value={state.value}
-                //onChange={onSearch}
                 placeholder="Search"
                 autoComplete="off"
-                //ref={anchorRef}
                 slotProps={{
                   input: {
                     startAdornment: (
                       <MyInputAdornment position="start">
-                        <MyIconButton
-                          aria-label="description for action"
-                          //onClick={clickHandler}
-                        >
+                        <MyIconButton aria-label="description for action">
                           <MyIconSearch
                             stroke={1.5}
                             size="16px"
@@ -493,31 +463,29 @@ export default function RootLayout({
                       <MyInputAdornment position="end">
                         {/* <HeaderAvatarStyle variant="rounded"> */}
                         <MyIconButton>
-                          <MyIconAdjustmentsHorizontal
-                            id="qsettings"
-                            stroke={1.5}
-                            size="20px"
-                            //ref={anchorRef1}
-                            //onClick={onQSettingsClick}
-                          />
+                          <MyIconAdjustmentsHorizontal id="qsettings" stroke={1.5} size="20px" />
                         </MyIconButton>
                         {/* </HeaderAvatarStyle> */}
                       </MyInputAdornment>
                     )
                   }
                 }}
-
-                //aria-describedby="search-helper-text"
-                // inputProps={{ 'aria-label': 'weight' }}
               />
             </MyBox>
+            {/*Welcome Message */}
+            {loginUser && (
+              <MyTypography
+                sx={{
+                  ml: 30,
+                  fontSize: '13px',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                Welcome, {loginUser}
+              </MyTypography>
+            )}
             <MyBox sx={{ flexGrow: 1 }} />
             <MyBox sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <MyIconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <MyBadge badgeContent={10} color="error">
-                  <MyWhatsAppIcon style={{ color: 'green' }} />
-                </MyBadge>
-              </MyIconButton>
               <MyIconButton size="large" aria-label="show 4 new mails" color="inherit">
                 <MyBadge badgeContent={4} color="error">
                   <MyMailIcon />
@@ -594,7 +562,7 @@ export default function RootLayout({
               <MySimpleTreeView
                 aria-label="gmail"
                 defaultExpandedItems={['3']}
-                defaultSelectedItems="5"
+                defaultSelectedItems="1"
                 slots={{
                   expandIcon: MyArrowRightIcon,
                   collapseIcon: MyArrowDropDownIcon,
@@ -602,80 +570,53 @@ export default function RootLayout({
                 }}
                 sx={{ flexGrow: 1, maxWidth: 300 }}
               >
+                {menuFlags.dashboard && (
                 <CustomTreeItem
                   itemId="1"
                   label="Dashboard"
-                  labelIcon={MyHomeIcon}
+                  labelIcon={MyIconDashboard}
                   onClick={() => {
                     toggleDrawer1();
                     router.push('/dashboard');
                   }}
                 />
+                  )}
+                {menuFlags.courses && (
                 <CustomTreeItem
                   itemId="2"
+                  label="Courses"
+                  labelIcon={MyIconBook}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/courses/list');
+                  }}
+                />
+                  )}
+                {menuFlags.admissions && (
+                <CustomTreeItem
+                  itemId="3"
+                  label="Admissions"
+                  labelIcon={MyIconUsers}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/admissions/list');
+                  }}
+                />
+                  )}
+                {menuFlags.user && (
+                <CustomTreeItem
+                  itemId="4"
                   label="Users"
-                  labelIcon={MySupervisorAccountIcon}
+                  labelIcon={MyIconUsers}
                   onClick={() => {
                     toggleDrawer1();
                     router.push('/users/list');
                   }}
                 />
+                  )}
+                {menuFlags.roles && (
                 <CustomTreeItem
-                  itemId="31"
-                  label="Currencies"
-                  labelIcon={MyCurrencyExcangeIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/currencies/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="32"
-                  label="Lead Sources"
-                  labelIcon={MyAdsClickIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/lead-sources/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="33"
-                  label="Industries"
-                  labelIcon={MyFactoryIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/industries/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="34"
-                  label="Account Types"
-                  labelIcon={MySwitchAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/account-types/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="35"
-                  label="Opportunity Types"
-                  labelIcon={MyApiIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/opportunity-types/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="36"
-                  label="Stages"
-                  labelIcon={MyFormatAlignJustifyIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/stages/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="37"
+                  itemId="5"
                   label="Roles"
                   labelIcon={MyControlCameraIcon}
                   onClick={() => {
@@ -683,278 +624,131 @@ export default function RootLayout({
                     router.push('/roles/list');
                   }}
                 />
+                )}
+                {menuFlags.quizzes && (
                 <CustomTreeItem
-                  itemId="38"
-                  label="Units"
-                  labelIcon={MySupervisorAccountIcon}
+                  itemId="6"
+                  label="Quizzes"
+                  labelIcon={MyIconActivity}
                   onClick={() => {
                     toggleDrawer1();
-                    router.push('/units/list');
+                    router.push('/quizzes/list');
                   }}
                 />
+                  )}
+                  {menuFlags.quizQuestions && (
                 <CustomTreeItem
-                  itemId="39"
-                  label="Document Types"
-                  labelIcon={MySupervisorAccountIcon}
+                  itemId="7"
+                  label="Quiz Questions"
+                  labelIcon={MyIconBook}
                   onClick={() => {
                     toggleDrawer1();
-                    router.push('/document-types/list');
+                    router.push('/quiz-question/list');
                   }}
                 />
+                  )}
+                  {menuFlags.questionOptions && (
                 <CustomTreeItem
-                  itemId="40"
-                  label="Document Categories"
-                  labelIcon={MySupervisorAccountIcon}
+                  itemId="8"
+                  label="Question Options"
+                  labelIcon={MyIconBook}
                   onClick={() => {
                     toggleDrawer1();
-                    router.push('/document-categories/list');
+                    router.push('/question-options/list');
                   }}
                 />
-                <CustomTreeItem
-                  itemId="41"
-                  label="Document Subcategories"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/document-subcategories/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="42"
-                  label="Terms"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/terms/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="43"
-                  label="Incoterms"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/incoterms/list');
-                  }}
-                />
+                  )}
+                    {menuFlags.importQuizzes && (
                 <CustomTreeItem
                   itemId="9"
-                  label="Product Categories"
-                  labelIcon={MyCategoryIcon}
+                  label="Import Quizzes"
+                  labelIcon={MyIconBook}
                   onClick={() => {
                     toggleDrawer1();
-                    router.push('/product-categories/list');
+                    router.push('/import-quizzes');
                   }}
                 />
-                <CustomTreeItem
-                  itemId="300"
-                  label="Countries"
-                  labelIcon={MyFlagIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/countries/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="301"
-                  label="States"
-                  labelIcon={MyCorporateFareIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/states/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="302"
-                  label="Case Types"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/case-types/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="303"
-                  label="Cases"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/cases/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="304"
-                  label="Taxes"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/taxes/list');
-                  }}
-                />
+                  )}
+                  {menuFlags.codeProjects && (
                 <CustomTreeItem
                   itemId="10"
-                  label="Products"
-                  labelIcon={MyInventoryIcon}
+                  label="Code Projects"
+                  labelIcon={MyIconBook}
                   onClick={() => {
                     toggleDrawer1();
-                    router.push('/products/list');
+                    router.push('/code-projects/list');
                   }}
                 />
+                  )}
+                  {menuFlags.videoUploads && (
+                <CustomTreeItem
+                  itemId="19"
+                  label="Video Uploads"
+                  labelIcon={MyIconActivity}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/video-uploads/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.studyNotes && (
+                <CustomTreeItem
+                  itemId="20"
+                  label="Study Notes"
+                  labelIcon={MyIconBook}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/study-notes/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.siteConfigs && (
+                <CustomTreeItem
+                  itemId="21"
+                  label="Site Configs"
+                  labelIcon={MyIconBook}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/site-config/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.companies && (
+                  <CustomTreeItem
+                  itemId="22"
+                  label="Company"
+                  labelIcon={MyIconMailbox}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/companies/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.emails && (
                 <CustomTreeItem
                   itemId="11"
-                  label="Accounts"
-                  labelIcon={MyBusinessIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/accounts/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="12"
-                  label="Contacts"
-                  labelIcon={MyPersonOutlineIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/contacts/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="13"
-                  label="Opportunities"
-                  labelIcon={MyCropPortraitIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/opportunities/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="14"
-                  label="Leads"
-                  labelIcon={MyClearHandsIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/leads/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="15"
-                  label="Quotes"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/quotes/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="16"
-                  label="Documents"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/documents/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="17"
                   label="E-Mails"
-                  labelIcon={MySupervisorAccountIcon}
+                  labelIcon={MyIconMailbox}
                   onClick={() => {
                     toggleDrawer1();
                     router.push('/emails/list');
                   }}
                 />
+                  )}
+                  {menuFlags.compaigns && (
                 <CustomTreeItem
-                  itemId="18"
+                  itemId="12"
                   label="Compaigns"
-                  labelIcon={MySupervisorAccountIcon}
+                  labelIcon={MyIconPackage}
                   onClick={() => {
                     toggleDrawer1();
                     router.push('/compaigns/list');
                   }}
                 />
+                    )}
+                    {menuFlags.events && (
                 <CustomTreeItem
-                  itemId="19"
-                  label="Calls"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/calls/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="20"
-                  label="Meetings"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/meetings/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="21"
-                  label="Tasks"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/tasks/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="22"
-                  label="Notes"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/notes/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="23"
-                  label="Invoices"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/invoices/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="24"
-                  label="Contracts"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/contracts/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="25"
-                  label="Cases"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/cases/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="26"
-                  label="Targets"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/targets/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="27"
-                  label="Projects"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/projects/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="28"
+                  itemId="13"
                   label="Events"
                   labelIcon={MySupervisorAccountIcon}
                   onClick={() => {
@@ -962,114 +756,72 @@ export default function RootLayout({
                     router.push('/events/list');
                   }}
                 />
+                  )}
+                  {menuFlags.surveys && (
                 <CustomTreeItem
-                  itemId="29"
+                  itemId="14"
                   label="Surveys"
-                  labelIcon={MySupervisorAccountIcon}
+                  labelIcon={MyIconSearch}
                   onClick={() => {
                     toggleDrawer1();
                     router.push('/surveys/list');
                   }}
                 />
+                  )}
+                  {menuFlags.countries && (
                 <CustomTreeItem
-                  itemId="30"
+                  itemId="15"
+                  label="Countries"
+                  labelIcon={MyFlagIcon}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/countries/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.currencies && (
+                <CustomTreeItem
+                  itemId="16"
+                  label="Currencies"
+                  labelIcon={MyCurrencyExcangeIcon}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/currencies/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.states && (
+                <CustomTreeItem
+                  itemId="17"
+                  label="States"
+                  labelIcon={MyCorporateFareIcon}
+                  onClick={() => {
+                    toggleDrawer1();
+                    router.push('/states/list');
+                  }}
+                />
+                  )}
+                  {menuFlags.reports && (
+                <CustomTreeItem
+                  itemId="18"
                   label="Reports"
-                  labelIcon={MySupervisorAccountIcon}
+                  labelIcon={MyIconTallymark1}
                   onClick={() => {
                     toggleDrawer1();
                     router.push('/reports/list');
                   }}
                 />
-                <CustomTreeItem
-                  itemId="44"
-                  label="Provisional Invoices"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/provisional-invoices/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="45"
-                  label="Orders"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/orders/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="46"
-                  label="Delivery Slips"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/delivery-slips/list');
-                  }}
-                />
-                <CustomTreeItem
-                  itemId="47"
-                  label="Locations"
-                  labelIcon={MySupervisorAccountIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/locations/list');
-                  }}
-                />
-                {/* <CustomTreeItem itemId="3" label="Categories" labelIcon={MyLabelIcon}>
-                  <CustomTreeItem
-                    itemId="5"
-                    label="Social"
-                    labelIcon={MySupervisorAccountIcon}
-                    //labelInfo="90"
-                    color="#1a73e8"
-                    bgColor="#e8f0fe"
-                    colorForDarkMode="#B8E7FB"
-                    bgColorForDarkMode={alpha('#00b4ff', 0.2)}
-                  />
-                  <CustomTreeItem
-                    itemId="6"
-                    label="Updates"
-                    labelIcon={MyInfoIcon}
-                    //labelInfo="2,294"
-                    color="#e3742f"
-                    bgColor="#fcefe3"
-                    colorForDarkMode="#FFE2B7"
-                    bgColorForDarkMode={alpha('#ff8f00', 0.2)}
-                  />
-                  <CustomTreeItem
-                    itemId="7"
-                    label="Forums"
-                    labelIcon={MyForumIcon}
-                    //labelInfo="3,566"
-                    color="#a250f5"
-                    bgColor="#f3e8fd"
-                    colorForDarkMode="#D9B8FB"
-                    bgColorForDarkMode={alpha('#9035ff', 0.15)}
-                  />
-                  <CustomTreeItem
-                    itemId="8"
-                    label="Promotions"
-                    labelIcon={MyLocalOfferIcon}
-                    //labelInfo="733"
-                    color="#3c8039"
-                    bgColor="#e6f4ea"
-                    colorForDarkMode="#CCE8CD"
-                    bgColorForDarkMode={alpha('#64ff6a', 0.2)}
-                  />
-                </CustomTreeItem>
-                <CustomTreeItem itemId="4" label="History" labelIcon={MyLabelIcon} /> */}
+                  )}
               </MySimpleTreeView>
             </MyPerfectScrollbar>
           </MyDrawer>
         </MyBox>
-
         <MyCard
           component="div"
           sx={{
             flexGrow: 1,
             borderRadius: 2,
-            backgroundColor: '#fafafa',
+            backgroundColor: 'rgb(238, 242, 246)',
             position: 'relative',
             left: 0,
             width: 'calc(100vw - ' + (firstRender ? 300 : matchUpMd ? 300 : 0) + 'px'
@@ -1089,74 +841,6 @@ export default function RootLayout({
           </MyBox>
         </MyCard>
       </MyBox>
-      {/* <MyPopper
-          open={state.open1}
-          anchorEl={document.getElementById('qsettings')}
-          transition
-          placement="bottom-end"
-          disablePortal
-          modifiers={[
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 15]
-              }
-            }
-          ]}
-        >
-          {({ TransitionProps }) => (
-            <MyClickAwayListener onClickAway={handleClose1}>
-              <MyTransitions in={open} {...TransitionProps}>
-                <MyFade {...TransitionProps}>
-                  <MyBox sx={{ border: 1, p: 0, bgcolor: 'background.paper', width: '360px', maxHeight: '460px' }}>
-                    <MyTypography
-                      onClick={onQueryItemClick}
-                      sx={{ pl: 2, backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#36415215' }}
-                    >
-                      <MyTypography variant="h4">
-                        <MyCheckbox edge="start" checked={state.checkAll} tabIndex={-1} disableRipple />
-                        Query Items (All/ None)
-                      </MyTypography>
-                    </MyTypography>
-                    <MyList sx={{ width: '100%', maxWidth: 360, overflow: 'auto', maxHeight: 360, bgcolor: 'background.paper', pt: 0 }}>
-                      {state.queryItems.map((item, index) => {
-                        const labelId = item.id;
-
-                        return (
-                          <div key={item.id}>
-                            {item.name === "Hide Empty Part #'s" && <hr style={{ width: '100%', margin: '10px 0' }} />}
-                            <MyListItem disablePadding>
-                              <MyListItemButton role={undefined} onClick={() => handleToggle(item.id)} dense sx={{ height: '30px' }}>
-                                <MyListItemIcon>
-                                  <MyCheckbox
-                                    edge="start"
-                                    checked={item.checked}
-                                    tabIndex={-1}
-                                    disableRipple
-                                    inputProps={{ 'aria-labelledby': labelId }}
-                                  />
-                                </MyListItemIcon>
-                                <MyListItemText
-                                  id={labelId}
-                                  primary={item.name}
-                                  sx={{ ml: 0 }}
-                                  primaryTypographyProps={{
-                                    style: { fontWeight: item.name === "Hide Empty Part #'s" ? 'bold' : 'normal' }
-                                  }}
-                                />
-                              </MyListItemButton>
-                            </MyListItem>
-                          </div>
-                        );
-                      })}
-                    </MyList>
-                  </MyBox>
-                </MyFade>
-              </MyTransitions>
-            </MyClickAwayListener>
-          )}
-        </MyPopper> */}
-      <Toaster />
     </AuthGuard>
   );
 }

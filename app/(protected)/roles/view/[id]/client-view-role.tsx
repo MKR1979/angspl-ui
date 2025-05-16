@@ -10,6 +10,7 @@ import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyDivider from '@/app/custom-components/MyDivider';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyGrid from '@/app/custom-components/MyGrid';
+import MyBox from '@/app/custom-components/MyBox';
 import RoleDTO from '@/app/types/RoleDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
 
@@ -27,8 +28,10 @@ const ClientViewRole = ({ dtoRole }: Props) => {
         <MyCardContent>
           <MyGrid container spacing={2}>
             <MyGrid size={{ xs: 12, md: 6 }}>
-              <MyTypography variant="subtitle2">Role Name:</MyTypography>
-              <MyTypography>{state.dtoRole.role_name}</MyTypography>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Role Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoRole.role_name}</MyTypography>
+              </MyBox>
             </MyGrid>
           </MyGrid>
         </MyCardContent>

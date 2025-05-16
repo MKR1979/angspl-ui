@@ -33,7 +33,7 @@ const useViewProfile = ({ dtoUser }: Props) => {
   const getData = useCallback(async (): Promise<void> => {
     let dtoUser: UserDTO = {} as UserDTO;
     const { error, data } = await getUserMyProfile();
-    if (!error && data?.getUserMyProfile) {
+    if (!error && data) {
       dtoUser = data.getUserMyProfile;
     }
     setState({ dtoUser: dtoUser } as StateType);

@@ -11,8 +11,6 @@ import MyCardContent from './MyCardContent';
 import eq from 'lodash/eq';
 //import MyIconButton from './MyIconButton';
 import MyCard from './MyCard';
-import MyIconButton from './MyIconButton';
-import MyCloseIcon from './MyCloseIcon';
 
 interface MyConfirmDialogProps {
   title: string;
@@ -46,11 +44,12 @@ const MyConfirmDialog = ({ children, ...props }: ModalProps & MyConfirmDialogPro
           zIndex: 1
         }}
         title={props.title}
-        secondary={
-          <MyIconButton size="large">
-            <MyCloseIcon fontSize="small" onClick={props.onNoClick} />
-          </MyIconButton>
-        }
+
+        // secondary={
+        //   <MyIconButton size="large">
+        //     <MyCloseIcon fontSize="small" onClick={props.onNoClick} />
+        //   </MyIconButton>
+        // }
       >
         <MyCardContent>{children}</MyCardContent>
         <Divider />

@@ -1,0 +1,28 @@
+
+BUGS/DEFECTs:-
+    1. Paid / Free Courses :- we should have more data for the courses (notes/course-content and the links we provide there )
+    2. The site should not allow to login or access any page of the application by directly typing the url in the browser (not asking 
+        to login).
+   
+
+
+
+New Requirement:
+    1. Videos :- Data/video links are hardcoaded.
+    2. There should be a switch language button, by which any-one can switch the language of the web application (English <> Hindi)
+    3. Role based Access on the sitre
+    4. Create module for Image Gallery. Or implement dynamic functionality for image uploads
+    5. Create account on facebook
+
+
+
+Design Changes: 
+    1. Print Admission :- While printing admission form, the background page needs to edit/remove.
+    2. Question-options :- later we need to apply functionality on the search bar that we can search the options bases on the Question    text or quiz name.
+
+-----------company-----------
+- id (bigint)
+- name (string)
+- address (string)
+- contact_email (string)
+- status (enum: 'active' | 'inactive' | 'suspended' | 'pending_approval')

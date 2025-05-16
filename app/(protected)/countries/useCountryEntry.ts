@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import CountryDTO, { COUNTRY } from '@/app/types/CountryDTO';
 import { ADD_COUNTRY, UPDATE_COUNTRY, GET_COUNTRY, GET_COUNTRY_COUNTRY_NAME_EXIST } from '@/app/graphql/Country';
-import toast from 'react-hot-toast';
 
 type ErrorMessageType = {
   country_name: string | null;
@@ -11,7 +10,6 @@ type ErrorMessageType = {
 
 type StateType = {
   dtoCountry: CountryDTO;
-  saveDisabled: boolean;
   errorMessages: ErrorMessageType;
 };
 
@@ -27,7 +25,6 @@ const useCountryEntry = ({ dtoCountry }: Props) => {
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoCountry: dtoCountry,
-    saveDisabled: false,
     errorMessages: { ...ERROR_MESSAGES }
   });
 
@@ -56,7 +53,7 @@ const useCountryEntry = ({ dtoCountry }: Props) => {
         id: state.dtoCountry.id
       }
     });
-    if (!error && data?.getCountry) {
+    if (!error && data) {
       dtoCountry = data.getCountry;
     }
     setState({ dtoCountry: dtoCountry } as StateType);
@@ -70,7 +67,7 @@ const useCountryEntry = ({ dtoCountry }: Props) => {
         country_name: state.dtoCountry.country_name
       }
     });
-    if (!error && data?.getCountryCountryNameExist) {
+    if (!error && data) {
       exist = data.getCountryCountryNameExist;
     }
     return exist;
@@ -106,7 +103,6 @@ const useCountryEntry = ({ dtoCountry }: Props) => {
   }, [state.dtoCountry.country_name, IsCountryNameExist]);
 
   const onCountryNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
     {
       const country_name = await validateCountryName();
       setState({ errorMessages: { ...state.errorMessages, country_name: country_name } } as StateType);
@@ -125,45 +121,41 @@ const useCountryEntry = ({ dtoCountry }: Props) => {
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
-      try {
-        setState({ saveDisabled: true } as StateType);
-        event.preventDefault();
-
-        if (await validateForm()) {
-          if (state.dtoCountry.id === 0) {
-            const { data } = await addCountry({
-              variables: {
-                country_name: state.dtoCountry.country_name
-              }
-            });
-            if (data?.addCountry) {
-              toast.success('record saved successfully');
-              router.push('/countries/list');
-            } else {
-              toast.error('Failed to save the record');
+      event.preventDefault();
+      if (await validateForm()) {
+        if (state.dtoCountry.id === 0) {
+          const { data } = await addCountry({
+            variables: {
+              ...state.dtoCountry
             }
-          } else {
-            const { data } = await updateCountry({
-              variables: {
-                id: state.dtoCountry.id,
-                country_name: state.dtoCountry.country_name
-              }
-            });
-            if (data?.updateCountry) {
-              toast.success('record saved successfully');
-              router.push('/countries/list');
-            } else {
-              toast.error('Failed to save the record');
+          });
+          if (data) {
+            router.push('/countries/list');
+          }
+        } else {
+          const { data } = await updateCountry({
+            variables: {
+              ...state.dtoCountry
             }
+          });
+          if (data) {
+            router.push('/countries/list');
           }
         }
-      } catch {
-        toast.error('Failed to save the record');
-      } finally {
-        setState({ saveDisabled: false } as StateType);
       }
     },
     [validateForm, addCountry, state.dtoCountry, router, updateCountry]
+  );
+
+  const onClearClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      setState({
+        dtoCountry: { ...COUNTRY, id: state.dtoCountry.id },
+        errorMessages: { ...ERROR_MESSAGES }
+      } as StateType);
+    },
+    [state.dtoCountry.id, ERROR_MESSAGES]
   );
 
   const onCancelClick = useCallback(
@@ -179,6 +171,7 @@ const useCountryEntry = ({ dtoCountry }: Props) => {
     onInputChange,
     onCountryNameBlur,
     onSaveClick,
+    onClearClick,
     onCancelClick
   };
 };

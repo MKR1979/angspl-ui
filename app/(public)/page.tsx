@@ -3,13 +3,42 @@ import MyBox from '../custom-components/MyBox';
 import MyCard from '../custom-components/MyCard';
 import MyCardContent from '../custom-components/MyCardContent';
 import MyGrid from '../custom-components/MyGrid';
-import { CardHeader } from '@mui/material';
+import { COMPANY } from '.././constants/constants';
 import MyCheckCircleIcon from '../custom-components/MyCheckCircleIcon';
 import MyApiIcon from '../custom-components/MyApiIcon';
+import { CardHeader } from '@mui/material';
+
 export default function Home() {
   return (
     <div style={{ width: '100%', padding: '0px' }}>
-      <div
+      <h2 className="rolling-header"> {COMPANY}</h2>
+      {/* <div style={{ position: 'relative', padding: '20px' }}>
+        <img
+          src="background.png"
+          alt="Internship"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '500px',
+            objectFit: 'cover',
+            borderRadius: '15px',
+            zIndex: -1,
+            opacity: 0.3
+          }}
+        />
+        <div style={{ position: 'relative', zIndex: 1, padding: '20px', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+          <MyCardContent>
+            <p style={{ marginBottom: '10px' }}>
+              Benefits of IT and Software Development Expertise at <b>{COMPANY}</b>
+            </p>
+            At {COMPANY}, we offer comprehensive IT and software development programs designed to prepare students for the fast-evolving
+            digital landscape. Here’s how our expertise can benefit individuals and organizations alike:
+          </MyCardContent>
+        </div>
+      </div> */}
+       <div
         style={{
           backgroundImage: 'url(/hero2.png)',
           backgroundSize: 'cover',
@@ -17,7 +46,7 @@ export default function Home() {
           backgroundPosition: 'center',
           position: 'relative',
           width: '100%',
-          height: '400px'
+          height: '350px'
           //borderRadius: '18px'
         }}
       >
@@ -25,6 +54,25 @@ export default function Home() {
           <h1 style={{ fontSize: '50px' }}>Next-Gen Technology for Next-Level Growth</h1>
         </div>
       </div>
+      <style>
+        {`
+          @keyframes rollingText {
+            from {
+              transform: translateX(100%);
+            }
+            to {
+              transform: translateX(-100%);
+            }
+          }
+
+          .rolling-header {
+            white-space: nowrap;
+            overflow: hidden;
+           
+            animation: rollingText 12s linear infinite;
+          }
+        `}
+      </style>
       <div>
         <MyBox>
           <MyCard>
@@ -201,10 +249,14 @@ export default function Home() {
       </div>
       <div className={styles.container}>
         <div className={styles.vertical_center}>
-          <p>© Copyright 2025 Adhyayan NextGen Solution Pvt. Ltd., All rights reserved.</p>
+          <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
+          <div className={styles.vertical_center}>
+            ||
+            <a href="/terms">Terms of use</a>||
+            <a href="/privacy-policy">Privacy Policy</a>
+          </div>
         </div>
       </div>
-      
     </div>
   );
 }
