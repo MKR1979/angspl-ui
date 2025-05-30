@@ -622,7 +622,7 @@ const ClientPricing = () => {
             </MyBox>
             <MyTabPanel value={state.tabIndex} index={0}>
               <MyGrid container spacing={2} alignItems="stretch">
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -688,7 +688,7 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -748,7 +748,7 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -805,7 +805,7 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -862,6 +862,64 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
+
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+  <MyCard
+    elevation={3}
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+      borderRadius: '16px',
+      overflow: 'hidden',
+      transition: 'transform 0.3s ease',
+      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+    }}
+    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+  >
+    <CardHeader
+      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Online Attendance</span>}
+      sx={{
+        textAlign: 'center',
+        height: '60px',
+        backgroundColor: '#e2e8f0',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    />
+    <MyCardContent
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '24px',
+        backgroundColor: '#f7fafc',
+        border: '1px solid #e2e8f0'
+      }}
+    >
+      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹3000</div>
+      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly & Excludes VAT</div>
+      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
+        A standalone, location-based online attendance system with employee dashboard and centralized admin reporting. Ideal for institutions and organizations needing precise and flexible attendance tracking.
+      </div>
+      <MyButton
+        variant="contained"
+        fullWidth
+        onClick={() => {
+          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+        }}
+      >
+        Book a Demo
+      </MyButton>
+    </MyCardContent>
+  </MyCard>
+</MyGrid>
+
+
+
               </MyGrid>
             </MyTabPanel>
             <MyTabPanel value={state.tabIndex} index={1}>
