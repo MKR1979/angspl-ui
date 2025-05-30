@@ -662,10 +662,9 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        An entry-level, fully managed hosting solution designed for schools, colleges, and universities with limited data
-                        and automation needs. Ideal for up to <strong>10 users</strong>.
+                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional online presence. This fully managed static web application includes all essential features for sharing information and managing admission enquiries.
                       </div>
-                      <MyButton
+                      {/* <MyButton
                         variant="outlined"
                         fullWidth
                         style={{
@@ -676,15 +675,15 @@ const ClientPricing = () => {
                         }}
                       >
                         Compare Plans&nbsp;➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.open(formatUrl('adhyayan.online'), '_blank');
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Try It Free
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -729,24 +728,22 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Advanced shared hosting with improved performance, expanded storage, and business-centric features. Best suited for
-                        teams of up to
-                        <strong>50 users</strong>.
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
                       </div>
-                      <MyButton
+                      {/* <MyButton
                         variant="outlined"
                         style={{ marginBottom: '12px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                       >
                         Compare Plans&nbsp;➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.open(formatUrl('adhyayan.online'), '_blank');
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Try It Free
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -791,20 +788,19 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
-                        demanding teams of up to <strong>150 Users</strong>.
+                       A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework, course content, and fee payment.
                       </div>
-                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.open(formatUrl('adhyayan.online'), '_blank');
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Try It Free
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -849,20 +845,19 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
-                        ideal for large organizations with complex requirements.
+                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility. Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized Admin Reporting.
                       </div>
-                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.location.href = '/contact-us';
+                          window.location.href = 'https://www.angspl.com/contact-us';
                         }}
                       >
-                        Contact Us
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -911,20 +906,19 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        An entry-level, fully managed hosting solution designed for schools, colleges, and universities with limited data
-                        and automation needs. Ideal for up to <strong>10 users</strong>.
+                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional online presence. This fully managed static web application includes all essential features for sharing information and managing admission enquiries.
                       </div>
-                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.open(formatUrl('adhyayan.online'), '_blank');
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Try It Free
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -969,20 +963,19 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Advanced shared hosting with improved performance, expanded storage, and business-centric features. Best suited for
-                        teams of up to 50 users
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
                       </div>
-                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.open(formatUrl('adhyayan.online'), '_blank');
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Try It Free
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1083,20 +1076,19 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Experience elite performance and limitless flexibility with our most powerful shared hosting package — designed for
-                        demanding teams of up to 150 users.
+                        A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework, course content, and fee payment.
                       </div>
-                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.open(formatUrl('adhyayan.online'), '_blank');
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Try It Free
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1141,20 +1133,19 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Enterprise-grade, fully managed hosting with dedicated resources, scalable performance, and unmatched flexibility —
-                        ideal for large organizations with complex requirements.
+                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility. Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized Admin Reporting.
                       </div>
-                      <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
+                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
-                      </MyButton>
+                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.location.href = '/contact-us'; // ya koi external link bhi de sakte ho
+                          window.location.href = 'https://www.angspl.com/contact-us'; // ya koi external link bhi de sakte ho
                         }}
                       >
-                        Contact Us
+                        Book a Demo
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1189,42 +1180,6 @@ const ClientPricing = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
-
-                    {/* <TableBody>
-  {rows.map((row) => (
-    <React.Fragment key={row.name}>
-      <TableRow>
-        <TableCell
-          onClick={() => row.children && toggleRowExpansion(row.name)}
-          sx={{ cursor: row.children ? 'pointer' : 'default', border: '1px solid #e0e0e0' }}
-        >
-          {row.children && (
-            <span style={{ marginRight: '8px' }}>
-              {state.expandedRows[row.name] ? '▼' : '▶'}
-            </span>
-          )}
-          {row.name}
-        </TableCell>
-        <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{row.calories}</TableCell>
-        <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{row.fat}</TableCell>
-        <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{row.carbs}</TableCell>
-        <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{row.protein}</TableCell>
-      </TableRow>
-
-      {state.expandedRows[row.name] && row.children?.map((child) => (
-        <TableRow key={child.name}>
-          <TableCell sx={{ border: '1px solid #e0e0e0', pl: 4 }}>
-            {child.name}
-          </TableCell>
-          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{child.calories}</TableCell>
-          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{child.fat}</TableCell>
-          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{child.carbs}</TableCell>
-          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>{child.protein}</TableCell>
-        </TableRow>
-      ))}
-    </React.Fragment>
-  ))}
-</TableBody> */}
                   </Table>
                 </TableContainer>
               </MyGrid>
