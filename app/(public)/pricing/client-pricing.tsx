@@ -469,7 +469,7 @@ const ClientPricing = () => {
       carbs: '✖',
       protein: '✔'
     },
-     {
+    {
       name: 'Public Site',
       calories: '✔',
       fat: '✖',
@@ -554,7 +554,7 @@ const ClientPricing = () => {
           protein: '✔'
         }
       ]
-    },
+    }
   ];
 
   const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
@@ -610,10 +610,12 @@ const ClientPricing = () => {
       <MyBox>
         <MyCard>
           <MyCardContent>
-            <MyTypography variant="h4" component="h1" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
-              Choose Your Plan
+            <MyTypography variant="h5" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
+              Choose Your Plan{' '}
+              <MyBox component="span" sx={{ fontSize: '1rem', fontWeight: 'normal', ml: 1 }}>
+                Flexible Pricing That Fits Your Needs
+              </MyBox>
             </MyTypography>
-            <MyBox sx={{ mb: 1, fontSize: '20px', textAlign: 'center' }}>Smart Plans for Every Need — Pick Yours Today!</MyBox>
             <MyBox sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
               <MyTabs value={state.tabIndex} onChange={handleTabChange}>
                 <MyTab label="Monthly Billing" />
@@ -641,7 +643,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -653,16 +655,18 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹2000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional online presence. This fully managed static web application includes all essential features for sharing information and managing admission enquiries.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
+                        online presence. This fully managed static web application includes all essential features for sharing information
+                        and managing admission enquiries.
                       </div>
                       {/* <MyButton
                         variant="outlined"
@@ -707,7 +711,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -719,16 +723,17 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: '600', color: '#2d3748' }}>₹3500</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
+                        Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
                       </div>
                       {/* <MyButton
                         variant="outlined"
@@ -767,7 +772,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -779,16 +784,18 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹7000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly, Excludes VAT</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                       A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework, course content, and fee payment.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
+                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
+                        course content, and fee payment.
                       </div>
                       {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
@@ -824,7 +831,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -836,16 +843,18 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹10000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility. Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized Admin Reporting.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT & Application Support</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
+                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
+                        Admin Reporting.
                       </div>
                       {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans&nbsp;➡️
@@ -864,67 +873,66 @@ const ClientPricing = () => {
                 </MyGrid>
 
                 <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
-  <MyCard
-    elevation={3}
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      width: '100%',
-      borderRadius: '16px',
-      overflow: 'hidden',
-      transition: 'transform 0.3s ease',
-      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-    }}
-    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-  >
-    <CardHeader
-      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Online Attendance</span>}
-      sx={{
-        textAlign: 'center',
-        height: '60px',
-        backgroundColor: '#e2e8f0',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    />
-    <MyCardContent
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '24px',
-        backgroundColor: '#f7fafc',
-        border: '1px solid #e2e8f0'
-      }}
-    >
-      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹3000</div>
-      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Monthly & Excludes VAT</div>
-      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-        A standalone, location-based online attendance system with employee dashboard and centralized admin reporting. Ideal for institutions and organizations needing precise and flexible attendance tracking.
-      </div>
-      <MyButton
-        variant="contained"
-        fullWidth
-        onClick={() => {
-          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-        }}
-      >
-        Book a Demo
-      </MyButton>
-    </MyCardContent>
-  </MyCard>
-</MyGrid>
-
-
-
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Online Attendance</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '45px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '10px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹2000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
+                        institutions needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device
+                        verification for enhanced accuracy and security.
+                      </div>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        }}
+                      >
+                        Book a Demo
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
               </MyGrid>
             </MyTabPanel>
             <MyTabPanel value={state.tabIndex} index={1}>
-              <MyGrid container spacing={2} alignItems="stretch">
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+              <MyGrid container spacing={2} alignItems="stretch" style={{ marginBottom: -2 }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -943,7 +951,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -955,16 +963,18 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹20000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional online presence. This fully managed static web application includes all essential features for sharing information and managing admission enquiries.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
+                        online presence. This fully managed static web application includes all essential features for sharing information
+                        and managing admission enquiries.
                       </div>
                       {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
@@ -981,7 +991,7 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1000,7 +1010,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1012,16 +1022,17 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹35000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
+                        Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
                       </div>
                       {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
@@ -1038,63 +1049,7 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                {/* <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Premium</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <div style={{ fontSize: '26px' }}>$280.00</div>
-                      <div>Per Year</div>
-                      <br></br>
-                      <div>Billed Annually Excludes VAT</div>
-                      <br></br>
-                      <div>
-                        Our highest performance shared hosting package with a large storage capacity and greater flexibility. Recommended
-                        for up to 150 Users.
-                      </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Try It Free</MyButton>
-                      </div>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Dedicated</span>}
-                      sx={{ textAlign: 'center', height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent
-                      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <div style={{ fontSize: '26px' }}>from $3200</div>
-                      <div>Per Year</div>
-                      <br></br>
-                      <div>Excludes VAT & Application Support</div>
-                      <br></br>
-                      <div>
-                        Enterprise grade, fully managed instance with dedicated resources, scalable performance and the ultimate
-                        flexability.
-                      </div>
-                      <br></br>
-                      <div style={{ paddingBottom: '10px' }}>
-                        <MyButton>Compare Plans</MyButton>
-                      </div>
-                      <div>
-                        <MyButton>Contact Us</MyButton>
-                      </div>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid> */}
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1113,7 +1068,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1125,16 +1080,18 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹70000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Billed Annually Excludes VAT</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework, course content, and fee payment.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
+                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
+                        course content, and fee payment.
                       </div>
                       {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
@@ -1151,7 +1108,7 @@ const ClientPricing = () => {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1170,7 +1127,7 @@ const ClientPricing = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '60px',
+                        height: '45px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1182,16 +1139,18 @@ const ClientPricing = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        padding: '24px',
+                        padding: '10px',
                         backgroundColor: '#f7fafc',
                         border: '1px solid #e2e8f0'
                       }}
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹99999</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '16px' }}>Excludes VAT & Application Support</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '24px' }}>
-                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility. Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized Admin Reporting.
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT & Application Support</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
+                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
+                        Admin Reporting.
                       </div>
                       {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
                         Compare Plans ➡️
@@ -1201,6 +1160,62 @@ const ClientPricing = () => {
                         fullWidth
                         onClick={() => {
                           window.location.href = 'https://www.angspl.com/contact-us'; // ya koi external link bhi de sakte ho
+                        }}
+                      >
+                        Book a Demo
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Online Attendance</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '45px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '10px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹20000</div>
+                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
+                        institutions needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device
+                        verification for enhanced accuracy and security.
+                      </div>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => {
+                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
                         Book a Demo
@@ -1218,23 +1233,25 @@ const ClientPricing = () => {
           <MyCardContent>
             <MyGrid container spacing={2} alignItems="stretch">
               <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-                <TableContainer component={Paper} sx={{ mt: 4 }}>
+                <TableContainer component={Paper} sx={{ mt: -2 }}>
                   <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
                     <TableHead>
                       <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                        <TableCell sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>Features</TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
-                          Basic
-                        </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
-                          Professional
-                        </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
-                          Premium
-                        </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 'bold', border: '1px solid #e0e0e0' }}>
-                          Dedicated
-                        </TableCell>
+                        {['Features', 'Basic', 'Professional', 'Premium', 'Dedicated'].map((text, index) => (
+                          <TableCell
+                            key={text}
+                            align={index === 0 ? 'left' : 'center'}
+                            sx={{
+                              fontWeight: 'bold',
+                              fontSize: '1rem',
+                              border: '1px solid #e0e0e0',
+                              padding: '10px 14px',
+                              lineHeight: 1.2
+                            }}
+                          >
+                            {text}
+                          </TableCell>
+                        ))}
                       </TableRow>
                     </TableHead>
                     <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
@@ -1260,5 +1277,5 @@ const ClientPricing = () => {
 };
 
 export default memo(ClientPricing, (prevProps, nextProps) => {
-  return eq(prevProps, nextProps); // Don't re-render!
+  return eq(prevProps, nextProps);
 });
