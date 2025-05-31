@@ -36,9 +36,8 @@ const useReceipt = () => {
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
-  // Fetch Admission Info
   const [getReceipt] = useLazyQuery(GET_RECEIPT, {
-    fetchPolicy: 'network-only', // Doesn't check cache before making a network request
+    fetchPolicy: 'network-only', 
   });
 
   const getReceiptInfo = useCallback(async (): Promise<void> => {
