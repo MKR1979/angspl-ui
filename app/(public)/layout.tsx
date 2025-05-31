@@ -143,7 +143,7 @@ export default function RootLayout({
             container={container}
             variant="temporary"
             open={mobileOpen}
-            onClose={handleCloseDrawer} // Close drawer when clicking outside
+            onClose={handleCloseDrawer} 
             ModalProps={{
               keepMounted: true
             }}
