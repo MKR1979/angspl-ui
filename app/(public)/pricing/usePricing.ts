@@ -20,31 +20,20 @@ const usePricing = () => {
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
-//   const toggleRowExpansion = useCallback((rowKey: string) => {
-//   const current = state.expandedRows?.[rowKey] ?? false;
-
-//   setState({
-//     ...state,
-//     expandedRows: {
-//       ...state.expandedRows,
-//       [rowKey]: !current
-//     }
-//   });
-// }, [state]);
-
-const toggleRowExpansion = useCallback((rowKey: string) => {
-  const currentExpanded = state.expandedRows?.[rowKey] ?? false;
-  const updatedExpandedRows = {
-    ...state.expandedRows,
-    [rowKey]: !currentExpanded
-  };
-  setState({
-    ...state,
-    expandedRows: updatedExpandedRows
-  });
-}, [state]);
-
-
+  const toggleRowExpansion = useCallback(
+    (rowKey: string) => {
+      const currentExpanded = state.expandedRows?.[rowKey] ?? false;
+      const updatedExpandedRows = {
+        ...state.expandedRows,
+        [rowKey]: !currentExpanded
+      };
+      setState({
+        ...state,
+        expandedRows: updatedExpandedRows
+      });
+    },
+    [state]
+  );
 
   const handleTabChange = useCallback(async (event: React.SyntheticEvent<Element, Event>, newValue: number): Promise<void> => {
     setState({ tabIndex: newValue } as StateType);
