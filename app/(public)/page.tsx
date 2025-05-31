@@ -11,33 +11,7 @@ import { CardHeader } from '@mui/material';
 export default function Home() {
   return (
     <div style={{ width: '100%', padding: '0px' }}>
-      <h2 className="rolling-header"> {COMPANY}</h2>
-      {/* <div style={{ position: 'relative', padding: '20px' }}>
-        <img
-          src="background.png"
-          alt="Internship"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '500px',
-            objectFit: 'cover',
-            borderRadius: '15px',
-            zIndex: -1,
-            opacity: 0.3
-          }}
-        />
-        <div style={{ position: 'relative', zIndex: 1, padding: '20px', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
-          <MyCardContent>
-            <p style={{ marginBottom: '10px' }}>
-              Benefits of IT and Software Development Expertise at <b>{COMPANY}</b>
-            </p>
-            At {COMPANY}, we offer comprehensive IT and software development programs designed to prepare students for the fast-evolving
-            digital landscape. Here’s how our expertise can benefit individuals and organizations alike:
-          </MyCardContent>
-        </div>
-      </div> */}
+      <h2 className="rolling-header"> {COMPANY}</h2>     
        <div
         style={{
           backgroundImage: 'url(/hero2.png)',
@@ -47,8 +21,7 @@ export default function Home() {
           position: 'relative',
           width: '100%',
           height: '350px'
-          //borderRadius: '18px'
-        }}
+         }}
       >
         <div className={styles.hero_text}>
           <h1 style={{ fontSize: '50px' }}>Next-Gen Technology for Next-Level Growth</h1>
