@@ -33,21 +33,28 @@ export default function RootLayout({
   const [openMobileSubmenus, setOpenMobileSubmenus] = useState<Record<string, boolean>>({});
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
-
   const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
     { text: 'About Us', href: '/about-us' },
-    { text: 'Pricing', href: '/pricing' },
+    // { text: 'Pricing', href: '/pricing' },
+    {
+      text: 'Pricing',
+      children: [
+        { text: 'College', href: '/pricing-clg' },
+        { text: 'School', href: '/pricing-sch' },
+        { text: 'Institute', href: '/pricing-tech' }
+      ]
+    },
     { text: 'Contact Us', href: '/contact-us' },
     { text: 'affiliate', href: '/affiliate' },
     {
       text: 'Our Services',
       children: [
         { text: 'Product/ Services', href: '/our-service' },
-        { text: 'Technology', href: '/technology' }        
+        { text: 'Technology', href: '/technology' }
       ]
     },
     { text: 'Demo', href: formatUrl('adhyayan.online') }
@@ -64,7 +71,7 @@ export default function RootLayout({
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setContainer(window.document.body); // ✅ Correctly setting container inside useEffect
+      setContainer(window.document.body);
     }
   }, []);
 
@@ -75,11 +82,6 @@ export default function RootLayout({
     }));
   };
 
-  // const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, children: any) => {
-  //   setAnchorEl(event.currentTarget);
-  //   setMenuItems(children);
-  // };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
     setMenuItems(null);
@@ -89,7 +91,7 @@ export default function RootLayout({
     <Box
       sx={{ width: drawerWidth }}
       role="presentation"
-      onClick={handleCloseDrawer} // Close drawer on clicking anywhere inside
+      onClick={handleCloseDrawer}
     >
       <Typography variant="h6" sx={{ my: 2 }}>
         <MyBox
@@ -222,60 +224,68 @@ export default function RootLayout({
               ))}
             </Box> */}
             <Box sx={{ display: { xs: 'none', sm: 'block' }, position: 'relative' }}>
-  {navItems.map((item) =>
-    item.children ? (
-      <Box
-        key={item.text}
-        onMouseEnter={() => setHoveredMenu(item.text)}
-        onMouseLeave={() => setHoveredMenu(null)}
-        sx={{ display: 'inline-block', position: 'relative' }}
-      >
-        <MyButton
-          variant="outlined"
-          sx={{ backgroundColor: '#fff', border: 'none', color: '#000' }}
-        >
-          {item.text}
-        </MyButton>
+              {navItems.map((item) =>
+                item.children ? (
+                  <Box
+                    key={item.text}
+                    onMouseEnter={() => setHoveredMenu(item.text)}
+                    onMouseLeave={() => setHoveredMenu(null)}
+                    sx={{ display: 'inline-block', position: 'relative' }}
+                  >
+                    <MyButton variant="outlined" sx={{ backgroundColor: '#fff', border: 'none', color: '#000' }}>
+                      {item.text}
+                    </MyButton>
 
-        {hoveredMenu === item.text && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              backgroundColor: '#fff',
-              boxShadow: 3,
-              borderRadius: 1,
-              zIndex: 10,
-              minWidth: '180px',
-              padding: 1,
-            }}
-          >
-            {item.children.map((child) => (
-              <MyLink
-                key={child.text}
-                href={child.href}
-                style={{ display: 'block', padding: '8px 16px', color: '#000', textDecoration: 'none' }}
-              >
-                {child.text}
-              </MyLink>
-            ))}
-          </Box>
-        )}
-      </Box>
-    ) : (
-      <MyButton
-        key={item.text}
-        variant="outlined"
-        sx={{ backgroundColor: '#fff', border: 'none', color: '#000' }}
-      >
-        <MyLink href={item.href} style={{ color: '#000' }}>
-          {item.text}
-        </MyLink>
-      </MyButton>
-    )
-  )}
-</Box>
+                    {hoveredMenu === item.text && (
+                      <Box
+                        // key={item.text}
+                        sx={{
+                          position: 'absolute',
+                          top: '100%',
+                          left: 0,
+                          backgroundColor: '#fff',
+                          boxShadow: 3,
+                          borderRadius: 1,
+                          zIndex: 10,
+                          minWidth: '180px',
+                          padding: 1
+                        }}
+                      >
+                        {item.children.map((child) => (
+                          // <>
+                            /* <Box
+                              key={child.text}
+                              sx={{
+                                '&:hover a': {
+                                  backgroundColor: '#f0f0f0',
+                                  color: '#1976d2',
+                                  borderRadius: 15,
+                                  cursor: 'pointer'
+                                }
+                              }}
+                            > */
+                              <MyLink
+                                key={child.text}
+                                href={child.href}
+                                style={{ display: 'block', padding: '8px 16px', color: '#000', textDecoration: 'none' }}
+                              >
+                                {child.text}
+                              </MyLink>
+
+                          /* </> */
+                        ))}
+                      </Box>
+                    )}
+                  </Box>
+                ) : (
+                  <MyButton key={item.text} variant="outlined" sx={{ backgroundColor: '#fff', border: 'none', color: '#000' }}>
+                    <MyLink href={item.href} style={{ color: '#000' }}>
+                      {item.text}
+                    </MyLink>
+                  </MyButton>
+                )
+              )}
+            </Box>
 
             {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) =>
@@ -314,7 +324,7 @@ export default function RootLayout({
             container={container}
             variant="temporary"
             open={mobileOpen}
-            onClose={handleCloseDrawer} 
+            onClose={handleCloseDrawer}
             ModalProps={{
               keepMounted: true
             }}

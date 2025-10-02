@@ -7,7 +7,7 @@ type StateType = {
   expandedRows: Record<string, boolean>;
 };
 
-const usePricing = () => {
+const usePricingSch = () => {
   const INITIAL_STATE: StateType = Object.freeze({
     breadcrumbsItems: [{ label: 'Terms', href: '/terms/list' }, { label: 'Add Term' }],
     tabIndex: 0,
@@ -45,4 +45,4 @@ const usePricing = () => {
   };
 };
 
-export default usePricing;
+export default usePricingSch;
