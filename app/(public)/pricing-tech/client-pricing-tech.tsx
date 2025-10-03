@@ -63,42 +63,42 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Academics',
+          name: 'Academics',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Courses',
+              name: 'Courses',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Online Admission',
+              name: 'Online Admission',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔',
               children: [
                 {
-                  name: '•• Admission',
+                  name: 'Admission',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Enrollments',
+                  name: 'Enrollments',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Admission Summary',
+                  name: 'Admission Summary',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
@@ -107,28 +107,28 @@ const ClientPricingTech = () => {
               ]
             },
             {
-              name: '•• Study Kits',
+              name: 'Study Kits',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔',
               children: [
                 {
-                  name: '•• Code Projects',
+                  name: 'Code Projects',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Study Notes',
+                  name: 'Study Notes',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Upload Videos',
+                  name: 'Upload Videos',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
@@ -137,35 +137,35 @@ const ClientPricingTech = () => {
               ]
             },
             {
-              name: '•• Online Exams',
+              name: 'Online Exams',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔',
               children: [
                 {
-                  name: '•• Add Exam',
+                  name: 'Add Exam',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Exam Questions',
+                  name: 'Exam Questions',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Exam Bulk Import',
+                  name: 'Exam Bulk Import',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Exam Results',
+                  name: 'Exam Results',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
@@ -177,49 +177,49 @@ const ClientPricingTech = () => {
         },
 
         {
-          name: '•• Employee Services',
+          name: 'Employee Services',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Employee Master',
+              name: 'Employee Master',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Review Attendance',
+              name: 'Review Attendance',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Attendance Report',
+              name: 'Attendance Report',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔',
               children: [
                 {
-                  name: '•• Time Log Report',
+                  name: 'Time Log Report',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Day Wise Attendance',
+                  name: 'Day Wise Attendance',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Presence Overview',
+                  name: 'Presence Overview',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
@@ -228,28 +228,28 @@ const ClientPricingTech = () => {
               ]
             },
             {
-              name: '•• User Devices',
+              name: 'User Devices',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Bulk Attendance',
+              name: 'Bulk Attendance',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔',
               children: [
                 {
-                  name: '•• Mark Attendance',
+                  name: 'Mark Attendance',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
                   dedicated: '✔'
                 },
                 {
-                  name: '•• Lock Attendance',
+                  name: 'Lock Attendance',
                   basic: '✖',
                   professional: '✔',
                   premium: '✔',
@@ -260,35 +260,35 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Payment Management',
+          name: 'Payment Management',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Schedule Fee',
+              name: 'Schedule Fee',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Collect Pay',
+              name: 'Collect Pay',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Receipts',
+              name: 'Receipts',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Fee Head',
+              name: 'Fee Head',
               basic: '✖',
               professional: '✔',
               premium: '✔',
@@ -297,28 +297,28 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Communications',
+          name: 'Communications',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Emails',
+              name: 'Emails',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Email Templates',
+              name: 'Email Templates',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Notifications',
+              name: 'Notifications',
               basic: '✖',
               professional: '✔',
               premium: '✔',
@@ -327,28 +327,28 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Engagements',
+          name: 'Engagements',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Enquiry',
+              name: 'Enquiry',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Events',
+              name: 'Events',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Meetings',
+              name: 'Meetings',
               basic: '✖',
               professional: '✔',
               premium: '✔',
@@ -357,28 +357,28 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Geography',
+          name: 'Geography',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Countries',
+              name: 'Countries',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• States',
+              name: 'States',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Locations',
+              name: 'Locations',
               basic: '✖',
               professional: '✔',
               premium: '✔',
@@ -387,218 +387,27 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Affiliates',
+          name: 'Affiliates',
           basic: '✖',
           professional: '✔',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Review Affiliates',
+              name: 'Review Affiliates',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Referrals',
+              name: 'Referrals',
               basic: '✖',
               professional: '✔',
               premium: '✔',
               dedicated: '✔'
             }
           ]
-        }
-      ]
-    },
-
-    {
-      name: 'Dynamic Web Application',
-      basic: '✖',
-      professional: '✔',
-      premium: '✔',
-      dedicated: '✔',
-      children: [
-        {
-          name: '• Home Page',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Online Admission',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔',
-          children: [
-            {
-              name: '•• Document Upload & Verification',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Online Payment Collection',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Payment Gateway',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Receipt and Acknowledgement',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Account Creation',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Login Credentials Delivery',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            }
-          ]
-        },
-        {
-          name: '• Programs Dashboard',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔',
-          children: [
-            {
-              name: '•• Course Catalog',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Online Enrollment',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Payment Gateway',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Receipt and Acknowledgement',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Account Creation',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Login Credentials Delivery',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            }
-          ]
-        },
-        {
-          name: '• Affiliates',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔',
-          children: [
-            {
-              name: '•• Affiliate Registration',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Affiliate Login Panel',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Referral Tracking',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            },
-            {
-              name: '•• Commission Summary',
-              basic: '✖',
-              professional: '✔',
-              premium: '✔',
-              dedicated: '✔'
-            }
-          ]
-        },
-        {
-          name: '• About Us',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Contact Us',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Login',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Online Registration',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Forgot Password',
-          basic: '✖',
-          professional: '✔',
-          premium: '✔',
-          dedicated: '✔'
         }
       ]
     },
@@ -610,21 +419,21 @@ const ClientPricingTech = () => {
       dedicated: '✔',
       children: [
         {
-          name: '• Course Contents',
+          name: 'Course Contents',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Enrolled Courses',
+              name: 'Enrolled Courses',
               basic: '✖',
               professional: '✖',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Free Courses',
+              name: 'Free Courses',
               basic: '✖',
               professional: '✖',
               premium: '✔',
@@ -633,28 +442,28 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Study Kits',
+          name: 'Study Kits',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔',
           children: [
             {
-              name: '•• Code Insight',
+              name: 'Code Insight',
               basic: '✖',
               professional: '✖',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Notes Insight',
+              name: 'Notes Insight',
               basic: '✖',
               professional: '✖',
               premium: '✔',
               dedicated: '✔'
             },
             {
-              name: '•• Video Insight',
+              name: 'Video Insight',
               basic: '✖',
               professional: '✖',
               premium: '✔',
@@ -663,49 +472,49 @@ const ClientPricingTech = () => {
           ]
         },
         {
-          name: '• Online Exams / Skill Tests',
+          name: 'Online Exams / Skill Tests',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Payments / Fees',
+          name: 'Payments / Fees',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Student Info',
+          name: 'Student Info',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Online Homework',
+          name: 'Online Homework',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Login',
+          name: 'Login',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• View Profile',
+          name: 'View Profile',
           basic: '✖',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Change Password',
+          name: 'Change Password',
           basic: '✖',
           professional: '✖',
           premium: '✔',
@@ -722,28 +531,28 @@ const ClientPricingTech = () => {
       dedicated: '✔',
       children: [
         {
-          name: '• Location Based Online Attendance',
+          name: 'Location Based Online Attendance',
           basic: '✖',
           professional: '✖',
           premium: '✖',
           dedicated: '✔'
         },
         {
-          name: '• Login',
+          name: 'Login',
           basic: '✖',
           professional: '✖',
           premium: '✖',
           dedicated: '✔'
         },
         {
-          name: '• View Profile',
+          name: 'View Profile',
           basic: '✖',
           professional: '✖',
           premium: '✖',
           dedicated: '✔'
         },
         {
-          name: '• Change Password',
+          name: 'Change Password',
           basic: '✖',
           professional: '✖',
           premium: '✖',
@@ -759,28 +568,28 @@ const ClientPricingTech = () => {
       dedicated: '✔',
       children: [
         {
-          name: '• Referral Trekking',
+          name: 'Referral Trekking',
           basic: '✖',
           professional: '✖',
           premium: '✖',
           dedicated: '✔'
         },
         {
-          name: '• Login',
+          name: 'Login',
           basic: '✖',
           professional: '✖',
           premium: '✖',
           dedicated: '✔'
         },
         {
-          name: '• View Profile',
+          name: 'View Profile',
           basic: '✖',
           professional: '✖',
           premium: '✖',
           dedicated: '✔'
         },
         {
-          name: '• Change Password',
+          name: 'Change Password',
           basic: '✖',
           professional: '✖',
           premium: '✖',
@@ -796,84 +605,91 @@ const ClientPricingTech = () => {
       dedicated: '✔'
     },
     {
-      name: 'Public Site',
+      name: 'Dynamic Web Application',
       basic: '✔',
       professional: '✖',
       premium: '✔',
       dedicated: '✔',
       children: [
         {
-          name: '• Home Page',
+          name: 'Home Page',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• About Us',
+          name: 'About Us',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Programs Enrollment',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Services / Offerings',
+          name: 'Services / Offerings',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Affiliate Registration',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Contact Us',
+          name: 'Contact Us',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Admission Enquiry',
+          name: 'Admission Enquiry',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Header & Navigation',
+          name: 'Login',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Registration',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Forget Password',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Footer',
+          name: 'Social Media Links',
           basic: '✔',
           professional: '✖',
           premium: '✔',
           dedicated: '✔'
         },
         {
-          name: '• Responsive Design',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• SEO Tags',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Social Media Links',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
-          dedicated: '✔'
-        },
-        {
-          name: '• Image Gallery',
+          name: 'Image Gallery',
           basic: '✔',
           professional: '✖',
           premium: '✔',
