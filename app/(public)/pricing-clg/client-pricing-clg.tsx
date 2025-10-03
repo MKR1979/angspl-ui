@@ -11,547 +11,689 @@ import { CardHeader, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import MyTabPanel from '@/app/custom-components/MyTabPanel';
 import MyTabs from '@/app/custom-components/MyTabs';
 import MyTab from '@/app/custom-components/MyTab';
-import './pricing.css';
-import { COMPANY } from '.././constants/constants';
-
-import usePricing from './usePricing';
+import './pricingClg.css';
+import { COMPANY } from '../constants/constants';
+import usePricingClg from './usePricingClg';
 
 const ClientPricing = () => {
-  const { state, handleTabChange, toggleRowExpansion } = usePricing();
+  const { state, handleTabChange, toggleRowExpansion } = usePricingClg();
   const rows = [
     {
-      name: 'Dynamic Web Application',
-      calories: '✖',
-      fat: '✔',
-      carbs: '✔',
-      protein: '✔',
-      children: [
-        {
-          name: '• Home Page',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Online Admission',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔',
-          children: [
-            {
-              name: '•• Document Upload & Verification',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Online Payment Collection',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Payment Gateway',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Receipt and Acknowledgement',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Account Creation',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Login Credentials Delivery',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            }
-          ]
-        },
-        {
-          name: '• Programs Dashboard',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔',
-          children: [
-            {
-              name: '•• Course Catalog',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Online Enrollment',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Payment Gateway',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Receipt and Acknowledgement',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Account Creation',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Login Credentials Delivery',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            }
-          ]
-        },
-        {
-          name: '• Affiliates',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔',
-          children: [
-            {
-              name: '•• Affiliate Registration',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Affiliate Login Panel',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Referral Tracking',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            },
-            {
-              name: '•• Commission Summary',
-              calories: '✖',
-              fat: '✔',
-              carbs: '✔',
-              protein: '✔'
-            }
-          ]
-        },
-        {
-          name: '• About Us',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Contact Us',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Login',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Online Registration',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Forgot Password',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        }
-      ]
-    },
-    {
       name: 'Admin Dashboard',
-      calories: '✖',
-      fat: '✔',
-      carbs: '✔',
-      protein: '✔',
+      basic: '✖',
+      professional: '✔',
+      premium: '✔',
+      dedicated: '✔',
       children: [
         {
-          name: '• Login',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Courses / Classes Management',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Applicant Verification',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Roles Management',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Users Management',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Online Study Kit',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔',
+          name: 'User Access Management',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
           children: [
             {
-              name: '•• Practice Project',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Roles',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
             },
             {
-              name: '•• Study Notes',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Users',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
             },
             {
-              name: '•• Video Uploads',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Role Permission',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'User Permission',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
             }
           ]
         },
         {
-          name: '• Online Exams Management',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔',
+          name: 'Academics',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
           children: [
             {
-              name: '•• Instant Exam Builder',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Courses',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
             },
             {
-              name: '•• Bulk Exam Uploader',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Online Admission',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔',
+              children: [
+                {
+                  name: 'Admission',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Enrollments',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Admission Summary',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                }
+              ]
+            },
+            {
+              name: 'Study Kits',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔',
+              children: [
+                {
+                  name: 'Code Projects',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Study Notes',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Upload Videos',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                }
+              ]
+            },
+            {
+              name: 'Online Exams',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔',
+              children: [
+                {
+                  name: 'Add Exam',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Exam Questions',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Exam Bulk Import',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Exam Results',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          name: 'Employee Services',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
+          children: [
+            {
+              name: 'Employee Master',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Review Attendance',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Attendance Report',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔',
+              children: [
+                {
+                  name: 'Time Log Report',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Day Wise Attendance',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Presence Overview',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                }
+              ]
+            },
+            {
+              name: 'User Devices',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Bulk Attendance',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔',
+              children: [
+                {
+                  name: 'Mark Attendance',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                },
+                {
+                  name: 'Lock Attendance',
+                  basic: '✖',
+                  professional: '✔',
+                  premium: '✔',
+                  dedicated: '✔'
+                }
+              ]
             }
           ]
         },
         {
-          name: '• View Profile',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Payment Management',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
+          children: [
+            {
+              name: 'Schedule Fee',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Collect Pay',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Receipts',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Fee Head',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            }
+          ]
         },
         {
-          name: '• Change Password',
-          calories: '✖',
-          fat: '✔',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Communications',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
+          children: [
+            {
+              name: 'Emails',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Email Templates',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Notifications',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            }
+          ]
+        },
+        {
+          name: 'Engagements',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
+          children: [
+            {
+              name: 'Enquiry',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Events',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Meetings',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            }
+          ]
+        },
+        {
+          name: 'Geography',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
+          children: [
+            {
+              name: 'Countries',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'States',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Locations',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            }
+          ]
+        },
+        {
+          name: 'Affiliates',
+          basic: '✖',
+          professional: '✔',
+          premium: '✔',
+          dedicated: '✔',
+          children: [
+            {
+              name: 'Review Affiliates',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Referrals',
+              basic: '✖',
+              professional: '✔',
+              premium: '✔',
+              dedicated: '✔'
+            }
+          ]
         }
       ]
     },
     {
       name: 'Student Dashboard',
-      calories: '✖',
-      fat: '✖',
-      carbs: '✔',
-      protein: '✔',
+      basic: '✖',
+      professional: '✖',
+      premium: '✔',
+      dedicated: '✔',
       children: [
         {
-          name: '• Login',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Online Exams / Skill Tests',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Online Fee Payment',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Online Homework',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Courses Content',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔',
+          name: 'Course Contents',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔',
           children: [
             {
-              name: '•• Paid Courses / Programs',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Enrolled Courses',
+              basic: '✖',
+              professional: '✖',
+              premium: '✔',
+              dedicated: '✔'
             },
             {
-              name: '•• Free Courses / Programs',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Free Courses',
+              basic: '✖',
+              professional: '✖',
+              premium: '✔',
+              dedicated: '✔'
             }
           ]
         },
         {
-          name: '• Study Kit',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔',
+          name: 'Study Kits',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔',
           children: [
             {
-              name: '•• Code Insights',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Code Insight',
+              basic: '✖',
+              professional: '✖',
+              premium: '✔',
+              dedicated: '✔'
             },
             {
-              name: '•• Notes Insights',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Notes Insight',
+              basic: '✖',
+              professional: '✖',
+              premium: '✔',
+              dedicated: '✔'
             },
             {
-              name: '•• Online Videos',
-              calories: '✖',
-              fat: '✖',
-              carbs: '✔',
-              protein: '✔'
+              name: 'Video Insight',
+              basic: '✖',
+              professional: '✖',
+              premium: '✔',
+              dedicated: '✔'
             }
           ]
         },
         {
-          name: '• View Profile',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Online Exams / Skill Tests',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Change Password',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Payments / Fees',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+        {
+          name: 'Student Info',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+        {
+          name: 'Online Homework',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+        {
+          name: 'Login',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+        {
+          name: 'View Profile',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+        {
+          name: 'Change Password',
+          basic: '✖',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         }
       ]
     },
 
     {
       name: 'Employee Dashboard',
-      calories: '✖',
-      fat: '✖',
-      carbs: '✖',
-      protein: '✔',
+      basic: '✖',
+      professional: '✖',
+      premium: '✖',
+      dedicated: '✔',
       children: [
         {
-          name: '• Login',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✖',
-          protein: '✔'
+          name: 'Location Based Online Attendance',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
         },
         {
-          name: '• Location Based Online Attendance',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✖',
-          protein: '✔'
+          name: 'Login',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
         },
         {
-          name: '• View Profile',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✖',
-          protein: '✔'
+          name: 'View Profile',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
         },
         {
-          name: '• Change Password',
-          calories: '✖',
-          fat: '✖',
-          carbs: '✖',
-          protein: '✔'
+          name: 'Change Password',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
+        }
+      ]
+    },
+        {
+      name: 'Affiliate Dashboard',
+      basic: '✖',
+      professional: '✖',
+      premium: '✖',
+      dedicated: '✔',
+      children: [
+        {
+          name: 'Referral Trekking',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
+        },
+        {
+          name: 'Login',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
+        },
+        {
+          name: 'View Profile',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
+        },
+        {
+          name: 'Change Password',
+          basic: '✖',
+          professional: '✖',
+          premium: '✖',
+          dedicated: '✔'
         }
       ]
     },
     {
       name: 'Location Based Attendance',
-      calories: '✖',
-      fat: '✖',
-      carbs: '✖',
-      protein: '✔'
+      basic: '✖',
+      professional: '✖',
+      premium: '✖',
+      dedicated: '✔'
     },
-    {
-      name: 'Public Site',
-      calories: '✔',
-      fat: '✖',
-      carbs: '✔',
-      protein: '✔',
+   {
+      name: 'Dynamic Web Application',
+      basic: '✔',
+      professional: '✖',
+      premium: '✔',
+      dedicated: '✔',
       children: [
         {
-          name: '• Home Page',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Home Page',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• About Us',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'About Us',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Programs Enrollment',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Services / Offerings',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Services / Offerings',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Affiliate Registration',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Contact Us',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Contact Us',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Admission Enquiry',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Admission Enquiry',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Header & Navigation',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Login',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Registration',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
+        },
+                {
+          name: 'Forget Password',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Footer',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Social Media Links',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         },
         {
-          name: '• Responsive Design',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• SEO Tags',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Social Media Links',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
-        },
-        {
-          name: '• Image Gallery',
-          calories: '✔',
-          fat: '✖',
-          carbs: '✔',
-          protein: '✔'
+          name: 'Image Gallery',
+          basic: '✔',
+          professional: '✖',
+          premium: '✔',
+          dedicated: '✔'
         }
       ]
     }
@@ -561,10 +703,10 @@ const ClientPricing = () => {
 
   interface RowData {
     name: string;
-    calories: string;
-    fat: string;
-    carbs: string;
-    protein: string;
+    basic: string;
+    professional: string;
+    premium: string;
+    dedicated: string;
     children?: RowData[];
   }
 
@@ -587,16 +729,16 @@ const ClientPricing = () => {
             {row.name}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-            {row.calories}
+            {row.basic}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-            {row.fat}
+            {row.professional}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-            {row.carbs}
+            {row.premium}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-            {row.protein}
+            {row.dedicated}
           </TableCell>
         </TableRow>
 
@@ -611,7 +753,7 @@ const ClientPricing = () => {
         <MyCard>
           <MyCardContent>
             <MyTypography variant="h5" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
-              Choose Your Plan{' '}
+              Choose Your College Plan{' '}
               <MyBox component="span" sx={{ fontSize: '1rem', fontWeight: 'normal', ml: 1 }}>
                 Flexible Pricing That Fits Your Needs
               </MyBox>
@@ -732,15 +874,12 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        {/* A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
+                        Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support. */}
                         A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
+                        Dashboard for managing Users, Roles, and Courses. Ideal for Colleges needing advanced functionality and streamlined
+                        management.
                       </div>
-                      {/* <MyButton
-                        variant="outlined"
-                        style={{ marginBottom: '12px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                      >
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -793,13 +932,13 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        {/* A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
+                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
+                        course content, and fee payment. */}
                         A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -852,13 +991,13 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        {/* Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
+                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
+                        Admin Reporting. */}
                         Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -912,9 +1051,12 @@ const ClientPricing = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
+                        {/* A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
                         institutions needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device
-                        verification for enhanced accuracy and security.
+                        verification for enhanced accuracy and security. */}
+                        A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
+                        Colleges needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device verification
+                        for enhanced accuracy and security.
                       </div>
                       <MyButton
                         variant="contained"
