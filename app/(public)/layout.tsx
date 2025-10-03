@@ -199,7 +199,6 @@ export default function RootLayout({
                     >
                       {item.text}
                     </MyButton>
-
                     {hoveredMenu === item.text && (
                       <Box
                         sx={{
@@ -218,16 +217,12 @@ export default function RootLayout({
                           <MyLink
                             key={child.text}
                             href={child.href}
-                            style={{
-                              // display: 'block',
-                              // padding: '4px 10px',
-                              // color: '#000',
-                              textDecoration: 'none'
-                            }}
+                            style={{textDecoration: 'none'}}
+                            onClick={() => setHoveredMenu(null)} // 👈 close submenu on click
                           >
                             <Box //if not work then remove the box and only use {child.text}
                               sx={{
-                                padding: '5px 1px 5px 8px', // top right bottom left
+                                padding: '5px 1px 5px 8px',
                                 color: '#000',
                                 width: '100%',
                                 borderBottom: '1px solid #ddd',
