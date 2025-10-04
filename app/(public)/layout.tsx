@@ -39,6 +39,19 @@ export default function RootLayout({
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
+    {
+      text: 'Modules/Services',
+      children: [
+        { text: 'Admission Management', href: '/adm-management' },
+        { text: 'Student Management', href: '/pricing-sch' },
+        { text: 'Fees Management', href: '/pricing-tech' },
+        { text: 'Attendance Management', href: '/pricing-clg' },
+        { text: 'Academics Management', href: '/pricing-sch' },
+        { text: 'Examination Management', href: '/pricing-tech' },
+        { text: 'Learning Management', href: '/pricing-clg' },
+        { text: 'Inventory Management', href: '/pricing-sch' }
+      ]
+    },
     { text: 'About Us', href: '/about-us' },
     {
       text: 'Pricing',
@@ -210,15 +223,16 @@ export default function RootLayout({
                           borderRadius: 1,
                           zIndex: 10,
                           minWidth: '150px',
-                          width: 'auto'
+                          width: 'max-content', 
+                          paddingX: '5px'
                         }}
                       >
                         {item.children.map((child) => (
                           <MyLink
                             key={child.text}
                             href={child.href}
-                            style={{textDecoration: 'none'}}
-                            onClick={() => setHoveredMenu(null)} // 👈 close submenu on click
+                            style={{ textDecoration: 'none' }}
+                            onClick={() => setHoveredMenu(null)} 
                           >
                             <Box //if not work then remove the box and only use {child.text}
                               sx={{
