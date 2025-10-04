@@ -804,7 +804,7 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹2000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
                         online presence. This fully managed static web application includes all essential features for sharing information
@@ -872,19 +872,13 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: '600', color: '#2d3748' }}>₹3500</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         {/* A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
                         Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support. */}
                         A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin Dashboard 
                         for managing Users, Roles, and Courses. Ideal for Schools needing advanced functionality and streamlined management.
                       </div>
-                      {/* <MyButton
-                        variant="outlined"
-                        style={{ marginBottom: '12px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                      >
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -935,7 +929,7 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹7000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         {/* A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
@@ -997,7 +991,7 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹10000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT & Application Support</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         {/* Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
@@ -1059,14 +1053,11 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹2000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. 
                         Ideal for Schools needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device 
                         verification for enhanced accuracy and security.
-                        {/* A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
-                        institutions needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device
-                        verification for enhanced accuracy and security. */}
                       </div>
                       <MyButton
                         variant="contained"
@@ -1122,15 +1113,12 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹20000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans ➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -1181,14 +1169,11 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹35000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
                         Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans ➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -1239,15 +1224,12 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹70000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans ➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
@@ -1298,20 +1280,17 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹99999</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT & Application Support</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans ➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
                         onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us'; // ya koi external link bhi de sakte ho
+                          window.location.href = 'https://www.angspl.com/contact-us'; 
                         }}
                       >
                         Book a Demo
@@ -1357,7 +1336,7 @@ const ClientPricingSch = () => {
                     >
                       <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹20000</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT</div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
                         institutions needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device

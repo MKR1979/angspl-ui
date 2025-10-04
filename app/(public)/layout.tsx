@@ -39,6 +39,19 @@ export default function RootLayout({
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
+    {
+      text: 'Modules/Services',
+      children: [
+        { text: 'Admission Management', href: '/adm-management' },
+        { text: 'Student Management', href: '/pricing-sch' },
+        { text: 'Fees Management', href: '/pricing-tech' },
+        { text: 'Attendance Management', href: '/pricing-clg' },
+        { text: 'Academics Management', href: '/pricing-sch' },
+        { text: 'Examination Management', href: '/pricing-tech' },
+        { text: 'Learning Management', href: '/pricing-clg' },
+        { text: 'Inventory Management', href: '/pricing-sch' }
+      ]
+    },
     { text: 'About Us', href: '/about-us' },
     {
       text: 'Pricing',
@@ -199,7 +212,6 @@ export default function RootLayout({
                     >
                       {item.text}
                     </MyButton>
-
                     {hoveredMenu === item.text && (
                       <Box
                         sx={{
@@ -211,23 +223,20 @@ export default function RootLayout({
                           borderRadius: 1,
                           zIndex: 10,
                           minWidth: '150px',
-                          width: 'auto'
+                          width: 'max-content', 
+                          paddingX: '5px'
                         }}
                       >
                         {item.children.map((child) => (
                           <MyLink
                             key={child.text}
                             href={child.href}
-                            style={{
-                              // display: 'block',
-                              // padding: '4px 10px',
-                              // color: '#000',
-                              textDecoration: 'none'
-                            }}
+                            style={{ textDecoration: 'none' }}
+                            onClick={() => setHoveredMenu(null)} 
                           >
                             <Box //if not work then remove the box and only use {child.text}
                               sx={{
-                                padding: '5px 1px 5px 8px', // top right bottom left
+                                padding: '5px 1px 5px 8px',
                                 color: '#000',
                                 width: '100%',
                                 borderBottom: '1px solid #ddd',
