@@ -45,3 +45,31 @@ a {
   /* font-weight: bold; */
 }
 
+/* css for scroll bar */
+::-webkit-scrollbar {
+  width: 10px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+  border-right: 2.5px solid transparent; 
+  border-left: 2.5px solid transparent;
+  background-clip: content-box;       
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+  border-right: 2.5px solid transparent;
+  border-left: 2.5px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-bottom: 2.5px solid transparent;
+  border-top: 2.5px solid transparent;
+  background-clip: content-box;
+} 
