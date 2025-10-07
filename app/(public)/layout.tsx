@@ -34,7 +34,7 @@ export default function RootLayout({
   const [openMobileSubmenus, setOpenMobileSubmenus] = useState<Record<string, boolean>>({});
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
-  const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
+  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   const drawerWidth = 240;
   const navItems = [
@@ -70,7 +70,14 @@ export default function RootLayout({
         { text: 'Technology', href: '/technology' }
       ]
     },
-    { text: 'Demo', href: formatUrl('adhyayan.online') }
+    { 
+      text: 'Demo', 
+      children: [
+        { text: 'College', href: '/pricing-clg' },
+        { text: 'School', href: '/demo-sch' },
+        { text: 'Institute', href: '/pricing-tech' }
+      ]  
+    }
   ];
 
   // Toggle Drawer
