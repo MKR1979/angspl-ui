@@ -4,8 +4,8 @@ import eq from 'lodash/eq';
 import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
-import './adm-mng.css';
-import { COMPANY } from '.././constants/constants';
+import './attendance-mgmt.css';
+import { COMPANY } from '../../constants/constants';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
@@ -72,7 +72,7 @@ const ClientAboutUs = () => {
               <MyGrid container justifyContent="center" spacing={2}>
                 <MyGrid container justifyContent="center">
                   <MyGrid size={{ xs: 12, sm: 12 }} textAlign="center">
-                    <div className="section-heading">ADMISSION MANAGEMENT</div>
+                    <div className="section-heading">ATTENDANCE MANAGEMENT</div>
                     <div className="section-underline">
                       <div></div>
                       <div></div>

@@ -1,4 +1,4 @@
-import ClientAdmMng from './client-adm-mng';
+import ClientAdmMng from './client-adm-mgmt';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

@@ -20,6 +20,7 @@ import MyLink from '../custom-components/MyLink';
 import MyLogo from '../custom-components/MyLogo';
 import MyButton from '../custom-components/MyButton';
 import { Menu, MenuItem } from '@mui/material';
+import {MOD_DESC} from '../(public)/constants/constants';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@mui/icons-material';
 
 export default function RootLayout({
@@ -42,14 +43,14 @@ export default function RootLayout({
     {
       text: 'Modules/Services',
       children: [
-        { text: 'Admission Management', href: '/adm-management' },
-        { text: 'Student Management', href: '/pricing-sch' },
-        { text: 'Fees Management', href: '/pricing-tech' },
-        { text: 'Attendance Management', href: '/pricing-clg' },
-        { text: 'Academics Management', href: '/pricing-sch' },
-        { text: 'Examination Management', href: '/pricing-tech' },
-        { text: 'Learning Management', href: '/pricing-clg' },
-        { text: 'Inventory Management', href: '/pricing-sch' }
+        { text: 'Admission Management', href: `/${MOD_DESC}/adm-management` },
+        { text: 'Student Management', href: `/${MOD_DESC}/student-management` },
+        { text: 'Fees Management', href: `/${MOD_DESC}/fee-management` },
+        { text: 'Attendance Management', href: `/${MOD_DESC}/attendance-management` },
+        { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
+        { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
+        { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
+        { text: 'Company Creation', href: `/company` }
       ]
     },
     { text: 'About Us', href: '/about-us' },
