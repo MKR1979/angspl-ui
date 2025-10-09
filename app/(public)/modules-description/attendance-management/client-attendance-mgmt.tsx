@@ -12,6 +12,11 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
+const howItWorksImages = [
+  '/attendanceImgs/attendance-emp3.png',
+  '/attendanceImgs/attendance-emp4.png',
+  '/attendanceImgs/attendance-emp45.png',
+];
 
 const ClientAboutUs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,6 +36,24 @@ const ClientAboutUs = () => {
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   };
+
+  const [hiwIndex, setHiwIndex] = useState(0); // hiw = How It Works
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToHiwPrev = () => {
+    setHiwIndex((prev) => (prev === 0 ? howItWorksImages.length - 1 : prev - 1));
+  };
+
+  const goToHiwNext = () => {
+    setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
+  };
+
 
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
@@ -80,63 +103,84 @@ const ClientAboutUs = () => {
                   </MyGrid>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Admission Management System</span> is a digital platform
-                  designed to simplify and streamline the entire student admission process. It helps school efficiently manage applications,
-                  registration, document submission, and free payments in an organized and transparent manner. This system reduces manual
-                  paperwork and errors by providing an automated process both administrators and parents. Parents can conveniently fill out
-                  admission form, upload necessary documents, and track application status online, while schools can manage student data
-                  securely through a central database. With features like real-time notification, data validation, and secure record
-                  management, data validation, and secure record management, the school admission management system ensures a hassle-free
-                  experience for application and smooth operations for the school administration.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance Management System</span> enables employees to mark their attendance only when
+                  they are physically present within the designated office or campus premises.
+                  This system uses the geolocation of the user's device to validate their proximity to the registered office location.
+                  Employees can conveniently use their own smartphones or devices to mark their attendance through
+                  a secure web or mobile interface.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
-                  <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
+                  <div className="section-heading1">Key Benefits of Location-Based Attendance</div>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
                   <MyCardContent className="list-text">
                     <ul className="benefits-list">
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> Fill Application form from Anywhere and Anytime.
+                        <span>&#10003;</span> Attendance can be marked only within the allowed distance from the office/campus.
                       </li>
                       <li>
-                        <span>&#10003;</span> No need to stand in long queues.
+                        <span>&#10003;</span> Supports real-time check-in and check-out from personal devices.
                       </li>
                       <li>
-                        <span>&#10003;</span> Cost savings for the institutes.
+                        <span>&#10003;</span> Ensures accurate attendance by verifying user location and device ID.
                       </li>
                       <li>
-                        <span>&#10003;</span>Reducing the unwanted data.
+                        <span>&#10003;</span>Reduces proxy or buddy punching, improving accountability.
                       </li>
                       <li>
-                        <span>&#10003;</span> Eliminates the need for extra staff to manage applicants.
+                        <span>&#10003;</span>Automates attendance reporting and simplifies payroll processing.
+                      </li>
+                      <li>
+                        <span>&#10003;</span>Supports multiple locations or branches without manual tracking.
                       </li>
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> No longer requirement of printing & storing the forms separately.
+                        <span>&#10003;</span> Helps organizations maintain accurate, location-verified attendance records.
                       </li>
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Admission Form</h2>
+                {/* <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">How It Works Section</h2>
                   <div className="responsive-image">
-                    <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
+                    <img src="/attendanceImgs/attendance-emp3.png" alt="Admission Form" />
+                  </div>
+                </MyGrid> */}
+
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">How It Works Section</h2>
+
+                  <div className="responsive-image">
+                    <img
+                      src={howItWorksImages[hiwIndex]}
+                      alt="How It Works"
+                      className="about-banner-img"
+                    />
+
+                    {/* Arrows */}
+                    <IconButton className="banner-arrow left" onClick={goToHiwPrev}>
+                      <ArrowBackIos />
+                    </IconButton>
+                    <IconButton className="banner-arrow right" onClick={goToHiwNext}>
+                      <ArrowForwardIos />
+                    </IconButton>
                   </div>
                 </MyGrid>
 
+
                 <MyCardContent className="card-text">
-                  The online admission and student enrollment process in schools can be tedious, involving managing and analyzing inquiries,
-                  planning marketing strategies, and creating and handling student records. Verifying student data and generating merit
-                  lists for various admission rounds based on seat availability, while maintaining effective communication with parents and
-                  students throughout the process, consumes a lot of time. Manual handling of paperwork and documents often leads to errors.
-                  <br />
+                  Users log in securely using their registered credentials on the web or mobile app.
+                  The system verifies their identity through their unique device ID and IP address
+                  before granting access. Once logged in, users can view their attendance dashboard,
+                  check previous records, and prepare to mark their attendance within the allowed location range.
+                  {/* <br />
                   Our <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> is designed to streamline
                   all activities involved in student enrollment by combining them into a cloud-based platform. The main objective of this
                   system is to help school staff efficiently enroll students and maintain accurate records. It enables administrators to
                   simplify and automate the online admission process by managing and verifying student entries, documents, images,
-                  certificates.
+                  certificates. */}
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Add New Students</h2>
+                  <h2 className="section-subheading">How Employees Mark Attendance</h2>
                   <div className="responsive-video">
                     <iframe
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
@@ -147,17 +191,15 @@ const ClientAboutUs = () => {
                   </div>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> helps schools automate and
-                  simplify routine activities such as curriculum management, attendance tracking, administrative tasks, information
-                  handling, fee management, and assignments. This robust, cloud-based, and time-tested educational ERP system offers
-                  advanced modules that empower teachers and educators to digitize the daily operations of educational institutions.
-                  Designed to efficiently manage and record administrative work,
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management Software</span> includes all essential modules
-                  for tracking student records, admissions, fees, timetable planning, and other critical school processes, enabling seamless
-                  management for both teachers and staff.
+                  Employee Dashboard in the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance system</span> allows employees to mark their attendance quickly and securely.
+                  After logging in, the system automatically detects the employee’s GPS location and verifies whether they are within the approved office or campus area.
+                  If they are within the allowed range, the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Mark Attendance”</span> button becomes active for check-in or check-out.
+                  The system records important details such as <span style={{ fontWeight: 'bold', color: '#334D6E' }}>location coordinates, device ID, IP address, and timestamp</span> in real time.
+                  This ensures that attendance is marked only from authorized locations, maintaining <span style={{ fontWeight: 'bold', color: '#334D6E' }}>accuracy, transparency, and accountability</span> for the organization.
+
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Review Admissions</h2>
+                  <h2 className="section-subheading">How Students Mark Attendance</h2>
                   <div className="responsive-video">
                     <iframe
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
@@ -167,17 +209,32 @@ const ClientAboutUs = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-
                 <MyCardContent className="card-text">
-                  The Review Admission feature enables administrators to efficiently manage and monitor the entire admission process within
-                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management System</span>. Once logged in, administrators
-                  can access the Academics section to view all admission entries in real time. The module allows filtering admissions based
-                  on various criteria such as class, admission date, and academic session, providing quick access to relevant records.
+                  This video explains how students can efficiently mark their attendance using the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance system</span> Once
+                  logged in to the system through a web or mobile device, the student’s current GPS location is automatically detected and verified against the registered campus area.
+                  Only when the student is within the allowed zone does the system activate the check-in/check-out option.
                   <br />
-                  Administrators can review each applicant’s complete admission details, including personal information, submitted
-                  documents, fee payment status, and other related data. This feature streamlines the admission verification process,
-                  ensuring transparency and accuracy. By centralizing admission review operations, it eliminates manual checks and enhances
-                  decision-making efficiency for school staff and management.
+                  The attendance is then securely recorded along with device ID, IP address, location coordinates, and timestamp. This ensures that attendance is accurate, location-verified,
+                  and eliminates the possibility of proxy marking, helping educational institutions maintain transparency and accountability.
+                </MyCardContent>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">How Bulk Attendance Works</h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+                <MyCardContent className="card-text">
+                  This video demonstrates how bulk attendance is managed using the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance system</span>.
+                  Initially, attendance for multiple employees or students can be marked simultaneously through the dashboard, ensuring location verification for every entry.
+                  Once reviewed, the admin can <span style={{ fontWeight: 'bold', color: '#334D6E' }}>lock the attendance records</span> to prevent any further modifications.
+                  Each record captures essential details such as device ID, GPS coordinates, IP address, and timestamp.
+                  This approach saves time, streamlines attendance management, and maintains <span style={{ fontWeight: 'bold', color: '#334D6E' }}>accurate and secure records</span> for the organization or institution.
+
                 </MyCardContent>
               </MyGrid>
             </MyCardContent>
