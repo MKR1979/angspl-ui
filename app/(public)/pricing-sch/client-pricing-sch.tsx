@@ -829,7 +829,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -886,7 +886,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -948,7 +948,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1009,7 +1009,7 @@ const ClientPricingSch = () => {
                           window.location.href = 'https://www.angspl.com/contact-us';
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1066,7 +1066,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1126,7 +1126,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1181,7 +1181,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1237,7 +1237,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1293,7 +1293,7 @@ const ClientPricingSch = () => {
                           window.location.href = 'https://www.angspl.com/contact-us'; 
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
@@ -1349,7 +1349,7 @@ const ClientPricingSch = () => {
                           window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
                         }}
                       >
-                        Book a Demo
+                        Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
