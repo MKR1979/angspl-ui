@@ -11,15 +11,31 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
-const howItWorksImages = [
-  '/attendanceImgs/attendance-emp3.png',
-  '/attendanceImgs/attendance-emp4.png',
-  '/attendanceImgs/attendance-emp45.png',
-];
+const bannerImages = ['/ModulesImgs/attendance.png.png', '/ModulesImgs/attendance1.png.png', '/ModulesImgs/attendance2.png.png'];
+// const howItWorksImages = [
+//   '/attendanceImgs/attendance-emp3.png',
+//   '/attendanceImgs/attendance-emp4.png',
+//   '/attendanceImgs/attendance-emp45.png',
+// ];
 
 const ClientAboutUs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = [
+    "/ModulesImgs/attendance.png.png",
+    "/ModulesImgs/attendance1.png.png",
+    "/ModulesImgs/attendance2.png.png",
+    "/ModulesImgs/attendance2.png.png",
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000); // change page every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   // Auto-slide every 3 seconds
   useEffect(() => {
@@ -37,22 +53,22 @@ const ClientAboutUs = () => {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   };
 
-  const [hiwIndex, setHiwIndex] = useState(0); // hiw = How It Works
+  // const [hiwIndex, setHiwIndex] = useState(0); // hiw = How It Works
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
-  const goToHiwPrev = () => {
-    setHiwIndex((prev) => (prev === 0 ? howItWorksImages.length - 1 : prev - 1));
-  };
+  // const goToHiwPrev = () => {
+  //   setHiwIndex((prev) => (prev === 0 ? howItWorksImages.length - 1 : prev - 1));
+  // };
 
-  const goToHiwNext = () => {
-    setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
-  };
+  // const goToHiwNext = () => {
+  //   setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
+  // };
 
 
   const getYouTubeVideoId = (url: string): string | null => {
@@ -149,35 +165,49 @@ const ClientAboutUs = () => {
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">How It Works Section</h2>
 
-                  <div className="responsive-image">
+                  {/* <div className="responsive-image">
                     <img
                       src={howItWorksImages[hiwIndex]}
                       alt="How It Works"
                       className="about-banner-img"
                     />
 
-                    {/* Arrows */}
-                    <IconButton className="banner-arrow left" onClick={goToHiwPrev}>
+                                      <IconButton className="banner-arrow left" onClick={goToHiwPrev}>
                       <ArrowBackIos />
                     </IconButton>
                     <IconButton className="banner-arrow right" onClick={goToHiwNext}>
                       <ArrowForwardIos />
                     </IconButton>
+                  </div> */}
+                  <div className="book-container">
+                    <div className="book">
+                      {images.map((src, index) => (
+                        <img
+                          key={index}
+                          src={src}
+                          alt={`page-${index}`}
+                          className={`page ${index === current ? "active" : ""}`}
+                        />
+                      ))}
+                    </div>
                   </div>
+
                 </MyGrid>
 
 
                 <MyCardContent className="card-text">
-                  Users log in securely using their registered credentials on the web or mobile app.
-                  The system verifies their identity through their unique device ID and IP address
-                  before granting access. Once logged in, users can view their attendance dashboard,
-                  check previous records, and prepare to mark their attendance within the allowed location range.
-                  {/* <br />
-                  Our <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> is designed to streamline
-                  all activities involved in student enrollment by combining them into a cloud-based platform. The main objective of this
-                  system is to help school staff efficiently enroll students and maintain accurate records. It enables administrators to
-                  simplify and automate the online admission process by managing and verifying student entries, documents, images,
-                  certificates. */}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Employee Attendance:</span> Employees log in securely to the Location-Based Attendance system via web or mobile. The system detects
+                  their current GPS location and verifies whether they are within the approved office or campus area. If
+                  inside the allowed range, the Mark Attendancebutton becomes active. The system records ocation coordinates,
+                  device ID, IP address, and timestamp, ensuring attendance is secure, accurate, and location-verified.
+                  <br />
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Student Attendance:</span> Students log in through the same secure portal. The system automatically verifies their GPS location within the campus.
+                  Only when they are inside the allowed zone does the
+                  check-in/check-out option become active. Attendance is recorded along with device details and timestamp
+                  , ensuring transparency and eliminating proxy entries.
+                  <br />
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Bulk Attendance:</span> Admins can mark attendance for multiple employees or students at once. After verifying the entries, they can lock the attendance records to prevent edits.
+                  Each entry captures essential details such as GPS coordinates, device ID, IP address, and timestamp, making the process time-efficient, accurate, and secure.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">How Employees Mark Attendance</h2>
