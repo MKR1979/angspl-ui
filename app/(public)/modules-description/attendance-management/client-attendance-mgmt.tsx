@@ -105,7 +105,7 @@ const ClientAboutUs = () => {
                 <MyCardContent className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance Management System</span> enables employees to mark their attendance only when
                   they are physically present within the designated office or campus premises.
-                  This system uses the geolocation of the user's device to validate their proximity to the registered office location.
+                  This system uses the geolocation of the users device to validate their proximity to the registered office location.
                   Employees can conveniently use their own smartphones or devices to mark their attendance through
                   a secure web or mobile interface.
                 </MyCardContent>
