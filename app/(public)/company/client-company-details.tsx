@@ -36,26 +36,9 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     onSaveClick,
     setOpen1,
     setClose1,
-    onPhoneNoChange
+    onPhoneNoChange,
+    // onDomainNameChange
   } = useCompany();
-
-// const domainSuffix = `.adhyayan.${(company_type || '').toLowerCase()}`;
-
-// const handleDomainChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//   // Extract only the editable part (before the suffix)
-//   let value = e.target.value;
-  
-//   // Remove suffix if user tries to type it
-//   if (value.endsWith(domainSuffix)) {
-//     value = value.slice(0, value.length - domainSuffix.length);
-//   }
-
-//   // Limit editable part to 10 chars
-//   value = value.slice(0, 10);
-
-//   // Update main state
-//   state.dtoCompany.domain_name = value + domainSuffix;
-// };
 
   return (
     <Card variant="outlined" sx={{ p: 1, borderRadius: 2, marginTop: 2, border: 'none' }}>
@@ -110,35 +93,40 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             <MyTextField
               label="Domain Name"
               name="domain_name"
-              value={state.dtoCompany.domain_name || ''}
-              //  value={`${state.dtoCompany.domain_name || ''}.adhyayan.${(company_type || '').toLowerCase()}`}
+              value={state.dtoCompany.domain_name}
               onChange={onInputChange}
               placeholder="Enter Domain Name"
               inputProps={{
-                maxLength: gConstants.PHONE_NO_LENGTH,
+                maxLength: gConstants.COMPANY_NAME_LENGTH,
                 pattern: '^[A-Za-z]{1,2}$'
               }}
               onBlur={onDomainNameBlur}
               error={state.errorMessages.domain_name ? true : false}
-            />
-            {/* <MyGrid size={{ xs: 12, sm: 6 }}>
-  <MyTextField
-    label="Domain Name"
-    name="domain_name"
-    value={state.dtoCompany.domain_name || domainSuffix} // show suffix always
-    onChange={handleDomainChange}
-    placeholder="Enter Domain Name"
-    inputProps={{
-      maxLength: 10 + domainSuffix.length // total length
-    }}
-    onBlur={onDomainNameBlur}
-    error={state.errorMessages.domain_name ? true : false}
-  />
-  <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
-</MyGrid> */}
-          
+            />          
             <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
           </MyGrid>
+
+{/* 
+          <MyGrid size={{ xs: 12, sm: 6 }}>
+            <MyTextField
+              label="Domain Name"
+              name="domain_name"
+              value={state.dtoCompany.domain_name}
+              onChange={onDomainNameChange}
+              placeholder="Enter domain prefix"
+              InputProps={{
+                endAdornment: <span style={{ color: '#666', marginLeft: 4 }}>.adhyayan.online</span>
+              }}
+              inputProps={{
+                maxLength: gConstants.COMPANY_NAME_LENGTH,
+                pattern: '^[a-zA-Z0-9-]+$'
+              }}
+              onBlur={onDomainNameBlur}
+              error={!!state.errorMessages.domain_name}
+            />
+            <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
+          </MyGrid> */}
+
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyTextField
               label="Email"

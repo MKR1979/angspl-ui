@@ -4,8 +4,8 @@ import './MyPayReceipt.css';
 import { useSelector } from '../../store';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyButton from '@/app/custom-components/MyButton';
-import { PASSWORD } from '../../(public)/constants/constants';
-import { getAcademicSession } from '@/app/common/currentSession';
+// import { PASSWORD } from '../../(public)/constants/constants';
+// import { getAcademicSession } from '@/app/common/currentSession';
 
 interface SuccessMessageProps {
   course_name: string;
@@ -57,7 +57,7 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
       <div className="receipt-container-outer">
         <div ref={printRef} className="receipt-container">
           <div className="school-info">
-            <img src={companyInfo.logo_url} alt="School Logo" className="receipt-logo" />
+            {/* <img src={companyInfo.logo_url} alt="School Logo" className="receipt-logo" /> */}
             <div>
               <strong style={{ fontSize: '20px' }}>{companyInfo.company_name}</strong>
               <p>RECEIPT - OFFICE COPY</p>
@@ -79,7 +79,7 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
                 <strong>SCHOLAR NO:</strong> {learner_id}
               </span>
               <span>
-                <strong>SESSION:</strong> {getAcademicSession()}
+                <strong>SESSION:</strong> 
               </span>
             </div>
             <div className="receipt-line">
@@ -156,7 +156,7 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
               </span>
               {is_data_exist !== 'true' && (
                 <span>
-                  Password: <b>{PASSWORD}</b>
+                  Password:
                 </span>
               )}
               {/* <span>
@@ -176,7 +176,7 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
             ) : (
               <p>
                 <strong>Thank you for your payment, {student_name}.</strong>
-                We appreciate your timely transaction towards the academic session {getAcademicSession()}.
+                We appreciate your timely transaction towards the academic session.
               </p>
             )}
             <p>This is a system generated receipt and does not require any signature.</p>

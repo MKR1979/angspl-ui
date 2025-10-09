@@ -12,6 +12,7 @@ export default interface CompanyDTO extends BaseDTO {
   plan_type: string;
   payment_type: string;
   amount: number;
+  source_flag: string;
 }
 
 export const COMPANY: CompanyDTO = Object.freeze({
@@ -27,6 +28,7 @@ export const COMPANY: CompanyDTO = Object.freeze({
   plan_type: '',
   payment_type: '',
   amount: 0,
+  source_flag: '',
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

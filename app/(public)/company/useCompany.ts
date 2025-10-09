@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
 import { arrCompanyStatus, arrCompanyType } from '@/app/common/Configuration';
-import { ADD_COMPANY_PUBLIC } from '@/app/graphql/Company';
+import { ADD_COMPANY_RETURN_USERID } from '@/app/graphql/Company';
 // import { useSnackbar } from '../../custom-components/SnackbarProvider';
 import * as gConstants from '../../constants/constants';
 import { ADD_FEE_COLLECTION_RETURN_ID } from '@/app/graphql/FeeCollection';
@@ -68,12 +68,12 @@ const useCompany = () => {
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   //   const showSnackbar = useSnackbar();
   const [saving, setSaving] = useState(false);
-  const [addCompanyPublic] = useMutation(ADD_COMPANY_PUBLIC, {});
+  const [addCompanyReturnId] = useMutation(ADD_COMPANY_RETURN_USERID, {});
   const [addFeeCollectionReturnId] = useMutation(ADD_FEE_COLLECTION_RETURN_ID);
   //   const [domainInput, setDomainInput] = useState(
   //   state.dtoCompany.domain_name?.split('.adhyayan.')?.[0] || ''
   // );
-  // const domainSuffix = `.adhyayan.${company_type || ''}`;
+  const DOMAIN_SUFFIX = '.adhyayan.online';
 
   useEffect(() => {
     if (state.arrCompanyStausLookup.length > 0 && !state.dtoCompany.status) {
@@ -155,6 +155,22 @@ const useCompany = () => {
     },
     [state.dtoCompany]
   );
+
+const onDomainNameChange = useCallback(
+  (event: ChangeEvent<HTMLInputElement>) => {
+    let prefix = event.target.value;
+    if (prefix.endsWith(DOMAIN_SUFFIX)) {
+      prefix = prefix.replace(DOMAIN_SUFFIX, '');
+    }
+    setState({
+      dtoCompany: {
+        ...state.dtoCompany,
+        domain_name: prefix,
+      },
+    } as StateType);
+  },
+  [state.dtoCompany]
+);
 
   const onCodeChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -327,21 +343,31 @@ const useCompany = () => {
       try {
         if (await validateForm()) {
           if (state.dtoCompany.id === 0) {
-            const { data } = await addCompanyPublic({
+
+          //   if (result?.data?.addAdmissionClgReturnUserId > 0) {
+          //     showSnackbar(gMessageConstants.SNACKBAR_INSERT_RECORD, 'success');
+          //     const newUserId = result?.data?.addAdmissionClgReturnUserId;
+          //     setStudentId(newUserId);
+          //     setSubmitted(true);
+          //   } else {
+          //     showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
+          //   }
+          // }
+
+            const result = await addCompanyReturnId({
               variables: {
-                company_name: state.dtoCompany.company_name,
                 company_code: state.dtoCompany.company_code,
-                domain_name: state.dtoCompany.domain_name,
+                company_name: state.dtoCompany.company_name,
                 company_type: company_type,
                 email: state.dtoCompany.email,
                 phone_no: state.dtoCompany.phone_no,
                 address: state.dtoCompany.address,
-                plan_type: plan_type,
-                payment_type: payment_type,
-                amount: payment_amount
+                status: state.dtoCompany.status,
+                domain_name: state.dtoCompany.domain_name,
+                source_flag: 'Public'
               }
             });
-            if (data) {
+            if (result?.data?.addCompanyReturnId > 0) {
               //  router.push('/companies/list');
               const options = {
                 key: gConstants.RAZORPAY_KEY,
@@ -354,16 +380,6 @@ const useCompany = () => {
                   const newPaymentId = await addPaymentDetails(event, response, amount, 1, 1);
                   router.push(`/paymentReceipt?id=${newPaymentId}&userName=${encodeURIComponent('')}`);
                 },
-                // The handler is called after successful payment
-                // handler: async (response: any) => {
-                //   console.log('Payment Sucessfull, payment response:',response);
-                //   //await addPaymentDetails(event, response, price);
-                //   router.push(
-                //     `/payReceipt?courseName=${encodeURIComponent(course)}&studentName=${encodeURIComponent(
-                //       state.dtoPaymentDetails.first_name + ' ' + state.dtoPaymentDetails.last_name
-                //     )}&amount=${price}&userName=${encodeURIComponent(userName)}`
-                //   );
-                // },
                 prefill: {
                   name: 'Student Name',
                   email: gConstants.CONTACT_EMAIL,
@@ -385,7 +401,7 @@ const useCompany = () => {
         setSaving(false);
       }
     },
-    [validateForm, addCompanyPublic, state.dtoCompany, router]
+    [validateForm, addCompanyReturnId, state.dtoCompany, router]
   );
 
   //  const onSaveClick = useCallback(
@@ -496,7 +512,7 @@ const useCompany = () => {
     setClose2,
     onPhoneNoChange,
     onDomainNameBlur,
-    saving
+    saving,onDomainNameChange
   };
 };
 
