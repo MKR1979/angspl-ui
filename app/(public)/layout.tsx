@@ -20,6 +20,7 @@ import MyLink from '../custom-components/MyLink';
 import MyLogo from '../custom-components/MyLogo';
 import MyButton from '../custom-components/MyButton';
 import { Menu, MenuItem } from '@mui/material';
+import {MOD_DESC} from '../(public)/constants/constants';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@mui/icons-material';
 
 export default function RootLayout({
@@ -34,11 +35,24 @@ export default function RootLayout({
   const [openMobileSubmenus, setOpenMobileSubmenus] = useState<Record<string, boolean>>({});
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
-  const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
+  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
+    {
+      text: 'Modules/Services',
+      children: [
+        { text: 'Admission Management', href: `/${MOD_DESC}/adm-management` },
+        { text: 'Student Management', href: `/${MOD_DESC}/student-management` },
+        { text: 'Fees Management', href: `/${MOD_DESC}/fee-management` },
+        { text: 'Attendance Management', href: `/${MOD_DESC}/attendance-management` },
+        { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
+        { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
+        { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
+        { text: 'Company Creation', href: `/company` }
+      ]
+    },
     { text: 'About Us', href: '/about-us' },
     {
       text: 'Pricing',
@@ -57,7 +71,14 @@ export default function RootLayout({
         { text: 'Technology', href: '/technology' }
       ]
     },
-    { text: 'Demo', href: formatUrl('adhyayan.online') }
+    { 
+      text: 'Demo', 
+      children: [
+        { text: 'College', href: '/pricing-clg' },
+        { text: 'School', href: '/demo-sch' },
+        { text: 'Institute', href: '/pricing-tech' }
+      ]  
+    }
   ];
 
   // Toggle Drawer
@@ -199,7 +220,6 @@ export default function RootLayout({
                     >
                       {item.text}
                     </MyButton>
-
                     {hoveredMenu === item.text && (
                       <Box
                         sx={{
@@ -211,23 +231,20 @@ export default function RootLayout({
                           borderRadius: 1,
                           zIndex: 10,
                           minWidth: '150px',
-                          width: 'auto'
+                          width: 'max-content', 
+                          paddingX: '5px'
                         }}
                       >
                         {item.children.map((child) => (
                           <MyLink
                             key={child.text}
                             href={child.href}
-                            style={{
-                              // display: 'block',
-                              // padding: '4px 10px',
-                              // color: '#000',
-                              textDecoration: 'none'
-                            }}
+                            style={{ textDecoration: 'none' }}
+                            onClick={() => setHoveredMenu(null)} 
                           >
                             <Box //if not work then remove the box and only use {child.text}
                               sx={{
-                                padding: '5px 1px 5px 8px', // top right bottom left
+                                padding: '5px 1px 5px 8px',
                                 color: '#000',
                                 width: '100%',
                                 borderBottom: '1px solid #ddd',

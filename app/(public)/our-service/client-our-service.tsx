@@ -27,22 +27,22 @@ const ClientOurService = () => {
               name: '• Online Admission',
               children: [
                 {
-                  name: '•• Document Upload & Verification'
+                  name: '• Document Upload & Verification'
                 },
                 {
-                  name: '•• Online Payment Collection'
+                  name: '• Online Payment Collection'
                 },
                 {
-                  name: '•• Payment Gateway'
+                  name: '• Payment Gateway'
                 },
                 {
-                  name: '•• Receipt and Acknowledgement'
+                  name: '• Receipt and Acknowledgement'
                 },
                 {
-                  name: '•• Account Creation'
+                  name: '• Account Creation'
                 },
                 {
-                  name: '•• Login Credentials Delivery'
+                  name: '• Login Credentials Delivery'
                 }
               ]
             },
@@ -50,22 +50,22 @@ const ClientOurService = () => {
               name: '• Programs Dashboard',
               children: [
                 {
-                  name: '•• Course Catalog'
+                  name: '• Course Catalog'
                 },
                 {
-                  name: '•• Online Enrollment'
+                  name: '• Online Enrollment'
                 },
                 {
-                  name: '•• Payment Gateway'
+                  name: '• Payment Gateway'
                 },
                 {
-                  name: '•• Receipt and Acknowledgement'
+                  name: '• Receipt and Acknowledgement'
                 },
                 {
-                  name: '•• Account Creation'
+                  name: '• Account Creation'
                 },
                 {
-                  name: '•• Login Credentials Delivery'
+                  name: '• Login Credentials Delivery'
                 }
               ]
             },
@@ -73,16 +73,16 @@ const ClientOurService = () => {
               name: '• Affiliates',
               children: [
                 {
-                  name: '•• Affiliate Registration'
+                  name: '• Affiliate Registration'
                 },
                 {
-                  name: '•• Affiliate Login Panel'
+                  name: '• Affiliate Login Panel'
                 },
                 {
-                  name: '•• Referral Tracking'
+                  name: '• Referral Tracking'
                 },
                 {
-                  name: '•• Commission Summary'
+                  name: '• Commission Summary'
                 }
               ]
             },
@@ -125,13 +125,13 @@ const ClientOurService = () => {
               name: '• Online Study Kit',
               children: [
                 {
-                  name: '•• Practice Project'
+                  name: '• Practice Project'
                 },
                 {
-                  name: '•• Study Notes'
+                  name: '• Study Notes'
                 },
                 {
-                  name: '•• Video Uploads'
+                  name: '• Video Uploads'
                 }
               ]
             },
@@ -139,10 +139,10 @@ const ClientOurService = () => {
               name: '• Online Exams Management',
               children: [
                 {
-                  name: '•• Instant Exam Builder'
+                  name: '• Instant Exam Builder'
                 },
                 {
-                  name: '•• Bulk Exam Uploader'
+                  name: '• Bulk Exam Uploader'
                 }
               ]
             },
@@ -173,10 +173,10 @@ const ClientOurService = () => {
               name: '• Courses Content',
               children: [
                 {
-                  name: '•• Paid Courses / Programs'
+                  name: '• Paid Courses / Programs'
                 },
                 {
-                  name: '•• Free Courses / Programs'
+                  name: '• Free Courses / Programs'
                 }
               ]
             },
@@ -184,13 +184,13 @@ const ClientOurService = () => {
               name: '• Study Kit',
               children: [
                 {
-                  name: '•• Code Insights'
+                  name: '• Code Insights'
                 },
                 {
-                  name: '•• Notes Insights'
+                  name: '• Notes Insights'
                 },
                 {
-                  name: '•• Online Videos'
+                  name: '• Online Videos'
                 }
               ]
             },
@@ -237,22 +237,22 @@ const ClientOurService = () => {
               name: '• Online Admission',
               children: [
                 {
-                  name: '•• Document Upload & Verification'
+                  name: '• Document Upload & Verification'
                 },
                 {
-                  name: '•• Online Payment Collection'
+                  name: '• Online Payment Collection'
                 },
                 {
-                  name: '•• Payment Gateway'
+                  name: '• Payment Gateway'
                 },
                 {
-                  name: '•• Receipt and Acknowledgement'
+                  name: '• Receipt and Acknowledgement'
                 },
                 {
-                  name: '•• Account Creation'
+                  name: '• Account Creation'
                 },
                 {
-                  name: '•• Login Credentials Delivery'
+                  name: '• Login Credentials Delivery'
                 }
               ]
             },
@@ -260,22 +260,22 @@ const ClientOurService = () => {
               name: '• Programs Dashboard',
               children: [
                 {
-                  name: '•• Course Catalog'
+                  name: '• Course Catalog'
                 },
                 {
-                  name: '•• Online Enrollment'
+                  name: '• Online Enrollment'
                 },
                 {
-                  name: '•• Payment Gateway'
+                  name: '• Payment Gateway'
                 },
                 {
-                  name: '•• Receipt and Acknowledgement'
+                  name: '• Receipt and Acknowledgement'
                 },
                 {
-                  name: '•• Account Creation'
+                  name: '• Account Creation'
                 },
                 {
-                  name: '•• Login Credentials Delivery'
+                  name: '• Login Credentials Delivery'
                 }
               ]
             },
@@ -283,16 +283,16 @@ const ClientOurService = () => {
               name: '• Affiliates',
               children: [
                 {
-                  name: '•• Affiliate Registration'
+                  name: '• Affiliate Registration'
                 },
                 {
-                  name: '•• Affiliate Login Panel'
+                  name: '• Affiliate Login Panel'
                 },
                 {
-                  name: '•• Referral Tracking'
+                  name: '• Referral Tracking'
                 },
                 {
-                  name: '•• Commission Summary'
+                  name: '• Commission Summary'
                 }
               ]
             },
@@ -335,13 +335,13 @@ const ClientOurService = () => {
               name: '• Online Study Kit',
               children: [
                 {
-                  name: '•• Practice Project'
+                  name: '• Practice Project'
                 },
                 {
-                  name: '•• Study Notes'
+                  name: '• Study Notes'
                 },
                 {
-                  name: '•• Video Uploads'
+                  name: '• Video Uploads'
                 }
               ]
             },
@@ -349,10 +349,10 @@ const ClientOurService = () => {
               name: '• Online Exams Management',
               children: [
                 {
-                  name: '•• Instant Exam Builder'
+                  name: '• Instant Exam Builder'
                 },
                 {
-                  name: '•• Bulk Exam Uploader'
+                  name: '• Bulk Exam Uploader'
                 }
               ]
             },
@@ -383,10 +383,10 @@ const ClientOurService = () => {
               name: '• Courses Content',
               children: [
                 {
-                  name: '•• Paid Courses / Programs'
+                  name: '• Paid Courses / Programs'
                 },
                 {
-                  name: '•• Free Courses / Programs'
+                  name: '• Free Courses / Programs'
                 }
               ]
             },
@@ -394,13 +394,13 @@ const ClientOurService = () => {
               name: '• Study Kit',
               children: [
                 {
-                  name: '•• Code Insights'
+                  name: '• Code Insights'
                 },
                 {
-                  name: '•• Notes Insights'
+                  name: '• Notes Insights'
                 },
                 {
-                  name: '•• Online Videos'
+                  name: '• Online Videos'
                 }
               ]
             },

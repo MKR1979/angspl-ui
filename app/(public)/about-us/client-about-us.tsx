@@ -20,11 +20,6 @@ const ClientAboutUs = () => {
           <br></br>
         </div>
         <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        {/* <CardHeader
-          avatar={<MyInfoIcon></MyInfoIcon>}
-          title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>About Us</span>}
-          sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
-        /> */}
         <MyCardContent>
           <MyGrid container spacing={2} alignItems="stretch">
             <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
