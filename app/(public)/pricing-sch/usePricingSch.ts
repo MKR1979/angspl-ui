@@ -1,4 +1,5 @@
 import { useCallback, useReducer } from 'react';
+import { useRouter } from 'next/navigation';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 
 type StateType = {
@@ -17,7 +18,7 @@ const usePricingSch = () => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const router = useRouter();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const toggleRowExpansion = useCallback(
@@ -38,8 +39,14 @@ const usePricingSch = () => {
   const handleTabChange = useCallback(async (event: React.SyntheticEvent<Element, Event>, newValue: number): Promise<void> => {
     setState({ tabIndex: newValue } as StateType);
   }, []);
+
+  const goToCompanyModule = (companyType: string, planType: string, paymentType: string, amount: number) => {
+    router.push(`/company?company_type=${companyType}&plan_type=${planType}&payment_type=${paymentType}&payment_amount=${amount}`);
+  };
+
   return {
     state,
+    goToCompanyModule,
     handleTabChange,
     toggleRowExpansion
   };

@@ -24,6 +24,38 @@ export const ADD_COMPANY = gql`
   }
 `;
 
+export const ADD_COMPANY_PUBLIC = gql`
+  mutation addCompanyPublic(
+    $company_code: String
+    $company_name: String!
+    $domain_name: String
+    $company_type: String
+    $email: String
+    $phone_no: String
+    $address: String
+    $status: String
+    $plan_type: String
+    $payment_type: String
+    $amount: Float
+  ) {
+    addCompanyPublic(
+      addCompanyPublicInput: {
+        company_code: $company_code
+        company_name: $company_name
+        domain_name: $domain_name
+        company_type: $company_type
+        email: $email
+        phone_no: $phone_no
+        address: $address
+        status: $status
+        plan_type: $plan_type
+        payment_type: $payment_type
+        amount: $amount
+      }
+    )
+  }
+`;
+
 export const UPDATE_COMPANY = gql`
   mutation updateCompany(
     $id: Int!

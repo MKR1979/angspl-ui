@@ -50,7 +50,7 @@ export default function RootLayout({
         { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
         { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
         { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
-        { text: 'Company Creation', href: `/company` }
+        // { text: 'Company Creation', href: `/company` }
       ]
     },
     { text: 'About Us', href: '/about-us' },

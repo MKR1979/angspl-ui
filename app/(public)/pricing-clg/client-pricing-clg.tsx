@@ -16,7 +16,7 @@ import { COMPANY } from '../constants/constants';
 import usePricingClg from './usePricingClg';
 
 const ClientPricing = () => {
-  const { state, handleTabChange, toggleRowExpansion } = usePricingClg();
+  const { state, handleTabChange, goToCompanyModule, toggleRowExpansion } = usePricingClg();
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -699,7 +699,7 @@ const ClientPricing = () => {
     }
   ];
 
-  const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
+  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   interface RowData {
     name: string;
@@ -810,25 +810,7 @@ const ClientPricing = () => {
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      {/* <MyButton
-                        variant="outlined"
-                        fullWidth
-                        style={{
-                          marginBottom: '12px',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center'
-                        }}
-                      >
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Basic', 'Monthly', 2000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -878,13 +860,7 @@ const ClientPricing = () => {
                         Dashboard for managing Users, Roles, and Courses. Ideal for Colleges needing advanced functionality and streamlined
                         management.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Professional', 'Monthly', 3500)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -934,13 +910,7 @@ const ClientPricing = () => {
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Premium', 'Monthly', 7000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -990,13 +960,7 @@ const ClientPricing = () => {
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us';
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Dedicated', 'Monthly', 10000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1050,9 +1014,7 @@ const ClientPricing = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('College', 'Online Attendance', 'Monthly', 2000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1107,13 +1069,7 @@ const ClientPricing = () => {
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Basic', 'Yearly', 20000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1162,13 +1118,7 @@ const ClientPricing = () => {
                         A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
                         Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Professional', 'Yearly', 35000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1218,13 +1168,7 @@ const ClientPricing = () => {
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Premium', 'Yearly', 70000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1274,13 +1218,7 @@ const ClientPricing = () => {
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.
                       </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us'; 
-                        }}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Dedicated', 'Yearly', 99999)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1333,9 +1271,7 @@ const ClientPricing = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('College', 'Online Attendance', 'Yearly', 20000)}
                       >
                         Subscribe Now
                       </MyButton>

@@ -16,7 +16,7 @@ import { COMPANY } from '../constants/constants';
 import usePricingTech from './usePricingTech';
 
 const ClientPricingTech = () => {
-  const { state, handleTabChange, toggleRowExpansion } = usePricingTech();
+  const { state, handleTabChange, toggleRowExpansion, goToCompanyModule } = usePricingTech();
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -699,7 +699,7 @@ const ClientPricingTech = () => {
     }
   ];
 
-  const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
+  //const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   interface RowData {
     name: string;
@@ -813,9 +813,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('Institute','Basic', 'Monthly', 1)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -869,9 +870,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                         onClick={() => goToCompanyModule('Institute','Professional', 'Monthly', 3500)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -925,9 +927,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                         onClick={() => goToCompanyModule('Institute','Premium', 'Monthly', 7000)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -981,9 +984,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us';
-                        }}
+                         onClick={() => goToCompanyModule('Institute','Dedicated', 'Monthly', 10000)}
+                        // onClick={() => {
+                        //   window.location.href = 'https://www.angspl.com/contact-us';
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1038,9 +1042,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                         onClick={() => goToCompanyModule('Institute','Online Attendance', 'Monthly', 2000)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1098,9 +1103,7 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('Institute','Basic', 'Yearly', 20000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1153,9 +1156,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('Institute','Professional', 'Yearly', 35000)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1209,9 +1213,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('Institute','Premium', 'Yearly', 70000)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1265,9 +1270,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us'; 
-                        }}
+                        onClick={() => goToCompanyModule('Institute','Dedicated', 'Yearly', 99999)}
+                        // onClick={() => {
+                        //   window.location.href = 'https://www.angspl.com/contact-us'; 
+                        // }}
                       >
                         Subscribe Now{/* Subscribe Now */}
                       </MyButton>
@@ -1321,9 +1327,10 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('Institute','Online Attendance', 'Yearly', 20000)}
+                        // onClick={() => {
+                        //   window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
+                        // }}
                       >
                         Subscribe Now
                       </MyButton>
