@@ -245,17 +245,11 @@
 
 
 .book-container {
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
   height: 90vh;
-
   perspective: 1200px;
-
   background: #f0f0f0;
 
 }
@@ -263,76 +257,57 @@
 .book {
 
   position: relative;
-
   width: 700px;
-
   height: 500px;
-
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-
   border-radius: 10px;
-
   overflow: hidden;
-
   background: #fff;
 
 }
  
 .page {
-
   position: absolute;
-
   top: 0;
-
-  left: 0;
-
-  width: 100%;
-
+  width: 50%;
   height: 100%;
-
   backface-visibility: hidden;
-
-  transform-origin: left center;
-
   opacity: 0;
-
   transform: rotateY(-180deg);
-
-  transition: all 1.5s ease-in-out;
-
-  border-radius: 10px;
-
+  transition: all 1.2s ease-in-out;
+  border-radius: 0;
+  overflow: hidden;
 }
- 
+
+/* Left page setup */
+.page.left-page {
+  left: 0;
+  transform-origin: right center;
+  border-right: 2px solid #ddd;
+}
+
+/* Right page setup */
+.page.right-page {
+  right: 0;
+  transform-origin: left center;
+  border-left: 2px solid #ddd;
+}
+
+/* Active pages visible */
 .page.active {
-
   opacity: 1;
-
   transform: rotateY(0deg);
-
   z-index: 2;
-
-}
- 
-.page:not(.active) {
-
-  z-index: 1;
-
 }
 
  
 .book-container {
 
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
   height: 90vh;
-
   perspective: 1200px;
-
   background: #f0f0f0;
 
 }
@@ -340,17 +315,11 @@
 .book {
 
   position: relative;
-
   width: 700px;
-
   height: 500px;
-
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-
   border-radius: 10px;
-
   overflow: hidden;
-
   background: #fff;
 
 }

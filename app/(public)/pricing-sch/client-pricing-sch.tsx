@@ -16,7 +16,7 @@ import { COMPANY } from '../constants/constants';
 import usePricingSch from './usePricingSch';
 
 const ClientPricingSch = () => {
-  const { state, handleTabChange, toggleRowExpansion } = usePricingSch();
+  const { state, goToCompanyModule, handleTabChange, toggleRowExpansion } = usePricingSch();
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -699,7 +699,7 @@ const ClientPricingSch = () => {
     }
   ];
 
-  const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
+ // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   interface RowData {
     name: string;
@@ -810,24 +810,10 @@ const ClientPricingSch = () => {
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      {/* <MyButton
-                        variant="outlined"
-                        fullWidth
-                        style={{
-                          marginBottom: '12px',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center'
-                        }}
-                      >
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('School','Basic', 'Monthly', 2000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -882,9 +868,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('School','Professional', 'Monthly', 3500)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -931,22 +915,14 @@ const ClientPricingSch = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        {/* A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                        course content, and fee payment. */}
                         A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework, 
                         course content, and fee payment.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                       onClick={() => goToCompanyModule('School','Premium', 'Monthly', 7000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -993,21 +969,13 @@ const ClientPricingSch = () => {
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        {/* Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                        Admin Reporting. */}
                         Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized Admin Reporting.
                       </div>
-                      {/* <MyButton variant="outlined" fullWidth style={{ marginBottom: '12px' }}>
-                        Compare Plans&nbsp;➡️
-                      </MyButton> */}
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us';
-                        }}
+                       onClick={() => goToCompanyModule('School','Dedicated', 'Monthly', 10000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1062,9 +1030,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('School','Online Attendance', 'Monthly', 2000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1122,9 +1088,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('School','Basic', 'Yearly', 20000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1177,9 +1141,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                       onClick={() => goToCompanyModule('School','Professional','Yearly', 35000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1233,9 +1195,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('School','Premium', 'Yearly', 70000)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1289,9 +1249,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.location.href = 'https://www.angspl.com/contact-us'; 
-                        }}
+                        onClick={() => goToCompanyModule('School','Dedicated', 'Yearly', 99999)}
                       >
                         Subscribe Now
                       </MyButton>
@@ -1345,9 +1303,7 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => {
-                          window.open(formatUrl('https://www.angspl.com/contact-us'), '_blank');
-                        }}
+                        onClick={() => goToCompanyModule('School','Online Attendance', 'Yearly', 20000)}
                       >
                         Subscribe Now
                       </MyButton>

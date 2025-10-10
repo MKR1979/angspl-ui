@@ -12,20 +12,14 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const bannerImages = ['/ModulesImgs/attendance.png.png', '/ModulesImgs/attendance1.png.png', '/ModulesImgs/attendance2.png.png'];
-// const howItWorksImages = [
-//   '/attendanceImgs/attendance-emp3.png',
-//   '/attendanceImgs/attendance-emp4.png',
-//   '/attendanceImgs/attendance-emp45.png',
-// ];
-
 const ClientAboutUs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    "/ModulesImgs/attendance.png.png",
-    "/ModulesImgs/attendance1.png.png",
-    "/ModulesImgs/attendance2.png.png",
-    "/ModulesImgs/attendance2.png.png",
+    "/ModulesImgs/login.png",
+    "/ModulesImgs/emp.png",
+    "/ModulesImgs/emp2.png",
+    "/ModulesImgs/student.png",
   ];
 
   const [current, setCurrent] = useState(0);
@@ -37,7 +31,7 @@ const ClientAboutUs = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Auto-slide every 3 seconds
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
@@ -52,24 +46,6 @@ const ClientAboutUs = () => {
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   };
-
-  // const [hiwIndex, setHiwIndex] = useState(0); // hiw = How It Works
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
-  //   }, 3000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  // const goToHiwPrev = () => {
-  //   setHiwIndex((prev) => (prev === 0 ? howItWorksImages.length - 1 : prev - 1));
-  // };
-
-  // const goToHiwNext = () => {
-  //   setHiwIndex((prev) => (prev + 1) % howItWorksImages.length);
-  // };
-
 
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
@@ -94,9 +70,6 @@ const ClientAboutUs = () => {
             <ArrowForwardIos />
           </IconButton>
         </div>
-        {/* <div className="about-banner">
-          <img src="/ModulesImgs/admsMng.png" alt="Admission Management" className="about-banner-img" />
-        </div> */}
         <MyBox
           sx={{
             width: { xs: '100%', sm: '76%' },
@@ -155,30 +128,8 @@ const ClientAboutUs = () => {
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                {/* <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">How It Works Section</h2>
-                  <div className="responsive-image">
-                    <img src="/attendanceImgs/attendance-emp3.png" alt="Admission Form" />
-                  </div>
-                </MyGrid> */}
-
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">How It Works Section</h2>
-
-                  {/* <div className="responsive-image">
-                    <img
-                      src={howItWorksImages[hiwIndex]}
-                      alt="How It Works"
-                      className="about-banner-img"
-                    />
-
-                                      <IconButton className="banner-arrow left" onClick={goToHiwPrev}>
-                      <ArrowBackIos />
-                    </IconButton>
-                    <IconButton className="banner-arrow right" onClick={goToHiwNext}>
-                      <ArrowForwardIos />
-                    </IconButton>
-                  </div> */}
                   <div className="book-container">
                     <div className="book">
                       {images.map((src, index) => (
@@ -191,10 +142,7 @@ const ClientAboutUs = () => {
                       ))}
                     </div>
                   </div>
-
                 </MyGrid>
-
-
                 <MyCardContent className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Employee Attendance:</span> Employees log in securely to the Location-Based Attendance system via web or mobile. The system detects
                   their current GPS location and verifies whether they are within the approved office or campus area. If
@@ -264,12 +212,10 @@ const ClientAboutUs = () => {
                   Once reviewed, the admin can <span style={{ fontWeight: 'bold', color: '#334D6E' }}>lock the attendance records</span> to prevent any further modifications.
                   Each record captures essential details such as device ID, GPS coordinates, IP address, and timestamp.
                   This approach saves time, streamlines attendance management, and maintains <span style={{ fontWeight: 'bold', color: '#334D6E' }}>accurate and secure records</span> for the organization or institution.
-
                 </MyCardContent>
               </MyGrid>
             </MyCardContent>
           </MyCard>
-
           <div className="container">
             <div className="vertical_center">
               <p>

@@ -55,3 +55,8 @@ export const VIDEO_TAGS_LENGTH =40
 export const COMPANY_NAME_LENGTH = 50
 export const PHONE_NO_LENGTH = 10
 export const DEFAULT_COMPANY_ID = 1
+
+export const PAY_FOR_COMPANY_SUBSCRIPTION = "Company Subscription"
+export const PAY_MODE = "Online"
+export const STATUS_PAID = "Paid"
+export const SOURCE_FLAG_MISCELLANEOUS = "Miscellaneous"
