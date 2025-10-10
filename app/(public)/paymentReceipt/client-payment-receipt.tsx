@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GET_PAY_RECEIPT_BY_PAYMENT_ID } from '@/app/graphql/Receipt';
+import { GET_COM_PAY_RECEIPT_BY_PAYMENT_ID } from '@/app/graphql/Receipt';
 import { useLazyQuery } from '@apollo/client';
 import PaymentReceipt from '../../custom-components/payment-receipt/MyPaymentReceipt';
 
@@ -10,23 +10,22 @@ interface ClientReceiptProps {
   isDataExist?: string;
 }
 const ClientReceipt: React.FC<ClientReceiptProps> = ({ id, userName, isDataExist }) => {
-  const [getPayReceiptByPaymentId] = useLazyQuery(GET_PAY_RECEIPT_BY_PAYMENT_ID, { fetchPolicy: 'network-only' });
-
+  const [getComPayReceiptByPaymentId] = useLazyQuery(GET_COM_PAY_RECEIPT_BY_PAYMENT_ID, { fetchPolicy: 'network-only' });
   const [generateReceipt, setGenerateReceipt] = useState(false);
   const [receiptData, setReceiptData] = useState<any>(null);
 
   const getPayReceiptInfo = useCallback(async (): Promise<void> => {
     if (!id) return;
-    const { data } = await getPayReceiptByPaymentId({
+    const { data } = await getComPayReceiptByPaymentId({
       variables: {
-        payment_id: id
+        payment_id: id,
       }
     });
-    if (data?.getPayReceiptByPaymentId) {
-      setReceiptData(data.getPayReceiptByPaymentId);
+    if (data?.getComPayReceiptByPaymentId) {
+      setReceiptData(data.getComPayReceiptByPaymentId);
       setGenerateReceipt(true);
     }
-  }, [id, getPayReceiptByPaymentId]);
+  }, [id, getComPayReceiptByPaymentId]);
 
   useEffect(() => {
     if (!generateReceipt) {

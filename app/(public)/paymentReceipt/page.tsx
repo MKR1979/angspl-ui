@@ -8,6 +8,7 @@ const ReceiptContent = () => {
   const id = searchParams.get('id');
   const parsedId = id ? parseInt(id, 10) : NaN;
   const userName = searchParams.get('userName') ?? '';
+  // const companyName = searchParams.get('companyName') ?? '';
   const isDataExist = searchParams.get('isDataExist') ?? '';
   if (isNaN(parsedId)) {
     return <p>Invalid payment request.</p>;

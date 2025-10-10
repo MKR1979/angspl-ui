@@ -9,8 +9,6 @@ export const ADD_COMPANY = gql`
     $phone_no: String
     $address: String
     $status: String
-    $domain_name: String
-    $source_flag: String
   ) {
     addCompany(
       addCompanyInput: {
@@ -21,14 +19,12 @@ export const ADD_COMPANY = gql`
         phone_no: $phone_no
         address: $address
         status: $status
-        domain_name: $domain_name
-        source_flag: $source_flag
       }
     )
   }
 `;
 
-export const ADD_COMPANY_RETURN_USERID = gql`
+export const ADD_COMPANY_RETURN_ID = gql`
   mutation addCompanyReturnId(
     $company_code: String
     $company_name: String!
@@ -173,8 +169,20 @@ export const GET_COMPANY_ALL = gql`
   }
 `;
 
-// export const GET_COMPANY_NAME_EXIST = gql`
-//   query getCompanyNameExist($id: Int!, $role_name: String!) {
-//     getCompanyNameExist(id: $id, role_name: $role_name)
-//   }
-// `;
+export const GET_COMPANY_NAME_EXIST = gql`
+  query getCompanyNameExist($id: Int!, $company_name: String!) {
+    getCompanyNameExist(id: $id, company_name: $company_name)
+  }
+`;
+
+export const GET_COMPANY_EMAIL_EXIST = gql`
+  query getCompanyEmailExist($id: Int!, $email: String!) {
+    getCompanyEmailExist(id: $id, email: $email)
+  }
+`;
+
+export const GET_COMPANY_PHONE_NO_EXIST = gql`
+  query getCompanyPhoneNoExist($id: Int!, $phone_no: String!) {
+    getCompanyPhoneNoExist(id: $id,  phone_no: $phone_no)
+  }
+`;

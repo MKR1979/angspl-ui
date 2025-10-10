@@ -14,6 +14,7 @@ import MyTab from '@/app/custom-components/MyTab';
 import './pricingClg.css';
 import { COMPANY } from '../constants/constants';
 import usePricingClg from './usePricingClg';
+import * as Constants from '../constants/constants';
 
 const ClientPricing = () => {
   const { state, handleTabChange, goToCompanyModule, toggleRowExpansion } = usePricingClg();
@@ -766,7 +767,7 @@ const ClientPricing = () => {
             </MyBox>
             <MyTabPanel value={state.tabIndex} index={0}>
               <MyGrid container spacing={2} alignItems="stretch">
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -802,7 +803,7 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹2000</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.BASIC_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -810,13 +811,13 @@ const ClientPricing = () => {
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Basic', 'Monthly', 2000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Basic', 'Monthly', 3000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -852,21 +853,21 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: '600', color: '#2d3748' }}>₹3500</div>
+                      <div style={{ fontSize: '25px', fontWeight: '600', color: '#2d3748' }}>₹{Constants.PROFESSIONAL_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for managing Users, Roles, and Courses. Ideal for Colleges needing advanced functionality and streamlined
+                        Dashboard for efficiently managing Users, Roles, and Courses. Ideal for Colleges needing advanced functionality and streamlined
                         management.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Professional', 'Monthly', 3500)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Professional', 'Monthly', 5000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -902,7 +903,7 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹7000</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.PREMIUM_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -910,13 +911,13 @@ const ClientPricing = () => {
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Premium', 'Monthly', 7000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Premium', 'Monthly', 9999)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -952,7 +953,7 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹10000</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.DEDICATED_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -960,62 +961,7 @@ const ClientPricing = () => {
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Dedicated', 'Monthly', 10000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Online Attendance</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '45px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹2000</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
-                        Colleges needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device verification
-                        for enhanced accuracy and security.
-                      </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => goToCompanyModule('College', 'Online Attendance', 'Monthly', 2000)}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Dedicated', 'Monthly', 14000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1025,7 +971,7 @@ const ClientPricing = () => {
             </MyTabPanel>
             <MyTabPanel value={state.tabIndex} index={1}>
               <MyGrid container spacing={2} alignItems="stretch" style={{ marginBottom: -2 }}>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1061,7 +1007,7 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹20000</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.BASIC_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -1069,13 +1015,13 @@ const ClientPricing = () => {
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Basic', 'Yearly', 20000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Basic', 'Yearly', 32000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1111,20 +1057,21 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹35000</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.PROFESSIONAL_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and support.
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Interactive
+                        Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and
+                        seamless automation support.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Professional', 'Yearly', 35000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Professional', 'Yearly', 59000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1160,7 +1107,7 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹70000</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.PREMIUM_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -1168,13 +1115,13 @@ const ClientPricing = () => {
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Premium', 'Yearly', 70000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Premium', 'Yearly', 95000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                   <MyCard
                     elevation={3}
                     style={{
@@ -1210,7 +1157,7 @@ const ClientPricing = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹99999</div>
+                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.DEDICATED_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -1218,61 +1165,7 @@ const ClientPricing = () => {
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Dedicated', 'Yearly', 99999)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Online Attendance</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '45px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹20000</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly & Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A standalone, location-based attendance system with an employee dashboard and centralized admin reporting. Ideal for
-                        institutions needing accurate, flexible tracking. It offers real-time monitoring, geo-fencing, and device
-                        verification for enhanced accuracy and security.
-                      </div>
-                      <MyButton
-                        variant="contained"
-                        fullWidth
-                        onClick={() => goToCompanyModule('College', 'Online Attendance', 'Yearly', 20000)}
-                      >
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('College', 'Dedicated', 'Yearly', 120000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
