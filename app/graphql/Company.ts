@@ -9,6 +9,8 @@ export const ADD_COMPANY = gql`
     $phone_no: String
     $address: String
     $status: String
+    $domain_name: String
+    $source_flag: String
   ) {
     addCompany(
       addCompanyInput: {
@@ -19,6 +21,36 @@ export const ADD_COMPANY = gql`
         phone_no: $phone_no
         address: $address
         status: $status
+        domain_name: $domain_name
+        source_flag: $source_flag
+      }
+    )
+  }
+`;
+
+export const ADD_COMPANY_RETURN_USERID = gql`
+  mutation addCompanyReturnId(
+    $company_code: String
+    $company_name: String!
+    $company_type: String
+    $email: String
+    $phone_no: String
+    $address: String
+    $status: String
+    $domain_name: String
+    $source_flag: String
+  ) {
+    addCompanyReturnId(
+      addCompanyReturnIdInput: {
+        company_code: $company_code
+        company_name: $company_name
+        company_type: $company_type
+        email: $email
+        phone_no: $phone_no
+        address: $address
+        status: $status
+        domain_name: $domain_name
+        source_flag: $source_flag
       }
     )
   }
