@@ -182,8 +182,8 @@ const ClientAcademicMgmt = () => {
               </MyGrid>
             </MyCardContent>
           </MyCard>
-
-          <div className="container">
+       </MyBox>
+         <div className="container">
             <div className="vertical_center">
               <p>
                 © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
@@ -195,7 +195,6 @@ const ClientAcademicMgmt = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
     </>
   );

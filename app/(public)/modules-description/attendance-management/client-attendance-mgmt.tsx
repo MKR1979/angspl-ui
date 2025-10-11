@@ -122,27 +122,29 @@ const ClientAboutUs = () => {
                       <li>
                         <span>&#10003;</span>Supports multiple locations or branches without manual tracking.
                       </li>
-                      <li style={{ margin: 0, padding: 0 }}>
+                      <li style={{ marginBottom: '5px', padding: 0 }}>
                         <span>&#10003;</span> Helps organizations maintain accurate, location-verified attendance records.
                       </li>
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">How It Works Section</h2>
-                  <div className="book-container">
-                    <div className="book">
-                      {images.map((src, index) => (
-                        <img
-                          key={index}
-                          src={src}
-                          alt={`page-${index}`}
-                          className={`page ${index === current ? "active" : ""}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </MyGrid>
+                      <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                        <div className="book-container">
+                          {/* Heading overlay on book background */}
+                          <h2 className="book-heading">How It Works Section</h2>
+
+                          <div className="book">
+                            {images.map((src, index) => (
+                              <img
+                                key={index}
+                                src={src}
+                                alt={`page-${index}`}
+                                className={`page ${index === current ? "active" : ""}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </MyGrid>
                 <MyCardContent className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Employee Attendance:</span> Employees log in securely to the Location-Based Attendance system via web or mobile. The system detects
                   their current GPS location and verifies whether they are within the approved office or campus area. If
@@ -216,7 +218,8 @@ const ClientAboutUs = () => {
               </MyGrid>
             </MyCardContent>
           </MyCard>
-          <div className="container">
+        </MyBox>
+            <div className="container">
             <div className="vertical_center">
               <p>
                 © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
@@ -228,7 +231,6 @@ const ClientAboutUs = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
     </>
   );
