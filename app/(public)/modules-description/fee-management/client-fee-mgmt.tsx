@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/paymentMngImgs/pay6.png', '/paymentMngImgs/pay3.png', '/paymentMngImgs/pay5.png'];
+const bannerImages = ['/paymentMngImgs/pay1.jpg', '/paymentMngImgs/pay3.png', '/paymentMngImgs/pay5.png'];
 
 const ClientFeeMgmt = () => {
 
