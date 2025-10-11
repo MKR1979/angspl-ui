@@ -13,6 +13,7 @@ export const SNACKBAR_PROFILE_UPDATE_FAILED = 'Failed to Update Profile. Please 
 export const SNACKBAR_PASSWORD_UPDATE_FAILED = 'Failed to Update Password. Please try again.'
 export const SNACKBAR_UPDATE_FAILED = 'Failed to Update Record. Please try again.'
 export const SNACKBAR_INSERT_FAILED = 'Failed to Insert Record. Please try again.'
+export const SNACKBAR_PAYMENT_FAILED ='Payment failed or cancelled!'
 export const SNACKBAR_DATA_FETCH_ERROR  = 'Something went wrong while fetching records. Please try again.'
 export const SNACKBAR_REGISTERED_USER_FAILED = 'Failed to Register User. Please try again.'
 export const SNACKBAR_DELETE_FAILED = 'Failed to Delete Record. Please try again.'

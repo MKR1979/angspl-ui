@@ -15,6 +15,8 @@ import './pricingTech.css';
 import { COMPANY } from '../constants/constants';
 import usePricingTech from './usePricingTech';
 import * as Constants from '../constants/constants';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 const ClientPricingTech = () => {
   const { state, handleTabChange, toggleRowExpansion, goToCompanyModule } = usePricingTech();
@@ -709,6 +711,8 @@ const ClientPricingTech = () => {
     children?: RowData[];
   }
 
+  const router = useRouter();
+
   const renderRow = (row: RowData, level: number = 0): React.ReactNode => {
     const isExpanded = !!state.expandedRows[row.name];
     const hasChildren = Array.isArray(row.children) && row.children.length > 0;
@@ -751,12 +755,53 @@ const ClientPricingTech = () => {
       <MyBox>
         <MyCard>
           <MyCardContent>
-            <MyTypography variant="h5" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
-              Choose Your Institute Plan{' '}
-              <MyBox component="span" sx={{ fontSize: '1rem', fontWeight: 'normal', ml: 1 }}>
-                Flexible Pricing That Fits Your Needs
-              </MyBox>
-            </MyTypography>
+            <MyBox
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 2,
+                mb: 2
+              }}
+            >
+              {/* Left Arrow Button */}
+              <MyButton
+                variant="outlined"
+                sx={{
+                  minWidth: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  fontSize: '1.2rem',
+                  padding: 0
+                }}
+                onClick={() => router.push('/pricing-sch')}
+              >
+                <ArrowBack />
+              </MyButton>
+
+              {/* Heading Text */}
+              <MyTypography variant="h5" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
+                Choose Your Institute Plan{' '}
+                <MyBox component="span" sx={{ fontSize: '1rem', fontWeight: 'normal', ml: 1 }}>
+                  Flexible Pricing That Fits Your Needs
+                </MyBox>
+              </MyTypography>
+
+              {/* Right Arrow Button */}
+              <MyButton
+                variant="outlined"
+                sx={{
+                  minWidth: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  fontSize: '1.2rem',
+                  padding: 0
+                }}
+                onClick={() => router.push('/pricing-clg')}
+              >
+                <ArrowForward />
+              </MyButton>
+            </MyBox>
             <MyBox sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
               <MyTabs value={state.tabIndex} onChange={handleTabChange}>
                 <MyTab label="Monthly Billing" />
@@ -784,7 +829,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -801,7 +846,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.BASIC_MONTHLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.BASIC_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -834,7 +879,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -851,7 +896,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: '600', color: '#2d3748' }}>₹{Constants.PROFESSIONAL_MONTHLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PROFESSIONAL_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -888,7 +933,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -905,7 +950,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.PREMIUM_MONTHLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PREMIUM_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -938,7 +983,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -955,7 +1000,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.DEDICATED_MONTHLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.DEDICATED_MONTHLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -992,7 +1037,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1009,7 +1054,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.BASIC_YEARLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.BASIC_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -1042,7 +1087,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1059,7 +1104,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.PROFESSIONAL_YEARLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PROFESSIONAL_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -1096,7 +1141,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1113,7 +1158,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.PREMIUM_YEARLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PREMIUM_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
@@ -1146,7 +1191,7 @@ const ClientPricingTech = () => {
                       title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
                       sx={{
                         textAlign: 'center',
-                        height: '45px',
+                        height: '40px',
                         backgroundColor: '#e2e8f0',
                         display: 'flex',
                         alignItems: 'center',
@@ -1163,7 +1208,7 @@ const ClientPricingTech = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '25px', fontWeight: 600, color: '#2d3748' }}>₹{Constants.DEDICATED_YEARLY}</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.DEDICATED_YEARLY}</div>
                       <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>

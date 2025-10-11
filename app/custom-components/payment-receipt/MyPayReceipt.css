@@ -1,3 +1,12 @@
+.company-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+
 .receipt-container-outer {
   max-width: 900px;
   margin: 0 auto 0 auto;
@@ -68,11 +77,110 @@
 }
 
 .thank-you {
-  border-top: 1px dashed #000;
-  padding-top: 1rem;
+  margin-top: 1rem;
+  font-size: 14px;
   text-align: center;
-  color: #444;
-  font-size: 13px;
+  color: #333;
+}
+
+/* 🔹 Mobile View Adjustments */
+@media (max-width: 600px) {
+  .receipt-container {
+    padding: 1rem;
+    font-size: 12px; 
+  }
+
+  .receipt-line {
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+   .receipt-container {
+    padding: 0.5rem;
+  }
+.company-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.receipt-container-outer {
+  max-width: 900px;
+  margin: 0 auto 0 auto;
+}
+
+.receipt-container {
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  padding: 2rem;
+  border: 2px solid #000;
+  background: #fff;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.receipt-top {
+  margin-bottom: 1rem;
+}
+
+.receipt-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3rem 0;
+}
+
+.receipt-paragraph {
+  margin: 1rem 0;
+  font-size: 14px;
+}
+
+.receipt-details {
+  margin-bottom: 1rem;
+}
+
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.fee-table th,
+.fee-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: left;
+}
+
+.fee-table th {
+  background-color: #f0f0f0;
+}
+
+.authorized-sign {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.school-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem 1.2rem 0rem 0rem;
+  gap: 1rem;
+}
+
+.receipt-logo {
+  height: 60px;
+}
+
+.thank-you {
+  margin-top: 1rem;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
 }
 
 /* 🔹 Mobile View Adjustments */
@@ -123,3 +231,41 @@
     padding: 4px;
   }
 }
+
+  .school-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .receipt-logo {
+    height: 40px; 
+  }
+
+  .fee-table th,
+  .fee-table td {
+    font-size: 12px;
+    padding: 6px;
+    word-wrap: break-word;
+  }
+
+  .thank-you {
+    font-size: 12px;
+    text-align: left; 
+  }
+}
+
+/* 🔹 Very Small Screens (e.g. <400px) */
+@media (max-width: 400px) {
+  .receipt-container {
+    padding: 0.5rem;
+  }
+
+  .fee-table th,
+  .fee-table td {
+    font-size: 11px;
+    padding: 4px;
+  }
+}
+
+

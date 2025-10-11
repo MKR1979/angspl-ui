@@ -20,7 +20,7 @@ import MyLink from '../custom-components/MyLink';
 import MyLogo from '../custom-components/MyLogo';
 import MyButton from '../custom-components/MyButton';
 import { Menu, MenuItem } from '@mui/material';
-import {MOD_DESC} from '../(public)/constants/constants';
+import {MOD_DESC, MODULE_DEMO} from '../(public)/constants/constants';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@mui/icons-material';
 
 export default function RootLayout({
@@ -40,20 +40,6 @@ export default function RootLayout({
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
-    {
-      text: 'Modules/Services',
-      children: [
-        { text: 'Admission Management', href: `/${MOD_DESC}/adm-management` },
-        { text: 'Student Management', href: `/${MOD_DESC}/student-management` },
-        { text: 'Fees Management', href: `/${MOD_DESC}/fee-management` },
-        { text: 'Attendance Management', href: `/${MOD_DESC}/attendance-management` },
-        { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
-        { text: 'Course Management', href: `/${MOD_DESC}/course-management` },
-        { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
-        { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
-        // { text: 'Company Creation', href: `/company` }
-      ]
-    },
     { text: 'About Us', href: '/about-us' },
     {
       text: 'Pricing',
@@ -63,8 +49,19 @@ export default function RootLayout({
         { text: 'Institute', href: '/pricing-tech' }
       ]
     },
-    { text: 'Contact Us', href: '/contact-us' },
-    { text: 'affiliate', href: '/affiliate' },
+    {
+      text: 'Modules',
+      children: [
+        { text: 'Admission Management', href: `/${MOD_DESC}/adm-management` },
+        { text: 'Student Management', href: `/${MOD_DESC}/student-management` },
+        { text: 'Fees Management', href: `/${MOD_DESC}/fee-management` },
+        { text: 'Attendance Management', href: `/${MOD_DESC}/attendance-management` },
+        { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
+        { text: 'Course Management', href: `/${MOD_DESC}/course-management` },
+        { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
+        { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
+      ]
+    },
     {
       text: 'Our Services',
       children: [
@@ -75,11 +72,13 @@ export default function RootLayout({
     { 
       text: 'Demo', 
       children: [
-        { text: 'College', href: '/pricing-clg' },
-        { text: 'School', href: '/demo-sch' },
-        { text: 'Institute', href: '/pricing-tech' }
+        { text: 'College', href: `/${MODULE_DEMO}/demo-clg` },
+        { text: 'School', href: `/${MODULE_DEMO}/demo-sch` },
+        { text: 'Institute', href: `/${MODULE_DEMO}/demo-tech` }
       ]  
-    }
+    },
+    { text: 'Contact Us', href: '/contact-us' },
+    { text: 'affiliate', href: '/affiliate' }, 
   ];
 
   // Toggle Drawer

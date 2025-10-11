@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
@@ -10,6 +10,9 @@ import * as gConstants from '../../constants/constants';
 import { ADD_FEE_COLLECT_COMPANY_RETURN_ID } from '@/app/graphql/FeeCollection';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import * as gMessageConstants from '@/app/constants/messages-constants';
+import { SEND_OTP, VERIFY_OTP, RESEND_OTP } from '@/app/graphql/Email';
+import EmailDTO, { EMAIL } from '@/app/types/EmailDTO';
+import { useSnackbar } from '../../custom-components/SnackbarProvider';
 
 type ErrorMessageType = {
   company_code: string | null;
@@ -24,14 +27,21 @@ type ErrorMessageType = {
   logo_height: number | null;
   logo_width: number | null;
   status: string | null;
+  email_otp: string | null;
 };
 
 type StateType = {
-  dtoCompany: CompanyDTO;
+  dtoCompany: CompanyDTO & { email_otp?: string };
+  dtoEmail: EmailDTO;
   open2: boolean;
   arrCompanyStatusLookup: LookupDTO[];
   arrCompanyTypeLookup: LookupDTO[];
   errorMessages: ErrorMessageType;
+  otpSent?: boolean;
+  otpVerified?: boolean;
+  sendingOtp?: boolean;
+  verifyingOtp?: boolean;
+  resendingOtp?: boolean;
 };
 
 const useCompany = () => {
@@ -48,30 +58,59 @@ const useCompany = () => {
     logo_url: null,
     logo_height: null,
     logo_width: null,
-    status: null
+    status: null,
+    email_otp: null
   } as ErrorMessageType);
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoCompany: COMPANY,
-    // open1: false,
+    dtoEmail: EMAIL,
     open2: false,
     arrCompanyStatusLookup: arrCompanyStatus,
     arrCompanyTypeLookup: arrCompanyType,
+    otpSent: false,
+    otpVerified: false,
+    sendingOtp: false,
+    verifyingOtp: false,
+    resendingOtp: false,
     errorMessages: { ...ERROR_MESSAGES }
   } as StateType);
 
-  const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
+  // const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
+  //   return { ...state, ...action };
+  // };
+
+  // const [state, setState] = useReducer(reducer, INITIAL_STATE);
+
+  const reducer = (state = INITIAL_STATE, action: Partial<StateType>): StateType => {
     return { ...state, ...action };
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-  //   const showSnackbar = useSnackbar();
+  // const [addEmail] = useMutation(ADD_EMAIL, {});
+  const [sendOtp] = useMutation(SEND_OTP, {});
+  const [verifyOtp] = useMutation(VERIFY_OTP, {});
+  const [resendOtp] = useMutation(RESEND_OTP, {});
+  const [timeLeft, setTimeLeft] = useState<number | 0>(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const showSnackbar = useSnackbar();
   const [saving, setSaving] = useState(false);
   const [addCompanyReturnId] = useMutation(ADD_COMPANY_RETURN_ID, {});
   const [addFeeCollectCompanyReturnId] = useMutation(ADD_FEE_COLLECT_COMPANY_RETURN_ID);
   const [getCompanyEmailExist] = useLazyQuery(GET_COMPANY_EMAIL_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyNameExist] = useLazyQuery(GET_COMPANY_NAME_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
+
+  const MAIL_CONFIG = {
+    smtpHost: 'smtp.gmail.com', //siteConfig.find((c) => c.key === 'SMTP_HOST')?.value ?? '',
+    smtpPort: 465, //Number(siteConfig.find((c) => c.key === 'SMTP_PORT')?.value ?? ''),
+    smtpUser: 'adhyayan.solution@gmail.com', //siteConfig.find((c) => c.key === 'SMTP_USER')?.value ?? '',
+    smtpPassword: 'bnfwtqfzbcdsdgbd', //siteConfig.find((c) => c.key === 'SMTP_PASSWORD')?.value ?? '',
+    // secure: siteConfig.find((c) => c.key === 'SMTP_SECURE')?.value ?? '',
+    secure: true, //siteConfig.find((c) => c.key === 'SMTP_SECURE')?.value?.toLowerCase() === 'true',
+    fromAddress: 'adhyayan.solution@gmail.com', //siteConfig.find((c) => c.key === 'SMTP_FROM')?.value ?? '',
+    resendOtpTime: 2   //Number(siteConfig.find((c) => c.key === 'RESEND_OTP_TIME')?.value ?? '')
+  };
 
   useEffect(() => {
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
@@ -144,13 +183,26 @@ const useCompany = () => {
       const { name, value } = event.target;
       const formattedValue = value.replace(/\s+/g, '').toLowerCase();
       setState({
+        ...state,
         dtoCompany: {
           ...state.dtoCompany,
-          [name]: formattedValue
-        }
+          [name]: formattedValue,
+        },
+        // ✅ Reset OTP fields if email is changed
+        ...(name === 'email' && formattedValue !== state.dtoCompany.email
+          ? {
+              otpVerified: false,
+              otpSent: false,
+              dtoCompany: {
+                ...state.dtoCompany,
+                [name]: formattedValue,
+                email_otp: '',
+              },
+            }
+          : {}),
       } as StateType);
     },
-    [state.dtoCompany]
+    [state]
   );
 
   const onInputChange = useCallback(
@@ -313,6 +365,31 @@ const useCompany = () => {
     setState({ errorMessages: { ...state.errorMessages, address: address } } as StateType);
   }, [validateAddress, state.errorMessages]);
 
+  const startTimer = useCallback(() => {
+    const duration = MAIL_CONFIG.resendOtpTime;
+    setTimeLeft(duration);
+    if (timerRef.current) clearInterval(timerRef.current);
+    let remaining = duration;
+    timerRef.current = setInterval(() => {
+      remaining--;
+      setTimeLeft(remaining);
+      if (remaining <= 0) {
+        clearInterval(timerRef.current!);
+      }
+    }, 1000);
+  }, []);
+
+  const stopTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (state.otpSent) {
+      startTimer();
+    }
+    return stopTimer;
+  }, [startTimer, stopTimer, state.otpSent]);
+
   const validateForm = useCallback(async () => {
     let isFormValid = true;
     const errorMessages: ErrorMessageType = {} as ErrorMessageType;
@@ -415,15 +492,11 @@ const useCompany = () => {
   event: React.MouseEvent<HTMLElement>
 ): Promise<boolean> => {
   return new Promise((resolve) => {
-    console.log('[Razorpay] openRazorpay called');
-    console.log('[Razorpay] Payment Amount:', paymentAmount, 'Company ID:', companyId);
     if (typeof window === 'undefined') {
-      console.error('[Razorpay] window is undefined. Are you on server-side?');
       resolve(false);
       return;
     }
     if (!(window as any).Razorpay) {
-      console.error('[Razorpay] window.Razorpay is undefined. Script might not be loaded.');
       resolve(false);
       return;
     } else {
@@ -436,11 +509,9 @@ const useCompany = () => {
       name: gConstants.COMPANY,
       description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
       handler: async (response: any) => {
-        console.log('[Razorpay] Payment success handler called', response);
         const newPaymentId = await addPaymentDetails(event, response, paymentAmount, companyId);
-        console.log('[Razorpay] Payment recorded, newPaymentId:', newPaymentId);
         router.push(`/paymentReceipt?id=${newPaymentId}`);
-        resolve(true); // ✅ Payment succeeded
+        resolve(true);
       },
       prefill: {
         name: 'Student Name',
@@ -467,6 +538,38 @@ const useCompany = () => {
   });
 };
 
+// const onSendEmail = useCallback(async () => {
+//   try {
+//     const { data } = await addEmail({
+//       variables: {
+//         addEmailInput: {
+//           to_address: state.dtoCompany.email,
+//           subject: gMessageConstants.AFFILIATE_REGISTRATION_MAIL_SUBJECT,
+//           body: gMessageConstants.AFFILIATE_REGISTRATION_EMAIL_BODY,
+//           template_name: '',
+//           attachment_path: '',
+//           status: '',
+//           retry_count: 0,
+//           email_source: 'affiliate'
+//         },
+//         emailConfigInput: {
+//           smtpHost: MAIL_CONFIG.smtpHost,
+//           smtpPort: MAIL_CONFIG.smtpPort,
+//           smtpUser: MAIL_CONFIG.smtpUser,
+//           smtpPassword: MAIL_CONFIG.smtpPassword,
+//           secure: MAIL_CONFIG.secure,
+//           fromAddress: MAIL_CONFIG.fromAddress
+//         }
+//       }
+//     });
+//     if (data) {
+//       console.log('Email sent Successfully :', data);
+//     }
+//   } catch (error: any) {
+//     console.error('Error while sending email:', error);
+//   }
+// }, [addEmail, state.dtoCompany.email]);
+
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
       event.preventDefault();
@@ -489,20 +592,143 @@ const useCompany = () => {
           }
         });
         const newCompanyId = result?.data?.addCompanyReturnId;
-        console.log('CompanyId we get :', newCompanyId);
         const paymentSuccess = openRazorpay(payment_amount, newCompanyId, event);
         if (!paymentSuccess) {
           console.warn('Payment failed or cancelled');
+          showSnackbar(gMessageConstants.SNACKBAR_PAYMENT_FAILED, 'error');
           return;
         }
       } catch (error: any) {
         console.error('Error while saving company:', error);
-        // showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
+        showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
       } finally {
         setSaving(false);
       }
     },
     [validateForm, addCompanyReturnId, state.dtoCompany, router]
+  );
+
+  const onSendOtpClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      if (state.sendingOtp) return;
+      const emailValidationError = await validateEmail();
+      if (emailValidationError) {
+        showSnackbar(emailValidationError, 'error');
+        return;
+      }
+      setState({ sendingOtp: true });
+      try {
+        const { data } = await sendOtp({
+          variables: {
+            sendOtpInput: {
+              to_address: state.dtoCompany.email,
+              template_name: 'Email template',
+              purpose: 'Email verification'
+            },
+            emailConfigInput: {
+              smtpHost: MAIL_CONFIG.smtpHost,
+              smtpPort: MAIL_CONFIG.smtpPort,
+              smtpUser: MAIL_CONFIG.smtpUser,
+              smtpPassword: MAIL_CONFIG.smtpPassword,
+              secure: MAIL_CONFIG.secure,
+              fromAddress: MAIL_CONFIG.fromAddress
+            }
+          }
+        });
+        if (data) {
+          showSnackbar(gMessageConstants.SNACKBAR_OTP_SUCCESS, 'success');
+          setState({ otpSent: true });
+          startTimer();
+        }
+      } catch (error: any) {
+        console.error('Error while saving referral:', error);
+        showSnackbar(gMessageConstants.SNACKBAR_OTP_ERROR, 'error');
+      } finally {
+        setState({ sendingOtp: false });
+      }
+    },
+    [sendOtp, state.dtoCompany.email, validateEmail]
+  );
+
+  const onVerifyOtpClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      if (state.verifyingOtp) return;
+      setState({ verifyingOtp: true });
+
+      try {
+        const { data } = await verifyOtp({
+          variables: {
+            verifyOtpInput: {
+              to_address: state.dtoCompany.email,
+              otp: state.dtoCompany.email_otp || '',
+              purpose: 'Email verification'
+            },
+            emailConfigInput: {
+              smtpHost: MAIL_CONFIG.smtpHost,
+              smtpPort: MAIL_CONFIG.smtpPort,
+              smtpUser: MAIL_CONFIG.smtpUser,
+              smtpPassword: MAIL_CONFIG.smtpPassword,
+              secure: MAIL_CONFIG.secure,
+              fromAddress: MAIL_CONFIG.fromAddress
+            }
+          }
+        });
+
+        if (data?.verifyOtp === true) {
+          setState({ otpVerified: true });
+          showSnackbar('OTP verified successfully', 'success');
+        } else {
+          showSnackbar('Invalid OTP. Please try again.', 'error');
+        }
+      } catch (error: any) {
+        console.error('Error while verifying OTP:', error);
+        showSnackbar('Error verifying OTP', 'error');
+      } finally {
+        setState({ verifyingOtp: false });
+      }
+    },
+    [verifyOtp, state.dtoCompany.email, state.dtoCompany.email_otp]
+  );
+
+  const onResendOtpClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      if (state.resendingOtp) return;
+      setState({ resendingOtp: true });
+      try {
+        const { data } = await resendOtp({
+          variables: {
+            resendOtpInput: {
+              to_address: state.dtoCompany.email,
+              purpose: state.dtoEmail.purpose || 'Email verification' // fallback if undefined
+            },
+            emailConfigInput: {
+              smtpHost: MAIL_CONFIG.smtpHost,
+              smtpPort: MAIL_CONFIG.smtpPort,
+              smtpUser: MAIL_CONFIG.smtpUser,
+              smtpPassword: MAIL_CONFIG.smtpPassword,
+              secure: MAIL_CONFIG.secure,
+              fromAddress: MAIL_CONFIG.fromAddress
+            }
+          }
+        });
+
+        if (data?.resendOtp === true) {
+          showSnackbar(gMessageConstants.SNACKBAR_OTP_SUCCESS, 'success');
+          startTimer();
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_OTP_ERROR, 'error');
+        }
+      } catch (error: any) {
+        console.error('Error while resending OTP:', error);
+        showSnackbar(gMessageConstants.SNACKBAR_OTP_ERROR, 'error');
+      } finally {
+        setState({ resendingOtp: false }); // <-- fixed from setSaving
+      }
+    },
+    [resendOtp, state.dtoCompany.email]
   );
 
   const onCancelClick = useCallback(
@@ -536,7 +762,11 @@ const useCompany = () => {
     onPhoneNoChange,
     onDomainPrefixBlur,
     saving,
-    onDomainPrefixChange
+    onDomainPrefixChange,   
+     onSendOtpClick,
+    onVerifyOtpClick,
+    onResendOtpClick,
+    timeLeft
   };
 };
 
