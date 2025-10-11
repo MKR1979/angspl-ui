@@ -6,17 +6,17 @@ import useCompany from './useCompany';
 import MyTypography from '@/app/custom-components/MyTypography';
 import MyPhoneNumber from '@/app/custom-components/MyPhoneNumber';
 import MyGrid from '@/app/custom-components/MyGrid';
-import MyAutocomplete from '@/app/custom-components/MyAutocomplete';
+// import MyAutocomplete from '@/app/custom-components/MyAutocomplete';
 import * as gConstants from '../../constants/constants';
 import { Card } from '@mui/material';
 import './company.css';
 import MyBox from '@/app/custom-components/MyBox';
 
 interface ClientCompanyProps {
-  company_type?: string;
-  plan_type?: string;
-  payment_type?: string;
-  payment_amount?: number;
+  company_type: string;
+  plan_type: string;
+  payment_type: string;
+  payment_amount: number;
 }
 
 const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }: ClientCompanyProps) => {
@@ -26,18 +26,13 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     onNormalizedInputChange,
     onCodeChange,
     onCompanyNameBlur,
-    onStatusBlur,
     onEmailBlur,
     onPhoneNoBlur,
     onCompanyCodeBlur,
     onAddressBlur,
-    onCompanyStatusChange,
-    onDomainNameBlur,
+    onDomainPrefixBlur,
     onSaveClick,
-    setOpen1,
-    setClose1,
-    onPhoneNoChange,
-    // onDomainNameChange
+    onPhoneNoChange,onDomainPrefixChange
   } = useCompany();
 
   return (
@@ -81,7 +76,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               onChange={onCodeChange}
               placeholder="Enter Company Code"
               inputProps={{
-                maxLength: 8,
+                maxLength: gConstants.CODE_LENGTH,
                 pattern: '^[A-Z0-9]+$'
               }}
               onBlur={onCompanyCodeBlur}
@@ -92,41 +87,30 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyTextField
               label="Domain Name"
-              name="domain_name"
-              value={state.dtoCompany.domain_name}
-              onChange={onInputChange}
+              name="domain_prefix"
+              value={state.dtoCompany.domain_prefix}
+              onChange={onDomainPrefixChange(company_type)}
               placeholder="Enter Domain Name"
               inputProps={{
-                maxLength: gConstants.COMPANY_NAME_LENGTH,
+                maxLength: gConstants.PHONE_NO_LENGTH,
                 pattern: '^[A-Za-z]{1,2}$'
               }}
-              onBlur={onDomainNameBlur}
-              error={state.errorMessages.domain_name ? true : false}
-            />          
-            <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
+              onBlur={onDomainPrefixBlur}
+              error={state.errorMessages.domain_prefix ? true : false}
+            />
+            <MyTypography className="error">{state.errorMessages.domain_prefix}</MyTypography>
           </MyGrid>
-
-{/* 
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyTextField
-              label="Domain Name"
+              label="Full Domain Name"
               name="domain_name"
               value={state.dtoCompany.domain_name}
-              onChange={onDomainNameChange}
-              placeholder="Enter domain prefix"
+              placeholder='Your Domain Name Here'
               InputProps={{
-                endAdornment: <span style={{ color: '#666', marginLeft: 4 }}>.adhyayan.online</span>
+                readOnly: true
               }}
-              inputProps={{
-                maxLength: gConstants.COMPANY_NAME_LENGTH,
-                pattern: '^[a-zA-Z0-9-]+$'
-              }}
-              onBlur={onDomainNameBlur}
-              error={!!state.errorMessages.domain_name}
             />
-            <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
-          </MyGrid> */}
-
+          </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyTextField
               label="Email"
@@ -193,36 +177,6 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               }}
             />
           </MyGrid>
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyAutocomplete
-              open={state.open1}
-              onOpen={setOpen1}
-              onClose={setClose1}
-              value={{ text: state.dtoCompany.status }}
-              getOptionLabel={(option: any) => option.text}
-              firstitem={{ id: 0, text: '' }}
-              options={state.arrCompanyStausLookup}
-              onChange={onCompanyStatusChange}
-              onBlur={onStatusBlur}
-              filterOptions={(options, state) => {
-                // searchable Lookup
-                const searchTerm = state.inputValue.toLowerCase();
-                return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
-              }}
-              renderInput={(params) => (
-                <MyTextField
-                  {...params}
-                  label="Status"
-                  slotProps={{
-                    inputLabel: { shrink: true }
-                  }}
-                  onBlur={onStatusBlur}
-                  error={state.errorMessages.status ? true : false}
-                />
-              )}
-            />
-            <MyTypography className="error"> {state.errorMessages.status}</MyTypography>
-          </MyGrid>
           <MyGrid size={{ xs: 12, sm: 12 }}>
             <MyTextField
               label="Address"
@@ -242,7 +196,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
           <MyGrid size={{ xs: 12, sm: 12 }}>
             <div>
               <img src="pay-methods-branding.png" width="160px" alt="Payment Methods" />
-              <button onClick={(e) => onSaveClick(e, company_type, plan_type, payment_type, payment_amount)} className="pay-now-button">
+              <button onClick={(e) => onSaveClick(e, company_type, payment_amount)} className="pay-now-button">
                 Pay Now ₹{payment_amount}
               </button>
             </div>
