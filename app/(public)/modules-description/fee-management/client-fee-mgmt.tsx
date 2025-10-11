@@ -11,10 +11,29 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
+const bannerImages = ['/paymentMngImgs/pay6.png', '/paymentMngImgs/pay3.png', '/paymentMngImgs/pay5.png'];
 
 const ClientFeeMgmt = () => {
+
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = [
+    "/paymentMngImgs/scehdule pay.webp",
+    "/paymentMngImgs/collect pay.webp",
+    "/paymentMngImgs/receipts 1.webp",
+    "/paymentMngImgs/receipts 2.webp",
+    "/paymentMngImgs/fee heads.webp",
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000); // change page every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
+
 
   // Auto-slide every 3 seconds
   useEffect(() => {
@@ -125,13 +144,27 @@ const ClientFeeMgmt = () => {
                         <li style={{ margin: 0, padding: 0 }}>
                           <span>➤</span>Go to the home page and log in.
                         </li>
-                        <li style={{ margin: 0, padding: 0 }}>
+                        <li style={{ marginBottom: '5px', padding: 0 }}>
                           <span>➤  Password:</span>Password (Please contact your administrator to obtain the password. You will have the option to change it after logging in
                         </li>
                       </ul>
-                      <div className="responsive-image">
-                        <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
-                      </div>
+                      <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                        <div className="book-container">
+                          {/* Heading overlay on book background */}
+                          <h2 className="book-heading">How It Works Section</h2>
+
+                          <div className="book">
+                            {images.map((src, index) => (
+                              <img
+                                key={index}
+                                src={src}
+                                alt={`page-${index}`}
+                                className={`page ${index === current ? "active" : ""}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </MyGrid>
                     </MyCardContent>
                   </MyGrid>
                 </MyGrid>
@@ -359,20 +392,19 @@ const ClientFeeMgmt = () => {
               </MyGrid>
             </MyCardContent>
           </MyCard>
-
-          <div className="container">
+        </MyBox>
+        <div className="container">
+          <div className="vertical_center">
+            <p>
+              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
+            </p>
             <div className="vertical_center">
-              <p>
-                © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-              </p>
-              <div className="vertical_center">
-                ||
-                <a href="/terms">Terms of use</a>||
-                <a href="/privacy-policy">Privacy Policy</a>
-              </div>
+              ||
+              <a href="/terms">Terms of use</a>||
+              <a href="/privacy-policy">Privacy Policy</a>
             </div>
           </div>
-        </MyBox>
+        </div>
       </div>
     </>
   );
