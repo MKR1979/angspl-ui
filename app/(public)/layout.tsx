@@ -20,7 +20,7 @@ import MyLink from '../custom-components/MyLink';
 import MyLogo from '../custom-components/MyLogo';
 import MyButton from '../custom-components/MyButton';
 import { Menu, MenuItem } from '@mui/material';
-import {MOD_DESC} from '../(public)/constants/constants';
+import {MOD_DESC, MODULE_DEMO} from '../(public)/constants/constants';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@mui/icons-material';
 
 export default function RootLayout({
@@ -74,9 +74,9 @@ export default function RootLayout({
     { 
       text: 'Demo', 
       children: [
-        { text: 'College', href: '/pricing-clg' },
-        { text: 'School', href: '/demo-sch' },
-        { text: 'Institute', href: '/pricing-tech' }
+        { text: 'College', href: `/${MODULE_DEMO}/demo-clg` },
+        { text: 'School', href: `/${MODULE_DEMO}/demo-sch` },
+        { text: 'Institute', href: `/${MODULE_DEMO}/demo-tech` }
       ]  
     }
   ];

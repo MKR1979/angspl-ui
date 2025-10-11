@@ -7,16 +7,16 @@ import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyBox from '@/app/custom-components/MyBox';
 import { IconButton, Button } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import './demoSch.css';
-import { COMPANY } from '../constants/constants';
-import { useDemoSch } from './useDemoSch';
+import './demoClg.css';
+import { COMPANY } from '../../constants/constants';
+import { useDemoClg } from './useDemoClg';
 import SchoolIcon from '@mui/icons-material/School';
 import GroupIcon from '@mui/icons-material/Group';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import TimelineIcon from '@mui/icons-material/Timeline';
 
-const ClientDemoSch = () => {
-  const { bannerImages, currentIndex, goToNext, goToPrev, getYouTubeVideoId, testimonials, handleModuleClick, moduleRefs } = useDemoSch();
+const ClientDemoClg = () => {
+  const { bannerImages, currentIndex, goToNext, goToPrev, getYouTubeVideoId, testimonials, handleModuleClick, moduleRefs } = useDemoClg();
 
   const modules = [
     {
@@ -126,14 +126,6 @@ const ClientDemoSch = () => {
 
           <h3>Key Features:</h3>
           <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-          { /* <ul
-            style={{
-              paddingLeft: '0',
-              marginTop: '0.5rem',
-              listStyleType: 'disc',
-              marginLeft: '3rem',
-              textAlign: 'left'
-            }} > */ }
             <li>Automate fee collection for multiple fee types, including tuition, transport, lab, and extracurricular fees.</li>
             <li>Generate digital receipts instantly for payments made online or offline.</li>
             <li>Track due balances, send automated reminders to parents, and prevent delays in fee collection.</li>
@@ -221,7 +213,7 @@ const ClientDemoSch = () => {
       <div>
         {/* === HERO SECTION === */}
         <div className="about-banner">
-          <img src={bannerImages[currentIndex]} alt="School Management Demo" className="about-banner-img" />
+          <img src={bannerImages[currentIndex]} alt="College Management Demo" className="about-banner-img" />
           <IconButton className="banner-arrow left" onClick={goToPrev}>
             <ArrowBackIos />
           </IconButton>
@@ -232,7 +224,7 @@ const ClientDemoSch = () => {
             <h1 className="hero-title">Empower Your School with Smart Management</h1>
             <p className="hero-subtitle">
               Manage admissions, attendance, fees, and communication – all from one powerful dashboard.
-              <a href="https://adhyayan.online" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700', fontWeight: 'bold' }}>
+              <a href="https://adhyayan.college" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700', fontWeight: 'bold' }}>
                 Visit Live Demo
               </a>
             </p>
@@ -254,13 +246,13 @@ const ClientDemoSch = () => {
               {/* SECTION: INTRO */}
               <MyGrid container justifyContent="center" spacing={2}>
                 <MyGrid size={{ xs: 12 }} textAlign="center">
-                  <div className="section-heading">SCHOOL MANAGEMENT SYSTEM</div>
+                  <div className="section-heading">COLLEGE MANAGEMENT SYSTEM</div>
                   <div className="section-underline">
                     <div></div>
                     <div></div>
                   </div>
                   <p className="card-text">
-                    Discover how our <strong>School Management Software</strong> simplifies daily operations for schools. From managing
+                    Discover how our <strong>College Management Software</strong> simplifies daily operations for schools. From managing
                     admissions to tracking performance, everything is unified under one digital platform.
                   </p>
                 </MyGrid>
@@ -286,7 +278,7 @@ const ClientDemoSch = () => {
                   <iframe
                     // src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
                     src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
-                    title="School Management System Demo"
+                    title="College Management System Demo"
                     frameBorder="0"
                     allowFullScreen
                   ></iframe>
@@ -320,7 +312,7 @@ const ClientDemoSch = () => {
                   >
                     {/* <h2>{m.title}</h2> */}
                     <h2 style={{ textAlign: 'center' }}>{m.title}</h2>
-                    {m.content} 
+                    {m.content}
                   </div>
                 ))}
               </div>
@@ -350,7 +342,7 @@ const ClientDemoSch = () => {
         </MyBox>
       </div>
       <Button
-        href="https://adhyayan.school"
+        href="https://adhyayan.college"
         target="_blank"
         variant="contained"
         sx={{
@@ -376,4 +368,4 @@ const ClientDemoSch = () => {
   );
 };
 
-export default memo(ClientDemoSch, (prevProps, nextProps) => eq(prevProps, nextProps));
+export default memo(ClientDemoClg, (prevProps, nextProps) => eq(prevProps, nextProps));

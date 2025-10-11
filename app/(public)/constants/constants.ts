@@ -9,6 +9,7 @@ export const EMAIL="info@adhyayan.online"
 export const RECEIPT = "Payment Receipt"
 export const CURRENCY = "INR"
 export const MOD_DESC = "modules-description"
+export const MODULE_DEMO = "demo"
 
 // pricing
 export const BASIC_MONTHLY = 3000
