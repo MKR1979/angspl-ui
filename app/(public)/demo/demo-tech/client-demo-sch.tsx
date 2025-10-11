@@ -26,7 +26,7 @@ const ClientDemoTech = () => {
       content: (
         <div style={{ lineHeight: 1.6 }}>
           <p>
-            The <strong>Academic Management</strong> module is designed to streamline every aspect of your schools academic operations. From
+            The <strong>Academic Management</strong> module is designed to streamline every aspect of your institute academic operations. From
             creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless and
             efficient.
           </p>
@@ -75,7 +75,7 @@ const ClientDemoTech = () => {
           <p>
             The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all the data of
             students, teachers, and staff members. It provides a secure, centralized database that ensures easy access, efficient
-            management, and accurate tracking of every individual associated with your school.
+            management, and accurate tracking of every individual associated with your institute.
           </p>
 
           <h3>Key Features:</h3>
@@ -91,7 +91,7 @@ const ClientDemoTech = () => {
 
           <p>
             <strong>Benefits:</strong> Reduces manual paperwork, eliminates data duplication, improves accessibility, and ensures compliance
-            with school policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
+            with institute policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
           </p>
 
           <p>
@@ -106,7 +106,7 @@ const ClientDemoTech = () => {
           />
 
           <p>
-            With this module, schools can build a robust digital ecosystem that ensures that student and staff information is always
+            With this module, institute can build a robust digital ecosystem that ensures that student and staff information is always
             organized, secure, and easily accessible whenever needed.
           </p>
         </div>
@@ -119,7 +119,7 @@ const ClientDemoTech = () => {
       content: (
         <div style={{ lineHeight: 1.6 }}>
           <p>
-            The <strong>Fees & Finance</strong> module streamlines all financial operations of the school, from student fee collection to
+            The <strong>Fees & Finance</strong> module streamlines all financial operations of the institute, from student fee collection to
             expense tracking, ensuring accurate, transparent, and timely financial management.
           </p>
 
@@ -136,7 +136,7 @@ const ClientDemoTech = () => {
 
           <p>
             <strong>Benefits:</strong> Reduces manual accounting errors, ensures timely fee collection, improves cash flow, and provides
-            real-time visibility into the school’s financial health. Administrators can easily track both incoming fees and outgoing
+            real-time visibility into the institute’s financial health. Administrators can easily track both incoming fees and outgoing
             expenses.
           </p>
 
@@ -161,11 +161,11 @@ const ClientDemoTech = () => {
     {
       icon: <TimelineIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
       title: 'Reports & Analytics',
-      description: 'Gain insights into student performance and school efficiency.',
+      description: 'Gain insights into student performance and institute efficiency.',
       content: (
         <div style={{ lineHeight: 1.6 }}>
           <p>
-            The <strong>Reports & Analytics</strong> module transforms school data into meaningful insights, allowing administrators and
+            The <strong>Reports & Analytics</strong> module transforms institute data into meaningful insights, allowing administrators and
             teachers to make data-driven decisions for academic excellence and operational efficiency.
           </p>
 
@@ -181,23 +181,23 @@ const ClientDemoTech = () => {
           </ul>
 
           <p>
-            <strong>Benefits:</strong> Helps schools measure performance, plan interventions, enhance transparency, and make informed
+            <strong>Benefits:</strong> Helps institute measure performance, plan interventions, enhance transparency, and make informed
             decisions that improve student outcomes and operational efficiency.
           </p>
 
           <p>
             <strong>Use Cases:</strong> Monitor student progress, identify struggling students, evaluate teacher effectiveness, analyze fee
-            collection trends, prepare management reports, and drive data-backed school improvement initiatives.
+            collection trends, prepare management reports, and drive data-backed institute improvement initiatives.
           </p>
 
           <img
-            src="/ModulesImgs/reportsAnalytics.png"
+            src="/ModulesImgs/admsMng.png"
             alt="Reports & Analytics Dashboard"
             style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
           />
 
           <p>
-            With the Reports & Analytics module, schools can move beyond simple record-keeping to intelligent, actionable insights that
+            With the Reports & Analytics module, institute can move beyond simple record-keeping to intelligent, actionable insights that
             support continuous improvement.
           </p>
         </div>
@@ -212,7 +212,7 @@ const ClientDemoTech = () => {
       <div>
         {/* === HERO SECTION === */}
         <div className="about-banner">
-          <img src={bannerImages[currentIndex]} alt="Institute Management Demo" className="about-banner-img" />
+          <img src={bannerImages[currentIndex]} alt="institute Management Demo" className="about-banner-img" />
           <IconButton className="banner-arrow left" onClick={goToPrev}>
             <ArrowBackIos />
           </IconButton>
@@ -220,7 +220,7 @@ const ClientDemoTech = () => {
             <ArrowForwardIos />
           </IconButton>
           <div className="hero-content">
-            <h1 className="hero-title">Empower Your School with Smart Management</h1>
+            <h1 className="hero-title">Empower Your Institute with Smart Management</h1>
             <p className="hero-subtitle">
               Manage admissions, attendance, fees, and communication – all from one powerful dashboard.
               <a href="https://adhyayan.online" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700', fontWeight: 'bold' }}>
@@ -228,6 +228,32 @@ const ClientDemoTech = () => {
               </a>
             </p>
           </div>
+          <Button
+            href="https://angspl.com/contact-us"
+            target="_blank"
+            variant="contained"
+            color="success"
+            sx={{
+              position: 'absolute',
+              bottom: { xs: 50, sm: 50 }, 
+              right: { xs: 10, sm: 20 }, 
+              borderRadius: '90px',
+              boxShadow: 3,
+              px: { xs: 0.8, sm: 1.5 }, 
+              py: { xs: 0.5, sm: 1.5 }, 
+              display: 'flex',
+              alignItems: 'center',
+              gap: { xs: 0.5, sm: 1 }, 
+              fontSize: { xs: 8, sm: 12 } 
+            }}
+          >         
+            <SchoolIcon
+              sx={{
+                fontSize: { xs: 14, sm: 20 } 
+              }}
+            />
+            Schedule Free Demo
+          </Button>
         </div>
 
         {/* === CONTENT BODY === */}
@@ -251,7 +277,7 @@ const ClientDemoTech = () => {
                     <div></div>
                   </div>
                   <p className="card-text">
-                    Discover how our <strong>Learning Management Software</strong> simplifies daily operations for schools. From managing
+                    Discover how our <strong>Learning Management Software</strong> simplifies daily operations for institute. From managing
                     admissions to tracking performance, everything is unified under one digital platform.
                   </p>
                 </MyGrid>
@@ -313,15 +339,6 @@ const ClientDemoTech = () => {
                     {m.content} 
                   </div>
                 ))}
-              </div>
-
-              {/* SECTION: CALL TO ACTION */}
-              <div className="cta-section">
-                <h2>Ready to Transform Your School?</h2>
-                <p>Schedule a personalized demo and see the difference.</p>
-                <Button variant="contained" color="success" sx={{ borderRadius: 3, px: 4, py: 1.2 }}>
-                  Schedule Free Demo
-                </Button>
               </div>
             </MyCardContent>
           </MyCard>

@@ -25,7 +25,6 @@ const ClientDemoSch = () => {
       description: 'Organize subjects, classes, timetables, and grading efficiently.',
       content: (
         <div style={{ lineHeight: 1.6 }}>
-
           <p>
             The <strong>Academic Management</strong> module is designed to streamline every aspect of your schools academic operations. From
             creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless and
@@ -192,7 +191,7 @@ const ClientDemoSch = () => {
           </p>
 
           <img
-            src="/ModulesImgs/reportsAnalytics.png"
+            src="/ModulesImgs/admsMng.png"
             alt="Reports & Analytics Dashboard"
             style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
           />
@@ -229,6 +228,32 @@ const ClientDemoSch = () => {
               </a>
             </p>
           </div>
+          <Button
+            href="https://angspl.com/contact-us"
+            target="_blank"
+            variant="contained"
+            color="success"
+            sx={{
+              position: 'absolute',
+              bottom: { xs: 50, sm: 50 },
+              right: { xs: 10, sm: 20 }, 
+              borderRadius: '90px',
+              boxShadow: 3,
+              px: { xs: 0.8, sm: 1.5 }, 
+              py: { xs: 0.5, sm: 1.5 }, 
+              display: 'flex',
+              alignItems: 'center',
+              gap: { xs: 0.5, sm: 1 },
+              fontSize: { xs: 8, sm: 12 }
+            }}
+          >
+            <SchoolIcon
+              sx={{
+                fontSize: { xs: 14, sm: 20 } 
+              }}
+            />
+            Schedule Free Demo
+          </Button>
         </div>
 
         {/* === CONTENT BODY === */}
@@ -312,18 +337,9 @@ const ClientDemoSch = () => {
                   >
                     {/* <h2>{m.title}</h2> */}
                     <h2 style={{ textAlign: 'center' }}>{m.title}</h2>
-                    {m.content} 
+                    {m.content}
                   </div>
                 ))}
-              </div>
-
-              {/* SECTION: CALL TO ACTION */}
-              <div className="cta-section">
-                <h2>Ready to Transform Your School?</h2>
-                <p>Schedule a personalized demo and see the difference.</p>
-                <Button variant="contained" color="success" sx={{ borderRadius: 3, px: 4, py: 1.2 }}>
-                  Schedule Free Demo
-                </Button>
               </div>
             </MyCardContent>
           </MyCard>

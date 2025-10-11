@@ -27,7 +27,7 @@ const ClientDemoClg = () => {
         <div style={{ lineHeight: 1.6 }}>
           {/* <h2>Academic Management</h2> */}
           <p>
-            The <strong>Academic Management</strong> module is designed to streamline every aspect of your schools academic operations. From
+            The <strong>Academic Management</strong> module is designed to streamline every aspect of your college academic operations. From
             creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless and
             efficient.
           </p>
@@ -76,7 +76,7 @@ const ClientDemoClg = () => {
           <p>
             The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all the data of
             students, teachers, and staff members. It provides a secure, centralized database that ensures easy access, efficient
-            management, and accurate tracking of every individual associated with your school.
+            management, and accurate tracking of every individual associated with your college.
           </p>
 
           <h3>Key Features:</h3>
@@ -92,7 +92,7 @@ const ClientDemoClg = () => {
 
           <p>
             <strong>Benefits:</strong> Reduces manual paperwork, eliminates data duplication, improves accessibility, and ensures compliance
-            with school policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
+            with college policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
           </p>
 
           <p>
@@ -107,7 +107,7 @@ const ClientDemoClg = () => {
           />
 
           <p>
-            With this module, schools can build a robust digital ecosystem that ensures that student and staff information is always
+            With this module, colleges can build a robust digital ecosystem that ensures that student and staff information is always
             organized, secure, and easily accessible whenever needed.
           </p>
         </div>
@@ -120,7 +120,7 @@ const ClientDemoClg = () => {
       content: (
         <div style={{ lineHeight: 1.6 }}>
           <p>
-            The <strong>Fees & Finance</strong> module streamlines all financial operations of the school, from student fee collection to
+            The <strong>Fees & Finance</strong> module streamlines all financial operations of the college, from student fee collection to
             expense tracking, ensuring accurate, transparent, and timely financial management.
           </p>
 
@@ -137,7 +137,7 @@ const ClientDemoClg = () => {
 
           <p>
             <strong>Benefits:</strong> Reduces manual accounting errors, ensures timely fee collection, improves cash flow, and provides
-            real-time visibility into the school’s financial health. Administrators can easily track both incoming fees and outgoing
+            real-time visibility into the college financial health. Administrators can easily track both incoming fees and outgoing
             expenses.
           </p>
 
@@ -162,11 +162,11 @@ const ClientDemoClg = () => {
     {
       icon: <TimelineIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
       title: 'Reports & Analytics',
-      description: 'Gain insights into student performance and school efficiency.',
+      description: 'Gain insights into student performance and college efficiency.',
       content: (
         <div style={{ lineHeight: 1.6 }}>
           <p>
-            The <strong>Reports & Analytics</strong> module transforms school data into meaningful insights, allowing administrators and
+            The <strong>Reports & Analytics</strong> module transforms college data into meaningful insights, allowing administrators and
             teachers to make data-driven decisions for academic excellence and operational efficiency.
           </p>
 
@@ -182,23 +182,23 @@ const ClientDemoClg = () => {
           </ul>
 
           <p>
-            <strong>Benefits:</strong> Helps schools measure performance, plan interventions, enhance transparency, and make informed
+            <strong>Benefits:</strong> Helps colleges measure performance, plan interventions, enhance transparency, and make informed
             decisions that improve student outcomes and operational efficiency.
           </p>
 
           <p>
             <strong>Use Cases:</strong> Monitor student progress, identify struggling students, evaluate teacher effectiveness, analyze fee
-            collection trends, prepare management reports, and drive data-backed school improvement initiatives.
+            collection trends, prepare management reports, and drive data-backed college improvement initiatives.
           </p>
 
           <img
-            src="/ModulesImgs/reportsAnalytics.png"
+            src="/ModulesImgs/admsMng.png"
             alt="Reports & Analytics Dashboard"
             style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
           />
 
           <p>
-            With the Reports & Analytics module, schools can move beyond simple record-keeping to intelligent, actionable insights that
+            With the Reports & Analytics module, colleges can move beyond simple record-keeping to intelligent, actionable insights that
             support continuous improvement.
           </p>
         </div>
@@ -221,7 +221,7 @@ const ClientDemoClg = () => {
             <ArrowForwardIos />
           </IconButton>
           <div className="hero-content">
-            <h1 className="hero-title">Empower Your School with Smart Management</h1>
+            <h1 className="hero-title">Empower Your College with Smart Management</h1>
             <p className="hero-subtitle">
               Manage admissions, attendance, fees, and communication – all from one powerful dashboard.
               <a href="https://adhyayan.college" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700', fontWeight: 'bold' }}>
@@ -229,6 +229,32 @@ const ClientDemoClg = () => {
               </a>
             </p>
           </div>
+          <Button
+            href="https://angspl.com/contact-us"
+            target="_blank"
+            variant="contained"
+            color="success"
+            sx={{
+              position: 'absolute',
+              bottom: { xs: 50, sm: 50 },
+              right: { xs: 10, sm: 20 }, 
+              borderRadius: '90px',
+              boxShadow: 3,
+              px: { xs: 0.8, sm: 1.5 }, 
+              py: { xs: 0.5, sm: 1.5 }, 
+              display: 'flex',
+              alignItems: 'center',
+              gap: { xs: 0.5, sm: 1 }, 
+              fontSize: { xs: 8, sm: 12 } 
+            }}
+          >
+            <SchoolIcon
+              sx={{
+                fontSize: { xs: 14, sm: 20 } 
+              }}
+            />
+            Schedule Free Demo
+          </Button>
         </div>
 
         {/* === CONTENT BODY === */}
@@ -252,7 +278,7 @@ const ClientDemoClg = () => {
                     <div></div>
                   </div>
                   <p className="card-text">
-                    Discover how our <strong>College Management Software</strong> simplifies daily operations for schools. From managing
+                    Discover how our <strong>College Management Software</strong> simplifies daily operations for colleges. From managing
                     admissions to tracking performance, everything is unified under one digital platform.
                   </p>
                 </MyGrid>
@@ -316,30 +342,20 @@ const ClientDemoClg = () => {
                   </div>
                 ))}
               </div>
-
-              {/* SECTION: CALL TO ACTION */}
-              <div className="cta-section">
-                <h2>Ready to Transform Your School?</h2>
-                <p>Schedule a personalized demo and see the difference.</p>
-                <Button variant="contained" color="success" sx={{ borderRadius: 3, px: 4, py: 1.2 }}>
-                  Schedule Free Demo
-                </Button>
-              </div>
             </MyCardContent>
           </MyCard>
-
-          {/* FOOTER */}
-          <div className="container">
+        </MyBox>
+        {/* FOOTER */}
+        <div className="container">
+          <div className="vertical_center">
+            <p>
+              © {new Date().getFullYear()} {COMPANY}, All rights reserved.
+            </p>
             <div className="vertical_center">
-              <p>
-                © {new Date().getFullYear()} {COMPANY}, All rights reserved.
-              </p>
-              <div className="vertical_center">
-                || <a href="/terms">Terms of use</a> || <a href="/privacy-policy">Privacy Policy</a>
-              </div>
+              || <a href="/terms">Terms of use</a> || <a href="/privacy-policy">Privacy Policy</a>
             </div>
           </div>
-        </MyBox>
+        </div>
       </div>
       <Button
         href="https://adhyayan.college"
@@ -347,7 +363,7 @@ const ClientDemoClg = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: 20,
+          bottom: 70,
           right: 20,
           borderRadius: '50px',
           bgcolor: '#FFD700',
