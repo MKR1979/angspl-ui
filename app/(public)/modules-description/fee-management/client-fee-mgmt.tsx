@@ -72,7 +72,7 @@ const ClientFeeMgmt = () => {
               <MyGrid container justifyContent="center" spacing={2}>
                 <MyGrid container justifyContent="center">
                   <MyGrid size={{ xs: 12, sm: 12 }} textAlign="center">
-                    <div className="section-heading">FEE MANAGEMENT</div>
+                    <div className="section-heading">Payment Management System</div>
                     <div className="section-underline">
                       <div></div>
                       <div></div>
@@ -80,105 +80,282 @@ const ClientFeeMgmt = () => {
                   </MyGrid>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Admission Management System</span> is a digital platform
-                  designed to simplify and streamline the entire student admission process. It helps school efficiently manage applications,
-                  registration, document submission, and free payments in an organized and transparent manner. This system reduces manual
-                  paperwork and errors by providing an automated process both administrators and parents. Parents can conveniently fill out
-                  admission form, upload necessary documents, and track application status online, while schools can manage student data
-                  securely through a central database. With features like real-time notification, data validation, and secure record
-                  management, data validation, and secure record management, the school admission management system ensures a hassle-free
-                  experience for application and smooth operations for the school administration.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment Management</span> is a system used
+                  to schedule, collect, and monitor all types of payments made by students or employees. It helps institutions
+                  manage fees efficiently by keeping track payment frequency, total amount, and due dates. Through this module,
+                  users can schedule payments, generate receipts, and view payments histories-ensuring transparency and accuracy
+                  in all financial transactions
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
-                  <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
+                  <div className="section-heading1">Key highlights </div>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
                   <MyCardContent className="list-text">
                     <ul className="benefits-list">
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> Fill Application form from Anywhere and Anytime.
+                        <span>&#10003;</span>  Allows scheduling of payments based on course, student, or department.
                       </li>
                       <li>
-                        <span>&#10003;</span> No need to stand in long queues.
+                        <span>&#10003;</span> Tracks payment frequency such as monthly, Quarterly, or Yearly.
                       </li>
                       <li>
-                        <span>&#10003;</span> Cost savings for the institutes.
+                        <span>&#10003;</span> Displays detailed payment information including total and net amount.
                       </li>
                       <li>
-                        <span>&#10003;</span>Reducing the unwanted data.
+                        <span>&#10003;</span> Enables generations of receipts and payment reports.
                       </li>
                       <li>
-                        <span>&#10003;</span> Eliminates the need for extra staff to manage applicants.
+                        <span>&#10003;</span> Help maintain transparency and accuracy in financial records.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Reduces manual work through automated payment scheduling.
                       </li>
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> No longer requirement of printing & storing the forms separately.
+                        <span>&#10003;</span> Provides easy access to payment history for both admin and users.
                       </li>
                     </ul>
                   </MyCardContent>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Admission Form</h2>
-                  <div className="responsive-image">
-                    <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
-                  </div>
+                  <h2 className="section-subheading">Accessing the application</h2>
+                  <h3 className="section-subheading">Login</h3>
+                  <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                    <MyCardContent className="list-text">
+                      <ul className="benefits-list">
+                        <li style={{ margin: 0, padding: 0 }}>
+                          <span>➤</span>Go to the home page and log in.
+                        </li>
+                        <li style={{ margin: 0, padding: 0 }}>
+                          <span>➤  Password:</span>Password (Please contact your administrator to obtain the password. You will have the option to change it after logging in
+                        </li>
+                      </ul>
+                      <div className="responsive-image">
+                        <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
+                      </div>
+                    </MyCardContent>
+                  </MyGrid>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                  <MyCardContent className="list-text">
+                    <h2 className="section-subheading">payment management</h2>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span>  After sign-in, the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>admin dashboard</span>opens automatically.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> From the left-side menu, click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>payment management system.</span>
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Under payement, select <span style={{ fontWeight: 'bold', color: '#334D6E' }}>schedule fee .</span>
+                      </li>
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> The payment management dashboard will open, showing a list of <span style={{ fontWeight: 'bold', color: '#334D6E' }}>schedule payment.</span>
+                      </li>
+                    </ul>
+                  </MyCardContent>
+                  <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                    <div className="responsive-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+                        title="How to Add New Students | Step-by-Step Guide"
+                        frameBorder="0"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </MyGrid>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                  <MyCardContent className="list-text">
+                    <h2 className="section-subheading">Schedule payment </h2>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span>  Click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>schedule payment.</span>
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Under schedule payment , select <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Add payment.</span>
+                      </li>
+                      <li>
+                        <span>&#10003;</span> select <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+add</span> create New <span style={{ fontWeight: 'bold', color: '#334D6E' }}>
+                          Payment Information.</span>
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Select your course, student name, payment frequency and total amount then
+                        <br /> click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>save</span>
+                        button to add your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>payment information.</span>
+                      </li>
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>save</span>
+                        to create the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>schedule payment.</span>
+                      </li>
+                    </ul>
+                  </MyCardContent>
+                  <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                    <div className="responsive-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                        title="How to Add New Students | Step-by-Step Guide"
+                        frameBorder="0"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </MyGrid>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                  <MyCardContent className="list-text">
+                    <h2 className="section-subheading">Collect Payment  </h2>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click on Collect Payment.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Under opayment management select Collect Pay.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> The collect payment dashboard will open, showing a list of Collect Payment.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Select add to create New Add Fee Collection.
+                      </li>
+                      <li>
+                        <span>&#10003;</span>Select your course, student name, payment frequency and total amount then click save button to add your Add Fee Collection.
+                      </li>
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click save to create the Payment Collection.
+                      </li>
+                    </ul>
+                  </MyCardContent>
+                  <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                    <div className="responsive-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                        title="How to Add New Students | Step-by-Step Guide"
+                        frameBorder="0"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </MyGrid>
+                </MyGrid>
+                <MyGrid
+                  size={{ xs: 12, sm: 12 }}
+                  sx={{
+                    textAlign: 'left',
+                    margin: 0,
+                    paddingX: { xs: '16px', sm: '24px', md: '10px' },
+                  }}
+                >
+                  <MyCardContent className="list-text">
+                    <h2 className="section-subheading">Payment Management</h2>
+
+                    {/* Receipts Section */}
+                    <h3 className="section-subheading" style={{ marginTop: '20px' }}>
+                      Receipts
+                    </h3>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click on <strong>Receipts</strong>.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Under <strong>Payment Management</strong>, select
+                        <strong> Receipts</strong>.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> The <strong>Receipts Dashboard</strong> will open,
+                        displaying a list of all receipts.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> To verify a receipt, click on the{' '}
+                        <strong>Student Name hyperlink</strong> and review the details.
+                      </li>
+                    </ul>
+
+                    {/* Fees Head Section */}
+                    <h3 className="section-subheading" style={{ marginTop: '20px' }}>
+                      Fees Head
+                    </h3>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click on <strong>Fees Head</strong>.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Under <strong>Payment Management</strong>, select
+                        <strong> Fees Head</strong>.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> The <strong>Fees Head Dashboard</strong> will open,
+                        showing a list of all Fee Heads.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Select your <strong>Course Name</strong>,{' '}
+                        <strong>Category</strong>, <strong>Code</strong>, and{' '}
+                        <strong>Status</strong>, then mark <strong>Is Mandatory</strong> if
+                        required.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Click <strong>Save</strong> to create the Fees Head.
+                      </li>
+                    </ul>
+                  </MyCardContent>
+
+                  <MyGrid
+                    size={{ xs: 12, md: 12 }}
+                    sx={{ maxWidth: '1210px', margin: '0 auto' }}
+                  >
+                    <div className="responsive-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                        title="Payment Management | Receipts and Fees Head Guide"
+                        frameBorder="0"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </MyGrid>
+                </MyGrid>
+                <MyGrid
+                  size={{ xs: 12, sm: 12 }}
+                  sx={{
+                    textAlign: 'left',
+                    margin: 0,
+                    paddingX: { xs: '16px', sm: '24px', md: '10px' },
+                  }}
+                >
+                  <MyCardContent className="list-text">
+                    <h2 className="section-subheading">Edit Exam</h2>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click on <strong>Edit Exam</strong>.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> You can verify the exam details by clicking on the{' '}
+                        <strong>Student Name hyperlink</strong> and reviewing all information.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Click on <strong>Edit</strong> to modify the exam
+                        status from <strong>“Active”</strong> to <strong>“Verified”</strong>, and
+                        then click on <strong>Save</strong>.
+                      </li>
+                    </ul>
+
+                    <h2 className="section-subheading" style={{ marginTop: '20px' }}>
+                      Edit Add Fees Payment
+                    </h2>
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> Click on <strong>Edit Add Fees Payment</strong>.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> You can verify the payment details by clicking on
+                        the <strong>Student Name hyperlink</strong> and reviewing all related
+                        information.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Click on <strong>Edit</strong> to change the status
+                        from <strong>“Active”</strong> to <strong>“Verified”</strong>, and then
+                        click on <strong>Save</strong>.
+                      </li>
+                    </ul>
+                  </MyCardContent>
                 </MyGrid>
 
-                <MyCardContent className="card-text">
-                  The online admission and student enrollment process in schools can be tedious, involving managing and analyzing inquiries,
-                  planning marketing strategies, and creating and handling student records. Verifying student data and generating merit
-                  lists for various admission rounds based on seat availability, while maintaining effective communication with parents and
-                  students throughout the process, consumes a lot of time. Manual handling of paperwork and documents often leads to errors.
-                  <br />
-                  Our <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> is designed to streamline
-                  all activities involved in student enrollment by combining them into a cloud-based platform. The main objective of this
-                  system is to help school staff efficiently enroll students and maintain accurate records. It enables administrators to
-                  simplify and automate the online admission process by managing and verifying student entries, documents, images,
-                  certificates.
-                </MyCardContent>
-                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Add New Students</h2>
-                  <div className="responsive-video">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
-                      title="How to Add New Students | Step-by-Step Guide"
-                      frameBorder="0"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </MyGrid>
-                <MyCardContent className="card-text">
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> helps schools automate and
-                  simplify routine activities such as curriculum management, attendance tracking, administrative tasks, information
-                  handling, fee management, and assignments. This robust, cloud-based, and time-tested educational ERP system offers
-                  advanced modules that empower teachers and educators to digitize the daily operations of educational institutions.
-                  Designed to efficiently manage and record administrative work,
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management Software</span> includes all essential modules
-                  for tracking student records, admissions, fees, timetable planning, and other critical school processes, enabling seamless
-                  management for both teachers and staff.
-                </MyCardContent>
-                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Review Admissions</h2>
-                  <div className="responsive-video">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
-                      title="How to Add New Students | Step-by-Step Guide"
-                      frameBorder="0"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </MyGrid>
-
-                <MyCardContent className="card-text">
-                  The Review Admission feature enables administrators to efficiently manage and monitor the entire admission process within
-                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management System</span>. Once logged in, administrators
-                  can access the Academics section to view all admission entries in real time. The module allows filtering admissions based
-                  on various criteria such as class, admission date, and academic session, providing quick access to relevant records.
-                  <br />
-                  Administrators can review each applicant’s complete admission details, including personal information, submitted
-                  documents, fee payment status, and other related data. This feature streamlines the admission verification process,
-                  ensuring transparency and accuracy. By centralizing admission review operations, it eliminates manual checks and enhances
-                  decision-making efficiency for school staff and management.
-                </MyCardContent>
               </MyGrid>
             </MyCardContent>
           </MyCard>

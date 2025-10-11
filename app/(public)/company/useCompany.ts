@@ -1,17 +1,20 @@
 import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
-import { arrCompanyStatus, arrCompanyType } from '@/app/common/Configuration';
-import { ADD_COMPANY_RETURN_USERID } from '@/app/graphql/Company';
+import { arrCompanyStatus, arrCompanyType, regExEMail } from '@/app/common/Configuration';
+import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST } from '@/app/graphql/Company';
 // import { useSnackbar } from '../../custom-components/SnackbarProvider';
 import * as gConstants from '../../constants/constants';
-import { ADD_FEE_COLLECTION_RETURN_ID } from '@/app/graphql/FeeCollection';
+import { ADD_FEE_COLLECT_COMPANY_RETURN_ID } from '@/app/graphql/FeeCollection';
+import { isValidPhoneNumber } from 'libphonenumber-js';
+import * as gMessageConstants from '@/app/constants/messages-constants';
 
 type ErrorMessageType = {
   company_code: string | null;
   company_name: string | null;
+  domain_prefix: string | null;
   domain_name: string | null;
   company_type: string | null;
   email: string | null;
@@ -25,22 +28,18 @@ type ErrorMessageType = {
 
 type StateType = {
   dtoCompany: CompanyDTO;
-  open1: boolean;
   open2: boolean;
-  arrCompanyStausLookup: LookupDTO[];
+  arrCompanyStatusLookup: LookupDTO[];
   arrCompanyTypeLookup: LookupDTO[];
   errorMessages: ErrorMessageType;
 };
-
-// type Props = {
-//   dtoCompany: CompanyDTO;
-// };
 
 const useCompany = () => {
   const router = useRouter();
   const ERROR_MESSAGES: ErrorMessageType = Object.freeze({
     company_code: null,
     company_name: null,
+    domain_prefix: null,
     domain_name: null,
     company_type: null,
     email: null,
@@ -54,9 +53,9 @@ const useCompany = () => {
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoCompany: COMPANY,
-    open1: false,
+    // open1: false,
     open2: false,
-    arrCompanyStausLookup: arrCompanyStatus,
+    arrCompanyStatusLookup: arrCompanyStatus,
     arrCompanyTypeLookup: arrCompanyType,
     errorMessages: { ...ERROR_MESSAGES }
   } as StateType);
@@ -68,16 +67,15 @@ const useCompany = () => {
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   //   const showSnackbar = useSnackbar();
   const [saving, setSaving] = useState(false);
-  const [addCompanyReturnId] = useMutation(ADD_COMPANY_RETURN_USERID, {});
-  const [addFeeCollectionReturnId] = useMutation(ADD_FEE_COLLECTION_RETURN_ID);
-  //   const [domainInput, setDomainInput] = useState(
-  //   state.dtoCompany.domain_name?.split('.adhyayan.')?.[0] || ''
-  // );
-  const DOMAIN_SUFFIX = '.adhyayan.online';
+  const [addCompanyReturnId] = useMutation(ADD_COMPANY_RETURN_ID, {});
+  const [addFeeCollectCompanyReturnId] = useMutation(ADD_FEE_COLLECT_COMPANY_RETURN_ID);
+  const [getCompanyEmailExist] = useLazyQuery(GET_COMPANY_EMAIL_EXIST, { fetchPolicy: 'network-only' });
+  const [getCompanyNameExist] = useLazyQuery(GET_COMPANY_NAME_EXIST, { fetchPolicy: 'network-only' });
+  const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
 
   useEffect(() => {
-    if (state.arrCompanyStausLookup.length > 0 && !state.dtoCompany.status) {
-      const firstItem = state.arrCompanyStausLookup[0];
+    if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
+      const firstItem = state.arrCompanyStatusLookup[0];
       setState({
         ...state,
         dtoCompany: {
@@ -86,52 +84,65 @@ const useCompany = () => {
         }
       });
     }
-  }, [state.arrCompanyStausLookup]);
+  }, [state.arrCompanyStatusLookup]);
 
-  const addPaymentDetails = useCallback(
-    async (event: React.MouseEvent<HTMLElement>, response: any, price: number, user_id: number, course_id: number) => {
-      event.preventDefault();
-      try {
-        const today = new Date();
-        const paymentDate = today.toISOString().split('T')[0];
-        const feeMonth = today.toLocaleString('default', { month: 'long' });
-        const feeYear = today.getFullYear();
-        const result = await addFeeCollectionReturnId({
-          variables: {
-            course_id: course_id,
-            learner_id: user_id,
-            payment_date: paymentDate,
-            payment_mode: gConstants.PAY_MODE,
-            cheque_number: '',
-            fee_amount: price,
-            fee_month: feeMonth,
-            fee_year: feeYear,
-            currency: gConstants.CURRENCY,
-            transaction_id: '',
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-            remarks: '',
-            status: gConstants.STATUS_PAID,
-            source_flag: gConstants.SOURCE_FLAG_MISCELLANEOUS
-          }
-        });
-        const newPaymentId = result?.data?.addFeeCollectionReturnId ?? 0;
-        return newPaymentId;
-      } catch (error) {
-        console.error('Error adding payment:', error);
+    useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => console.log('Razorpay script loaded successfully.');
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const IsEMailExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyEmailExist({
+      variables: {
+        id: state.dtoCompany.id,
+        email: state.dtoCompany.email
       }
-    },
-    [addFeeCollectionReturnId]
-  );
+    });
+    if (!error && data) {
+      exist = data.getCompanyEmailExist;
+    }
+    return exist;
+  }, [getCompanyEmailExist, state.dtoCompany.id, state.dtoCompany.email]);
+
+  const IsCompanyNameExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyNameExist({
+      variables: {
+        id: state.dtoCompany.id,
+        company_name: state.dtoCompany.company_name
+      }
+    });
+    if (!error && data) {
+      exist = data.getCompanyNameExist;
+    }
+    return exist;
+  }, [getCompanyNameExist, state.dtoCompany.id, state.dtoCompany.company_name]);
+
+  const IsMobileNoExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyPhoneNoExist({
+      variables: {
+        id: state.dtoCompany.id,
+        phone_no: state.dtoCompany.phone_no
+      }
+    });
+    if (!error && data) {
+      exist = data.getCompanyPhoneNoExist;
+    }
+    return exist;
+  }, [getCompanyPhoneNoExist, state.dtoCompany.id, state.dtoCompany.phone_no]);
 
   const onNormalizedInputChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
-
-      // Remove all spaces and convert to lowercase
       const formattedValue = value.replace(/\s+/g, '').toLowerCase();
-
       setState({
         dtoCompany: {
           ...state.dtoCompany,
@@ -156,21 +167,39 @@ const useCompany = () => {
     [state.dtoCompany]
   );
 
-const onDomainNameChange = useCallback(
-  (event: ChangeEvent<HTMLInputElement>) => {
-    let prefix = event.target.value;
-    if (prefix.endsWith(DOMAIN_SUFFIX)) {
-      prefix = prefix.replace(DOMAIN_SUFFIX, '');
-    }
-    setState({
-      dtoCompany: {
-        ...state.dtoCompany,
-        domain_name: prefix,
-      },
-    } as StateType);
-  },
-  [state.dtoCompany]
-);
+  const onDomainPrefixChange = useCallback(
+    (company_type?: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const prefix = event.target.value.trim().toLowerCase();
+      let suffix = '';
+      switch (company_type?.toLowerCase()) {
+        case 'school':
+          suffix = '.adhyayan.school';
+          break;
+        case 'college':
+          suffix = '.adhyayan.college';
+          break;
+        case 'institute':
+          suffix = '.adhyayan.online';
+          break;
+        default:
+          suffix = '.adhyayan.online';
+      }
+      // Construct full domain name
+      const fullDomain = prefix ? `${prefix}${suffix}` : '';
+      setState({
+        dtoCompany: {
+          ...state.dtoCompany,
+          domain_prefix: prefix,
+          domain_name: fullDomain
+        },
+        errorMessages: {
+          ...state.errorMessages,
+          domain_prefix: ''
+        }
+      } as StateType);
+    },
+    [state.dtoCompany, state.errorMessages]
+  );
 
   const onCodeChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -185,35 +214,38 @@ const onDomainNameChange = useCallback(
     },
     [state.dtoCompany]
   );
+
   const validateCompanyName = useCallback(async () => {
     if (state.dtoCompany.company_name.trim() === '') {
-      return 'Required field!';
+      return gMessageConstants.REQUIRED_FIELD;
+    } else if (await IsCompanyNameExist()) {
+      return gMessageConstants.ALREADY_EXIST;
     } else {
       return null;
     }
-  }, [state.dtoCompany.company_name]);
+  }, [state.dtoCompany.company_name, IsCompanyNameExist]);
 
   const onCompanyNameBlur = useCallback(async () => {
     const company_name = await validateCompanyName();
     setState({ errorMessages: { ...state.errorMessages, company_name: company_name } } as StateType);
   }, [validateCompanyName, state.errorMessages]);
 
-  const validateDomainName = useCallback(async () => {
-    if (state.dtoCompany.domain_name.trim() === '') {
-      return 'Required field!';
+  const validateDomainPrefix = useCallback(async () => {
+    if (state.dtoCompany.domain_prefix.trim() === '') {
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
-  }, [state.dtoCompany.domain_name]);
+  }, [state.dtoCompany.domain_prefix]);
 
-  const onDomainNameBlur = useCallback(async () => {
-    const domain_name = await validateDomainName();
-    setState({ errorMessages: { ...state.errorMessages, domain_name: domain_name } } as StateType);
-  }, [validateDomainName, state.errorMessages]);
+  const onDomainPrefixBlur = useCallback(async () => {
+    const domain_prefix = await validateDomainPrefix();
+    setState({ errorMessages: { ...state.errorMessages, domain_prefix: domain_prefix } } as StateType);
+  }, [validateDomainPrefix, state.errorMessages]);
 
   const validateCompanyCode = useCallback(async () => {
     if (state.dtoCompany.company_code.trim() === '') {
-      return 'Required field!';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -226,11 +258,15 @@ const onDomainNameChange = useCallback(
 
   const validateEmail = useCallback(async () => {
     if (state.dtoCompany.email.trim() === '') {
-      return 'Required field!';
+      return gMessageConstants.REQUIRED_FIELD;
+    } else if (!state.dtoCompany.email.trim().match(regExEMail)) {
+      return gMessageConstants.INVALID;
+    } else if (await IsEMailExist()) {
+      return gMessageConstants.ALREADY_EXIST;
     } else {
       return null;
     }
-  }, [state.dtoCompany.email]);
+  }, [state.dtoCompany.email, IsEMailExist]);
 
   const onEmailBlur = useCallback(async () => {
     const email = await validateEmail();
@@ -250,12 +286,14 @@ const onDomainNameChange = useCallback(
   );
 
   const validatePhoneNo = useCallback(async () => {
-    if (state.dtoCompany.phone_no.trim() === '') {
-      return 'Required field!';
+    if (!isValidPhoneNumber(state.dtoCompany.phone_no.trim())) {
+      return gMessageConstants.REQUIRED_FIELD;
+    } else if (await IsMobileNoExist()) {
+      return gMessageConstants.ALREADY_EXIST;
     } else {
       return null;
     }
-  }, [state.dtoCompany.phone_no]);
+  }, [state.dtoCompany.phone_no, IsMobileNoExist]);
 
   const onPhoneNoBlur = useCallback(async () => {
     const phone_no = await validatePhoneNo();
@@ -264,7 +302,7 @@ const onDomainNameChange = useCallback(
 
   const validateAddress = useCallback(async () => {
     if (state.dtoCompany.address.trim() === '') {
-      return 'Required field!';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -274,29 +312,6 @@ const onDomainNameChange = useCallback(
     const address = await validateAddress();
     setState({ errorMessages: { ...state.errorMessages, address: address } } as StateType);
   }, [validateAddress, state.errorMessages]);
-
-  const onCompanyStatusChange = useCallback(
-    async (event: any, value: unknown) => {
-      setState({
-        dtoCompany: {
-          ...state.dtoCompany,
-          status: (value as LookupDTO).text
-        }
-      } as StateType);
-    },
-    [state.dtoCompany]
-  );
-  const validateStatus = useCallback(async () => {
-    if (state.dtoCompany.status.trim() === '') {
-      return 'Required field!';
-    } else {
-      return null;
-    }
-  }, [state.dtoCompany.status]);
-  const onStatusBlur = useCallback(async () => {
-    const status = await validateStatus();
-    setState({ errorMessages: { ...state.errorMessages, status: status } } as StateType);
-  }, [validateStatus, state.errorMessages]);
 
   const validateForm = useCallback(async () => {
     let isFormValid = true;
@@ -321,148 +336,173 @@ const onDomainNameChange = useCallback(
     if (errorMessages.address) {
       isFormValid = false;
     }
-    errorMessages.status = await validateStatus();
-    if (errorMessages.status) {
-      isFormValid = false;
-    }
     setState({ errorMessages: errorMessages } as StateType);
     return isFormValid;
-  }, [validateCompanyName, validateStatus, validateEmail, validateCompanyCode, validatePhoneNo, validateAddress]);
+  }, [validateCompanyName, validateEmail, validateCompanyCode, validatePhoneNo, validateAddress]);
+
+  const addPaymentDetails = useCallback(
+    async (event: React.MouseEvent<HTMLElement>, response: any, paymentAmount: number, companyId: number) => {
+      event.preventDefault();
+      try {
+        const today = new Date();
+        const paymentDate = today.toISOString().split('T')[0];
+        const feeMonth = today.toLocaleString('default', { month: 'long' });
+        const feeYear = today.getFullYear();
+        const result = await addFeeCollectCompanyReturnId({
+          variables: {
+            company_id: companyId,
+            payment_date: paymentDate,
+            payment_mode: gConstants.PAY_MODE,
+            cheque_number: '',
+            fee_amount: paymentAmount,
+            fee_month: feeMonth,
+            fee_year: feeYear,
+            currency: gConstants.CURRENCY,
+            transaction_id: '',
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            remarks: '',
+            status: gConstants.STATUS_PAID,
+            source_flag: gConstants.SOURCE_FLAG_PUBLIC
+          }
+        });
+        const newPaymentId = result?.data?.addFeeCollectCompanyReturnId ?? 0;
+        return newPaymentId;
+      } catch (error) {
+        console.error('Error adding payment:', error);
+      }
+    },
+    [addFeeCollectCompanyReturnId]
+  );
+
+  // const openRazorpay = (paymentAmount: number, companyId: number, event: React.MouseEvent<HTMLElement>): Promise<boolean> => {
+  //   return new Promise((resolve) => {
+  //     const options = {
+  //       key: gConstants.RAZORPAY_KEY,
+  //       amount: paymentAmount * 100,
+  //       currency: gConstants.CURRENCY,
+  //       name: gConstants.COMPANY,
+  //       description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
+  //       handler: async (response: any) => {
+  //         const newPaymentId = await addPaymentDetails(event, response, paymentAmount, companyId);
+  //         router.push(`/paymentReceipt?id=${newPaymentId}&userName=${encodeURIComponent(state.dtoCompany.company_name)}`);
+  //         resolve(true); // ✅ Payment succeeded
+  //       },
+  //       prefill: {
+  //         name: 'Student Name',
+  //         email: gConstants.CONTACT_EMAIL,
+  //         contact: gConstants.CONTACT_PHONE_NO
+  //       },
+  //       theme: {
+  //         color: '#3399cc'
+  //       },
+  //       modal: {
+  //         ondismiss: () => {
+  //           console.warn('Payment popup was closed by user');
+  //           resolve(false);
+  //         }
+  //       }
+  //     };
+  //     const rzp = new (window as any).Razorpay(options);
+  //     rzp.open();
+  //   });
+  // };
+
+  const openRazorpay = (
+  paymentAmount: number,
+  companyId: number,
+  event: React.MouseEvent<HTMLElement>
+): Promise<boolean> => {
+  return new Promise((resolve) => {
+    console.log('[Razorpay] openRazorpay called');
+    console.log('[Razorpay] Payment Amount:', paymentAmount, 'Company ID:', companyId);
+    if (typeof window === 'undefined') {
+      console.error('[Razorpay] window is undefined. Are you on server-side?');
+      resolve(false);
+      return;
+    }
+    if (!(window as any).Razorpay) {
+      console.error('[Razorpay] window.Razorpay is undefined. Script might not be loaded.');
+      resolve(false);
+      return;
+    } else {
+      console.log('[Razorpay] window.Razorpay is available');
+    }
+    const options = {
+      key: gConstants.RAZORPAY_KEY,
+      amount: paymentAmount * 100,
+      currency: gConstants.CURRENCY,
+      name: gConstants.COMPANY,
+      description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
+      handler: async (response: any) => {
+        console.log('[Razorpay] Payment success handler called', response);
+        const newPaymentId = await addPaymentDetails(event, response, paymentAmount, companyId);
+        console.log('[Razorpay] Payment recorded, newPaymentId:', newPaymentId);
+        router.push(`/paymentReceipt?id=${newPaymentId}`);
+        resolve(true); // ✅ Payment succeeded
+      },
+      prefill: {
+        name: 'Student Name',
+        email: gConstants.CONTACT_EMAIL,
+        contact: gConstants.CONTACT_PHONE_NO
+      },
+      theme: { color: '#3399cc' },
+      modal: {
+        ondismiss: () => {
+          console.warn('[Razorpay] Payment popup was closed by user');
+          resolve(false);
+        }
+      }
+    };
+    try {
+      console.log('[Razorpay] Creating Razorpay instance with options:', options);
+      const rzp = new (window as any).Razorpay(options);
+      console.log('[Razorpay] Opening Razorpay checkout');
+      rzp.open();
+    } catch (err) {
+      console.error('[Razorpay] Error creating Razorpay instance:', err);
+      resolve(false);
+    }
+  });
+};
 
   const onSaveClick = useCallback(
-    async (
-      event: React.MouseEvent<HTMLElement>,
-      company_type?: string,
-      plan_type?: string,
-      payment_type?: string,
-      payment_amount?: number
-    ) => {
+    async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
       event.preventDefault();
       if (saving) return;
       setSaving(true);
+      if (!(await validateForm())) return;
+      if (state.dtoCompany.id !== 0) return;
       try {
-        if (await validateForm()) {
-          if (state.dtoCompany.id === 0) {
-
-          //   if (result?.data?.addAdmissionClgReturnUserId > 0) {
-          //     showSnackbar(gMessageConstants.SNACKBAR_INSERT_RECORD, 'success');
-          //     const newUserId = result?.data?.addAdmissionClgReturnUserId;
-          //     setStudentId(newUserId);
-          //     setSubmitted(true);
-          //   } else {
-          //     showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
-          //   }
-          // }
-
-            const result = await addCompanyReturnId({
-              variables: {
-                company_code: state.dtoCompany.company_code,
-                company_name: state.dtoCompany.company_name,
-                company_type: company_type,
-                email: state.dtoCompany.email,
-                phone_no: state.dtoCompany.phone_no,
-                address: state.dtoCompany.address,
-                status: state.dtoCompany.status,
-                domain_name: state.dtoCompany.domain_name,
-                source_flag: 'Public'
-              }
-            });
-            if (result?.data?.addCompanyReturnId > 0) {
-              //  router.push('/companies/list');
-              const options = {
-                key: gConstants.RAZORPAY_KEY,
-                amount: (payment_amount ?? 0) * 100, // in paise
-                currency: gConstants.CURRENCY,
-                name: gConstants.COMPANY,
-                description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
-                handler: async (response: any) => {
-                  const amount = payment_amount ?? 0;
-                  const newPaymentId = await addPaymentDetails(event, response, amount, 1, 1);
-                  router.push(`/paymentReceipt?id=${newPaymentId}&userName=${encodeURIComponent('')}`);
-                },
-                prefill: {
-                  name: 'Student Name',
-                  email: gConstants.CONTACT_EMAIL,
-                  contact: gConstants.CONTACT_PHONE_NO
-                },
-                theme: {
-                  color: '#3399cc'
-                }
-              };
-              const rzp = new (window as any).Razorpay(options);
-              rzp.open();
-            }
+        const result = await addCompanyReturnId({
+          variables: {
+            company_code: state.dtoCompany.company_code,
+            company_name: state.dtoCompany.company_name,
+            company_type: company_type,
+            email: state.dtoCompany.email,
+            phone_no: state.dtoCompany.phone_no,
+            address: state.dtoCompany.address,
+            status: gConstants.STATUS,
+            domain_name: state.dtoCompany.domain_name,
+            source_flag: gConstants.SOURCE_FLAG_PUBLIC
           }
+        });
+        const newCompanyId = result?.data?.addCompanyReturnId;
+        console.log('CompanyId we get :', newCompanyId);
+        const paymentSuccess = openRazorpay(payment_amount, newCompanyId, event);
+        if (!paymentSuccess) {
+          console.warn('Payment failed or cancelled');
+          return;
         }
       } catch (error: any) {
-        console.error('Error while saving referral:', error);
+        console.error('Error while saving company:', error);
         // showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
       } finally {
         setSaving(false);
       }
     },
     [validateForm, addCompanyReturnId, state.dtoCompany, router]
-  );
-
-  //  const onSaveClick = useCallback(
-  //     async (event: React.MouseEvent<HTMLElement>, price: number, course: string) => {
-  //       event.preventDefault();
-  //       if (await validateForm()) {
-  //         if (state.dtoPaymentDetails.id === 0) {
-  //           const userName = String(await generateUserName(state.dtoPaymentDetails.first_name));
-  //           const { data } = await addUser({
-  //             variables: {
-  //               first_name: state.dtoPaymentDetails.first_name,
-  //               last_name: state.dtoPaymentDetails.last_name,
-  //               email: state.dtoPaymentDetails.email,
-  //               mobile_no: state.dtoPaymentDetails.mobile_no,
-  //               user_name: userName,
-  //               password: gConstants.PASSWORD,
-  //               status: gConstants.STATUS,
-  //               role_id: gConstants.ROLE_ID,
-  //               image_url: 'To be updated'
-  //             }
-  //           });
-  //           if (data) {
-  //             const options = {
-  //               key: gConstants.RAZORPAY_KEY,
-  //               amount: price * 100, // in paise
-  //               currency: gConstants.CURRENCY,
-  //               name: gConstants.COMPANY,
-  //               description: `Payment for ${selectedCourse}`,
-  //               // The handler is called after successful payment
-  //               handler: async (response: any) => {
-  //                 await addPaymentDetails(event, response, price);
-  //                 router.push(
-  //                   `/payReceipt?courseName=${encodeURIComponent(course)}&studentName=${encodeURIComponent(
-  //                     state.dtoPaymentDetails.first_name + ' ' + state.dtoPaymentDetails.last_name
-  //                   )}&amount=${price}&userName=${encodeURIComponent(userName)}`
-  //                 );
-  //               },
-  //               prefill: {
-  //                 name: 'Student Name',
-  //                 email: gConstants.CONTACT_EMAIL,
-  //                 contact: gConstants.CONTACT_PHONE_NO
-  //               },
-  //               theme: {
-  //                 color: '#3399cc'
-  //               }
-  //             };
-  //             const rzp = new (window as any).Razorpay(options);
-  //             rzp.open();
-  //           }
-  //         }
-  //       }
-  //     },
-  //     [state, validateForm, addUser, addPaymentDetails, selectedCourse, router]
-  //   );
-
-  const onClearClick = useCallback(
-    async (event: React.MouseEvent<HTMLElement>) => {
-      event.preventDefault();
-      setState({ dtoCompany: { ...COMPANY, id: state.dtoCompany.id }, errorMessages: { ...ERROR_MESSAGES } } as StateType);
-    },
-    [state.dtoCompany.id, ERROR_MESSAGES]
   );
 
   const onCancelClick = useCallback(
@@ -472,19 +512,9 @@ const onDomainNameChange = useCallback(
     },
     [router]
   );
-
-  const setOpen1 = useCallback(async (): Promise<void> => {
-    setState({ open1: true } as StateType);
-  }, []);
-
-  const setClose1 = useCallback(async (): Promise<void> => {
-    setState({ open1: false } as StateType);
-  }, []);
-
   const setOpen2 = useCallback(async (): Promise<void> => {
     setState({ open2: true } as StateType);
   }, []);
-
   const setClose2 = useCallback(async (): Promise<void> => {
     setState({ open2: false } as StateType);
   }, []);
@@ -495,24 +525,18 @@ const onDomainNameChange = useCallback(
     onNormalizedInputChange,
     onCodeChange,
     onCompanyNameBlur,
-    // onCompanyTypeBlur,
-    onStatusBlur,
     onEmailBlur,
     onPhoneNoBlur,
     onCompanyCodeBlur,
     onAddressBlur,
-    onCompanyStatusChange,
-    // onCompanyTypeChange,
     onSaveClick,
-    onClearClick,
     onCancelClick,
-    setOpen1,
-    setClose1,
     setOpen2,
     setClose2,
     onPhoneNoChange,
-    onDomainNameBlur,
-    saving,onDomainNameChange
+    onDomainPrefixBlur,
+    saving,
+    onDomainPrefixChange
   };
 };
 
