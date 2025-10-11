@@ -11,10 +11,26 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
+const bannerImages = ['/examination/exam5.jpg', '/examination/exam1.jpg', '/examination/exam12.png'];
 
 const ClientExamMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+   const images = [
+    "/examination/add-exam.webp",
+    "/examination/exam-ques..webp",
+    "/examination/exam-result.webp",
+    "/examination/import-exam.webp",
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+   useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % images.length);
+      }, 4000); // change page every 4 seconds
+      return () => clearInterval(interval);
+    }, []);
 
   // Auto-slide every 3 seconds
   useEffect(() => {
@@ -80,63 +96,81 @@ const ClientExamMgmt = () => {
                   </MyGrid>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Admission Management System</span> is a digital platform
-                  designed to simplify and streamline the entire student admission process. It helps school efficiently manage applications,
-                  registration, document submission, and free payments in an organized and transparent manner. This system reduces manual
-                  paperwork and errors by providing an automated process both administrators and parents. Parents can conveniently fill out
-                  admission form, upload necessary documents, and track application status online, while schools can manage student data
-                  securely through a central database. With features like real-time notification, data validation, and secure record
-                  management, data validation, and secure record management, the school admission management system ensures a hassle-free
-                  experience for application and smooth operations for the school administration.
+                  Online exams are computer-based tests that allow students to take assessments through the internet instead
+                  of traditional paper methods. They provide flexibility in time and location, support automated evaluation,
+                  and offer features like instant results, question randomization, and secure monitoring. This system makes
+                  learning and examination more efficient, accessible, and transparent for both students and institutions.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
-                  <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
+                  <div className="section-heading1"> KEY HIGHLIGHTS OF ONLINE EXAMINATION MANAGEMENT</div>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
                   <MyCardContent className="list-text">
                     <ul className="benefits-list">
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> Fill Application form from Anywhere and Anytime.
+                        <span>&#10003;</span> Flexible: Attempt exams from anywhere.
                       </li>
                       <li>
-                        <span>&#10003;</span> No need to stand in long queues.
+                        <span>&#10003;</span> Quick: Instant results and auto-grading.
                       </li>
                       <li>
-                        <span>&#10003;</span> Cost savings for the institutes.
+                        <span>&#10003;</span> Secure: safe login & random question.
                       </li>
                       <li>
-                        <span>&#10003;</span>Reducing the unwanted data.
+                        <span>&#10003;</span>Transparent: Accurate performance reports.
                       </li>
                       <li>
-                        <span>&#10003;</span> Eliminates the need for extra staff to manage applicants.
+                        <span>&#10003;</span> Cost-effective: save paper & resources.
                       </li>
-                      <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> No longer requirement of printing & storing the forms separately.
+                      <li style={{ marginBottom: '5px', padding: 0 }}>
+                        <span>&#10003;</span> Easy to manage: simple exam creation & result review.
                       </li>
                     </ul>
                   </MyCardContent>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Admission Form</h2>
-                  <div className="responsive-image">
-                    <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
-                  </div>
-                </MyGrid>
+                  <h2 className="section-subheading">Academics</h2>
+                      <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                        <div className="book-container">
+                          {/* Heading overlay on book background */}
+                          <h2 className="book-heading">How It Works Section</h2>
 
-                <MyCardContent className="card-text">
-                  The online admission and student enrollment process in schools can be tedious, involving managing and analyzing inquiries,
-                  planning marketing strategies, and creating and handling student records. Verifying student data and generating merit
-                  lists for various admission rounds based on seat availability, while maintaining effective communication with parents and
-                  students throughout the process, consumes a lot of time. Manual handling of paperwork and documents often leads to errors.
-                  <br />
-                  Our <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> is designed to streamline
-                  all activities involved in student enrollment by combining them into a cloud-based platform. The main objective of this
-                  system is to help school staff efficiently enroll students and maintain accurate records. It enables administrators to
-                  simplify and automate the online admission process by managing and verifying student entries, documents, images,
-                  certificates.
-                </MyCardContent>
+                          <div className="book">
+                            {images.map((src, index) => (
+                              <img
+                                key={index}
+                                src={src}
+                                alt={`page-${index}`}
+                                className={`page ${index === current ? "active" : ""}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </MyGrid>
+                  <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                    <MyCardContent className="list-text">
+                      <ul className="benefits-list">
+                        <li style={{ margin: 0, padding: 0 }}>
+                          <span>&#10003;</span> After sign-in, the admin dashboard opens automatically.
+                        </li>
+                        <li>
+                          <span>&#10003;</span> From the left-side menu, click on academics.
+                        </li>
+                        <li>
+                          <span>&#10003;</span> Under accademics, select online exam.
+                        </li>
+                        <li>
+                          <span>&#10003;</span>Transparent: Accurate performance reports.
+                        </li>
+                        <li style={{ margin: 0, padding: 0 }}>
+                          <span>&#10003;</span> The exam dashboard will open, showing a list of existing exams.
+                        </li>
+                      </ul>
+                    </MyCardContent>
+                  </MyGrid>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Add New Students</h2>
+                  <h2 className="section-subheading">Online Exam </h2>
                   <div className="responsive-video">
                     <iframe
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
@@ -147,17 +181,19 @@ const ClientExamMgmt = () => {
                   </div>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> helps schools automate and
-                  simplify routine activities such as curriculum management, attendance tracking, administrative tasks, information
-                  handling, fee management, and assignments. This robust, cloud-based, and time-tested educational ERP system offers
-                  advanced modules that empower teachers and educators to digitize the daily operations of educational institutions.
-                  Designed to efficiently manage and record administrative work,
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management Software</span> includes all essential modules
-                  for tracking student records, admissions, fees, timetable planning, and other critical school processes, enabling seamless
-                  management for both teachers and staff.
+                  To manage your online examinations, begin by clicking on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Online Exam </span> section.
+                  Once inside, select the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Add Exam</span> option.
+                  This will open the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Add Exam Dashboard,</span> where you can view a list of all existing exams.
+                  <br />
+                  To create a new exam, click on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+ Add</span> button.
+                  You will then be prompted to select important details such as the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Course, Quiz Name, Quiz Code,</span> and
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Quiz Type </span>.
+                  After entering all the required information, click the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Save</span> button to finalize and create your new exam entry.
+                  <br />
+                  Your newly created exam will now appear in the exam list, ready for further configuration or assignment to students.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Review Admissions</h2>
+                  <h2 className="section-subheading">Add exam</h2>
                   <div className="responsive-video">
                     <iframe
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
@@ -167,23 +203,150 @@ const ClientExamMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-
                 <MyCardContent className="card-text">
-                  The Review Admission feature enables administrators to efficiently manage and monitor the entire admission process within
-                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management System</span>. Once logged in, administrators
-                  can access the Academics section to view all admission entries in real time. The module allows filtering admissions based
-                  on various criteria such as class, admission date, and academic session, providing quick access to relevant records.
-                  <br />
-                  Administrators can review each applicant’s complete admission details, including personal information, submitted
-                  documents, fee payment status, and other related data. This feature streamlines the admission verification process,
-                  ensuring transparency and accuracy. By centralizing admission review operations, it eliminates manual checks and enhances
-                  decision-making efficiency for school staff and management.
+                  To create and manage exams, navigate to the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Add Exam </span>
+                  section under the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Online Exam </span>
+                  module. This section allows you to add new exams and manage existing ones.
+                  Click on the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> +Add </span>
+                  button to create a new exam. Enter the required details such as
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Course Name, Quiz Name, Duration, Quiz Code, </span>
+                  and
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Quiz Type. </span>
+                  Once all fields are filled, click on
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Save </span>
+                  to successfully add your exam.
+
+                  After adding, you can verify or edit the exam by selecting the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Edit Exam </span>
+                  option. Click on the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> hyperlinked student name </span>
+                  to review complete details. If necessary, update the status from
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Active </span>
+                  to
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Verified </span>
+                  and click
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Save </span>
+                  to confirm your changes.
+                </MyCardContent>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Exam Questions </h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+                <MyCardContent className="card-text">
+                  To manage your exam questions, go to the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Exam Question </span>
+                  section under the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Online Exam </span>
+                  module. The
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Exam Question Dashboard </span>
+                  will open, showing a list of all existing exam questions.
+
+                  To add a new question, click on the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Add </span>
+                  button. Select the appropriate
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Quiz Name </span>
+                  and enter the
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Question </span>.
+                  Once completed, click on
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Save </span>
+                  to add the exam question successfully.
+
+                  The newly added question will now appear in the dashboard, ready for review or editing if required.
                 </MyCardContent>
               </MyGrid>
+              <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                <h2 className="section-subheading">Import Exam </h2>
+                <div className="responsive-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                    title="How to Add New Students | Step-by-Step Guide"
+                    frameBorder="0"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </MyGrid>
+              <MyCardContent className="card-text">
+                To manage and import exams efficiently, navigate to the
+                <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Import Exam </span>
+                section under the
+                <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Online Exam </span>
+                module. Here, you will find the
+                <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Import Exam Dashboard, </span>
+                which displays a complete list of all exams that have already been imported. This allows you to keep track of existing exams and ensures there are no duplicates.
+
+                To create a new imported exam, start by selecting the required
+                <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Course Name, Quiz Name, Quiz Code, Quiz Type, </span>
+                and define the
+                <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Duration </span>
+                for the quiz. It is important to ensure that all details match the intended course and assessment criteria. After entering the necessary information, attach the file containing the quiz questions. The system supports uploading files in the prescribed format, which allows multiple questions to be added at once, saving time and reducing manual entry errors.
+
+                Once the file is selected, click on the
+                <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Upload </span>
+                button. The system will process the file, add the questions to the selected quiz, and display a confirmation message once the import is successful. The newly imported exam will now appear in the dashboard, ready for assignment to students or further editing. This feature streamlines exam creation, ensures consistency in question formatting, and provides an efficient way to manage large sets of exam questions.
+              </MyCardContent>
+              <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                <h2 className="section-subheading">Student Skill Test</h2>
+                <div className="responsive-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                    title="How to Add New Students | Step-by-Step Guide"
+                    frameBorder="0"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </MyGrid>
+              <MyCardContent className="card-text">
+                To take the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Student Skill Test, </span> start by entering your correct <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Username </span> and <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Password </span>. Upon successful login, the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Learning Dashboard </span> will open automatically. Navigate to the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Skill Test </span> section to begin your exam.
+
+                During the test, use the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> NEXT </span> button to move forward to the next question, and the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> PREV </span> button if you need to review a previous question. Keep an eye on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> “Time Left” </span> timer located at the top-right corner of the screen to manage your exam time effectively.
+
+                After answering all questions, click the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Submit </span> button. A confirmation box will appear; click <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Submit </span> again to finalize and complete your exam. Once submitted, you can review your <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Score </span> and view the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Quiz Summary </span> for detailed insights.
+
+                You also have two additional options: click <span style={{ fontWeight: 'bold', color: '#334D6E' }}> RESTART EXAM </span> if you want to take the exam again, or click <span style={{ fontWeight: 'bold', color: '#334D6E' }}> EXIT EXAM </span> to leave the exam page and return to the main dashboard.
+              </MyCardContent>
+               <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Exam result </h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+                  <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                    <MyCardContent className="list-text">
+                      <ul className="benefits-list">
+                        <li style={{ margin: 0, padding: 0 }}>
+                          <span>&#10003;</span> Click on Exam Result. 
+                        </li>
+                        <li>
+                          <span>&#10003;</span> Under online exam , select Exam Result. 
+                        </li>
+                        <li>
+                          <span>&#10003;</span> The exam result dashboard will open, showing a Review of Exam Result.
+                        </li>
+                        <li style={{ margin: 0, padding: 0 }}>
+                          <span>&#10003;</span> Select student name, from date and to date.
+                        </li>
+                      </ul>
+                    </MyCardContent>
+                  </MyGrid>
             </MyCardContent>
           </MyCard>
-
-          <div className="container">
+        </MyBox>
+            <div className="container">
             <div className="vertical_center">
               <p>
                 © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
@@ -195,7 +358,6 @@ const ClientExamMgmt = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
     </>
   );

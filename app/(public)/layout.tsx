@@ -48,6 +48,7 @@ export default function RootLayout({
         { text: 'Fees Management', href: `/${MOD_DESC}/fee-management` },
         { text: 'Attendance Management', href: `/${MOD_DESC}/attendance-management` },
         { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
+        { text: 'Course Management', href: `/${MOD_DESC}/course-management` },
         { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
         { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
         // { text: 'Company Creation', href: `/company` }
