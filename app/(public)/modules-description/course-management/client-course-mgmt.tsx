@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/coursemngImgs/course3.jpg', '/coursemngImgs/course7.jpg'];
+const bannerImages = ['/coursemngImgs/course8.jpg', '/coursemngImgs/course7.jpg'];
 
 const ClientCourseMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

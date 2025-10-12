@@ -11,9 +11,24 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
+const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff8.jpg', '/affiliateImgs/aff10.jpg'];
 
 const ClientAffiliateMgmt = () => {
+    const images = [
+    "/affiliateImgs/aff.PNG",
+    "/affiliateImgs/aff1.PNG",
+    "/affiliateImgs/aff2.PNG",
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000); // change page every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-slide every 3 seconds
@@ -80,14 +95,15 @@ const ClientAffiliateMgmt = () => {
                   </MyGrid>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Admission Management System</span> is a digital platform
-                  designed to simplify and streamline the entire student admission process. It helps school efficiently manage applications,
-                  registration, document submission, and free payments in an organized and transparent manner. This system reduces manual
-                  paperwork and errors by providing an automated process both administrators and parents. Parents can conveniently fill out
-                  admission form, upload necessary documents, and track application status online, while schools can manage student data
-                  securely through a central database. With features like real-time notification, data validation, and secure record
-                  management, data validation, and secure record management, the school admission management system ensures a hassle-free
-                  experience for application and smooth operations for the school administration.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Management System</span> is a powerful
+                  platform designed to manage and track affiliate partnerships effectively. It enables organizations to promote
+                  their courses, products, or services through registered affiliates who earn commissions based on successful
+                  referrals or sales. This system automates the entire affiliate process — from registration, referral tracking,
+                  and commission calculation to payment management — ensuring transparency and efficiency. Administrators can
+                  monitor affiliate performance, view reports, and manage payouts, while affiliates can access personalized
+                  dashboards to track their earnings, referral links, and progress. By integrating automation and real-time
+                  analytics, the Affiliate Management System helps institutions or businesses expand their reach, increase
+                  enrollments, and build strong marketing networks with minimal manual effort.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
@@ -96,47 +112,64 @@ const ClientAffiliateMgmt = () => {
                   <MyCardContent className="list-text">
                     <ul className="benefits-list">
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> Fill Application form from Anywhere and Anytime.
+                        <span>&#10003;</span> Helps increase student enrollments and reach new audiences.
                       </li>
                       <li>
-                        <span>&#10003;</span> No need to stand in long queues.
+                        <span>&#10003;</span> Provides a cost-effective way to promote courses or services.
                       </li>
                       <li>
-                        <span>&#10003;</span> Cost savings for the institutes.
+                        <span>&#10003;</span> Tracks referrals, clicks, and conversions automatically.
                       </li>
                       <li>
-                        <span>&#10003;</span>Reducing the unwanted data.
+                        <span>&#10003;</span> Gives real-time performance reports for each affiliate.
                       </li>
                       <li>
-                        <span>&#10003;</span> Eliminates the need for extra staff to manage applicants.
+                        <span>&#10003;</span> Simplifies commission calculation and payout management.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Improves brand visibility through affiliate promotions.
                       </li>
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> No longer requirement of printing & storing the forms separately.
+                        <span>&#10003;</span> Saves time by reducing manual tracking and calculations.
                       </li>
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Admission Form</h2>
+                {/* <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Online affiliate</h2>
                   <div className="responsive-image">
                     <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
                   </div>
-                </MyGrid>
+                </MyGrid> */}
+                  <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                        <div className="book-container">
+                          {/* Heading overlay on book background */}
+                          <h2 className="book-heading">Online affiliate</h2>
 
+                          <div className="book">
+                            {images.map((src, index) => (
+                              <img
+                                key={index}
+                                src={src}
+                                alt={`page-${index}`}
+                                className={`page ${index === current ? "active" : ""}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </MyGrid>
                 <MyCardContent className="card-text">
-                  The online admission and student enrollment process in schools can be tedious, involving managing and analyzing inquiries,
-                  planning marketing strategies, and creating and handling student records. Verifying student data and generating merit
-                  lists for various admission rounds based on seat availability, while maintaining effective communication with parents and
-                  students throughout the process, consumes a lot of time. Manual handling of paperwork and documents often leads to errors.
-                  <br />
-                  Our <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> is designed to streamline
-                  all activities involved in student enrollment by combining them into a cloud-based platform. The main objective of this
-                  system is to help school staff efficiently enroll students and maintain accurate records. It enables administrators to
-                  simplify and automate the online admission process by managing and verifying student entries, documents, images,
-                  certificates.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Online Affiliate</span> feature allows users to
+                  register as affiliates and manage their referrals directly through the platform. To get started, click on
+                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option and fill in the affiliate
+                  registration form with the required details, then click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to
+                  create your affiliate account. Once registered, go to the home page, log in, and click on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option
+                  under the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Dashboard</span>. You will be redirected to <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Your Referrals List</span>, where
+                  you can view and manage all your referrals. To add a new referral, click on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+ADD</span> button, fill in the necessary details, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to
+                  create the referral entry. This process allows affiliates to efficiently register, manage, and track their referrals online, ensuring proper record-keeping and smooth commission tracking.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Add New Students</h2>
+                  <h2 className="section-subheading">Affiliate Dashboard</h2>
                   <div className="responsive-video">
                     <iframe
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
@@ -147,17 +180,22 @@ const ClientAffiliateMgmt = () => {
                   </div>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> helps schools automate and
-                  simplify routine activities such as curriculum management, attendance tracking, administrative tasks, information
-                  handling, fee management, and assignments. This robust, cloud-based, and time-tested educational ERP system offers
-                  advanced modules that empower teachers and educators to digitize the daily operations of educational institutions.
-                  Designed to efficiently manage and record administrative work,
-                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management Software</span> includes all essential modules
-                  for tracking student records, admissions, fees, timetable planning, and other critical school processes, enabling seamless
-                  management for both teachers and staff.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Dashboard </span> provides affiliates
+                  with a complete overview of their performance, earnings, and referral activities in one place.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Summary</span> section
+                  displays key statistics such as total referrals, successful conversions, total earnings, and
+                  active campaigns — helping affiliates quickly understand their overall progress.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Your Referral Summary</span> section
+                  gives detailed insights into every referral made, including referral links, the number of users
+                  who joined or purchased through those links, and the current status of each referral. Lastly,
+                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment Info</span> section shows all
+                  commission-related details, such as earned amount, pending payments, payout history, and payment
+                  dates, ensuring full financial transparency. Together, these sections allow affiliates to track
+                  their activities, analyze performance, and manage their earnings efficiently through a single,
+                  user-friendly dashboard.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Review Admissions</h2>
+                  <h2 className="section-subheading">Affiliate Referrals</h2>
                   <div className="responsive-video">
                     <iframe
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
@@ -169,32 +207,79 @@ const ClientAffiliateMgmt = () => {
                 </MyGrid>
 
                 <MyCardContent className="card-text">
-                  The Review Admission feature enables administrators to efficiently manage and monitor the entire admission process within
-                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management System</span>. Once logged in, administrators
-                  can access the Academics section to view all admission entries in real time. The module allows filtering admissions based
-                  on various criteria such as class, admission date, and academic session, providing quick access to relevant records.
-                  <br />
-                  Administrators can review each applicant’s complete admission details, including personal information, submitted
-                  documents, fee payment status, and other related data. This feature streamlines the admission verification process,
-                  ensuring transparency and accuracy. By centralizing admission review operations, it eliminates manual checks and enhances
-                  decision-making efficiency for school staff and management.
+                  The  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Referrals</span> section in
+                  the Affiliate Dashboard provides detailed information about all users or customers who joined or purchased
+                  through an affiliate’s referral link. It displays each referral’s name, registration or purchase date,
+                  status (such as pending, completed, or approved), and any commission earned from that referral. This
+                  section helps affiliates track the effectiveness of their promotional efforts, see which referrals
+                  converted successfully, and identify opportunities to increase engagement. By offering a clear and
+                  organized view of all referral activities, this feature ensures transparency and allows affiliates
+                  to monitor and maximize their earnings efficiently.
                 </MyCardContent>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Review Affiliates</h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+
+                <MyCardContent className="card-text">
+                  The  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Review Affiliates </span> section allows
+                  administrators to manage and monitor affiliates efficiently. To add new affiliates, click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Affiliates</span>,
+                  fill in the required details such as name, contact information, and commission structure, and then
+                  click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create the affiliate account. Once added, you are redirected to the Your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliates List</span> page,
+                  where all created affiliates are displayed for review. To calculate payments, select the desired users
+                  and specify the  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>From Date</span> and  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date </span>for the payment period. After selecting the appropriate rows,
+                  click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Calculate Payment”</span> to generate commission details for the selected affiliates. This process ensures
+                  accurate tracking, timely payouts, and streamlined management of all affiliate activities.
+                </MyCardContent>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Referrals</h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+
+                <MyCardContent className="card-text">
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Referrals </span> section
+                  allows administrators or affiliates to add and manage referral records efficiently.
+                  To add a new referral, click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Referrals</span>,
+                  fill in the required details such as the referral’s name, contact information, and related affiliate,
+                  and then click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create the
+                  referral entry. After submission, you are redirected to the Your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliates List</span> page
+                  within the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Review Referrals</span> section,
+                  where all added referrals are displayed for review. To verify referrals, select the desired users,
+                  specify the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>From Date</span> and <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date</span> for
+                  the relevant period, select the appropriate rows, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Mark Verified”</span>. This process ensures that all referra
+                  l records are properly tracked, verified, and managed for accurate reporting and commission calculation.
+                </MyCardContent>
+
               </MyGrid>
             </MyCardContent>
           </MyCard>
         </MyBox>
-         <div className="container">
+        <div className="container">
+          <div className="vertical_center">
+            <p>
+              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
+            </p>
             <div className="vertical_center">
-              <p>
-                © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-              </p>
-              <div className="vertical_center">
-                ||
-                <a href="/terms">Terms of use</a>||
-                <a href="/privacy-policy">Privacy Policy</a>
-              </div>
+              ||
+              <a href="/terms">Terms of use</a>||
+              <a href="/privacy-policy">Privacy Policy</a>
             </div>
           </div>
+        </div>
       </div>
     </>
   );
