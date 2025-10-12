@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
-const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
+const bannerImages = ['/coursemngImgs/course8.jpg', '/coursemngImgs/course7.jpg'];
 
 const ClientCourseMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -118,7 +118,7 @@ const ClientCourseMgmt = () => {
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Academics</h2>
                   <div className="responsive-image">
-                    <img src="/course management/course.webp" alt="Admission Form" />
+                    <img src="/coursemngImgs/course.webp" alt="Admission Form" />
                   </div>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
