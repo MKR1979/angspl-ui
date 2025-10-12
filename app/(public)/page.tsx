@@ -14,18 +14,19 @@ export default function Home() {
       <h2 className="rolling-header"> {COMPANY}</h2>     
        <div
         style={{
-          backgroundImage: 'url(/hero2.png)',
+          // backgroundImage: 'url(/hero2.png)',
+          backgroundImage: 'url(/home-page/homePage.jpg)',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           position: 'relative',
           width: '100%',
-          height: '350px'
+          height: '365px'
          }}
       >
-        <div className={styles.hero_text}>
+        {/* <div className={styles.hero_text}>
           <h1 style={{ fontSize: '50px' }}>Next-Gen Technology for Next-Level Growth</h1>
-        </div>
+        </div> */}
       </div>
       <style>
         {`

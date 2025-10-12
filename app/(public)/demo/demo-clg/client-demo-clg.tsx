@@ -223,7 +223,7 @@ const ClientDemoClg = () => {
           <div className="hero-content">
             <h1 className="hero-title">Empower Your College with Smart Management</h1>
             <p className="hero-subtitle">
-              Manage admissions, attendance, fees, and communication – all from one powerful dashboard.
+              Manage admissions, attendance, fees, and communication, all from one powerful dashboard.
               <a href="https://adhyayan.college" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700', fontWeight: 'bold' }}>
                 Visit Live Demo
               </a>
