@@ -136,7 +136,7 @@ const ClientDemoSch = () => {
 
           <p>
             <strong>Benefits:</strong> Reduces manual accounting errors, ensures timely fee collection, improves cash flow, and provides
-            real-time visibility into the school’s financial health. Administrators can easily track both incoming fees and outgoing
+            real-time visibility into the schools financial health. Administrators can easily track both incoming fees and outgoing
             expenses.
           </p>
 
