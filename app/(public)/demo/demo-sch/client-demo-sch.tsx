@@ -232,15 +232,16 @@ const ClientDemoSch = () => {
             href="https://angspl.com/contact-us"
             target="_blank"
             variant="contained"
-            color="success"
             sx={{
               position: 'absolute',
               bottom: { xs: 50, sm: 50 },
-              right: { xs: 10, sm: 20 }, 
+              right: { xs: 10, sm: 20 },
               borderRadius: '90px',
+              bgcolor: '#FFD700',
+              color: '#334D6E',
               boxShadow: 3,
-              px: { xs: 0.8, sm: 1.5 }, 
-              py: { xs: 0.5, sm: 1.5 }, 
+              px: { xs: 0.8, sm: 1.5 },
+              py: { xs: 0.5, sm: 1.5 },
               display: 'flex',
               alignItems: 'center',
               gap: { xs: 0.5, sm: 1 },
@@ -249,7 +250,7 @@ const ClientDemoSch = () => {
           >
             <SchoolIcon
               sx={{
-                fontSize: { xs: 14, sm: 20 } 
+                fontSize: { xs: 14, sm: 20 }
               }}
             />
             Schedule Free Demo

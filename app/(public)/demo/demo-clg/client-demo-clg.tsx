@@ -233,12 +233,14 @@ const ClientDemoClg = () => {
             href="https://angspl.com/contact-us"
             target="_blank"
             variant="contained"
-            color="success"
+            // color="success"
             sx={{
               position: 'absolute',
               bottom: { xs: 50, sm: 50 },
               right: { xs: 10, sm: 20 }, 
               borderRadius: '90px',
+              bgcolor: '#FFD700',
+              color: '#334D6E',
               boxShadow: 3,
               px: { xs: 0.8, sm: 1.5 }, 
               py: { xs: 0.5, sm: 1.5 }, 
