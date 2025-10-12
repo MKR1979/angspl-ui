@@ -1,16 +1,16 @@
 import { useCallback, useReducer } from 'react';
-import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
+// import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { useRouter } from 'next/navigation';
 
 type StateType = {
-  breadcrumbsItems: BreadcrumbsItem[];
+  // breadcrumbsItems: BreadcrumbsItem[];
   tabIndex: number;
   expandedRows: Record<string, boolean>;
 };
 
 const usePricingTech = () => {
   const INITIAL_STATE: StateType = Object.freeze({
-    breadcrumbsItems: [{ label: 'Terms', href: '/terms/list' }, { label: 'Add Term' }],
+    // breadcrumbsItems: [{ label: 'Terms', href: '/terms/list' }, { label: 'Add Term' }],
     tabIndex: 0,
     expandedRows: {}
   });

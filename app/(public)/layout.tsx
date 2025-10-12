@@ -20,8 +20,8 @@ import MyLink from '../custom-components/MyLink';
 import MyLogo from '../custom-components/MyLogo';
 import MyButton from '../custom-components/MyButton';
 import { Menu, MenuItem } from '@mui/material';
-import {MOD_DESC, MODULE_DEMO} from '../(public)/constants/constants';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@mui/icons-material';
+import * as Constants from './constants/constants';
 
 export default function RootLayout({
   children
@@ -35,8 +35,6 @@ export default function RootLayout({
   const [openMobileSubmenus, setOpenMobileSubmenus] = useState<Record<string, boolean>>({});
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
-  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
-
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
@@ -44,37 +42,37 @@ export default function RootLayout({
     {
       text: 'Pricing',
       children: [
-        { text: 'College', href: '/pricing-clg' },
-        { text: 'School', href: '/pricing-sch' },
-        { text: 'Institute', href: '/pricing-tech' }
+        { text: 'College', href: `/${Constants.MODULE_PRICING}/pricing-clg` },
+        { text: 'School', href: `/${Constants.MODULE_PRICING}/pricing-sch` },
+        { text: 'Institute', href: `/${Constants.MODULE_PRICING}/pricing-tech` }
       ]
     },
     {
       text: 'Modules',
       children: [
-        { text: 'Admission Management', href: `/${MOD_DESC}/adm-management` },
-        { text: 'Student Management', href: `/${MOD_DESC}/student-management` },
-        { text: 'Fees Management', href: `/${MOD_DESC}/fee-management` },
-        { text: 'Attendance Management', href: `/${MOD_DESC}/attendance-management` },
-        { text: 'Academics Management', href: `/${MOD_DESC}/academic-management` },
-        { text: 'Course Management', href: `/${MOD_DESC}/course-management` },
-        { text: 'Examination Management', href: `/${MOD_DESC}/exam-management` },
-        { text: 'Affiliate Management', href: `/${MOD_DESC}/affiliate-management` },
+        { text: 'Admission Management', href: `/${Constants.MOD_DESC}/adm-management` },
+        { text: 'Student Management', href: `/${Constants.MOD_DESC}/student-management` },
+        { text: 'Fees Management', href: `/${Constants.MOD_DESC}/fee-management` },
+        { text: 'Attendance Management', href: `/${Constants.MOD_DESC}/attendance-management` },
+        { text: 'Academics Management', href: `/${Constants.MOD_DESC}/academic-management` },
+        { text: 'Course Management', href: `/${Constants.MOD_DESC}/course-management` },
+        { text: 'Examination Management', href: `/${Constants.MOD_DESC}/exam-management` },
+        { text: 'Affiliate Management', href: `/${Constants.MOD_DESC}/affiliate-management` },
       ]
     },
     {
-      text: 'Our Services',
+      text: 'Products',
       children: [
-        { text: 'Product/ Services', href: '/our-service' },
+        { text: 'Services', href: '/our-service' },
         { text: 'Technology', href: '/technology' }
       ]
     },
     { 
       text: 'Demo', 
       children: [
-        { text: 'College', href: `/${MODULE_DEMO}/demo-clg` },
-        { text: 'School', href: `/${MODULE_DEMO}/demo-sch` },
-        { text: 'Institute', href: `/${MODULE_DEMO}/demo-tech` }
+        { text: 'College', href: `/${Constants.MODULE_DEMO}/demo-clg` },
+        { text: 'School', href: `/${Constants.MODULE_DEMO}/demo-sch` },
+        { text: 'Institute', href: `/${Constants.MODULE_DEMO}/demo-tech` }
       ]  
     },
     { text: 'Contact Us', href: '/contact-us' },
