@@ -38,13 +38,12 @@ export default function RootLayout({
   const drawerWidth = 240;
   const navItems = [
     { text: 'Home', href: '/' },
-    { text: 'About Us', href: '/about-us' },
     {
       text: 'Pricing',
       children: [
-        { text: 'College', href: `/${Constants.MODULE_PRICING}/pricing-clg` },
         { text: 'School', href: `/${Constants.MODULE_PRICING}/pricing-sch` },
-        { text: 'Institute', href: `/${Constants.MODULE_PRICING}/pricing-tech` }
+        { text: 'College', href: `/${Constants.MODULE_PRICING}/pricing-clg` },        
+        { text: 'Institute', href: `/${Constants.MODULE_PRICING}/pricing-tech`}
       ]
     },
     {
@@ -70,13 +69,14 @@ export default function RootLayout({
     { 
       text: 'Demo', 
       children: [
-        { text: 'College', href: `/${Constants.MODULE_DEMO}/demo-clg` },
         { text: 'School', href: `/${Constants.MODULE_DEMO}/demo-sch` },
+        { text: 'College', href: `/${Constants.MODULE_DEMO}/demo-clg` },   
         { text: 'Institute', href: `/${Constants.MODULE_DEMO}/demo-tech` }
       ]  
     },
     { text: 'Contact Us', href: '/contact-us' },
     { text: 'affiliate', href: '/affiliate' }, 
+    { text: 'About Us', href: '/about-us' },
   ];
 
   // Toggle Drawer

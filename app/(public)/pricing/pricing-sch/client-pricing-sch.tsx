@@ -752,306 +752,292 @@ const ClientPricingSch = () => {
 
   return (
     <div style={{ width: '100%', paddingTop: '0px' }}>
-      <MyBox>
-        <MyCard>
-          <MyCardContent>
-            <MyBox
+      <MyCardContent>
+        <MyBox
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            position: 'relative',
+            mb: 2,
+            flexDirection: { xs: 'column', sm: 'row' },
+            gap: { xs: 2, sm: 0 }
+          }}
+        >
+          <MyBox
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              position: { xs: 'static', sm: 'absolute' },
+              left: { sm: 0 },
+              justifyContent: { xs: 'center', sm: 'flex-start' },
+              width: { xs: '100%', sm: 'auto' }
+            }}
+          >
+            <MyButton
+              variant="outlined"
               sx={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                position: 'relative',
-                mb: 2,
-                flexDirection: { xs: 'column', sm: 'row' },
-                gap: { xs: 2, sm: 0 }
+                minWidth: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                fontSize: '1rem',
+                padding: 0
               }}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
             >
-              <MyBox
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 2,
-                  position: { xs: 'static', sm: 'absolute' },
-                  left: { sm: 0 },
-                  justifyContent: { xs: 'center', sm: 'flex-start' },
-                  width: { xs: '100%', sm: 'auto' }
-                }}
-              >
-                <MyButton
-                  variant="outlined"
-                  sx={{
-                    minWidth: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    fontSize: '1rem',
-                    padding: 0
+              <ArrowBack />
+            </MyButton>
+            <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
+              Choose the right plan for your{' '}
+              <strong>
+                <span style={{ fontSize: '1.1rem' }}>School</span>
+              </strong>
+            </MyTypography>
+            <MyButton
+              variant="outlined"
+              sx={{
+                minWidth: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                fontSize: '1rem',
+                padding: 0
+              }}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-tech`)}
+            >
+              <ArrowForward />
+            </MyButton>
+          </MyBox>
+          <MyBox
+            sx={{
+              margin: { xs: '0', sm: '0 auto' },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: { xs: '100%', sm: 'auto' }
+            }}
+          >
+            <MyTabs value={state.tabIndex} onChange={handleTabChange} sx={{ marginBottom: 0, paddingBottom: 0 }}>
+              <MyTab label="Monthly Billing" />
+              <MyTab label="Annual Billing" />
+            </MyTabs>
+          </MyBox>
+        </MyBox>
+        <MyTabPanel value={state.tabIndex} index={0}>
+          <MyGrid container spacing={2} alignItems="stretch">
+            {[
+              {
+                title: 'Startup',
+                price: Constants.SCHOOL_PRICING.STARTUP_MONTHLY,
+                description: `A perfect starting point for schools to build a strong online presence. This fully managed website includes all essential features to share school information, highlight achievements, and efficiently manage admission enquiries.`,
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Premium',
+                price: Constants.SCHOOL_PRICING.PREMIUM_MONTHLY,
+                description: `A dynamic web application with Online Admission, Fee Payment Integration, and an intuitive Admin Dashboard
+                     for efficiently managing Students, Staff, Classes, and Courses. Ideal for schools looking for advanced functionality and
+                     streamlined administration.`,
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Enterprise',
+                price: Constants.SCHOOL_PRICING.ENTERPRISE_MONTHLY,
+                description: `An advanced web application featuring Online Admission, Course Enrollment, Integrated Payments, and a
+                     powerful Admin Panel for managing Students, Staff, Roles, and Courses. Includes a dedicated Student Dashboard with
+                      Online Exams, Notes, Projects, Homework, Course Materials, and Fee Payments — perfect for schools seeking a complete
+                     digital learning and management solution.`,
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Dedicated',
+                price: Constants.SCHOOL_PRICING.DEDICATED_MONTHLY,
+                description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and maximum
+                     flexibility. Includes all features from the Enterprise Plan, plus an Employee Dashboard with location-based attendance
+                      tracking and centralized administrative reporting — ideal for large schools and educational groups`,
+                extra: 'Excludes VAT/GST & Application Support'
+              }
+            ].map((plan) => (
+              <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyCard
+                  elevation={3}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s ease',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
                   }}
-                  onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 >
-                  <ArrowBack />
-                </MyButton>
-                <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
-                  Choose the right plan for your{' '}
-                  <strong>
-                    <span style={{ fontSize: '1.1rem' }}>School</span>
-                  </strong>
-                </MyTypography>
-                <MyButton
-                  variant="outlined"
-                  sx={{
-                    minWidth: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    fontSize: '1rem',
-                    padding: 0
-                  }}
-                  onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-tech`)}
-                >
-                  <ArrowForward />
-                </MyButton>
-              </MyBox>
-              <MyBox
-                sx={{
-                  margin: { xs: '0', sm: '0 auto' },
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: { xs: '100%', sm: 'auto' }
-                }}
-              >
-                <MyTabs value={state.tabIndex} onChange={handleTabChange} sx={{ marginBottom: 0, paddingBottom: 0 }}>
-                  <MyTab label="Monthly Billing" />
-                  <MyTab label="Annual Billing" />
-                </MyTabs>
-              </MyBox>
-            </MyBox>
-            <MyTabPanel value={state.tabIndex} index={0}>
-              <MyGrid container spacing={2} alignItems="stretch">
-                {[
-                  {
-                    title: 'Startup',
-                    price: Constants.STARTUP_MONTHLY,
-                    description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
+                  <CardHeader
+                    title={<span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
+                    sx={{
+                      textAlign: 'center',
+                      height: '40px',
+                      backgroundColor: '#e2e8f0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  />
+                  <MyCardContent
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: '10px',
+                      backgroundColor: '#f7fafc',
+                      border: '1px solid #e2e8f0',
+                      flexGrow: 1
+                    }}
+                  >
+                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
+                      ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
+                    </div>
+                    <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
+                    <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
+                    <MyBox sx={{ mt: 'auto', width: '100%' }}>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => goToCompanyModule('School', plan.title, 'Monthly', plan.price)}
+                      >
+                        Subscribe Now
+                      </MyButton>
+                    </MyBox>
+                  </MyCardContent>
+                </MyCard>
+              </MyGrid>
+            ))}
+          </MyGrid>
+        </MyTabPanel>
+        <MyTabPanel value={state.tabIndex} index={1}>
+          <MyGrid container spacing={2} alignItems="stretch">
+            {[
+              {
+                title: 'Startup',
+                price: Constants.SCHOOL_PRICING.STARTUP_YEARLY,
+                description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.`,
-                    extra: 'Billed Monthly, Excludes VAT / GST'
-                  },
-                  {
-                    title: 'Premium',
-                    price: Constants.PREMIUM_MONTHLY,
-                    description: `A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Premium',
+                price: Constants.SCHOOL_PRICING.PREMIUM_YEARLY,
+                description: `A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
                         Dashboard for effectively managing Users, Roles, and Courses. Ideal for Schools needing advanced functionality and
                         streamlined management.`,
-                    extra: 'Billed Monthly, Excludes VAT / GST'
-                  },
-                  {
-                    title: 'Enterprise',
-                    price: Constants.ENTERPRISE_MONTHLY,
-                    description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Enterprise',
+                price: Constants.SCHOOL_PRICING.ENTERPRISE_YEARLY,
+                description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.`,
-                    extra: 'Billed Monthly, Excludes VAT / GST'
-                  },
-                  {
-                    title: 'Dedicated',
-                    price: Constants.DEDICATED_MONTHLY,
-                    description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Dedicated',
+                price: Constants.SCHOOL_PRICING.DEDICATED_YEARLY,
+                description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
                         Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
                         Admin Reporting.`,
-                    extra: 'Excludes VAT/GST & Application Support'
-                  }
-                ].map((plan) => (
-                  <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={3}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '100%',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        transition: 'transform 0.3s ease',
-                        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                    >
-                      <CardHeader
-                        title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
-                        sx={{
-                          textAlign: 'center',
-                          height: '40px',
-                          backgroundColor: '#e2e8f0',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                      />
-                      <MyCardContent
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          padding: '10px',
-                          backgroundColor: '#f7fafc',
-                          border: '1px solid #e2e8f0',
-                          flexGrow: 1
-                        }}
-                      >
-                        <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
-                          ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
-                        </div>
-                        <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
-                        <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                          {plan.description}
-                        </div>
-                        <MyBox sx={{ mt: 'auto', width: '100%' }}>
-                          <MyButton
-                            variant="contained"
-                            fullWidth
-                            onClick={() => goToCompanyModule('School', plan.title, 'Monthly', plan.price)}
-                          >
-                            Subscribe Now
-                          </MyButton>
-                        </MyBox>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                ))}
+                extra: 'Excludes VAT/GST & Application Support'
+              }
+            ].map((plan) => (
+              <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyCard
+                  elevation={3}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s ease',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                >
+                  <CardHeader
+                    title={<span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
+                    sx={{
+                      textAlign: 'center',
+                      height: '40px',
+                      backgroundColor: '#e2e8f0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  />
+                  <MyCardContent
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: '10px',
+                      backgroundColor: '#f7fafc',
+                      border: '1px solid #e2e8f0',
+                      flexGrow: 1
+                    }}
+                  >
+                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
+                      ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
+                    </div>
+                    <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
+                    <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
+                    <MyBox sx={{ mt: 'auto', width: '100%' }}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', plan.title, 'Yearly', plan.price)}>
+                        Subscribe Now
+                      </MyButton>
+                    </MyBox>
+                  </MyCardContent>
+                </MyCard>
               </MyGrid>
-            </MyTabPanel>
-            <MyTabPanel value={state.tabIndex} index={1}>
-              <MyGrid container spacing={2} alignItems="stretch">
-                {[
-                  {
-                    title: 'Startup',
-                    price: Constants.STARTUP_YEARLY,
-                    description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-                        online presence. This fully managed static web application includes all essential features for sharing information
-                        and managing admission enquiries.`,
-                    extra: 'Billed Monthly, Excludes VAT / GST'
-                  },
-                  {
-                    title: 'Premium',
-                    price: Constants.PREMIUM_YEARLY,
-                    description: `A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for effectively managing Users, Roles, and Courses. Ideal for Schools needing advanced functionality and
-                        streamlined management.`,
-                    extra: 'Billed Monthly, Excludes VAT / GST'
-                  },
-                  {
-                    title: 'Enterprise',
-                    price: Constants.ENTERPRISE_YEARLY,
-                    description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                        course content, and fee payment.`,
-                    extra: 'Billed Monthly, Excludes VAT / GST'
-                  },
-                  {
-                    title: 'Dedicated',
-                    price: Constants.DEDICATED_YEARLY,
-                    description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                        Admin Reporting.`,
-                    extra: 'Excludes VAT/GST & Application Support'
-                  }
-                ].map((plan) => (
-                  <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={3}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '100%',
-                        borderRadius: '16px',
-                        overflow: 'hidden',
-                        transition: 'transform 0.3s ease',
-                        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                    >
-                      <CardHeader
-                        title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
-                        sx={{
-                          textAlign: 'center',
-                          height: '40px',
-                          backgroundColor: '#e2e8f0',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                      />
-                      <MyCardContent
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          padding: '10px',
-                          backgroundColor: '#f7fafc',
-                          border: '1px solid #e2e8f0',
-                          flexGrow: 1
-                        }}
-                      >
-                        <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
-                          ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
-                        </div>
-                        <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
-                        <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                          {plan.description}
-                        </div>
-                        <MyBox sx={{ mt: 'auto', width: '100%' }}>
-                          <MyButton
-                            variant="contained"
-                            fullWidth
-                            onClick={() => goToCompanyModule('School', plan.title, 'Yearly', plan.price)}
-                          >
-                            Subscribe Now
-                          </MyButton>
-                        </MyBox>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                ))}
-              </MyGrid>
-            </MyTabPanel>
-          </MyCardContent>
-        </MyCard>
-      </MyBox>
+            ))}
+          </MyGrid>
+        </MyTabPanel>
+      </MyCardContent>
+
       <MyBox>
-        <MyCard>
-          <MyCardContent>
-            <MyGrid container spacing={2} alignItems="stretch">
-              <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-                <TableContainer component={Paper} sx={{ mt: -2 }}>
-                  <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
-                    <TableHead>
-                      <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                        {['Features', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
-                          <TableCell
-                            key={text}
-                            align={index === 0 ? 'left' : 'center'}
-                            sx={{
-                              fontWeight: 'bold',
-                              fontSize: '1rem',
-                              border: '1px solid #e0e0e0',
-                              padding: '10px 14px',
-                              lineHeight: 1.2
-                            }}
-                          >
-                            {text}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
-                  </Table>
-                </TableContainer>
-              </MyGrid>
+        <MyCardContent>
+          <MyGrid container spacing={2} alignItems="stretch">
+            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+              <TableContainer component={Paper} sx={{ mt: -2 }}>
+                <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
+                  <TableHead>
+                    <TableRow sx={{ backgroundColor: '#e2e8f0' }}>
+                      {['Features', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
+                        <TableCell
+                          key={text}
+                          align={index === 0 ? 'left' : 'center'}
+                          sx={{
+                            fontWeight: 'bold',
+                            fontSize: '1.1rem',
+                            border: '1px solid #e0e0e0',
+                            padding: '10px 14px',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          {text}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
+                </Table>
+              </TableContainer>
             </MyGrid>
-          </MyCardContent>
-        </MyCard>
+          </MyGrid>
+        </MyCardContent>
       </MyBox>
       <div className="container">
         <div className="vertical_center">

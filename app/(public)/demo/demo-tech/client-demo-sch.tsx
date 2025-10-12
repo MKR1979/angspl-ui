@@ -382,8 +382,8 @@ const ClientDemoTech = () => {
               </div>
             </MyCardContent>
           </MyCard>
-
-          {/* FOOTER */}
+        </MyBox>
+                  {/* FOOTER */}
           <div className="container">
             <div className="vertical_center">
               <p>
@@ -394,7 +394,6 @@ const ClientDemoTech = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
       <Button
         href="https://adhyayan.online"
