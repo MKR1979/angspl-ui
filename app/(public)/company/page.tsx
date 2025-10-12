@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import ClientCompany from './client-company-details';
 import { Suspense } from 'react';
+import { SnackbarProvider } from '@/app/custom-components/SnackbarProvider';
 
 const CompanyContent = () => {
   const searchParams = useSearchParams();
@@ -17,8 +18,10 @@ const CompanyContent = () => {
 
 export default function CompanyPage() {
   return (
+    <SnackbarProvider> 
     <Suspense fallback={<p>Loading...</p>}>
       <CompanyContent />
     </Suspense>
+    </SnackbarProvider>
   );
 }

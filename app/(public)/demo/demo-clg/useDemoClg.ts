@@ -1,13 +1,11 @@
 import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 
-export const useDemoSch = () => {
+export const useDemoClg = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [activeModule, setActiveModule] = useState<number | null>(null);
-  // const detailRef = useRef<HTMLDivElement | null>(null);
   const bannerImages = ['/ModulesImgs/admsMng.png'];
 
   const moduleRefs = useRef<HTMLDivElement[]>([]);
-  moduleRefs.current = []; // reset on each render
+  moduleRefs.current = []; 
 
   const testimonials = useMemo(
     () => [

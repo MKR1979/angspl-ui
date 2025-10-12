@@ -39,61 +39,81 @@ const technologies = [
 
 const TechnologyPage: React.FC = () => {
   return (
-     <div style={{ width: '100%', paddingTop: '0px' }}>
-    <Box sx={{ p: 4 }}>
-      <Typography variant="h5" gutterBottom>
-        Technology Expertise
-      </Typography>
+      <div className="page-wrapper">
+      {/* Main content */}
+      <div className="content">
+        <Box sx={{ p: 4 }}>
+          <Typography variant="h5" gutterBottom>
+            Technology Expertise
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: '1px solid #e0e0e0', padding: '12px 16px', lineHeight: 1.2, width: '20%' }}>
+                    Program
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: '1px solid #e0e0e0', padding: '12px 16px', lineHeight: 1.2 }}>
+                    Primary Technology Stack
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {technologies.map((tech) => (
+                  <TableRow key={tech.program}>
+                    <TableCell sx={{ fontWeight: 'bold' }}>{tech.program}</TableCell>
+                    <TableCell>{tech.stack}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </div>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
-            <TableRow>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  fontSize: '1rem',
-                  border: '1px solid #e0e0e0',
-                  padding: '10px 14px',
-                  lineHeight: 1.2,
-                  width: '20%'
-                }}
-              >
-                <strong>Program</strong>
-              </TableCell>
-              <TableCell sx={{
-                  fontWeight: 'bold',
-                  fontSize: '1rem',
-                  border: '1px solid #e0e0e0',
-                  padding: '10px 14px',
-                  lineHeight: 1.2
-                }}>
-                <strong>Primary Technology Stack</strong>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {technologies.map((tech) => (
-              <TableRow key={tech.program}>
-                <TableCell sx={{fontWeight: 'bold',}}>{tech.program}</TableCell>
-                <TableCell>{tech.stack}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
-       <div className="container">
-        <div className="vertical_center">
-          <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
-          <div className="vertical_center">
-            ||
-            <a href="/terms">Terms of use</a>||
-            <a href="/privacy-policy">Privacy Policy</a>
-          </div>
+      {/* Footer */}
+      <div className="footer">
+        <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
+        <div>
+          <a href="/terms">Terms of use</a> | <a href="/privacy-policy">Privacy Policy</a>
         </div>
       </div>
     </div>
+
+    // <div className="page-wrapper">
+    //   <div className="content">
+    //     <Box sx={{ p: 4 }}>
+    //       <Typography variant="h5" gutterBottom>
+    //         Technology Expertise
+    //       </Typography>
+    //       <TableContainer component={Paper}>
+    //         <Table>
+    //           <TableHead>
+    //             <TableRow>
+    //               <TableCell className="table-header">Program</TableCell>
+    //               <TableCell className="table-header">Primary Technology Stack</TableCell>
+    //             </TableRow>
+    //           </TableHead>
+    //           <TableBody>
+    //             {technologies.map((tech) => (
+    //               <TableRow key={tech.program} className="table-row">
+    //                 <TableCell>{tech.program}</TableCell>
+    //                 <TableCell>{tech.stack}</TableCell>
+    //               </TableRow>
+    //             ))}
+    //           </TableBody>
+    //         </Table>
+    //       </TableContainer>
+    //     </Box>
+    //   </div>
+
+    //   <div className="footer">
+    //     <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
+    //     <div>
+    //       <a href="/terms">Terms of use</a> | <a href="/privacy-policy">Privacy Policy</a>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 
