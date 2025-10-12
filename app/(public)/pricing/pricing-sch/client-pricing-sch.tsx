@@ -12,9 +12,8 @@ import MyTabPanel from '@/app/custom-components/MyTabPanel';
 import MyTabs from '@/app/custom-components/MyTabs';
 import MyTab from '@/app/custom-components/MyTab';
 import './pricingSch.css';
-import { COMPANY } from '../constants/constants';
 import usePricingSch from './usePricingSch';
-import * as Constants from '../constants/constants';
+import * as Constants from '../../constants/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 
@@ -23,155 +22,155 @@ const ClientPricingSch = () => {
   const rows = [
     {
       name: 'Admin Dashboard',
-      basic: '✖',
-      professional: '✔',
+      startup: '✖',
       premium: '✔',
+      enterprise: '✔',
       dedicated: '✔',
       children: [
         {
           name: 'User Access Management',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Roles',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Users',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Role Permission',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'User Permission',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Academics',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Courses',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Online Admission',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔',
               children: [
                 {
                   name: 'Admission',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Enrollments',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Admission Summary',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 }
               ]
             },
             {
               name: 'Study Kits',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔',
               children: [
                 {
                   name: 'Code Projects',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Study Notes',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Upload Videos',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 }
               ]
             },
             {
               name: 'Online Exams',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔',
               children: [
                 {
                   name: 'Add Exam',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Exam Questions',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Exam Bulk Import',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Exam Results',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 }
               ]
@@ -181,81 +180,81 @@ const ClientPricingSch = () => {
 
         {
           name: 'Employee Services',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Employee Master',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Review Attendance',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Attendance Report',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔',
               children: [
                 {
                   name: 'Time Log Report',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Day Wise Attendance',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Presence Overview',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 }
               ]
             },
             {
               name: 'User Devices',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Bulk Attendance',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔',
               children: [
                 {
                   name: 'Mark Attendance',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 },
                 {
                   name: 'Lock Attendance',
-                  basic: '✖',
-                  professional: '✔',
+                  startup: '✖',
                   premium: '✔',
+                  enterprise: '✔',
                   dedicated: '✔'
                 }
               ]
@@ -264,150 +263,150 @@ const ClientPricingSch = () => {
         },
         {
           name: 'Payment Management',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Schedule Fee',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Collect Pay',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Receipts',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Fee Head',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Communications',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Emails',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Email Templates',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Notifications',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Engagements',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Enquiry',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Events',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Meetings',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Geography',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Countries',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'States',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Locations',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Affiliates',
-          basic: '✖',
-          professional: '✔',
+          startup: '✖',
           premium: '✔',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Review Affiliates',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Referrals',
-              basic: '✖',
-              professional: '✔',
+              startup: '✖',
               premium: '✔',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
@@ -416,111 +415,111 @@ const ClientPricingSch = () => {
     },
     {
       name: 'Student Dashboard',
-      basic: '✖',
-      professional: '✖',
-      premium: '✔',
+      startup: '✖',
+      premium: '✖',
+      enterprise: '✔',
       dedicated: '✔',
       children: [
         {
           name: 'Course Contents',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Enrolled Courses',
-              basic: '✖',
-              professional: '✖',
-              premium: '✔',
+              startup: '✖',
+              premium: '✖',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Free Courses',
-              basic: '✖',
-              professional: '✖',
-              premium: '✔',
+              startup: '✖',
+              premium: '✖',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Study Kits',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔',
           children: [
             {
               name: 'Code Insight',
-              basic: '✖',
-              professional: '✖',
-              premium: '✔',
+              startup: '✖',
+              premium: '✖',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Notes Insight',
-              basic: '✖',
-              professional: '✖',
-              premium: '✔',
+              startup: '✖',
+              premium: '✖',
+              enterprise: '✔',
               dedicated: '✔'
             },
             {
               name: 'Video Insight',
-              basic: '✖',
-              professional: '✖',
-              premium: '✔',
+              startup: '✖',
+              premium: '✖',
+              enterprise: '✔',
               dedicated: '✔'
             }
           ]
         },
         {
           name: 'Online Exams / Skill Tests',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Payments / Fees',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Student Info',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Online Homework',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Login',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'View Profile',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Change Password',
-          basic: '✖',
-          professional: '✖',
-          premium: '✔',
+          startup: '✖',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         }
       ]
@@ -528,174 +527,174 @@ const ClientPricingSch = () => {
 
     {
       name: 'Employee Dashboard',
-      basic: '✖',
-      professional: '✖',
+      startup: '✖',
       premium: '✖',
+      enterprise: '✖',
       dedicated: '✔',
       children: [
         {
           name: 'Location Based Online Attendance',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         },
         {
           name: 'Login',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         },
         {
           name: 'View Profile',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         },
         {
           name: 'Change Password',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         }
       ]
     },
     {
       name: 'Affiliate Dashboard',
-      basic: '✖',
-      professional: '✖',
+      startup: '✖',
       premium: '✖',
+      enterprise: '✖',
       dedicated: '✔',
       children: [
         {
           name: 'Referral Trekking',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         },
         {
           name: 'Login',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         },
         {
           name: 'View Profile',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         },
         {
           name: 'Change Password',
-          basic: '✖',
-          professional: '✖',
+          startup: '✖',
           premium: '✖',
+          enterprise: '✖',
           dedicated: '✔'
         }
       ]
     },
     {
       name: 'Location Based Attendance',
-      basic: '✖',
-      professional: '✖',
+      startup: '✖',
       premium: '✖',
+      enterprise: '✖',
       dedicated: '✔'
     },
     {
       name: 'Dynamic Web Application',
-      basic: '✔',
-      professional: '✖',
-      premium: '✔',
+      startup: '✔',
+      premium: '✖',
+      enterprise: '✔',
       dedicated: '✔',
       children: [
         {
           name: 'Home Page',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'About Us',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Programs Enrollment',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Services / Offerings',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Affiliate Registration',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Contact Us',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Admission Enquiry',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Login',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Registration',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Forget Password',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Social Media Links',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         },
         {
           name: 'Image Gallery',
-          basic: '✔',
-          professional: '✖',
-          premium: '✔',
+          startup: '✔',
+          premium: '✖',
+          enterprise: '✔',
           dedicated: '✔'
         }
       ]
@@ -706,9 +705,9 @@ const ClientPricingSch = () => {
 
   interface RowData {
     name: string;
-    basic: string;
-    professional: string;
+    startup: string;
     premium: string;
+    enterprise: string;
     dedicated: string;
     children?: RowData[];
   }
@@ -733,13 +732,13 @@ const ClientPricingSch = () => {
             {row.name}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-            {row.basic}
-          </TableCell>
-          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-            {row.professional}
+            {row.startup}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
             {row.premium}
+          </TableCell>
+          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+            {row.enterprise}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
             {row.dedicated}
@@ -758,56 +757,58 @@ const ClientPricingSch = () => {
           <MyCardContent>
             <MyBox
               sx={{
+                width: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                gap: 2,
+                position: 'relative',
                 mb: 2
               }}
             >
-              {/* Left Arrow Button */}
-              <MyButton
-                variant="outlined"
+              <MyBox
                 sx={{
-                  minWidth: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  fontSize: '1.2rem',
-                  padding: 0
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 2,
+                  position: 'absolute',
+                  left: 0
                 }}
-                onClick={() => router.push('/pricing-clg')}
               >
-                <ArrowBack />
-              </MyButton>
-
-              {/* Heading Text */}
-              <MyTypography variant="h5" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 1 }}>
-                Choose Your School Plan{' '}
-                <MyBox component="span" sx={{ fontSize: '1rem', fontWeight: 'normal', ml: 1 }}>
-                  Flexible Pricing That Fits Your Needs
-                </MyBox>
-              </MyTypography>
-
-              {/* Right Arrow Button */}
-              <MyButton
-                variant="outlined"
-                sx={{
-                  minWidth: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  fontSize: '1.2rem',
-                  padding: 0
-                }}
-                onClick={() => router.push('/pricing-tech')}
-              >
-                <ArrowForward />
-              </MyButton>
-            </MyBox>
-            <MyBox sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-              <MyTabs value={state.tabIndex} onChange={handleTabChange}>
-                <MyTab label="Monthly Billing" />
-                <MyTab label="Annual Billing" />
-              </MyTabs>
+                <MyButton
+                  variant="outlined"
+                  sx={{
+                    minWidth: '28px',
+                    height: '28px',
+                    borderRadius: '50%',
+                    fontSize: '1rem',
+                    padding: 0
+                  }}
+                  onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
+                >
+                  <ArrowBack />
+                </MyButton>
+                <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
+                  Choose the Right Plan for Your School
+                </MyTypography>
+                <MyButton
+                  variant="outlined"
+                  sx={{
+                    minWidth: '28px',
+                    height: '28px',
+                    borderRadius: '50%',
+                    fontSize: '1rem',
+                    padding: 0
+                  }}
+                  onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-tech`)}
+                >
+                  <ArrowForward />
+                </MyButton>
+              </MyBox>
+              <MyBox sx={{ margin: '0 auto', display: 'flex', alignItems: 'center' }}>
+                <MyTabs value={state.tabIndex} onChange={handleTabChange} sx={{ marginBottom: 0, paddingBottom: 0 }}>
+                  <MyTab label="Monthly Billing" />
+                  <MyTab label="Annual Billing" />
+                </MyTabs>
+              </MyBox>
             </MyBox>
             <MyTabPanel value={state.tabIndex} index={0}>
               <MyGrid container spacing={2} alignItems="stretch">
@@ -827,7 +828,7 @@ const ClientPricingSch = () => {
                     onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                   >
                     <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Startup</span>}
                       sx={{
                         textAlign: 'center',
                         height: '40px',
@@ -847,15 +848,16 @@ const ClientPricingSch = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.BASIC_MONTHLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.STARTUP_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
+                      </div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Basic', 'Monthly', 3000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Startup', 'Monthly', 3000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -872,56 +874,6 @@ const ClientPricingSch = () => {
                       overflow: 'hidden',
                       transition: 'transform 0.3s',
                       boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PROFESSIONAL_MONTHLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for effectively managing Users, Roles, and Courses. Ideal for Schools needing advanced functionality and
-                        streamlined management.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Professional', 'Monthly', 5000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
                     onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -947,15 +899,67 @@ const ClientPricingSch = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PREMIUM_MONTHLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.PREMIUM_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
+                      </div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
+                        Dashboard for effectively managing Users, Roles, and Courses. Ideal for Schools needing advanced functionality and
+                        streamlined management.
+                      </div>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Premium', 'Monthly', 5000)}>
+                        Subscribe Now
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Enterprise</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '40px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '10px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.ENTERPRISE_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
+                      </div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Premium', 'Monthly', 9999)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Enterprise', 'Monthly', 9999)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -997,8 +1001,9 @@ const ClientPricingSch = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.DEDICATED_MONTHLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.DEDICATED_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
+                      </div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
@@ -1031,7 +1036,7 @@ const ClientPricingSch = () => {
                     onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                   >
                     <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Basic</span>}
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Startup</span>}
                       sx={{
                         textAlign: 'center',
                         height: '40px',
@@ -1051,65 +1056,16 @@ const ClientPricingSch = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.BASIC_YEARLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.STARTUP_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
+                      </div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
                         online presence. This fully managed static web application includes all essential features for sharing information
                         and managing admission enquiries.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Basic', 'Yearly', 32000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Professional</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PROFESSIONAL_YEARLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Interactive
-                        Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and
-                        seamless automation support.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Professional', 'Yearly', 59000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Startup', 'Yearly', 32000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1151,15 +1107,67 @@ const ClientPricingSch = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.PREMIUM_YEARLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.PREMIUM_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
+                      </div>
+                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
+                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
+                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Interactive
+                        Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and
+                        seamless automation support.
+                      </div>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Premium', 'Yearly', 59000)}>
+                        Subscribe Now
+                      </MyButton>
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                  <MyCard
+                    elevation={3}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '100%',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      transition: 'transform 0.3s ease',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <CardHeader
+                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Enterprise</span>}
+                      sx={{
+                        textAlign: 'center',
+                        height: '40px',
+                        backgroundColor: '#e2e8f0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    />
+                    <MyCardContent
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '10px',
+                        backgroundColor: '#f7fafc',
+                        border: '1px solid #e2e8f0'
+                      }}
+                    >
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.ENTERPRISE_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
+                      </div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
                         managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
                         course content, and fee payment.
                       </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Premium', 'Yearly', 95000)}>
+                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', 'Enterprise', 'Yearly', 95000)}>
                         Subscribe Now
                       </MyButton>
                     </MyCardContent>
@@ -1201,8 +1209,9 @@ const ClientPricingSch = () => {
                         border: '1px solid #e2e8f0'
                       }}
                     >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>₹{Constants.DEDICATED_YEARLY}</div>
-                      <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
+                        ₹{Constants.DEDICATED_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
+                      </div>
                       <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
                       <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
                         Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
@@ -1229,7 +1238,7 @@ const ClientPricingSch = () => {
                   <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
                     <TableHead>
                       <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                        {['Features', 'Basic', 'Professional', 'Premium', 'Dedicated'].map((text, index) => (
+                        {['Features', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
                           <TableCell
                             key={text}
                             align={index === 0 ? 'left' : 'center'}
@@ -1256,7 +1265,7 @@ const ClientPricingSch = () => {
       </MyBox>
       <div className="container">
         <div className="vertical_center">
-          <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
+          <p>© Copyright 2025 {Constants.COMPANY}, All rights reserved.</p>
           <div className="vertical_center">
             ||
             <a href="/terms">Terms of use</a>||

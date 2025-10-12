@@ -10,13 +10,14 @@ export const RECEIPT = "Payment Receipt"
 export const CURRENCY = "INR"
 export const MOD_DESC = "modules-description"
 export const MODULE_DEMO = "demo"
+export const MODULE_PRICING = "pricing"
 
 // pricing
-export const BASIC_MONTHLY = 3000
-export const PROFESSIONAL_MONTHLY = 5000
-export const PREMIUM_MONTHLY = 9999
+export const STARTUP_MONTHLY = 3000
+export const PREMIUM_MONTHLY = 5000
+export const ENTERPRISE_MONTHLY = 9999
 export const DEDICATED_MONTHLY = 14000
-export const BASIC_YEARLY = 32000
-export const PROFESSIONAL_YEARLY = 59000
-export const PREMIUM_YEARLY = 95000
+export const STARTUP_YEARLY = 32000
+export const PREMIUM_YEARLY = 59000
+export const ENTERPRISE_YEARLY = 95000
 export const DEDICATED_YEARLY = 120000
