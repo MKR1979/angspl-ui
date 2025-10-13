@@ -54,3 +54,7 @@ export const INSTITUTE_PRICING  = {
   ENTERPRISE_YEARLY: 99000,
   DEDICATED_YEARLY: 130000,
 };
+
+// CONTACT_US
+
+export const CONTACT_US_SUBJECT = 'Enquiry for'

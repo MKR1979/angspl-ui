@@ -188,3 +188,26 @@ export const arrLeadTime: string[] = [
   '15 Weeks',
   '16 Weeks'
 ];
+
+export const capitalizeWords = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1);
+
+export const arrEnquiryCategoryType: any[] = [
+  { text: 'Admission' },
+  { text: 'Career Guidance' },
+  { text: 'General Enquiry' },
+  { text: 'Job Placement' },
+  { text: 'IT Support' },
+  { text: 'Sales' },
+  { text: 'Internship' }
+];
+
+ export const MAIL_CONFIG = {
+    smtpHost: 'smtp.gmail.com', 
+    smtpPort: 465,
+    smtpUser: 'adhyayan.solution@gmail.com',
+    smtpPassword: 'bnfwtqfzbcdsdgbd',
+    secure: true, 
+    fromAddress: 'adhyayan.solution@gmail.com', 
+    resendOtpTime: 2 
+  };

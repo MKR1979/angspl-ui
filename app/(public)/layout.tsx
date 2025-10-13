@@ -37,7 +37,8 @@ export default function RootLayout({
 
   const drawerWidth = 240;
   const navItems = [
-    { text: 'Home', href: '/' },
+    // { text: 'Home', href: '/' },
+    { text: 'Home', href: '/home' },
     {
       text: 'Pricing',
       children: [

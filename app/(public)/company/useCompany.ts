@@ -102,14 +102,13 @@ const useCompany = () => {
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
 
   const MAIL_CONFIG = {
-    smtpHost: 'smtp.gmail.com', //siteConfig.find((c) => c.key === 'SMTP_HOST')?.value ?? '',
-    smtpPort: 465, //Number(siteConfig.find((c) => c.key === 'SMTP_PORT')?.value ?? ''),
-    smtpUser: 'adhyayan.solution@gmail.com', //siteConfig.find((c) => c.key === 'SMTP_USER')?.value ?? '',
-    smtpPassword: 'bnfwtqfzbcdsdgbd', //siteConfig.find((c) => c.key === 'SMTP_PASSWORD')?.value ?? '',
-    // secure: siteConfig.find((c) => c.key === 'SMTP_SECURE')?.value ?? '',
-    secure: true, //siteConfig.find((c) => c.key === 'SMTP_SECURE')?.value?.toLowerCase() === 'true',
-    fromAddress: 'adhyayan.solution@gmail.com', //siteConfig.find((c) => c.key === 'SMTP_FROM')?.value ?? '',
-    resendOtpTime: 2   //Number(siteConfig.find((c) => c.key === 'RESEND_OTP_TIME')?.value ?? '')
+    smtpHost: 'smtp.gmail.com', 
+    smtpPort: 465,
+    smtpUser: 'adhyayan.solution@gmail.com',
+    smtpPassword: 'bnfwtqfzbcdsdgbd',
+    secure: true, 
+    fromAddress: 'adhyayan.solution@gmail.com', 
+    resendOtpTime: 2 
   };
 
   useEffect(() => {
