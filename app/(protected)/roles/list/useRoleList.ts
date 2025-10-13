@@ -9,11 +9,12 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
 import RoleDTO from '@/app/types/RoleDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { ROLE_LIST, DELETE_ROLE } from '@/app/graphql/Role';
+import * as gMessageConstants from '../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
@@ -65,7 +66,7 @@ const useRoleList = ({ arrRoleDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
@@ -85,22 +86,27 @@ const useRoleList = ({ arrRoleDTO, total_records }: Props) => {
   const [deleteRole] = useMutation(DELETE_ROLE, {});
 
   const getData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrRoleDTO: RoleDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getRoleList();
-    if (!error && data) {
-      arrRoleDTO = data.getRoleList.roles.map((item: RoleDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getRoleList.total_records;
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrRoleDTO: RoleDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getRoleList();
+      if (!error && data) {
+        arrRoleDTO = data.getRoleList.roles.map((item: RoleDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getRoleList.total_records;
+      }
+      setState({
+        arrRoleDTO: arrRoleDTO,
+        total_records: total_records,
+        isLoading: false,
+        arrSelectedId: [] as string[]
+      } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({
-      arrRoleDTO: arrRoleDTO,
-      total_records: total_records,
-      isLoading: false,
-      arrSelectedId: [] as string[]
-    } as StateType);
   }, [getRoleList]);
 
   useEffect(() => {
@@ -173,19 +179,24 @@ const useRoleList = ({ arrRoleDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteRole({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteRole({
+          variables: {
+            ids: params
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteRole, getData, state.visibleDialog1.id, toggleDialog1]
@@ -218,18 +229,23 @@ const useRoleList = ({ arrRoleDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteRole({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteRole({
+          variables: {
+            ids: state.arrSelectedId
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteRole, getData, state.arrSelectedId, toggleDialog]

@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyNumericInputProps extends NumericInputProps {}
 
 const MyNumericInput = ({ ...props }: MyNumericInputProps) => {
-  console.log('MyNumericInput rendered');
+//  console.log('MyNumericInput rendered');
   return <NumericInput size="small" InputLabelProps={{ shrink: true }} fullWidth {...props} />;
 };
 

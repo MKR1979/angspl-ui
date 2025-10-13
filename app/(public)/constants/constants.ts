@@ -1,3 +1,28 @@
+export const RECEIPT = "Payment Receipt"          
+export const REGISTERED_STATUS = "Registered" 
+export const ROLE_ID = 6
+export const STUDENT_TYPE_ID = 4
+export const ROLE_ID_STUDENT = 6
+export const PASSWORD = "adhyayan"
+export const GROUP_NAME_SCHOOL = "School"
+export const GROUP_NAME_COLLEGE = "College"
+export const CONTACT_PHONE_NO = "+91-9522933330"
+export const CONTACT_EMAIL ="info@adhyayan.online"
+export const SITE_URL_ONLINE ="adhyayan.online"
+export const SITE_URL_ACADEMY ="aitm.academy"
+export const YOUTUBE_CHANNER_URL = "https://www.youtube.com/@adhyayan.online"
+export const FULL_ADDRESS ="Gr. Floor, Kushwaha Complex, Ratibad road, Neelbad Chauraha,Bhopal-462044, India "
+export const ADDRESS1 =" Gr. Floor, Kushwaha Complex,"
+export const ADDRESS2 ="Ratibad road, Neelbad Chauraha,"
+export const ADDRESS3 ="Bhopal-462044, India"
+export const WHATSAPP_PHONE = "+918750779557"
+
+export const PROGRAMS_COURSE_TYPE = "enrichment"
+
+export const REGISTRATION_FEE =11
+
+// Send Otp on Email
+
 export const SUCCESS = "Operation Successful"
 export const FAIL = "Operation Failed"
 export const DOCUMENT_IMAGE_PATH = "public/uploads/"
@@ -6,21 +31,10 @@ export const COMPANY = "Adhyayan NextGen Solutions Pvt. Ltd."
 export const ADDRESS = "Gr. Floor, Kushwaha Complex, Ratibad road, Needbad Chauraha,Bhopal-462044, India"
 export const SITE_URL="adhyayan.online"
 export const EMAIL="info@adhyayan.online"
-export const RECEIPT = "Payment Receipt"
 export const CURRENCY = "INR"
 export const MOD_DESC = "modules-description"
 export const MODULE_DEMO = "demo"
 export const MODULE_PRICING = "pricing"
-
-// pricing
-// export const STARTUP_MONTHLY = 3000
-// export const PREMIUM_MONTHLY = 5000
-// export const ENTERPRISE_MONTHLY = 9999
-// export const DEDICATED_MONTHLY = 14000
-// export const STARTUP_YEARLY = 32000
-// export const PREMIUM_YEARLY = 59000
-// export const ENTERPRISE_YEARLY = 95000
-// export const DEDICATED_YEARLY = 120000
 
 export const SCHOOL_PRICING = {
   STARTUP_MONTHLY: 3000,

@@ -243,42 +243,10 @@
   gap: 10px;
 }
 
-/* .book-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  perspective: 1200px;
-  background: linear-gradient(135deg, #e3f2fd, #f0f0f0);
-} */
-
-.book-container {
-  position: relative; /* important for heading overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  perspective: 1500px;
-  background: linear-gradient(135deg, #dfeef0, #f4f2f2);
-}
-
-/* Heading overlay on top of book background */
-.book-heading {
-  position: absolute;
-  top: 20px; /* distance from top of book */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 28px;
-  font-weight: 600;
-  color: #465063;
-  font-family: serif;
-  z-index: 10; /* ensure heading is above book */
-  text-align: center;
-}
 /* ==== Book ==== */
 .book {
   position: relative;
-  width: 1050px;              /* Increased width */
+  width: 100%;              /* Increased width */
   height: 550px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -345,7 +313,7 @@
 
 @media (max-width: 768px) {
   .book {
-    width: 90%;
+    width: 100%;
     height: 400px;
   }
 

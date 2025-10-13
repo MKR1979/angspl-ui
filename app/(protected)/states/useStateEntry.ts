@@ -1,21 +1,27 @@
-import React, { ChangeEvent, useCallback, useEffect, useReducer } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import StateDTO, { STATE } from '@/app/types/stateDTO';
 import { ADD_STATE, UPDATE_STATE, GET_STATE } from '@/app/graphql/state';
 import { COUNTRY_LOOKUP } from '@/app/graphql/Country';
+import { arrCommonStatus, capitalizeWords } from '@/app/common/Configuration';
 import LookupDTO from '@/app/types/LookupDTO';
+import * as gMessageConstants from '../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 
 type ErrorMessageType = {
   state_name: string | null;
   country_id: string | null;
   state_code: string | null;
+  status: string | null;
 };
 
 type StateType = {
   dtoState: StateDTO;
   arrCountryLookup: LookupDTO[];
+  arrCommonStatusLookup: LookupDTO[];
   errorMessages: ErrorMessageType;
+  open1: boolean;
 };
 
 type Props = {
@@ -28,13 +34,16 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
   const ERROR_MESSAGES: ErrorMessageType = Object.freeze({
     state_name: null,
     state_code: null,
-    country_id: null
+    country_id: null,
+    status: null
   } as ErrorMessageType);
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoState: dtoState,
     arrCountryLookup: arrCountryLookup,
-    errorMessages: { ...ERROR_MESSAGES }
+    arrCommonStatusLookup: arrCommonStatus,
+    errorMessages: { ...ERROR_MESSAGES },
+    open1: false
   } as StateType);
 
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
@@ -42,7 +51,8 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const [saving, setSaving] = useState(false);
+  const showSnackbar = useSnackbar();
   const [addState] = useMutation(ADD_STATE, {});
 
   const [updateState] = useMutation(UPDATE_STATE, {});
@@ -55,27 +65,53 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     fetchPolicy: 'network-only' // Doesn't check cache before making a network request
   });
 
-  const getData1 = useCallback(async (): Promise<void> => {
-    let arrCountryLookup: LookupDTO[] = [];
-    const { error, data } = await getCountryLookup();
-    if (!error && data) {
-      arrCountryLookup = data.getCountryLookup;
+  useEffect(() => {
+    if (
+      state.arrCommonStatusLookup.length > 0 &&
+      !state.dtoState.status
+    ) {
+      const firstItem = state.arrCommonStatusLookup[0];
+      setState({
+        ...state,
+        dtoState: {
+          ...state.dtoState,
+          status: firstItem.text, // or firstItem.id if you store status by id
+        }
+      });
     }
-    setState({ arrCountryLookup: arrCountryLookup } as StateType);
+  }, [state.arrCommonStatusLookup]);
+
+  const getData1 = useCallback(async (): Promise<void> => {
+    try {
+      let arrCountryLookup: LookupDTO[] = [];
+      const { error, data } = await getCountryLookup();
+      if (!error && data) {
+        arrCountryLookup = data.getCountryLookup;
+      }
+      setState({ arrCountryLookup: arrCountryLookup } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
+    }
   }, [getCountryLookup]);
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoState: StateDTO = STATE;
-    const { error, data } = await getState({
-      variables: {
-        id: state.dtoState.id
+    try {
+      let dtoState: StateDTO = STATE;
+      const { error, data } = await getState({
+        variables: {
+          id: state.dtoState.id
+        }
+      });
+      if (!error && data) {
+        dtoState = { ...data.getState };
+        dtoState.countryLookupDTO = { id: dtoState.country_id, text: dtoState.country_name };
       }
-    });
-    if (!error && data) {
-      dtoState = { ...data.getState };
-      dtoState.countryLookupDTO = { id: dtoState.country_id, text: dtoState.country_name };
+      setState({ dtoState: dtoState } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoState: dtoState } as StateType);
   }, [getState, state.dtoState.id]);
 
   useEffect(() => {
@@ -87,16 +123,32 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
 
   const onInputChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      const capitalizedValue = capitalizeWords(value);
       setState({
         dtoState: {
           ...state.dtoState,
-          [event.target.name]: event.target.value
+          [name]: capitalizedValue
         }
       } as StateType);
     },
     [state.dtoState]
   );
 
+
+  const onCodeChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      let value = event.target.value.toUpperCase();
+      value = value.replace(/[^A-Z0-9]/g, "");
+      setState({
+        dtoState: {
+          ...state.dtoState,
+          state_code: value,
+        },
+      } as StateType);
+    },
+    [state.dtoState]
+  );
   const onCountryNameChange = useCallback(
     async (event: any, value: unknown) => {
       setState({
@@ -108,7 +160,7 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
 
   const validateStateName = useCallback(async () => {
     if (state.dtoState.state_name.trim() === '') {
-      return 'State Name is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -121,7 +173,7 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
 
   const validateCountryName = useCallback(async () => {
     if (state.dtoState.country_id === 0) {
-      return 'Country Name is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -131,6 +183,31 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     const country_id = await validateCountryName();
     setState({ errorMessages: { ...state.errorMessages, country_id: country_id } } as StateType);
   }, [validateCountryName, state.errorMessages]);
+
+  const onStatusChange = useCallback(
+    async (event: any, value: unknown) => {
+      setState({
+        dtoState: {
+          ...state.dtoState,
+          status: (value as LookupDTO).text
+        }
+      } as StateType);
+    },
+    [state.dtoState]
+  );
+
+  const validateStatus = useCallback(async () => {
+    if (state.dtoState.status.trim() === '') {
+      return gMessageConstants.REQUIRED_FIELD;
+    } else {
+      return null;
+    }
+  }, [state.dtoState.status]);
+
+  const onStatusBlur = useCallback(async () => {
+    const status = await validateStatus();
+    setState({ errorMessages: { ...state.errorMessages, status: status } } as StateType);
+  }, [validateStatus, state.errorMessages]);
 
   const validateForm = useCallback(async () => {
     let isFormValid = true;
@@ -143,34 +220,49 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     if (errorMessages.country_id) {
       isFormValid = false;
     }
+    errorMessages.status = await validateStatus();
+    if (errorMessages.status) {
+      isFormValid = false;
+    }
 
     setState({ errorMessages: errorMessages } as StateType);
     return isFormValid;
-  }, [validateStateName, validateCountryName]);
+  }, [validateStateName, validateCountryName, validateStatus]);
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      if (await validateForm()) {
-        if (state.dtoState.id === 0) {
-          const { data } = await addState({
-            variables: {
-              ...state.dtoState
+      if (saving) return; // prevent multiple clicks while saving
+      setSaving(true);
+      try {
+        if (await validateForm()) {
+          if (state.dtoState.id === 0) {
+            const { data } = await addState({
+              variables: {
+                ...state.dtoState
+              }
+            });
+            if (data) {
+              showSnackbar(gMessageConstants.SNACKBAR_INSERT_RECORD, 'success');
+              router.push('/states/list');
             }
-          });
-          if (data) {
-            router.push('/states/list');
-          }
-        } else {
-          const { data } = await updateState({
-            variables: {
-              ...state.dtoState
+          } else {
+            const { data } = await updateState({
+              variables: {
+                ...state.dtoState
+              }
+            });
+            if (data) {
+              showSnackbar(gMessageConstants.SNACKBAR_UPDATE_RECORD, 'success');
+              router.push('/states/list');
             }
-          });
-          if (data) {
-            router.push('/states/list');
           }
         }
+      } catch (error: any) {
+        console.error('Error while saving referral:', error);
+        showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
+      } finally {
+        setSaving(false); // ensure this always runs
       }
     },
     [validateForm, addState, state.dtoState, router, updateState]
@@ -191,15 +283,28 @@ const useStateEntry = ({ dtoState, arrCountryLookup }: Props) => {
     },
     [router]
   );
+
+  const setOpen1 = useCallback(async (): Promise<void> => {
+    setState({ open1: true } as StateType);
+  }, []);
+  const setClose1 = useCallback(async (): Promise<void> => {
+    setState({ open1: false } as StateType);
+  }, []);
   return {
     state,
     onInputChange,
+    onCodeChange,
     onCountryNameChange,
     onStateNameBlur,
     onCountryNameBlur,
     onSaveClick,
     onClearClick,
-    onCancelClick
+    onCancelClick,
+    saving,
+    setOpen1,
+    setClose1,
+    onStatusChange,
+    onStatusBlur
   };
 };
 

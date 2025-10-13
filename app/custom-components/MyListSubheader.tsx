@@ -7,7 +7,7 @@ interface MyListSubheaderProps extends ListSubheaderProps {
 }
 
 const MyListSubheader = ({ children, ...props }: MyListSubheaderProps) => {
-  console.log('MyListSubheader rendered');
+//  console.log('MyListSubheader rendered');
   return <ListSubheader {...props}> {children}</ListSubheader>;
 };
 

@@ -4,6 +4,8 @@ import { useLazyQuery } from '@apollo/client';
 import SiteConfigDTO from '@/app/types/SiteConfigDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_SITE_CONFIG } from '@/app/graphql/SiteConfig';
+import * as gMessageConstants from '../../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 type StateType = {
   dtoSiteConfig: SiteConfigDTO;
   breadcrumbsItems: BreadcrumbsItem[];
@@ -23,7 +25,7 @@ const useViewSiteConfig = ({ dtoSiteConfig }: Props) => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const showSnackbar = useSnackbar();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const [getSiteConfig] = useLazyQuery(GET_SITE_CONFIG, {
@@ -31,17 +33,23 @@ const useViewSiteConfig = ({ dtoSiteConfig }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoSiteConfig: SiteConfigDTO = {} as SiteConfigDTO;
-    const { error, data } = await getSiteConfig({
-      variables: {
-        id: state.dtoSiteConfig.id
+    try {
+      let dtoSiteConfig: SiteConfigDTO = {} as SiteConfigDTO;
+      const { error, data } = await getSiteConfig({
+        variables: {
+          id: state.dtoSiteConfig.id,
+          company_id: state.dtoSiteConfig.company_id
+        }
+      });
+      if (!error && data) {
+        dtoSiteConfig = data.getSiteConfig;
       }
-    });
-    if (!error && data) {
-      dtoSiteConfig = data.getSiteConfig;
+      setState({ dtoSiteConfig: dtoSiteConfig } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoSiteConfig: dtoSiteConfig } as StateType);
-  }, [getSiteConfig, state.dtoSiteConfig.id]);
+  }, [getSiteConfig, state.dtoSiteConfig.id, state.dtoSiteConfig.company_id]);
 
   useEffect(() => {
     if (state.dtoSiteConfig.id > 0) {
@@ -52,9 +60,11 @@ const useViewSiteConfig = ({ dtoSiteConfig }: Props) => {
   const onEditClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      router.push('/site-config/edit/' + state.dtoSiteConfig.id);
+      const companyId = state.dtoSiteConfig.company_id;
+      router.push(`/site-config/edit/${state.dtoSiteConfig.id}?company_id=${companyId}`);
+      // router.push('/site-config/edit/' + state.dtoSiteConfig.id);
     },
-    [router, state.dtoSiteConfig.id]
+    [router, state.dtoSiteConfig.id, state.dtoSiteConfig.company_id]
   );
 
   const onCancelClick = useCallback(

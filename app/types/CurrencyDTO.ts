@@ -4,6 +4,7 @@ export default interface CurrencyDTO extends BaseDTO {
   currency_code: string;
   currency_name: string;
   currency_symbol: string;
+  status: string;
 }
 
 export const CURRENCY: CurrencyDTO = Object.freeze({
@@ -11,6 +12,7 @@ export const CURRENCY: CurrencyDTO = Object.freeze({
   currency_code: '',
   currency_name: '',
   currency_symbol: '',
+  status: '',
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

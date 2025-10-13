@@ -1,10 +1,13 @@
-import ClientSingUp from './client-sign-up';
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Create Account'
-};
-export const revalidate = 0;
-export default async function LoginPage() {
-  return <ClientSingUp></ClientSingUp>;
+import ClientSingUp from './client-sign-up';
+import { SnackbarProvider } from '@/app/custom-components/SnackbarProvider';
+
+export default function ContactUsPage() {
+  return (
+    <SnackbarProvider>
+      <ClientSingUp />
+    </SnackbarProvider>
+  );
 }
+

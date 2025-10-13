@@ -3,7 +3,7 @@ import eq from 'lodash/eq';
 import { memo } from 'react';
 interface MyDialogProps extends DialogProps {}
 const MyDialogContent = ({ ...props }: MyDialogProps) => {
-  console.log('MyDialogContent rendered');
+  // console.log('MyDialogContent rendered');
   return <Dialog {...props}></Dialog>;
 };
 

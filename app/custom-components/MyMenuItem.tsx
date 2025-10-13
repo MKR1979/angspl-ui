@@ -5,7 +5,7 @@ import { memo } from 'react';
 interface MyMenuItemProps extends MenuItemProps {}
 
 const MyMenuItem = ({ ...props }: MyMenuItemProps) => {
-  console.log('MyMenuItem rendered');
+  //console.log('MyMenuItem rendered');
   return <MenuItem {...props}></MenuItem>;
 };
 

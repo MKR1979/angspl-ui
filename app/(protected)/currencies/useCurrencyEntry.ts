@@ -1,19 +1,26 @@
-import React, { ChangeEvent, useCallback, useEffect, useReducer } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import CurrencyDTO, { CURRENCY } from '@/app/types/CurrencyDTO';
 import { ADD_CURRENCY, UPDATE_CURRENCY, GET_CURRENCY } from '@/app/graphql/Currency';
 import { GET_CURRENCY_CURRENCY_CODE_EXIST, GET_CURRENCY_CURRENCY_NAME_EXIST } from '@/app/graphql/Currency';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import * as gMessageConstants from '../../constants/messages-constants';
+import LookupDTO from '@/app/types/LookupDTO';
+import { arrCommonStatus } from '@/app/common/Configuration';
 
 type ErrorMessageType = {
   currency_name: string | null;
   currency_code: string | null;
   currency_symbol: string | null;
+  status: string | null;
 };
 
 type StateType = {
   dtoCurrency: CurrencyDTO;
   errorMessages: ErrorMessageType;
+  arrCommonStatusLookup: LookupDTO[];
+  open1: boolean;
 };
 
 type Props = {
@@ -25,12 +32,15 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
   const ERROR_MESSAGES: ErrorMessageType = Object.freeze({
     currency_name: null,
     currency_code: null,
-    currency_symbol: null
+    currency_symbol: null,
+    status: null
   } as ErrorMessageType);
 
   const INITIAL_STATE: StateType = Object.freeze({
     dtoCurrency: dtoCurrency,
-    errorMessages: { ...ERROR_MESSAGES }
+    arrCommonStatusLookup: arrCommonStatus,
+    errorMessages: { ...ERROR_MESSAGES },
+    open1: false
   });
 
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
@@ -38,34 +48,46 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const [saving, setSaving] = useState(false);
+  const showSnackbar = useSnackbar();
   const [addCurrency] = useMutation(ADD_CURRENCY, {});
-
   const [updateCurrency] = useMutation(UPDATE_CURRENCY, {});
+  const [getCurrency] = useLazyQuery(GET_CURRENCY, { fetchPolicy: 'network-only' });
+  const [getCurrencyCurrencyCodeExist] = useLazyQuery(GET_CURRENCY_CURRENCY_CODE_EXIST, { fetchPolicy: 'network-only' });
+  const [getCurrencyCurrencyNameExist] = useLazyQuery(GET_CURRENCY_CURRENCY_NAME_EXIST, { fetchPolicy: 'network-only' });
 
-  const [getCurrency] = useLazyQuery(GET_CURRENCY, {
-    fetchPolicy: 'network-only' // Doesn't check cache before making a network request
-  });
-
-  const [getCurrencyCurrencyCodeExist] = useLazyQuery(GET_CURRENCY_CURRENCY_CODE_EXIST, {
-    fetchPolicy: 'network-only' // Doesn't check cache before making a network request
-  });
-
-  const [getCurrencyCurrencyNameExist] = useLazyQuery(GET_CURRENCY_CURRENCY_NAME_EXIST, {
-    fetchPolicy: 'network-only' // Doesn't check cache before making a network request
-  });
+  useEffect(() => {
+    if (
+      state.arrCommonStatusLookup.length > 0 &&
+      !state.dtoCurrency.status
+    ) {
+      const firstItem = state.arrCommonStatusLookup[0];
+      setState({
+        ...state,
+        dtoCurrency: {
+          ...state.dtoCurrency,
+          status: firstItem.text, // or firstItem.id if you store status by id
+        }
+      });
+    }
+  }, [state.arrCommonStatusLookup]);
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoCurrency: CurrencyDTO = CURRENCY;
-    const { error, data } = await getCurrency({
-      variables: {
-        id: state.dtoCurrency.id
+    try {
+      let dtoCurrency: CurrencyDTO = CURRENCY;
+      const { error, data } = await getCurrency({
+        variables: {
+          id: state.dtoCurrency.id
+        }
+      });
+      if (!error && data) {
+        dtoCurrency = data.getCurrency;
       }
-    });
-    if (!error && data) {
-      dtoCurrency = data.getCurrency;
+      setState({ dtoCurrency: dtoCurrency } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoCurrency: dtoCurrency } as StateType);
   }, [getCurrency, state.dtoCurrency.id]);
 
   const IsCurrencyCodeExist = useCallback(async (): Promise<boolean> => {
@@ -114,9 +136,23 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
     [state.dtoCurrency]
   );
 
+  const onCodeChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      let value = event.target.value.toUpperCase();
+      value = value.replace(/[^A-Z0-9]/g, "");
+      setState({
+        dtoCurrency: {
+          ...state.dtoCurrency,
+          currency_code: value,
+        },
+      } as StateType);
+    },
+    [state.dtoCurrency]
+  );
+
   const validateCurrencyName = useCallback(async () => {
     if (state.dtoCurrency.currency_name.trim() === '') {
-      return 'Currency Name is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else if (await IsCurrencyNameExist()) {
       return 'Currency Name already exists';
     } else {
@@ -124,12 +160,10 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
     }
   }, [state.dtoCurrency.currency_name, IsCurrencyNameExist]);
 
-  const onCurrencyNameBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const currency_name = await validateCurrencyName();
-      setState({ errorMessages: { ...state.errorMessages, currency_name: currency_name } } as StateType);
-    }, [validateCurrencyName, state.errorMessages]);
+  const onCurrencyNameBlur = useCallback(async () => {
+    const currency_name = await validateCurrencyName();
+    setState({ errorMessages: { ...state.errorMessages, currency_name: currency_name } } as StateType);
+  }, [validateCurrencyName, state.errorMessages]);
 
   const validateCurrencyCode = useCallback(async () => {
     if (state.dtoCurrency.currency_code.trim() != '' && (await IsCurrencyCodeExist())) {
@@ -139,27 +173,48 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
     }
   }, [state.dtoCurrency.currency_code, IsCurrencyCodeExist]);
 
-  const onCurrencyCodeBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const currency_code = await validateCurrencyCode();
-      setState({ errorMessages: { ...state.errorMessages, currency_code: currency_code } } as StateType);
-    }, [validateCurrencyCode, state.errorMessages]);
+  const onCurrencyCodeBlur = useCallback(async () => {
+    const currency_code = await validateCurrencyCode();
+    setState({ errorMessages: { ...state.errorMessages, currency_code: currency_code } } as StateType);
+  }, [validateCurrencyCode, state.errorMessages]);
 
   const validateCurrencySymbol = useCallback(async () => {
     if (state.dtoCurrency.currency_symbol.trim() === '') {
-      return 'Currency Symbol is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
   }, [state.dtoCurrency.currency_symbol]);
 
-  const onCurrencySymbolBlur = useCallback(async () =>
-    //event: React.FocusEvent<HTMLInputElement>
-    {
-      const currency_symbol = await validateCurrencySymbol();
-      setState({ errorMessages: { ...state.errorMessages, currency_symbol: currency_symbol } } as StateType);
-    }, [validateCurrencySymbol, state.errorMessages]);
+  const onCurrencySymbolBlur = useCallback(async () => {
+    const currency_symbol = await validateCurrencySymbol();
+    setState({ errorMessages: { ...state.errorMessages, currency_symbol: currency_symbol } } as StateType);
+  }, [validateCurrencySymbol, state.errorMessages]);
+
+  const onStatusChange = useCallback(
+    async (event: any, value: unknown) => {
+      setState({
+        dtoCurrency: {
+          ...state.dtoCurrency,
+          status: (value as LookupDTO).text
+        }
+      } as StateType);
+    },
+    [state.dtoCurrency]
+  );
+
+  const validateStatus = useCallback(async () => {
+    if (state.dtoCurrency.status.trim() === '') {
+      return gMessageConstants.REQUIRED_FIELD;
+    } else {
+      return null;
+    }
+  }, [state.dtoCurrency.status]);
+
+  const onStatusBlur = useCallback(async () => {
+    const status = await validateStatus();
+    setState({ errorMessages: { ...state.errorMessages, status: status } } as StateType);
+  }, [validateStatus, state.errorMessages]);
 
   const validateForm = useCallback(async () => {
     let isFormValid = true;
@@ -183,26 +238,37 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      if (await validateForm()) {
-        if (state.dtoCurrency.id === 0) {
-          const { data } = await addCurrency({
-            variables: {
-              ...state.dtoCurrency
+      if (saving) return;
+      setSaving(true);
+      try {
+        if (await validateForm()) {
+          if (state.dtoCurrency.id === 0) {
+            const { data } = await addCurrency({
+              variables: {
+                ...state.dtoCurrency
+              }
+            });
+            if (data) {
+              showSnackbar(gMessageConstants.SNACKBAR_INSERT_RECORD, 'success');
+              router.push('/currencies/list');
             }
-          });
-          if (data) {
-            router.push('/currencies/list');
-          }
-        } else {
-          const { data } = await updateCurrency({
-            variables: {
-              ...state.dtoCurrency
+          } else {
+            const { data } = await updateCurrency({
+              variables: {
+                ...state.dtoCurrency
+              }
+            });
+            if (data) {
+              showSnackbar(gMessageConstants.SNACKBAR_UPDATE_RECORD, 'success');
+              router.push('/currencies/list');
             }
-          });
-          if (data) {
-            router.push('/currencies/list');
           }
         }
+      } catch (error: any) {
+        console.error('Error while saving referral:', error);
+        showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
+      } finally {
+        setSaving(false);
       }
     },
     [validateForm, addCurrency, state.dtoCurrency, router, updateCurrency]
@@ -226,16 +292,28 @@ const useCurrencyEntry = ({ dtoCurrency }: Props) => {
     },
     [router]
   );
+  const setOpen1 = useCallback(async (): Promise<void> => {
+    setState({ open1: true } as StateType);
+  }, []);
+  const setClose1 = useCallback(async (): Promise<void> => {
+    setState({ open1: false } as StateType);
+  }, []);
 
   return {
     state,
     onInputChange,
+    onCodeChange,
     onCurrencyNameBlur,
     onCurrencyCodeBlur,
     onCurrencySymbolBlur,
     onSaveClick,
     onClearClick,
-    onCancelClick
+    onCancelClick,
+    saving,
+    onStatusBlur,
+    onStatusChange,
+    setOpen1,
+    setClose1
   };
 };
 

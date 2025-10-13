@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconLockStarProps extends IconProps {}
 const MyIconLockStar = ({ ...props }: MyIconLockStarProps) => {
-  console.log('My render');
+// console.log('My render');
   return <IconLockStar {...props}></IconLockStar>;
 };
 export default memo(MyIconLockStar, (prevProps, nextProps) => {

@@ -7,7 +7,7 @@ interface MyLinearProgressProps extends LinearProgressProps {
 }
 
 const MyLinearProgress = ({ ...props }: MyLinearProgressProps) => {
-  console.log('MyLinearProgress rendered');
+  //console.log('MyLinearProgress rendered');
   return <LinearProgress {...props} sx={{ height: '15px', ...props.sx }}></LinearProgress>;
 };
 

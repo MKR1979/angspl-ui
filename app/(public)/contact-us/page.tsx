@@ -1,12 +1,12 @@
-import { Metadata } from 'next';
-import ClientContactUs from './client-contact-us';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Contact Us'
-};
+import ContactUs from './contact-us';
+import { SnackbarProvider } from '@/app/custom-components/SnackbarProvider';
 
-export const revalidate = 0;
-
-export default async function ContactUsPage() {
-  return <ClientContactUs></ClientContactUs>;
+export default function ContactUsPage() {
+  return (
+    <SnackbarProvider>
+      <ContactUs />
+    </SnackbarProvider>
+  );
 }

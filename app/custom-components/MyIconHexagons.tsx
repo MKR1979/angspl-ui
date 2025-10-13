@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconHexagonsProps extends IconProps {}
 const MyIconHexagons = ({ ...props }: MyIconHexagonsProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconHexagons {...props}></IconHexagons>;
 };
 export default memo(MyIconHexagons, (prevProps, nextProps) => {

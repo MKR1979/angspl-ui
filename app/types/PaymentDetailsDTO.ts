@@ -5,6 +5,7 @@ export default interface PaymentDetailsDTO extends BaseDTO {
   last_name: string;
   email: string;
   mobile_no: string;
+  user_name: string;
 }
 
 export const PAYMENT_DETAILS: PaymentDetailsDTO = Object.freeze({
@@ -13,6 +14,7 @@ export const PAYMENT_DETAILS: PaymentDetailsDTO = Object.freeze({
   last_name: '',
   email: '',
   mobile_no: '',
+  user_name: '',
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

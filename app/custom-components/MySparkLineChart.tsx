@@ -6,7 +6,7 @@ import eq from 'lodash/eq';
 interface MySparkLineProps extends SparkLineChartProps {}
 
 const MySparkLineChart = ({ ...props }: MySparkLineProps) => {
-  console.log('MySparkLineChart rendered');
+  //console.log('MySparkLineChart rendered');
   return <SparkLineChart {...props}></SparkLineChart>;
 };
 

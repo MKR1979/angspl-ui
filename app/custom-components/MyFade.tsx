@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyFadeProps extends FadeProps {}
 
 const MyFade = ({ ...props }: MyFadeProps) => {
-  console.log('MyFade rendered');
+  // console.log('MyFade rendered');
   return <Fade {...props} />;
 };
 

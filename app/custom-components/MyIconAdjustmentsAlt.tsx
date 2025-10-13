@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconAdjustmentsAltProps extends IconProps {}
 const MyIconAdjustmentsAlt = ({ ...props }: MyIconAdjustmentsAltProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconAdjustmentsAlt {...props}></IconAdjustmentsAlt>;
 };
 export default memo(MyIconAdjustmentsAlt, (prevProps, nextProps) => {

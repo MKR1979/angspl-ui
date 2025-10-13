@@ -1,0 +1,31 @@
+Business Logic / Flow of user device Attendance:
+
+1. User Validation (Step 1):
+
+    ✔ Checks if the user exists and is active.
+
+    ✔ Raises an appropriate exception if the user is unauthorized.
+
+2. Device Validation (Step 2):
+
+    ✔ Validates whether device validation is enabled from site_config.
+
+    ✔ Calls func_user_device_mapping_exist to verify if the current device is mapped to the user.
+
+    ✔ If not, checks if any active device is already mapped.
+ 
+    ✔ If a different device was already mapped:
+
+    ✔ Checks attendance table for previous attendance using the same device and entry type on the same date.
+
+    ✔ Correctly raises exception if such attendance already exists.
+
+    ✔ Otherwise, updates old mapping to inactive.
+
+    ✔ Adds new mapping using func_user_device_mapping_insert.
+
+3. Attendance Insertion (Step 3):
+
+    ✔ Inserts attendance with correct fields and formatting.
+
+    ✔ Time is adjusted using now() AT TIME ZONE 'Asia/Kolkata' as per typical Indian localization practice.

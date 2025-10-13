@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useCallback, useReducer } from 'react';
+import React, { ChangeEvent, useCallback, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { UPDATE_USER_PASSWORD, VALIDATE_USER_PASSWORD } from '@/app/graphql/User';
+import { useSnackbar } from '../../custom-components/SnackbarProvider';
+import * as gMessageConstants from '../../constants/messages-constants';
 
 type ErrorMessageType = {
   old_password: string | null;
@@ -37,9 +39,12 @@ const useChangePassword = () => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const [saving, setSaving] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword1, setShowPassword1] = useState(false);
+   const [showPassword2, setShowPassword2] = useState(false);
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [updateUserPassword] = useMutation(UPDATE_USER_PASSWORD, {});
 
   const [validateUserPassword] = useLazyQuery(VALIDATE_USER_PASSWORD, {
@@ -67,7 +72,7 @@ const useChangePassword = () => {
   );
   const validateOldPassword = useCallback(async () => {
     if (state.old_password.trim() === '') {
-      return 'Old Password is required';
+     return gMessageConstants.REQUIRED_FIELD;
     } else if (!(await IsPasswordExist())) {
       return 'Old Password is wrong';
     } else {
@@ -82,7 +87,7 @@ const useChangePassword = () => {
 
   const validatePassword = useCallback(async () => {
     if (state.password.trim() === '') {
-      return 'Password is required';
+     return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -95,7 +100,7 @@ const useChangePassword = () => {
 
   const validateConfirmPassword = useCallback(async () => {
     if (state.confirm_password.trim() === '') {
-      return 'Confirm Password is required';
+     return gMessageConstants.REQUIRED_FIELD;
     } else if (state.password.trim() != state.confirm_password.trim()) {
       return 'Password and Confirm Password do not match';
     } else {
@@ -130,16 +135,26 @@ const useChangePassword = () => {
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      if (await validateForm()) {
-        const { data } = await updateUserPassword({
-          variables: {
-            old_password: state.old_password,
-            password: state.password
+      if (saving) return;
+      setSaving(true);
+      try {
+        if (await validateForm()) {
+          const { data } = await updateUserPassword({
+            variables: {
+              old_password: state.old_password,
+              password: state.password
+            }
+          });
+          if (data) {
+            showSnackbar(gMessageConstants.SNACKBAR_UPDATE_PASSWORD, 'success');
+            router.push('/login');
           }
-        });
-        if (data) {
-          router.push('/login');
         }
+      } catch (error: any) {
+        console.error('Error while saving password:', error);
+        showSnackbar(gMessageConstants.SNACKBAR_PASSWORD_UPDATE_FAILED, 'error');
+      } finally {
+        setSaving(false);
       }
     },
     [validateForm, state.old_password, state.password, router, updateUserPassword]
@@ -159,8 +174,15 @@ const useChangePassword = () => {
     onOldPasswordBlur,
     onPasswordBlur,
     onConfirmPasswordBlur,
+    showPassword,
+    setShowPassword,
+    showPassword1,
+    setShowPassword1,
+    showPassword2,
+    setShowPassword2,
     onSaveClick,
-    onCancelClick
+    onCancelClick,
+    saving
   };
 };
 

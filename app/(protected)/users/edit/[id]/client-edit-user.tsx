@@ -7,15 +7,15 @@ import useEditUser from './useEditUser';
 import UserDTO from '@/app/types/UserDTO';
 import LookupDTO from '@/app/types/LookupDTO';
 
-type Props = { dtoUser: UserDTO; arrRoleLookup: LookupDTO[] };
+type Props = { dtoUser: UserDTO; arrRoleLookup: LookupDTO[]; arrTypeLookup: LookupDTO[] };
 
-const ClientEditUser = ({ dtoUser, arrRoleLookup }: Props) => {
+const ClientEditUser = ({ dtoUser, arrRoleLookup, arrTypeLookup }: Props) => {
   const { state } = useEditUser();
 
   return (
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
-      <UserEntry dtoUser={dtoUser} arrRoleLookup={arrRoleLookup} />
+      <UserEntry dtoUser={dtoUser} arrRoleLookup={arrRoleLookup} arrTypeLookup={arrTypeLookup}/>
     </>
   );
 };

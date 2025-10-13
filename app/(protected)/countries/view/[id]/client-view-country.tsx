@@ -13,6 +13,8 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyBox from '@/app/custom-components/MyBox';
 import CountryDTO from '@/app/types/CountryDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
+import { useSelector, RootState } from '../../../../store';
+import { findPermission } from '../../../../common/utility-permission';
 
 type Props = {
   dtoCountry: CountryDTO;
@@ -20,6 +22,7 @@ type Props = {
 
 const ClientViewCountry = ({ dtoCountry }: Props) => {
   const { state, onEditClick, onCancelClick } = useViewCountry({ dtoCountry });
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   return (
     <>
@@ -33,6 +36,12 @@ const ClientViewCountry = ({ dtoCountry }: Props) => {
                 <MyTypography variant="subtitle2">{state.dtoCountry.country_name}</MyTypography>
               </MyBox>
             </MyGrid>
+            <MyGrid size={{ xs: 12, md: 6 }}>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography variant="subtitle1">Status:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoCountry.status}</MyTypography>
+              </MyBox>
+            </MyGrid>
           </MyGrid>
         </MyCardContent>
         <MyDivider />
@@ -43,7 +52,7 @@ const ClientViewCountry = ({ dtoCountry }: Props) => {
           modifiedAt={state.dtoCountry.modified_at}
         ></MyTimestamp>
         <MyCardActions>
-          <MyButton onClick={onEditClick}>Edit</MyButton>
+          {findPermission(userPermissions, 48) && <MyButton onClick={onEditClick}>Edit</MyButton>}
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

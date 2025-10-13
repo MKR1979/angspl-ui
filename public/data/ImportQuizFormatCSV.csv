@@ -1,0 +1,13 @@
+question,option_text,is_correct,explanation,status
+What is JSX in React?,A syntax extension for JavaScript,true,Correct - JSX allows HTML-like syntax in JavaScript.,Active
+What is JSX in React?,A database language,false,Incorrect - JSX is not a database language.,Active
+What is JSX in React?,A CSS preprocessor,false,Incorrect - JSX does not relate to CSS preprocessing.,Active
+What is JSX in React?,A routing library,false,Incorrect - JSX is unrelated to routing.,Active
+Which method is used to create components in React?,Function or class declarations,true,Correct - Components are made using functions or classes.,Active
+Which method is used to create components in React?,React.component(),false,Incorrect - This is not a valid React method.,Active
+Which method is used to create components in React?,createComponent(),false,Incorrect - Not a React API.,Active
+Which method is used to create components in React?,React.createClass(),false,Incorrect - Deprecated in modern React.,Active
+What is the virtual DOM in React?,A copy of the real DOM in memory,true,Correct - The virtual DOM is an in-memory representation.,Active
+What is the virtual DOM in React?,The actual UI elements,false,"Incorrect - It is a virtual representation, not the actual UI.",Active
+What is the virtual DOM in React?,A CSS framework,false,Incorrect - Virtual DOM is not a styling framework.,Active
+What is the virtual DOM in React?,A server-side rendering engine,false,"Incorrect - It runs in the browser, not on the server.",Active

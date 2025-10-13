@@ -31,7 +31,7 @@ export const EMAIL_LIST = gql`
 `;
 
 export const DELETE_EMAIL = gql`
-  mutation deleteEmail($ids: [String]!) {
+  mutation deleteEmail($ids: [Int]!) {
     deleteEmail(deleteEmailInput: { ids: $ids })
   }
 `;

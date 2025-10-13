@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconMailboxProps extends IconProps {}
 const MyIconMailbox = ({ ...props }: MyIconMailboxProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconMailbox {...props}></IconMailbox>;
 };
 export default memo(MyIconMailbox, (prevProps, nextProps) => {

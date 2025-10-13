@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconClock12Props extends IconProps {}
 const MyIconClock12 = ({ ...props }: MyIconClock12Props) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconClock12 {...props}></IconClock12>;
 };
 export default memo(MyIconClock12, (prevProps, nextProps) => {

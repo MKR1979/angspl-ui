@@ -38,7 +38,13 @@ export const generatePDF = async ({
     });
   };
 
+  // const companyLogoBase64 = await loadImageAsBase64(logoUrl);
   const companyLogoBase64 = await loadImageAsBase64(logoUrl);
+  if (!companyLogoBase64.startsWith('data:image')) {
+    console.warn('Logo not found or invalid format, skipping logo');
+  } else {
+    doc.addImage(companyLogoBase64, 'PNG', 4, 2, 35, 15);
+  }
 
   const drawHeaderFooter = () => {
     doc.setFont('helvetica', 'normal');
@@ -81,8 +87,8 @@ export const generatePDF = async ({
   doc.setFont('courier', 'normal');
   doc.setFontSize(12);
 
-  const marginLeft = 10; 
-  const marginRight = 10; 
+  const marginLeft = 10;
+  const marginRight = 10;
   const maxLineWidth = pageWidth - marginLeft - marginRight;
 
   const contentLines = content.split('\n');
@@ -91,7 +97,7 @@ export const generatePDF = async ({
 
   contentLines.forEach((line) => {
     const splittedLines: string[] = doc.splitTextToSize(line, maxLineWidth);
-  
+
     splittedLines.forEach((splitLine) => {
       if (y + lineSpacing > pageHeight - footerHeight) {
         doc.addPage();
@@ -106,6 +112,10 @@ export const generatePDF = async ({
   });
   doc.save(`${title.replace(/\s+/g, '_')}_adhyayan.online.pdf`);
 };
+
+
+
+
 
 
 

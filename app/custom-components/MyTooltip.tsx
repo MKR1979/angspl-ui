@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyTooltipProps extends TooltipProps {}
 
 const MyTooltip = ({ ...props }: MyTooltipProps) => {
-  console.log('MyTooltip rendered');
+  //console.log('MyTooltip rendered');
   return <Tooltip {...props} />;
 };
 

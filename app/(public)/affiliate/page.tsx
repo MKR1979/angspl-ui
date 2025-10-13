@@ -1,10 +1,12 @@
-import ClientAffiliate from './client-affiliate';
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Affiliate Program'
-};
-export const revalidate = 0;
-export default async function AffiliatePage() {
-  return <ClientAffiliate></ClientAffiliate>;
+import ClientAffiliate from './client-affiliate';
+import { SnackbarProvider } from '@/app/custom-components/SnackbarProvider';
+
+export default function ContactUsPage() {
+  return (
+    <SnackbarProvider>
+      <ClientAffiliate />
+    </SnackbarProvider>
+  );
 }

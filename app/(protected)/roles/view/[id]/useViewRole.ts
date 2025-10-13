@@ -4,6 +4,8 @@ import { useLazyQuery } from '@apollo/client';
 import RoleDTO from '@/app/types/RoleDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_ROLE } from '@/app/graphql/Role';
+import * as gMessageConstants from '../../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 type StateType = {
   dtoRole: RoleDTO;
   breadcrumbsItems: BreadcrumbsItem[];
@@ -23,7 +25,7 @@ const useViewRole = ({ dtoRole }: Props) => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const showSnackbar = useSnackbar();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const [getRole] = useLazyQuery(GET_ROLE, {
@@ -31,16 +33,21 @@ const useViewRole = ({ dtoRole }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoRole: RoleDTO = {} as RoleDTO;
-    const { error, data } = await getRole({
-      variables: {
-        id: state.dtoRole.id
+    try {
+      let dtoRole: RoleDTO = {} as RoleDTO;
+      const { error, data } = await getRole({
+        variables: {
+          id: state.dtoRole.id
+        }
+      });
+      if (!error && data) {
+        dtoRole = data.getRole;
       }
-    });
-    if (!error && data) {
-      dtoRole = data.getRole;
+      setState({ dtoRole: dtoRole } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoRole: dtoRole } as StateType);
   }, [getRole, state.dtoRole.id]);
 
   useEffect(() => {

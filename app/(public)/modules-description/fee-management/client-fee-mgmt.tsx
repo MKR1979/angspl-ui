@@ -10,6 +10,7 @@ import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import MyTypography from '@/app/custom-components/MyTypography';
 
 const bannerImages = ['/paymentMngImgs/pay1.jpg', '/paymentMngImgs/pay3.png', '/paymentMngImgs/pay5.png'];
 
@@ -149,10 +150,8 @@ const ClientFeeMgmt = () => {
                         </li>
                       </ul>
                       <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                         <MyTypography sx={{ fontSize: '24px',textAlign:'center', marginTop: '5px',marginBottom: '5px',  color: '#465063', fontFamily: 'serif',fontWeight:'bold' }} >How It Works Section</MyTypography>
                         <div className="book-container">
-                          {/* Heading overlay on book background */}
-                          <h2 className="book-heading">How It Works Section</h2>
-
                           <div className="book">
                             {images.map((src, index) => (
                               <img

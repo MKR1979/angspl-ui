@@ -5,10 +5,10 @@ import MyButton from '@/app/custom-components/MyButton';
 import MyTextField from '@/app/custom-components/MyTextField';
 import useUserEntry from './useUserEntry';
 import MyTypography from '@/app/custom-components/MyTypography';
-import MyFormControl from '@/app/custom-components/MyFormControl';
-import MyInputLabel from '@/app/custom-components/MyInputLabel';
-import MySelect from '@/app/custom-components/MySelect';
-import { arrUserStatus } from '@/app/common/Configuration';
+// import MyFormControl from '@/app/custom-components/MyFormControl';
+// import MyInputLabel from '@/app/custom-components/MyInputLabel';
+// import MySelect from '@/app/custom-components/MySelect';
+// import { arrUserStatus } from '@/app/common/Configuration';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyDivider from '@/app/custom-components/MyDivider';
@@ -21,35 +21,51 @@ import MyBox from '@/app/custom-components/MyBox';
 import MyImage from '@/app/custom-components/MyImage';
 import MyPhoneNumber from '@/app/custom-components/MyPhoneNumber';
 import * as gConstants from '../../constants/constants';
+import * as Constants from '../constants/constants';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 
 type UserEntryProps = {
   dtoUser: UserDTO;
   arrRoleLookup: LookupDTO[];
+  arrTypeLookup: LookupDTO[];
 };
 
 const UserEntry = (props: UserEntryProps) => {
   const {
-    state,
+    state, isEditMode,
     onInputChange,
+    onStatusChange,
+    onPlainInputChange,
     onMobileNoChange,
     onRoleNameChange,
-    onSelectChange,
+    onTypeChange,
     onFirstNameBlur,
     onLastNameBlur,
     onEMailIdBlur,
     onMobileNoBlur,
     onUserNameBlur,
     onPasswordBlur,
+    showPassword,
+    setShowPassword,
     onStatusBlur,
     onRoleBlur,
+    onTypeBlur,
     onSaveClick,
     onClearClick,
     onCancelClick,
     setOpen1,
     setClose1,
+    setOpen2,
+    setClose2,
+    setOpen3,
+    setClose3,
     onImageError,
     onImageClick,
-    UploadImage
+    onNormalizedInputChange,
+    UploadImage,
+    saving,
   } = useUserEntry(props);
 
   return (
@@ -62,7 +78,7 @@ const UserEntry = (props: UserEntryProps) => {
                 <MyImage
                   src={
                     state.dtoUser.image_url?.trim() == ''
-                      ? '/default-image.avif'
+                      ? '/common/default-image.webp'
                       : process.env.NEXT_PUBLIC_API_ROOT_URL + '/uploads/' + state.dtoUser.image_url
                   }
                   width={800}
@@ -122,7 +138,7 @@ const UserEntry = (props: UserEntryProps) => {
                   label="E-Mail"
                   name="email"
                   value={state.dtoUser.email}
-                  onChange={onInputChange}
+                  onChange={onNormalizedInputChange}
                   inputProps={{
                     maxLength: gConstants.EMAIL_LENGTH, // Restricts input to two characters
                     pattern: '^[A-Za-z]{1,2}$' // Allows only up to two letters (A-Z, a-z)
@@ -148,7 +164,7 @@ const UserEntry = (props: UserEntryProps) => {
                   label="Username"
                   name="user_name"
                   value={state.dtoUser.user_name}
-                  onChange={onInputChange}
+                  onChange={onNormalizedInputChange}
                   inputProps={{
                     maxLength: gConstants.USER_NAME_LENGTH, // Restricts input to two characters
                     pattern: '^[A-Za-z]{1,2}$' // Allows only up to two letters (A-Z, a-z)
@@ -161,16 +177,27 @@ const UserEntry = (props: UserEntryProps) => {
               <MyGrid size={{ xs: 12, sm: 6 }}>
                 <MyTextField
                   autoComplete="new-password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   label="Password"
                   name="password"
                   value={state.dtoUser.password}
-                  onChange={onInputChange}
+                  onChange={onPlainInputChange}
                   onBlur={onPasswordBlur}
                   error={state.errorMessages.password ? true : false}
                   inputProps={{
-                    minLength: gConstants.PASSWORD_MIN_LENGTH,
-                    maxLength: gConstants.PASSWORD_MAX_LENGTH
+                    ...(isEditMode
+                      ? { maxLength: gConstants.PASSWORD_MAX_LENGTH }
+                      : { minLength: gConstants.PASSWORD_MIN_LENGTH, maxLength: gConstants.PASSWORD_LENGTH })
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword(!showPassword)} edge="end">
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                          {/* sx={{ fontSize: 18 }} */}
+                        </IconButton>
+                      </InputAdornment>
+                    )
                   }}
                   required
                 />
@@ -189,9 +216,11 @@ const UserEntry = (props: UserEntryProps) => {
                   firstitem={{ id: 0, text: '' }}
                   options={state.arrRoleLookup}
                   onChange={onRoleNameChange}
-                  filterOptions={(
-                    options // to remove the empty selectable string in the lookup
-                  ) => options.filter((option: any) => option.text && option.text.trim() !== '')}
+                  filterOptions={(options, state) => {
+                    // searchable Lookup
+                    const searchTerm = state.inputValue.toLowerCase();
+                    return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+                  }}
                   renderInput={(params) => (
                     <MyTextField
                       {...params}
@@ -204,33 +233,81 @@ const UserEntry = (props: UserEntryProps) => {
                     />
                   )}
                 />
-                <MyTypography className="error"> {state.errorMessages.role_id}</MyTypography>
+                <MyTypography className="error"> {state.errorMessages.role_name}</MyTypography>
               </MyGrid>
               <MyGrid size={{ xs: 12, sm: 6 }}>
-                <MyFormControl error={state.errorMessages.status ? true : false} fullWidth>
-                  <MyInputLabel>Status</MyInputLabel>
-                  <MySelect
-                    label="Status"
-                    name="status"
-                    value={state.dtoUser.status.trim() === '' ? ' ' : state.dtoUser.status.trim()}
-                    dataSource={arrUserStatus.filter((status) => status.trim() !== '')} //  to remove the empty selectable string in the lookup
-                    // dataSource={arrUserStatus}
-                    onChange={onSelectChange}
-                    onBlur={onStatusBlur}
-                  />
-                </MyFormControl>
-                <MyTypography className="error"> {state.errorMessages.status}</MyTypography>
+                <MyAutocomplete
+                  open={state.open2}
+                  onOpen={setOpen2}
+                  onClose={setClose2}
+                  value={{
+                    id: state.dtoUser.type_id,
+                    text: state.dtoUser.type_name
+                  }}
+                  getOptionLabel={(option: any) => option.text}
+                  firstitem={{ id: 0, text: '' }}
+                  options={state.arrTypeLookup}
+                  onChange={onTypeChange}
+                  filterOptions={(options, state) => {
+                    // searchable Lookup
+                    const searchTerm = state.inputValue.toLowerCase();
+                    return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+                  }}
+                  renderInput={(params) => (
+                    <MyTextField
+                      {...params}
+                      label="Type"
+                      slotProps={{
+                        inputLabel: { shrink: true }
+                      }}
+                      onBlur={onTypeBlur}
+                      error={state.errorMessages.type_name ? true : false}
+                    />
+                  )}
+                />
+                <MyTypography className="error"> {state.errorMessages.type_name}</MyTypography>
               </MyGrid>
-              {state.dtoUser?.role_id === 6 && (
+              <MyGrid size={{ xs: 12, sm: 6 }}>
+                <MyAutocomplete
+                  open={state.open3}
+                  onOpen={setOpen3}
+                  onClose={setClose3}
+                  value={{ text: state.dtoUser.status }}
+                  getOptionLabel={(option: any) => option.text}
+                  firstitem={{ id: 0, text: '' }}
+                  options={state.arrUserStatusLookup}
+                  onChange={onStatusChange}
+                  onBlur={onStatusBlur}
+                  filterOptions={(options, state) => {
+                    // searchable Lookup
+                    const searchTerm = state.inputValue.toLowerCase();
+                    return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+                  }}
+                  renderInput={(params) => (
+                    <MyTextField
+                      {...params}
+                      label="Status"
+                      placeholder='Select status...'
+                      slotProps={{
+                        inputLabel: { shrink: true }
+                      }}
+                      error={state.errorMessages.status ? true : false}
+                    />
+                  )}
+                />
+                <MyTypography className="error">{state.errorMessages.status}</MyTypography>
+              </MyGrid>
+
+              {state.dtoUser?.role_name && state.dtoUser.role_name !== Constants.ROLE_NAME_ADMIN && (
                 <MyGrid size={{ xs: 12, sm: 6 }}>
                   <MyTextField
-                    label="Admission Id"
-                    name="admission_id"
-                    value={state.dtoUser.admission_id}
-                    onChange={onInputChange}
-                    error={state.errorMessages.admission_id ? true : false}
+                    label="Code"
+                    name="code"
+                    value={state.dtoUser.code}
+                    onChange={onPlainInputChange}
+                    error={state.errorMessages.code ? true : false}
                   />
-                  <MyTypography className="error"> {state.errorMessages.admission_id}</MyTypography>
+                  <MyTypography className="error"> {state.errorMessages.code}</MyTypography>
                 </MyGrid>
               )}
             </MyGrid>
@@ -239,7 +316,9 @@ const UserEntry = (props: UserEntryProps) => {
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onSaveClick} disabled={saving}>
+          {saving ? 'Saving...' : 'Save'}
+        </MyButton>
         <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>

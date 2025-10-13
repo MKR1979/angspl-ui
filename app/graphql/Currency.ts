@@ -1,14 +1,22 @@
 import gql from 'graphql-tag';
 export const ADD_CURRENCY = gql`
-  mutation addCurrency($currency_code: String, $currency_name: String, $currency_symbol: String) {
-    addCurrency(addCurrencyInput: { currency_code: $currency_code, currency_name: $currency_name, currency_symbol: $currency_symbol })
+  mutation addCurrency($currency_code: String, $currency_name: String, $currency_symbol: String, $status: String) {
+    addCurrency(
+      addCurrencyInput: { currency_code: $currency_code, currency_name: $currency_name, currency_symbol: $currency_symbol, status: $status }
+    )
   }
 `;
 
 export const UPDATE_CURRENCY = gql`
-  mutation updateCurrency($id: Int!, $currency_code: String, $currency_name: String, $currency_symbol: String) {
+  mutation updateCurrency($id: Int!, $currency_code: String, $currency_name: String, $currency_symbol: String, $status: String) {
     updateCurrency(
-      updateCurrencyInput: { id: $id, currency_code: $currency_code, currency_name: $currency_name, currency_symbol: $currency_symbol }
+      updateCurrencyInput: {
+        id: $id
+        currency_code: $currency_code
+        currency_name: $currency_name
+        currency_symbol: $currency_symbol
+        status: $status
+      }
     )
   }
 `;
@@ -45,6 +53,7 @@ export const CURRENCY_LIST = gql`
         currency_code
         currency_name
         currency_symbol
+        status
         created_by
         created_by_first_name
         created_by_last_name
@@ -67,6 +76,7 @@ export const GET_CURRENCY = gql`
       currency_code
       currency_name
       currency_symbol
+      status
       created_by
       created_by_first_name
       created_by_last_name

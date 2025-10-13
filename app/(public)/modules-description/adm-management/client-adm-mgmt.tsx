@@ -10,12 +10,30 @@ import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/ModulesImgs/admsMng.png', '/ModulesImgs/admsMng1.png', '/ModulesImgs/admsMng2.png'];
+const bannerImages = ['/admissionImgs/adm6.jpg', '/admissionImgs/adm7.jpg', '/admissionImgs/adm9.jpg'];
 
 const ClientAdmMgmt = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = [
+    '/admissionImgs/adm.webp',
+    '/admissionImgs/adm1.webp',
+    '/admissionImgs/adm2.webp',
+    '/admissionImgs/adm3.webp',
+    '/admissionImgs/adm4.webp',
+    '/admissionImgs/adm5.webp'
+  ];
 
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000); // change page every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
   // Auto-slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -113,14 +131,16 @@ const ClientAdmMgmt = () => {
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Admission Form</h2>
-                  <div className="responsive-image">
-                    <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
+                   <MyTypography sx={{ fontSize: '24px',textAlign:'center', marginTop: '5px',marginBottom: '5px',  color: '#465063', fontFamily: 'serif',fontWeight:'bold' }} >Our Admission Process</MyTypography>
+                  <div className="book-container">
+                    <div className="book">
+                      {images.map((src, index) => (
+                        <img key={index} src={src} alt={`page-${index}`} className={`page ${index === current ? 'active' : ''}`} />
+                      ))}
+                    </div>
                   </div>
                 </MyGrid>
-
                 <MyCardContent className="card-text">
                   The online admission and student enrollment process in schools can be tedious, involving managing and analyzing inquiries,
                   planning marketing strategies, and creating and handling student records. Verifying student data and generating merit
@@ -133,7 +153,6 @@ const ClientAdmMgmt = () => {
                   simplify and automate the online admission process by managing and verifying student entries, documents, images,
                   certificates.
                 </MyCardContent>
-
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Add New Admission</h2>
                   <div className="responsive-video">
@@ -145,7 +164,6 @@ const ClientAdmMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-
                 <MyCardContent className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> helps schools automate and
                   simplify routine activities such as curriculum management, attendance tracking, administrative tasks, information
@@ -155,6 +173,57 @@ const ClientAdmMgmt = () => {
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management Software</span> includes all essential modules
                   for tracking student records, admissions, fees, timetable planning, and other critical school processes, enabling seamless
                   management for both teachers and staff.
+                </MyCardContent>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Here Is Payment Process</h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+                <MyCardContent className="card-text">
+                  To complete your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Admission Form</span>, carefully fill in all
+                  required details and click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span>. Once your form is
+                  submitted, click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Pay Now</span> to proceed with the payment of
+                  the registration fee. A <span style={{ fontWeight: 'bold', color: '#334D6E' }}>QR code</span> will appear on your screen —
+                  scan it using any UPI application (Google Pay, PhonePe, Paytm) to make the payment securely. After the payment is
+                  successfully completed, you will receive a <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment Receipt</span>{' '}
+                  as confirmation of your registration.
+                </MyCardContent>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <h2 className="section-subheading">Admissions Managed by Admin</h2>
+                  <div className="responsive-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+                      title="How to Add New Students | Step-by-Step Guide"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </MyGrid>
+                <MyCardContent className="card-text">
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>admin</span> has full control over the admission process and
+                  can manage student admissions directly from their side. This includes:
+                  <ul>
+                    <li>
+                      <strong>Add Admissions:</strong> Admins can manually add new student
+                      details, course selections, and other relevant information into the system.
+                    </li>
+                    <li>
+                      <strong >View Admissions:</strong> Admins can view all student admission
+                      records, track their status, and quickly access student details when needed.
+                    </li>
+                    <li>
+                      <strong>Edit Admissions:</strong> If any student information needs
+                      correction or update, the admin can edit the records to ensure accuracy.
+                    </li>
+                  </ul>
+                  This functionality ensures that the institution can efficiently manage admissions, maintain accurate records, and provide
+                  a smooth enrollment experience for students, even when applications are submitted offline or through third-party sources.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Review Admissions</h2>
@@ -167,7 +236,6 @@ const ClientAdmMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-
                 <MyCardContent className="card-text">
                   The Review Admission feature enables administrators to efficiently manage and monitor the entire admission process within
                   the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management System</span>. Once logged in, administrators
@@ -184,17 +252,17 @@ const ClientAdmMgmt = () => {
           </MyCard>
         </MyBox>
         <div className="container">
+          <div className="vertical_center">
+            <p>
+              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
+            </p>
             <div className="vertical_center">
-              <p>
-                © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-              </p>
-              <div className="vertical_center">
-                ||
-                <a href="/terms">Terms of use</a>||
-                <a href="/privacy-policy">Privacy Policy</a>
-              </div>
+              ||
+              <a href="/terms">Terms of use</a>||
+              <a href="/privacy-policy">Privacy Policy</a>
             </div>
           </div>
+        </div>
       </div>
     </>
   );

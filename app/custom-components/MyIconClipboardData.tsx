@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconClipboardDataProps extends IconProps {}
 const MyIconClipboardData = ({ ...props }: MyIconClipboardDataProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconClipboardData {...props}></IconClipboardData>;
 };
 export default memo(MyIconClipboardData, (prevProps, nextProps) => {

@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyInputLabelProps extends InputLabelProps {}
 
 const MyInputLabel = ({ ...props }: MyInputLabelProps) => {
-  console.log('MyInputLabel  rendered');
+  //console.log('MyInputLabel  rendered');
   return <InputLabel shrink={true} {...props}></InputLabel>;
 };
 

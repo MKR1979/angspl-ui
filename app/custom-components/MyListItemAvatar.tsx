@@ -7,7 +7,7 @@ interface MyListItemAvatarProps extends ListItemAvatarProps {
 }
 
 const MyListItemAvatar = ({ children, ...props }: MyListItemAvatarProps) => {
-  console.log('MyListItemAvatar rendered');
+// console.log('MyListItemAvatar rendered');
   return <ListItemAvatar {...props}> {children}</ListItemAvatar>;
 };
 

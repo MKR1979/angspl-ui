@@ -8,7 +8,7 @@ interface MyTabProps extends TabProps {
 }
 
 const MyTab = ({ ...props }: MyTabProps) => {
-  console.log('MyTab rendered');
+  //console.log('MyTab rendered');
   return <Tab style={{ width: 'auto' }} {...props} />;
 };
 

@@ -37,18 +37,6 @@ export const QUIZ_DATA_LOOKUP = gql`
   }
 `;
 
-export const MEETING_LIST_ALL = gql`
-  query getMeetingListAll {
-    getMeetingListAll {
-      id
-      title
-      start
-      end
-    }
-  }
-`;
-
-
 export const QUIZ_DATA_LIST_ALL = gql`
   query getQuizDataListAll {
     getQuizDataListAll {

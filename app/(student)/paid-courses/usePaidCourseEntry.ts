@@ -12,8 +12,8 @@ type ErrorMessageType = {
   Duration: string | null;
   Price: number | null;
   Content: string | null;
-  Notes: string | null;
-  Sample_Questions: string | null;
+  Notes_insight: string | null;
+  Code_Insight: string | null;
   Exam_Quiz: string | null;
   Sample_Questions_File: string | null;
 };
@@ -32,8 +32,8 @@ const ERROR_MESSAGES: ErrorMessageType = {
   Duration: null,
   Price: null,
   Content: null,
-  Notes: null,
-  Sample_Questions: null,
+  Notes_insight: null,
+  Code_Insight: null,
   Exam_Quiz: null,
   Sample_Questions_File: null
 };
@@ -66,6 +66,7 @@ const usePaidCourseEntry = () => {
           id: parseInt(item.id.toString()),
           course_name: item.course_name,
           course_code: item.course_code,
+          // course_type_name: item.course_type_name,
           price: item.price
         };
       });
@@ -76,18 +77,30 @@ const usePaidCourseEntry = () => {
     } as StateType);
   }, [getCourseListAll]);
 
-  const onSaveClickCodeInsights = useCallback((course_id: number, course_name: string | null) => {
-    router.push(`/code-insights?courseId=${encodeURIComponent(course_id)}&courseName=${encodeURIComponent(course_name ?? '')}`);
+  const onClickVideoeInsightsFree = useCallback((course_id: number) => {
+    router.push(`/video-insights?courseId=${encodeURIComponent(course_id)}`);
   }, []);
 
-  const onSaveClick = useCallback((quiz_id: number, quiz_name: string | null) => {
-    router.push(`/quiz-data?quizId=${encodeURIComponent(quiz_id)}&quizName=${encodeURIComponent(quiz_name ?? '')}`);
+  const onClickCodeInsightsFree = useCallback((course_id: number) => {
+    router.push(`/code-insights?courseId=${encodeURIComponent(course_id)}}`);
+  }, []);
+
+  const onClickNotesInsightsFree = useCallback((course_id: number) => {
+    router.push(`/notes-insights?courseId=${encodeURIComponent(course_id)}`);
+  }, []);
+
+  // const onClickExamQuizFree = useCallback((course_Id: number) => {
+  //   router.push(`/quiz-data?courseId=${encodeURIComponent(course_Id)}}`);
+  // }, []);
+
+  const onClickExamQuizFree = useCallback((course_Id: number) => {
+    router.push(`/quiz-data?courseId=${encodeURIComponent(course_Id)}}`);
   }, []);
 
   useEffect(() => {
     getCourses();
   }, [getCourses]);
-  return { state, onSaveClick, onSaveClickCodeInsights };
+  return { state, onClickVideoeInsightsFree, onClickCodeInsightsFree, onClickExamQuizFree, onClickNotesInsightsFree };
 };
 
 export default usePaidCourseEntry;

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyControlCameraIconProps extends SvgIconProps {}
 const MyControlCameraIcon = ({ ...props }: MyControlCameraIconProps) => {
-  console.log('MyControlCameraIcon render');
+  // console.log('MyControlCameraIcon render');
   return <ControlCameraIcon {...props}></ControlCameraIcon>;
 };
 export default memo(MyControlCameraIcon, (prevProps, nextProps) => {

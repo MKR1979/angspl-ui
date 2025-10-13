@@ -15,6 +15,8 @@ import MyEditIcon from '@/app/custom-components/MyEditIcon';
 import MyClearIcon from '@/app/custom-components/MyClearIcon';
 import useRoleList from './useRoleList';
 import RoleDTO from '@/app/types/RoleDTO';
+import { useSelector, RootState } from '../../../store';
+import { findPermission } from '../../../common/utility-permission';
 
 type Props = {
   arrRoleDTO: RoleDTO[];
@@ -43,77 +45,105 @@ const ClientRoleList = ({ arrRoleDTO, total_records }: Props) => {
     onDeleteSingleClose
   } = useRoleList({ arrRoleDTO, total_records });
 
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
+
   const columns: GridColDef[] = [
     {
       field: 'id',
       headerName: 'Id',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'role_name',
       headerName: 'Role Name',
       flex: 1,
+      minWidth: 150,
       renderCell: useCallback(
-        (params: GridRenderCellParams) => <MyLink href={'/roles/view/' + params.row.id}>{params.row.role_name}</MyLink>,
-        []
+        (params: GridRenderCellParams) =>
+          findPermission(userPermissions, 144) ? (
+            <MyLink href={'/roles/view/' + params.row.id}>{params.row.role_name}</MyLink>
+          ) : (
+            <span>{params.row.role_name}</span>
+          ),
+        [userPermissions]
       )
+    },
+    {
+      field: 'type_name',
+      headerName: 'Type Name',
+      flex: 1,
+      minWidth: 150
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      flex: 1,
+      minWidth: 150
     }
   ];
-  console.log('hello', state.arrRoleDTO);
   return (
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
       <MyCard>
-        <MyCardContent>
-          <MyDataGrid
-            apiRef={apiRef}
-            rowSelectionModel={state.arrSelectedId}
-            initialStateModel={state.initialState}
-            sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
-            onSortModelChange={onSortChange}
-            onRowSelectionModelChange={onCheckChange}
-            rows={state.arrRoleDTO}
-            rowCount={state.total_records}
-            columns={columns}
-            loading={state.isLoading}
-            handleContextMenu={handleContextMenu}
-            onAddClick={onAddClick}
-            showAddButton={true}
-            onDeleteClick={onDeleteAllClick}
-            showDeleteButton={state.arrSelectedId.length > 0}
-            onFilterModelChange={onFilterModelChange}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            onRowDoubleClick={onRowDoubleClick}
-          />
-
-          <MyMenu
-            open={state.contextMenu !== null}
-            onClose={handleClose}
-            anchorReference="anchorPosition"
-            anchorPosition={
-              state.contextMenu !== null
-                ? {
-                    top: state.contextMenu.mouseY,
-                    left: state.contextMenu.mouseX
-                  }
-                : undefined
-            }
-            slotProps={{
-              root: {
-                onContextMenu: onContextMenu
+        <MyCardContent sx={{ overflowX: 'auto' }}>
+          <div style={{ minWidth: `${columns.length * 150}px` }}>
+            <MyDataGrid
+              apiRef={apiRef}
+              rowSelectionModel={state.arrSelectedId}
+              initialStateModel={state.initialState}
+              sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
+              onSortModelChange={onSortChange}
+              onRowSelectionModelChange={onCheckChange}
+              rows={state.arrRoleDTO}
+              rowCount={state.total_records}
+              columns={columns}
+              loading={state.isLoading}
+              handleContextMenu={handleContextMenu}
+              onAddClick={onAddClick}
+              showAddButton={findPermission(userPermissions, 141)}
+              onDeleteClick={onDeleteAllClick}
+              showDeleteButton={state.arrSelectedId.length > 0 && findPermission(userPermissions, 142)}
+              showExportButton={true}
+              onFilterModelChange={onFilterModelChange}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              onRowDoubleClick={onRowDoubleClick}
+            />
+          </div>
+          {(findPermission(userPermissions, 143) || findPermission(userPermissions, 142)) && (
+            <MyMenu
+              open={state.contextMenu !== null}
+              onClose={handleClose}
+              anchorReference="anchorPosition"
+              anchorPosition={
+                state.contextMenu !== null
+                  ? {
+                      top: state.contextMenu.mouseY,
+                      left: state.contextMenu.mouseX
+                    }
+                  : undefined
               }
-            }}
-          >
-            <MyMenuItem onClick={onEditClick}>
-              <MyEditIcon />
-              Edit
-            </MyMenuItem>
-            <MyMenuItem onClick={onDeleteClick}>
-              <MyClearIcon />
-              Delete
-            </MyMenuItem>
-          </MyMenu>
+              slotProps={{
+                root: {
+                  onContextMenu: onContextMenu
+                }
+              }}
+            >
+              {findPermission(userPermissions, 143) && (
+                <MyMenuItem onClick={onEditClick}>
+                  <MyEditIcon />
+                  Edit
+                </MyMenuItem>
+              )}
+              {findPermission(userPermissions, 142) && (
+                <MyMenuItem onClick={onDeleteClick}>
+                  <MyClearIcon />
+                  Delete
+                </MyMenuItem>
+              )}
+            </MyMenu>
+          )}
         </MyCardContent>
       </MyCard>
       {state.visibleDialog && (

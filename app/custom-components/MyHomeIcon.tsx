@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyHomeIconProps extends SvgIconProps {}
 const MyHomeIcon = ({ ...props }: MyHomeIconProps) => {
-  console.log('MyHomeIcon render');
+  // console.log('MyHomeIcon render');
   return <HomeIcon {...props}></HomeIcon>;
 };
 export default memo(MyHomeIcon, (prevProps, nextProps) => {

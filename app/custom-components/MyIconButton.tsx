@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyIconButtonProps extends IconButtonProps {}
 
 const MyIconButton = ({ children, ...props }: MyIconButtonProps) => {
-  console.log('MyIconButton rendered');
+  //console.log('MyIconButton rendered');
   return <IconButton {...props}> {children}</IconButton>;
 };
 

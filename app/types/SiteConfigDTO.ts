@@ -5,6 +5,9 @@ export default interface SiteConfigDTO extends BaseDTO {
   type: string;
   description: string;
   status: string;
+  company_id: number | null;
+  company_name: string;
+  business_config: Record<string, any>;
 }
 
 export const SITE_CONFIG: SiteConfigDTO = Object.freeze({
@@ -14,6 +17,9 @@ export const SITE_CONFIG: SiteConfigDTO = Object.freeze({
   type: '',
   description: '',
   status: '',
+  company_id: null,
+  company_name: '',
+  business_config: {},
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

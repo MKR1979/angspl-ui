@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyZoomProps extends ZoomProps {}
 
 const MyZoom = ({ ...props }: MyZoomProps) => {
-  console.log('MyZoom rendered');
+  //console.log('MyZoom rendered');
   return <Zoom {...props} />;
 };
 

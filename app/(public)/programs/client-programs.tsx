@@ -5,8 +5,10 @@ import usePrograms from './usePrograms';
 import SuccessMessage from './client-payee-details'; // Ensure this is imported
 import MyIconSearch from '@/app/custom-components/MyIconSearch';
 import CourseAllDTO from '@/app/types/CourseAllDTO';
+import * as Constants from '../constants/constants';
+
 const ClientPrograms = () => {
-  const { state, handlePayNow, submitted, selectedCourse, selectedPrice } = usePrograms();
+  const { state, handlePayNow, submitted, selectedCourse, selectedCourseId, selectedPrice } = usePrograms();
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -19,7 +21,7 @@ const ClientPrograms = () => {
   return (
     <>
       {submitted ? (
-        <SuccessMessage course={selectedCourse} price={selectedPrice} />
+        <SuccessMessage course={selectedCourse} course_id={selectedCourseId} price={selectedPrice} />
       ) : loading ? (
         <div className="loading-container">
           <div className="spinner"></div>
@@ -42,13 +44,18 @@ const ClientPrograms = () => {
 
           <div className="course-categories-container">
             {(state.arrCourseListAll ?? [])
-              .filter((item: CourseAllDTO) => item.is_paid)
+              .filter(
+                (item: CourseAllDTO) =>
+                  item.is_paid &&
+                  // item.group_name?.toLowerCase() === companyInfo?.company_type?.toLowerCase() &&
+                  item.course_type_name?.toLowerCase() === Constants.PROGRAMS_COURSE_TYPE
+              )
               .map(
                 (course) =>
                   course.course_name.toLowerCase().includes(searchQuery.toLowerCase()) && ( // Apply search filter here
                     <div key={course.course_code} className="course-category">
                       <img
-                        src={course?.logo_url && course.logo_url.trim() !== '' ? course.logo_url : '/default-image.png'}
+                        src={course?.logo_url && course.logo_url.trim() !== '' ? course.logo_url : '/common/default-image.webp'}
                         alt={course?.course_name || 'Course Image'}
                         className="course-image"
                       />
@@ -61,7 +68,7 @@ const ClientPrograms = () => {
                           </li>
                         ))}
                       </ul>
-                      <button onClick={() => handlePayNow(course?.course_name, course?.price)} className="enroll-button">
+                      <button onClick={() => handlePayNow(course?.course_name, course?.id, course?.price)} className="enroll-button">
                         Enroll Now
                       </button>
                     </div>
@@ -75,16 +82,25 @@ const ClientPrograms = () => {
       )}
       <style jsx>{`
         .loading-container {
+          /*   display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          width: 100vw;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 9999;  */
+
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          height: 100vh; /* Full viewport height */
-          width: 100vw; /* Full viewport width */
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 9999; /* Ensure it's above all other elements */
+          margin-top: 250px; /* push below navbar if needed */
+          width: 100%;
+          height: auto; /* don’t cover whole screen */
+          position: relative; /* no overlay */
         }
 
         .spinner {

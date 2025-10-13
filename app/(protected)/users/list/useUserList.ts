@@ -9,11 +9,14 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
 import UserDTO from '@/app/types/UserDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { USER_LIST, DELETE_USER } from '@/app/graphql/User';
+import * as gMessageConstants from '../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import { dispatch } from '../../../store/';
+import { setIsEditMode } from '@/app/store/slices/siteConfigState';
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
@@ -65,7 +68,7 @@ const useUserList = ({ arrUserDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
@@ -85,17 +88,22 @@ const useUserList = ({ arrUserDTO, total_records }: Props) => {
   const [deleteUser] = useMutation(DELETE_USER, {});
 
   const getData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrUserDTO: UserDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getUserList();
-    if (!error && data) {
-      arrUserDTO = data.getUserList.users.map((item: UserDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getUserList.total_records;
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrUserDTO: UserDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getUserList();
+      if (!error && data) {
+        arrUserDTO = data.getUserList.users.map((item: UserDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getUserList.total_records;
+      }
+      setState({ arrUserDTO: arrUserDTO, total_records: total_records, isLoading: false, arrSelectedId: [] as string[] } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ arrUserDTO: arrUserDTO, total_records: total_records, isLoading: false, arrSelectedId: [] as string[] } as StateType);
   }, [getUserList]);
 
   useEffect(() => {
@@ -141,11 +149,8 @@ const useUserList = ({ arrUserDTO, total_records }: Props) => {
   );
 
   const onRowDoubleClick: GridEventListener<'rowDoubleClick'> = useCallback(
-    async (
-      params // GridRowParams
-      //event, // MuiEvent<React.MouseEvent<HTMLElement>>
-      //details // GridCallbackDetails
-    ) => {
+    async (params) => {
+      dispatch(setIsEditMode(true));
       router.push('/users/edit/' + params.row.id);
     },
     [router]
@@ -154,6 +159,7 @@ const useUserList = ({ arrUserDTO, total_records }: Props) => {
   const onEditClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
       event.preventDefault();
+      dispatch(setIsEditMode(true));
       router.push('/users/edit/' + state.selectedRow);
     },
     [router, state.selectedRow]
@@ -170,37 +176,37 @@ const useUserList = ({ arrUserDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteUser({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteUser({
+          variables: {
+            ids: params
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteUser, getData, state.visibleDialog1.id, toggleDialog1]
   );
 
-  const onCheckChange = useCallback(
-    async (
-      model: GridRowSelectionModel
-      //details: GridCallbackDetails<any>
-    ): Promise<void> => {
-      setState({ arrSelectedId: model as string[] } as StateType);
-    },
-    []
-  );
+  const onCheckChange = useCallback(async (model: GridRowSelectionModel): Promise<void> => {
+    setState({ arrSelectedId: model as string[] } as StateType);
+  }, []);
 
   const onAddClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
       event.preventDefault();
+      dispatch(setIsEditMode(false));
       router.push('/users/add');
     },
     [router]
@@ -216,18 +222,23 @@ const useUserList = ({ arrUserDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteUser({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteUser({
+          variables: {
+            ids: state.arrSelectedId
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'error');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteUser, getData, state.arrSelectedId, toggleDialog]

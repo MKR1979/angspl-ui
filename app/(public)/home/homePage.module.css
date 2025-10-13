@@ -187,5 +187,97 @@ a.secondary {
   }
 }
 
+/* css for rolling containers on home page   */
+
+.rollingContainer {
+  width: 100%;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+.rollingRow {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.rollingContent {
+  display: flex;
+  animation: scroll-left 25s linear infinite;
+}
+
+.rollingRow.right .rollingContent {
+  animation: scroll-right 25s linear infinite;
+}
+
+.rollingItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 20px 30px;
+  margin: 15px;
+  border-radius: 50px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: #1D3557;
+  /* width: 240px;*/
+  width: auto; 
+  min-width: 240px; 
+  /* max-width: 240px; */
+  box-sizing: border-box; 
+}
+
+ .iconImage {
+  width: 48px;
+  height: 48px;
+  margin: 0 15px;
+  object-fit: cover; 
+  border-radius: 50%; 
+  background: #f0f0f0;
+} 
+
+.left .rollingContent {
+  animation: scroll-left 25s linear infinite;
+}
+
+.right .rollingContent {
+  animation: scroll-right 25s linear infinite;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .rollingItem {
+    padding: 10px 15px;  
+    margin: 8px;          
+    min-width: 140px;  
+    font-size: 14px;    
+    border-radius: 30px;
+  }
+
+  .iconImage {
+    width: 32px;
+    height: 32px;
+    margin: 0 8px;
+  }
+}
 
 

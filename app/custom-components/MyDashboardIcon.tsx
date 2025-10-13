@@ -4,7 +4,7 @@ import eq from 'lodash/eq';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyDashboardIconProps extends SvgIconProps {}
 const MyDashboardIcon = ({ ...props }: MyDashboardIconProps) => {
-  console.log('MyDashboardIcon rendered');
+  // console.log('MyDashboardIcon rendered');
   return <DashboardIcon {...props}></DashboardIcon>;
 };
 

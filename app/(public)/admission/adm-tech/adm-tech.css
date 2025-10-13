@@ -1,0 +1,126 @@
+.affiliate-header {
+  text-align: center;
+  font-size: 1.8em;
+  color: #000000;
+  margin-bottom: 20px;
+}
+.mybutton{
+  text-align: center;
+}
+
+/* General container styling */
+.admission-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* Form styling */
+.affiliate-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 16px; /* Space between form groups */
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.form-control,
+.form-control-dpd, /* Dropdown class */
+.course-fee-input,
+.form-control.textarea {
+  width: 100%;
+  padding: 12px; /* Uniform padding for all inputs */
+  font-size: 14px; /* Consistent font size */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control-dpd {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" viewBox="0 0 16 16"><path d="M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"/></svg>') no-repeat right 12px center;
+  background-color: #fff;
+  background-size: 12px;
+}
+
+.form-control:focus,
+.form-control-dpd:focus,
+.course-fee-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+.form-control.textarea {
+  resize: none;
+  height: 100px;
+}
+
+.course-fee-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjust alignment for "Preferred Course" and "Course Fee" */
+.preferred-course-group,
+.course-fee-group {
+  grid-column: span 1; /* Each occupies one column */
+}
+
+.course-fee-group {
+  margin-left: 16px; /* Optional spacing for better alignment */
+}
+
+/* Submit button styling */
+.submit-button {
+  display: block;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+.form-title {
+  font-size: 30px;
+  text-decoration: underline;
+  margin-bottom: 5px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admission-form {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+
+}

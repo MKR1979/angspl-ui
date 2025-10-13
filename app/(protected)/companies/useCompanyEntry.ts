@@ -1,11 +1,13 @@
-import React, { ChangeEvent, useCallback, useEffect, useReducer } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
-import { arrCompanyStatus } from '@/app/common/Configuration';
+import { arrCompanyStatus, capitalizeWords } from '@/app/common/Configuration';
 import { arrCompanyType } from '@/app/common/Configuration';
 import { ADD_COMPANY, UPDATE_COMPANY, GET_COMPANY } from '@/app/graphql/Company';
+import { useSnackbar } from '../../custom-components/SnackbarProvider';
+import * as gMessageConstants from '../../constants/messages-constants';
 
 type ErrorMessageType = {
   company_code: string | null;
@@ -14,6 +16,9 @@ type ErrorMessageType = {
   email: string | null;
   phone_no: string | null;
   address: string | null;
+  logo_url: string | null;
+  logo_height: number | null;
+  logo_width: number | null;
   status: string | null;
 };
 
@@ -39,6 +44,9 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
     email: null,
     phone_no: null,
     address: null,
+    logo_url: null,
+    logo_height: null,
+    logo_width: null,
     status: null
   } as ErrorMessageType);
 
@@ -56,21 +64,28 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
+  const showSnackbar = useSnackbar();
+  const [saving, setSaving] = useState(false);
   const [addCompany] = useMutation(ADD_COMPANY, {});
   const [updateCompany] = useMutation(UPDATE_COMPANY, {});
   const [getCompany] = useLazyQuery(GET_COMPANY, { fetchPolicy: 'network-only' });
 
   const getCompanyData = useCallback(async (): Promise<void> => {
-    let dtoCompany: CompanyDTO = COMPANY;
-    const { error, data } = await getCompany({
-      variables: {
-        id: state.dtoCompany.id
+    try {
+      let dtoCompany: CompanyDTO = COMPANY;
+      const { error, data } = await getCompany({
+        variables: {
+          id: state.dtoCompany.id
+        }
+      });
+      if (!error && data) {
+        dtoCompany = data.getCompany;
       }
-    });
-    if (!error && data) {
-      dtoCompany = data.getCompany;
+      setState({ dtoCompany: dtoCompany } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoCompany: dtoCompany } as StateType);
   }, [getCompany, state.dtoCompany.id]);
 
   useEffect(() => {
@@ -79,23 +94,83 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
     }
   }, [state.dtoCompany.id, getCompanyData]);
 
-  const onInputChange = useCallback(
+  useEffect(() => {
+    if (
+      state.arrCompanyStausLookup.length > 0 &&
+      !state.dtoCompany.status
+    ) {
+      const firstItem = state.arrCompanyStausLookup[0];
+      setState({
+        ...state,
+        dtoCompany: {
+          ...state.dtoCompany,
+          status: firstItem.text, // or firstItem.id if you store status by id
+        }
+      });
+    }
+  }, [state.arrCompanyStausLookup]);
+
+  // const onEmailInputChange = useCallback(
+  //   async (event: ChangeEvent<HTMLInputElement>) => {
+  //     const lowerCaseValue = event.target.value.toLowerCase();
+
+  //     setState({
+  //       dtoCompany: {
+  //         ...state.dtoCompany,
+  //         [event.target.name]: lowerCaseValue  // ✅ Use lowerCaseValue
+  //       }
+  //     } as StateType);
+  //   },
+  //   [state.dtoCompany]
+  // );
+
+  const onNormalizedInputChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
-      const { name, type, checked, value } = event.target;
+      const { name, value } = event.target;
+
+      // Remove all spaces and convert to lowercase
+      const formattedValue = value.replace(/\s+/g, '').toLowerCase();
 
       setState({
         dtoCompany: {
           ...state.dtoCompany,
-          [name]: type === 'checkbox' ? checked : name === 'price' ? Number(value) : value
+          [name]: formattedValue
         }
       } as StateType);
     },
     [state.dtoCompany]
   );
 
+  const onInputChange = useCallback(
+    async (event: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      const capitalizedValue = capitalizeWords(value);
+      setState({
+        dtoCompany: {
+          ...state.dtoCompany,
+          [name]: capitalizedValue
+        }
+      } as StateType);
+    },
+    [state.dtoCompany]
+  );
+
+  const onCodeChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      let value = event.target.value.toUpperCase();
+      value = value.replace(/[^A-Z0-9]/g, "");
+      setState({
+        dtoCompany: {
+          ...state.dtoCompany,
+          company_code: value,
+        },
+      } as StateType);
+    },
+    [state.dtoCompany]
+  );
   const validateCompanyName = useCallback(async () => {
     if (state.dtoCompany.company_name.trim() === '') {
-      return 'Company Name is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -108,7 +183,7 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
 
   const validateCompanyCode = useCallback(async () => {
     if (state.dtoCompany.company_code.trim() === '') {
-      return 'Company Code is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -133,7 +208,7 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
 
   const validateCompanyType = useCallback(async () => {
     if (state.dtoCompany.company_type.trim() === '') {
-      return 'Company Type is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -146,7 +221,7 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
 
   const validateEmail = useCallback(async () => {
     if (state.dtoCompany.email.trim() === '') {
-      return 'Email  is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -171,7 +246,7 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
 
   const validatePhoneNo = useCallback(async () => {
     if (state.dtoCompany.phone_no.trim() === '') {
-      return 'Phone Number  is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -184,7 +259,7 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
 
   const validateAddress = useCallback(async () => {
     if (state.dtoCompany.address.trim() === '') {
-      return 'Address is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -208,7 +283,7 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
   );
   const validateStatus = useCallback(async () => {
     if (state.dtoCompany.status.trim() === '') {
-      return 'Status is required';
+      return gMessageConstants.REQUIRED_FIELD;
     } else {
       return null;
     }
@@ -256,26 +331,37 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      if (await validateForm()) {
-        if (state.dtoCompany.id === 0) {
-          const { data } = await addCompany({
-            variables: {
-              ...state.dtoCompany
+      if (saving) return;
+      setSaving(true);
+      try {
+        if (await validateForm()) {
+          if (state.dtoCompany.id === 0) {
+            const { data } = await addCompany({
+              variables: {
+                ...state.dtoCompany
+              }
+            });
+            if (data) {
+              showSnackbar(gMessageConstants.SNACKBAR_INSERT_RECORD, 'success');
+              router.push('/companies/list');
             }
-          });
-          if (data) {
-            router.push('/companies/list');
-          }
-        } else {
-          const { data } = await updateCompany({
-            variables: {
-              ...state.dtoCompany
+          } else {
+            const { data } = await updateCompany({
+              variables: {
+                ...state.dtoCompany
+              }
+            });
+            if (data) {
+              showSnackbar(gMessageConstants.SNACKBAR_UPDATE_RECORD, 'success');
+              router.push('/companies/list');
             }
-          });
-          if (data) {
-            router.push('/companies/list');
           }
         }
+      } catch (error: any) {
+        console.error('Error while saving referral:', error);
+        showSnackbar(gMessageConstants.SNACKBAR_INSERT_FAILED, 'error');
+      } finally {
+        setSaving(false);
       }
     },
     [validateForm, addCompany, state.dtoCompany, router, updateCompany]
@@ -316,6 +402,8 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
   return {
     state,
     onInputChange,
+    onNormalizedInputChange,
+    onCodeChange,
     onCompanyNameBlur,
     onCompanyTypeBlur,
     onStatusBlur,
@@ -332,7 +420,8 @@ const useCompanyEntry = ({ dtoCompany }: Props) => {
     setClose1,
     setOpen2,
     setClose2,
-    onPhoneNoChange
+    onPhoneNoChange,
+    saving
   };
 };
 

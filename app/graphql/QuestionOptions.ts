@@ -1,13 +1,37 @@
 import gql from 'graphql-tag';
 export const ADD_QUESTION_OPTIONS = gql`
-  mutation addQuestionOptions($quiz_id:Int!,$question_id:Int, $option_text: String, $explanation: String, $is_correct: Boolean) {
-    addQuestionOptions(addQuestionOptionsInput: {quiz_id:$quiz_id, question_id:$question_id, option_text: $option_text, explanation: $explanation, is_correct: $is_correct })
+  mutation addQuestionOptions($quiz_id: Int!, $question_id: Int, $option_text: String, $explanation: String, $is_correct: Boolean) {
+    addQuestionOptions(
+      addQuestionOptionsInput: {
+        quiz_id: $quiz_id
+        question_id: $question_id
+        option_text: $option_text
+        explanation: $explanation
+        is_correct: $is_correct
+      }
+    )
   }
 `;
 
 export const UPDATE_QUESTION_OPTIONS = gql`
-  mutation updateQuestionOptions($id: Int!,$quiz_id:Int!, $question_id:Int, $option_text: String, $explanation: String, $is_correct: Boolean) {
-    updateQuestionOptions(updateQuestionOptionsInput: { id: $id, quiz_id:$quiz_id,question_id:$question_id, option_text: $option_text,explanation: $explanation, is_correct: $is_correct })
+  mutation updateQuestionOptions(
+    $id: Int!
+    $quiz_id: Int!
+    $question_id: Int
+    $option_text: String
+    $explanation: String
+    $is_correct: Boolean
+  ) {
+    updateQuestionOptions(
+      updateQuestionOptionsInput: {
+        id: $id
+        quiz_id: $quiz_id
+        question_id: $question_id
+        option_text: $option_text
+        explanation: $explanation
+        is_correct: $is_correct
+      }
+    )
   }
 `;
 

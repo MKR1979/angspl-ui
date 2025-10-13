@@ -1,10 +1,12 @@
-import ClientAdmission from './client-admission';
 import { Metadata } from 'next';
+import ClientAdmissionPage from './client-admission';
 
 export const metadata: Metadata = {
-  title: 'Admission Program'
+  title: 'Admission'
 };
+
 export const revalidate = 0;
-export default async function AdmissionPage() {
-  return <ClientAdmission></ClientAdmission>;
+
+export default async function HomePage() {
+  return <ClientAdmissionPage></ClientAdmissionPage>;
 }

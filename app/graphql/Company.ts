@@ -8,6 +8,9 @@ export const ADD_COMPANY = gql`
     $email: String
     $phone_no: String
     $address: String
+    $logo_url: String
+    $logo_height: Int
+    $logo_width: Int
     $status: String
   ) {
     addCompany(
@@ -18,6 +21,9 @@ export const ADD_COMPANY = gql`
         email: $email
         phone_no: $phone_no
         address: $address
+        logo_url: $logo_url
+        logo_height: $logo_height
+        logo_width: $logo_width
         status: $status
       }
     )
@@ -61,6 +67,9 @@ export const UPDATE_COMPANY = gql`
     $email: String
     $phone_no: String
     $address: String
+    $logo_url: String
+    $logo_height: Int
+    $logo_width: Int
     $status: String
   ) {
     updateCompany(
@@ -72,6 +81,9 @@ export const UPDATE_COMPANY = gql`
         email: $email
         phone_no: $phone_no
         address: $address
+        logo_url: $logo_url
+        logo_height: $logo_height
+        logo_width: $logo_width
         status: $status
       }
     )
@@ -113,6 +125,9 @@ export const COMPANY_LIST = gql`
         email
         phone_no
         address
+        logo_url
+        logo_height
+        logo_width
         status
         created_by
         created_by_first_name
@@ -139,6 +154,9 @@ export const GET_COMPANY = gql`
       email
       phone_no
       address
+      logo_url
+      logo_height
+      logo_width
       status
       created_by
       created_by_first_name
@@ -164,9 +182,43 @@ export const GET_COMPANY_ALL = gql`
       email
       phone_no
       address
+      logo_url
+      logo_height
+      logo_width
       status
     }
   }
+`;
+
+export const GET_COMPANY_INFO_BY_DOMAIN = gql`
+  query getCompanyInfoByDomain($domain_name: String) {
+    getCompanyInfoByDomain(domain_name: $domain_name)
+    { 
+    id
+    company_id
+    domain_name 
+    company_name
+    company_type
+    company_email
+    company_phone_no
+    company_address
+    logo_url
+    logo_height
+    logo_width
+    status
+    role_id
+    created_by
+    created_by_first_name
+    created_by_last_name
+    created_by_user_name
+    created_at
+    modified_by
+    modified_by_first_name
+    modified_by_last_name
+    modified_by_user_name
+    modified_at
+  }
+}
 `;
 
 export const GET_COMPANY_NAME_EXIST = gql`

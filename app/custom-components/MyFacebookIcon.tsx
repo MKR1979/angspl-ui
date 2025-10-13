@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyFacebookIconProps extends SvgIconProps {}
 const MyFacebookIcon = ({ ...props }: MyFacebookIconProps) => {
-  console.log('MyFacebookIcon render');
+  // console.log('MyFacebookIcon render');
   return <FacebookIcon {...props}></FacebookIcon>;
 };
 export default memo(MyFacebookIcon, (prevProps, nextProps) => {

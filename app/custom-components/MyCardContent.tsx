@@ -4,7 +4,7 @@ import eq from 'lodash/eq';
 
 interface MyCardContentProps extends CardContentProps {}
 const MyCardContent = ({ ...props }: MyCardContentProps) => {
-  console.log('MyCardContent rendered');
+  // console.log('MyCardContent rendered');
   return <CardContent sx={{ m: 1, p: 1 }} {...props}></CardContent>;
 };
 

@@ -14,6 +14,7 @@ import MyCard from '@/app/custom-components/MyCard';
 import CompanyDTO from '@/app/types/CompanyDTO';
 import MyAutocomplete from '@/app/custom-components/MyAutocomplete';
 import './company.css';
+import * as Constants from '../constants/constants';
 import * as gConstants from '../../constants/constants';
 
 type CountryEntryProps = {
@@ -24,6 +25,8 @@ const CompanyEntry = (props: CountryEntryProps) => {
   const {
     state,
     onInputChange,
+    onNormalizedInputChange,
+    onCodeChange,
     onCompanyNameBlur,
     onCompanyTypeBlur,
     onStatusBlur,
@@ -40,7 +43,8 @@ const CompanyEntry = (props: CountryEntryProps) => {
     setClose1,
     setOpen2,
     setClose2,
-    onPhoneNoChange
+    onPhoneNoChange,
+    saving
   } = useCompanyEntry(props);
   return (
     <MyCard>
@@ -67,10 +71,10 @@ const CompanyEntry = (props: CountryEntryProps) => {
               label="Company Code"
               name="company_code"
               value={state.dtoCompany.company_code}
-              onChange={onInputChange}
+              onChange={onCodeChange}
               inputProps={{
-                maxLength: gConstants.CODE_LENGTH,
-                pattern: '^[A-Za-z]{1,2}$'
+                maxLength: Constants.CODE_LENGTH,
+                   pattern: '^[A-Z0-9]+$'
               }}
               onBlur={onCompanyCodeBlur}
               error={state.errorMessages.company_code ? true : false}
@@ -89,7 +93,10 @@ const CompanyEntry = (props: CountryEntryProps) => {
               options={state.arrCompanyTypeLookup}
               onChange={onCompanyTypeChange}
               onBlur={onCompanyTypeBlur}
-              filterOptions={(options) => options.filter((option: any) => option.text && option.text.trim() !== '')}
+              filterOptions={(options, state) => {        // searchable Lookup
+                const searchTerm = state.inputValue.toLowerCase();
+                return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+              }}
               renderInput={(params) => (
                 <MyTextField
                   {...params}
@@ -110,7 +117,7 @@ const CompanyEntry = (props: CountryEntryProps) => {
               label="Email"
               name="email"
               value={state.dtoCompany.email}
-              onChange={onInputChange}
+              onChange={onNormalizedInputChange}
               inputProps={{
                 maxLength: gConstants.EMAIL_LENGTH,
                 pattern: '^[A-Za-z]{1,2}$'
@@ -142,7 +149,10 @@ const CompanyEntry = (props: CountryEntryProps) => {
               options={state.arrCompanyStausLookup}
               onChange={onCompanyStatusChange}
               onBlur={onStatusBlur}
-              filterOptions={(options) => options.filter((option: any) => option.text && option.text.trim() !== '')}
+              filterOptions={(options, state) => {        // searchable Lookup
+                const searchTerm = state.inputValue.toLowerCase();
+                return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+              }}
               renderInput={(params) => (
                 <MyTextField
                   {...params}
@@ -176,7 +186,10 @@ const CompanyEntry = (props: CountryEntryProps) => {
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick}>Save</MyButton>
+        {/* <MyButton onClick={onSaveClick}>Save</MyButton> */}
+         <MyButton onClick={onSaveClick} disabled={saving}>
+            {saving ? 'Saving...' : 'Save'}
+          </MyButton>
         <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>

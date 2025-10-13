@@ -4,6 +4,7 @@ import { useDispatch as useAppDispatch, useSelector as useAppSelector, TypedUseS
 import { persistReducer, persistStore } from 'redux-persist';
 import rootReducer from './reducer';
 import localStorage from 'redux-persist/es/storage';
+//import sessionStorage from 'redux-persist/es/storage/session';
 
 const persistConfig = {
   key: 'rootReducer',

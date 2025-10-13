@@ -12,7 +12,7 @@ interface MyTabsProps extends TabsProps {
 
 const MyTabs = ({ ...props }: MyTabsProps) => {
   const theme = useTheme();
-  console.log('MyTabs rendered');
+//  console.log('MyTabs rendered');
   return (
     <Tabs
       indicatorColor="primary"

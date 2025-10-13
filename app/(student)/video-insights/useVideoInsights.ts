@@ -3,8 +3,12 @@ import { useCallback, useEffect, useReducer } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { GET_VIDEO_UPLOADS_ALL } from '@/app/graphql/VideoUploads';
 import VideoUploadsDTO, { VIDEO_UPLOADS_LIST_ALL } from '@/app/types/VideoUploadsDTO';
-import { COURSE_LOOKUP } from '@/app/graphql/Course';
+// import { COURSE_LOOKUP } from '@/app/graphql/Course';
+import { COURSE_LOOKUP_BY_USER_ID } from '@/app/graphql/Course';
 import LookupDTO from '@/app/types/LookupDTO';
+import * as gMessageConstants from '../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import { RootState, useSelector } from '@/app/store';
 
 type ErrorMessageType = {
   course_name: string | null;
@@ -53,17 +57,33 @@ const useVideoInsights = ({ courseId, courseName, StudyNotesId }: Props) => {
   const reducer = (state: StateType, action: Partial<StateType>): StateType => ({ ...state, ...action });
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const showSnackbar = useSnackbar();
+  const companyInfo = useSelector((state: RootState) => state.globalState.companyInfo);
   const [getVideoUploadsAll] = useLazyQuery(GET_VIDEO_UPLOADS_ALL, { fetchPolicy: 'network-only' });
-  const [getCourseLookup] = useLazyQuery(COURSE_LOOKUP, { fetchPolicy: 'network-only' });
+  // const [getCourseLookup] = useLazyQuery(COURSE_LOOKUP, { fetchPolicy: 'network-only' });
+  const { loginUser_id } = useSelector((state) => state.loginState);
+  const [getCourseByUserIdLookup] = useLazyQuery(COURSE_LOOKUP_BY_USER_ID, { fetchPolicy: 'network-only' });
 
   const getCourseList = useCallback(async (): Promise<void> => {
-    let arrCourseLookup: LookupDTO[] = [];
-    const { error, data } = await getCourseLookup();
-    if (!error && data) {
-      arrCourseLookup = data.getCourseLookup;
+    try {
+      let arrCourseLookup: LookupDTO[] = [];
+      const { error, data } = await getCourseByUserIdLookup(
+        {
+          variables: {
+            user_id: loginUser_id,
+            group_name: companyInfo.company_type,
+          }
+        }
+      );
+      if (!error && data) {
+        arrCourseLookup = data.getCourseByUserIdLookup;
+      }
+      setState({ arrCourseLookup: arrCourseLookup } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ arrCourseLookup: arrCourseLookup } as StateType);
-  }, [getCourseLookup]);
+  }, [getCourseByUserIdLookup]);
 
   const getVideoUpdates = useCallback(
     async (arrCourseLookupParam: LookupDTO[], selectedCourseId?: number): Promise<void> => {
@@ -151,19 +171,6 @@ const useVideoInsights = ({ courseId, courseName, StudyNotesId }: Props) => {
     }
   }, [courseId]);
 
-  const validateCourse = useCallback(async () => {
-    if (state.dtoVideoUploads.course_name.trim() === '') {
-      return 'Course Name is required';
-    } else {
-      return null;
-    }
-  }, [state.dtoVideoUploads.course_name]);
-
-  const onCourseBlur = useCallback(async () => {
-    const course_name = await validateCourse();
-    setState({ errorMessages: { ...state.errorMessages, course_name: course_name } } as StateType);
-  }, [validateCourse, state.errorMessages]);
-
   const onCourseChange = useCallback(
     async (event: any, value: unknown) => {
       const selectedCourse = value as LookupDTO;
@@ -203,7 +210,6 @@ const useVideoInsights = ({ courseId, courseName, StudyNotesId }: Props) => {
     courseId,
     courseName,
     onCourseChange,
-    onCourseBlur,
     StudyNotesId
   };
 };

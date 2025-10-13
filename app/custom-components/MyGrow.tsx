@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyGrowProps extends GrowProps {}
 
 const MyGrow = ({ ...props }: MyGrowProps) => {
-  console.log('MyGrow rendered');
+  // console.log('MyGrow rendered');
   return <Grow {...props} />;
 };
 

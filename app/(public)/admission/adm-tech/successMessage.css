@@ -1,0 +1,139 @@
+.success-container {
+  max-width: 600px;
+  margin: 200px auto 0 auto;
+  margin-top: 150px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.success-container h2 {
+  color: #218838;
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.success-message {
+  font-size: 16px;
+  text-align: center;
+}
+
+.success-container p {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+.pay-now-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.pay-now-button:hover {
+  background-color: #1565c0;
+}
+
+.admission-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-weight: bold;
+  min-width: 160px;
+  display: inline-block;
+}
+
+.label::after {
+  content: ":";
+  margin-right: 4px;
+}
+
+
+.value {
+  color: #1976d2;
+}
+
+/* client-adm-school.tsx page css */
+.admission-form-header {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.admission-form-header h2 {
+  font-size: 21px;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+
+@media (max-width: 600px) {
+
+  /* Adjust the form layout for mobile */
+  /* .admission-form-body {
+    width: 100%;
+    padding: 18px;
+    box-sizing: border-box;
+  } */
+  .success-container,
+  .admission-form-body {
+    width: 100%;
+    /* Make the container full width */
+    margin-left: 0;
+    /* Remove any left margin */
+    margin-right: 0;
+    /* Keep right margin intact or adjust if needed */
+    padding-left: 5px;
+    /* Remove padding on the left side */
+    padding-right: 5px;
+    /* Optional: Add some right padding for balance */
+    box-sizing: border-box;
+    /* Ensure padding does not affect width */
+  }
+
+  .label {
+    min-width: 120px;
+    /* Reduced width for labels on mobile */
+    font-size: 12px;
+    padding-right: 8px;
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: 1px;
+    /* Additional adjustment to reduce space */
+  }
+
+
+
+  .value {
+    font-size: 12px;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .pay-now-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    display: block;
+    width: 50%;
+    margin-top: 20px;
+  }
+}

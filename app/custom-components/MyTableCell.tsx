@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyTableCellProps extends TableCellProps {}
 
 const MyTableCell = ({ children, ...props }: MyTableCellProps) => {
-  console.log('MyTableCell rendered');
+//  console.log('MyTableCell rendered');
   return <TableCell {...props}> {children}</TableCell>;
 };
 

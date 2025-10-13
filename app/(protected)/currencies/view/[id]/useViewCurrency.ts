@@ -4,6 +4,8 @@ import { useLazyQuery } from '@apollo/client';
 import CurrencyDTO from '@/app/types/CurrencyDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_CURRENCY } from '@/app/graphql/Currency';
+import * as gMessageConstants from '../../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 type StateType = {
   dtoCurrency: CurrencyDTO;
   breadcrumbsItems: BreadcrumbsItem[];
@@ -23,7 +25,7 @@ const useViewCurrency = ({ dtoCurrency }: Props) => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const showSnackbar = useSnackbar();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const [getCurrency] = useLazyQuery(GET_CURRENCY, {
@@ -31,16 +33,21 @@ const useViewCurrency = ({ dtoCurrency }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoCurrency: CurrencyDTO = {} as CurrencyDTO;
-    const { error, data } = await getCurrency({
-      variables: {
-        id: state.dtoCurrency.id
+    try {
+      let dtoCurrency: CurrencyDTO = {} as CurrencyDTO;
+      const { error, data } = await getCurrency({
+        variables: {
+          id: state.dtoCurrency.id
+        }
+      });
+      if (!error && data) {
+        dtoCurrency = data.getCurrency;
       }
-    });
-    if (!error && data) {
-      dtoCurrency = data.getCurrency;
+      setState({ dtoCurrency: dtoCurrency } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoCurrency: dtoCurrency } as StateType);
   }, [getCurrency, state.dtoCurrency.id]);
 
   useEffect(() => {

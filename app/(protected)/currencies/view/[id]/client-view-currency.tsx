@@ -13,6 +13,8 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyBox from '@/app/custom-components/MyBox';
 import CurrencyDTO from '@/app/types/CurrencyDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
+import { useSelector, RootState } from '../../../../store';
+import { findPermission } from '../../../../common/utility-permission';
 
 type Props = {
   dtoCurrency: CurrencyDTO;
@@ -20,7 +22,7 @@ type Props = {
 
 const ClientViewCurrency = ({ dtoCurrency }: Props) => {
   const { state, onEditClick, onCancelClick } = useViewCurrency({ dtoCurrency });
-
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
   return (
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
@@ -45,6 +47,12 @@ const ClientViewCurrency = ({ dtoCurrency }: Props) => {
                 <MyTypography variant="subtitle2">{state.dtoCurrency.currency_symbol}</MyTypography>
               </MyBox>
             </MyGrid>
+            <MyGrid size={{ xs: 12, md: 6 }}>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography variant="subtitle1">Status:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoCurrency.status}</MyTypography>
+              </MyBox>
+            </MyGrid>
           </MyGrid>
         </MyCardContent>
         <MyDivider />
@@ -55,7 +63,7 @@ const ClientViewCurrency = ({ dtoCurrency }: Props) => {
           modifiedAt={state.dtoCurrency.modified_at}
         ></MyTimestamp>
         <MyCardActions>
-          <MyButton onClick={onEditClick}>Edit</MyButton>
+          {findPermission(userPermissions, 58) && <MyButton onClick={onEditClick}>Edit</MyButton>}
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

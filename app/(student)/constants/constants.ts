@@ -1,5 +1,2 @@
-export const SUCCESS = "Operation Successful"
-export const FAIL = "Operation Failed"
-export const COURSE_DOC_PATH= "courseDocs/"
-export const LOGO_PATH= "imgPrograms/"
-export const DOCUMENT_IMAGE_PATH= "imgPrograms/"
+//export const COURSE_DOC_PATH= "courseDocs/"      ///define in app\(protected)\constants and app\(student)\constants
+

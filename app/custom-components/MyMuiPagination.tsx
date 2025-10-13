@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyMuiPaginationProps extends PaginationProps {}
 
 const MyMuiPagination = ({ ...props }: MyMuiPaginationProps) => {
-  console.log('MyMuiPagination rendered');
+  //console.log('MyMuiPagination rendered');
   return <MuiPagination {...props} />;
 };
 

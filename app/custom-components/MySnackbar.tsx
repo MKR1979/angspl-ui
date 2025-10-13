@@ -1,19 +1,3 @@
-// import { memo } from 'react';
-// import Snackbar, { SnackbarProps } from '@mui/material/Snackbar';
-// import eq from 'lodash/eq';
-
-// interface MySnackbarProps extends SnackbarProps {}
-
-// const MySnackbar = ({ ...props }: MySnackbarProps) => {
-//   console.log('MySnackbar rendered');
-//   return <Snackbar {...props} />;
-// };
-
-// export default memo(MySnackbar, (prevProps, nextProps) => {
-//   return eq(prevProps, nextProps); // Don't re-render!
-// });
-
-
 'use client';
 import React from 'react';
 import Snackbar from '@mui/material/Snackbar';
@@ -51,10 +35,10 @@ const MySnackbar: React.FC<MySnackbarProps> = ({
         sx={{
           width: '100%',
           ...(severity === 'success' && {
-            backgroundColor: '#DFF0D8',
-            color: '#3c763d',  
+            backgroundColor: '#DFF0D8', // light green
+            color: '#3c763d',           // dark green text
             '& .MuiAlert-icon': {
-              color: '#3c763d' 
+              color: '#3c763d'         // icon also dark green
             }
           })
         }}

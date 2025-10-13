@@ -5,7 +5,7 @@ import { memo } from 'react';
 interface MyLineChartProps extends LineChartProps {}
 
 const MyLineChart = ({ ...props }: MyLineChartProps) => {
-  console.log('MyLineChart rendered');
+ // console.log('MyLineChart rendered');
   return <LineChart yAxis={[{ min: 0, scaleType: 'linear' }]} {...props}></LineChart>;
 };
 

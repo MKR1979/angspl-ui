@@ -1,13 +1,25 @@
 .notes-insight-container {
   position: relative;
-  max-width: 800px;
-  height: 570px;
-  margin: 25px 25px;
-  padding: 20px;
+  max-width: 1700px;
+  height: 600px;
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notes-insight-title1 {
+  font-size: 19px;
+  font-weight: bold;
+  margin-top: 0;
 }
 
 .notes-insight-code {
@@ -18,20 +30,17 @@
   border-radius: 8px;
   white-space: pre;
   word-wrap: break-word;
-  height: 370px;
+  height: 500px;
   width: 100%;
-  max-width: 730px;
+  max-width: 1700px;
   overflow-y: auto;
   overflow-x: auto;
   border: 1px solid #ddd;
   position: relative;
 }
+
 .notes-container {
   position: relative;
-}
-.notes-insight-details {
-  margin: 15px;
-  margin-bottom: 20px;
 }
 
 .copy-button {
@@ -74,6 +83,7 @@
 }
 
 .button-container {
+  padding-bottom: 5px;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
@@ -107,26 +117,7 @@ button:hover {
   background-color: #1976d2;
 }
 
-/* Dropdown css */
-
-.custom-autocomplete {
-  width: 35%;
-}
-
-.custom-autocomplete .MuiOutlinedInput-root {
-  border-radius: 12px;
-}
-
-.custom-autocomplete .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: #007bff;
-  border-width: 2px;
-}
-
-.custom-autocomplete:hover .MuiInputLabel-root {
-  color: #007bff;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 300px) {
   .notes-insight-container {
     margin: 1px;
     padding: 5px;
@@ -137,7 +128,7 @@ button:hover {
     margin-top: 10px;
   }
 
-  .copy-button {
+  .copy-button1 {
     position: absolute;
     margin-bottom: 10px;
     margin-top: -10px;
@@ -147,15 +138,22 @@ button:hover {
     font-size: 12px;
     z-index: 10;
   }
-  .pdf-button {
+
+  .pdf-button1 {
     top: 22px;
     right: 20px;
     font-size: 10px;
     padding: 5px;
   }
-  .custom-autocomplete {
+
+  .custom-autocomplete1 {
     width: 100% !important;
+    min-width: 250px;
+    max-width: 500px;
+    margin-bottom: 15px;
+    margin-left: 1px;
   }
+
   .notes-insight-code {
     font-size: 12px;
     line-height: 1.2;
@@ -183,23 +181,4 @@ button:hover {
 
 .pdf-button:focus {
   outline: none;
-}
-
-/* Dropdown css */
-
-.custom-autocomplete {
-  width: 35%;
-}
-
-.custom-autocomplete .MuiOutlinedInput-root {
-  border-radius: 12px;
-}
-
-.custom-autocomplete .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: #007bff;
-  border-width: 2px;
-}
-
-.custom-autocomplete:hover .MuiInputLabel-root {
-  color: #007bff;
 }

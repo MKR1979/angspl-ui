@@ -10,17 +10,19 @@ export const metadata: Metadata = {
 
 export const revalidate = 0;
 
-type Props = { params: Promise<{ id: string }> };
+ type Props = { params: Promise<{ id: string }>, searchParams: Promise<{company_id: string}> };
 
-export default async function ViewSiteConfigPage({ params }: Props) {
+export default async function ViewSiteConfigPage({ params, searchParams }: Props) {
   const { id } = await params;
+   const { company_id } = await searchParams;
   let dtoSiteConfig: SiteConfigDTO = SITE_CONFIG;
   try {
     const apolloClient = await createServerApolloClient();
     const result = apolloClient.query({
       query: GET_SITE_CONFIG,
       variables: {
-        id: parseInt(id)
+        id: parseInt(id),
+       company_id: parseInt(company_id)
       }
     });
     const results = await Promise.all([result]);

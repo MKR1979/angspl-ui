@@ -9,11 +9,12 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
 import CountryDTO from '@/app/types/CountryDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { COUNTRY_LIST, DELETE_COUNTRY } from '@/app/graphql/Country';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import * as gMessageConstants from '../../../constants/messages-constants';
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
@@ -65,7 +66,7 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
@@ -85,22 +86,27 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
   const [deleteCountry] = useMutation(DELETE_COUNTRY, {});
 
   const getData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrCountryDTO: CountryDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getCountryList();
-    if (!error && data) {
-      arrCountryDTO = data.getCountryList.countries.map((item: CountryDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getCountryList.total_records;
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrCountryDTO: CountryDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getCountryList();
+      if (!error && data) {
+        arrCountryDTO = data.getCountryList.countries.map((item: CountryDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getCountryList.total_records;
+      }
+      setState({
+        arrCountryDTO: arrCountryDTO,
+        total_records: total_records,
+        isLoading: false,
+        arrSelectedId: [] as string[]
+      } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({
-      arrCountryDTO: arrCountryDTO,
-      total_records: total_records,
-      isLoading: false,
-      arrSelectedId: [] as string[]
-    } as StateType);
   }, [getCountryList]);
 
   useEffect(() => {
@@ -146,11 +152,7 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
   );
 
   const onRowDoubleClick: GridEventListener<'rowDoubleClick'> = useCallback(
-    async (
-      params // GridRowParams
-      //event, // MuiEvent<React.MouseEvent<HTMLElement>>
-      //details // GridCallbackDetails
-    ) => {
+    async (params) => {
       router.push('/countries/edit/' + params.row.id);
     },
     [router]
@@ -175,19 +177,24 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteCountry({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteCountry({
+          variables: {
+            ids: params
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteCountry, getData, state.visibleDialog1.id, toggleDialog1]
@@ -221,18 +228,23 @@ const useCountryList = ({ arrCountryDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteCountry({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteCountry({
+          variables: {
+            ids: state.arrSelectedId
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteCountry, getData, state.arrSelectedId, toggleDialog]

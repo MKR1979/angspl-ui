@@ -5,16 +5,17 @@ import MyBreadcrumbs from '@/app/custom-components/MyBreadcrumbs';
 import SiteConfigEntry from '../../site-config-entry';
 import useEditSiteConfig from './useEditSiteConfig';
 import SiteConfigDTO from '@/app/types/SiteConfigDTO';
+import LookupDTO from '@/app/types/LookupDTO';
 
-type Props = { dtoSiteConfig: SiteConfigDTO };
+type Props = { dtoSiteConfig: SiteConfigDTO, arrCompanyLookup: LookupDTO[] };
 
-const ClientEditSiteConfig = ({ dtoSiteConfig }: Props) => {
+const ClientEditSiteConfig = ({ dtoSiteConfig, arrCompanyLookup }: Props) => {
   const { state } = useEditSiteConfig();
 
   return (
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
-      <SiteConfigEntry dtoSiteConfig={dtoSiteConfig} />
+      <SiteConfigEntry dtoSiteConfig={dtoSiteConfig} arrCompanyLookup={arrCompanyLookup} />
     </>
   );
 };

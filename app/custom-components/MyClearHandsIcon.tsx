@@ -4,7 +4,7 @@ import eq from 'lodash/eq';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyCleanHandsIconProps extends SvgIconProps {}
 const MyCleanHandsIcon = ({ ...props }: MyCleanHandsIconProps) => {
-  console.log('MyCleanHandsIcon rendered');
+  // console.log('MyCleanHandsIcon rendered');
   return <CleanHandsIcon {...props}></CleanHandsIcon>;
 };
 export default memo(MyCleanHandsIcon, (prevProps, nextProps) => {

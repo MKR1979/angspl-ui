@@ -8,7 +8,7 @@ interface MyLocalizationProviderProps extends LocalizationProviderProps<Date, IL
 }
 
 const MyLocalizationProvider = ({ ...props }: MyLocalizationProviderProps) => {
-  console.log('MyLocalizationProvider rendered');
+//  console.log('MyLocalizationProvider rendered');
   return <LocalizationProvider dateAdapter={AdapterDateFns} {...props} />;
 };
 

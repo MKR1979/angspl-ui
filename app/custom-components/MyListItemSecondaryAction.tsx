@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyListItemSecondaryActionProps extends ListItemSecondaryActionProps {}
 
 const MyListItemSecondaryAction = ({ children, ...props }: MyListItemSecondaryActionProps) => {
-  console.log('MyListItemSecondaryAction rendered');
+ //console.log('MyListItemSecondaryAction rendered');
   return <ListItemSecondaryAction {...props}> {children}</ListItemSecondaryAction>;
 };
 

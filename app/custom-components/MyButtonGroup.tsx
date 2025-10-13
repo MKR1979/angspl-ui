@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyButtonGroupProps extends ButtonGroupProps {}
 
 const MyButtonGroup = ({ children, ...props }: MyButtonGroupProps) => {
-  console.log('MyButtonGroup rendered');
+  // console.log('MyButtonGroup rendered');
   return <ButtonGroup {...props}> {children}</ButtonGroup>;
 };
 

@@ -9,17 +9,23 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
-import SiteConfigDTO from '@/app/types/SiteConfigDTO';
+import SiteConfigDTO, { SITE_CONFIG } from '@/app/types/SiteConfigDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { SITE_CONFIG_LIST, DELETE_SITE_CONFIG } from '@/app/graphql/SiteConfig';
+import * as gMessageConstants from '../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import { COMPANY_LOOKUP } from '@/app/graphql/Company';
+import LookupDTO from '@/app/types/LookupDTO';
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
 type StateType = {
   isLoading: boolean;
+  open1: boolean;
   arrSiteConfigDTO: SiteConfigDTO[];
+  arrCompanyLookup: LookupDTO[];
+  dtoSiteConfig: SiteConfigDTO;
   total_records: number;
   filter_text: string;
   sort_field: string;
@@ -27,6 +33,7 @@ type StateType = {
   visibleDialog: boolean;
   visibleDialog1: visibleDialog1Type;
   selectedRow: string;
+  selectedCompanyId: string;
   arrSelectedId: string[];
   contextMenu: ContextMenuType | null;
   initialState: GridInitialState;
@@ -42,7 +49,10 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
   const apiRef = useGridApiRef();
   const INITIAL_STATE: StateType = Object.freeze({
     isLoading: false,
+    open1: false,
     arrSiteConfigDTO: arrSiteConfigDTO,
+    dtoSiteConfig: SITE_CONFIG,
+    arrCompanyLookup: [] as LookupDTO[],
     total_records: total_records,
     filter_text: '',
     sort_field: 'id',
@@ -50,6 +60,7 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
     visibleDialog: false,
     visibleDialog1: { id: '', visibility: false },
     selectedRow: '',
+    selectedCompanyId: '',
     arrSelectedId: [],
     contextMenu: null,
     initialState: {
@@ -65,11 +76,12 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
   });
+  const [getCompanyLookup] = useLazyQuery(COMPANY_LOOKUP, { fetchPolicy: 'network-only' });
 
   const [getSiteConfigList] = useLazyQuery(SITE_CONFIG_LIST, {
     fetchPolicy: 'network-only', // Doesn't check cache before making a network request
@@ -78,34 +90,78 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
       sort_field: state.sort_field,
       sort_direction: state.sort_direction,
       offset: paginationModel.page * paginationModel.pageSize,
-      limit: paginationModel.pageSize
+      limit: paginationModel.pageSize,
+      company_id: state.dtoSiteConfig.company_id
     }
   });
 
   const [deleteSiteConfig] = useMutation(DELETE_SITE_CONFIG, {});
 
-  const getData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrSiteConfigDTO: SiteConfigDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getSiteConfigList();
-    if (!error && data) {
-      arrSiteConfigDTO = data.getSiteConfigList.siteConfigs.map((item: SiteConfigDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getSiteConfigList.total_records;
+  const getCompany = useCallback(async (): Promise<void> => {
+    try {
+      let arrCompanyLookup: LookupDTO[] = [];
+      const { error, data } = await getCompanyLookup();
+      if (!error && data?.getCompanyLookup) {
+        arrCompanyLookup = [
+          { id: -1, text: 'All Companies' }, // <-- Inject All option here
+          ...data.getCompanyLookup
+        ];
+      }
+      setState({ arrCompanyLookup: arrCompanyLookup } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({
-      arrSiteConfigDTO: arrSiteConfigDTO,
-      total_records: total_records,
-      isLoading: false,
-      arrSelectedId: [] as string[]
-    } as StateType);
-  }, [getSiteConfigList]);
+  }, [getCompanyLookup]);
+
+  useEffect(() => {
+    getCompany();
+  }, [getCompany]);
+
+  const getData = useCallback(async (): Promise<void> => {
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrSiteConfigDTO: SiteConfigDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getSiteConfigList({
+        variables: {
+          company_id: state.dtoSiteConfig.company_id
+        }
+      });
+      if (!error && data) {
+        arrSiteConfigDTO = data.getSiteConfigList.siteConfigs.map((item: SiteConfigDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getSiteConfigList.total_records;
+      }
+      setState({
+        arrSiteConfigDTO: arrSiteConfigDTO,
+        total_records: total_records,
+        isLoading: false,
+        arrSelectedId: [] as string[]
+      } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
+    }
+  }, [getSiteConfigList, state.dtoSiteConfig.company_id]);
 
   useEffect(() => {
     getData();
   }, [getData, state.filter_text, state.sort_field, state.sort_direction, paginationModel]);
+
+  const onCompanyNameChange = useCallback(
+    async (event: any, value: unknown) => {
+      setState({
+        dtoSiteConfig: {
+          ...state.dtoSiteConfig,
+          company_name: (value as LookupDTO).text,
+          company_id: (value as LookupDTO).id
+        }
+      } as StateType);
+    },
+    [state.dtoSiteConfig]
+  );
 
   const handleClose = useCallback(async (): Promise<void> => {
     setState({ contextMenu: null } as StateType);
@@ -137,19 +193,24 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
   const handleContextMenu = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
       event.preventDefault();
+      const rowId = event.currentTarget.getAttribute('data-id') as string;
+      const row = apiRef.current.getRow(rowId);
+      const companyId = row?.company_id?.toString() || '';
       setState({
-        selectedRow: event.currentTarget.getAttribute('data-id') as string,
+        selectedRow: rowId,
+        selectedCompanyId: companyId,
         contextMenu: state.contextMenu === null ? { mouseX: event.clientX - 2, mouseY: event.clientY - 4 } : null
       } as StateType);
     },
-    [state.contextMenu]
+    [state.contextMenu, apiRef]
   );
 
   const onRowDoubleClick: GridEventListener<'rowDoubleClick'> = useCallback(
-    async (
-      params
-    ) => {
-      router.push('/site-config/edit/' + params.row.id);
+    (params) => {
+      const id = params.row.id;
+      const company_id = params.row.company_id;
+
+      router.push(`/site-config/edit/${id}?company_id=${company_id}`);
     },
     [router]
   );
@@ -157,9 +218,10 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
   const onEditClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
       event.preventDefault();
-      router.push('/site-config/edit/' + state.selectedRow);
+      router.push(`/site-config/edit/${state.selectedRow}?company_id=${state.selectedCompanyId}`);
+      //router.push('/site-config/edit/' + state.selectedRow);
     },
-    [router, state.selectedRow]
+    [router, state.selectedRow, state.selectedCompanyId]
   );
 
   const onDeleteClick = useCallback(
@@ -173,22 +235,28 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteSiteConfig({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteSiteConfig({
+          variables: {
+            ids: params,
+            company_id: Number(state.selectedCompanyId)
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
-    [deleteSiteConfig, getData, state.visibleDialog1.id, toggleDialog1]
+    [deleteSiteConfig, getData, state.visibleDialog1.id, toggleDialog1, state.selectedCompanyId]
   );
 
   const onCheckChange = useCallback(
@@ -219,21 +287,27 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteSiteConfig({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteSiteConfig({
+          variables: {
+            ids: state.arrSelectedId,
+            company_id: Number(state.selectedCompanyId)
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
-    [deleteSiteConfig, getData, state.arrSelectedId, toggleDialog]
+    [deleteSiteConfig, getData, state.arrSelectedId, toggleDialog, state.selectedCompanyId]
   );
 
   const onContextMenu = useCallback(
@@ -260,6 +334,13 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
     toggleDialog1('');
   }, [toggleDialog1]);
 
+  const setOpen1 = useCallback(async (): Promise<void> => {
+    setState({ open1: true } as StateType);
+  }, []);
+  const setClose1 = useCallback(async (): Promise<void> => {
+    setState({ open1: false } as StateType);
+  }, []);
+
   return {
     state,
     apiRef,
@@ -279,7 +360,10 @@ const useSiteConfigList = ({ arrSiteConfigDTO, total_records }: Props) => {
     onContextMenu,
     onFilterModelChange,
     onRowDoubleClick,
-    onDeleteSingleClose
+    onDeleteSingleClose,
+    setClose1,
+    setOpen1,
+    onCompanyNameChange
   };
 };
 

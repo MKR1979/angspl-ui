@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconLogoutProps extends IconProps {}
 const MyIconLogout = ({ ...props }: MyIconLogoutProps) => {
-  console.log('My render');
+ //console.log('My render');
   return <IconLogout {...props}></IconLogout>;
 };
 export default memo(MyIconLogout, (prevProps, nextProps) => {

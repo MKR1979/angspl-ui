@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyDividerProps extends DividerProps {}
 
 const MyDivider = ({ ...props }: MyDividerProps) => {
-  console.log('MyDivider rendered');
+  // console.log('MyDivider rendered');
   return <Divider {...props}></Divider>;
 };
 

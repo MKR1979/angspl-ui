@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyStackProps extends StackProps {}
 
 const MyStack = ({ children, ...props }: MyStackProps) => {
-  console.log('MyStack rendered');
+// console.log('MyStack rendered');
   return <Stack {...props}> {children}</Stack>;
 };
 

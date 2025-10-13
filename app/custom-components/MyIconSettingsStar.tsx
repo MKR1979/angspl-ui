@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconTieProps extends IconProps {}
 const MyIconTie = ({ ...props }: MyIconTieProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconSettingsStar {...props}></IconSettingsStar>;
 };
 export default memo(MyIconTie, (prevProps, nextProps) => {

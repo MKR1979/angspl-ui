@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyCheckCircleIconProps extends SvgIconProps {}
 const MyCheckCircleIcon = ({ ...props }: MyCheckCircleIconProps) => {
-  console.log('MyCheckCircleIcon render');
+  // console.log('MyCheckCircleIcon render');
   return <CheckCircleIcon {...props}></CheckCircleIcon>;
 };
 export default memo(MyCheckCircleIcon, (prevProps, nextProps) => {

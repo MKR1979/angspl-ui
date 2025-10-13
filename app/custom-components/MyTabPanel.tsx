@@ -10,7 +10,7 @@ interface MyTabPanelProps {
 }
 
 const MyTabPanel = ({ children, value, index, ...other }: MyTabPanelProps) => {
-  console.log('MyTabPanel rendered');
+  //console.log('MyTabPanel rendered');
   return (
     <div role="tabpanel" hidden={value !== index} {...other}>
       {value === index && <MyBox sx={{ p: 0 }}>{children}</MyBox>}

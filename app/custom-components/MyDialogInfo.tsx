@@ -17,7 +17,7 @@ interface MyDialogInfoProps {
 
 const MyDialogInfo = ({ children, ...props }: ModalProps & MyDialogInfoProps) => {
   const rootRef = useRef(null);
-  console.log('MyDialogInfo rendered');
+  // console.log('MyDialogInfo rendered');
   return (
     <Modal
       disablePortal

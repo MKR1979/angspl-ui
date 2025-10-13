@@ -8,7 +8,7 @@ import eq from 'lodash/eq';
 interface MyReactApexChartProps extends Props {}
 
 const MyReactApexChart = ({ ...props }: MyReactApexChartProps) => {
-  console.log('MyReactApexChart  rendered');
+ //console.log('MyReactApexChart  rendered');
   return <ReactApexChart {...props}> </ReactApexChart>;
 };
 

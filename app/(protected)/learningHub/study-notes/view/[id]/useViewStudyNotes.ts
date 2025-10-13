@@ -1,0 +1,81 @@
+import React, { useCallback, useEffect, useReducer } from 'react';
+import { useRouter } from 'next/navigation';
+import { useLazyQuery } from '@apollo/client';
+import StudyNotesDTO from '@/app/types/StudyNotesDTO';
+import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
+import { GET_STUDY_NOTES } from '@/app/graphql/StudyNotes';
+import * as gConstants from '../../../../../constants/constants';
+import * as gMessageConstants from '../../../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+
+type StateType = {
+  dtoStudyNotes: StudyNotesDTO;
+  breadcrumbsItems: BreadcrumbsItem[];
+};
+
+type Props = {
+  dtoStudyNotes: StudyNotesDTO;
+};
+
+const useViewStudyNotes = ({ dtoStudyNotes }: Props) => {
+  const router = useRouter();
+  const INITIAL_STATE: StateType = Object.freeze({
+    dtoStudyNotes: dtoStudyNotes,
+    breadcrumbsItems: [{ label: 'Study Notes', href: `/${gConstants.ADMIN_STUDENT_DASHBOARD}/study-notes/list` }, { label: 'View Study Notes' }]
+  });
+
+  const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
+    return { ...state, ...action };
+  };
+  const showSnackbar = useSnackbar();
+  const [state, setState] = useReducer(reducer, INITIAL_STATE);
+  const [getStudyNotes] = useLazyQuery(GET_STUDY_NOTES, { fetchPolicy: 'network-only' });
+
+  const getStudyNotesData = useCallback(async (): Promise<void> => {
+    try {
+      let dtoStudyNotes: StudyNotesDTO = {} as StudyNotesDTO;
+      const { error, data } = await getStudyNotes({
+        variables: {
+          id: state.dtoStudyNotes.id
+        }
+      });
+      if (!error && data) {
+        dtoStudyNotes = data.getStudyNotes;
+      }
+      setState({ dtoStudyNotes: dtoStudyNotes } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
+    }
+  }, [getStudyNotes, state.dtoStudyNotes.id]);
+
+  useEffect(() => {
+    if (state.dtoStudyNotes.id > 0) {
+      getStudyNotesData();
+    }
+  }, [state.dtoStudyNotes.id, getStudyNotesData]);
+
+  const onEditClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      router.push(`/${gConstants.ADMIN_STUDENT_DASHBOARD}/study-notes/edit/` + state.dtoStudyNotes.id);
+    },
+    [router, state.dtoStudyNotes.id]
+  );
+
+  const onCancelClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      router.push(`/${gConstants.ADMIN_STUDENT_DASHBOARD}/study-notes/list`);
+    },
+    [router]
+  );
+
+  return {
+    state,
+    onEditClick,
+    onCancelClick
+  };
+};
+
+export default useViewStudyNotes;

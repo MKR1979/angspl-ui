@@ -1,0 +1,71 @@
+receipt-container {
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  padding: 2rem;
+  border: 2px solid #000;
+  background: #fff;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.receipt-top {
+  margin-bottom: 1rem;
+}
+
+.receipt-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3rem 0;
+}
+
+.receipt-paragraph {
+  margin: 1rem 0;
+  font-size: 14px;
+}
+
+.receipt-details {
+  margin-bottom: 1rem;
+}
+
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.fee-table th,
+.fee-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: left;
+}
+
+.fee-table th {
+  background-color: #f0f0f0;
+}
+
+.authorized-sign {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.school-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2rem 1.2rem 0rem 0rem;
+  gap: 1rem;
+}
+
+.receipt-logo {
+  height: 60px;
+}
+
+.thank-you {
+  border-top: 1px dashed #000;
+  padding-top: 1rem;
+  text-align: center;
+  color: #444;
+  font-size: 13px;
+}

@@ -10,15 +10,12 @@ import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import MyTypography from '@/app/custom-components/MyTypography';
 
 const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff8.jpg', '/affiliateImgs/aff10.jpg'];
 
 const ClientAffiliateMgmt = () => {
-    const images = [
-    "/affiliateImgs/aff.PNG",
-    "/affiliateImgs/aff1.PNG",
-    "/affiliateImgs/aff2.PNG",
-  ];
+  const images = ['/affiliateImgs/aff.PNG', '/affiliateImgs/aff1.PNG', '/affiliateImgs/aff2.PNG'];
 
   const [current, setCurrent] = useState(0);
 
@@ -95,15 +92,14 @@ const ClientAffiliateMgmt = () => {
                   </MyGrid>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Management System</span> is a powerful
-                  platform designed to manage and track affiliate partnerships effectively. It enables organizations to promote
-                  their courses, products, or services through registered affiliates who earn commissions based on successful
-                  referrals or sales. This system automates the entire affiliate process — from registration, referral tracking,
-                  and commission calculation to payment management — ensuring transparency and efficiency. Administrators can
-                  monitor affiliate performance, view reports, and manage payouts, while affiliates can access personalized
-                  dashboards to track their earnings, referral links, and progress. By integrating automation and real-time
-                  analytics, the Affiliate Management System helps institutions or businesses expand their reach, increase
-                  enrollments, and build strong marketing networks with minimal manual effort.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Management System</span> is a powerful platform
+                  designed to manage and track affiliate partnerships effectively. It enables organizations to promote their courses,
+                  products, or services through registered affiliates who earn commissions based on successful referrals or sales. This
+                  system automates the entire affiliate process — from registration, referral tracking, and commission calculation to
+                  payment management — ensuring transparency and efficiency. Administrators can monitor affiliate performance, view reports,
+                  and manage payouts, while affiliates can access personalized dashboards to track their earnings, referral links, and
+                  progress. By integrating automation and real-time analytics, the Affiliate Management System helps institutions or
+                  businesses expand their reach, increase enrollments, and build strong marketing networks with minimal manual effort.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
@@ -141,32 +137,41 @@ const ClientAffiliateMgmt = () => {
                     <img src="/ModulesImgs/admForm.png" alt="Admission Form" />
                   </div>
                 </MyGrid> */}
-                  <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                        <div className="book-container">
-                          {/* Heading overlay on book background */}
-                          <h2 className="book-heading">Online affiliate</h2>
-
-                          <div className="book">
-                            {images.map((src, index) => (
-                              <img
-                                key={index}
-                                src={src}
-                                alt={`page-${index}`}
-                                className={`page ${index === current ? "active" : ""}`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </MyGrid>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <MyTypography
+                    sx={{
+                      fontSize: '24px',
+                      textAlign: 'center',
+                      marginTop: '5px',
+                      marginBottom: '5px',
+                      color: '#465063',
+                      fontFamily: 'serif',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Online affiliate
+                  </MyTypography>
+                  <div className="book-container">
+                    <div className="book">
+                      {images.map((src, index) => (
+                        <img key={index} src={src} alt={`page-${index}`} className={`page ${index === current ? 'active' : ''}`} />
+                      ))}
+                    </div>
+                  </div>
+                </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Online Affiliate</span> feature allows users to
-                  register as affiliates and manage their referrals directly through the platform. To get started, click on
-                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option and fill in the affiliate
-                  registration form with the required details, then click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to
-                  create your affiliate account. Once registered, go to the home page, log in, and click on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option
-                  under the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Dashboard</span>. You will be redirected to <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Your Referrals List</span>, where
-                  you can view and manage all your referrals. To add a new referral, click on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+ADD</span> button, fill in the necessary details, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to
-                  create the referral entry. This process allows affiliates to efficiently register, manage, and track their referrals online, ensuring proper record-keeping and smooth commission tracking.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Online Affiliate</span> feature allows users to register as
+                  affiliates and manage their referrals directly through the platform. To get started, click on the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option and fill in the affiliate registration form
+                  with the required details, then click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create your
+                  affiliate account. Once registered, go to the home page, log in, and click on the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option under the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Dashboard</span>. You will be redirected to{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Your Referrals List</span>, where you can view and manage all your
+                  referrals. To add a new referral, click on the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+ADD</span> button,
+                  fill in the necessary details, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create
+                  the referral entry. This process allows affiliates to efficiently register, manage, and track their referrals online,
+                  ensuring proper record-keeping and smooth commission tracking.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Affiliate Dashboard</h2>
@@ -180,19 +185,17 @@ const ClientAffiliateMgmt = () => {
                   </div>
                 </MyGrid>
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Dashboard </span> provides affiliates
-                  with a complete overview of their performance, earnings, and referral activities in one place.
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Summary</span> section
-                  displays key statistics such as total referrals, successful conversions, total earnings, and
-                  active campaigns — helping affiliates quickly understand their overall progress.
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Your Referral Summary</span> section
-                  gives detailed insights into every referral made, including referral links, the number of users
-                  who joined or purchased through those links, and the current status of each referral. Lastly,
-                  the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment Info</span> section shows all
-                  commission-related details, such as earned amount, pending payments, payout history, and payment
-                  dates, ensuring full financial transparency. Together, these sections allow affiliates to track
-                  their activities, analyze performance, and manage their earnings efficiently through a single,
-                  user-friendly dashboard.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Dashboard </span> provides affiliates with a
+                  complete overview of their performance, earnings, and referral activities in one place. The{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Summary</span> section displays key statistics such as
+                  total referrals, successful conversions, total earnings, and active campaigns — helping affiliates quickly understand
+                  their overall progress. The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Your Referral Summary</span> section
+                  gives detailed insights into every referral made, including referral links, the number of users who joined or purchased
+                  through those links, and the current status of each referral. Lastly, the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment Info</span> section shows all commission-related details,
+                  such as earned amount, pending payments, payout history, and payment dates, ensuring full financial transparency.
+                  Together, these sections allow affiliates to track their activities, analyze performance, and manage their earnings
+                  efficiently through a single, user-friendly dashboard.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Affiliate Referrals</h2>
@@ -207,14 +210,13 @@ const ClientAffiliateMgmt = () => {
                 </MyGrid>
 
                 <MyCardContent className="card-text">
-                  The  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Referrals</span> section in
-                  the Affiliate Dashboard provides detailed information about all users or customers who joined or purchased
-                  through an affiliate’s referral link. It displays each referral’s name, registration or purchase date,
-                  status (such as pending, completed, or approved), and any commission earned from that referral. This
-                  section helps affiliates track the effectiveness of their promotional efforts, see which referrals
-                  converted successfully, and identify opportunities to increase engagement. By offering a clear and
-                  organized view of all referral activities, this feature ensures transparency and allows affiliates
-                  to monitor and maximize their earnings efficiently.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Referrals</span> section in the Affiliate Dashboard
+                  provides detailed information about all users or customers who joined or purchased through an affiliate’s referral link.
+                  It displays each referral’s name, registration or purchase date, status (such as pending, completed, or approved), and any
+                  commission earned from that referral. This section helps affiliates track the effectiveness of their promotional efforts,
+                  see which referrals converted successfully, and identify opportunities to increase engagement. By offering a clear and
+                  organized view of all referral activities, this feature ensures transparency and allows affiliates to monitor and maximize
+                  their earnings efficiently.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Review Affiliates</h2>
@@ -229,14 +231,18 @@ const ClientAffiliateMgmt = () => {
                 </MyGrid>
 
                 <MyCardContent className="card-text">
-                  The  <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Review Affiliates </span> section allows
-                  administrators to manage and monitor affiliates efficiently. To add new affiliates, click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Affiliates</span>,
-                  fill in the required details such as name, contact information, and commission structure, and then
-                  click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create the affiliate account. Once added, you are redirected to the Your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliates List</span> page,
-                  where all created affiliates are displayed for review. To calculate payments, select the desired users
-                  and specify the  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>From Date</span> and  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date </span>for the payment period. After selecting the appropriate rows,
-                  click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Calculate Payment”</span> to generate commission details for the selected affiliates. This process ensures
-                  accurate tracking, timely payouts, and streamlined management of all affiliate activities.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Review Affiliates </span> section allows administrators to
+                  manage and monitor affiliates efficiently. To add new affiliates, click on{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Affiliates</span>, fill in the required details such as name,
+                  contact information, and commission structure, and then click{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create the affiliate account. Once added, you are
+                  redirected to the Your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliates List</span> page, where all
+                  created affiliates are displayed for review. To calculate payments, select the desired users and specify the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>From Date</span> and{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date </span>for the payment period. After selecting the
+                  appropriate rows, click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Calculate Payment”</span> to generate
+                  commission details for the selected affiliates. This process ensures accurate tracking, timely payouts, and streamlined
+                  management of all affiliate activities.
                 </MyCardContent>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Referrals</h2>
@@ -251,19 +257,19 @@ const ClientAffiliateMgmt = () => {
                 </MyGrid>
 
                 <MyCardContent className="card-text">
-                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Referrals </span> section
-                  allows administrators or affiliates to add and manage referral records efficiently.
-                  To add a new referral, click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Referrals</span>,
-                  fill in the required details such as the referral’s name, contact information, and related affiliate,
-                  and then click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create the
-                  referral entry. After submission, you are redirected to the Your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliates List</span> page
-                  within the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Review Referrals</span> section,
-                  where all added referrals are displayed for review. To verify referrals, select the desired users,
-                  specify the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>From Date</span> and <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date</span> for
-                  the relevant period, select the appropriate rows, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Mark Verified”</span>. This process ensures that all referra
-                  l records are properly tracked, verified, and managed for accurate reporting and commission calculation.
+                  The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Referrals </span> section allows administrators or affiliates
+                  to add and manage referral records efficiently. To add a new referral, click on{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Referrals</span>, fill in the required details such as the
+                  referral’s name, contact information, and related affiliate, and then click{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create the referral entry. After submission, you
+                  are redirected to the Your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliates List</span> page within the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Review Referrals</span> section, where all added referrals are
+                  displayed for review. To verify referrals, select the desired users, specify the{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>From Date</span> and{' '}
+                  <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date</span> for the relevant period, select the appropriate
+                  rows, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Mark Verified”</span>. This process ensures that
+                  all referra l records are properly tracked, verified, and managed for accurate reporting and commission calculation.
                 </MyCardContent>
-
               </MyGrid>
             </MyCardContent>
           </MyCard>

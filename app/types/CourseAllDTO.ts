@@ -3,44 +3,64 @@ export default interface CourseDTO extends BaseDTO {
   id: number;
   course_name: string;
   course_code: string;
-  price: number; 
+  price: number;
+  reg_fee: number;
+  group_name: string;
   duration: string;
   category: string;
+  course_type_id: number;
+  course_type_name: string;
   logo_url: string;
-  documents_path:string;
+  documents_path: string;
   status: string;
-  is10threq:boolean;
-  is12threq:boolean;
-  isgradreq:boolean;
-  ispgreq:boolean;
-  isphotoidreq:boolean;
-  quiz_id: number;
-  quiz_name: string;
-  is_paid:boolean;
-  code_project_id: number;
-  code_project_title: string;
+  prev_class_marksheet: boolean;
+  is10threq: boolean;
+  is12threq: boolean;
+  isdiplomareq: boolean;
+  isgradreq: boolean;
+  ispgreq: boolean;
+  isphotoidreq: boolean;
+  is_aadhar_req: boolean;
+  is_birth_certi_req: boolean;
+  is_tc_req: boolean;
+  is_samagraid_req: boolean;
+  is_paid: boolean;
+  is_video: boolean;
+  is_notes: boolean;
+  is_code_project: boolean;
+  is_exam: boolean;
 }
 
 export const COURSE_LIST_ALL: CourseDTO = {
   id: 0,
   course_name: '',
   course_code: '',
-  price: 0, 
+  price: 0,
+  reg_fee: 0,
+  group_name: '',
   duration: '',
   category: '',
-  logo_url:'',
-  documents_path:'', 
+  course_type_id: 0,
+  course_type_name: '',
+  logo_url: '',
+  documents_path: '',
   status: '',
+  prev_class_marksheet: false,
   is10threq: false,
   is12threq: false,
+  isdiplomareq: false,
   isgradreq: false,
   ispgreq: false,
   isphotoidreq: false,
-  quiz_id: 0,
-  quiz_name: '',
-  is_paid: false,  
-  code_project_id: 0,
-  code_project_title:'',
+  is_aadhar_req: false,
+  is_birth_certi_req: false,
+  is_tc_req: false,
+  is_samagraid_req: false,
+  is_paid: false,
+  is_video: false,
+  is_notes: false,
+  is_code_project: false,
+  is_exam: false,
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

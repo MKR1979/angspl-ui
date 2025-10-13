@@ -13,6 +13,9 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyBox from '@/app/custom-components/MyBox';
 import SiteConfigDTO from '@/app/types/SiteConfigDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
+import { useSelector, RootState } from '../../../../store';
+import { findPermission } from '../../../../common/utility-permission';
+import * as Constants from '../../../constants/constants';
 
 type Props = {
   dtoSiteConfig: SiteConfigDTO;
@@ -20,6 +23,7 @@ type Props = {
 
 const ClientViewSiteConfig = ({ dtoSiteConfig }: Props) => {
   const { state, onEditClick, onCancelClick } = useViewSiteConfig({ dtoSiteConfig });
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   return (
     <>
@@ -27,6 +31,12 @@ const ClientViewSiteConfig = ({ dtoSiteConfig }: Props) => {
       <MyCard>
         <MyCardContent>
           <MyGrid container spacing={2}>
+            <MyGrid size={{ xs: 12, md: 6 }}>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Company Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoSiteConfig.company_name}</MyTypography>
+              </MyBox>
+            </MyGrid>
             <MyGrid size={{ xs: 12, md: 6 }}>
               <MyBox sx={{ mb: 0 }}>
                 <MyTypography>Key:</MyTypography>
@@ -57,6 +67,16 @@ const ClientViewSiteConfig = ({ dtoSiteConfig }: Props) => {
                 <MyTypography variant="subtitle2">{state.dtoSiteConfig.status}</MyTypography>
               </MyBox>
             </MyGrid>
+            {state.dtoSiteConfig.type === Constants.SITE_CONFIG_TYPE_JSON && (
+              <MyGrid size={{ xs: 12, md: 12 }}>
+                <MyBox sx={{ mb: 0 }}>
+                  <MyTypography variant="subtitle1">Business Config:</MyTypography>
+                  <MyTypography variant="subtitle2" sx={{ whiteSpace: 'pre-wrap' }}>
+                    {state.dtoSiteConfig.business_config?.business_config || ''}
+                  </MyTypography>
+                </MyBox>
+              </MyGrid>
+            )}
           </MyGrid>
         </MyCardContent>
         <MyDivider />
@@ -67,7 +87,7 @@ const ClientViewSiteConfig = ({ dtoSiteConfig }: Props) => {
           modifiedAt={state.dtoSiteConfig.modified_at}
         ></MyTimestamp>
         <MyCardActions>
-          <MyButton onClick={onEditClick}>Edit</MyButton>
+          {findPermission(userPermissions, 148) && <MyButton onClick={onEditClick}>Edit</MyButton>}
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

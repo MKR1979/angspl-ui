@@ -9,11 +9,12 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
 import CurrencyDTO from '@/app/types/CurrencyDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { CURRENCY_LIST, DELETE_CURRENCY } from '@/app/graphql/Currency';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import * as gMessageConstants from '../../../constants/messages-constants';
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
@@ -65,7 +66,7 @@ const useCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
@@ -85,22 +86,27 @@ const useCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
   const [deleteCurrency] = useMutation(DELETE_CURRENCY, {});
 
   const getData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrCurrencyDTO: CurrencyDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getCurrencyList();
-    if (!error && data) {
-      arrCurrencyDTO = data.getCurrencyList.currencies.map((item: CurrencyDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getCurrencyList.total_records;
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrCurrencyDTO: CurrencyDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getCurrencyList();
+      if (!error && data) {
+        arrCurrencyDTO = data.getCurrencyList.currencies.map((item: CurrencyDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getCurrencyList.total_records;
+      }
+      setState({
+        arrCurrencyDTO: arrCurrencyDTO,
+        total_records: total_records,
+        isLoading: false,
+        arrSelectedId: [] as string[]
+      } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({
-      arrCurrencyDTO: arrCurrencyDTO,
-      total_records: total_records,
-      isLoading: false,
-      arrSelectedId: [] as string[]
-    } as StateType);
   }, [getCurrencyList]);
 
   useEffect(() => {
@@ -147,9 +153,7 @@ const useCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
 
   const onRowDoubleClick: GridEventListener<'rowDoubleClick'> = useCallback(
     async (
-      params // GridRowParams
-      //event, // MuiEvent<React.MouseEvent<HTMLElement>>
-      //details // GridCallbackDetails
+      params
     ) => {
       router.push('/currencies/edit/' + params.row.id);
     },
@@ -175,19 +179,24 @@ const useCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteCurrency({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteCurrency({
+          variables: {
+            ids: params
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteCurrency, getData, state.visibleDialog1.id, toggleDialog1]
@@ -196,7 +205,6 @@ const useCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
   const onCheckChange = useCallback(
     async (
       model: GridRowSelectionModel
-      //details: GridCallbackDetails<any>
     ): Promise<void> => {
       setState({ arrSelectedId: model as string[] } as StateType);
     },
@@ -221,18 +229,23 @@ const useCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteCurrency({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteCurrency({
+          variables: {
+            ids: state.arrSelectedId
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteCurrency, getData, state.arrSelectedId, toggleDialog]

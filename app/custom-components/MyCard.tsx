@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyCardProps extends CardProps {}
 
 const MyCard = ({ children, ...props }: MyCardProps) => {
-  console.log('MyCard rendered');
+  // console.log('MyCard rendered');
   return <Card {...props}> {children}</Card>;
 };
 

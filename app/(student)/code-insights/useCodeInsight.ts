@@ -4,8 +4,11 @@ import { useLazyQuery } from '@apollo/client';
 import { GET_CODE_PROJECT_ALL } from '@/app/graphql/CodeProject';
 import LookupDTO from '@/app/types/LookupDTO';
 import CodeProjectDTO, { CODE_PROJECT } from '@/app/types/CodeProjectDTO';
-import { COURSE_LOOKUP } from '@/app/graphql/Course';
+import {COURSE_LOOKUP_BY_USER_ID } from '@/app/graphql/Course';
 import { generatePDF } from '@/app/custom-components/MyPdfGeneration';
+import * as gMessageConstants from '../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import { RootState, useSelector } from '@/app/store';
 
 type ErrorMessageType = {
   course_name: string | null;
@@ -52,18 +55,47 @@ const useCodeInsight = ({ courseId, courseName, CodeProjectId }: Props) => {
   const reducer = (state: StateType, action: Partial<StateType>): StateType => ({ ...state, ...action });
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   const [copied, setCopied] = useState(false);
+  const companyInfo = useSelector((state: RootState) => state.globalState.companyInfo);
+  const showSnackbar = useSnackbar();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [getCodeProjectsAll] = useLazyQuery(GET_CODE_PROJECT_ALL, { fetchPolicy: 'network-only' });
-  const [getCourseLookup] = useLazyQuery(COURSE_LOOKUP, { fetchPolicy: 'network-only' });
+  // const [getCourseLookup] = useLazyQuery(COURSE_LOOKUP, { fetchPolicy: 'network-only' });
+  const { loginUser_id } = useSelector((state) => state.loginState);
+  const [getCourseByUserIdLookup] = useLazyQuery(COURSE_LOOKUP_BY_USER_ID, { fetchPolicy: 'network-only' });
+
+  // const getCourseList = useCallback(async (): Promise<void> => {
+  //   try {
+  //     let arrCourseLookup: LookupDTO[] = [];
+  //     const { error, data } = await getCourseLookup();
+  //     if (!error && data) {
+  //       arrCourseLookup = data.getCourseLookup;
+  //     }
+  //     setState({ arrCourseLookup: arrCourseLookup } as StateType);
+  //   } catch (err) {
+  //     console.error('Error loading quiz question:', err);
+  //     showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
+  //   }
+  // }, [getCourseLookup]);
 
   const getCourseList = useCallback(async (): Promise<void> => {
-    let arrCourseLookup: LookupDTO[] = [];
-    const { error, data } = await getCourseLookup();
-    if (!error && data) {
-      arrCourseLookup = data.getCourseLookup;
+    try {
+      let arrCourseLookup: LookupDTO[] = [];
+      const { error, data } = await getCourseByUserIdLookup({
+        variables: {
+          user_id: loginUser_id,
+          group_name: companyInfo.company_type,
+        }
+      });
+      if (!error && data) {
+        arrCourseLookup = data.getCourseByUserIdLookup;
+      }
+
+      setState({ arrCourseLookup: arrCourseLookup } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ arrCourseLookup: arrCourseLookup } as StateType);
-  }, [getCourseLookup]);
+  }, [getCourseByUserIdLookup, companyInfo.company_type]);
 
   const getCodeProjects = useCallback(
     async (arrCourseLookupParam: LookupDTO[], selectedCourseId?: number): Promise<void> => {
@@ -168,19 +200,6 @@ const useCodeInsight = ({ courseId, courseName, CodeProjectId }: Props) => {
     [state.dtoCodeProject]
   );
 
-  const validateCourse = useCallback(async () => {
-    if (state.dtoCodeProject.course_name.trim() === '') {
-      return 'Course Name is required';
-    } else {
-      return null;
-    }
-  }, [state.dtoCodeProject.course_name]);
-
-  const onCourseBlur = useCallback(async () => {
-    const course_name = await validateCourse();
-    setState({ errorMessages: { ...state.errorMessages, course_name: course_name } } as StateType);
-  }, [validateCourse, state.errorMessages]);
-
   const goToNext = () => {
     if (currentIndex < state.arrCodeProjectListAll.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -193,7 +212,8 @@ const useCodeInsight = ({ courseId, courseName, CodeProjectId }: Props) => {
     }
   };
 
-  const currentProgram = state.arrCodeProjectListFilter[0] || {};
+  // const currentProgram = state.arrCodeProjectListFilter[0] || {};
+  const currentProgram = state.arrCodeProjectListFilter[currentIndex] || {};
 
   const setOpen1 = useCallback(async (): Promise<void> => {
     setState({ open1: true } as StateType);
@@ -218,12 +238,26 @@ const useCodeInsight = ({ courseId, courseName, CodeProjectId }: Props) => {
     }
   };
 
+  // const handleDownloadPdf = async () => {
+  //   await generatePDF({
+  //     title: currentProgram.title,
+  //     content: currentProgram.source_code?.code
+  //   });
+  // };
   const handleDownloadPdf = async () => {
     await generatePDF({
       title: currentProgram.title,
-      content: currentProgram.source_code?.code
+      content: currentProgram.source_code?.code,
+      logoUrl: companyInfo.logo_url,
+      company: {
+        email: companyInfo.company_email,
+        website: 'adhyayan.online',
+        contact: '+91-9522933330',
+        contactUsPage: 'adhyayan.online/contact-us'
+      }
     });
   };
+
 
   return {
     currentProgram,
@@ -235,7 +269,7 @@ const useCodeInsight = ({ courseId, courseName, CodeProjectId }: Props) => {
     goToPrev,
     setClose1,
     onCourseChange,
-    onCourseBlur,
+    // onCourseBlur,
     isPrevDisabled: currentIndex === 0,
     isNextDisabled: currentIndex === state.arrCodeProjectListFilter.length - 1,
     handleDownloadPdf,

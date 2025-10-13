@@ -21,8 +21,8 @@ interface TSProps {
   [others: string]: any;
 }
 
-const MyTransitions = React.forwardRef(({ children, position, sx, type, direction, ...others }: TSProps, ref: Ref<ExoticComponent>) => {
-  console.log(sx);
+const MyTransitions = React.forwardRef(({ children, position, type, direction, ...others }: TSProps, ref: Ref<ExoticComponent>) => {
+//  console.log(sx);
   let positionSX = {
     transformOrigin: '0 0 0'
   };

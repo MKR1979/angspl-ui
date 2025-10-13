@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyContainerProps extends ContainerProps {}
 
 const MyContainer = ({ children, ...props }: MyContainerProps) => {
-  console.log('MyContainer rendered');
+  // console.log('MyContainer rendered');
   return <Container {...props}> {children}</Container>;
 };
 

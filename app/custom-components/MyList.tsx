@@ -7,7 +7,7 @@ interface MyListProps extends ListProps {
 }
 
 const MyList = ({ children, ...props }: MyListProps) => {
-  console.log('MyList rendered');
+//  console.log('MyList rendered');
   return <List {...props}> {children}</List>;
 };
 

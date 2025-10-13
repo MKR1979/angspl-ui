@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyInboxTwoToneIconProps extends SvgIconProps {}
 const MyInboxTwoToneIcon = ({ ...props }: MyInboxTwoToneIconProps) => {
-  console.log('My render');
+ // console.log('My render');
   return <InboxTwoToneIcon {...props}></InboxTwoToneIcon>;
 };
 export default memo(MyInboxTwoToneIcon, (prevProps, nextProps) => {

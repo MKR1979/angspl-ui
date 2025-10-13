@@ -45,6 +45,7 @@ a {
   /* font-weight: bold; */
 }
 
+
 /* css for scroll bar */
 ::-webkit-scrollbar {
   width: 10px; 
@@ -73,3 +74,23 @@ a {
   border-top: 2.5px solid transparent;
   background-clip: content-box;
 } 
+
+/* css for menu item scroll bar */
+
+.sidebar-scroll .ps__rail-y {
+  width: 10px !important;
+  background: transparent !important;
+}
+
+.sidebar-scroll .ps__thumb-y {
+  background: #bbb !important;
+  border-radius: 5px !important;
+  border-right: 2.5px solid transparent;
+  border-left: 2.5px solid transparent;
+  background-clip: content-box;
+}
+
+.sidebar-scroll .ps__thumb-y:hover {
+  background: #999 !important;
+}
+
