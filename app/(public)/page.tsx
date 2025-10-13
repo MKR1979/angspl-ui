@@ -3,7 +3,7 @@ import MyBox from '../custom-components/MyBox';
 import MyCard from '../custom-components/MyCard';
 import MyCardContent from '../custom-components/MyCardContent';
 import MyGrid from '../custom-components/MyGrid';
-import { COMPANY } from '.././constants/constants';
+import { COMPANY } from '../constants/constants';
 import MyCheckCircleIcon from '../custom-components/MyCheckCircleIcon';
 import MyApiIcon from '../custom-components/MyApiIcon';
 import { CardHeader } from '@mui/material';

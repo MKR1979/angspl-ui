@@ -345,7 +345,9 @@ const ClientDemoSch = () => {
             </MyCardContent>
           </MyCard>
 
-          {/* FOOTER */}
+
+        </MyBox>
+                  {/* FOOTER */}
           <div className="container">
             <div className="vertical_center">
               <p>
@@ -356,7 +358,6 @@ const ClientDemoSch = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
       <Button
         href="https://adhyayan.school"
