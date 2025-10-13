@@ -17,7 +17,9 @@ import MyInputLabel from '@/app/custom-components/MyInputLabel';
 import MyDivider from '@/app/custom-components/MyDivider';
 import MyCardActions from '@/app/custom-components/MyCardActions';
 import MyButton from '@/app/custom-components/MyButton';
+import * as gConstants from '../../constants/constants';
 import { arrUserStatus } from '@/app/common/Configuration';
+import MyPhoneNumber from '@/app/custom-components/MyPhoneNumber';
 
 type Props = { dtoUser: UserDTO };
 
@@ -35,7 +37,9 @@ const ClientEditProfile = ({ dtoUser }: Props) => {
     onCancelClick,
     onImageError,
     onImageClick,
-    UploadImage
+    UploadImage,
+    onPhoneNoChange,onNormalizedInputChange,
+    saving
   } = useEditProfile({ dtoUser });
 
   return (
@@ -50,7 +54,7 @@ const ClientEditProfile = ({ dtoUser }: Props) => {
                   <MyImage
                     src={
                       state.dtoUser.image_url?.trim() == ''
-                        ? '/default-image.avif'
+                        ? '/common/default-image.webp'
                         : process.env.NEXT_PUBLIC_API_ROOT_URL + '/uploads/' + state.dtoUser.image_url
                     }
                     width={800}
@@ -80,6 +84,10 @@ const ClientEditProfile = ({ dtoUser }: Props) => {
                     label="First Name"
                     name="first_name"
                     value={state.dtoUser.first_name}
+                    inputProps={{
+                      maxLength: gConstants.FIRST_NAME_LENGTH,
+                      pattern: '^[A-Za-z]{1,2}$'
+                    }}
                     onChange={onInputChange}
                     onBlur={onFirstNameBlur}
                     error={state.errorMessages.first_name ? true : false}
@@ -91,6 +99,10 @@ const ClientEditProfile = ({ dtoUser }: Props) => {
                     label="Last Name"
                     name="last_name"
                     value={state.dtoUser.last_name}
+                    inputProps={{
+                      maxLength: gConstants.LAST_NAME_LENGTH,
+                      pattern: '^[A-Za-z]{1,2}$'
+                    }}
                     onChange={onInputChange}
                     onBlur={onLastNameBlur}
                     error={state.errorMessages.last_name ? true : false}
@@ -102,19 +114,21 @@ const ClientEditProfile = ({ dtoUser }: Props) => {
                     label="E-Mail"
                     name="email"
                     value={state.dtoUser.email}
-                    onChange={onInputChange}
+                    inputProps={{
+                      maxLength: gConstants.EMAIL_LENGTH,
+                      pattern: '^[A-Za-z]{1,2}$'
+                    }}
+                    onChange={onNormalizedInputChange}
                     onBlur={onEMailIdBlur}
                     error={state.errorMessages.email ? true : false}
                   />
                   <MyTypography className="error"> {state.errorMessages.email}</MyTypography>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 6 }}>
-                  <MyTextField
-                    autoComplete="new-mobile"
+                  <MyPhoneNumber
                     label="Mobile #"
-                    name="mobile_no"
+                    onChange={onPhoneNoChange}
                     value={state.dtoUser.mobile_no}
-                    onChange={onInputChange}
                     onBlur={onMobileNoBlur}
                     error={state.errorMessages.mobile_no ? true : false}
                   />
@@ -140,7 +154,9 @@ const ClientEditProfile = ({ dtoUser }: Props) => {
         </MyCardContent>
         <MyDivider></MyDivider>
         <MyCardActions>
-          <MyButton onClick={onSaveClick}>Save</MyButton>
+          <MyButton onClick={onSaveClick} disabled={saving}>
+            {saving ? 'Saving...' : 'Save'}
+            </MyButton>
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

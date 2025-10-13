@@ -7,7 +7,7 @@ interface MyAvatarProps extends AvatarProps {
 }
 
 const MyAvatar = forwardRef(({ ...props }: MyAvatarProps, ref: ForwardedRef<unknown>) => {
-  console.log('MyAvatar rendered');
+  // console.log('MyAvatar rendered');
   return <Avatar ref={ref as unknown as any} {...props} />;
 });
 MyAvatar.displayName = 'MyAvatar';

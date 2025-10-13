@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconBuildingStoreProps extends IconProps {}
 const MyIconBuildingStore = ({ ...props }: MyIconBuildingStoreProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconBuildingStore {...props}></IconBuildingStore>;
 };
 export default memo(MyIconBuildingStore, (prevProps, nextProps) => {

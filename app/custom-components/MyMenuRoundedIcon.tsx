@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyMenuRoundedIconProps extends SvgIconProps {}
 const MyMenuRoundedIcon = ({ ...props }: MyMenuRoundedIconProps) => {
-  console.log('MyMenuRoundedIcon render');
+  //console.log('MyMenuRoundedIcon render');
   return <MenuRoundedIcon {...props}></MenuRoundedIcon>;
 };
 export default memo(MyMenuRoundedIcon, (prevProps, nextProps) => {

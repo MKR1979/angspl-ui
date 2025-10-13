@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 type MyPhoneNumberProps = MuiPhoneNumberProps & {};
 
 const MyPhoneNumber = ({ ...props }: MyPhoneNumberProps) => {
-  console.log('MyPhoneNumber rendered');
+// console.log('MyPhoneNumber rendered');
   return <MuiPhoneNumber InputLabelProps={{ shrink: true }} size="small" variant="outlined" fullWidth defaultCountry={'in'} {...props} />;
 };
 

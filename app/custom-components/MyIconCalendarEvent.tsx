@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconCalendarEventProps extends IconProps {}
 const MyIconCalendarEvent = ({ ...props }: MyIconCalendarEventProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconCalendarEvent {...props}></IconCalendarEvent>;
 };
 export default memo(MyIconCalendarEvent, (prevProps, nextProps) => {

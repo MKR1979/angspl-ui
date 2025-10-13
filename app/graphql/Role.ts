@@ -1,25 +1,25 @@
 import gql from 'graphql-tag';
 export const ADD_ROLE = gql`
-  mutation addRole($role_name: String!) {
-    addRole(addRoleInput: { role_name: $role_name })
+  mutation addRole($role_name: String!, $type_id: Int, $status: String) {
+    addRole(addRoleInput: { role_name: $role_name, type_id: $type_id, status: $status })
   }
 `;
 
 export const UPDATE_ROLE = gql`
-  mutation updateRole($id: Int!, $role_name: String!) {
-    updateRole(updateRoleInput: { id: $id, role_name: $role_name })
+  mutation updateRole($id: Int!, $role_name: String!, $type_id: Int, $status: String) {
+    updateRole(updateRoleInput: { id: $id, role_name: $role_name, type_id: $type_id, status: $status })
   }
 `;
 
 export const DELETE_ROLE = gql`
   mutation deleteRole($ids: [Int]!) {
-    deleteRole(deleteRoleInput: { ids: $ids})
+    deleteRole(deleteRoleInput: { ids: $ids })
   }
 `;
 
 export const ROLE_LOOKUP = gql`
-  query getRoleLookup {
-    getRoleLookup {
+  query getRoleLookup($type_id : Int) {
+    getRoleLookup(type_id : $type_id ) {
       id
       text
     }
@@ -41,6 +41,9 @@ export const ROLE_LIST = gql`
       roles {
         id
         role_name
+        type_id
+        type_name
+        status
         created_by
         created_by_first_name
         created_by_last_name
@@ -61,6 +64,9 @@ export const GET_ROLE = gql`
     getRole(getRoleInput: { id: $id }) {
       id
       role_name
+      type_id
+      type_name
+      status
       created_by
       created_by_first_name
       created_by_last_name

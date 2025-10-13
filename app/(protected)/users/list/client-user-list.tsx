@@ -16,6 +16,8 @@ import MyClearIcon from '@/app/custom-components/MyClearIcon';
 import useUserList from './useUserList';
 import UserDTO from '@/app/types/UserDTO';
 import MyAvatar from '@/app/custom-components/MyAvatar';
+import { useSelector, RootState } from '../../../store';
+import { findPermission } from '../../../common/utility-permission'; 
 
 type Props = {
   arrUserDTO: UserDTO[];
@@ -74,15 +76,21 @@ const ClientUserList = ({ arrUserDTO, total_records }: Props) => {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
     };
   }
+
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
+
   const columns: GridColDef[] = [
     {
       field: 'id',
       headerName: 'Id',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'image_url',
       headerName: 'Photo',
+      flex: 1,
+      minWidth: 100,
       width: 50,
       sortable: false,
       renderCell: useCallback(
@@ -99,35 +107,58 @@ const ClientUserList = ({ arrUserDTO, total_records }: Props) => {
       field: 'first_name',
       headerName: 'First Name',
       flex: 1,
+      minWidth: 150,
       renderCell: useCallback(
-        (params: GridRenderCellParams) => <MyLink href={'/users/view/' + params.row.id}>{params.row.first_name}</MyLink>,
-        []
+        (params: GridRenderCellParams) =>
+          findPermission(userPermissions, 194) ? (
+            <MyLink href={`/users/view/${params.row.id}`}>{params.row.first_name}</MyLink>
+          ) : (
+            <span>{params.row.first_name}</span>
+          ),
+        [userPermissions]
       )
     },
     {
       field: 'last_name',
       headerName: 'Last Name',
-      flex: 1
-    },
-    {
-      field: 'email',
-      headerName: 'E-Mail',
-      flex: 1
-    },
-    {
-      field: 'mobile_no',
-      headerName: 'Mobile #',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'user_name',
       headerName: 'Username',
-      flex: 1
+      flex: 1,
+      minWidth: 150
+    },
+    {
+      field: 'email',
+      headerName: 'E-Mail',
+      flex: 1,
+      minWidth: 150
+    },
+    {
+      field: 'mobile_no',
+      headerName: 'Mobile #',
+      flex: 1,
+      minWidth: 150
+    },
+    {
+      field: 'role_name',
+      headerName: 'Role',
+      flex: 1,
+      minWidth: 150
+    },
+        {
+      field: 'type_name',
+      headerName: 'Type',
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'status',
       headerName: 'Status',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     }
   ];
 
@@ -135,29 +166,33 @@ const ClientUserList = ({ arrUserDTO, total_records }: Props) => {
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
       <MyCard>
-        <MyCardContent>
-          <MyDataGrid
-            apiRef={apiRef}
-            rowSelectionModel={state.arrSelectedId}
-            initialStateModel={state.initialState}
-            sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
-            onSortModelChange={onSortChange}
-            onRowSelectionModelChange={onCheckChange}
-            rows={state.arrUserDTO}
-            rowCount={state.total_records}
-            columns={columns}
-            loading={state.isLoading}
-            handleContextMenu={handleContextMenu}
-            onAddClick={onAddClick}
-            showAddButton={true}
-            onDeleteClick={onDeleteAllClick}
-            showDeleteButton={state.arrSelectedId.length > 0}
-            onFilterModelChange={onFilterModelChange}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            onRowDoubleClick={onRowDoubleClick}
-          />
-
+        <MyCardContent sx={{ overflowX: 'auto' }}>
+          {/* <div style={{ minWidth: 800 }}> */}
+          <div style={{ minWidth: `${columns.length * 150}px` }}>
+            <MyDataGrid
+              apiRef={apiRef}
+              rowSelectionModel={state.arrSelectedId}
+              initialStateModel={state.initialState}
+              sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
+              onSortModelChange={onSortChange}
+              onRowSelectionModelChange={onCheckChange}
+              rows={state.arrUserDTO}
+              rowCount={state.total_records}
+              columns={columns}
+              loading={state.isLoading}
+              handleContextMenu={handleContextMenu}
+              onAddClick={onAddClick}
+              showAddButton={findPermission(userPermissions, 191)}
+              onDeleteClick={onDeleteAllClick}
+              showDeleteButton={state.arrSelectedId.length > 0 && findPermission(userPermissions, 192)}
+              showExportButton={true}
+              onFilterModelChange={onFilterModelChange}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              onRowDoubleClick={onRowDoubleClick}
+            />
+          </div>
+          {(findPermission(userPermissions, 193) || findPermission(userPermissions, 192)) && (
           <MyMenu
             open={state.contextMenu !== null}
             onClose={handleClose}
@@ -176,15 +211,21 @@ const ClientUserList = ({ arrUserDTO, total_records }: Props) => {
               }
             }}
           >
-            <MyMenuItem onClick={onEditClick}>
-              <MyEditIcon />
-              Edit
-            </MyMenuItem>
-            <MyMenuItem onClick={onDeleteClick}>
-              <MyClearIcon />
-              Delete
-            </MyMenuItem>
+            {findPermission(userPermissions, 193) && (
+              <MyMenuItem onClick={onEditClick}>
+                <MyEditIcon />
+                Edit
+              </MyMenuItem>
+            )}
+
+            {findPermission(userPermissions, 192) && (
+              <MyMenuItem onClick={onDeleteClick}>
+                <MyClearIcon />
+                Delete
+              </MyMenuItem>
+            )}
           </MyMenu>
+          )}
         </MyCardContent>
       </MyCard>
       {state.visibleDialog && (

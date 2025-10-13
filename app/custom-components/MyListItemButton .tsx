@@ -8,7 +8,7 @@ interface MyListItemButtonProps extends ListItemButtonProps {
 }
 
 const MyListItemButton = ({ children, ...props }: MyListItemButtonProps) => {
-  console.log('MyListItemButton rendered');
+//  console.log('MyListItemButton rendered');
   return <ListItemButton {...props}> {children}</ListItemButton>;
 };
 

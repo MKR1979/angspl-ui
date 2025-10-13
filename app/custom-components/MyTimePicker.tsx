@@ -7,7 +7,7 @@ interface MyTimePickerProps extends TimePickerProps<Date> {
 }
 
 const MyTimePicker = ({ ...props }: MyTimePickerProps) => {
-  console.log('MyTimePicker rendered');
+  //console.log('MyTimePicker rendered');
   return (
     <TimePicker
       slotProps={{

@@ -5,13 +5,16 @@ import MyBreadcrumbs from '@/app/custom-components/MyBreadcrumbs';
 import SiteConfigEntry from '../site-config-entry';
 import useAddSiteConfig from './useAddSiteConfig';
 import { SITE_CONFIG } from '@/app/types/SiteConfigDTO';
+import LookupDTO from '@/app/types/LookupDTO';
 
-const ClientAddSiteConfig = () => {
+type Props = { arrCompanyLookup: LookupDTO[] };
+
+const ClientAddSiteConfig = ({ arrCompanyLookup }: Props) => {
   const { state } = useAddSiteConfig();
   return (
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
-      <SiteConfigEntry dtoSiteConfig={SITE_CONFIG} />
+      <SiteConfigEntry dtoSiteConfig={SITE_CONFIG} arrCompanyLookup={arrCompanyLookup} />
     </>
   );
 };

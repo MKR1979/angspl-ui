@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyCurrencyExchangeIconProps extends SvgIconProps {}
 const MyCurrencyExchangeIcon = ({ ...props }: MyCurrencyExchangeIconProps) => {
-  console.log('MyCurrencyExchangeIcon render');
+  // console.log('MyCurrencyExchangeIcon render');
   return <CurrencyExchangeIcon {...props}></CurrencyExchangeIcon>;
 };
 export default memo(MyCurrencyExchangeIcon, (prevProps, nextProps) => {

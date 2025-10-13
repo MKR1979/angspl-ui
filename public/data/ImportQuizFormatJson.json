@@ -1,0 +1,88 @@
+{
+  "data": {
+    "AddQuizData": [
+      {
+        "questions": [
+          {
+            "question": "What is JSX in React?",
+            "status": "Active",
+            "options": [
+              {
+                "option_text": "A syntax extension for JavaScript",
+                "is_correct": true,
+                "explanation": "Correct - JSX allows HTML-like syntax in JavaScript."
+              },
+              {
+                "option_text": "A database language",
+                "is_correct": false,
+                "explanation": "Incorrect - JSX is not a database language."
+              },
+              {
+                "option_text": "A CSS preprocessor",
+                "is_correct": false,
+                "explanation": "Incorrect - JSX does not relate to CSS preprocessing."
+              },
+              {
+                "option_text": "A routing library",
+                "is_correct": false,
+                "explanation": "Incorrect - JSX is unrelated to routing."
+              }
+            ]
+          },
+          {
+            "question": "Which method is used to create components in React?",
+            "status": "Active",
+            "options": [
+              {
+                "option_text": "Function or class declarations",
+                "is_correct": true,
+                "explanation": "Correct - Components are made using functions or classes."
+              },
+              {
+                "option_text": "React.component()",
+                "is_correct": false,
+                "explanation": "Incorrect - This is not a valid React method."
+              },
+              {
+                "option_text": "createComponent()",
+                "is_correct": false,
+                "explanation": "Incorrect - Not a React API."
+              },
+              {
+                "option_text": "React.createClass()",
+                "is_correct": false,
+                "explanation": "Incorrect - Deprecated in modern React."
+              }
+            ]
+          },
+          {
+            "question": "What is the virtual DOM in React?",
+            "status": "Active",
+            "options": [
+              {
+                "option_text": "A copy of the real DOM in memory",
+                "is_correct": true,
+                "explanation": "Correct - The virtual DOM is an in-memory representation."
+              },
+              {
+                "option_text": "The actual UI elements",
+                "is_correct": false,
+                "explanation": "Incorrect - It is a virtual representation, not the actual UI."
+              },
+              {
+                "option_text": "A CSS framework",
+                "is_correct": false,
+                "explanation": "Incorrect - Virtual DOM is not a styling framework."
+              },
+              {
+                "option_text": "A server-side rendering engine",
+                "is_correct": false,
+                "explanation": "Incorrect - It runs in the browser, not on the server."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

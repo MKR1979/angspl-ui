@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyCardMediaProps extends CardMediaProps {}
 
 const MyCardMedia = ({ children, ...props }: MyCardMediaProps) => {
-  console.log('MyCardMedia rendered');
+  // console.log('MyCardMedia rendered');
   return <CardMedia {...props}> {children}</CardMedia>;
 };
 

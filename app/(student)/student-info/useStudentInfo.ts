@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer, useState } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
-import { GET_ADMISSION, ADD_ADMISSION } from '@/app/graphql/Admission';
-import AdmissionDTO, { ADMISSION } from '@/app/types/AdmissionDTO';
+import { GET_ADMISSION_TECH, ADD_ADMISSION_TECH } from '@/app/graphql/AdmissionTech';
+import AdmissionDTO, { ADMISSION_TECH } from '@/app/types/AdmissionTechDTO';
 import { useSelector } from '../../store';
 
 type ErrorMessageType = {
@@ -72,7 +72,7 @@ const ERROR_MESSAGES: ErrorMessageType = {
 
 const INITIAL_STATE: StateType = {
   arrAdmission: [],
-  dtoAdmission: ADMISSION,
+  dtoAdmission: ADMISSION_TECH,
   errorMessages: { ...ERROR_MESSAGES }
 };
 
@@ -83,24 +83,27 @@ const reducer = (state: StateType, action: Partial<StateType>): StateType => {
 
 const useStudentInfo = () => {
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-  const [singleUpload] = useMutation(ADD_ADMISSION, {});
-  const { admission_id } = useSelector((state) => state.globalState);
-  const [getAdmission] = useLazyQuery(GET_ADMISSION, { fetchPolicy: 'network-only' });
+  const [singleUpload] = useMutation(ADD_ADMISSION_TECH, {});
+  const { admission_id } = useSelector((state) => state.loginState);
+    // ✅ Ensure type-dependent values don’t mismatch server/client
+  const [tenthProofType, setTenthProofType] = useState<string>('N/A');
+  const [twelfthProofType, setTwelfthProofType] = useState<string>('N/A');
+  const [getAdmissionTech] = useLazyQuery(GET_ADMISSION_TECH, { fetchPolicy: 'network-only' });
 
   const getAdmissions = useCallback(async (): Promise<void> => {
-    const { error, data } = await getAdmission({
+    const { error, data } = await getAdmissionTech({
       variables: {
-        id: admission_id
+        id: Number(admission_id)
       }
     });
-    if (!error && data?.getAdmission) {
-      const dto: AdmissionDTO = data.getAdmission; // use object directly
+    if (!error && data?.getAdmissionTech) {
+      const dto: AdmissionDTO = data.getAdmissionTech; // use object directly
       setState({
         dtoAdmission: dto,
         arrAdmission: [dto] // optional, if you want to keep it
       } as StateType);
     }
-  }, [getAdmission]);
+  }, [getAdmissionTech]);
 
   const onImageError = useCallback(
     async (event: any) => {
@@ -112,6 +115,24 @@ const useStudentInfo = () => {
   const onImageClick = useCallback(async () => {
     document.getElementById('Document_image')!.click();
   }, []);
+
+ // Safe formatter to avoid hydration mismatch
+  const formatDate = (date?: string | Date | null): string => {
+  if (!date) return 'N/A';
+
+  try {
+    const parsedDate = typeof date === 'string' ? new Date(date) : date;
+    if (!parsedDate || isNaN(parsedDate.getTime())) return 'N/A';
+
+    return new Intl.DateTimeFormat('en-GB', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(parsedDate);
+  } catch {
+    return 'N/A';
+  }
+};
 
   const UploadImage = useCallback(async () => {
     const files = (document.getElementById('Document_image') as any)!.files;
@@ -132,7 +153,12 @@ const useStudentInfo = () => {
   useEffect(() => {
     getAdmissions();
   }, [getAdmissions]);
-  return { state, onImageError, onImageClick, UploadImage };
+    useEffect(() => {
+    setTenthProofType(typeof state.dtoAdmission.tenthproof);
+    setTwelfthProofType(typeof state.dtoAdmission.twelthproof);
+  }, [state.dtoAdmission.tenthproof, state.dtoAdmission.twelthproof]);
+
+  return { state, onImageError, onImageClick, UploadImage,formatDate, twelfthProofType, tenthProofType };
 };
 
 export default useStudentInfo;

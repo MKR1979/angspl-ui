@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyCollapseProps extends CollapseProps {}
 
 const MyCollapse = ({ children, ...props }: MyCollapseProps) => {
-  console.log('MyCollapse rendered');
+  // console.log('MyCollapse rendered');
   return <Collapse {...props}> {children}</Collapse>;
 };
 

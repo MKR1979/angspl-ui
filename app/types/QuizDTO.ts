@@ -6,6 +6,8 @@ export default interface QuizDTO extends BaseDTO {
   course_name: string;
   quiz_name: string;
   quiz_code: string;
+  quiz_type: string;
+  exam_duration: number;
   status: string;
   quizLookupDTO: LookupDTO | null;
 }
@@ -16,6 +18,8 @@ export const QUIZ: QuizDTO = {
   course_name: '',
   quiz_name: '',
   quiz_code: '',
+  quiz_type: '',
+  exam_duration: 0,
   status: '',
   quizLookupDTO: { id: 0, text: '' },
   created_by: 0,

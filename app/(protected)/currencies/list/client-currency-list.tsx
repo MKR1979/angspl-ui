@@ -15,6 +15,8 @@ import MyEditIcon from '@/app/custom-components/MyEditIcon';
 import MyClearIcon from '@/app/custom-components/MyClearIcon';
 import useCurrencyList from './useCurrencyList';
 import CurrencyDTO from '@/app/types/CurrencyDTO';
+import { useSelector, RootState } from '../../../store';
+import { findPermission } from '../../../common/utility-permission';
 
 type Props = {
   arrCurrencyDTO: CurrencyDTO[];
@@ -42,31 +44,47 @@ const ClientCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
     onRowDoubleClick,
     onDeleteSingleClose
   } = useCurrencyList({ arrCurrencyDTO, total_records });
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   const columns: GridColDef[] = [
     {
       field: 'id',
       headerName: 'Id',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'currency_name',
       headerName: 'Currency Name',
       flex: 1,
+      minWidth: 150,
       renderCell: useCallback(
-        (params: GridRenderCellParams) => <MyLink href={'/currencies/view/' + params.row.id}>{params.row.currency_name}</MyLink>,
-        []
+        (params: GridRenderCellParams) =>
+          findPermission(userPermissions, 59) ? (
+            <MyLink href={'/currencies/view/' + params.row.id}>{params.row.currency_name}</MyLink>
+          ) : (
+            <span>{params.row.currency_name}</span>
+          ),
+        [userPermissions]
       )
     },
     {
       field: 'currency_code',
       headerName: 'Currency Code',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'currency_symbol',
       headerName: 'Currency Symbol',
-      flex: 1
+      flex: 1,
+      minWidth: 150
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      flex: 1,
+      minWidth: 150
     }
   ];
 
@@ -74,56 +92,64 @@ const ClientCurrencyList = ({ arrCurrencyDTO, total_records }: Props) => {
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
       <MyCard>
-        <MyCardContent>
-          <MyDataGrid
-            apiRef={apiRef}
-            rowSelectionModel={state.arrSelectedId}
-            initialStateModel={state.initialState}
-            sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
-            onSortModelChange={onSortChange}
-            onRowSelectionModelChange={onCheckChange}
-            rows={state.arrCurrencyDTO}
-            rowCount={state.total_records}
-            columns={columns}
-            loading={state.isLoading}
-            handleContextMenu={handleContextMenu}
-            onAddClick={onAddClick}
-            showAddButton={true}
-            onDeleteClick={onDeleteAllClick}
-            showDeleteButton={state.arrSelectedId.length > 0}
-            onFilterModelChange={onFilterModelChange}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            onRowDoubleClick={onRowDoubleClick}
-          />
-
-          <MyMenu
-            open={state.contextMenu !== null}
-            onClose={handleClose}
-            anchorReference="anchorPosition"
-            anchorPosition={
-              state.contextMenu !== null
-                ? {
-                    top: state.contextMenu.mouseY,
-                    left: state.contextMenu.mouseX
-                  }
-                : undefined
-            }
-            slotProps={{
-              root: {
-                onContextMenu: onContextMenu
+        <MyCardContent sx={{ overflowX: 'auto' }}>
+          <div style={{ minWidth: `${columns.length * 150}px` }}>
+            <MyDataGrid
+              apiRef={apiRef}
+              rowSelectionModel={state.arrSelectedId}
+              initialStateModel={state.initialState}
+              sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
+              onSortModelChange={onSortChange}
+              onRowSelectionModelChange={onCheckChange}
+              rows={state.arrCurrencyDTO}
+              rowCount={state.total_records}
+              columns={columns}
+              loading={state.isLoading}
+              handleContextMenu={handleContextMenu}
+              onAddClick={onAddClick}
+              showAddButton={findPermission(userPermissions, 56)}
+              onDeleteClick={onDeleteAllClick}
+              showDeleteButton={state.arrSelectedId.length > 0 && findPermission(userPermissions, 57)}
+              showExportButton={true}
+              onFilterModelChange={onFilterModelChange}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              onRowDoubleClick={onRowDoubleClick}
+            />
+          </div>
+          {(findPermission(userPermissions, 58) || findPermission(userPermissions, 57)) && (
+            <MyMenu
+              open={state.contextMenu !== null}
+              onClose={handleClose}
+              anchorReference="anchorPosition"
+              anchorPosition={
+                state.contextMenu !== null
+                  ? {
+                      top: state.contextMenu.mouseY,
+                      left: state.contextMenu.mouseX
+                    }
+                  : undefined
               }
-            }}
-          >
-            <MyMenuItem onClick={onEditClick}>
-              <MyEditIcon />
-              Edit
-            </MyMenuItem>
-            <MyMenuItem onClick={onDeleteClick}>
-              <MyClearIcon />
-              Delete
-            </MyMenuItem>
-          </MyMenu>
+              slotProps={{
+                root: {
+                  onContextMenu: onContextMenu
+                }
+              }}
+            >
+              {findPermission(userPermissions, 58) && (
+                <MyMenuItem onClick={onEditClick}>
+                  <MyEditIcon />
+                  Edit
+                </MyMenuItem>
+              )}
+              {findPermission(userPermissions, 57) && (
+                <MyMenuItem onClick={onDeleteClick}>
+                  <MyClearIcon />
+                  Delete
+                </MyMenuItem>
+              )}
+            </MyMenu>
+          )}
         </MyCardContent>
       </MyCard>
       {state.visibleDialog && (

@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyAppBarProps extends AppBarProps {}
 
 const MyAppBar = ({ children, ...props }: MyAppBarProps) => {
-  console.log('MyAppBar rendered');
+  // console.log('MyAppBar rendered');
   return <AppBar {...props}> {children}</AppBar>;
 };
 

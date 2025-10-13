@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyDeleteTwoToneIconProps extends SvgIconProps {}
 const MyDeleteTwoToneIcon = ({ ...props }: MyDeleteTwoToneIconProps) => {
-  console.log('MyDeleteTwoToneIcon render');
+  // console.log('MyDeleteTwoToneIcon render');
   return <DeleteTwoToneIcon {...props}></DeleteTwoToneIcon>;
 };
 export default memo(MyDeleteTwoToneIcon, (prevProps, nextProps) => {

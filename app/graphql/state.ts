@@ -1,33 +1,19 @@
 import gql from 'graphql-tag';
 export const ADD_STATE = gql`
-  mutation addState(
-  $state_name: String!, 
-  $state_code: String, 
-  $country_id: Int) {
-    addState(addStateInput: { 
-    state_name: $state_name, 
-    state_code: $state_code, 
-    country_id: $country_id })
+  mutation addState($state_name: String!, $state_code: String, $country_id: Int, $status: String) {
+    addState(addStateInput: { state_name: $state_name, state_code: $state_code, country_id: $country_id, status: $status })
   }
 `;
 
 export const UPDATE_STATE = gql`
-  mutation updateState(
-  $id: Int!, 
-  $state_name: String!, 
-  $state_code: String, 
-  $country_id: Int) {
-    updateState(updateStateInput: { 
-    id: $id, 
-    state_name: $state_name, 
-    state_code: $state_code, 
-    country_id: $country_id })
+  mutation updateState($id: Int!, $state_name: String!, $state_code: String, $country_id: Int, $status: String) {
+    updateState(updateStateInput: { id: $id, state_name: $state_name, state_code: $state_code, country_id: $country_id, status: $status })
   }
 `;
 
 export const DELETE_STATE = gql`
   mutation deleteState($ids: [Int]!) {
-    deleteState(deleteStateInput: { ids: $ids})
+    deleteState(deleteStateInput: { ids: $ids })
   }
 `;
 
@@ -40,8 +26,17 @@ export const STATE_LOOKUP = gql`
   }
 `;
 
+export const DISTRICT_LOOKUP = gql`
+  query getDistrictLookup($state_id: Int!) {
+    getDistrictLookup(state_id: $state_id) {
+      id
+      text
+    }
+  }
+`;
+
 export const STATE_LIST = gql`
-  query getStateList( $filter_text: String, $sort_direction: String, $sort_field: String, $offset: Int, $limit: Int) {
+  query getStateList($filter_text: String, $sort_direction: String, $sort_field: String, $offset: Int, $limit: Int) {
     getStateList(
       getStateListInput: {
         filter_text: $filter_text
@@ -58,6 +53,7 @@ export const STATE_LIST = gql`
         state_code
         country_id
         country_name
+        status
         created_by
         created_by_first_name
         created_by_last_name
@@ -95,12 +91,13 @@ export const STATE_SHORTLIST = gql`
 `;
 export const GET_STATE = gql`
   query getState($id: Int!) {
-    getState(getStateInput: { id: $id}) {
+    getState(getStateInput: { id: $id }) {
       id
       state_name
       state_code
       country_id
       country_name
+      status
       created_by
       created_by_first_name
       created_by_last_name

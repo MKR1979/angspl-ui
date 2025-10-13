@@ -1,29 +1,31 @@
 .login-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-  }
-  .already-msg2{
-    margin-left: auto;
-    font-size: 13px;
-  }
-  .mycard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.already-msg2 {
+  margin-left: auto;
+  font-size: 13px;
+}
+
+ .mycard {
     font-size: 14px;
     margin: 60px auto ;
     width: 400px;
-    height: 500px;
+    height: auto;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border: 3px solid rgb(238, 242, 246);
   }
-  @media (max-width: 600px) {
-    .mycard {
+@media (max-width: 600px) {
+  .mycard {
 
-        width: 95%;
-        margin: 10px auto;
-        margin-top: 50px;
-    }
+    width: 95%;
+    margin: 10px auto;
+    margin-top: 50px;
+  }
 }

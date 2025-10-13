@@ -36,16 +36,6 @@ export const CODE_PROJECT_LOOKUP = gql`
   }
 `;
 
-export const MEETING_LIST_ALL = gql`
-  query getMeetingListAll {
-    getMeetingListAll {
-      id
-      title
-      start
-      end
-    }
-  }
-`;
 export const CODE_PROJECT_LIST_ALL = gql`
   query getCodeProjectsListAll {
     getCodeProjectListsAll {

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyFactoryIconProps extends SvgIconProps {}
 const MyFactoryIcon = ({ ...props }: MyFactoryIconProps) => {
-  console.log('MyFactoryIcon render');
+  // console.log('MyFactoryIcon render');
   return <FactoryIcon {...props}></FactoryIcon>;
 };
 export default memo(MyFactoryIcon, (prevProps, nextProps) => {

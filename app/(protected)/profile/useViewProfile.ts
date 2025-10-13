@@ -4,6 +4,11 @@ import { useLazyQuery } from '@apollo/client';
 import UserDTO from '@/app/types/UserDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_USER_MY_PROFILE } from '@/app/graphql/User';
+import { dispatch } from '../../store';
+import { setIsEditMode } from '@/app/store/slices/siteConfigState';
+import * as gMessageConstants from '../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+
 type StateType = {
   dtoUser: UserDTO;
   breadcrumbsItems: BreadcrumbsItem[];
@@ -23,7 +28,7 @@ const useViewProfile = ({ dtoUser }: Props) => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const showSnackbar = useSnackbar();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const [getUserMyProfile] = useLazyQuery(GET_USER_MY_PROFILE, {
@@ -31,12 +36,17 @@ const useViewProfile = ({ dtoUser }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoUser: UserDTO = {} as UserDTO;
-    const { error, data } = await getUserMyProfile();
-    if (!error && data) {
-      dtoUser = data.getUserMyProfile;
+    try {
+      let dtoUser: UserDTO = {} as UserDTO;
+      const { error, data } = await getUserMyProfile();
+      if (!error && data) {
+        dtoUser = data.getUserMyProfile;
+      }
+      setState({ dtoUser: dtoUser } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoUser: dtoUser } as StateType);
   }, [getUserMyProfile]);
 
   useEffect(() => {
@@ -46,21 +56,28 @@ const useViewProfile = ({ dtoUser }: Props) => {
   const onEditClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
+      dispatch(setIsEditMode(true));
       router.push('/edit-profile/');
     },
     [router]
   );
+  const onCancelClick = useCallback(
+    async (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault();
+      router.push('/dashboard');
+    },
+    [router]
+  );
 
-  const onImageError = useCallback(async () =>
-    //event: any
-    {
-      setState({ dtoUser: { ...state.dtoUser, image_url: '' } } as StateType);
-    }, [state.dtoUser]);
+  const onImageError = useCallback(async () => {
+    setState({ dtoUser: { ...state.dtoUser, image_url: '' } } as StateType);
+  }, [state.dtoUser]);
 
   return {
     state,
     onEditClick,
-    onImageError
+    onImageError,
+    onCancelClick
   };
 };
 

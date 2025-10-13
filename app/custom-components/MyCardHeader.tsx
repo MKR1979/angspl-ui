@@ -4,7 +4,7 @@ import eq from 'lodash/eq';
 
 interface MyCardHeaderProps extends CardHeaderProps {}
 const MyCardHeader = ({ ...props }: MyCardHeaderProps) => {
-  console.log('MyCardHeader rendered');
+  // console.log('MyCardHeader rendered');
   return <CardHeader sx={{ m: 1, p: 1 }} {...props}></CardHeader>;
 };
 

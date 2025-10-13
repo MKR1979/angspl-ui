@@ -136,7 +136,7 @@ const ClientDemoSch = () => {
 
           <p>
             <strong>Benefits:</strong> Reduces manual accounting errors, ensures timely fee collection, improves cash flow, and provides
-            real-time visibility into the school’s financial health. Administrators can easily track both incoming fees and outgoing
+            real-time visibility into the schools financial health. Administrators can easily track both incoming fees and outgoing
             expenses.
           </p>
 
@@ -345,7 +345,9 @@ const ClientDemoSch = () => {
             </MyCardContent>
           </MyCard>
 
-          {/* FOOTER */}
+
+        </MyBox>
+                  {/* FOOTER */}
           <div className="container">
             <div className="vertical_center">
               <p>
@@ -356,7 +358,6 @@ const ClientDemoSch = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
       <Button
         href="https://adhyayan.school"

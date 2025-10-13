@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyLocalShippingTwoToneIconProps extends SvgIconProps {}
 const MyLocalShippingTwoToneIcon = ({ ...props }: MyLocalShippingTwoToneIconProps) => {
-  console.log('MyDescriptionTwoToneIcon render');
+  //console.log('MyDescriptionTwoToneIcon render');
   return <LocalShippingTwoToneIcon {...props}></LocalShippingTwoToneIcon>;
 };
 export default memo(MyLocalShippingTwoToneIcon, (prevProps, nextProps) => {

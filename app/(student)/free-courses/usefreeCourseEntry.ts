@@ -3,6 +3,7 @@ import { useLazyQuery } from '@apollo/client';
 import FreeCourseDTO, { FREE_COURSE } from '@/app/types/FreeCoursesDTO';
 import { COURSE_LIST_ALL } from '@/app/graphql/Course';
 import CourseAllDTO from '@/app/types/CourseAllDTO';
+//import router from 'next/router';
 import { useRouter } from 'next/navigation';
 
 type ErrorMessageType = {
@@ -11,11 +12,11 @@ type ErrorMessageType = {
   Duration: string | null;
   Price: number | null;
   Content: string | null;
-  Notes: string | null;
-  Sample_Questions: string | null;
+  Notes_insight: string | null;
+  Code_Insight: string | null;
   Exam_Quiz: string | null;
-  PDF_Resources: string | null;
   Sample_Questions_File: string | null;
+  is_video: boolean;
 };
 
 type StateType = {
@@ -31,10 +32,10 @@ const ERROR_MESSAGES: ErrorMessageType = {
   Duration: null,
   Price: null,
   Content: null,
-  Notes: null,
-  Sample_Questions: null,
+  Notes_insight: null,
+  Code_Insight: null,
   Exam_Quiz: null,
-  PDF_Resources: null,
+  is_video: false,
   Sample_Questions_File: null
 };
 
@@ -65,7 +66,7 @@ const useFreeCourseEntry = () => {
           id: parseInt(item.id.toString()),
           course_name: item.course_name,
           course_code: item.course_code,
-          price: item.price
+          price: item.price,
         };
       });
     }
@@ -75,19 +76,38 @@ const useFreeCourseEntry = () => {
     } as StateType);
   }, [getCourseListAll]);
 
-  const onClickCodeInsightsFree = useCallback((course_id: number, course_name: string | null) => {
-    router.push(`/code-insights?courseId=${encodeURIComponent(course_id)}&courseName=${encodeURIComponent(course_name ?? '')}`);
+  const onClickVideoeInsightsFree = useCallback((course_id: number) => {
+    router.push(`/video-insights?courseId=${encodeURIComponent(course_id)}`);
   }, []);
 
-  const onSaveClick = useCallback((quiz_id: number, quiz_name: string | null) => {
-    router.push(`/quiz-data?quizId=${encodeURIComponent(quiz_id)}&quizName=${encodeURIComponent(quiz_name ?? '')}`);
+  const onClickCodeInsightsFree = useCallback((course_id: number) => {
+    router.push(`/code-insights?courseId=${encodeURIComponent(course_id)}`);
+  }, []);
+
+  const onClickNotesInsightsFree = useCallback((course_id: number) => {
+    router.push(`/notes-insights?courseId=${encodeURIComponent(course_id)}`);
+  }, []);
+
+  //   const onClickSampleQuestionsFree = useCallback((course_id: number) => {
+  //   router.push(`/notes-insights?courseId=${encodeURIComponent(course_id)}`);
+  // }, []);
+
+  const onClickExamQuizFree = useCallback((course_Id: number) => {
+    router.push(`/quiz-data?courseId=${encodeURIComponent(course_Id)}}`);
   }, []);
 
   useEffect(() => {
     getCourses();
   }, [getCourses]);
 
-  return { state, onSaveClick, onClickCodeInsightsFree };
+  return {
+    state,
+    onClickVideoeInsightsFree,
+    onClickCodeInsightsFree,
+    onClickNotesInsightsFree,
+    onClickExamQuizFree,
+    // onClickCourseContentFree,
+  };
 };
 
 export default useFreeCourseEntry;

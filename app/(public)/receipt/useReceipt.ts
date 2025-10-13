@@ -2,6 +2,7 @@ import { useCallback, useEffect, useReducer } from 'react';
 import ReceiptDTO, { RECEIPT } from '@/app/types/ReceiptDTO';
 import { useLazyQuery } from '@apollo/client';
 import { GET_RECEIPT } from '@/app/graphql/Receipt';
+import { useSelector } from '../../store';
 
 interface ErrorMessageType {
   admission_date: string | null;
@@ -33,22 +34,21 @@ const useReceipt = () => {
   const reducer = (state: StateType, action: Partial<StateType>): StateType => {
     return { ...state, ...action };
   };
-
+const { companyInfo } = useSelector((state) => state.globalState);  
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   // Fetch Admission Info
-  const [getReceipt] = useLazyQuery(GET_RECEIPT, {
-    fetchPolicy: 'network-only', // Doesn't check cache before making a network request
-  });
+  const [getReceipt] = useLazyQuery(GET_RECEIPT, { fetchPolicy: 'network-only', });
 
   const getReceiptInfo = useCallback(async (): Promise<void> => {
     const { data } = await getReceipt({
       variables: {
-        id: state.dtoReceipt.id
+        id: state.dtoReceipt.id,
+        company_type: companyInfo.company_type
       }
     })  
   setState({ dtoReceipt: data.getReceipt || RECEIPT }); 
-  }, [getReceipt]);
+  }, [companyInfo.company_type, getReceipt, state.dtoReceipt.id]);
 
   useEffect(() => {
     getReceiptInfo();

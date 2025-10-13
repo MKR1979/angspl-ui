@@ -5,7 +5,6 @@ import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
 import { arrCompanyStatus, arrCompanyType, regExEMail } from '@/app/common/Configuration';
 import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST } from '@/app/graphql/Company';
-// import { useSnackbar } from '../../custom-components/SnackbarProvider';
 import * as gConstants from '../../constants/constants';
 import { ADD_FEE_COLLECT_COMPANY_RETURN_ID } from '@/app/graphql/FeeCollection';
 import { isValidPhoneNumber } from 'libphonenumber-js';
@@ -76,16 +75,9 @@ const useCompany = () => {
     errorMessages: { ...ERROR_MESSAGES }
   } as StateType);
 
-  // const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
-  //   return { ...state, ...action };
-  // };
-
-  // const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
   const reducer = (state = INITIAL_STATE, action: Partial<StateType>): StateType => {
     return { ...state, ...action };
   };
-
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   // const [addEmail] = useMutation(ADD_EMAIL, {});
   const [sendOtp] = useMutation(SEND_OTP, {});
@@ -102,14 +94,13 @@ const useCompany = () => {
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
 
   const MAIL_CONFIG = {
-    smtpHost: 'smtp.gmail.com', //siteConfig.find((c) => c.key === 'SMTP_HOST')?.value ?? '',
-    smtpPort: 465, //Number(siteConfig.find((c) => c.key === 'SMTP_PORT')?.value ?? ''),
-    smtpUser: 'adhyayan.solution@gmail.com', //siteConfig.find((c) => c.key === 'SMTP_USER')?.value ?? '',
-    smtpPassword: 'bnfwtqfzbcdsdgbd', //siteConfig.find((c) => c.key === 'SMTP_PASSWORD')?.value ?? '',
-    // secure: siteConfig.find((c) => c.key === 'SMTP_SECURE')?.value ?? '',
-    secure: true, //siteConfig.find((c) => c.key === 'SMTP_SECURE')?.value?.toLowerCase() === 'true',
-    fromAddress: 'adhyayan.solution@gmail.com', //siteConfig.find((c) => c.key === 'SMTP_FROM')?.value ?? '',
-    resendOtpTime: 2   //Number(siteConfig.find((c) => c.key === 'RESEND_OTP_TIME')?.value ?? '')
+    smtpHost: 'smtp.gmail.com',
+    smtpPort: 465,
+    smtpUser: 'adhyayan.solution@gmail.com',
+    smtpPassword: 'bnfwtqfzbcdsdgbd',
+    secure: true,
+    fromAddress: 'adhyayan.solution@gmail.com',
+    resendOtpTime: 2
   };
 
   useEffect(() => {
@@ -125,7 +116,7 @@ const useCompany = () => {
     }
   }, [state.arrCompanyStatusLookup]);
 
-    useEffect(() => {
+  useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.async = true;
@@ -191,14 +182,14 @@ const useCompany = () => {
         // ✅ Reset OTP fields if email is changed
         ...(name === 'email' && formattedValue !== state.dtoCompany.email
           ? {
-              otpVerified: false,
-              otpSent: false,
-              dtoCompany: {
-                ...state.dtoCompany,
-                [name]: formattedValue,
-                email_otp: '',
-              },
-            }
+            otpVerified: false,
+            otpSent: false,
+            dtoCompany: {
+              ...state.dtoCompany,
+              [name]: formattedValue,
+              email_otp: '',
+            },
+          }
           : {}),
       } as StateType);
     },
@@ -453,122 +444,89 @@ const useCompany = () => {
     [addFeeCollectCompanyReturnId]
   );
 
-  // const openRazorpay = (paymentAmount: number, companyId: number, event: React.MouseEvent<HTMLElement>): Promise<boolean> => {
-  //   return new Promise((resolve) => {
-  //     const options = {
-  //       key: gConstants.RAZORPAY_KEY,
-  //       amount: paymentAmount * 100,
-  //       currency: gConstants.CURRENCY,
-  //       name: gConstants.COMPANY,
-  //       description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
-  //       handler: async (response: any) => {
-  //         const newPaymentId = await addPaymentDetails(event, response, paymentAmount, companyId);
-  //         router.push(`/paymentReceipt?id=${newPaymentId}&userName=${encodeURIComponent(state.dtoCompany.company_name)}`);
-  //         resolve(true); // ✅ Payment succeeded
-  //       },
-  //       prefill: {
-  //         name: 'Student Name',
-  //         email: gConstants.CONTACT_EMAIL,
-  //         contact: gConstants.CONTACT_PHONE_NO
-  //       },
-  //       theme: {
-  //         color: '#3399cc'
-  //       },
-  //       modal: {
-  //         ondismiss: () => {
-  //           console.warn('Payment popup was closed by user');
-  //           resolve(false);
+  const openRazorpay = (
+    paymentAmount: number,
+    companyId: number,
+    event: React.MouseEvent<HTMLElement>
+  ): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (typeof window === 'undefined') {
+        resolve(false);
+        return;
+      }
+      if (!(window as any).Razorpay) {
+        resolve(false);
+        return;
+      } else {
+        console.log('[Razorpay] window.Razorpay is available');
+      }
+      const options = {
+        key: gConstants.RAZORPAY_KEY,
+        amount: paymentAmount * 100,
+        currency: gConstants.CURRENCY,
+        name: gConstants.COMPANY,
+        description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
+        handler: async (response: any) => {
+          const newPaymentId = await addPaymentDetails(event, response, paymentAmount, companyId);
+          router.push(`/paymentReceipt?id=${newPaymentId}`);
+          resolve(true);
+        },
+        prefill: {
+          name: 'Student Name',
+          email: gConstants.CONTACT_EMAIL,
+          contact: gConstants.CONTACT_PHONE_NO
+        },
+        theme: { color: '#3399cc' },
+        modal: {
+          ondismiss: () => {
+            console.warn('[Razorpay] Payment popup was closed by user');
+            resolve(false);
+          }
+        }
+      };
+      try {
+        console.log('[Razorpay] Creating Razorpay instance with options:', options);
+        const rzp = new (window as any).Razorpay(options);
+        console.log('[Razorpay] Opening Razorpay checkout');
+        rzp.open();
+      } catch (err) {
+        console.error('[Razorpay] Error creating Razorpay instance:', err);
+        resolve(false);
+      }
+    });
+  };
+
+  // const onSendEmail = useCallback(async () => {
+  //   try {
+  //     const { data } = await addEmail({
+  //       variables: {
+  //         addEmailInput: {
+  //           to_address: state.dtoCompany.email,
+  //           subject: gMessageConstants.AFFILIATE_REGISTRATION_MAIL_SUBJECT,
+  //           body: gMessageConstants.AFFILIATE_REGISTRATION_EMAIL_BODY,
+  //           template_name: '',
+  //           attachment_path: '',
+  //           status: '',
+  //           retry_count: 0,
+  //           email_source: 'affiliate'
+  //         },
+  //         emailConfigInput: {
+  //           smtpHost: MAIL_CONFIG.smtpHost,
+  //           smtpPort: MAIL_CONFIG.smtpPort,
+  //           smtpUser: MAIL_CONFIG.smtpUser,
+  //           smtpPassword: MAIL_CONFIG.smtpPassword,
+  //           secure: MAIL_CONFIG.secure,
+  //           fromAddress: MAIL_CONFIG.fromAddress
   //         }
   //       }
-  //     };
-  //     const rzp = new (window as any).Razorpay(options);
-  //     rzp.open();
-  //   });
-  // };
-
-  const openRazorpay = (
-  paymentAmount: number,
-  companyId: number,
-  event: React.MouseEvent<HTMLElement>
-): Promise<boolean> => {
-  return new Promise((resolve) => {
-    if (typeof window === 'undefined') {
-      resolve(false);
-      return;
-    }
-    if (!(window as any).Razorpay) {
-      resolve(false);
-      return;
-    } else {
-      console.log('[Razorpay] window.Razorpay is available');
-    }
-    const options = {
-      key: gConstants.RAZORPAY_KEY,
-      amount: paymentAmount * 100,
-      currency: gConstants.CURRENCY,
-      name: gConstants.COMPANY,
-      description: `Payment for ${gConstants.PAY_FOR_COMPANY_SUBSCRIPTION}`,
-      handler: async (response: any) => {
-        const newPaymentId = await addPaymentDetails(event, response, paymentAmount, companyId);
-        router.push(`/paymentReceipt?id=${newPaymentId}`);
-        resolve(true);
-      },
-      prefill: {
-        name: 'Student Name',
-        email: gConstants.CONTACT_EMAIL,
-        contact: gConstants.CONTACT_PHONE_NO
-      },
-      theme: { color: '#3399cc' },
-      modal: {
-        ondismiss: () => {
-          console.warn('[Razorpay] Payment popup was closed by user');
-          resolve(false);
-        }
-      }
-    };
-    try {
-      console.log('[Razorpay] Creating Razorpay instance with options:', options);
-      const rzp = new (window as any).Razorpay(options);
-      console.log('[Razorpay] Opening Razorpay checkout');
-      rzp.open();
-    } catch (err) {
-      console.error('[Razorpay] Error creating Razorpay instance:', err);
-      resolve(false);
-    }
-  });
-};
-
-// const onSendEmail = useCallback(async () => {
-//   try {
-//     const { data } = await addEmail({
-//       variables: {
-//         addEmailInput: {
-//           to_address: state.dtoCompany.email,
-//           subject: gMessageConstants.AFFILIATE_REGISTRATION_MAIL_SUBJECT,
-//           body: gMessageConstants.AFFILIATE_REGISTRATION_EMAIL_BODY,
-//           template_name: '',
-//           attachment_path: '',
-//           status: '',
-//           retry_count: 0,
-//           email_source: 'affiliate'
-//         },
-//         emailConfigInput: {
-//           smtpHost: MAIL_CONFIG.smtpHost,
-//           smtpPort: MAIL_CONFIG.smtpPort,
-//           smtpUser: MAIL_CONFIG.smtpUser,
-//           smtpPassword: MAIL_CONFIG.smtpPassword,
-//           secure: MAIL_CONFIG.secure,
-//           fromAddress: MAIL_CONFIG.fromAddress
-//         }
-//       }
-//     });
-//     if (data) {
-//       console.log('Email sent Successfully :', data);
-//     }
-//   } catch (error: any) {
-//     console.error('Error while sending email:', error);
-//   }
-// }, [addEmail, state.dtoCompany.email]);
+  //     });
+  //     if (data) {
+  //       console.log('Email sent Successfully :', data);
+  //     }
+  //   } catch (error: any) {
+  //     console.error('Error while sending email:', error);
+  //   }
+  // }, [addEmail, state.dtoCompany.email]);
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
@@ -586,7 +544,7 @@ const useCompany = () => {
             email: state.dtoCompany.email,
             phone_no: state.dtoCompany.phone_no,
             address: state.dtoCompany.address,
-            status: gConstants.STATUS,
+            status: gConstants.STATUS_ACTIVE,
             domain_name: state.dtoCompany.domain_name,
             source_flag: gConstants.SOURCE_FLAG_PUBLIC
           }
@@ -762,8 +720,8 @@ const useCompany = () => {
     onPhoneNoChange,
     onDomainPrefixBlur,
     saving,
-    onDomainPrefixChange,   
-     onSendOtpClick,
+    onDomainPrefixChange,
+    onSendOtpClick,
     onVerifyOtpClick,
     onResendOtpClick,
     timeLeft

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconKeyProps extends IconProps {}
 const MyIconKey = ({ ...props }: MyIconKeyProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconKey {...props}></IconKey>;
 };
 export default memo(MyIconKey, (prevProps, nextProps) => {

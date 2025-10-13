@@ -5,7 +5,7 @@ import { useSelector } from './store';
 
 const AuthGuard = ({ children }: any) => {
   const router = useRouter();
-  const { token } = useSelector((state) => state.globalState);
+  const { token } = useSelector((state) => state.loginState);
 
   useEffect(() => {
     if (token.trim() === '') {

@@ -41,3 +41,11 @@ export const AFFILIATE_REGISTRATION_EMAIL_BODY =
   "We’re excited to have you on board. You can now start promoting and earning with us. " +
   "Stay tuned for updates, tips, and exclusive opportunities. Welcome to the team!";
 
+export const ADMIN_TYPE_NAME = "Admin"
+export const STUDENT_TYPE_NAME = "Student"
+export const EMPLOYEE_TYPE_NAME = "Employee"
+export const CONTRACTOR_TYPE_NAME = "Contractor"
+export const AFFILIATE_TYPE_NAME = "Affiliate"
+export const SNACKBAR_SEND_EMAIL = 'Email Send Successfully!'
+
+// export const CONTACT_US_EMAIL_BODY = 'Thank you for contacting us. We will get back to you soon!'

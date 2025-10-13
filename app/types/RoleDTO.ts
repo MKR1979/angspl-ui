@@ -2,11 +2,17 @@ import BaseDTO from './BaseDTO';
 
 export default interface RoleDTO extends BaseDTO {
   role_name: string;
+  type_id: number;
+  type_name: string;
+  status: string;
 }
 
 export const ROLE: RoleDTO = Object.freeze({
   id: 0,
   role_name: '',
+  type_id: 0,
+  type_name: '',
+  status: '',
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

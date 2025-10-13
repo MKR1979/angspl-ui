@@ -20,8 +20,22 @@ type StateEntryProps = {
 };
 
 const StateEntry = (props: StateEntryProps) => {
-  const { state, onInputChange, onCountryNameChange, onStateNameBlur, onCountryNameBlur, onSaveClick, onClearClick, onCancelClick } =
-    useStateEntry(props);
+  const {
+    state,
+    onInputChange,
+    onCodeChange,
+    onCountryNameChange,
+    onStateNameBlur,
+    onCountryNameBlur,
+    onSaveClick,
+    onClearClick,
+    onCancelClick,
+    saving,
+    setOpen1,
+    setClose1,
+    onStatusChange,
+    onStatusBlur,
+  } = useStateEntry(props);
 
   return (
     <MyCard>
@@ -35,23 +49,23 @@ const StateEntry = (props: StateEntryProps) => {
               onChange={onInputChange}
               onBlur={onStateNameBlur}
               inputProps={{
-                maxLength: 30, 
-                pattern: "^[A-Za-z]{1,2}$", 
+                maxLength: 30,
+                pattern: '^[A-Za-z]{1,2}$'
               }}
               error={state.errorMessages.state_name ? true : false}
             />
             <MyTypography className="error"> {state.errorMessages.state_name}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField 
-            label="State Code" 
-            name="state_code" 
-            value={state.dtoState.state_code} 
-            onChange={onInputChange}
-            inputProps={{
-              maxLength: 10, 
-              pattern: "^[A-Za-z]{1,2}$", 
-            }}
+            <MyTextField
+              label="State Code"
+              name="state_code"
+              value={state.dtoState.state_code}
+              onChange={onCodeChange}
+              inputProps={{
+                maxLength: 10,
+                pattern: '^[A-Z0-9]+$'
+              }}
             />
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
@@ -62,9 +76,10 @@ const StateEntry = (props: StateEntryProps) => {
               options={state.arrCountryLookup}
               onChange={onCountryNameChange}
               onBlur={onCountryNameBlur}
-                filterOptions={(options) => // to remove the empty selectable string in the lookup
-                options.filter((option: any) => option.text && option.text.trim() !== '')
-              }
+              filterOptions={(options, state) => {        // searchable Lookup
+                const searchTerm = state.inputValue.toLowerCase();
+                return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+              }}
               renderInput={(params) => (
                 <MyTextField
                   {...params}
@@ -79,11 +94,44 @@ const StateEntry = (props: StateEntryProps) => {
             />
             <MyTypography className="error">{state.errorMessages.country_id}</MyTypography>
           </MyGrid>
+           <MyGrid size={{ xs: 12, sm: 6 }}>
+            <MyAutocomplete
+              open={state.open1}
+              onOpen={setOpen1}
+              onClose={setClose1}
+              value={{ text: state.dtoState.status }}
+              getOptionLabel={(option: any) => option.text}
+              firstitem={{ id: 0, text: '' }}
+              options={state.arrCommonStatusLookup}
+              onChange={onStatusChange}
+              onBlur={onStatusBlur}
+              filterOptions={(options, state) => {
+                // searchable Lookup
+                const searchTerm = state.inputValue.toLowerCase();
+                return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+              }}
+              renderInput={(params) => (
+                <MyTextField
+                  {...params}
+                  label="Status"
+                  placeholder='Select status...'
+                  slotProps={{
+                    inputLabel: { shrink: true }
+                  }}
+                  onBlur={onStatusBlur}
+                  error={state.errorMessages.status ? true : false}
+                />
+              )}
+            />
+            <MyTypography className="error">{state.errorMessages.status}</MyTypography>
+          </MyGrid>
         </MyGrid>
       </MyCardContent>
       <MyDivider></MyDivider>
       <MyCardActions>
-        <MyButton onClick={onSaveClick}>Save</MyButton>
+        <MyButton onClick={onSaveClick} disabled={saving}>
+          {saving ? 'Saving...' : 'Save'}
+        </MyButton>
         <MyButton onClick={onClearClick}>Clear</MyButton>
         <MyButton onClick={onCancelClick}>Cancel</MyButton>
       </MyCardActions>

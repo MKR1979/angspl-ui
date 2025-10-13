@@ -6,6 +6,7 @@ export default interface StateDTO extends BaseDTO {
   state_code: string;
   country_id: number;
   country_name: string;
+  status: string;
   countryLookupDTO: LookupDTO | null;
 }
 
@@ -15,6 +16,7 @@ export const STATE: StateDTO = {
   state_code: '',
   country_id: 0,
   country_name: '',
+  status: '',
   countryLookupDTO: { id: 0, text: '' },
   created_by: 0,
   created_by_first_name: '',

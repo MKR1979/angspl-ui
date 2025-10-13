@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyDialogTitleProps extends DialogTitleProps {}
 
 const MyDialogTitle = ({ ...props }: MyDialogTitleProps) => {
-  console.log('MyDialogTitle rendered');
+  // console.log('MyDialogTitle rendered');
   return <DialogTitle {...props}></DialogTitle>;
 };
 

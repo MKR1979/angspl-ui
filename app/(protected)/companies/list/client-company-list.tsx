@@ -15,6 +15,8 @@ import MyEditIcon from '@/app/custom-components/MyEditIcon';
 import MyClearIcon from '@/app/custom-components/MyClearIcon';
 import useCompanyList from './useCompanyList';
 import CompanyDTO from '@/app/types/CompanyDTO';
+import { useSelector, RootState } from '../../../store';
+import { findPermission } from '../../../common/utility-permission';
 
 type Props = {
   arrCompanyDTO: CompanyDTO[];
@@ -42,51 +44,65 @@ const ClientCompanyList = ({ arrCompanyDTO, total_records }: Props) => {
     onRowDoubleClick,
     onDeleteSingleClose
   } = useCompanyList({ arrCompanyDTO, total_records });
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   const columns: GridColDef[] = [
     {
       field: 'id',
       headerName: 'Id',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'company_name',
       headerName: 'Company Name',
       flex: 1,
+      minWidth: 150,
       renderCell: useCallback(
-        (params: GridRenderCellParams) => <MyLink href={'/companies/view/' + params.row.id}>{params.row.company_name}</MyLink>,
-        []
+        (params: GridRenderCellParams) =>
+          findPermission(userPermissions, 39) ? (
+            <MyLink href={'/companies/view/' + params.row.id}>{params.row.company_name}</MyLink>
+          ) : (
+            <span>{params.row.company_name}</span>
+          ),
+        [userPermissions]
       )
     },
     {
       field: 'company_code',
       headerName: 'Company Code',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'company_type',
       headerName: 'Company Type',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'email',
       headerName: 'Email',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'phone_no',
       headerName: 'Phone No',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'address',
       headerName: 'Address',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     },
     {
       field: 'status',
       headerName: 'Status',
-      flex: 1
+      flex: 1,
+      minWidth: 150
     }
   ];
 
@@ -94,56 +110,64 @@ const ClientCompanyList = ({ arrCompanyDTO, total_records }: Props) => {
     <>
       <MyBreadcrumbs items={state.breadcrumbsItems}></MyBreadcrumbs>
       <MyCard>
-        <MyCardContent>
-          <MyDataGrid
-            apiRef={apiRef}
-            rowSelectionModel={state.arrSelectedId}
-            initialStateModel={state.initialState}
-            sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
-            onSortModelChange={onSortChange}
-            onRowSelectionModelChange={onCheckChange}
-            rows={state.arrCompanyDTO}
-            rowCount={state.total_records}
-            columns={columns}
-            loading={state.isLoading}
-            handleContextMenu={handleContextMenu}
-            onAddClick={onAddClick}
-            showAddButton={true}
-            onDeleteClick={onDeleteAllClick}
-            showDeleteButton={state.arrSelectedId.length > 0}
-            onFilterModelChange={onFilterModelChange}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-            onRowDoubleClick={onRowDoubleClick}
-          />
-
-          <MyMenu
-            open={state.contextMenu !== null}
-            onClose={handleClose}
-            anchorReference="anchorPosition"
-            anchorPosition={
-              state.contextMenu !== null
-                ? {
-                    top: state.contextMenu.mouseY,
-                    left: state.contextMenu.mouseX
-                  }
-                : undefined
-            }
-            slotProps={{
-              root: {
-                onContextMenu: onContextMenu
+        <MyCardContent sx={{ overflowX: 'auto' }}>
+          <div style={{ minWidth: `${columns.length * 150}px` }}>
+            <MyDataGrid
+              apiRef={apiRef}
+              rowSelectionModel={state.arrSelectedId}
+              initialStateModel={state.initialState}
+              sortModel={[{ field: state.sort_field, sort: state.sort_direction }]}
+              onSortModelChange={onSortChange}
+              onRowSelectionModelChange={onCheckChange}
+              rows={state.arrCompanyDTO}
+              rowCount={state.total_records}
+              columns={columns}
+              loading={state.isLoading}
+              handleContextMenu={handleContextMenu}
+              onAddClick={onAddClick}
+              showAddButton={findPermission(userPermissions, 36)}
+              onDeleteClick={onDeleteAllClick}
+              showDeleteButton={state.arrSelectedId.length > 0 && findPermission(userPermissions, 37)}
+              showExportButton={true}
+              onFilterModelChange={onFilterModelChange}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              onRowDoubleClick={onRowDoubleClick}
+            />
+          </div>
+          {(findPermission(userPermissions, 38) || findPermission(userPermissions, 37)) && (
+            <MyMenu
+              open={state.contextMenu !== null}
+              onClose={handleClose}
+              anchorReference="anchorPosition"
+              anchorPosition={
+                state.contextMenu !== null
+                  ? {
+                      top: state.contextMenu.mouseY,
+                      left: state.contextMenu.mouseX
+                    }
+                  : undefined
               }
-            }}
-          >
-            <MyMenuItem onClick={onEditClick}>
-              <MyEditIcon />
-              Edit
-            </MyMenuItem>
-            <MyMenuItem onClick={onDeleteClick}>
-              <MyClearIcon />
-              Delete
-            </MyMenuItem>
-          </MyMenu>
+              slotProps={{
+                root: {
+                  onContextMenu: onContextMenu
+                }
+              }}
+            >
+              {findPermission(userPermissions, 38) && (
+                <MyMenuItem onClick={onEditClick}>
+                  <MyEditIcon />
+                  Edit
+                </MyMenuItem>
+              )}
+              {findPermission(userPermissions, 37) && (
+                <MyMenuItem onClick={onDeleteClick}>
+                  <MyClearIcon />
+                  Delete
+                </MyMenuItem>
+              )}
+            </MyMenu>
+          )}
         </MyCardContent>
       </MyCard>
       {state.visibleDialog && (

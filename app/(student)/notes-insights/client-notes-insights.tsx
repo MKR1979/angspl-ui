@@ -1,5 +1,4 @@
 'use client';
-// import React, { useState } from 'react';
 import useNotesInsights from './useNotesInsights';
 import './notes-insights.css';
 import MyGrid from '@/app/custom-components/MyGrid';
@@ -21,7 +20,7 @@ const NotesInsightsPage: React.FC<ClientNotesInsightProps> = (props) => {
     goToPrev,
     isPrevDisabled,
     isNextDisabled,
-    onCourseBlur,
+    // onCourseBlur,
     handleDownloadPdf,
     onCourseChange,
     setOpen1,
@@ -31,48 +30,52 @@ const NotesInsightsPage: React.FC<ClientNotesInsightProps> = (props) => {
   } = useNotesInsights(props);
 
   if (!currentProgram) return <p>Loading...</p>;
+  console.log('client page course data:-',state.arrCourseLookup );
   return (
     <>
-      <div className="quiz-container">
-        <div className="course-tabs-wrapper">
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyAutocomplete
-              className="custom-autocomplete"
-              open={state.open1}
-              onOpen={courseId ? undefined : setOpen1}
-              onClose={courseId ? undefined : setClose1}
-              value={state.arrCourseLookup.find((opt) => opt.id === (courseId ?? state.dtoStudyNotes.course_id)) ?? { id: 0, text: '' }}
-              getOptionLabel={(option: any) => option.text}
-              firstitem={{ id: 0, text: '' }}
-              options={state.arrCourseLookup}
-              onChange={onCourseChange}
-              filterOptions={(options, state) => {
-                const searchTerm = state.inputValue.toLowerCase();
-                return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
-              }}
-              onInputChange={(event, newInputValue) => {
-                console.log('User input:', newInputValue);
-              }}
-              renderInput={(params) => (
-                <MyTextField
-                  {...params}
-                  label="Course"
-                  slotProps={{
-                    inputLabel: { shrink: true }
-                  }}
-                  onBlur={onCourseBlur}
-                  error={state.errorMessages.course_name ? true : false}
-                />
-              )}
-            />
-            <MyTypography className="error">{state.errorMessages.course_name}</MyTypography>
-          </MyGrid>
-        </div>
-      </div>
+      <MyGrid container spacing={2} >
+        <MyGrid size={{ xs: 12, sm: 6 }} sx={{ display: 'flex' }}  >
+          <MyAutocomplete sx={{ maxWidth: 500, minWidth: 300, marginBottom: '10px', }}
+            open={state.open1}
+            onOpen={courseId ? undefined : setOpen1}
+            onClose={courseId ? undefined : setClose1}
+            value={state.arrCourseLookup.find((opt) => opt.id === (courseId ?? state.dtoStudyNotes.course_id)) ?? { id: 0, text: '' }}
+            getOptionLabel={(option: any) => option.text}
+            firstitem={{ id: 0, text: '' }}
+            options={state.arrCourseLookup}
+            onChange={onCourseChange}
+            filterOptions={(options, state) => {
+              const searchTerm = state.inputValue.toLowerCase();
+              return options.filter((option: any) => option.text && option.text.toLowerCase().includes(searchTerm));
+            }}
+            renderInput={(params) => (
+              <MyTextField
+                {...params}
+                label="Select Course"
+                slotProps={{
+                  inputLabel: {
+                    shrink: true,
+                    sx: {
+                      fontSize: '17px',
+                      fontWeight: '500',
+                      transform: 'translate(14px, -19px) scale(1)'
+                    }
+                  }
+                }}
+                error={!!state.errorMessages.course_name}
+                placeholder="Select your course..."
+              />
+            )}
+          />
+          <MyTypography className="error" sx={{ fontSize: '12px' }}>  {state.errorMessages.course_name} </MyTypography>
+        </MyGrid>
+
+        <MyGrid size={{ xs: 12, sm: 6 }} className="notes-insight-title1" sx={{ fontSize: '16px', fontWeight: 500 }} >
+          Title:- {currentProgram?.title}
+        </MyGrid>
+      </MyGrid>
 
       <div className="notes-insight-container">
-        <h4>Course Name:- {currentProgram.course_name}</h4>
-        <h4 className="notes-insight-title">Title:- {currentProgram ? currentProgram.title : 'Loading...'}</h4>
         <div className="notes-insight-details">
           <div className="notes-container">
             <button className="copy-button" onClick={handleCopy}>

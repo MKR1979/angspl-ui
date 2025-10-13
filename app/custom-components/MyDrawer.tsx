@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyDrawerProps extends DrawerProps {}
 
 const MyDrawer = ({ children, ...props }: MyDrawerProps) => {
-  console.log('MyDrawer rendered');
+  // console.log('MyDrawer rendered');
   return <Drawer {...props}> {children}</Drawer>;
 };
 

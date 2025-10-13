@@ -20,144 +20,183 @@ const ClientDemoTech = () => {
 
   const modules = [
     {
-      icon: <SchoolIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Academic Management',
-      description: 'Organize subjects, classes, timetables, and grading efficiently.',
-      content: (
-        <div style={{ lineHeight: 1.6 }}>
-          <p>
-            The <strong>Academic Management</strong> module is designed to streamline every aspect of your institute academic operations.
-            From creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless
-            and efficient.
-          </p>
+  icon: <SchoolIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+  title: 'Academic Management',
+  description: 'Organize subjects, classes, timetables, grading, and learning resources efficiently.',
+  content: (
+    <div style={{ lineHeight: 1.6 }}>
+      <p>
+        The <strong>Academic Management</strong> module is designed to streamline every aspect of your institutes academic operations.
+        From creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless
+        and efficient.
+      </p>
 
-          <h3>Key Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li>Create and manage subjects, classes, and sections with ease.</li>
-            <li>Set up academic calendars and manage exam schedules.</li>
-            <li>Assign teachers to classes and track their workload.</li>
-            <li>Grade management: record, update, and analyze student performance.</li>
-            <li>Generate timetables automatically or manually, ensuring no clashes.</li>
-          </ul>
+      <h3>Key Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li>Create and manage subjects, classes, and sections with ease.</li>
+        <li>Set up academic calendars and manage exam schedules.</li>
+        <li>Assign teachers to classes and track their workload.</li>
+        <li>Grade management: record, update, and analyze student performance.</li>
+        <li>Generate timetables automatically or manually, ensuring no clashes.</li>
+        <li>Monitor attendance trends and manage syllabus coverage.</li>
+      </ul>
 
-          <p>
-            This module empowers teachers, administrators, and management to stay on top of academic planning, reducing manual errors and
-            saving time.
-          </p>
+      <h3>Learning Management System (LMS) Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li><strong>Study Notes Module:</strong> Provide students with downloadable and interactive study notes for all subjects.</li>
+        <li><strong>Video Content:</strong> Upload and share video lectures, tutorials, and demonstrations directly with students.</li>
+        <li><strong>Online Exams:</strong> Conduct quizzes, mid-terms, and final exams online and automatically evaluate student performance.</li>
+        <li><strong>Performance Graphs:</strong> Visualize student progress over time with performance dashboards and analytics.</li>
+        <li><strong>Paid & Free Courses:</strong> Offer additional courses either for free or on a subscription basis, directly integrated within the LMS.</li>
+      </ul>
 
-          <p>
-            You can also monitor attendance trends, manage syllabus coverage, and generate reports to make informed decisions for academic
-            improvement.
-          </p>
+      <p>
+        This module empowers teachers, administrators, and management to stay on top of academic planning while also providing
+        students with a comprehensive learning platform. By integrating study materials, video content, online evaluations, and
+        courses, the LMS ensures both teaching and learning are efficient, engaging, and measurable.
+      </p>
 
-          {/* Optional: demo video */}
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
-            title="Academic Management Demo"
-            frameBorder="0"
-            allowFullScreen
-            style={{ marginTop: '1rem', borderRadius: '8px' }}
-          ></iframe>
+      <p>
+        With detailed reports and insights, educators can identify strengths and weaknesses in student performance, helping them
+        make data-driven decisions for academic improvement.
+      </p>
 
-          {/* Optional: image */}
-          <img src="/ModulesImgs/admsMng.png" alt="Academic Dashboard" style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }} />
-        </div>
-      )
-    },
+      {/* Optional: demo video */}
+       <h3>Academic Management Demo:</h3>
+        <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
+        title="Academic Management Demo"
+        frameBorder="0"
+        allowFullScreen
+        style={{ marginTop: '1rem', borderRadius: '8px' }}
+      ></iframe>
+
+      {/* Optional: image */}
+      {/* <img
+        src="/ModulesImgs/admsMng.png"
+        alt="Academic Dashboard"
+        style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
+      /> */}
+    </div>
+  )
+},
+{
+  icon: <GroupIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+  title: 'Student & Staff Records',
+  description: 'Manage student, teacher, and staff data securely along with attendance tracking.',
+  content: (
+    <div style={{ lineHeight: 1.6 }}>
+      <p>
+        The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all the data of
+        students, teachers, and staff members. It provides a secure, centralized database that ensures easy access, efficient
+        management, and accurate tracking of every individual associated with your institute.
+      </p>
+
+      <h3>Key Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li>Maintain detailed student profiles with personal, academic, and medical information.</li>
+        <li>Track staff qualifications, experience, subjects taught, and attendance records.</li>
+        <li>Upload and manage documents, certificates, photographs, and ID cards securely.</li>
+        <li>Search, filter, and sort records for quick retrieval and efficient management.</li>
+        <li>Integrate with timetables, attendance, and grading systems for holistic insights.</li>
+        <li>Automated alerts for missing or incomplete data entries.</li>
+        <li>Generate printable student and staff reports for administrative needs.</li>
+      </ul>
+
+      <h3>Attendance Management System:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li><strong>Employee & Student Attendance:</strong> Maintain accurate attendance records for all staff and students.</li>
+        <li><strong>Location-Based Attendance:</strong> Users can mark attendance only within the campus, ensuring authenticity.</li>
+        <li><strong>Track Presence & Absence:</strong> Monitor daily attendance, late arrivals, and absences in real-time.</li>
+        <li><strong>Attendance Analytics:</strong> Generate reports and dashboards for performance tracking and compliance.</li>
+      </ul>
+
+      <p>
+        <strong>Benefits:</strong> Reduces manual paperwork, eliminates data duplication, improves accessibility, and ensures compliance
+        with institute policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
+      </p>
+
+      <p>
+        <strong>Use Cases:</strong> Quickly find student details during parent-teacher meetings, track staff workload, maintain health
+        records, manage transfers, and ensure smooth communication between teachers, students, and management. Attendance data can
+        also be used to analyze student participation and staff punctuality.
+      </p>
+
+       <h3>Attendance Module Demo:</h3>
+        <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
+        title="Attendance Management Demo"
+        frameBorder="0"
+        allowFullScreen
+        style={{ marginTop: '1rem', borderRadius: '8px' }}
+      ></iframe>
+
+
+      <p>
+        With this module, your institute can build a robust digital ecosystem that ensures all student and staff information,
+        including attendance and other critical records, is organized, secure, and easily accessible whenever needed.
+      </p>
+    </div>
+  )
+},
     {
-      icon: <GroupIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Student & Staff Records',
-      description: 'Manage student and teacher data securely in one central database.',
-      content: (
-        <div style={{ lineHeight: 1.6 }}>
-          <p>
-            The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all the data of
-            students, teachers, and staff members. It provides a secure, centralized database that ensures easy access, efficient
-            management, and accurate tracking of every individual associated with your institute.
-          </p>
+  icon: <ReceiptLongIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+  title: 'Fees & Finance',
+  description: 'Simplify payments, generate receipts, track dues, and manage finances transparently.',
+  content: (
+    <div style={{ lineHeight: 1.6 }}>
+      <p>
+        The <strong>Fees & Finance</strong> module streamlines all financial operations of the institute, from student fee collection to
+        expense tracking, ensuring accurate, transparent, and timely financial management.
+      </p>
 
-          <h3>Key Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li>Maintain detailed student profiles with personal, academic, and medical information.</li>
-            <li>Track staff qualifications, experience, subjects taught, and attendance records.</li>
-            <li>Upload and manage documents, certificates, photographs, and ID cards securely.</li>
-            <li>Search, filter, and sort records for quick retrieval and efficient management.</li>
-            <li>Integrate with timetables, attendance, and grading systems for holistic insights.</li>
-            <li>Automated alerts for missing or incomplete data entries.</li>
-            <li>Generate printable student and staff reports for administrative needs.</li>
-          </ul>
+      <h3>Key Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li>Automate fee collection for multiple fee types, including tuition, transport, lab, and extracurricular fees.</li>
+        <li>Generate digital receipts instantly for payments made online or offline.</li>
+        <li>Track due balances, late fees, and send automated reminders to parents to prevent delays.</li>
+        <li>Maintain records of expenses, budgets, and financial transactions to ensure transparency.</li>
+        <li>Generate monthly, quarterly, and yearly financial reports for auditing and decision-making.</li>
+        <li>Integrate with student records to link fees with specific students, classes, or programs.</li>
+        <li>Support multiple payment methods, including cash, card, bank transfer, and online payment gateways.</li>
+        <li>Seamless integration with payment gateways for smooth, secure, and transparent transactions.</li>
+        <li>Robust fee management system allowing easy tracking of paid fees, due fees, late fees, and fee history.</li>
+      </ul>
 
-          <p>
-            <strong>Benefits:</strong> Reduces manual paperwork, eliminates data duplication, improves accessibility, and ensures compliance
-            with institute policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
-          </p>
+      <p>
+        <strong>Benefits:</strong> Reduces manual accounting errors, ensures timely fee collection, improves cash flow, and provides
+        real-time visibility into the institutes financial health. Both management and parents can track and manage all financial
+        transactions effortlessly.
+      </p>
 
-          <p>
-            <strong>Use Cases:</strong> Quickly find student details during parent-teacher meetings, track staff workload, maintain health
-            records, manage transfers, and ensure smooth communication between teachers, students, and management.
-          </p>
+      <p>
+        <strong>Use Cases:</strong> Issue fee reminders, generate online receipts instantly, monitor outstanding balances, track
+        late fees, manage scholarships or discounts, prepare financial statements for audits, and plan budgets for the next
+        academic year.
+      </p>
 
-          <img
-            src="/ModulesImgs/admsMng.png"
-            alt="Student & Staff Records"
-            style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
-          />
+     <h3>Fee Management Demo:</h3>
+        <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
+        title="Fee Management Demo"
+        frameBorder="0"
+        allowFullScreen
+        style={{ marginTop: '1rem', borderRadius: '8px' }}
+      ></iframe>
 
-          <p>
-            With this module, institute can build a robust digital ecosystem that ensures that student and staff information is always
-            organized, secure, and easily accessible whenever needed.
-          </p>
-        </div>
-      )
-    },
-    {
-      icon: <ReceiptLongIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Fees & Finance',
-      description: 'Simplify payments, generate receipts, and monitor due balances easily.',
-      content: (
-        <div style={{ lineHeight: 1.6 }}>
-          <p>
-            The <strong>Fees & Finance</strong> module streamlines all financial operations of the institute, from student fee collection to
-            expense tracking, ensuring accurate, transparent, and timely financial management.
-          </p>
-
-          <h3>Key Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li>Automate fee collection for multiple fee types, including tuition, transport, lab, and extracurricular fees.</li>
-            <li>Generate digital receipts instantly for payments made online or offline.</li>
-            <li>Track due balances, send automated reminders to parents, and prevent delays in fee collection.</li>
-            <li>Maintain records of expenses, budgets, and financial transactions to ensure transparency.</li>
-            <li>Generate monthly, quarterly, and yearly financial reports for auditing and decision-making.</li>
-            <li>Integrate with student records to link fees with specific students, classes, or programs.</li>
-            <li>Support multiple payment methods, including cash, card, bank transfer, and online payment gateways.</li>
-          </ul>
-
-          <p>
-            <strong>Benefits:</strong> Reduces manual accounting errors, ensures timely fee collection, improves cash flow, and provides
-            real-time visibility into the institute’s financial health. Administrators can easily track both incoming fees and outgoing
-            expenses.
-          </p>
-
-          <p>
-            <strong>Use Cases:</strong> Issue fee reminders, generate receipts for parents, monitor outstanding balances, track scholarships
-            or discounts, prepare financial statements for audits, and plan budgets for the next academic year.
-          </p>
-
-          <img
-            src="/ModulesImgs/admsMng.png"
-            alt="Fees & Finance Dashboard"
-            style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
-          />
-
-          <p>
-            This module empowers management to have a clear financial overview, ensures transparency with parents, and reduces the workload
-            of finance staff significantly.
-          </p>
-        </div>
-      )
-    },
+      <p>
+        With this module, the institute can ensure smooth financial operations, enhance transparency with parents, reduce the workload
+        of finance staff, and have complete control over all fee-related activities.
+      </p>
+    </div>
+  )
+},
     {
       icon: <TimelineIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
       title: 'Reports & Analytics',
@@ -278,7 +317,7 @@ const ClientDemoTech = () => {
                     <div></div>
                   </div>
                   <p className="card-text">
-                    Discover how our <strong>Learning Management Software</strong> simplifies daily operations for institute. From managing
+                    Discover how our <strong>Learning Management Software</strong> simplifies daily operations for institutes. From managing
                     admissions to tracking performance, everything is unified under one digital platform.
                   </p>
                 </MyGrid>
@@ -343,8 +382,8 @@ const ClientDemoTech = () => {
               </div>
             </MyCardContent>
           </MyCard>
-
-          {/* FOOTER */}
+        </MyBox>
+                  {/* FOOTER */}
           <div className="container">
             <div className="vertical_center">
               <p>
@@ -355,7 +394,6 @@ const ClientDemoTech = () => {
               </div>
             </div>
           </div>
-        </MyBox>
       </div>
       <Button
         href="https://adhyayan.online"

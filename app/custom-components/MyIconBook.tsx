@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconBookProps extends IconProps {}
 const MyIconBook = ({ ...props }: MyIconBookProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconBook {...props}></IconBook>;
 };
 export default memo(MyIconBook, (prevProps, nextProps) => {

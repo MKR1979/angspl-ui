@@ -14,6 +14,8 @@ import MyBox from '@/app/custom-components/MyBox';
 import UserDTO from '@/app/types/UserDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
 import MyImage from '@/app/custom-components/MyImage';
+import { useSelector, RootState } from '../../../../store';
+import { findPermission } from '../../../../common/utility-permission';
 
 type Props = {
   dtoUser: UserDTO;
@@ -21,6 +23,8 @@ type Props = {
 
 const ClientViewUser = ({ dtoUser }: Props) => {
   const { state, onEditClick, onCancelClick, onImageError } = useViewUser({ dtoUser });
+
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   return (
     <>
@@ -34,7 +38,7 @@ const ClientViewUser = ({ dtoUser }: Props) => {
                   <MyImage
                     src={
                       state.dtoUser.image_url?.trim() == ''
-                        ? '/default-image.avif'
+                        ? '/common/default-image.webp'
                         : process.env.NEXT_PUBLIC_API_ROOT_URL + '/uploads/' + state.dtoUser.image_url
                     }
                     width={800}
@@ -63,6 +67,12 @@ const ClientViewUser = ({ dtoUser }: Props) => {
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
                   <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">User Name:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.user_name}</MyTypography>
+                  </MyBox>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, md: 6 }}>
+                  <MyBox sx={{ mb: 0 }}>
                     <MyTypography variant="subtitle1">E-Mail:</MyTypography>
                     <MyTypography variant="subtitle2">{state.dtoUser.email}</MyTypography>
                   </MyBox>
@@ -81,17 +91,23 @@ const ClientViewUser = ({ dtoUser }: Props) => {
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 6 }}>
                   <MyBox sx={{ mb: 0 }}>
+                    <MyTypography variant="subtitle1">Type:</MyTypography>
+                    <MyTypography variant="subtitle2">{state.dtoUser.type_name}</MyTypography>
+                  </MyBox>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, md: 6 }}>
+                  <MyBox sx={{ mb: 0 }}>
                     <MyTypography variant="subtitle1">Status:</MyTypography>
                     <MyTypography variant="subtitle2">{state.dtoUser.status}</MyTypography>
                   </MyBox>
                 </MyGrid>
                 {state.dtoUser.role_name === 'student' && (
-                <MyGrid size={{ xs: 12, md: 6 }}>
-                  <MyBox sx={{ mb: 0 }}>
-                    <MyTypography variant="subtitle1">Admission Id:</MyTypography>
-                    <MyTypography variant="subtitle2">{state.dtoUser.admission_id}</MyTypography>
-                  </MyBox>
-                </MyGrid>
+                  <MyGrid size={{ xs: 12, md: 6 }}>
+                    <MyBox sx={{ mb: 0 }}>
+                      <MyTypography variant="subtitle1">Code:</MyTypography>
+                      <MyTypography variant="subtitle2">{state.dtoUser.code}</MyTypography>
+                    </MyBox>
+                  </MyGrid>
                 )}
               </MyGrid>
             </MyGrid>
@@ -105,7 +121,7 @@ const ClientViewUser = ({ dtoUser }: Props) => {
           modifiedAt={state.dtoUser.modified_at}
         ></MyTimestamp>
         <MyCardActions>
-          <MyButton onClick={onEditClick}>Edit</MyButton>
+          {findPermission(userPermissions, 193) && <MyButton onClick={onEditClick}>Edit</MyButton>}
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

@@ -7,7 +7,7 @@ interface MyChipProps extends ChipProps {
 }
 
 const MyChip = forwardRef(({ ...props }: MyChipProps, ref: ForwardedRef<unknown>) => {
-  console.log('MyChip rendered');
+  // console.log('MyChip rendered');
   return <Chip ref={ref as any} {...props} />;
 });
 MyChip.displayName = 'MyChip';

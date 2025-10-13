@@ -6,10 +6,9 @@ export default interface PaidCourseDTO extends BaseDTO {
   Duration:  string;
   Price:  number; 
   Content:  string;
-  Notes:  string;
-  Sample_Questions:  string;
+  Notes_insight:  string;
+  Code_insight:  string;
   Exam_Quiz:  string;
-  PDF_Resources:  string;
   Sample_Questions_File:  string;
 }
 
@@ -20,10 +19,9 @@ export const PAID_COURSE: PaidCourseDTO = {
   Duration: '',
   Price: 0,
   Content: '',
-  Notes: '',
-  Sample_Questions: '',
+  Notes_insight: '',
+  Code_insight: '',
   Exam_Quiz: '',
-  PDF_Resources: '',
   Sample_Questions_File: '',
   created_by: 0,
   created_by_first_name: '',

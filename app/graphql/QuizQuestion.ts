@@ -1,14 +1,40 @@
 import gql from 'graphql-tag';
+
 export const ADD_QUIZ_QUESTION = gql`
-  mutation addQuizQuestion($quiz_id: Int, $question: String!, $status: String) {
-    addQuizQuestion(addQuizQuestionInput: {quiz_id: $quiz_id, question: $question, status: $status })
+  mutation addQuizQuestion(
+    $quiz_id: Int
+    $question: String!
+    $status: String
+    $options: [OptionInput!]
+  ) {
+    addQuizQuestion(
+      addQuizQuestionInput: {
+        quiz_id: $quiz_id
+        question: $question
+        status: $status
+        options: $options
+      }
+    )
   }
 `;
 
 export const UPDATE_QUIZ_QUESTION = gql`
-  mutation updateQuizQuestion($id: Int!, $quiz_id: Int, $question: String!, $status: String) {
+  mutation updateQuizQuestion(
+    $id: Int!,
+    $quiz_id: Int, 
+    $question: String!, 
+    $status: String,
+    $options: [OptionInput!]
+    ) 
+    {
     updateQuizQuestion(
-      updateQuizQuestionInput: { id: $id, quiz_id: $quiz_id, question: $question, status: $status }
+      updateQuizQuestionInput: 
+      { id: $id, 
+        quiz_id: $quiz_id,
+        question: $question,
+        status: $status,
+        options: $options
+      }
     )
   }
 `;
@@ -115,6 +141,12 @@ export const GET_QUIZ_QUESTION = gql`
       quiz_name
       question
       status
+      options {
+        id
+        option_text
+        is_correct
+        explanation
+      }
       created_by
       created_by_first_name
       created_by_last_name

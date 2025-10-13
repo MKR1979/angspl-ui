@@ -3,7 +3,7 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import eq from 'lodash/eq';
 
 const MyTextField = ({ ...rest }: TextFieldProps) => {
-  console.log('MyTextField rendered');
+  //console.log('MyTextField rendered');
   return <TextField InputLabelProps={{ shrink: true }} size="small" variant="outlined" fullWidth {...rest}></TextField>;
 };
 

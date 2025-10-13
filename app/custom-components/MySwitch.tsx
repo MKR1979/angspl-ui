@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MySwitchProps extends SwitchProps {}
 
 const MySwitch = ({ ...props }: MySwitchProps) => {
-  console.log('MySwitch rendered');
+//  console.log('MySwitch rendered');
   return <Switch {...props}> </Switch>;
 };
 

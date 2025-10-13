@@ -13,6 +13,8 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyBox from '@/app/custom-components/MyBox';
 import CompanyDTO from '@/app/types/CompanyDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
+import { useSelector, RootState } from '../../../../store';
+import { findPermission } from '../../../../common/utility-permission';
 
 type Props = {
   dtoCompany: CompanyDTO;
@@ -20,6 +22,7 @@ type Props = {
 
 const ClientViewCompany = ({ dtoCompany }: Props) => {
   const { state, onEditClick, onCancelClick } = useViewCompany({ dtoCompany });
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   return (
     <>
@@ -80,7 +83,7 @@ const ClientViewCompany = ({ dtoCompany }: Props) => {
           modifiedAt={state.dtoCompany.modified_at}
         ></MyTimestamp>
         <MyCardActions>
-          <MyButton onClick={onEditClick}>Edit</MyButton>
+          {findPermission(userPermissions, 38) && <MyButton onClick={onEditClick}>Edit</MyButton>}
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

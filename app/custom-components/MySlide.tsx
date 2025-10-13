@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MySlideProps extends SlideProps {}
 
 const MySlide = ({ ...props }: MySlideProps) => {
-  console.log('MySlide rendered');
+  //console.log('MySlide rendered');
   return <Slide {...props} />;
 };
 

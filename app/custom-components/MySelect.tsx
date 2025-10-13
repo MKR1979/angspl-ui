@@ -10,7 +10,7 @@ type MySelectProps = SelectProps & {
 };
 
 const MySelect = ({ dataSource, valueField, displayField, ...others }: MySelectProps) => {
-  console.log('MySelect rendered');
+//  console.log('MySelect rendered');
   return (
     <Select
       size="small"

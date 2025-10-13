@@ -10,7 +10,7 @@ interface MyTypographyProps extends TypographyProps {
 }
 
 const MyTypography = ({ ...props }: MyTypographyProps) => {
-  console.log('MyTypography rendered');
+  //console.log('MyTypography rendered');
   return <Typography variant="body2" {...props}></Typography>;
 };
 

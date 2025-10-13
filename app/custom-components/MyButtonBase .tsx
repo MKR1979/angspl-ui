@@ -8,7 +8,7 @@ interface MyButtonBaseProps extends ButtonBaseProps {
 }
 
 const MyButtonBase = ({ children, ...props }: MyButtonBaseProps) => {
-  console.log('MyButtonBase rendered');
+  // console.log('MyButtonBase rendered');
   return <ButtonBase {...props}> {children}</ButtonBase>;
 };
 

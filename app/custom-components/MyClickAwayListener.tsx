@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyClickAwayListenerProps extends ClickAwayListenerProps {}
 
 const MyClickAwayListener = ({ ...props }: MyClickAwayListenerProps) => {
-  console.log('MyClickAwayListener rendered');
+  // console.log('MyClickAwayListener rendered');
   return <ClickAwayListener {...props} />;
 };
 

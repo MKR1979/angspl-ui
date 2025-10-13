@@ -14,7 +14,7 @@ const MyLink = ({
 }: MyLinkProps & {
   children?: React.ReactNode;
 } & React.RefAttributes<HTMLAnchorElement>) => {
-  console.log('MyLink rendered');
+  //console.log('MyLink rendered');
   return <Link style={{ textDecoration: 'underline' }} as={props.href} {...props} />;
 };
 

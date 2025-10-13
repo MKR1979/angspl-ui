@@ -1,13 +1,13 @@
 import gql from 'graphql-tag';
 export const ADD_COUNTRY = gql`
-  mutation addCountry($country_name: String!) {
-    addCountry(addCountryInput: { country_name: $country_name })
+  mutation addCountry($country_name: String!, $status: String) {
+    addCountry(addCountryInput: { country_name: $country_name, status: $status })
   }
 `;
 
 export const UPDATE_COUNTRY = gql`
-  mutation updateCountry($id: Int!, $country_name: String!) {
-    updateCountry(updateCountryInput: { id: $id, country_name: $country_name })
+  mutation updateCountry($id: Int!, $country_name: String!, $status: String) {
+    updateCountry(updateCountryInput: { id: $id, country_name: $country_name, status: $status })
   }
 `;
 
@@ -41,6 +41,7 @@ export const COUNTRY_LIST = gql`
       countries {
         id
         country_name
+        status
         created_by
         created_by_first_name
         created_by_last_name
@@ -61,6 +62,7 @@ export const GET_COUNTRY = gql`
     getCountry(getCountryInput: { id: $id }) {
       id
       country_name
+      status
       created_by
       created_by_first_name
       created_by_last_name

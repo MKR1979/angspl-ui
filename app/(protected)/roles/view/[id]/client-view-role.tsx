@@ -13,6 +13,8 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyBox from '@/app/custom-components/MyBox';
 import RoleDTO from '@/app/types/RoleDTO';
 import MyTimestamp from '@/app/custom-components/MyTimestamp';
+import { useSelector, RootState } from '../../../../store';
+import { findPermission } from '../../../../common/utility-permission';
 
 type Props = {
   dtoRole: RoleDTO;
@@ -20,6 +22,8 @@ type Props = {
 
 const ClientViewRole = ({ dtoRole }: Props) => {
   const { state, onEditClick, onCancelClick } = useViewRole({ dtoRole });
+
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
 
   return (
     <>
@@ -33,6 +37,18 @@ const ClientViewRole = ({ dtoRole }: Props) => {
                 <MyTypography variant="subtitle2">{state.dtoRole.role_name}</MyTypography>
               </MyBox>
             </MyGrid>
+               <MyGrid size={{ xs: 12, md: 6 }}>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Type Name:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoRole.type_name}</MyTypography>
+              </MyBox>
+            </MyGrid>
+              <MyGrid size={{ xs: 12, md: 6 }}>
+              <MyBox sx={{ mb: 0 }}>
+                <MyTypography>Status:</MyTypography>
+                <MyTypography variant="subtitle2">{state.dtoRole.status}</MyTypography>
+              </MyBox>
+            </MyGrid>
           </MyGrid>
         </MyCardContent>
         <MyDivider />
@@ -43,7 +59,7 @@ const ClientViewRole = ({ dtoRole }: Props) => {
           modifiedAt={state.dtoRole.modified_at}
         ></MyTimestamp>
         <MyCardActions>
-          <MyButton onClick={onEditClick}>Edit</MyButton>
+          {findPermission(userPermissions, 143) && <MyButton onClick={onEditClick}>Edit</MyButton>}
           <MyButton onClick={onCancelClick}>Cancel</MyButton>
         </MyCardActions>
       </MyCard>

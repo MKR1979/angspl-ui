@@ -4,6 +4,10 @@ import { useLazyQuery } from '@apollo/client';
 import UserDTO from '@/app/types/UserDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_USER } from '@/app/graphql/User';
+import { dispatch } from '../../../../store/';
+import { setIsEditMode } from '@/app/store/slices/siteConfigState';
+import * as gMessageConstants from '../../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 type StateType = {
   dtoUser: UserDTO;
   breadcrumbsItems: BreadcrumbsItem[];
@@ -19,7 +23,7 @@ const useViewUser = ({ dtoUser }: Props) => {
     dtoUser: dtoUser,
     breadcrumbsItems: [{ label: 'Users', href: '/users/list' }, { label: 'View User' }]
   });
-
+  const showSnackbar = useSnackbar();
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
@@ -31,16 +35,21 @@ const useViewUser = ({ dtoUser }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoUser: UserDTO = {} as UserDTO;
-    const { error, data } = await getUser({
-      variables: {
-        id: state.dtoUser.id,
+    try {
+      let dtoUser: UserDTO = {} as UserDTO;
+      const { error, data } = await getUser({
+        variables: {
+          id: state.dtoUser.id
+        }
+      });
+      if (!error && data) {
+        dtoUser = data.getUser;
       }
-    });
-    if (!error && data) {
-      dtoUser = data.getUser;
+      setState({ dtoUser: dtoUser } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoUser: dtoUser } as StateType);
   }, [getUser, state.dtoUser.id]);
 
   useEffect(() => {
@@ -52,6 +61,7 @@ const useViewUser = ({ dtoUser }: Props) => {
   const onEditClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
+      dispatch(setIsEditMode(true));
       router.push('/users/edit/' + state.dtoUser.id);
     },
     [router, state.dtoUser.id]
@@ -65,11 +75,9 @@ const useViewUser = ({ dtoUser }: Props) => {
     [router]
   );
 
-  const onImageError = useCallback(async () =>
-    //event: any
-    {
-      setState({ dtoUser: { ...state.dtoUser, image_url: '' } } as StateType);
-    }, [state.dtoUser]);
+  const onImageError = useCallback(async () => {
+    setState({ dtoUser: { ...state.dtoUser, image_url: '' } } as StateType);
+  }, [state.dtoUser]);
 
   return {
     state,

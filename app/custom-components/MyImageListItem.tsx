@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyImageListItemProps extends ImageListItemProps {}
 
 const MyImageListItem = ({ children, ...props }: MyImageListItemProps) => {
-  console.log('MyImageListItem rendered');
+  //console.log('MyImageListItem rendered');
   return <ImageListItem {...props}> {children}</ImageListItem>;
 };
 

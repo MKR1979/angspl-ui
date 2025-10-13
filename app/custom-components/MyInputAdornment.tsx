@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyInputAdornmentProps extends InputAdornmentProps {}
 
 const MyInputAdornment = ({ children, ...props }: MyInputAdornmentProps) => {
-  console.log('MyInputAdornment rendered');
+// console.log('MyInputAdornment rendered');
   return <InputAdornment {...props}> {children}</InputAdornment>;
 };
 

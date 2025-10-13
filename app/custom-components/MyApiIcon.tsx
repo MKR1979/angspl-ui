@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyApiIconProps extends SvgIconProps {}
 const MyApiIcon = ({ ...props }: MyApiIconProps) => {
-  console.log('MyApiIcon render');
+  // console.log('MyApiIcon render');
   return <ApiIcon {...props}></ApiIcon>;
 };
 export default memo(MyApiIcon, (prevProps, nextProps) => {

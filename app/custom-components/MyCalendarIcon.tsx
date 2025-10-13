@@ -4,7 +4,7 @@ import eq from 'lodash/eq';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyCalendarIconProps extends SvgIconProps {}
 const MyCalendarIcon = ({ ...props }: MyCalendarIconProps) => {
-  console.log('MyCalendarIcon rendered');
+  // console.log('MyCalendarIcon rendered');
   return <CalendarIcon {...props}></CalendarIcon>;
 };
 export default memo(MyCalendarIcon, (prevProps, nextProps) => {

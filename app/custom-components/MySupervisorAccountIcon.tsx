@@ -4,7 +4,7 @@ import eq from 'lodash/eq';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MySupervisorAccountIconProps extends SvgIconProps {}
 const MySupervisorAccountIcon = ({ ...props }: MySupervisorAccountIconProps) => {
-  console.log('MySupervisorAccountIcon rendered');
+//  console.log('MySupervisorAccountIcon rendered');
   return <SupervisorAccountIcon {...props}></SupervisorAccountIcon>;
 };
 export default memo(MySupervisorAccountIcon, (prevProps, nextProps) => {

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconStackFrontProps extends IconProps {}
 const MyIconSortDescending = ({ ...props }: MyIconStackFrontProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconSortDescending {...props}></IconSortDescending>;
 };
 export default memo(MyIconSortDescending, (prevProps, nextProps) => {

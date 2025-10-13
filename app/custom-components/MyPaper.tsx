@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyPaperProps extends PaperProps {}
 
 const MyPaper = ({ children, ...props }: MyPaperProps) => {
-  console.log('MyPaper rendered');
+  //console.log('MyPaper rendered');
   return <Paper {...props}> {children}</Paper>;
 };
 

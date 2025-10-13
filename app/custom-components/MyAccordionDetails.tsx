@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyAccordionDetailsProps extends AccordionDetailsProps {}
 
 const MyAccordionDetails = ({ children, ...props }: MyAccordionDetailsProps) => {
-  console.log('MyAccordionDetails rendered');
+  // console.log('MyAccordionDetails rendered');
   return <AccordionDetails {...props}> {children}</AccordionDetails>;
 };
 

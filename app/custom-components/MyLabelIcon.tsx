@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyLabelIconProps extends SvgIconProps {}
 const MyLabelIcon = ({ ...props }: MyLabelIconProps) => {
-  console.log('MyLabelIcon render');
+  //console.log('MyLabelIcon render');
   return <Label {...props}></Label>;
 };
 export default memo(MyLabelIcon, (prevProps, nextProps) => {

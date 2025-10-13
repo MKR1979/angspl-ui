@@ -1,10 +1,11 @@
 'use client';
 import React, { useRef } from "react";
-import * as constants from '../constants/constants';
-import * as gConstants from '../../constants/constants';
+import * as Constants from '../constants/constants';
+// import * as gConstants from '../../constants/constants'
 import './receipt.css';
 import MyBox from "@/app/custom-components/MyBox";
 import { FaWhatsapp } from "react-icons/fa";
+import { useSelector } from '../../store';
 interface ClientReceiptProps {
   courseName?: string;
   studentName?: string;
@@ -23,6 +24,8 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ courseName, studentName, 
       newWindow?.print();
     }
   };
+  
+  const { companyInfo } = useSelector((state) => state.globalState);
   return (
     <MyBox
       sx={{
@@ -36,10 +39,10 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ courseName, studentName, 
         margin: '100px auto',
       }}
     >
-      <h2 className="container1">{constants.RECEIPT}</h2>
+      <h2 className="container1">{Constants.RECEIPT}</h2>
       <img 
-        src="logo.png" 
-        alt="Internship" 
+        src={companyInfo.logo_url} 
+        alt="Payment" 
         style={{ width: '200px', height: 'auto', borderRadius: '10px' }} 
       />
         <div ref={printRef}>
@@ -47,10 +50,10 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ courseName, studentName, 
         Print Receipt
       </button>
       <div className="container">
-        <h3 className="text-xl font-bold text-center">{gConstants.COMPANY}</h3>
-        <p><strong>Address:</strong> {gConstants.FULL_ADDRESS}</p>
-        <p><strong>Email:</strong> {gConstants.CONTACT_EMAIL} / <strong>Phone No:</strong>{gConstants.CONTACT_PHONE_NO}</p>
-        <p><strong>Site url:</strong> {gConstants.SITE_URL_ONLINE}</p>
+        <h3 className="text-xl font-bold text-center">{companyInfo.company_name}</h3>
+        <p><strong>Address:</strong> {companyInfo.company_address}</p>
+        <p><strong>Email:</strong> {companyInfo.company_email} / <strong>Phone No:</strong>{companyInfo.company_phone_no}</p>
+        <p><strong>Site url:</strong> {companyInfo.domain_name}</p>
         <hr className="my-2" />
 
         {/* Conditional Rendering */}
@@ -65,10 +68,10 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ courseName, studentName, 
         <p>
           <strong>Login Credentials:</strong> <br />
           <strong>Username:</strong> {userName} <br />
-          <strong>Password:</strong> {gConstants.PASSWORD} <br />       
+          <strong>Password:</strong> {Constants.PASSWORD} <br />       
         </p>
         <a
-      href={`https://wa.me/${gConstants.WHATSAPP_PHONE}`}
+      href={`https://wa.me/${Constants.WHATSAPP_PHONE}`}
       target="_blank"
       rel="noopener noreferrer"
       className="whatsapp-button"

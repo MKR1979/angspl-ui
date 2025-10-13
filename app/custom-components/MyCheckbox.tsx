@@ -7,7 +7,7 @@ interface MyCheckboxProps extends CheckboxProps {
 }
 
 const MyCheckbox = ({ ...props }: MyCheckboxProps) => {
-  console.log('MyCheckbox rendered');
+  // console.log('MyCheckbox rendered');
   return <FormControlLabel control={<Checkbox {...props} />} label={props.label} />;
 };
 

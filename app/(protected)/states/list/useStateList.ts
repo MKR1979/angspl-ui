@@ -9,11 +9,12 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
 import StateDTO from '@/app/types/stateDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { STATE_LIST, DELETE_STATE } from '@/app/graphql/state';
+import * as gMessageConstants from '../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider'
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
@@ -65,7 +66,7 @@ const useStateList = ({ arrStateDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
@@ -85,17 +86,22 @@ const useStateList = ({ arrStateDTO, total_records }: Props) => {
   const [deleteState] = useMutation(DELETE_STATE, {});
 
   const getData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrStateDTO: StateDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getStateList();
-    if (!error && data) {
-      arrStateDTO = data.getStateList.states.map((item: StateDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getStateList.total_records;
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrStateDTO: StateDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getStateList();
+      if (!error && data) {
+        arrStateDTO = data.getStateList.states.map((item: StateDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getStateList.total_records;
+      }
+      setState({ arrStateDTO: arrStateDTO, total_records: total_records, isLoading: false, arrSelectedId: [] as string[] } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ arrStateDTO: arrStateDTO, total_records: total_records, isLoading: false, arrSelectedId: [] as string[] } as StateType);
   }, [getStateList]);
 
   useEffect(() => {
@@ -141,7 +147,7 @@ const useStateList = ({ arrStateDTO, total_records }: Props) => {
 
   const onRowDoubleClick: GridEventListener<'rowDoubleClick'> = useCallback(
     async (
-      params 
+      params
     ) => {
       router.push('/states/edit/' + params.row.id);
     },
@@ -167,19 +173,24 @@ const useStateList = ({ arrStateDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteState({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteState({
+          variables: {
+            ids: params
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteState, getData, state.visibleDialog1.id, toggleDialog1]
@@ -212,18 +223,23 @@ const useStateList = ({ arrStateDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteState({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteState({
+          variables: {
+            ids: state.arrSelectedId
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteState, getData, state.arrSelectedId, toggleDialog]

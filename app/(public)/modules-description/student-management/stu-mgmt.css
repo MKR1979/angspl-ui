@@ -242,3 +242,89 @@
   display: flex;
   gap: 10px;
 }
+
+.book {
+  position: relative;
+  width: 100%;              /* Increased width */
+  height: 550px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-origin: left center;
+  opacity: 0;
+  transform: rotateY(-180deg);
+  transition: all 1.2s ease-in-out;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+
+.page.active {
+  opacity: 1;
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+
+.page:not(.active) {
+  z-index: 1;
+}
+
+
+.page-content {
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.page-content h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #1976d2;
+}
+
+.page-content p {
+  font-size: 16px;
+}
+
+
+@media (max-width: 1024px) {
+  .book {
+    width: 80%;
+    height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .book {
+    width: 100%;
+    height: 400px;
+  }
+
+  .page-content {
+    padding: 20px;
+  }
+
+  .page-content h2 {
+    font-size: 20px;
+  }
+
+  .page-content p {
+    font-size: 14px;
+  }
+}

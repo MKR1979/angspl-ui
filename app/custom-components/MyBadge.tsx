@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyBadgeProps extends BadgeProps {}
 
 const MyBadge = ({ children, ...props }: MyBadgeProps) => {
-  console.log('MyList rendered');
+  // console.log('MyList rendered');
   return <Badge {...props}> {children}</Badge>;
 };
 

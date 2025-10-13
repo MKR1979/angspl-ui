@@ -10,12 +10,12 @@ import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import MyTypography from '@/app/custom-components/MyTypography';
 
 const bannerImages = ['/coursemngImgs/course8.jpg', '/coursemngImgs/course7.jpg'];
 
 const ClientCourseMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   // Auto-slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,6 +31,17 @@ const ClientCourseMgmt = () => {
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   };
+
+    const images = ['/coursemngImgs/course.webp',  '/coursemngImgs/courses.PNG', '/coursemngImgs/courses1.jpg', '/coursemngImgs/courses3.webp.jpg'];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000); // change page every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
@@ -116,9 +127,25 @@ const ClientCourseMgmt = () => {
                   </MyCardContent>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Academics</h2>
-                  <div className="responsive-image">
-                    <img src="/coursemngImgs/course.webp" alt="Admission Form" />
+                  <MyTypography
+                    sx={{
+                      fontSize: '24px',
+                      textAlign: 'center',
+                      marginTop: '5px',
+                      marginBottom: '5px',
+                      color: '#465063',
+                      fontFamily: 'serif',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    How It Works Section
+                  </MyTypography>
+                  <div className="book-container">
+                    <div className="book">
+                      {images.map((src, index) => (
+                        <img key={index} src={src} alt={`page-${index}`} className={`page ${index === current ? 'active' : ''}`} />
+                      ))}
+                    </div>
                   </div>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>

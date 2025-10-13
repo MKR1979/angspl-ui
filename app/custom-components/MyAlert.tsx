@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyAlertProps extends AlertProps {}
 
 const MyAlert = ({ children, ...props }: MyAlertProps) => {
-  console.log('MyAlert rendered');
+  // console.log('MyAlert rendered');
   return <Alert {...props}> {children}</Alert>;
 };
 

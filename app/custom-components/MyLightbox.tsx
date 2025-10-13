@@ -7,7 +7,7 @@ interface MyLightboxProps extends ILightBoxProps {
 }
 
 const MyLightbox = ({ ...props }: MyLightboxProps) => {
-  console.log('MyLightbox rendered');
+ // console.log('MyLightbox rendered');
   return <Lightbox {...props} />;
 };
 

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyFiberManualRecordIconProps extends SvgIconProps {}
 const MyFiberManualRecordIcon = ({ ...props }: MyFiberManualRecordIconProps) => {
-  console.log('MyFiberManualRecordIcon render');
+  // console.log('MyFiberManualRecordIcon render');
   return <FiberManualRecordIcon {...props}></FiberManualRecordIcon>;
 };
 export default memo(MyFiberManualRecordIcon, (prevProps, nextProps) => {

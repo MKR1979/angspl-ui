@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyFlagIconProps extends SvgIconProps {}
 const MyFlagIcon = ({ ...props }: MyFlagIconProps) => {
-  console.log('MyFlagIcon render');
+  // console.log('MyFlagIcon render');
   return <Flag {...props}></Flag>;
 };
 export default memo(MyFlagIcon, (prevProps, nextProps) => {

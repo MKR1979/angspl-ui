@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyHistoryIconProps extends SvgIconProps {}
 const MyHistoryIcon = ({ ...props }: MyHistoryIconProps) => {
-  console.log('MyHistoryIcon render');
+  // console.log('MyHistoryIcon render');
   return <HistoryIcon {...props}></HistoryIcon>;
 };
 export default memo(MyHistoryIcon, (prevProps, nextProps) => {

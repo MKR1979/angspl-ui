@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyTreeViewProps extends TreeViewProps<boolean | undefined> {}
 
 const MyTreeView = ({ ...props }: MyTreeViewProps) => {
-  console.log('MyTreeView rendered');
+ //console.log('MyTreeView rendered');
   return <TreeView {...props} />;
 };
 

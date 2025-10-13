@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyToolbarProps extends ToolbarProps {}
 
 const MyToolbar = ({ children, ...props }: MyToolbarProps) => {
-  console.log('MyToolbar rendered');
+//  console.log('MyToolbar rendered');
   return <Toolbar {...props}> {children}</Toolbar>;
 };
 

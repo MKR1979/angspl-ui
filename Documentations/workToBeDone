@@ -1,0 +1,43 @@
+Top Priority changes :- 
+    1. Create separate development and demo environment.
+    2. Payment - context is not defined error.   
+    3. Database backup plan.
+
+Top Priority Bugs/Defects :-
+    1. Avoid unnecessary api calls on login and any other page call.
+    2. Bulk Attendance not working for marking single attendance.
+    3. On adding user, all the user permission related to that user's role will be automatically created.
+
+
+BUGS/DEFECTs:-
+    1. Paid / Free Courses :- we should have more data for the courses (sample-question file and the links we provide there for notes and sample-question file).
+    --  Sample Questions File needs to be replaced with videos. And the links are not working.
+    
+    2. The site should not allow to login or access any page of the application by directly typing the url in the browser (not asking 
+        to login).
+
+    3. If anyone login using there login credentials, and in between admin deletes that users account, then the user should login at that point and user should redirect to login page.    
+
+    4. In Angspl.com VAT should be removed in pricing.
+    5. Online Exams :-
+      a. submit button or next button should be separated,
+      b. attempted or unattempted questions stats along with the quiz exam.
+      c. Daily exam updates for students (like if a class 10th student have 2 exams same day then he/she should be notify through a           notification/ update on the dashboard/quid-data module),
+      d. only courses which have quizzes should appear/ present in the course lookup.
+
+
+Design Changes: 
+    1. Print Admission :- While printing admission form, the background page needs to edit/remove.
+    2. Question-options :- later we need to apply functionality on the search bar that we can search the options bases on the Question    text or quiz name.
+    3. Profile / Edit-profile / change password should be at common place for all the dashboards.
+    4. Login page should be divided into half and in rest half we'll display about company something.
+    5. Start using adhyayan.school and adhyayan.college for respective demo environment.
+
+
+New Requirement:
+    1. There should be a switch language button, by which any-one can switch the language of the web application (English <> Hindi)
+    3. Create module for Image Gallery. Or implement dynamic functionality for image uploads
+    4. Create account on facebook, Linkedin
+    5. Quiz data also have a rank , which ranks multiple students based on their performance in quiz. 
+    6. Online exam can also have a Mobile Application. Also check the scope how to schedule exam (on given date or time).
+    7. Mobile App Development for all the modules.

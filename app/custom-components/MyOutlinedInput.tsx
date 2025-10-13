@@ -6,7 +6,7 @@ interface MyOutlinedInputProps extends OutlinedInputProps {}
 
 const MyOutlinedInput = forwardRef(({ ...props }: MyOutlinedInputProps, ref: ForwardedRef<unknown>) => {
   //const MyOutlinedInput = ({ ...props }: MyOutlinedInputProps) => {
-  console.log('MyOutlinedInput rendered');
+ // console.log('MyOutlinedInput rendered');
   return <OutlinedInput ref={ref} {...props} />;
 });
 MyOutlinedInput.displayName = 'MyOutlinedInput';

@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyDangerProps extends ButtonProps {}
 const MyDangerButton = ({ ...props }: MyDangerProps) => {
   const theme = useTheme();
-  console.log('MyDangerButton rendered');
+  // console.log('MyDangerButton rendered');
   return (
     <Button
       variant="contained"

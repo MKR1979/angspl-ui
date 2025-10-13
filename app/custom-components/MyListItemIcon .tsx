@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyListItemIconProps extends ListItemIconProps {}
 
 const MyListItemIcon = ({ children, ...props }: MyListItemIconProps) => {
-  console.log('MyListItemIcon rendered');
+//  console.log('MyListItemIcon rendered');
   return <ListItemIcon {...props}> {children}</ListItemIcon>;
 };
 

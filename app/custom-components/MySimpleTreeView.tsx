@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MySimpleTreeViewProps extends SimpleTreeViewProps<boolean | undefined> {}
 
 const MySimpleTreeView = ({ ...props }: MySimpleTreeViewProps) => {
-  console.log('MySimpleTreeView rendered');
+//  console.log('MySimpleTreeView rendered');
   return <SimpleTreeView {...props} />;
 };
 

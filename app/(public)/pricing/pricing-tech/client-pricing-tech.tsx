@@ -751,527 +751,299 @@ const ClientPricingTech = () => {
   };
   return (
     <div style={{ width: '100%', paddingTop: '0px' }}>
-      <MyBox>
-        <MyCard>
-          <MyCardContent>
-            <MyBox
+      <MyCardContent>
+        <MyBox
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            position: 'relative',
+            mb: 2,
+            flexDirection: { xs: 'column', sm: 'row' },
+            gap: { xs: 2, sm: 0 }
+          }}
+        >
+          <MyBox
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              position: { xs: 'static', sm: 'absolute' },
+              left: { sm: 0 },
+              justifyContent: { xs: 'center', sm: 'flex-start' },
+              width: { xs: '100%', sm: 'auto' }
+            }}
+          >
+            <MyButton
+              variant="outlined"
               sx={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative', 
-                mb: 2
+                minWidth: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                fontSize: '1rem',
+                padding: 0
               }}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
             >
-              <MyBox
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 2,
-                  position: 'absolute',
-                  left: 0
-                }}
-              >
-                <MyButton
-                  variant="outlined"
-                  sx={{
-                    minWidth: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    fontSize: '1rem',
-                    padding: 0
+              <ArrowBack />
+            </MyButton>
+            <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
+              Choose the right plan for your{' '}
+              <strong>
+                <span style={{ fontSize: '1.1rem' }}>Institute</span>
+              </strong>
+            </MyTypography>
+            <MyButton
+              variant="outlined"
+              sx={{
+                minWidth: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                fontSize: '1rem',
+                padding: 0
+              }}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
+            >
+              <ArrowForward />
+            </MyButton>
+          </MyBox>
+          <MyBox
+            sx={{
+              margin: { xs: '0', sm: '0 auto' },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: { xs: '100%', sm: 'auto' }
+            }}
+          >
+            <MyTabs value={state.tabIndex} onChange={handleTabChange} sx={{ marginBottom: 0, paddingBottom: 0 }}>
+              <MyTab label="Monthly Billing" />
+              <MyTab label="Annual Billing" />
+            </MyTabs>
+          </MyBox>
+        </MyBox>
+        <MyTabPanel value={state.tabIndex} index={0}>
+          <MyGrid container spacing={2} alignItems="stretch">
+            {[
+              {
+                title: 'Startup',
+                price: Constants.INSTITUTE_PRICING.STARTUP_MONTHLY,
+                description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
+                                  online presence. This fully managed static web application includes all essential features for sharing information
+                                  and managing admission enquiries.`,
+                extra: 'Billed Monthly, Excludes VAT / GST',
+                amount: 1
+              },
+              {
+                title: 'Premium',
+                price: Constants.INSTITUTE_PRICING.PREMIUM_MONTHLY,
+                description: `A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
+                                  Dashboard for efficiently managing Users, Roles, and Courses. Ideal for Institutes needing advanced functionality
+                                  and centralized, streamlined management.`,
+                extra: 'Billed Monthly, Excludes VAT / GST',
+                amount: 5000
+              },
+              {
+                title: 'Enterprise',
+                price: Constants.INSTITUTE_PRICING.ENTERPRISE_MONTHLY,
+                description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
+                                  managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
+                                  course content, and fee payment.`,
+                extra: 'Billed Monthly, Excludes VAT / GST',
+                amount: 9999
+              },
+              {
+                title: 'Dedicated',
+                price: Constants.INSTITUTE_PRICING.DEDICATED_MONTHLY,
+                description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
+                                  Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
+                                  Admin Reporting.`,
+                extra: 'Excludes VAT/GST & Application Support',
+                amount: 14000
+              }
+            ].map((plan) => (
+              <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyCard
+                  elevation={3}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s ease',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
                   }}
-                  onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 >
-                  <ArrowBack />
-                </MyButton>
-
-                <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
-                  Choose the Right Plan for Your Institute
-                </MyTypography>
-
-                <MyButton
-                  variant="outlined"
-                  sx={{
-                    minWidth: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    fontSize: '1rem',
-                    padding: 0
+                  <CardHeader
+                    title={<span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
+                    sx={{
+                      textAlign: 'center',
+                      height: '40px',
+                      backgroundColor: '#e2e8f0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  />
+                  <MyCardContent
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: '10px',
+                      backgroundColor: '#f7fafc',
+                      border: '1px solid #e2e8f0',
+                      flexGrow: 1 // fills space to align buttons at bottom
+                    }}
+                  >
+                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
+                      ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
+                    </div>
+                    <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
+                    <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
+                    <MyBox sx={{ mt: 'auto', width: '100%' }}>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => goToCompanyModule('Institute', plan.title, 'Monthly', plan.amount)}
+                      >
+                        Subscribe Now
+                      </MyButton>
+                    </MyBox>
+                  </MyCardContent>
+                </MyCard>
+              </MyGrid>
+            ))}
+          </MyGrid>
+        </MyTabPanel>
+        <MyTabPanel value={state.tabIndex} index={1}>
+          <MyGrid container spacing={2} alignItems="stretch">
+            {[
+              {
+                title: 'Startup',
+                price: Constants.INSTITUTE_PRICING.STARTUP_YEARLY,
+                description: ` A perfect starting point for institutes to establish a professional online presence. This fully managed website includes all essential features to showcase institute information, highlight courses and achievements, and efficiently manage admission enquiries.`,
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Premium',
+                price: Constants.INSTITUTE_PRICING.PREMIUM_YEARLY,
+                description: `A dynamic web application with Online Admission, Fee Payment Integration, and an intuitive Admin Dashboard
+                     for efficiently managing Students, Trainers, Batches, and Courses. Ideal for institutes seeking advanced functionality 
+                     and streamlined administration.`,
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Enterprise',
+                price: Constants.INSTITUTE_PRICING.ENTERPRISE_YEARLY,
+                description: ` An advanced web application featuring Online Admission, Course Enrollment, Integrated Payments, and a
+                     powerful Admin Panel for managing Students, Trainers, Roles, and Courses. Includes a dedicated Student Dashboard with
+                      Online Tests, Study Materials, Assignments, Projects, and Fee Payments — perfect for institutes looking for a complete
+                       digital learning and management solution.`,
+                extra: 'Billed Monthly, Excludes VAT / GST'
+              },
+              {
+                title: 'Dedicated',
+                price: Constants.INSTITUTE_PRICING.DEDICATED_YEARLY,
+                description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and maximum
+                     flexibility. Includes all features from the Enterprise Plan, plus a Trainer Dashboard with attendance tracking, batch
+                     scheduling, and centralized performance reporting — ideal for large institutes and multi-branch training organizations.`,
+                extra: 'Excludes VAT/GST & Application Support'
+              }
+            ].map((plan) => (
+              <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+                <MyCard
+                  elevation={3}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '100%',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s ease',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
                   }}
-                  onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 >
-                  <ArrowForward />
-                </MyButton>
-              </MyBox>
-
-              <MyBox sx={{ margin: '0 auto', display: 'flex', alignItems: 'center' }}>
-                <MyTabs value={state.tabIndex} onChange={handleTabChange} sx={{ marginBottom: 0, paddingBottom: 0 }}>
-                  <MyTab label="Monthly Billing" />
-                  <MyTab label="Annual Billing" />
-                </MyTabs>
-              </MyBox>
-            </MyBox>
-            <MyTabPanel value={state.tabIndex} index={0}>
-              <MyGrid container spacing={2} alignItems="stretch">
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
+                  <CardHeader
+                    title={<span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
+                    sx={{
+                      textAlign: 'center',
+                      height: '40px',
+                      backgroundColor: '#e2e8f0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  />
+                  <MyCardContent
+                    sx={{
                       display: 'flex',
                       flexDirection: 'column',
-                      width: '100%',
-                      height: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
+                      alignItems: 'center',
+                      padding: '10px',
+                      backgroundColor: '#f7fafc',
+                      border: '1px solid #e2e8f0',
+                      flexGrow: 1
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                   >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Startup</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.STARTUP_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-                        online presence. This fully managed static web application includes all essential features for sharing information
-                        and managing admission enquiries.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Startup', 'Monthly', 1)}>
+                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
+                      ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
+                    </div>
+                    <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
+                    <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
+                    <MyBox sx={{ mt: 'auto', width: '100%' }}>
+                      <MyButton
+                        variant="contained"
+                        fullWidth
+                        onClick={() => goToCompanyModule('Institute', plan.title, 'Yearly', plan.price)}
+                      >
                         Subscribe Now
                       </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.PREMIUM_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for efficiently managing Users, Roles, and Courses. Ideal for Institutes needing advanced functionality
-                        and centralized, streamlined management.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Premium', 'Monthly', 5000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Enterprise</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.ENTERPRISE_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Monthly, Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                        course content, and fee payment.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Enterprise', 'Monthly', 9999)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.DEDICATED_MONTHLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Month</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                        Admin Reporting.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Dedicated', 'Monthly', 14000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
+                    </MyBox>
+                  </MyCardContent>
+                </MyCard>
               </MyGrid>
-            </MyTabPanel>
-            <MyTabPanel value={state.tabIndex} index={1}>
-              <MyGrid container spacing={2} alignItems="stretch" style={{ marginBottom: -2 }}>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Startup</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.STARTUP_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-                        online presence. This fully managed static web application includes all essential features for sharing information
-                        and managing admission enquiries.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Startup', 'Yearly', 32000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Premium</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.PREMIUM_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
-                      </div>
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Interactive
-                        Admin Dashboard for managing Users, Roles, and Courses. Ideal for Institutions needing advanced functionality and
-                        seamless automation support.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Premium', 'Yearly', 59000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Enterprise</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.ENTERPRISE_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Billed Annually Excludes VAT / GST</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                        course content, and fee payment.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Enterprise', 'Yearly', 95000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-                  <MyCard
-                    elevation={3}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '100%',
-                      borderRadius: '16px',
-                      overflow: 'hidden',
-                      transition: 'transform 0.3s ease',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  >
-                    <CardHeader
-                      title={<span style={{ fontSize: '20px', fontWeight: 'bold', color: '#1a202c' }}>Dedicated</span>}
-                      sx={{
-                        textAlign: 'center',
-                        height: '40px',
-                        backgroundColor: '#e2e8f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    />
-                    <MyCardContent
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '10px',
-                        backgroundColor: '#f7fafc',
-                        border: '1px solid #e2e8f0'
-                      }}
-                    >
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748' }}>
-                        ₹{Constants.DEDICATED_YEARLY} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
-                      </div>
-                      {/* <div style={{ marginBottom: '4px', color: '#718096' }}>Per Year</div> */}
-                      <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>Excludes VAT/GST & Application Support</div>
-                      <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>
-                        Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                        Admin Reporting.
-                      </div>
-                      <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('Institute', 'Dedicated', 'Yearly', 120000)}>
-                        Subscribe Now
-                      </MyButton>
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-              </MyGrid>
-            </MyTabPanel>
-          </MyCardContent>
-        </MyCard>
-      </MyBox>
+            ))}
+          </MyGrid>
+        </MyTabPanel>
+      </MyCardContent>
       <MyBox>
-        <MyCard>
-          <MyCardContent>
-            <MyGrid container spacing={2} alignItems="stretch">
-              <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-                <TableContainer component={Paper} sx={{ mt: -2 }}>
-                  <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
-                    <TableHead>
-                      <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                        {['Features', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
-                          <TableCell
-                            key={text}
-                            align={index === 0 ? 'left' : 'center'}
-                            sx={{
-                              fontWeight: 'bold',
-                              fontSize: '1rem',
-                              border: '1px solid #e0e0e0',
-                              padding: '10px 14px',
-                              lineHeight: 1.2
-                            }}
-                          >
-                            {text}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
-                  </Table>
-                </TableContainer>
-              </MyGrid>
+        <MyCardContent>
+          <MyGrid container spacing={2} alignItems="stretch">
+            <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
+              <TableContainer component={Paper} sx={{ mt: -2 }}>
+                <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
+                  <TableHead>
+                    <TableRow sx={{ backgroundColor: '#e2e8f0' }}>
+                      {['Features', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
+                        <TableCell
+                          key={text}
+                          align={index === 0 ? 'left' : 'center'}
+                          sx={{
+                            fontWeight: 'bold',
+                            fontSize: '1.1rem',
+                            border: '1px solid #e0e0e0',
+                            padding: '10px 14px',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          {text}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
+                </Table>
+              </TableContainer>
             </MyGrid>
-          </MyCardContent>
-        </MyCard>
+          </MyGrid>
+        </MyCardContent>
       </MyBox>
       <div className="container">
         <div className="vertical_center">

@@ -4,6 +4,8 @@ import { useLazyQuery } from '@apollo/client';
 import StateDTO from '@/app/types/stateDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { GET_STATE } from '@/app/graphql/state';
+import * as gMessageConstants from '../../../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
 type StateType = {
   dtoState: StateDTO;
   breadcrumbsItems: BreadcrumbsItem[];
@@ -23,7 +25,7 @@ const useViewState = ({ dtoState }: Props) => {
   const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
     return { ...state, ...action };
   };
-
+  const showSnackbar = useSnackbar();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
 
   const [getState] = useLazyQuery(GET_STATE, {
@@ -31,16 +33,21 @@ const useViewState = ({ dtoState }: Props) => {
   });
 
   const getData = useCallback(async (): Promise<void> => {
-    let dtoState: StateDTO = {} as StateDTO;
-    const { error, data } = await getState({
-      variables: {
-        id: state.dtoState.id
+    try {
+      let dtoState: StateDTO = {} as StateDTO;
+      const { error, data } = await getState({
+        variables: {
+          id: state.dtoState.id
+        }
+      });
+      if (!error && data) {
+        dtoState = data.getState;
       }
-    });
-    if (!error && data) {
-      dtoState = data.getState;
+      setState({ dtoState: dtoState } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ dtoState: dtoState } as StateType);
   }, [getState, state.dtoState.id]);
 
   useEffect(() => {

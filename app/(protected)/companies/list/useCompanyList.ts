@@ -9,11 +9,12 @@ import {
   useGridApiRef,
   GridInitialState
 } from '@mui/x-data-grid';
-import toast from 'react-hot-toast';
 import { SortDirectionType, ContextMenuType, defaultPageSize } from '../../../common/Configuration';
 import CompanyDTO from '@/app/types/CompanyDTO';
 import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { COMPANY_LIST, DELETE_COMPANY } from '@/app/graphql/Company';
+import * as gMessageConstants from '../../../constants/messages-constants';
+import { useSnackbar } from '../../../custom-components/SnackbarProvider';
 
 type visibleDialog1Type = { id: string; visibility: boolean };
 
@@ -65,7 +66,7 @@ const useCompanyList = ({ arrCompanyDTO, total_records }: Props) => {
   };
 
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-
+  const showSnackbar = useSnackbar();
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: defaultPageSize
@@ -85,17 +86,22 @@ const useCompanyList = ({ arrCompanyDTO, total_records }: Props) => {
   const [deleteCompany] = useMutation(DELETE_COMPANY, {});
 
   const getCompanyData = useCallback(async (): Promise<void> => {
-    setState({ isLoading: true } as StateType);
-    let arrCompanyDTO: CompanyDTO[] = [];
-    let total_records: number = 0;
-    const { error, data } = await getCompanyList();
-    if (!error && data) {
-      arrCompanyDTO = data.getCompanyList.companies.map((item: CompanyDTO) => {
-        return { ...item, id: parseInt(item.id.toString()) };
-      });
-      total_records = data.getCompanyList.total_records;
+    try {
+      setState({ isLoading: true } as StateType);
+      let arrCompanyDTO: CompanyDTO[] = [];
+      let total_records: number = 0;
+      const { error, data } = await getCompanyList();
+      if (!error && data) {
+        arrCompanyDTO = data.getCompanyList.companies.map((item: CompanyDTO) => {
+          return { ...item, id: parseInt(item.id.toString()) };
+        });
+        total_records = data.getCompanyList.total_records;
+      }
+      setState({ arrCompanyDTO: arrCompanyDTO, total_records: total_records, isLoading: false, arrSelectedId: [] as string[] } as StateType);
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ arrCompanyDTO: arrCompanyDTO, total_records: total_records, isLoading: false, arrSelectedId: [] as string[] } as StateType);
   }, [getCompanyList]);
 
   useEffect(() => {
@@ -165,19 +171,24 @@ const useCompanyList = ({ arrCompanyDTO, total_records }: Props) => {
 
   const DeleteSingle = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const params = [Number(state.visibleDialog1.id)];
-      const { data } = await deleteCompany({
-        variables: {
-          ids: params
+      try {
+        event.preventDefault();
+        const params = [Number(state.visibleDialog1.id)];
+        const { data } = await deleteCompany({
+          variables: {
+            ids: params
+          }
+        });
+        await toggleDialog1('');
+        if (data) {
+          getCompanyData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog1('');
-      if (data) {
-        getCompanyData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteCompany, getCompanyData, state.visibleDialog1.id, toggleDialog1]
@@ -205,18 +216,23 @@ const useCompanyList = ({ arrCompanyDTO, total_records }: Props) => {
 
   const DeleteSelected = useCallback(
     async (event: React.MouseEvent<HTMLElement>): Promise<void> => {
-      event.preventDefault();
-      const { data } = await deleteCompany({
-        variables: {
-          ids: state.arrSelectedId
+      try {
+        event.preventDefault();
+        const { data } = await deleteCompany({
+          variables: {
+            ids: state.arrSelectedId
+          }
+        });
+        await toggleDialog();
+        if (data) {
+          getCompanyData();
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_RECORD, 'success');
+        } else {
+          showSnackbar(gMessageConstants.SNACKBAR_DELETE_FAILED, 'error');
         }
-      });
-      await toggleDialog();
-      if (data) {
-        getCompanyData();
-        toast.success('record(s) deleted successfully');
-      } else {
-        toast.error('Error occured while deleting record(s)');
+      } catch (err) {
+        console.error('Error loading quiz question:', err);
+        showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
       }
     },
     [deleteCompany, getCompanyData, state.arrSelectedId, toggleDialog]

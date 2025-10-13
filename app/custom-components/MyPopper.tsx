@@ -7,7 +7,7 @@ interface MyPopperProps extends PopperProps {
 }
 
 const MyPopper = ({ ...props }: MyPopperProps) => {
-  console.log('MyPopper rendered');
+  //console.log('MyPopper rendered');
   return <Popper {...props} />;
 };
 

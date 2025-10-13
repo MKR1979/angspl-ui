@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyPersonOutlineIconProps extends SvgIconProps {}
 const MyPersonOutlineIcon = ({ ...props }: MyPersonOutlineIconProps) => {
-  console.log('MyPersonOutlineIcon render');
+ // console.log('MyPersonOutlineIcon render');
   return <PersonOutlineIcon {...props}></PersonOutlineIcon>;
 };
 export default memo(MyPersonOutlineIcon, (prevProps, nextProps) => {

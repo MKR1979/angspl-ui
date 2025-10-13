@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyTableRowProps extends TableRowProps {}
 
 const MyTableRow = ({ children, ...props }: MyTableRowProps) => {
-  console.log('MyTableRow rendered');
+// console.log('MyTableRow rendered');
   return <TableRow {...props}> {children}</TableRow>;
 };
 

@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyGridProps extends Grid2Props {}
 
 const MyGrid = ({ children, ...props }: MyGridProps) => {
-  console.log('MyGrid rendered');
+  // console.log('MyGrid rendered');
   return <Grid {...props}> {children}</Grid>;
 };
 

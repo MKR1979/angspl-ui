@@ -4,8 +4,12 @@ import { useLazyQuery } from '@apollo/client';
 import { GET_STUDY_NOTES_ALL } from '@/app/graphql/StudyNotes';
 import LookupDTO from '@/app/types/LookupDTO';
 import StudyNotesDTO, { STUDY_NOTES } from '@/app/types/StudyNotesDTO';
-import { COURSE_LOOKUP } from '@/app/graphql/Course';
+// import { COURSE_LOOKUP } from '@/app/graphql/Course';
+import { COURSE_LOOKUP_BY_USER_ID } from '@/app/graphql/Course';
 import { generatePDF } from '@/app/custom-components/MyPdfGeneration';
+import * as gMessageConstants from '../../constants/messages-constants';
+import { useSnackbar } from '@/app/custom-components/SnackbarProvider';
+import { RootState, useSelector } from '@/app/store';
 
 type ErrorMessageType = {
   course_name: string | null;
@@ -51,18 +55,49 @@ const useNotesInsight = ({ courseId, courseName, StudyNotesId }: Props) => {
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [copied, setCopied] = useState(false);
-  // const [getStudyNotes] = useLazyQuery(STUDY_NOTES_LIST, { fetchPolicy: 'network-only' });
+  const companyInfo = useSelector((state: RootState) => state.globalState.companyInfo);
+  // const [getCompanyInfoByDomain] = useLazyQuery(GET_COMPANY_INFO_BY_DOMAIN, { fetchPolicy: 'network-only' });
   const [getStudyNotesAll] = useLazyQuery(GET_STUDY_NOTES_ALL, { fetchPolicy: 'network-only' });
-  const [getCourseLookup] = useLazyQuery(COURSE_LOOKUP, {fetchPolicy: 'network-only'});
+  const showSnackbar = useSnackbar();
+  // const [getCourseLookup] = useLazyQuery(COURSE_LOOKUP, { fetchPolicy: 'network-only' });
+  const { loginUser_id } = useSelector((state) => state.loginState);
+  const [getCourseByUserIdLookup] = useLazyQuery(COURSE_LOOKUP_BY_USER_ID, { fetchPolicy: 'network-only' });
+
+  // const getCourseList = useCallback(async (): Promise<void> => {
+  //   try {
+  //     let arrCourseLookup: LookupDTO[] = [];
+  //     const { error, data } = await getCourseByUserIdLookup();
+  //     if (!error && data) {
+  //       arrCourseLookup = data.getCourseLookup;
+  //     }
+  //     setState({ arrCourseLookup: arrCourseLookup } as StateType);
+  //   } catch (err) {
+  //     console.error('Error loading quiz question:', err);
+  //     showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
+  //   }
+  // }, [getCourseByUserIdLookup]);
 
   const getCourseList = useCallback(async (): Promise<void> => {
-    let arrCourseLookup: LookupDTO[] = [];
-    const { error, data } = await getCourseLookup();
-    if (!error && data) {
-      arrCourseLookup = data.getCourseLookup;
+    try {
+      let arrCourseLookup: LookupDTO[] = [];
+      const { error, data } = await getCourseByUserIdLookup({
+        variables: {
+          user_id: loginUser_id,
+          group_name: companyInfo.company_type,
+        }
+      });
+      if (!error && data) {
+        arrCourseLookup = data.getCourseByUserIdLookup;
+        console.log('course data we get', data.getCourseByUserIdLookup);
+      }
+
+      setState({ arrCourseLookup: arrCourseLookup } as StateType);
+      console.log('State after setState: arrCourseLookup:**************', arrCourseLookup); // Log immediately after setting state
+    } catch (err) {
+      console.error('Error loading quiz question:', err);
+      showSnackbar(gMessageConstants.SNACKBAR_DATA_FETCH_ERROR, 'error');
     }
-    setState({ arrCourseLookup: arrCourseLookup } as StateType);
-  }, [getCourseLookup]);
+  }, [getCourseByUserIdLookup, companyInfo.company_type]);
 
   const getNotes = useCallback(
     async (arrCourseLookupParam: LookupDTO[], selectedCourseId?: number): Promise<void> => {
@@ -71,6 +106,7 @@ const useNotesInsight = ({ courseId, courseName, StudyNotesId }: Props) => {
 
       try {
         const { data } = await getStudyNotesAll();
+        console.log("Fetched data:", data);
         if (data?.getStudyNotesAll) {
           arrStudyNotesDTO = data.getStudyNotesAll;
         }
@@ -168,19 +204,6 @@ const useNotesInsight = ({ courseId, courseName, StudyNotesId }: Props) => {
     [state.dtoStudyNotes]
   );
 
-  const validateCourse = useCallback(async () => {
-    if (state.dtoStudyNotes.course_name.trim() === '') {
-      return 'Course Name is required';
-    } else {
-      return null;
-    }
-  }, [state.dtoStudyNotes.course_name]);
-
-  const onCourseBlur = useCallback(async () => {
-    const course_name = await validateCourse();
-    setState({ errorMessages: { ...state.errorMessages, course_name: course_name } } as StateType);
-  }, [validateCourse, state.errorMessages]);
-
   const goToNext = () => {
     if (currentIndex < state.arrStudyNotesListAll.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -193,7 +216,7 @@ const useNotesInsight = ({ courseId, courseName, StudyNotesId }: Props) => {
     }
   };
 
-  const currentProgram = state.arrStudyNotesListFilter[0] || {};
+  const currentProgram = state.arrStudyNotesListFilter[currentIndex] || {};
 
   const setOpen1 = useCallback(async (): Promise<void> => {
     setState({ open1: true } as StateType);
@@ -218,12 +241,27 @@ const useNotesInsight = ({ courseId, courseName, StudyNotesId }: Props) => {
     }
   };
 
+  // const handleDownloadPdf = async () => {
+  //   await generatePDF({
+  //     title: currentProgram.title,
+  //     content: currentProgram.description?.code
+  //   });
+  // };
+
   const handleDownloadPdf = async () => {
     await generatePDF({
       title: currentProgram.title,
-      content: currentProgram.description?.code
+      content: currentProgram.description?.code,
+      logoUrl: companyInfo.logo_url,
+      company: {
+        email: companyInfo.company_email,
+        website: 'adhyayan.online',
+        contact: '+91-9522933330',
+        contactUsPage: 'adhyayan.online/contact-us'
+      }
     });
   };
+
   return {
     currentProgram,
     state,
@@ -234,7 +272,6 @@ const useNotesInsight = ({ courseId, courseName, StudyNotesId }: Props) => {
     goToPrev,
     setClose1,
     onCourseChange,
-    onCourseBlur,
     isPrevDisabled: currentIndex === 0,
     isNextDisabled: currentIndex === state.arrStudyNotesListFilter.length - 1,
     handleDownloadPdf,

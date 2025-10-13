@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { SvgIconProps } from '@mui/material/SvgIcon';
 interface MyShoppingCartIconProps extends SvgIconProps {}
 const MyShoppingCartIcon = ({ ...props }: MyShoppingCartIconProps) => {
-  console.log('MyShoppingCartIcon render');
+//  console.log('MyShoppingCartIcon render');
   return <ShoppingCartIcon {...props}></ShoppingCartIcon>;
 };
 export default memo(MyShoppingCartIcon, (prevProps, nextProps) => {

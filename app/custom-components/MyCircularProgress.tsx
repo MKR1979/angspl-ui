@@ -5,7 +5,7 @@ import eq from 'lodash/eq';
 interface MyCircularProgressProps extends CircularProgressProps {}
 
 const MyCircularProgress = ({ ...props }: MyCircularProgressProps) => {
-  console.log('MyCircularProgress rendered');
+  // console.log('MyCircularProgress rendered');
   return <CircularProgress {...props}></CircularProgress>;
 };
 

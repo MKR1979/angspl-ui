@@ -1,5 +1,5 @@
 'use client';
-import { forwardRef, useCallback, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import { styled } from '@mui/material/styles';
@@ -20,7 +20,7 @@ import MyTextField from '../custom-components/MyTextField';
 import MyInputAdornment from '../custom-components/MyInputAdornment';
 import MyIconSearch from '../custom-components/MyIconSearch';
 import MyIconAdjustmentsHorizontal from '../custom-components/MyIconAdjustmentsHorizontal';
-import MyPerfectScrollbar from '../custom-components/MyPerfectScrollbar ';
+// import MyPerfectScrollbar from '../custom-components/MyPerfectScrollbar ';
 import MyDrawer from '../custom-components/MyDrawer';
 import MyCard from '../custom-components/MyCard';
 import MyLogo from '../custom-components/MyLogo';
@@ -38,13 +38,22 @@ import MyArrowRightIcon from '../custom-components/MyArrowRightIcon';
 import MySimpleTreeView from '../custom-components/MySimpleTreeView';
 import { useFirstRender } from '../hooks/useFirstRender';
 import AuthGuard from '../auth-guard';
-import { useDispatch, useSelector } from '../store';
-import { setToken } from '../store/slices/globalState';
+import { useDispatch, useSelector, RootState } from '../store';
+import { setToken } from '../store/slices/loginState';
 import MyIconDashboard from '../custom-components/MyIconDashboard';
-import MyIconBook from '../custom-components/MyIconBook';
+//import MyIconBook from '../custom-components/MyIconBook';
 import MyIconActivity from '../custom-components/MyIconActivity';
 import MyIconClipboardData from '../custom-components/MyIconClipboardData';
 import MyHistoryEduTwoToneIcon from '../custom-components/MyHistoryEduTwoToneIcon';
+import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
+import AssignmentTwoToneIcon from '@mui/icons-material/AssignmentTwoTone';
+import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
+import StickyNote2TwoToneIcon from '@mui/icons-material/StickyNote2TwoTone';
+import CodeTwoToneIcon from '@mui/icons-material/CodeTwoTone';
+import AutoStoriesTwoToneIcon from '@mui/icons-material/AutoStoriesTwoTone';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { SnackbarProvider } from '../custom-components/SnackbarProvider'; // adjust path as needed
+import { findPermission } from '../common/utility-permission'; // path to your utility
 
 declare module 'react' {
   interface CSSProperties {
@@ -52,9 +61,7 @@ declare module 'react' {
     '--tree-view-bg-color'?: string;
   }
 }
-interface StyledTreeItemProps 
-  extends Omit<UseTreeItem2Parameters, 'rootRef' | 'children'>, 
-  React.HTMLAttributes<HTMLLIElement> {
+interface StyledTreeItemProps extends Omit<UseTreeItem2Parameters, 'rootRef' | 'children'>, React.HTMLAttributes<HTMLLIElement> {
   bgColor?: string;
   bgColorForDarkMode?: string;
   color?: string;
@@ -127,46 +134,46 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(props: StyledTreeItemP
     '--tree-view-color': theme.palette.mode !== 'dark' ? color : colorForDarkMode,
     '--tree-view-bg-color': theme.palette.mode !== 'dark' ? bgColor : bgColorForDarkMode
   };
-  
+
   return (
-  <TreeItem2Provider itemId={itemId}>
-    <CustomTreeItemRoot {...getRootProps({ ...other, style })}>
-      <CustomTreeItemContent
-        {...getContentProps({
-          className: clsx('content', {
-            expanded: status.expanded,
-            selected: status.selected,
-            focused: status.focused
-          })
-        })}
-      >
-        <CustomTreeItemIconContainer {...getIconContainerProps()}>
-          <TreeItem2Icon status={status} />
-        </CustomTreeItemIconContainer>
-        <MyBox
-          sx={{
-            display: 'flex',
-            flexGrow: 1,
-            alignItems: 'center',
-            p: 0,
-            pr: 0
-          }}
+    <TreeItem2Provider itemId={itemId}>
+      <CustomTreeItemRoot {...getRootProps({ ...other, style })}>
+        <CustomTreeItemContent
+          {...getContentProps({
+            className: clsx('content', {
+              expanded: status.expanded,
+              selected: status.selected,
+              focused: status.focused
+            })
+          })}
         >
-          <MyBox component={LabelIcon} color="inherit" sx={{ mr: 1, ml: -2 }} />
-          <MyTypography
-            {...getLabelProps({
-              variant: 'body2',
-              sx: { display: 'flex', fontWeight: 'inherit', flexGrow: 1 }
-            })}
-          />
-          <MyTypography variant="caption" color="inherit">
-            {labelInfo}
-          </MyTypography>
-        </MyBox>
-      </CustomTreeItemContent>
-      {children && <CustomTreeItemGroupTransition {...getGroupTransitionProps()} />}
-    </CustomTreeItemRoot>
-  </TreeItem2Provider>
+          <CustomTreeItemIconContainer {...getIconContainerProps()}>
+            <TreeItem2Icon status={status} />
+          </CustomTreeItemIconContainer>
+          <MyBox
+            sx={{
+              display: 'flex',
+              flexGrow: 1,
+              alignItems: 'center',
+              p: 0,
+              pr: 0
+            }}
+          >
+            <MyBox component={LabelIcon} color="inherit" sx={{ mr: 1, ml: -2 }} />
+            <MyTypography
+              {...getLabelProps({
+                variant: 'body2',
+                sx: { display: 'flex', fontWeight: 'inherit', flexGrow: 1 }
+              })}
+            />
+            <MyTypography variant="caption" color="inherit">
+              {labelInfo}
+            </MyTypography>
+          </MyBox>
+        </CustomTreeItemContent>
+        {children && <CustomTreeItemGroupTransition {...getGroupTransitionProps()} />}
+      </CustomTreeItemRoot>
+    </TreeItem2Provider>
   );
 });
 
@@ -187,7 +194,7 @@ export default function RootLayout({
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -220,6 +227,12 @@ export default function RootLayout({
     dispatch(setToken(''));
   }, [removeCookie, dispatch]);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <MyMenu
@@ -239,7 +252,8 @@ export default function RootLayout({
     >
       <MyMenuItem onClick={handleMenuProfile}>Profile</MyMenuItem>
       <MyMenuItem onClick={handleMenuChangePassword}>Change Password</MyMenuItem>
-      <MyMenuItem onClick={handleMenuClose}>My account</MyMenuItem>
+      {/* <MyMenuItem onClick={handleMenuClose}>My account</MyMenuItem> */}
+      {/*  *** this would be used later on *** */}
       <MyMenuItem onClick={logout}>Logout</MyMenuItem>
     </MyMenu>
   );
@@ -262,16 +276,16 @@ export default function RootLayout({
       onClose={handleMobileMenuClose}
     >
       <MyMenuItem>
-        <MyIconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <MyBadge badgeContent={4} color="error">
+        <MyIconButton size="large" aria-label="show 0 new mails" color="inherit">
+          <MyBadge badgeContent={0} color="error">
             <MyMailIcon />
           </MyBadge>
         </MyIconButton>
         <p>Messages</p>
       </MyMenuItem>
       <MyMenuItem>
-        <MyIconButton size="large" aria-label="show 17 new notifications" color="inherit">
-          <MyBadge badgeContent={17} color="error">
+        <MyIconButton size="large" aria-label="show 0 new notifications" color="inherit">
+          <MyBadge badgeContent={0} color="error">
             <MyNotificationsIcon />
           </MyBadge>
         </MyIconButton>
@@ -294,10 +308,25 @@ export default function RootLayout({
   const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
   const theme = useTheme();
   //const dispatch = useDispatch();
-  const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
-  const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
+  const matchUpMd = useMediaQuery(theme.breakpoints.up('md'), { noSsr: true });
+  const matchDownMd = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
   const firstRender = useFirstRender();
-  const [open, setOpen] = useState(true);
+  //const [open, setOpen] = useState(true);
+  const isBelowMinSidebarWidth = useMediaQuery('(max-width: 900px)');
+  const [open, setOpen] = useState<boolean | null>(null);
+  const sidebarWidth = 'clamp(220px, 20vw, 300px)';
+
+  useEffect(() => {
+    if (open === null) {
+      setOpen(!matchDownMd);
+    }
+  }, [matchDownMd, open]);
+
+  useEffect(() => {
+    if (isBelowMinSidebarWidth) {
+      setOpen(false);
+    }
+  }, [isBelowMinSidebarWidth]);
 
   const toggleDrawer = () => () => {
     setOpen(!open);
@@ -307,322 +336,415 @@ export default function RootLayout({
       setOpen(false);
     }
   };
-  const { loginUser } = useSelector((state) => state.globalState);
-  const { siteConfig } = useSelector((state) => state.globalState);
-  console.log( 'show site cong\fig',siteConfig);
-   // Initialize all menus as visible by default
+  const userPermissions = useSelector((state: RootState) => state.siteConfigState.userPermission);
+  const { loginUser } = useSelector((state) => state.loginState);
+  const { companyInfo } = useSelector((state) => state.globalState);
+  const { siteConfig } = useSelector((state) => state.siteConfigState);
+  // Initialize all menus as visible by default
   const menuFlags = {
+    learningDashboard: true,
+    courseContents: true,
     freeCourse: true,
     paidCourse: true,
+    studyKits: true,
     testQuizzes: true,
     videoInsights: true,
     codeInsights: true,
     notesInsights: true,
     studentInfo: true,
+    feePayment: true,
+    homeworks: true
     // Add more keys as needed...
   };
 
-  // Apply switch-case to disable menus when value is 'false'
-  if (siteConfig) {
-    switch (siteConfig.key) {
-      case 'enable_free_course':
-        menuFlags.freeCourse = siteConfig.value == 'true';
-        break;
-      case 'enable_paid_course':
-        menuFlags.paidCourse = siteConfig.value == 'true';
-        break;
-      case 'enable_test_quizzes':
-        menuFlags.testQuizzes = siteConfig.value == 'true';
-        break;
-      case 'enable_video_insights':
-        menuFlags.videoInsights = siteConfig.value == 'true';
-        break;
-      case 'enable_code_insights':
-        menuFlags.codeInsights = siteConfig.value == 'true';
-        break;
-      case 'enable_notes_insights':
-        menuFlags.notesInsights = siteConfig.value == 'true';
-        break;
-      case 'enable_student_info':
-        menuFlags.studentInfo = siteConfig.value == 'true';
-        break;
-      // Add remaining 13+ cases here
-      default:
-        break;
-    }
+  if (Array.isArray(siteConfig)) {
+    siteConfig.forEach((config) => {
+      switch (config.key) {
+        case 'ENABLE_LEARNING_DASHBOARD':
+          menuFlags.learningDashboard = config.value === 'true';
+          break;
+        case 'ENABLE_COURSE_CONTENTS':
+          menuFlags.courseContents = config.value === 'true';
+          break;
+        case 'ENABLE_FREE_COURSE':
+          menuFlags.freeCourse = config.value === 'true';
+          break;
+        case 'ENABLE_PAID_COURSE':
+          menuFlags.paidCourse = config.value === 'true';
+          break;
+        case 'ENABLE_STUDY_KITS':
+          menuFlags.studyKits = config.value === 'true';
+          break;
+        case 'ENABLE_TEST_QUIZZES':
+          menuFlags.testQuizzes = config.value === 'true';
+          break;
+        case 'ENABLE_VIDEO_INSIGHTS':
+          menuFlags.videoInsights = config.value === 'true';
+          break;
+        case 'ENABLE_CODE_INSIGHTS':
+          menuFlags.codeInsights = config.value === 'true';
+          break;
+        case 'ENABLE_NOTES_INSIGHTS':
+          menuFlags.notesInsights = config.value === 'true';
+          break;
+        case 'ENABLE_STUDENT_INFO':
+          menuFlags.studentInfo = config.value === 'true';
+          break;
+        case 'ENABLE_FEE_PAYMENT':
+          menuFlags.feePayment = config.value === 'true';
+          break;
+        case 'ENABLE_HOMEWORKS':
+          menuFlags.homeworks = config.value === 'true';
+          break;
+        // Add more cases here if needed
+        default:
+          break;
+      }
+    });
   }
-  //  
-  return (
-    <AuthGuard>
-      <MyBox>
-        <MyAppBar position="fixed" elevation={0} sx={{ backgroundColor: '#fff', color: '#000' }}>
-          <MyToolbar>
-            <MyBox sx={{ width: 300, display: 'flex' }}>
-              <MyIconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} onClick={toggleDrawer()}>
-                <MyMenuIcon />
-              </MyIconButton>
-               <MyBox
-                sx={{
-                  textShadow: '2px 2px 5px black',
-                  fontWeight: 'bold',
-                  fontSize: '26px',
-                  paddingTop: '5px',
-                  width: '96px'
-                }}
-              >
-                <MyLink href="/learning-dashbord">
-                  <MyLogo />
-                </MyLink>
-              </MyBox>
-              {/* </MyTypography> */}
-            </MyBox>
-            <MyBox sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <MyTextField
-                id="input-search-header"
-                sx={{ width: '325px' }}
-                placeholder="Search"
-                autoComplete="off"
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <MyInputAdornment position="start">
-                        <MyIconButton
-                          aria-label="description for action"
-                        >
-                          <MyIconSearch
-                            stroke={1.5}
-                            size="16px"
-                          />
-                        </MyIconButton>
-                      </MyInputAdornment>
-                    ),
-                    endAdornment: (
-                      <MyInputAdornment position="end">
-                        {/* <HeaderAvatarStyle variant="rounded"> */}
-                        <MyIconButton>
-                          <MyIconAdjustmentsHorizontal
-                            id="qsettings"
-                            stroke={1.5}
-                            size="20px"
-                          />
-                        </MyIconButton>
-                        {/* </HeaderAvatarStyle> */}
-                      </MyInputAdornment>
-                    )
-                  }
-                }}
-              />
-            </MyBox>
-            {/*Welcome Message */}
-            {loginUser && (
-                <MyTypography
-                  sx={{
-                    ml: 30,
-                    //fontWeight: 'bold',
-                    fontSize: '13px',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  Welcome, {loginUser}
-                </MyTypography>
-              )}
-            <MyBox sx={{ flexGrow: 1 }} />
-            <MyBox sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <MyIconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <MyBadge badgeContent={4} color="error">
-                  <MyMailIcon />
-                </MyBadge>
-              </MyIconButton>
-              <MyIconButton size="large" aria-label="show 17 new notifications" color="inherit">
-                <MyBadge badgeContent={17} color="error">
-                  <MyNotificationsIcon />
-                </MyBadge>
-              </MyIconButton>
-              <MyIconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <MyAccountCircle />
-              </MyIconButton>
-            </MyBox>
-            <MyBox sx={{ display: { xs: 'flex', md: 'none' } }}>
-              <MyIconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MyMoreVertIcon />
-              </MyIconButton>
-            </MyBox>
-          </MyToolbar>
-        </MyAppBar>
-        {renderMobileMenu}
-        {renderMenu}
-        <Offset></Offset>
-      </MyBox>
+  if (!companyInfo?.logo_url) return null;
 
-      <MyBox sx={{ display: 'flex' }}>
-        <MyBox component="nav" sx={{ width: firstRender ? 300 : open && matchUpMd ? 300 : 0 }}>
-          <MyDrawer
-            variant={firstRender ? 'persistent' : matchUpMd ? 'persistent' : 'temporary'}
-            open={open}
-            onClose={toggleDrawer()}
+  return (
+    <SnackbarProvider>
+      <AuthGuard>
+        <MyBox sx={{ mb: 2.5 }}>
+          {isMounted && (
+            <>
+              <MyAppBar position="fixed" elevation={0} sx={{ backgroundColor: '#fff', color: '#000' }}>
+                <MyToolbar>
+                  <MyBox sx={{ width: 300, display: 'flex' }}>
+                    <MyIconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} onClick={toggleDrawer()}>
+                      <MyMenuIcon />
+                    </MyIconButton>
+                    <MyBox
+                      sx={{
+                        textShadow: '2px 2px 5px black',
+                        fontWeight: 'bold',
+                        fontSize: '26px',
+                        paddingTop: '5px',
+                        width: '96px'
+                      }}
+                    >
+                      <MyLink href="/learning-dashbord">
+                        <MyLogo src={companyInfo.logo_url} height={companyInfo.logo_height}  />
+                      </MyLink>
+                    </MyBox>
+                    {/* </MyTypography> */}
+                  </MyBox>
+                  <MyBox sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <MyTextField
+                      id="input-search-header"
+                      sx={{ width: '325px' }}
+                      placeholder="Search"
+                      autoComplete="off"
+                      slotProps={{
+                        input: {
+                          startAdornment: (
+                            <MyInputAdornment position="start">
+                              <MyIconButton aria-label="description for action">
+                                <MyIconSearch stroke={1.5} size="16px" />
+                              </MyIconButton>
+                            </MyInputAdornment>
+                          ),
+                          endAdornment: (
+                            <MyInputAdornment position="end">
+                              {/* <HeaderAvatarStyle variant="rounded"> */}
+                              <MyIconButton>
+                                <MyIconAdjustmentsHorizontal id="qsettings" stroke={1.5} size="20px" />
+                              </MyIconButton>
+                              {/* </HeaderAvatarStyle> */}
+                            </MyInputAdornment>
+                          )
+                        }
+                      }}
+                    />
+                  </MyBox>
+                  {/*Welcome Message */}
+                  {loginUser && (
+                    <MyTypography
+                      sx={{
+                        ml: 2,
+                        //fontWeight: 'bold',
+                        fontSize: '13px',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      {/* Welcome, {loginUser} */}
+                    </MyTypography>
+                  )}
+                  <MyBox sx={{ flexGrow: 1 }} />
+                  <MyBox sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <MyIconButton size="large" aria-label="show 0 new mails" color="inherit">
+                      <MyBadge badgeContent={0} color="error">
+                        <MyMailIcon />
+                      </MyBadge>
+                    </MyIconButton>
+                    <MyIconButton size="large" aria-label="show 0 new notifications" color="inherit">
+                      <MyBadge badgeContent={0} color="error">
+                        <MyNotificationsIcon />
+                      </MyBadge>
+                    </MyIconButton>
+                    <MyIconButton
+                      size="large"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      onClick={handleProfileMenuOpen}
+                      color="inherit"
+                    >
+                      <MyAccountCircle />
+                    </MyIconButton>
+                  </MyBox>
+                  <MyBox sx={{ display: { xs: 'flex', md: 'none' } }}>
+                    <MyIconButton
+                      size="large"
+                      aria-label="show more"
+                      aria-controls={mobileMenuId}
+                      aria-haspopup="true"
+                      onClick={handleMobileMenuOpen}
+                      color="inherit"
+                    >
+                      <MyMoreVertIcon />
+                    </MyIconButton>
+                  </MyBox>
+                </MyToolbar>
+              </MyAppBar>
+              {renderMobileMenu}
+              {renderMenu}
+              <Offset></Offset>
+            </>
+          )}
+        </MyBox>
+
+        <MyBox sx={{ display: 'flex' }}>
+          <MyBox
+            component="nav"
             sx={{
-              width: 300,
-              '& .MuiDrawer-paper': {
-                mt: firstRender ? 11 : open && matchUpMd ? 11 : 0,
-                zIndex: 1099,
-                background: theme.palette.background.default,
-                color: theme.palette.text.primary,
-                borderRight: 'none'
-              }
+              width: open && matchUpMd ? sidebarWidth : 0,
+              minWidth: open && matchUpMd ? 220 : 0,
+              transition: 'width 0.3s ease-in-out'
             }}
-            ModalProps={{ keepMounted: false }}
           >
-            <MyPerfectScrollbar
-              component="div"
-              style={{
-                overflowY: 'hidden',
-                width: 300,
-                height: 'calc(100vh - ' + (matchUpMd ? 100 : 20) + 'px)',
-                maxHeight: 'calc(100vh - ' + (matchUpMd ? 100 : 20) + 'px)',
-                marginTop: 0
+            <MyDrawer
+              variant={firstRender ? 'persistent' : matchUpMd ? 'persistent' : 'temporary'}
+              open={!!open}
+              onClose={toggleDrawer()}
+              sx={{
+                width: open && matchUpMd ? sidebarWidth : 0,
+                '& .MuiDrawer-paper': {
+                  width: open && matchUpMd ? sidebarWidth : 0,
+                  minWidth: 220,
+                  transition: 'width 0.3s ease-in-out',
+                  mt: firstRender ? 11 : open && matchUpMd ? 11 : 0,
+                  zIndex: 1099,
+                  background: theme.palette.background.default,
+                  color: theme.palette.text.primary,
+                  borderRight: 'none'
+                }
               }}
+              ModalProps={{ keepMounted: false }}
             >
-              <MySimpleTreeView
-                aria-label="gmail"
-                defaultExpandedItems={['3']}
-                defaultSelectedItems="1"
-                slots={{
-                  expandIcon: MyArrowRightIcon,
-                  collapseIcon: MyArrowDropDownIcon,
-                  endIcon: EndIcon
+             <div
+                className="sidebar-scroll"
+                style={{
+                  overflowY: 'auto',
+                  width: sidebarWidth,
+                  height: 'calc(100vh - 100px)'
                 }}
-                sx={{ flexGrow: 1, maxWidth: 300 }}
               >
-                <CustomTreeItem
-                  itemId="1"
-                  label="Learning Dashboard"
-                  labelIcon={MyIconDashboard}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/learning-dashboard');
+                <MySimpleTreeView
+                  aria-label="gmail"
+                  defaultSelectedItems="1"
+                  slots={{
+                    expandIcon: MyArrowRightIcon,
+                    collapseIcon: MyArrowDropDownIcon,
+                    endIcon: EndIcon
                   }}
-                />
-                {menuFlags.paidCourse && (
-                <CustomTreeItem
-                  itemId="2"
-                  label="Paid Courses"
-                  labelIcon={MyIconBook}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/paid-courses');
-                  }}
-                /> 
-                 )}
-                {menuFlags.freeCourse && (
+                  sx={{ flexGrow: 1, maxWidth: sidebarWidth }}
+                >
+                  {menuFlags.learningDashboard && (
                     <CustomTreeItem
-                      itemId="3"
-                      label="Free Courses"
-                      labelIcon={MyIconBook}
+                      itemId="1"
+                      label="Learning Dashboard"
+                      labelIcon={MyIconDashboard}
                       onClick={() => {
                         toggleDrawer1();
-                        router.push('/free-courses');
+                        router.push('/learning-dashboard');
                       }}
                     />
                   )}
+                  {menuFlags.courseContents && (
+                    <CustomTreeItem itemId="2" label="Course Contents" labelIcon={LibraryBooksTwoToneIcon}>
+                      {menuFlags.paidCourse && (
+                        <CustomTreeItem
+                          itemId="2-1"
+                          label="Enrolled Courses"
+                          labelIcon={MenuBookTwoToneIcon}
+                          onClick={() => {
+                            toggleDrawer1();
+                            if (findPermission(userPermissions, 105)) {
+                              router.push('/paid-courses');
+                            } else {
+                              router.push('/access-denied');
+                            }
+                          }}
+                        />
+                      )}
+                      {menuFlags.freeCourse && (
+                        <CustomTreeItem
+                          itemId="2-2"
+                          label="Free Courses"
+                          labelIcon={MenuBookTwoToneIcon}
+                          onClick={() => {
+                            toggleDrawer1();
+                            if (findPermission(userPermissions, 212)) {
+                              router.push('/free-courses');
+                            } else {
+                              router.push('/access-denied');
+                            }
+                          }}
+                        />
+                      )}
+                    </CustomTreeItem>
+                  )}
+                  {menuFlags.studyKits && (
+                    <CustomTreeItem itemId="3" label="Study Kits" labelIcon={AutoStoriesTwoToneIcon}>
+                      {menuFlags.codeInsights && (
+                        <CustomTreeItem
+                          itemId="3-1"
+                          label="Code Insights"
+                          labelIcon={CodeTwoToneIcon}
+                          onClick={() => {
+                            toggleDrawer1();
+                            if (findPermission(userPermissions, 30)) {
+                              router.push('/code-insights');
+                            } else {
+                              router.push('/access-denied');
+                            }
+                          }}
+                        />
+                      )}
+                      {menuFlags.notesInsights && (
+                        <CustomTreeItem
+                          itemId="3-2"
+                          label="Notes Insights"
+                          labelIcon={StickyNote2TwoToneIcon}
+                          onClick={() => {
+                            toggleDrawer1();
+                            if (findPermission(userPermissions, 95)) {
+                              router.push('/notes-insights');
+                            } else {
+                              router.push('/access-denied');
+                            }
+                          }}
+                        />
+                      )}
+                      {menuFlags.videoInsights && (
+                        <CustomTreeItem
+                          itemId="3-3"
+                          label="Videos Insights"
+                          labelIcon={MyIconClipboardData}
+                          onClick={() => {
+                            toggleDrawer1();
+                            if (findPermission(userPermissions, 200)) {
+                              router.push('/video-insights');
+                            } else {
+                              router.push('/access-denied');
+                            }
+                          }}
+                        />
+                      )}
+                    </CustomTreeItem>
+                  )}
                   {menuFlags.testQuizzes && (
-                 <CustomTreeItem
-                  itemId="4"
-                  label="Test & Quizzes"
-                  labelIcon={MyIconActivity}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/quiz-data');
-                  }}
-                />  
-                 )}
-                 {menuFlags.videoInsights && (
-                 <CustomTreeItem
-                  itemId="5"
-                  label="Videos Insights"
-                  labelIcon={MyIconClipboardData}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/video-insights');
-                  }}
-                /> 
-                 )}
-                 {menuFlags.codeInsights && (
-                <CustomTreeItem
-                  itemId="6"
-                  label="Code Insights"
-                  labelIcon={MyIconBook}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/code-insights');
-                  }}
-                />
-                 )}
-                  {menuFlags.notesInsights && (
-                  <CustomTreeItem
-                  itemId="8"
-                  label="Notes Insights"
-                  labelIcon={MyIconBook}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/notes-insights');
-                  }}
-                />
-                 )}
-                 {menuFlags.studentInfo && (
-                <CustomTreeItem
-                  itemId="7"
-                  label="Student Info"
-                  labelIcon={MyHistoryEduTwoToneIcon}
-                  onClick={() => {
-                    toggleDrawer1();
-                    router.push('/student-info');
-                  }}
-                />  
-                )}
-              </MySimpleTreeView>
-            </MyPerfectScrollbar>
-          </MyDrawer>
-        </MyBox>
-        <MyCard
-          component="div"
-          sx={{
-            flexGrow: 1,
-            borderRadius: 2,
-            backgroundColor: 'rgb(238, 242, 246)',
-            position: 'relative',
-            left: 0,
-            width: 'calc(100vw - ' + (firstRender ? 300 : matchUpMd ? 300 : 0) + 'px'
-          }}
-        >
-        <MyBox
-          sx={{
-            flexGrow: 1,
-            p: 1,
-            m: 1.5,
-            borderRadius: 2,
-            backgroundColor: '#fff',
-            minHeight: 'calc(100vh - 88px)'
-          }}
-        >
-          {children}
+                    <CustomTreeItem
+                      itemId="4"
+                      label="Skill Tests"
+                      labelIcon={MyIconActivity}
+                      onClick={() => {
+                        toggleDrawer1();
+                        if (findPermission(userPermissions, 155)) {
+                          router.push('/quiz-data');
+                        } else {
+                          router.push('/access-denied');
+                        }
+                      }}
+                    />
+                  )}
+                  {menuFlags.feePayment && (
+                    <CustomTreeItem
+                      itemId="5"
+                      label="Payment & Fees"
+                      labelIcon={CreditCardIcon}
+                      onClick={() => {
+                        toggleDrawer1();
+                        if (findPermission(userPermissions, 80)) {
+                          router.push('/fee-payments');
+                        } else {
+                          router.push('/access-denied');
+                        }
+                      }}
+                    />
+                  )}
+                  {menuFlags.studentInfo && (
+                    <CustomTreeItem
+                      itemId="6"
+                      label="Student Info"
+                      labelIcon={MyHistoryEduTwoToneIcon}
+                      onClick={() => {
+                        toggleDrawer1();
+                        router.push('/student-info');
+                      }}
+                    />
+                  )}
+                  {menuFlags.homeworks && (
+                    <CustomTreeItem
+                      itemId="7"
+                      label="Homework"
+                      labelIcon={AssignmentTwoToneIcon}
+                      onClick={() => {
+                        toggleDrawer1();
+                        if (findPermission(userPermissions, 213)) {
+                          router.push('/notes-insights');
+                        } else {
+                          router.push('/access-denied');
+                        }
+                      }}
+                    />
+                  )}
+                </MySimpleTreeView>
+                {/* </MyPerfectScrollbar> */}
+              </div>
+            </MyDrawer>
           </MyBox>
-        </MyCard>
-      </MyBox> 
-    </AuthGuard>
+          <MyCard
+            component="div"
+            sx={{
+              flexGrow: 1,
+              borderRadius: 2,
+              backgroundColor: 'rgb(238, 242, 246)',
+              position: 'relative',
+              left: 0,
+              //width: 'calc(100vw - ' + (firstRender ? 300 : matchUpMd ? 300 : 0) + 'px'
+              width: `calc(100vw - ${open ? 300 : 0}px)`
+            }}
+          >
+            <MyBox
+              sx={{
+                flexGrow: 1,
+                p: 1,
+                m: 1.5,
+                borderRadius: 2,
+                backgroundColor: '#fff',
+                minHeight: 'calc(100vh - 88px)'
+              }}
+            >
+              {children}
+            </MyBox>
+          </MyCard>
+        </MyBox>
+      </AuthGuard>
+    </SnackbarProvider>
   );
 }

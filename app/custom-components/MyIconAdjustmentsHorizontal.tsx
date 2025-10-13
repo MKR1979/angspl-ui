@@ -5,7 +5,7 @@ import { IconProps } from '@tabler/icons-react';
 interface MyIconAdjustmentsHorizontalProps extends IconProps {}
 const MyIconAdjustmentsHorizontal = forwardRef(({ ...props }: MyIconAdjustmentsHorizontalProps, ref: ForwardedRef<SVGSVGElement>) => {
   //const MyIconAdjustmentsHorizontal = ({ ...props }: MyIconAdjustmentsHorizontalProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconAdjustmentsHorizontal ref={ref as unknown as any} {...props} />;
 });
 MyIconAdjustmentsHorizontal.displayName = 'MyIconAdjustmentsHorizontal';

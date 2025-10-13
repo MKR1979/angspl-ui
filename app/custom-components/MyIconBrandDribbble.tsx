@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { IconProps } from '@tabler/icons-react';
 interface MyIconBrandDribbbleProps extends IconProps {}
 const MyIconBrandDribbble = ({ ...props }: MyIconBrandDribbbleProps) => {
-  console.log('My render');
+  //console.log('My render');
   return <IconBrandDribbble {...props}></IconBrandDribbble>;
 };
 export default memo(MyIconBrandDribbble, (prevProps, nextProps) => {

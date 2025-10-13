@@ -20,7 +20,7 @@ type Props = {
 };
 
 const ClientViewUser = ({ dtoUser }: Props) => {
-  const { state, onEditClick, onImageError } = useViewUser({ dtoUser });
+  const { state, onEditClick, onImageError,onCancelClick } = useViewUser({ dtoUser });
 
   return (
     <>
@@ -34,7 +34,7 @@ const ClientViewUser = ({ dtoUser }: Props) => {
                   <MyImage
                     src={
                       state.dtoUser.image_url?.trim() == ''
-                        ? '/default-image.avif'
+                        ? '/common/default-image.webp'
                         : process.env.NEXT_PUBLIC_API_ROOT_URL + '/uploads/' + state.dtoUser.image_url
                     }
                     width={800}
@@ -86,6 +86,7 @@ const ClientViewUser = ({ dtoUser }: Props) => {
         ></MyTimestamp>
         <MyCardActions>
           <MyButton onClick={onEditClick}>Edit</MyButton>
+          <MyButton onClick={onCancelClick}>Close</MyButton>
         </MyCardActions>
       </MyCard>
     </>

@@ -8,7 +8,7 @@ interface MyImageProps extends ImageProps {
 }
 
 const MyImage = ({ ...props }: MyImageProps) => {
-  console.log('MyImage rendered');
+// console.log('MyImage rendered');
   return <Image {...props}></Image>;
 };
 
