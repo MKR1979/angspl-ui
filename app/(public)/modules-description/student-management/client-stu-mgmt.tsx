@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/studentMngImgs/student6.jpg', '/studentMngImgs/student8.jpg', '/studentMngImgs/student10.jpg'];
+const bannerImages = ['/studentMngImgs/student6.jpg', '/studentMngImgs/student8.jpg'];
 
 const ClientStuMgmt = () => {
   const images = ['/studentMngImgs/stu1.webp', '/studentMngImgs/stu2.webp', '/studentMngImgs/stu3.webp'];
@@ -90,7 +90,7 @@ const ClientStuMgmt = () => {
                     </div>
                   </MyGrid>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Student Management System</span> is a comprehensive digital
                   platform designed to efficiently manage every aspect of a student’s academic journey — from admission to performance
                   tracking. It serves as the central hub for students, teachers, and administrators to interact, share information, and
@@ -99,7 +99,7 @@ const ClientStuMgmt = () => {
                   This system streamlines all student-related operations such as course enrollment, attendance, examinations, and fee
                   management. It ensures that every student’s record is organized, accessible, and up to date, helping institutions maintain
                   accuracy and transparency in academic administration.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">KEY BENEFITS OF STUDENT MANAGEMENT SYSTEM</div>
                 </MyGrid>
@@ -147,7 +147,7 @@ const ClientStuMgmt = () => {
                     </div>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   Our system provides three flexible methods to add new students to the platform, ensuring a smooth and efficient onboarding
                   process. Heres how students can be added:
                   <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
@@ -176,7 +176,7 @@ const ClientStuMgmt = () => {
                   </MyGrid>
                   Each of these methods ensures that student data is seamlessly captured and integrated into the system for further academic
                   and administrative processes.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Study Kit</h2>
                   <div className="responsive-video">
@@ -189,7 +189,7 @@ const ClientStuMgmt = () => {
                   </div>
                 </MyGrid>
 
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Study Kit</span> is a dedicated learning resource in the
                   Student Dashboard that helps students access all essential study materials in one place. It includes{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Code Insights</span>, which provide programming examples, practical
@@ -200,7 +200,7 @@ const ClientStuMgmt = () => {
                   recorded lectures, allowing students to learn visually and understand complex topics more effectively. Together, these
                   features of the Study Kit provide a structured, interactive, and comprehensive approach to learning, enabling students to
                   improve their knowledge and skills efficiently.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Study Tests</h2>
                   <div className="responsive-video">
@@ -212,7 +212,7 @@ const ClientStuMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Skill Tests</span> section in the Student Dashboard is designed
                   to help students assess their understanding of course material and measure their learning progress . It provides a variety
                   of quizzes, tests, and assessments aligned with the topics covered in enrolled courses. Each test evaluates different
@@ -220,7 +220,7 @@ const ClientStuMgmt = () => {
                   these tests within a set duration, and the system provides instant feedback or scores upon completion. This helps students
                   identify their strengths and areas for improvement, enabling focused learning. Skill Tests also allow educators to track
                   performance, monitor progress, and ensure that students are mastering the concepts effectively.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Payment & Fees</h2>
                   <div className="responsive-video">
@@ -232,14 +232,14 @@ const ClientStuMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment & Fees</span> section in the Student Dashboard provides
                   students with a complete overview of their financial status within the institution. It displays information about paid
                   fees, showing all completed transactions along with dates, amounts, and receipts for transparency. At the same time, it
                   highlights any due payments, including outstanding amounts, deadlines, fines, or discounts, helping students stay aware of
                   pending fees. This section allows students to track their financial obligations efficiently and ensures that they can make
                   timely payments, thereby avoiding any disruptions in course access or academic activities.
-                </MyCardContent>
+                </MyGrid>
               </MyGrid>
             </MyCardContent>
           </MyCard>
