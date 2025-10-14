@@ -67,9 +67,7 @@ const ClientAffiliateMgmt = () => {
             <ArrowForwardIos />
           </IconButton>
         </div>
-        {/* <div className="about-banner">
-          <img src="/ModulesImgs/admsMng.png" alt="Admission Management" className="about-banner-img" />
-        </div> */}
+
         <MyBox
           sx={{
             width: { xs: '100%', sm: '76%' },
@@ -126,7 +124,7 @@ const ClientAffiliateMgmt = () => {
                         <span>&#10003;</span> Improves brand visibility through affiliate promotions.
                       </li>
                       <li style={{ margin: 0, padding: 0 }}>
-                        <span>&#10003;</span> Saves time by reducing manual tracking and calculations.
+                        <span>&#10003;</span>Saves time by reducing manual tracking and calculations.
                       </li>
                     </ul>
                   </MyCardContent>
