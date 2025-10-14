@@ -8,12 +8,12 @@ import MyBox from '@/app/custom-components/MyBox';
 import { IconButton, Button } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './demoClg.css';
-import { COMPANY } from '../../constants/constants';
 import { useDemoClg } from './useDemoClg';
 import SchoolIcon from '@mui/icons-material/School';
 import GroupIcon from '@mui/icons-material/Group';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const ClientDemoClg = () => {
   const { bannerImages, currentIndex, goToNext, goToPrev, getYouTubeVideoId, testimonials, handleModuleClick, moduleRefs } = useDemoClg();
@@ -237,22 +237,22 @@ const ClientDemoClg = () => {
             sx={{
               position: 'absolute',
               bottom: { xs: 50, sm: 50 },
-              right: { xs: 10, sm: 20 }, 
+              right: { xs: 10, sm: 20 },
               borderRadius: '90px',
               bgcolor: '#FFD700',
               color: '#334D6E',
               boxShadow: 3,
-              px: { xs: 0.8, sm: 1.5 }, 
-              py: { xs: 0.5, sm: 1.5 }, 
+              px: { xs: 0.8, sm: 1.5 },
+              py: { xs: 0.5, sm: 1.5 },
               display: 'flex',
               alignItems: 'center',
-              gap: { xs: 0.5, sm: 1 }, 
-              fontSize: { xs: 8, sm: 12 } 
+              gap: { xs: 0.5, sm: 1 },
+              fontSize: { xs: 8, sm: 12 }
             }}
           >
             <SchoolIcon
               sx={{
-                fontSize: { xs: 14, sm: 20 } 
+                fontSize: { xs: 14, sm: 20 }
               }}
             />
             Schedule Free Demo
@@ -347,17 +347,7 @@ const ClientDemoClg = () => {
             </MyCardContent>
           </MyCard>
         </MyBox>
-        {/* FOOTER */}
-        <div className="container">
-          <div className="vertical_center">
-            <p>
-              © {new Date().getFullYear()} {COMPANY}, All rights reserved.
-            </p>
-            <div className="vertical_center">
-              || <a href="/terms">Terms of use</a> || <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
       <Button
         href="https://adhyayan.college"

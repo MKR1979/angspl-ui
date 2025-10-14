@@ -8,12 +8,12 @@ import MyBox from '@/app/custom-components/MyBox';
 import { IconButton, Button } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './demoSch.css';
-import { COMPANY } from '../../constants/constants';
 import { useDemoSch } from './useDemoSch';
 import SchoolIcon from '@mui/icons-material/School';
 import GroupIcon from '@mui/icons-material/Group';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const ClientDemoSch = () => {
   const { bannerImages, currentIndex, goToNext, goToPrev, getYouTubeVideoId, testimonials, handleModuleClick, moduleRefs } = useDemoSch();
@@ -344,20 +344,8 @@ const ClientDemoSch = () => {
               </div>
             </MyCardContent>
           </MyCard>
-
-
         </MyBox>
-                  {/* FOOTER */}
-          <div className="container">
-            <div className="vertical_center">
-              <p>
-                © {new Date().getFullYear()} {COMPANY}, All rights reserved.
-              </p>
-              <div className="vertical_center">
-                || <a href="/terms">Terms of use</a> || <a href="/privacy-policy">Privacy Policy</a>
-              </div>
-            </div>
-          </div>
+        <Footer />
       </div>
       <Button
         href="https://adhyayan.school"
