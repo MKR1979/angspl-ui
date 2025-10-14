@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { COMPANY } from '.././constants/constants';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 import './technology.css';
 
 const technologies = [
@@ -39,7 +39,7 @@ const technologies = [
 
 const TechnologyPage: React.FC = () => {
   return (
-      <div className="page-wrapper">
+    <div className="page-wrapper">
       {/* Main content */}
       <div className="content">
         <Box sx={{ p: 4 }}>
@@ -70,50 +70,8 @@ const TechnologyPage: React.FC = () => {
           </TableContainer>
         </Box>
       </div>
-
-      {/* Footer */}
-      <div className="footer">
-        <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
-        <div>
-          <a href="/terms">Terms of use</a> | <a href="/privacy-policy">Privacy Policy</a>
-        </div>
-      </div>
+      <Footer />
     </div>
-
-    // <div className="page-wrapper">
-    //   <div className="content">
-    //     <Box sx={{ p: 4 }}>
-    //       <Typography variant="h5" gutterBottom>
-    //         Technology Expertise
-    //       </Typography>
-    //       <TableContainer component={Paper}>
-    //         <Table>
-    //           <TableHead>
-    //             <TableRow>
-    //               <TableCell className="table-header">Program</TableCell>
-    //               <TableCell className="table-header">Primary Technology Stack</TableCell>
-    //             </TableRow>
-    //           </TableHead>
-    //           <TableBody>
-    //             {technologies.map((tech) => (
-    //               <TableRow key={tech.program} className="table-row">
-    //                 <TableCell>{tech.program}</TableCell>
-    //                 <TableCell>{tech.stack}</TableCell>
-    //               </TableRow>
-    //             ))}
-    //           </TableBody>
-    //         </Table>
-    //       </TableContainer>
-    //     </Box>
-    //   </div>
-
-    //   <div className="footer">
-    //     <p>© Copyright 2025 {COMPANY}, All rights reserved.</p>
-    //     <div>
-    //       <a href="/terms">Terms of use</a> | <a href="/privacy-policy">Privacy Policy</a>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
