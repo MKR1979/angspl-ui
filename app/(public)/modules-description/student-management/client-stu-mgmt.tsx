@@ -5,7 +5,7 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import './stu-mgmt.css';
-import { COMPANY } from '../../constants/constants';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
@@ -138,7 +138,7 @@ const ClientStuMgmt = () => {
                   </MyCardContent>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <MyTypography sx={{ fontSize: '24px',textAlign:'center', marginTop: '5px',marginBottom: '5px',  color: '#465063', fontFamily: 'serif',fontWeight:'bold' }} >Adding a New Student Online</MyTypography>
+                  <MyTypography sx={{ fontSize: '24px', textAlign: 'center', marginTop: '5px', marginBottom: '5px', color: '#465063', fontFamily: 'serif', fontWeight: 'bold' }} >Adding a New Student Online</MyTypography>
                   <div className="book-container">
                     <div className="book">
                       {images.map((src, index) => (
@@ -244,18 +244,7 @@ const ClientStuMgmt = () => {
             </MyCardContent>
           </MyCard>
         </MyBox>
-        <div className="container">
-          <div className="vertical_center">
-            <p>
-              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-            </p>
-            <div className="vertical_center">
-              ||
-              <a href="/terms">Terms of use</a>||
-              <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
     </>
   );

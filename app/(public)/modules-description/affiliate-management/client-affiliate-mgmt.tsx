@@ -5,12 +5,12 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import './affiliate-mgmt.css';
-import { COMPANY } from '../../constants/constants';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff10.jpg'];
 
@@ -272,18 +272,7 @@ const ClientAffiliateMgmt = () => {
             </MyCardContent>
           </MyCard>
         </MyBox>
-        <div className="container">
-          <div className="vertical_center">
-            <p>
-              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-            </p>
-            <div className="vertical_center">
-              ||
-              <a href="/terms">Terms of use</a>||
-              <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
     </>
   );

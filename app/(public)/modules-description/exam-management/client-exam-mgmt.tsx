@@ -5,7 +5,7 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import './exam-mgmt.css';
-import { COMPANY } from '../../constants/constants';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
@@ -129,49 +129,49 @@ const ClientExamMgmt = () => {
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                  <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                    <MyTypography
-                      sx={{
-                        fontSize: '24px',
-                        textAlign: 'center',
-                        marginTop: '5px',
-                        marginBottom: '5px',
-                        color: '#465063',
-                        fontFamily: 'serif',
-                        fontWeight: 'bold'
-                      }}
-                    >
-                      How It Works Section
-                    </MyTypography>
-                    <div className="book-container">
-                      <div className="book">
-                        {images.map((src, index) => (
-                          <img key={index} src={src} alt={`page-${index}`} className={`page ${index === current ? 'active' : ''}`} />
-                        ))}
-                      </div>
+                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
+                  <MyTypography
+                    sx={{
+                      fontSize: '24px',
+                      textAlign: 'center',
+                      marginTop: '5px',
+                      marginBottom: '5px',
+                      color: '#465063',
+                      fontFamily: 'serif',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    How It Works Section
+                  </MyTypography>
+                  <div className="book-container">
+                    <div className="book">
+                      {images.map((src, index) => (
+                        <img key={index} src={src} alt={`page-${index}`} className={`page ${index === current ? 'active' : ''}`} />
+                      ))}
                     </div>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
-                    <MyCardContent className="list-text">
-                      <ul className="benefits-list">
-                        <li style={{ margin: 0, padding: 0 }}>
-                          <span>&#10003;</span> After sign-in, the admin dashboard opens automatically.
-                        </li>
-                        <li>
-                          <span>&#10003;</span> From the left-side menu, click on academics.
-                        </li>
-                        <li>
-                          <span>&#10003;</span> Under accademics, select online exam.
-                        </li>
-                        <li>
-                          <span>&#10003;</span>Transparent: Accurate performance reports.
-                        </li>
-                        <li style={{ margin: 0, padding: 0 }}>
-                          <span>&#10003;</span> The exam dashboard will open, showing a list of existing exams.
-                        </li>
-                      </ul>
-                    </MyCardContent>
-                  </MyGrid>
+                  </div>
+                </MyGrid>
+                <MyGrid size={{ xs: 12, sm: 12 }} sx={{ textAlign: 'left', margin: 0, paddingX: { xs: '16px', sm: '24px', md: '10px' } }}>
+                  <MyCardContent className="list-text">
+                    <ul className="benefits-list">
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> After sign-in, the admin dashboard opens automatically.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> From the left-side menu, click on academics.
+                      </li>
+                      <li>
+                        <span>&#10003;</span> Under accademics, select online exam.
+                      </li>
+                      <li>
+                        <span>&#10003;</span>Transparent: Accurate performance reports.
+                      </li>
+                      <li style={{ margin: 0, padding: 0 }}>
+                        <span>&#10003;</span> The exam dashboard will open, showing a list of existing exams.
+                      </li>
+                    </ul>
+                  </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Online Exam </h2>
                   <div className="responsive-video">
@@ -358,18 +358,7 @@ const ClientExamMgmt = () => {
             </MyCardContent>
           </MyCard>
         </MyBox>
-        <div className="container">
-          <div className="vertical_center">
-            <p>
-              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-            </p>
-            <div className="vertical_center">
-              ||
-              <a href="/terms">Terms of use</a>||
-              <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
     </>
   );

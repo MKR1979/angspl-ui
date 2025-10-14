@@ -5,7 +5,7 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import './course-mgmt.css';
-import { COMPANY } from '../../constants/constants';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
@@ -32,7 +32,7 @@ const ClientCourseMgmt = () => {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   };
 
-    const images = ['/coursemngImgs/course.webp',  '/coursemngImgs/courses.PNG', '/coursemngImgs/courses1.jpg', '/coursemngImgs/courses3.webp.jpg'];
+  const images = ['/coursemngImgs/course.webp', '/coursemngImgs/courses.PNG', '/coursemngImgs/courses1.jpg', '/coursemngImgs/courses3.webp.jpg'];
 
   const [current, setCurrent] = useState(0);
 
@@ -42,7 +42,7 @@ const ClientCourseMgmt = () => {
     }, 4000); // change page every 4 seconds
     return () => clearInterval(interval);
   }, []);
-  console.log('test',clearInterval)
+  console.log('test', clearInterval)
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
     const matches = url.match(regex);
@@ -160,7 +160,7 @@ const ClientCourseMgmt = () => {
                       <li>
                         <span>&#10003;</span> Under accademics, select courses.
                       </li>
-                     <li style={{ margin: 0, padding: 0 }}>
+                      <li style={{ margin: 0, padding: 0 }}>
                         <span>&#10003;</span> The course dashboard will open, showing a list of existing courses.
                       </li>
                     </ul>
@@ -218,19 +218,8 @@ const ClientCourseMgmt = () => {
               </MyGrid>
             </MyCardContent>
           </MyCard>
-        </MyBox>       
-          <div className="container">
-            <div className="vertical_center">
-              <p>
-                © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-              </p>
-              <div className="vertical_center">
-                ||
-                <a href="/terms">Terms of use</a>||
-                <a href="/privacy-policy">Privacy Policy</a>
-              </div>
-            </div>
-          </div>
+        </MyBox>
+        <Footer />
       </div>
     </>
   );
