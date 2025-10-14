@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useDemoClg = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -6,27 +6,6 @@ export const useDemoClg = () => {
 
   const moduleRefs = useRef<HTMLDivElement[]>([]);
   moduleRefs.current = []; 
-
-  const testimonials = useMemo(
-    () => [
-      {
-        text: 'This system has completely transformed how we handle student data.',
-        name: 'Priya Sharma',
-        school: 'Lotus Public School'
-      },
-      {
-        text: 'Our admissions are now 3x faster and more transparent.',
-        name: 'Rahul Mehta',
-        school: 'Sunrise International'
-      },
-      {
-        text: 'Teachers love how simple it is to manage attendance and grading.',
-        name: 'Anita George',
-        school: 'Silver Oak High School'
-      }
-    ],
-    []
-  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,10 +23,13 @@ export const useDemoClg = () => {
   }, [bannerImages.length]);
 
   const handleModuleClick = useCallback((index: number) => {
-    if (moduleRefs.current[index]) {
-      moduleRefs.current[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, []);
+  const element = moduleRefs.current[index];
+  if (element) {
+    const yOffset = -60;
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}, []);
 
   const getYouTubeVideoId = useCallback((url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
@@ -62,7 +44,6 @@ export const useDemoClg = () => {
     goToPrev,
     getYouTubeVideoId,
     handleModuleClick,
-    testimonials,
     moduleRefs
   };
 };

@@ -16,133 +16,136 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const ClientDemoTech = () => {
-  const { bannerImages, currentIndex, goToNext, goToPrev, getYouTubeVideoId, testimonials, handleModuleClick, moduleRefs } = useDemoTech();
+  const { bannerImages,
+    currentIndex,
+    goToNext,
+    goToPrev,
+    getYouTubeVideoId,
+    handleModuleClick,
+    moduleRefs
+  } = useDemoTech();
+
+  const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
 
   const modules = [
     {
-      icon: <SchoolIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Academic Management',
-      description: 'Organize subjects, classes, timetables, grading, and learning resources efficiently.',
-      content: (
-        <div style={{ lineHeight: 1.6 }}>
-          <p>
-            The <strong>Academic Management</strong> module is designed to streamline every aspect of your institutes academic operations.
-            From creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless
-            and efficient.
-          </p>
+  icon: <SchoolIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+  title: 'Academic Management',
+  description: 'Organize subjects, classes, timetables, grading, and learning resources efficiently.',
+  content: (
+    <div style={{ lineHeight: 1.6 }}>
+      <p>
+        The <strong>Academic Management</strong> module is designed to streamline every aspect of your institute’s academic operations.
+        From creating subjects and assigning teachers to scheduling classes, this module ensures that academic workflows are seamless
+        and efficient. AI-driven suggestions help optimize class schedules, teacher assignments, and syllabus coverage for maximum efficiency.
+      </p>
 
-          <h3>Key Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li>Create and manage subjects, classes, and sections with ease.</li>
-            <li>Set up academic calendars and manage exam schedules.</li>
-            <li>Assign teachers to classes and track their workload.</li>
-            <li>Grade management: record, update, and analyze student performance.</li>
-            <li>Generate timetables automatically or manually, ensuring no clashes.</li>
-            <li>Monitor attendance trends and manage syllabus coverage.</li>
-          </ul>
+      <h3>Key Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li>Create and manage subjects, classes, and sections with ease.</li>
+        <li>Set up academic calendars and manage exam schedules, with AI-assisted alerts for potential timetable conflicts.</li>
+        <li>Assign teachers to classes and track their workload efficiently, with smart workload balancing suggestions.</li>
+        <li>Grade management: record, update, and analyze student performance. AI insights highlight trends and at-risk students.</li>
+        <li>Generate timetables automatically or manually, ensuring no clashes and optimized utilization of classrooms.</li>
+        <li>Monitor attendance trends and manage syllabus coverage, with predictive analytics to identify students needing extra support.</li>
+      </ul>
 
-          <h3>Learning Management System (LMS) Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li><strong>Study Notes Module:</strong> Provide students with downloadable and interactive study notes for all subjects.</li>
-            <li><strong>Video Content:</strong> Upload and share video lectures, tutorials, and demonstrations directly with students.</li>
-            <li><strong>Online Exams:</strong> Conduct quizzes, mid-terms, and final exams online and automatically evaluate student performance.</li>
-            <li><strong>Performance Graphs:</strong> Visualize student progress over time with performance dashboards and analytics.</li>
-            <li><strong>Paid & Free Courses:</strong> Offer additional courses either for free or on a subscription basis, directly integrated within the LMS.</li>
-          </ul>
+      <h3>Learning Management System (LMS) Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li><strong>Study Notes Module:</strong> Provide students with downloadable and interactive study notes for all subjects.</li>
+        <li><strong>Video Content:</strong> Upload and share video lectures, tutorials, and demonstrations directly with students.</li>
+        <li><strong>Online Exams:</strong> Conduct quizzes, mid-terms, and final exams online and automatically evaluate student performance, with AI-assisted grading analysis.</li>
+        <li><strong>Performance Graphs:</strong> Visualize student progress over time with dashboards enhanced by AI insights for targeted interventions.</li>
+        <li><strong>Paid & Free Courses:</strong> Offer additional courses either for free or on a subscription basis, directly integrated within the LMS, with AI recommendations for students based on their performance.</li>
+      </ul>
 
-          <p>
-            This module empowers teachers, administrators, and management to stay on top of academic planning while also providing
-            students with a comprehensive learning platform. By integrating study materials, video content, online evaluations, and
-            courses, the LMS ensures both teaching and learning are efficient, engaging, and measurable.
-          </p>
+      <p>
+        This module empowers teachers, administrators, and management to stay on top of academic planning while also providing
+        students with a comprehensive learning platform. By integrating study materials, video content, online evaluations, and
+        courses, the LMS ensures both teaching and learning are efficient, engaging, and measurable.
+      </p>
 
-          <p>
-            With detailed reports and insights, educators can identify strengths and weaknesses in student performance, helping them
-            make data-driven decisions for academic improvement.
-          </p>
+      <p>
+        With detailed reports, predictive analytics, and AI-driven insights, educators can identify strengths and weaknesses in student performance, helping them
+        make data-driven decisions for academic improvement.
+      </p>
 
-          {/* Optional: demo video */}
-          <h3>Academic Management Demo:</h3>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
-            title="Academic Management Demo"
-            frameBorder="0"
-            allowFullScreen
-            style={{ marginTop: '1rem', borderRadius: '8px' }}
-          ></iframe>
-
-          {/* Optional: image */}
-          {/* <img
-        src="/ModulesImgs/admsMng.png"
-        alt="Academic Dashboard"
-        style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
-      /> */}
-        </div>
-      )
-    },
+      <h3>Academic Management Demo:</h3>
+      <iframe
+        width="100%"
+        height="315"
+        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+        title="Academic Management Demo"
+        frameBorder="0"
+        allowFullScreen
+        style={{ marginTop: '1rem', borderRadius: '8px' }}
+      ></iframe>
+    </div>
+  )
+},
     {
-      icon: <GroupIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Student & Staff Records',
-      description: 'Manage student, teacher, and staff data securely along with attendance tracking.',
-      content: (
-        <div style={{ lineHeight: 1.6 }}>
-          <p>
-            The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all the data of
-            students, teachers, and staff members. It provides a secure, centralized database that ensures easy access, efficient
-            management, and accurate tracking of every individual associated with your institute.
-          </p>
+  icon: <GroupIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+  title: 'Student & Staff Records',
+  description: 'Manage student, teacher, and staff data securely along with attendance tracking.',
+  content: (
+    <div style={{ lineHeight: 1.6 }}>
+      <p>
+        The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all the data of
+        students, teachers, and staff members. It provides a secure, centralized database that ensures easy access, efficient
+        management, and accurate tracking of every individual associated with your institute. AI-powered insights help detect patterns
+        and anomalies in records for proactive management.
+      </p>
 
-          <h3>Key Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li>Maintain detailed student profiles with personal, academic, and medical information.</li>
-            <li>Track staff qualifications, experience, subjects taught, and attendance records.</li>
-            <li>Upload and manage documents, certificates, photographs, and ID cards securely.</li>
-            <li>Search, filter, and sort records for quick retrieval and efficient management.</li>
-            <li>Integrate with timetables, attendance, and grading systems for holistic insights.</li>
-            <li>Automated alerts for missing or incomplete data entries.</li>
-            <li>Generate printable student and staff reports for administrative needs.</li>
-          </ul>
+      <h3>Key Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li>Maintain detailed student profiles with personal, academic, and medical information.</li>
+        <li>Track staff qualifications, experience, subjects taught, and attendance records.</li>
+        <li>Upload and manage documents, certificates, photographs, and ID cards securely.</li>
+        <li>Search, filter, and sort records quickly with AI-assisted suggestions for faster retrieval.</li>
+        <li>Integrate with timetables, attendance, and grading systems for holistic insights.</li>
+        <li>Automated alerts for missing or incomplete data entries, helping staff stay on top of critical updates.</li>
+        <li>Generate printable student and staff reports for administrative needs with predictive trend highlights.</li>
+      </ul>
 
-          <h3>Attendance Management System:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li><strong>Employee & Student Attendance:</strong> Maintain accurate attendance records for all staff and students.</li>
-            <li><strong>Location-Based Attendance:</strong> Users can mark attendance only within the campus, ensuring authenticity.</li>
-            <li><strong>Track Presence & Absence:</strong> Monitor daily attendance, late arrivals, and absences in real-time.</li>
-            <li><strong>Attendance Analytics:</strong> Generate reports and dashboards for performance tracking and compliance.</li>
-          </ul>
+      <h3>Attendance Management System:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li><strong>Employee & Student Attendance:</strong> Maintain accurate attendance records for all staff and students.</li>
+        <li><strong>Location-Based Attendance:</strong> Users can mark attendance only within the campus, ensuring authenticity.</li>
+        <li><strong>Track Presence & Absence:</strong> Monitor daily attendance, late arrivals, and absences in real-time.</li>
+        <li><strong>Attendance Analytics:</strong> AI-assisted dashboards highlight trends, patterns, and potential issues in attendance.</li>
+      </ul>
 
-          <p>
-            <strong>Benefits:</strong> Reduces manual paperwork, eliminates data duplication, improves accessibility, and ensures compliance
-            with institute policies. Administrators, teachers, and staff can work seamlessly with up-to-date information.
-          </p>
+      <p>
+        <strong>Benefits:</strong> Reduces manual paperwork, eliminates data duplication, improves accessibility, and ensures compliance
+        with institute policies. AI-driven insights enable administrators and teachers to identify anomalies and act proactively,
+        ensuring smooth operational management.
+      </p>
 
-          <p>
-            <strong>Use Cases:</strong> Quickly find student details during parent-teacher meetings, track staff workload, maintain health
-            records, manage transfers, and ensure smooth communication between teachers, students, and management. Attendance data can
-            also be used to analyze student participation and staff punctuality.
-          </p>
+      <p>
+        <strong>Use Cases:</strong> Quickly find student details during parent-teacher meetings, track staff workload, maintain health
+        records, manage transfers, and ensure smooth communication between teachers, students, and management. Attendance data and
+        AI-based trends help analyze student participation and staff punctuality effectively.
+      </p>
 
-          <h3>Attendance Module Demo:</h3>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
-            title="Attendance Management Demo"
-            frameBorder="0"
-            allowFullScreen
-            style={{ marginTop: '1rem', borderRadius: '8px' }}
-          ></iframe>
+      <h3>Attendance Module Demo:</h3>
+      <iframe
+        width="100%"
+        height="315"
+        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+        title="Attendance Management Demo"
+        frameBorder="0"
+        allowFullScreen
+        style={{ marginTop: '1rem', borderRadius: '8px' }}
+      ></iframe>
 
-
-          <p>
-            With this module, your institute can build a robust digital ecosystem that ensures all student and staff information,
-            including attendance and other critical records, is organized, secure, and easily accessible whenever needed.
-          </p>
-        </div>
-      )
-    },
+      <p>
+        With this module, your institute can build a robust digital ecosystem that ensures all student and staff information,
+        including attendance and other critical records, is organized, secure, and easily accessible whenever needed. AI-powered
+        insights provide proactive alerts and help in trend analysis, making management more effective and informed.
+      </p>
+    </div>
+  )
+},
     {
       icon: <ReceiptLongIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
       title: 'Fees & Finance',
@@ -183,7 +186,7 @@ const ClientDemoTech = () => {
           <iframe
             width="100%"
             height="315"
-            src="https://www.youtube.com/embed/DJ72Ir6YgHg?rel=0"
+            src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
             title="Fee Management Demo"
             frameBorder="0"
             allowFullScreen
@@ -198,53 +201,55 @@ const ClientDemoTech = () => {
       )
     },
     {
-      icon: <TimelineIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Reports & Analytics',
-      description: 'Gain insights into student performance and institute efficiency.',
-      content: (
-        <div style={{ lineHeight: 1.6 }}>
-          <p>
-            The <strong>Reports & Analytics</strong> module transforms institute data into meaningful insights, allowing administrators and
-            teachers to make data-driven decisions for academic excellence and operational efficiency.
-          </p>
+  icon: <TimelineIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+  title: 'Reports & Analytics',
+  description: 'Gain insights into student performance and institute efficiency.',
+  content: (
+    <div style={{ lineHeight: 1.6 }}>
+      <p>
+        The <strong>Reports & Analytics</strong> module transforms institute data into meaningful insights, helping administrators and
+        teachers make data-driven decisions for academic excellence and operational efficiency.
+      </p>
 
-          <h3>Key Features:</h3>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
-            <li>Generate detailed performance reports for students, classes, and subjects.</li>
-            <li>Visual dashboards for attendance trends, academic progress, fees collected, and staff performance.</li>
-            <li>Customizable analytics to monitor learning outcomes, exam results, and financial health.</li>
-            <li>Track trends over time to identify areas of improvement or intervention.</li>
-            <li>Export reports in multiple formats such as PDF, Excel, or CSV for presentations, audits, and record-keeping.</li>
-            <li>Integrate with other modules like Academic Management, Fees & Finance, and Attendance for a holistic view.</li>
-            <li>Real-time insights for proactive decision-making and strategic planning.</li>
-          </ul>
+      <h3>Key Features:</h3>
+      <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc' }}>
+        <li>Generate detailed performance reports for students, classes, and subjects with automated trend analysis.</li>
+        <li>Visual dashboards for attendance trends, academic progress, fee collection, and staff performance.</li>
+        <li>Smart suggestions for identifying students needing additional support and optimizing class schedules.</li>
+        <li>Customizable analytics to monitor learning outcomes, exam results, and financial health.</li>
+        <li>Track trends over time to predict areas requiring intervention or improvement.</li>
+        <li>Export reports in multiple formats such as PDF, Excel, or CSV for management review, audits, or parent communication.</li>
+        <li>Integrate with other modules like Academic Management, Fees & Finance, and Attendance for a holistic operational overview.</li>
+      </ul>
 
-          <p>
-            <strong>Benefits:</strong> Helps institute measure performance, plan interventions, enhance transparency, and make informed
-            decisions that improve student outcomes and operational efficiency.
-          </p>
+      <p>
+        <strong>Benefits:</strong> Enables institutes to make proactive, data-backed decisions, improve student outcomes, and optimize
+        administrative efficiency. With automated insights, administrators can quickly identify patterns and take timely action.
+      </p>
 
-          <p>
-            <strong>Use Cases:</strong> Monitor student progress, identify struggling students, evaluate teacher effectiveness, analyze fee
-            collection trends, prepare management reports, and drive data-backed institute improvement initiatives.
-          </p>
+      <p>
+        <strong>Use Cases:</strong> Monitor student performance trends, detect early warning signs for struggling students, evaluate
+        teaching effectiveness, analyze fee collection patterns, and generate actionable management reports.
+      </p>
 
-          <img
-            src="/ModulesImgs/admsMng.png"
-            alt="Reports & Analytics Dashboard"
-            style={{ width: '100%', marginTop: '1rem', borderRadius: '8px' }}
-          />
+      <iframe
+        width="100%"
+        height="315"
+        src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+        title="Reports & Analytics Demo"
+        frameBorder="0"
+        allowFullScreen
+        style={{ marginTop: '1rem', borderRadius: '8px' }}
+      ></iframe>
 
-          <p>
-            With the Reports & Analytics module, institute can move beyond simple record-keeping to intelligent, actionable insights that
-            support continuous improvement.
-          </p>
-        </div>
-      )
-    }
+      <p>
+        With the Reports & Analytics module, your institute can move beyond simple record-keeping to intelligent, actionable insights.
+        Automated trend detection and predictive suggestions help streamline operations and support continuous improvement.
+      </p>
+    </div>
+  )
+}
   ];
-
-  const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
 
   return (
     <>
@@ -252,12 +257,16 @@ const ClientDemoTech = () => {
         {/* === HERO SECTION === */}
         <div className="about-banner">
           <img src={bannerImages[currentIndex]} alt="institute Management Demo" className="about-banner-img" />
-          <IconButton className="banner-arrow left" onClick={goToPrev}>
-            <ArrowBackIos />
-          </IconButton>
-          <IconButton className="banner-arrow right" onClick={goToNext}>
-            <ArrowForwardIos />
-          </IconButton>
+          {bannerImages.length > 1 && (
+            <>
+              <IconButton className="banner-arrow left" onClick={goToPrev}>
+                <ArrowBackIos />
+              </IconButton>
+              <IconButton className="banner-arrow right" onClick={goToNext}>
+                <ArrowForwardIos />
+              </IconButton>
+            </>
+          )}
           <div className="hero-content">
             <h1 className="hero-title">Empower Your Institute with Smart Management</h1>
             <p className="hero-subtitle">
@@ -267,34 +276,6 @@ const ClientDemoTech = () => {
               </a>
             </p>
           </div>
-          {/* <Button
-            href="https://angspl.com/contact-us"
-            target="_blank"
-            variant="contained"
-            sx={{
-              position: 'absolute',
-              position: 'fixed',
-              bottom: { xs: 50, sm: 50 },
-              right: { xs: 10, sm: 20 },
-              borderRadius: '90px',
-              bgcolor: '#FFD700',
-              color: '#334D6E',
-              boxShadow: 3,
-              px: { xs: 0.8, sm: 1.5 },
-              py: { xs: 0.5, sm: 1.5 },
-              display: 'flex',
-              alignItems: 'center',
-              gap: { xs: 0.5, sm: 1 },
-              fontSize: { xs: 8, sm: 12 }
-            }}
-          >
-            <SchoolIcon
-              sx={{
-                fontSize: { xs: 14, sm: 20 }
-              }}
-            />
-            Schedule Free Demo
-          </Button> */}
         </div>
 
         {/* === CONTENT BODY === */}
@@ -318,8 +299,11 @@ const ClientDemoTech = () => {
                     <div></div>
                   </div>
                   <p className="card-text">
-                    Discover how our <strong>Learning Management Software</strong> simplifies daily operations for institutes. From managing
-                    admissions to tracking performance, everything is unified under one digital platform.
+                    {/* Discover how our <strong>Learning Management Software</strong> simplifies daily operations for institutes. From managing
+                    admissions to tracking performance, everything is unified under one digital platform. */}
+                    Discover how our <strong>Learning Management Software</strong> simplifies daily operations for institutes. From managing admissions to
+                     tracking performance, everything is unified under one digital platform, with <strong>Intelligent insights</strong> and <strong>AI-driven</strong> analytics 
+                     helping you make faster, data-backed decisions.
                   </p>
                 </MyGrid>
               </MyGrid>
@@ -350,21 +334,6 @@ const ClientDemoTech = () => {
                 </div>
               </MyGrid>
 
-              {/* SECTION: TESTIMONIALS */}
-              <MyGrid size={{ xs: 12 }} textAlign="center" sx={{ marginTop: 4 }}>
-                <h2 className="section-subheading">What Our Clients Say</h2>
-                <div className="testimonial-grid">
-                  {testimonials.map((t, idx) => (
-                    <div key={idx} className="testimonial-card">
-                      <p className="testimonial-text">“{t.text}”</p>
-                      <h4 className="testimonial-name">
-                        — {t.name}, {t.school}
-                      </h4>
-                    </div>
-                  ))}
-                </div>
-              </MyGrid>
-
               {/* Detailed Content Section */}
               <div className="module-details-section">
                 {modules.map((m, i) => (
@@ -392,7 +361,7 @@ const ClientDemoTech = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: { xs: 300, sm: 350 },
+          bottom: { xs: 300, sm: 400 },
           right: { xs: 10, sm: 10 },
           borderRadius: '90px',
           bgcolor: '#FFD700',
@@ -426,7 +395,7 @@ const ClientDemoTech = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: 20,
+          bottom: 80,
           right: 20,
           borderRadius: '50px',
           bgcolor: '#FFD700',
