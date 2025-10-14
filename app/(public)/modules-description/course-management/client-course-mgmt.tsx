@@ -42,7 +42,7 @@ const ClientCourseMgmt = () => {
     }, 4000); // change page every 4 seconds
     return () => clearInterval(interval);
   }, []);
-
+  console.log('test',clearInterval)
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
     const matches = url.match(regex);
