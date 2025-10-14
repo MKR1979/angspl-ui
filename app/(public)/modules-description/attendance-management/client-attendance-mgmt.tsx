@@ -5,7 +5,7 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import './attendance-mgmt.css';
-import { COMPANY } from '../../constants/constants';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
@@ -287,18 +287,7 @@ const ClientAboutUs = () => {
             </MyCardContent>
           </MyCard>
         </MyBox>
-        <div className="container">
-          <div className="vertical_center">
-            <p>
-              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-            </p>
-            <div className="vertical_center">
-              ||
-              <a href="/terms">Terms of use</a>||
-              <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
     </>
   );

@@ -5,12 +5,12 @@ import MyGrid from '@/app/custom-components/MyGrid';
 import MyCard from '@/app/custom-components/MyCard';
 import MyCardContent from '@/app/custom-components/MyCardContent';
 import './adm-mgmt.css';
-import { COMPANY } from '../../constants/constants';
 import MyBox from '@/app/custom-components/MyBox';
 import { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const bannerImages = ['/admissionImgs/adm6.jpg', '/admissionImgs/adm7.jpg'];
 
@@ -132,7 +132,7 @@ const ClientAdmMgmt = () => {
                   </MyCardContent>
                 </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                   <MyTypography sx={{ fontSize: '24px',textAlign:'center', marginTop: '5px',marginBottom: '5px',  color: '#465063', fontFamily: 'serif',fontWeight:'bold' }} >Our Admission Process</MyTypography>
+                  <MyTypography sx={{ fontSize: '24px', textAlign: 'center', marginTop: '5px', marginBottom: '5px', color: '#465063', fontFamily: 'serif', fontWeight: 'bold' }} >Our Admission Process</MyTypography>
                   <div className="book-container">
                     <div className="book">
                       {images.map((src, index) => (
@@ -209,20 +209,20 @@ const ClientAdmMgmt = () => {
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>admin</span> has full control over the admission process and
                   can manage student admissions directly from their side. This includes:
                   <MyCardContent>
-                  <ul>
-                    <li>
-                      <strong>Add Admissions:</strong> Admins can manually add new student
-                      details, course selections, and other relevant information into the system.
-                    </li>
-                    <li>
-                      <strong >View Admissions:</strong> Admins can view all student admission
-                      records, track their status, and quickly access student details when needed.
-                    </li>
-                    <li>
-                      <strong>Edit Admissions:</strong> If any student information needs
-                      correction or update, the admin can edit the records to ensure accuracy.
-                    </li>
-                  </ul>
+                    <ul>
+                      <li>
+                        <strong>Add Admissions:</strong> Admins can manually add new student
+                        details, course selections, and other relevant information into the system.
+                      </li>
+                      <li>
+                        <strong >View Admissions:</strong> Admins can view all student admission
+                        records, track their status, and quickly access student details when needed.
+                      </li>
+                      <li>
+                        <strong>Edit Admissions:</strong> If any student information needs
+                        correction or update, the admin can edit the records to ensure accuracy.
+                      </li>
+                    </ul>
                   </MyCardContent>
                   This functionality ensures that the institution can efficiently manage admissions, maintain accurate records, and provide
                   a smooth enrollment experience for students, even when applications are submitted offline or through third-party sources.
@@ -253,18 +253,7 @@ const ClientAdmMgmt = () => {
             </MyCardContent>
           </MyCard>
         </MyBox>
-        <div className="container">
-          <div className="vertical_center">
-            <p>
-              © Copyright {new Date().getFullYear()} {COMPANY}, All rights reserved.
-            </p>
-            <div className="vertical_center">
-              ||
-              <a href="/terms">Terms of use</a>||
-              <a href="/privacy-policy">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
+        <Footer />
       </div>
     </>
   );
