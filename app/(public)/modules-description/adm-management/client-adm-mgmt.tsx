@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/admissionImgs/adm6.jpg', '/admissionImgs/adm7.jpg', '/admissionImgs/adm9.jpg'];
+const bannerImages = ['/admissionImgs/adm6.jpg', '/admissionImgs/adm7.jpg'];
 
 const ClientAdmMgmt = () => {
   const images = [
@@ -94,7 +94,7 @@ const ClientAdmMgmt = () => {
                     </div>
                   </MyGrid>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text" >
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Admission Management System</span> is a digital platform
                   designed to simplify and streamline the entire student admission process. It helps school efficiently manage applications,
                   registration, document submission, and free payments in an organized and transparent manner. This system reduces manual
@@ -103,7 +103,7 @@ const ClientAdmMgmt = () => {
                   securely through a central database. With features like real-time notification, data validation, and secure record
                   management, data validation, and secure record management, the school admission management system ensures a hassle-free
                   experience for application and smooth operations for the school administration.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
                 </MyGrid>
@@ -141,7 +141,7 @@ const ClientAdmMgmt = () => {
                     </div>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The online admission and student enrollment process in schools can be tedious, involving managing and analyzing inquiries,
                   planning marketing strategies, and creating and handling student records. Verifying student data and generating merit
                   lists for various admission rounds based on seat availability, while maintaining effective communication with parents and
@@ -152,7 +152,7 @@ const ClientAdmMgmt = () => {
                   system is to help school staff efficiently enroll students and maintain accurate records. It enables administrators to
                   simplify and automate the online admission process by managing and verifying student entries, documents, images,
                   certificates.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Add New Admission</h2>
                   <div className="responsive-video">
@@ -164,7 +164,7 @@ const ClientAdmMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> School Management Software</span> helps schools automate and
                   simplify routine activities such as curriculum management, attendance tracking, administrative tasks, information
                   handling, fee management, and assignments. This robust, cloud-based, and time-tested educational ERP system offers
@@ -173,7 +173,7 @@ const ClientAdmMgmt = () => {
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management Software</span> includes all essential modules
                   for tracking student records, admissions, fees, timetable planning, and other critical school processes, enabling seamless
                   management for both teachers and staff.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Here Is Payment Process</h2>
                   <div className="responsive-video">
@@ -185,7 +185,7 @@ const ClientAdmMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   To complete your <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Admission Form</span>, carefully fill in all
                   required details and click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span>. Once your form is
                   submitted, click on <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Pay Now</span> to proceed with the payment of
@@ -193,7 +193,7 @@ const ClientAdmMgmt = () => {
                   scan it using any UPI application (Google Pay, PhonePe, Paytm) to make the payment securely. After the payment is
                   successfully completed, you will receive a <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Payment Receipt</span>{' '}
                   as confirmation of your registration.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Admissions Managed by Admin</h2>
                   <div className="responsive-video">
@@ -205,9 +205,10 @@ const ClientAdmMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>admin</span> has full control over the admission process and
                   can manage student admissions directly from their side. This includes:
+                  <MyCardContent>
                   <ul>
                     <li>
                       <strong>Add Admissions:</strong> Admins can manually add new student
@@ -222,9 +223,10 @@ const ClientAdmMgmt = () => {
                       correction or update, the admin can edit the records to ensure accuracy.
                     </li>
                   </ul>
+                  </MyCardContent>
                   This functionality ensures that the institution can efficiently manage admissions, maintain accurate records, and provide
                   a smooth enrollment experience for students, even when applications are submitted offline or through third-party sources.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Review Admissions</h2>
                   <div className="responsive-video">
@@ -236,7 +238,7 @@ const ClientAdmMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The Review Admission feature enables administrators to efficiently manage and monitor the entire admission process within
                   the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>School Management System</span>. Once logged in, administrators
                   can access the Academics section to view all admission entries in real time. The module allows filtering admissions based
@@ -246,7 +248,7 @@ const ClientAdmMgmt = () => {
                   documents, fee payment status, and other related data. This feature streamlines the admission verification process,
                   ensuring transparency and accuracy. By centralizing admission review operations, it eliminates manual checks and enhances
                   decision-making efficiency for school staff and management.
-                </MyCardContent>
+                </MyGrid>
               </MyGrid>
             </MyCardContent>
           </MyCard>

@@ -96,12 +96,12 @@ const ClientExamMgmt = () => {
                     </div>
                   </MyGrid>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   Online exams are computer-based tests that allow students to take assessments through the internet instead of traditional
                   paper methods. They provide flexibility in time and location, support automated evaluation, and offer features like
                   instant results, question randomization, and secure monitoring. This system makes learning and examination more efficient,
                   accessible, and transparent for both students and institutions.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1"> KEY HIGHLIGHTS OF ONLINE EXAMINATION MANAGEMENT</div>
                 </MyGrid>
@@ -129,8 +129,6 @@ const ClientExamMgmt = () => {
                     </ul>
                   </MyCardContent>
                 </MyGrid>
-                <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
-                  <h2 className="section-subheading">Academics</h2>
                   <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                     <MyTypography
                       sx={{
@@ -174,7 +172,6 @@ const ClientExamMgmt = () => {
                       </ul>
                     </MyCardContent>
                   </MyGrid>
-                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Online Exam </h2>
                   <div className="responsive-video">
@@ -186,7 +183,7 @@ const ClientExamMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   To manage your online examinations, begin by clicking on the{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Online Exam </span> section. Once inside, select the{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Add Exam</span> option. This will open the{' '}
@@ -201,7 +198,7 @@ const ClientExamMgmt = () => {
                   entry.
                   <br />
                   Your newly created exam will now appear in the exam list, ready for further configuration or assignment to students.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Add exam</h2>
                   <div className="responsive-video">
@@ -213,7 +210,7 @@ const ClientExamMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   To create and manage exams, navigate to the
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Add Exam </span>
                   section under the
@@ -237,7 +234,7 @@ const ClientExamMgmt = () => {
                   and click
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Save </span>
                   to confirm your changes.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Exam Questions </h2>
                   <div className="responsive-video">
@@ -249,7 +246,7 @@ const ClientExamMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   To manage your exam questions, go to the
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Exam Question </span>
                   section under the
@@ -265,7 +262,7 @@ const ClientExamMgmt = () => {
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Save </span>
                   to add the exam question successfully. The newly added question will now appear in the dashboard, ready for review or
                   editing if required.
-                </MyCardContent>
+                </MyGrid>
               </MyGrid>
               <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                 <h2 className="section-subheading">Import Exam </h2>
@@ -278,7 +275,7 @@ const ClientExamMgmt = () => {
                   ></iframe>
                 </div>
               </MyGrid>
-              <MyCardContent className="card-text">
+              <MyGrid className="card-text">
                 To manage and import exams efficiently, navigate to the
                 <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Import Exam </span>
                 section under the
@@ -299,7 +296,7 @@ const ClientExamMgmt = () => {
                 the import is successful. The newly imported exam will now appear in the dashboard, ready for assignment to students or
                 further editing. This feature streamlines exam creation, ensures consistency in question formatting, and provides an
                 efficient way to manage large sets of exam questions.
-              </MyCardContent>
+              </MyGrid>
               <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                 <h2 className="section-subheading">Student Skill Test</h2>
                 <div className="responsive-video">
@@ -311,7 +308,7 @@ const ClientExamMgmt = () => {
                   ></iframe>
                 </div>
               </MyGrid>
-              <MyCardContent className="card-text">
+              <MyGrid className="card-text">
                 To take the <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Student Skill Test, </span> start by entering your
                 correct <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Username </span> and{' '}
                 <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Password </span>. Upon successful login, the{' '}
@@ -328,7 +325,7 @@ const ClientExamMgmt = () => {
                 additional options: click <span style={{ fontWeight: 'bold', color: '#334D6E' }}> RESTART EXAM </span> if you want to take
                 the exam again, or click <span style={{ fontWeight: 'bold', color: '#334D6E' }}> EXIT EXAM </span> to leave the exam page
                 and return to the main dashboard.
-              </MyCardContent>
+              </MyGrid>
               <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                 <h2 className="section-subheading">Exam result </h2>
                 <div className="responsive-video">

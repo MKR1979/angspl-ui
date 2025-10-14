@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/ModulesImgs/attendance1.jpg', '/attendanceImgs/attendance3.jpg', '/attendanceImgs/attendances3.jpg'];
+const bannerImages = ['/ModulesImgs/attendance1.jpg', '/attendanceImgs/attendance3.jpg'];
 const ClientAboutUs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -86,13 +86,13 @@ const ClientAboutUs = () => {
                     </div>
                   </MyGrid>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance Management System</span> enables
                   employees to mark their attendance only when they are physically present within the designated office or campus premises.
                   This system uses the geolocation of the users device to validate their proximity to the registered office location.
                   Employees can conveniently use their own smartphones or devices to mark their attendance through a secure web or mobile
                   interface.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">Key Benefits of Location-Based Attendance</div>
                 </MyGrid>
@@ -145,7 +145,7 @@ const ClientAboutUs = () => {
                     </div>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Employee Attendance:</span> Employees log in securely to the
                   Location-Based Attendance system via web or mobile. The system detects their current GPS location and verifies whether
                   they are within the approved office or campus area. If inside the allowed range, the Mark Attendancebutton becomes active.
@@ -161,7 +161,7 @@ const ClientAboutUs = () => {
                   employees or students at once. After verifying the entries, they can lock the attendance records to prevent edits. Each
                   entry captures essential details such as GPS coordinates, device ID, IP address, and timestamp, making the process
                   time-efficient, accurate, and secure.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">How Employees Mark Attendance</h2>
                   <div className="responsive-video">
@@ -173,7 +173,7 @@ const ClientAboutUs = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   Employee Dashboard in the <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance system</span>{' '}
                   allows employees to mark their attendance quickly and securely. After logging in, the system automatically detects the
                   employee’s GPS location and verifies whether they are within the approved office or campus area. If they are within the
@@ -183,7 +183,7 @@ const ClientAboutUs = () => {
                   in real time. This ensures that attendance is marked only from authorized locations, maintaining{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>accuracy, transparency, and accountability</span> for the
                   organization.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">How Students Mark Attendance</h2>
                   <div className="responsive-video">
@@ -195,7 +195,7 @@ const ClientAboutUs = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   This video explains how students can efficiently mark their attendance using the{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance system</span> Once logged in to the
                   system through a web or mobile device, the student’s current GPS location is automatically detected and verified against
@@ -205,7 +205,7 @@ const ClientAboutUs = () => {
                   The attendance is then securely recorded along with device ID, IP address, location coordinates, and timestamp. This
                   ensures that attendance is accurate, location-verified, and eliminates the possibility of proxy marking, helping
                   educational institutions maintain transparency and accountability.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">How Bulk Attendance Works</h2>
                   <div className="responsive-video">
@@ -217,7 +217,7 @@ const ClientAboutUs = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   This video demonstrates how bulk attendance is managed using the{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Location-Based Attendance system</span>. Initially, attendance for
                   multiple employees or students can be marked simultaneously through the dashboard, ensuring location verification for
@@ -227,7 +227,7 @@ const ClientAboutUs = () => {
                   approach saves time, streamlines attendance management, and maintains{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>accurate and secure records</span> for the organization or
                   institution.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Review Attendance</h2>
                   <div className="responsive-video">
@@ -239,13 +239,13 @@ const ClientAboutUs = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Review Attendance</span> allows administrators to efficiently
                   manage and monitor attendance records of all users. Through this module, the admin can view detailed attendance data,
                   verify the authenticity of each entry, and make necessary edits to maintain accuracy. The system provides filters for
                   date, time in, and time out, enabling quick review and correction of records. This ensures that attendance data remains
                   transparent, accurate, and fully verified under administrative supervision.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Attendance Report</h2>
                   <div className="responsive-video">
@@ -257,7 +257,7 @@ const ClientAboutUs = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Attendance Report</span> provides a comprehensive overview of
                   attendance data in multiple formats to help administrators and users analyze presence and performance effectively. The
                   module offers three key report types:
@@ -282,7 +282,7 @@ const ClientAboutUs = () => {
                   </MyGrid>
                   Together, these reports enable institutions to maintain transparent, well-organized, and easily accessible attendance
                   records.
-                </MyCardContent>
+                </MyGrid>
               </MyGrid>
             </MyCardContent>
           </MyCard>
