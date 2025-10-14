@@ -16,6 +16,7 @@ import usePricingSch from './usePricingSch';
 import * as Constants from '../../constants/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const ClientPricingSch = () => {
   const { state, goToCompanyModule, handleTabChange, toggleRowExpansion } = usePricingSch();
@@ -1039,16 +1040,7 @@ const ClientPricingSch = () => {
           </MyGrid>
         </MyCardContent>
       </MyBox>
-      <div className="container">
-        <div className="vertical_center">
-          <p>© Copyright 2025 {Constants.COMPANY}, All rights reserved.</p>
-          <div className="vertical_center">
-            ||
-            <a href="/terms">Terms of use</a>||
-            <a href="/privacy-policy">Privacy Policy</a>
-          </div>
-        </div>
-      </div>
+            <Footer />
     </div>
   );
 };

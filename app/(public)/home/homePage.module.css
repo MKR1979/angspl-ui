@@ -204,11 +204,11 @@ a.secondary {
 
 .rollingContent {
   display: flex;
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left 35s linear infinite;
 }
 
 .rollingRow.right .rollingContent {
-  animation: scroll-right 25s linear infinite;
+  animation: scroll-right 35s linear infinite;
 }
 
 .rollingItem {
@@ -239,11 +239,11 @@ a.secondary {
 } 
 
 .left .rollingContent {
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left 35s linear infinite;
 }
 
 .right .rollingContent {
-  animation: scroll-right 25s linear infinite;
+  animation: scroll-right 35s linear infinite;
 }
 
 @keyframes scroll-left {
@@ -251,13 +251,13 @@ a.secondary {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-60%);
   }
 }
 
 @keyframes scroll-right {
   from {
-    transform: translateX(-50%);
+    transform: translateX(-60%);
   }
   to {
     transform: translateX(0);

@@ -1,4 +1,4 @@
-/* Banner CSS starts here */
+
 .about-banner {
   position: relative;
   width: 100%;
@@ -44,7 +44,7 @@
 .banner-arrow:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
-/* Banner Css ends here */
+
 
 .section-heading {
   font-size: 28px;
@@ -70,7 +70,7 @@
   color: #465063;
   font-family: serif;
   margin-bottom: 10px;
-  /* border-bottom: 2px solid #334d6e; */
+
   padding-bottom: 6px;
   text-align: left;
 }
@@ -243,9 +243,9 @@
   gap: 10px;
 }
 
-.book {
+/* .book {
   position: relative;
-  width: 100%;              /* Increased width */
+  width: 100%;              
   height: 550px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -327,4 +327,62 @@
   .page-content p {
     font-size: 14px;
   }
+} */
+
+.book-container {
+  display: flex;
+  justify-content: center;
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 400px;
+  perspective: 1200px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all 1s ease-in-out;
+  opacity: 0;
+  transform: rotateY(-180deg);
+}
+
+.page.active {
+  opacity: 1;
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+
+
+.fade-in {
+  animation: fadeInUp 0.8s ease-in-out both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .hero-banner { height: 220px; }
+  .hero-text h1 { font-size: 22px; }
+  .hero-text p { font-size: 14px; }
+  .book { height: 350px; }
+  .card-text, .benefits-list li { font-size: 15px; }
 }

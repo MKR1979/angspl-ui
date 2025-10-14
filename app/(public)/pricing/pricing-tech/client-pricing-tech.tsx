@@ -15,7 +15,7 @@ import './pricingTech.css';
 import usePricingTech from './usePricingTech';
 import * as Constants from '../../constants/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
-// import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
 import { useRouter } from 'next/navigation';
 
 const ClientPricingTech = () => {
@@ -1045,16 +1045,7 @@ const ClientPricingTech = () => {
           </MyGrid>
         </MyCardContent>
       </MyBox>
-      <div className="container">
-        <div className="vertical_center">
-          <p>© Copyright 2025 {Constants.COMPANY}, All rights reserved.</p>
-          <div className="vertical_center">
-            ||
-            <a href="/terms">Terms of use</a>||
-            <a href="/privacy-policy">Privacy Policy</a>
-          </div>
-        </div>
-      </div>
+            <Footer />
     </div>
   );
 };
