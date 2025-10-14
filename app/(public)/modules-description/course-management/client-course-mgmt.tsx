@@ -87,12 +87,12 @@ const ClientCourseMgmt = () => {
                     </div>
                   </MyGrid>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Course Module</span> is a key component
                   of the educational management system, designed to facilitate the creation, management, and administration
                   of courses offered by an institution. This module ensures that course information is captured in a
                   structured manner, enabling efficient enrollment, tracking, and documentation processes.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">KEY HIGHLIGHT</div>
                 </MyGrid>
@@ -177,7 +177,7 @@ const ClientCourseMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   To add a new course, begin by clicking on the
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Add Course </span>
                   option. You will be prompted to enter the necessary details for the course, including
@@ -191,7 +191,7 @@ const ClientCourseMgmt = () => {
                   Once all fields are filled and files uploaded, click on the
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Save </span>
                   button to successfully create the course. The newly added course will now appear in the course list, where it can be assigned to students, edited for updates, or managed further as needed.
-                </MyCardContent>
+                </MyGrid>
                 {/* <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Review Admissions</h2>
                   <div className="responsive-video">

@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff8.jpg', '/affiliateImgs/aff10.jpg'];
+const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff10.jpg'];
 
 const ClientAffiliateMgmt = () => {
   const images = ['/affiliateImgs/aff.PNG', '/affiliateImgs/aff1.PNG', '/affiliateImgs/aff2.PNG'];
@@ -91,7 +91,7 @@ const ClientAffiliateMgmt = () => {
                     </div>
                   </MyGrid>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Management System</span> is a powerful platform
                   designed to manage and track affiliate partnerships effectively. It enables organizations to promote their courses,
                   products, or services through registered affiliates who earn commissions based on successful referrals or sales. This
@@ -100,7 +100,7 @@ const ClientAffiliateMgmt = () => {
                   and manage payouts, while affiliates can access personalized dashboards to track their earnings, referral links, and
                   progress. By integrating automation and real-time analytics, the Affiliate Management System helps institutions or
                   businesses expand their reach, increase enrollments, and build strong marketing networks with minimal manual effort.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, sm: 12 }} textAlign="left">
                   <div className="section-heading1">BENEFITS OF ONLINE ADMISSION / ENROLLMENT</div>
                 </MyGrid>
@@ -159,7 +159,7 @@ const ClientAffiliateMgmt = () => {
                     </div>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Online Affiliate</span> feature allows users to register as
                   affiliates and manage their referrals directly through the platform. To get started, click on the{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate</span> option and fill in the affiliate registration form
@@ -172,7 +172,7 @@ const ClientAffiliateMgmt = () => {
                   fill in the necessary details, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Submit</span> to create
                   the referral entry. This process allows affiliates to efficiently register, manage, and track their referrals online,
                   ensuring proper record-keeping and smooth commission tracking.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Affiliate Dashboard</h2>
                   <div className="responsive-video">
@@ -184,7 +184,7 @@ const ClientAffiliateMgmt = () => {
                     ></iframe>
                   </div>
                 </MyGrid>
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Dashboard </span> provides affiliates with a
                   complete overview of their performance, earnings, and referral activities in one place. The{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>Affiliate Summary</span> section displays key statistics such as
@@ -196,7 +196,7 @@ const ClientAffiliateMgmt = () => {
                   such as earned amount, pending payments, payout history, and payment dates, ensuring full financial transparency.
                   Together, these sections allow affiliates to track their activities, analyze performance, and manage their earnings
                   efficiently through a single, user-friendly dashboard.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Affiliate Referrals</h2>
                   <div className="responsive-video">
@@ -209,7 +209,7 @@ const ClientAffiliateMgmt = () => {
                   </div>
                 </MyGrid>
 
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Affiliate Referrals</span> section in the Affiliate Dashboard
                   provides detailed information about all users or customers who joined or purchased through an affiliate’s referral link.
                   It displays each referral’s name, registration or purchase date, status (such as pending, completed, or approved), and any
@@ -217,7 +217,7 @@ const ClientAffiliateMgmt = () => {
                   see which referrals converted successfully, and identify opportunities to increase engagement. By offering a clear and
                   organized view of all referral activities, this feature ensures transparency and allows affiliates to monitor and maximize
                   their earnings efficiently.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Review Affiliates</h2>
                   <div className="responsive-video">
@@ -230,7 +230,7 @@ const ClientAffiliateMgmt = () => {
                   </div>
                 </MyGrid>
 
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Review Affiliates </span> section allows administrators to
                   manage and monitor affiliates efficiently. To add new affiliates, click on{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Affiliates</span>, fill in the required details such as name,
@@ -243,7 +243,7 @@ const ClientAffiliateMgmt = () => {
                   appropriate rows, click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Calculate Payment”</span> to generate
                   commission details for the selected affiliates. This process ensures accurate tracking, timely payouts, and streamlined
                   management of all affiliate activities.
-                </MyCardContent>
+                </MyGrid>
                 <MyGrid size={{ xs: 12, md: 12 }} sx={{ maxWidth: '1210px', margin: '0 auto' }}>
                   <h2 className="section-subheading">Referrals</h2>
                   <div className="responsive-video">
@@ -256,7 +256,7 @@ const ClientAffiliateMgmt = () => {
                   </div>
                 </MyGrid>
 
-                <MyCardContent className="card-text">
+                <MyGrid className="card-text">
                   The <span style={{ fontWeight: 'bold', color: '#334D6E' }}> Referrals </span> section allows administrators or affiliates
                   to add and manage referral records efficiently. To add a new referral, click on{' '}
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>+Add Referrals</span>, fill in the required details such as the
@@ -269,7 +269,7 @@ const ClientAffiliateMgmt = () => {
                   <span style={{ fontWeight: 'bold', color: '#334D6E' }}>To Date</span> for the relevant period, select the appropriate
                   rows, and click <span style={{ fontWeight: 'bold', color: '#334D6E' }}>“Mark Verified”</span>. This process ensures that
                   all referra l records are properly tracked, verified, and managed for accurate reporting and commission calculation.
-                </MyCardContent>
+                </MyGrid>
               </MyGrid>
             </MyCardContent>
           </MyCard>
