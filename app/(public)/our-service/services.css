@@ -24,22 +24,3 @@
     color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
-
-    .footer {
-        height: 100px;
-        margin: 0;
-        text-align: center;
-      }
-      .container {
-        height: 70px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        background-color: #E9F0FA;
-      }
-      
-      .vertical_center {
-        margin: auto;
-        display: flex;
-        gap: 10px;
-      }

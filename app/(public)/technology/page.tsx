@@ -27,6 +27,11 @@ const technologies = [
       'Terraform (IaC), Dockers, Kubernetes, Jenkins, Git/GitLab, Azure DevOps, CI/CD, ARM/YAML, PowerShell, AI & ML, Azure Kubernetes Service, Helm chart'
   },
   {
+    program: 'AI (Artificial Intelligency) / ML (Machine Learning)',
+    stack:
+      'Generative AI, Agentic AI, Machine Learning, Deep Learning, Natural Language Processing (NLP), Computer Vision, OpenAI, TensorFlow, PyTorch, and LangChain'
+  },
+  {
     program: 'Design (Solutioning)',
     stack:
       '12 Factor App, Cloud-Native Microservices, DDD, CQRS, Event Sourcing, Saga, Serverless, Microservices Architecture, Distributed Architecture, SOLID, OOD, C4 Model, HLD & LLD, Event-Driven Architecture, SOA'

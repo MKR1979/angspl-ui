@@ -2,10 +2,12 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useDemoSch = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const bannerImages = ['/ModulesImgs/admsMng.png'];
+  const bannerImages = ['/imgPrograms/demoPage/sch/schDemo.jpg'
+    // '/imgPrograms/demoPage/sch/schDemo1.jpg',
+  ];
 
   const moduleRefs = useRef<HTMLDivElement[]>([]);
-  moduleRefs.current = []; // reset on each render
+  moduleRefs.current = [];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,13 +25,13 @@ export const useDemoSch = () => {
   }, [bannerImages.length]);
 
   const handleModuleClick = useCallback((index: number) => {
-  const element = moduleRefs.current[index];
-  if (element) {
-    const yOffset = -60; // adjust based on your fixed header height
-    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  }
-}, []);
+    const element = moduleRefs.current[index];
+    if (element) {
+      const yOffset = -60; 
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, []);
 
   const getYouTubeVideoId = useCallback((url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
