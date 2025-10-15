@@ -32,19 +32,29 @@ export default function ClientHomePage() {
 
   return (
     <div style={{ width: '100%', padding: '0px' }}>
-      <h2 className="rolling-header"> {companyInfo.company_name}</h2>
       <div
         style={{
+          width: '100%',
+          overflow: 'hidden',
+          position: 'relative',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        <h2 className="rolling-header">{companyInfo.company_name}</h2>
+      </div>
+
+      <MyBox
+        sx={{
           backgroundImage: 'url(/home-page/homePage.jpg)',
+          display: 'block',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          position: 'relative',
           width: '100%',
-          height: '270px'
+          position: 'relative',
+          height: { xs: 140, sm: 200, md: 270 },
         }}
-      >
-      </div>
+      ></MyBox>
       <style>
         {`
           @keyframes rollingText {
@@ -59,9 +69,15 @@ export default function ClientHomePage() {
           .rolling-header {
             white-space: nowrap;
             overflow: hidden;
-           
-            animation: rollingText 12s linear infinite;
+           font-size: clamp(0.8rem, 4vw, 1.5rem); 
+            animation: rollingText 16s linear infinite;
           }
+
+            @media (max-width: 600px) {
+              .rolling-header {
+              animation-duration: 12s;
+  }
+}
         `}
       </style>
       <div></div>

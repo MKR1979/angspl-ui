@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [container, setContainer] = useState<HTMLElement | null>(null); // ✅ Use state for reactivity
+  const [container, setContainer] = useState<HTMLElement | null>(null); 
   const { companyInfo } = useSelector((state) => state.globalState);
   // const [menuItems, setMenuItems] = useState<{ text: string; href: string }[] | null>(null);
   const [openMobileSubmenus, setOpenMobileSubmenus] = useState<Record<string, boolean>>({});
@@ -225,7 +225,7 @@ export default function RootLayout({
       return;
     }
   }, [currentHost, router, getCompanyInfo]);
-  if (currentHost === null) return null; // avoid SSR crash
+  if (currentHost === null) return null; 
   if (currentHost === gConstants.DPS_HOST_NAME) return null;
   // END BLOCK-A
   //Array
@@ -272,7 +272,6 @@ export default function RootLayout({
         }
       ]
       : []),
-
     ...(menuFlags.publicDemo
       ? [
         {
@@ -285,9 +284,9 @@ export default function RootLayout({
         }
       ]
       : []),
+          ...(menuFlags.publicAboutUs ? [{ text: 'About Us', href: '/about-us' }] : []),
+              ...(menuFlags.publicAffiliates ? [{ text: 'Affiliate', href: '/affiliate' }] : []),
     ...(menuFlags.publicContactUs ? [{ text: 'Contact Us', href: '/contact-us' }] : []),
-    ...(menuFlags.publicAffiliates ? [{ text: 'Affiliate', href: '/affiliate' }] : []),
-    ...(menuFlags.publicAboutUs ? [{ text: 'About Us', href: '/about-us' }] : []),
     ...(menuFlags.publicLogin ? [{ text: 'Login', href: '/login' }] : []),
     // ...(menuFlags.publicPrograms ? [{ text: 'Programs', href: '/programs' }] : []),
     // ...(menuFlags.publicAdmission ? [{ text: 'Admission', href: '/admission' }] : []),
@@ -327,15 +326,6 @@ export default function RootLayout({
       </Typography>
       <Divider />
       <List>
-        {/* {navItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton onClick={handleCloseDrawer}>
-              <MyLink href={item.href} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <ListItemText primary={item.text} />
-              </MyLink>
-            </ListItemButton>
-          </ListItem>
-        ))} */}
         {navItems.map((item) =>
           item.children ? (
             <Box key={item.text} sx={{ display: { sm: 'none' } }}>
@@ -373,19 +363,6 @@ export default function RootLayout({
             </ListItem>
           )
         )}
-        {/* {navItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton onClick={handleCloseDrawer}>
-              {item.href ? (
-                <MyLink href={item.href} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <ListItemText primary={item.text} />
-                </MyLink>
-              ) : (
-                <ListItemText primary={item.text} />
-              )}
-            </ListItemButton>
-          </ListItem>
-        ))} */}
       </List>
     </Box>
   );
@@ -423,13 +400,6 @@ export default function RootLayout({
               </MyBox>
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {/* {navItems.map((item) => (
-                <MyButton variant="outlined" key={item.text} sx={{ backgroundColor: '#fff', border: 'none' }}>
-                  <MyLink href={item.href} style={{ color: '#000' }}>
-                    {item.text}
-                  </MyLink>
-                </MyButton>
-              ))} */}
               {navItems.map((item) =>
                 item.children ? (
                   <Box
@@ -479,6 +449,7 @@ export default function RootLayout({
                                 padding: '5px 1px 5px 8px',
                                 color: '#000',
                                 width: '100%',
+                                  fontSize: '0.875rem',
                                 borderBottom: '1px solid #ddd',
                                 '&:hover': {
                                   backgroundColor: '#f5f5f5',
@@ -518,17 +489,6 @@ export default function RootLayout({
                   </MyButton>
                 )
               )}
-              {/* {navItems.map((item) => (
-                <MyButton variant="outlined" key={item.text} sx={{ backgroundColor: '#fff', border: 'none' }}>
-                  {item.href ? (
-                    <MyLink href={item.href} style={{ color: '#000' }}>
-                      {item.text}
-                    </MyLink>
-                  ) : (
-                    item.text
-                  )}
-                </MyButton>
-              ))} */}
             </Box>
           </Toolbar>
         </AppBar>

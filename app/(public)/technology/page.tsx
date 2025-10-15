@@ -27,6 +27,11 @@ const technologies = [
       'Terraform (IaC), Dockers, Kubernetes, Jenkins, Git/GitLab, Azure DevOps, CI/CD, ARM/YAML, PowerShell, AI & ML, Azure Kubernetes Service, Helm chart'
   },
   {
+    program: 'AI (Artificial Intelligency) / ML (Machine Learning)',
+    stack:
+      'Generative AI, Agentic AI, Machine Learning, Deep Learning, Natural Language Processing (NLP), Computer Vision, OpenAI, TensorFlow, PyTorch, and LangChain'
+  },
+  {
     program: 'Design (Solutioning)',
     stack:
       '12 Factor App, Cloud-Native Microservices, DDD, CQRS, Event Sourcing, Saga, Serverless, Microservices Architecture, Distributed Architecture, SOLID, OOD, C4 Model, HLD & LLD, Event-Driven Architecture, SOA'
@@ -40,29 +45,69 @@ const technologies = [
 const TechnologyPage: React.FC = () => {
   return (
     <div className="page-wrapper">
-      {/* Main content */}
       <div className="content">
-        <Box sx={{ p: 4 }}>
-          <Typography variant="h5" gutterBottom>
+        <Box sx={{ p: { xs: 2, sm: 4 } }}>
+          <Typography variant="h5" gutterBottom sx={{ mb: 1, color: '#334D6E', fontWeight: 'bold' }}>
             Technology Expertise
           </Typography>
-          <TableContainer component={Paper}>
+          <TableContainer
+            component={Paper}
+            sx={{
+              borderRadius: 3,
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+              border: '1px solid #cfd8dc'
+            }}
+          >
             <Table>
-              <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
+              <TableHead sx={{ backgroundColor: '#f0f4f8' }}>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: '1px solid #e0e0e0', padding: '12px 16px', lineHeight: 1.2, width: '20%' }}>
+                  <TableCell
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '1.1rem',
+                      borderBottom: '2px solid #cfd8dc',
+                      width: '20%', // increased width
+                      borderRight: '1px solid #cfd8dc'
+                    }}
+                  >
                     Program
                   </TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', fontSize: '1.1rem', border: '1px solid #e0e0e0', padding: '12px 16px', lineHeight: 1.2 }}>
+                  <TableCell
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '1.1rem',
+                      borderBottom: '2px solid #cfd8dc'
+                    }}
+                  >
                     Primary Technology Stack
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {technologies.map((tech) => (
-                  <TableRow key={tech.program}>
-                    <TableCell sx={{ fontWeight: 'bold' }}>{tech.program}</TableCell>
-                    <TableCell>{tech.stack}</TableCell>
+                {technologies.map((tech, idx) => (
+                  <TableRow
+                    key={tech.program}
+                    sx={{
+                      backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9fbfd',
+                      '&:hover': {
+                        backgroundColor: '#e8f1ff',
+                        cursor: 'pointer'
+                      },
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    <TableCell
+                      sx={{
+                        fontWeight: 500,
+                        color: '#1a3e72',
+                        borderRight: '1px solid #cfd8dc',
+                        whiteSpace: 'nowrap' // keep single line
+                      }}
+                    >
+                      {tech.program}
+                    </TableCell>
+                    <TableCell sx={{ color: '#333', lineHeight: 1.6 }}>{tech.stack}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

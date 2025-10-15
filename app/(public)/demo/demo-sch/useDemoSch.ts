@@ -1,32 +1,13 @@
-import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useDemoSch = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const bannerImages = ['/ModulesImgs/admsMng.png'];
+  const bannerImages = ['/imgPrograms/demoPage/sch/schDemo.jpg'
+    // '/imgPrograms/demoPage/sch/schDemo1.jpg',
+  ];
 
   const moduleRefs = useRef<HTMLDivElement[]>([]);
-  moduleRefs.current = []; // reset on each render
-
-  const testimonials = useMemo(
-    () => [
-      {
-        text: 'This system has completely transformed how we handle student data.',
-        name: 'Priya Sharma',
-        school: 'Lotus Public School'
-      },
-      {
-        text: 'Our admissions are now 3x faster and more transparent.',
-        name: 'Rahul Mehta',
-        school: 'Sunrise International'
-      },
-      {
-        text: 'Teachers love how simple it is to manage attendance and grading.',
-        name: 'Anita George',
-        school: 'Silver Oak High School'
-      }
-    ],
-    []
-  );
+  moduleRefs.current = [];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,8 +25,11 @@ export const useDemoSch = () => {
   }, [bannerImages.length]);
 
   const handleModuleClick = useCallback((index: number) => {
-    if (moduleRefs.current[index]) {
-      moduleRefs.current[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const element = moduleRefs.current[index];
+    if (element) {
+      const yOffset = -60; 
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   }, []);
 
@@ -62,7 +46,6 @@ export const useDemoSch = () => {
     goToPrev,
     getYouTubeVideoId,
     handleModuleClick,
-    testimonials,
     moduleRefs
   };
 };
