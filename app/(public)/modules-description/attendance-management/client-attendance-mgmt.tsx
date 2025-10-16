@@ -48,8 +48,10 @@ const ClientAboutUs = () => {
     return matches ? matches[1] : null;
   };
 
-  const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
-  const videoSrc1 = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
+  const videoSrc = 'https://youtu.be/ECYhNXxdUjA';
+  const videoSrc1 = 'https://youtu.be/Oj7nV7QSyCw';
+  const videoSrc2 = 'https://youtu.be/2wc8WR7Jz48';
+  const videoSrc3 = 'https://youtu.be/YNnkKXRRm8o';
 
   return (
     <>
@@ -210,7 +212,7 @@ const ClientAboutUs = () => {
                   <h2 className="section-subheading">How Bulk Attendance Works</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc2)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
@@ -232,7 +234,7 @@ const ClientAboutUs = () => {
                   <h2 className="section-subheading">Review Attendance</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc3)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
@@ -250,7 +252,7 @@ const ClientAboutUs = () => {
                   <h2 className="section-subheading">Attendance Report</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc3)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen

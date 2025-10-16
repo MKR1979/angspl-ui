@@ -58,7 +58,7 @@ const ClientFeeMgmt = () => {
 
   const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
   const videoSrc1 = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
-
+const videoSrc3 = 'https://youtu.be/Ui1JEZYKq5I';
   return (
     <>
       <div>
@@ -247,7 +247,7 @@ const ClientFeeMgmt = () => {
                   <h2 className="section-subheading">Fee Head</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc3)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
