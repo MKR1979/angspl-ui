@@ -30,6 +30,21 @@ export default function ClientHomePage() {
     }
   }
 
+  // *** this is used to test the rolling lines in home page on local host ****
+  //   const categories = [
+  //   { name: 'School ERP', icon: '/imgPrograms/rolling/tech/schlERP.webp' },
+  //   { name: 'College ERP', icon: '/imgPrograms/rolling/tech/OnlineAttendance.webp' },
+  //   { name: 'Institute ERP', icon: '/imgPrograms/rolling/tech/online_exam.webp' },
+  //   { name: 'LMS', icon: '/imgPrograms/rolling/tech/LMS.webp' },
+  //   { name: 'Online Exams', icon: '/imgPrograms/rolling/tech/onlineExams.webp' },
+  //   { name: 'Payment Management', icon: '/imgPrograms/rolling/tech/admission.webp' },
+  //   { name: 'Shop Anywhere', icon: '/imgPrograms/rolling/tech/shopAnywhere.webp' },
+  //   { name: 'Clinic Portal', icon: '/imgPrograms/rolling/tech/clinicPortal.webp' },
+  //   { name: 'Stock Management', icon: '/imgPrograms/rolling/tech/StockManagement.webp' },
+  //   { name: 'Affiliate Programs', icon: '/imgPrograms/rolling/tech/imgAffiliate.webp' },
+  //   { name: 'Billing Management', icon: '/imgPrograms/rolling/tech/billingMgmt.webp' },
+  // ];
+
   return (
     <div style={{ width: '100%', padding: '0px' }}>
       <div
@@ -45,7 +60,7 @@ export default function ClientHomePage() {
 
       <MyBox
         sx={{
-          backgroundImage: 'url(/home-page/homePage.jpg)',
+          backgroundImage: 'url(/home-page/homePage.webp)',
           display: 'block',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
@@ -125,11 +140,11 @@ export default function ClientHomePage() {
                 <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                   <CardHeader
                     avatar={<MyApiIcon></MyApiIcon>}
-                    title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Welcome to Adhyayan NextGen Solutions Pvt. Ltd.</span>}
-                    sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                    title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Welcome to {companyInfo.company_name}</span>}
+                    sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                   />
                   <MyCardContent>
-                    At Adhyayan NextGen Solutions Pvt. Ltd., we are committed to driving digital transformation by delivering
+                    At {companyInfo.company_name}, we are committed to driving digital transformation by delivering
                     innovative, scalable, and industry-focused technology solutions. Our expertise spans ERP, CRM,
                     AI-powered automation, e-learning, billing systems, cloud solutions, and cybersecurity—helping businesses
                     optimize operations, enhance customer engagement, and accelerate growth.
@@ -145,7 +160,7 @@ export default function ClientHomePage() {
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Streamlined Business Operations</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -163,8 +178,8 @@ export default function ClientHomePage() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Customer Engagement & Sales Performance</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Customer Engagement And Sales Performance</span>}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -183,7 +198,7 @@ export default function ClientHomePage() {
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Revolutionizing Education with Digital Solutions</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -201,8 +216,8 @@ export default function ClientHomePage() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}> Data-Driven Decision Making & Analytics</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}> Data-Driven Decision Making And Analytics</span>}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -220,8 +235,8 @@ export default function ClientHomePage() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Cybersecurity & Compliance</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Cybersecurity And Compliance</span>}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -239,8 +254,8 @@ export default function ClientHomePage() {
                   >
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Scalable & Future-Ready Solutions</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Scalable And Future-Ready Solutions</span>}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -259,7 +274,7 @@ export default function ClientHomePage() {
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Scalability for Business Growth</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
                       <ul style={{ paddingLeft: '20px' }}>
@@ -278,10 +293,10 @@ export default function ClientHomePage() {
                     <CardHeader
                       avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
                       title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Innovative Solutions for a Digital-First Future</span>}
-                      sx={{ height: '50px', backgroundColor: 'rgb(238, 242, 246)' }}
+                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
                     />
                     <MyCardContent>
-                      At Adhyayan NextGen Solutions Pvt Ltd, we donot just build software—we create impact. Whether you are a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
+                      At {companyInfo.company_name}, we donot just build software—we create impact. Whether you are a startup, a large enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you stay ahead in the digital era.
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>

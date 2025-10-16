@@ -70,7 +70,6 @@
   color: #465063;
   font-family: serif;
   margin-bottom: 10px;
-  /* border-bottom: 2px solid #334d6e; */
   padding-bottom: 6px;
   text-align: left;
 }
@@ -223,29 +222,6 @@
     margin-bottom: 16px;
   }
 }
-
-/* .book-container {
-  position: relative; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  perspective: 1500px;
-  background: linear-gradient(135deg, #dfeef0, #f0f0f0);
-}
-
-
-.book-heading {
-  position: absolute;
-  top: 20px; 
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 28px;
-  font-weight: 600;
-  color: #465063;
-  z-index: 10; 
-  text-align: center;
-} */
 
 .book-container {
   display: flex;
