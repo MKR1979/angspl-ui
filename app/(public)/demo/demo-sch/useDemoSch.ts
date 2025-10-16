@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useDemoSch = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const bannerImages = ['/imgPrograms/demoPage/sch/schDemo.jpg'
+  const bannerImages = ['/imgPrograms/demoPage/sch/schDemo.webp'
     // '/imgPrograms/demoPage/sch/schDemo1.jpg',
   ];
 

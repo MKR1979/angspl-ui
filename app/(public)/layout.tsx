@@ -249,14 +249,14 @@ export default function RootLayout({
         {
           text: 'Modules',
           children: [
-            ...(menuFlags.publicAdmissionMng ? [{ text: 'Admission Management', href: `/${Constants.MOD_DESC}/adm-management` }] : []),
-            ...(menuFlags.publicStudentMng ? [{ text: 'Student Management', href: `/${Constants.MOD_DESC}/student-management` }] : []),
-            ...(menuFlags.publicFeeMng ? [{ text: 'Fees Management', href: `/${Constants.MOD_DESC}/fee-management` }] : []),
-            ...(menuFlags.publicAttendanceMng ? [{ text: 'Attendance Management', href: `/${Constants.MOD_DESC}/attendance-management` }] : []),
-            ...(menuFlags.publicAcademicMng ? [{ text: 'Academics Management', href: `/${Constants.MOD_DESC}/academic-management` }] : []),
-            ...(menuFlags.publicAffiliateMng ? [{ text: 'Course Management', href: `/${Constants.MOD_DESC}/course-management` }] : []),
-            ...(menuFlags.publicCourseMng ? [{ text: 'Examination Management', href: `/${Constants.MOD_DESC}/exam-management` }] : []),
-            ...(menuFlags.publicExaminationMng ? [{ text: 'Affiliate Management', href: `/${Constants.MOD_DESC}/affiliate-management` }] : [])
+            ...(menuFlags.publicAdmissionMng ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }] : []),
+            ...(menuFlags.publicStudentMng ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }] : []),
+            ...(menuFlags.publicFeeMng ? [{ text: 'Finance & Payments', href: `/${Constants.MOD_DESC}/fee-management` }] : []),
+            ...(menuFlags.publicAttendanceMng ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }] : []),
+          //  ...(menuFlags.publicAcademicMng ? [{ text: 'Academics Management', href: `/${Constants.MOD_DESC}/academic-management` }] : []),
+            ...(menuFlags.publicAffiliateMng ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }] : []),
+            ...(menuFlags.publicCourseMng ? [{ text: 'Assessments & Exams', href: `/${Constants.MOD_DESC}/exam-management` }] : []),
+            ...(menuFlags.publicExaminationMng ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }] : [])
           ]
         }
       ]
