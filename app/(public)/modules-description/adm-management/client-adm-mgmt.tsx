@@ -56,9 +56,9 @@ const ClientAdmMgmt = () => {
     return matches ? matches[1] : null;
   };
 
-  const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
-  const videoSrc1 = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
-
+  const videoSrc = 'https://youtu.be/NtPCZu2WZQE';
+  const videoSrc2 = 'https://youtu.be/-4nrNYPaLcU';
+  const videoSrc1 = 'https://youtu.be/MUA4cQ4TmCE';
   return (
     <>
       <div>
@@ -198,7 +198,7 @@ const ClientAdmMgmt = () => {
                   <h2 className="section-subheading">Admissions Managed by Admin</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
@@ -231,7 +231,7 @@ const ClientAdmMgmt = () => {
                   <h2 className="section-subheading">Review Admissions</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc2)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
