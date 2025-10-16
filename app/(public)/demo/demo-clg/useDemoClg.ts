@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useDemoClg = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const bannerImages = ['/imgPrograms/demoPage/clg/clgDemo.jpg'];
+  const bannerImages = ['/imgPrograms/demoPage/clg/clgDemo.webp'];
 
   const moduleRefs = useRef<HTMLDivElement[]>([]);
   moduleRefs.current = []; 

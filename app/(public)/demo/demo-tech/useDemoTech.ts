@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 export const useDemoTech = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const bannerImages = ['/imgPrograms/demoPage/tech/demoTech.jpg'];
+  const bannerImages = ['/imgPrograms/demoPage/tech/demoTech.webp'];
 
   const moduleRefs = useRef<HTMLDivElement[]>([]);
   moduleRefs.current = [];
