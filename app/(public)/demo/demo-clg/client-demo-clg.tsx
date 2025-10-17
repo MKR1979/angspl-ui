@@ -493,22 +493,13 @@ const ClientDemoClg = () => {
           display: 'flex',
           alignItems: 'center',
           gap: { xs: 1, sm: 1 },
-          fontSize: { xs: 12, sm: 12 },
+          fontSize: { xs: 10, sm: 12 },
           textAlign: 'center',
         }}
       >
-        <SchoolIcon sx={{ fontSize: { xs: 14, sm: 20 } }} />
-        <MyBox
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' }, // column on mobile
-            lineHeight: 1.1,
-          }}
-        >
-          <span>Schedule</span>
-          <span>Free Demo</span>
-        </MyBox>
-      </Button>
+        <SchoolIcon  fontSize="small" />
+        Expert Demo
+         </Button>
       <Button
         href="https://adhyayan.college"
         target="_blank"
