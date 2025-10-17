@@ -12,7 +12,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
 
-const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff10.jpg'];
+const bannerImages = ['/affiliateImgs/aff4.jpg', '/affiliateImgs/aff5.jpg'];
 
 const ClientAffiliateMgmt = () => {
   const images = ['/affiliateImgs/aff.PNG', '/affiliateImgs/aff1.PNG', '/affiliateImgs/aff2.PNG'];

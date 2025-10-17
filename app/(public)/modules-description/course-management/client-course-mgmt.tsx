@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/coursemngImgs/course8.jpg', '/coursemngImgs/course7.jpg'];
+const bannerImages = ['/coursemngImgs/course12.jpg', '/coursemngImgs/course14.jpg'];
 
 const ClientCourseMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,7 +42,7 @@ const ClientCourseMgmt = () => {
     }, 4000); // change page every 4 seconds
     return () => clearInterval(interval);
   }, []);
-  console.log('test', clearInterval)
+  console.log('test for the clear interval', clearInterval)
   const getYouTubeVideoId = (url: string): string | null => {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^&\n]{11})/;
     const matches = url.match(regex);
