@@ -487,7 +487,7 @@ const ClientDemoSch = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: { xs: 300, sm: 425 },
+          bottom: { xs: 335, sm: 425 },
           right: { xs: 10, sm: 10 },
           borderRadius: '90px',
           bgcolor: '#FFD700',
@@ -498,21 +498,24 @@ const ClientDemoSch = () => {
           display: 'flex',
           alignItems: 'center',
           gap: { xs: 1, sm: 1 },
-          fontSize: { xs: 12, sm: 12 },
+          fontSize: { xs: 10, sm: 12 },
           textAlign: 'center',
         }}
       >
-        <SchoolIcon sx={{ fontSize: { xs: 14, sm: 20 } }} />
-        <MyBox
+        <SchoolIcon  fontSize="small" />
+        {/* <MyBox
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: 'center',
             lineHeight: 1.1,
+            gap: { xs: 0, sm: 0.3 },
           }}
         >
-          <span>Schedule</span>
-          <span>Free Demo</span>
-        </MyBox>
+          <span>Expert</span>
+           <span>Demo</span>
+        </MyBox> */}
+        Expert Demo
       </Button>
 
       <Button

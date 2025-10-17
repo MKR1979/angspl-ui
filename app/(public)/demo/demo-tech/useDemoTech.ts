@@ -31,7 +31,7 @@ export const useDemoTech = () => {
   const handleModuleClick = useCallback((index: number) => {
   const element = moduleRefs.current[index];
   if (element) {
-    const yOffset = -60; // adjust based on your fixed header height
+    const yOffset = -60; 
     const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
     window.scrollTo({ top: y, behavior: 'smooth' });
