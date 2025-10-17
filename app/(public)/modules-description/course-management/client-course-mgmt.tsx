@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/coursemngImgs/course8.jpg', '/coursemngImgs/course7.jpg'];
+const bannerImages = ['/coursemngImgs/course12.jpg', '/coursemngImgs/course14.jpg'];
 
 const ClientCourseMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
