@@ -190,9 +190,12 @@ a.secondary {
 /* css for rolling containers on home page   */
 
 .rollingContainer {
-  width: 100%;
-  overflow: hidden;
-  margin: 5px 0;
+  border: 3px solid #eaf2f6; /* Light border color around the content */
+  padding: 20px; /* Padding inside the box */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color:rgb(238, 242, 246); /* Background color for the box */
+  margin-bottom: 30px; 
 }
 
 .rollingRow {
