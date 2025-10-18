@@ -48,10 +48,11 @@ const ClientAboutUs = () => {
     return matches ? matches[1] : null;
   };
 
-  const videoSrc = 'https://youtu.be/ECYhNXxdUjA';
+   const videoSrc = 'https://www.youtube.com/watch?v=X-uUKRDntmM';
   const videoSrc1 = 'https://youtu.be/Oj7nV7QSyCw';
-  const videoSrc2 = 'https://youtu.be/2wc8WR7Jz48';
-  const videoSrc3 = 'https://youtu.be/YNnkKXRRm8o';
+  const videoSrc2 = 'https://youtu.be/0aV6puN6xwM';
+  const videoSrc3 = 'https://youtu.be/eeIkOHgr_oI';
+  const videoSrc4 = 'https://youtu.be/9K74xt-sswM';
 
   return (
     <>
@@ -252,7 +253,7 @@ const ClientAboutUs = () => {
                   <h2 className="section-subheading">Attendance Report</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc3)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc4)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen

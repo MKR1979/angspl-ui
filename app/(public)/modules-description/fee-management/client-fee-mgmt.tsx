@@ -56,9 +56,10 @@ const ClientFeeMgmt = () => {
     return matches ? matches[1] : null;
   };
 
-  const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
-  const videoSrc1 = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
-const videoSrc3 = 'https://youtu.be/Ui1JEZYKq5I';
+  const videoSrc = 'https://youtu.be/W85SvzdXOLk';
+  const videoSrc1 = 'https://youtu.be/nhn4f3m5wVE';
+  const videoSrc2 = 'https://youtu.be/MsNU7foHAkU';
+  const videoSrc3 = 'https://youtu.be/Q5sxvQNTT0A';
   return (
     <>
       <div>
@@ -226,7 +227,7 @@ const videoSrc3 = 'https://youtu.be/Ui1JEZYKq5I';
                   <h2 className="section-subheading">Receipts</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc2)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
