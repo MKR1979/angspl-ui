@@ -487,7 +487,7 @@ const ClientDemoSch = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: { xs: 335, sm: 425 },
+          bottom: { xs: 335, sm: 615 },
           right: { xs: 10, sm: 10 },
           borderRadius: '90px',
           bgcolor: '#FFD700',

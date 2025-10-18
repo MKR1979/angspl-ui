@@ -39,16 +39,29 @@ export default function ClientHomePage() {
     }
   }
 
-  
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef1 = useRef<HTMLDivElement | null>(null);
+  const sectionRef2 = useRef<HTMLDivElement | null>(null);
 
+  // array for convenience
+  const sectionRefs = [sectionRef1, sectionRef2];
+
+  // track which section to scroll next
+  const [currentSection, setCurrentSection] = useState(0);
+
+  // handle button click
   const handleStartClick = useCallback(() => {
-    if (sectionRef.current) {
-      const yOffset = -60; // adjust for header offset if needed
-      const y = sectionRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+    const target = sectionRefs[currentSection]?.current;
+    if (target) {
+      const yOffset = -60; // adjust for header
+      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+
+      // move to next section for next click
+      // setCurrentSection((prev) => (prev + 1 < sectionRefs.length ? prev + 1 : prev));
+      // 👆 if you want it to loop back to first, use:
+      setCurrentSection((prev) => (prev + 1) % sectionRefs.length);
     }
-  }, []);
+  }, [currentSection]);
 
   // *** this is used to test the rolling lines in home page on local host ****
   //   const categories = [
@@ -145,19 +158,6 @@ export default function ClientHomePage() {
         >
           <h2 className="rolling-header">{companyInfo.company_name}</h2>
         </div>
-
-        {/* <MyBox
-          sx={{
-            backgroundImage: 'url(/home-page/home1.jpg)',
-            display: 'block',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            width: '100%',
-            position: 'relative',
-            height: { xs: 140, sm: 200, md: 500 },
-          }}
-        ></MyBox> */}
         <div>
           <MyBox
             sx={{
@@ -172,40 +172,6 @@ export default function ClientHomePage() {
             }}
           >
             {/* Button inside the image */}
-            {/* <a
-              href="#start"
-              style={{
-                position: 'absolute',
-                bottom: '39px',
-                left: '118px',
-                padding: '8px 52px', // Increased padding for larger button
-                backgroundColor: 'white',
-                color: buttonColor,
-                textDecoration: 'none',
-                fontSize: '22px', // Larger font size
-                // fontWeight: 'bold',
-                borderRadius: '8px', // Slightly bigger border radius for a more rounded button
-                border: `2px solid ${buttonColor}`,
-                transition: 'all 0.3s ease',
-                boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.15)', // Stronger shadow for larger button
-                cursor: 'pointer'
-              }}
-              // Hover effect (you can use external CSS for this)
-              onMouseOver={(e) => {
-                e.target.style.backgroundColor = buttonColor;
-                e.target.style.color = 'white';
-                e.target.style.transform = 'scale(1.1)';
-                e.target.style.boxShadow = '0px 8px 20px rgba(0, 0, 0, 0.2)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.backgroundColor = 'white';
-                e.target.style.color = buttonColor;
-                e.target.style.transform = 'scale(1)';
-                e.target.style.boxShadow = '0px 6px 18px rgba(0, 0, 0, 0.15)';
-              }}
-            >
-              Start Now
-            </a> */}
             <a
               href="#start"
               style={{
@@ -241,10 +207,7 @@ export default function ClientHomePage() {
                 box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
               `;
               }}
-              onClick={(e) => {
-                e.preventDefault();
-                handleStartClick(); // scroll to the section
-              }}
+              onClick={handleStartClick}
             >
               Start Now
             </a>
@@ -511,7 +474,7 @@ export default function ClientHomePage() {
                   ))}
                 </MyGrid>
                 <MyCard sx={{marginTop:'50px', boxShadow:'0px 3px 8px rgba(0, 0, 0, 0.1)', backgroundColor:'rgb(238, 242, 246)'}}>
-                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef}>
+                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef1}>
                 <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
                     <MyCardContent>
                       <h1
@@ -525,7 +488,7 @@ export default function ClientHomePage() {
                         Your Extended Team for Global 
                         <br></br>
                         <span
-                          style={{ color: '#E00000', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
+                          style={{ color: '#E41C40', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
                         >
                           {' '}
                           Scale & Innovation.{' '}
@@ -549,13 +512,13 @@ export default function ClientHomePage() {
                     </MyCardContent>
                   </MyGrid>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src="/home-page/homedown.PNG" alt="Image description" style={{ width: '100%', height: '300px' }} />
+                    <img src="/home-page/homedown1.png" alt="Image description" style={{ width: '100%', height: '500px' }} />
                   </MyGrid>
                 </MyGrid>
                 </MyCard>
-                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef}>
+                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef2}>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{marginTop:'10px', display: 'flex', alignItems: 'center' }}>
-                    <img src="/home-page/homedown.PNG" alt="Image description" style={{ width: '100%', height: 'auto' }} />
+                    <img src="/home-page/homedown.jpg" alt="Image description" style={{ width: '100%', height: 'auto' }} />
                   </MyGrid>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
                     <MyCardContent>

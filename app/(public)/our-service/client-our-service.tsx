@@ -187,73 +187,73 @@
 //   return eq(prevProps, nextProps); // Don't re-render!
 // });
 
-'use client';
-import React, { memo } from 'react';
-import eq from 'lodash/eq';
-import { Box, Grid, Typography } from '@mui/material';
-import Footer from '@/app/custom-components/my-footer/MyFooter';
-import {
-  Web,
-  PhoneIphone,
-  DesignServices,
-  Search,
-  Cloud,
-  Storage,
-  Memory,
-  Build,
-  DeveloperMode,
-  Security,
-  Wifi,
-  Insights,
-} from '@mui/icons-material';
-import './services.css'; // make sure your feature-card CSS is here
+// 'use client';
+// import React, { memo } from 'react';
+// import eq from 'lodash/eq';
+// import { Box, Grid, Typography } from '@mui/material';
+// import Footer from '@/app/custom-components/my-footer/MyFooter';
+// import {
+//   Web,
+//   PhoneIphone,
+//   DesignServices,
+//   Search,
+//   Cloud,
+//   Storage,
+//   Memory,
+//   Build,
+//   DeveloperMode,
+//   Security,
+//   Wifi,
+//   Insights,
+// } from '@mui/icons-material';
+// import './services.css'; // make sure your feature-card CSS is here
 
-const services = [
-  { title: 'Web Development', description: 'Responsive websites with React, Next.js, Node.js.', icon: <Web sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'Mobile App Development', description: 'High-performance iOS & Android apps.', icon: <PhoneIphone sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'UI/UX Design', description: 'Intuitive interfaces to boost engagement.', icon: <DesignServices sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'SEO Optimization', description: 'Increase rankings & organic traffic.', icon: <Search sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'AI / ML Services', description: 'Predictive analytics & intelligent automation.', icon: <Memory sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'Cloud Services', description: 'AWS, Azure & scalable cloud infrastructure.', icon: <Cloud sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'Data Services', description: 'Database design, analytics & pipelines.', icon: <Storage sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'DevOps Practices', description: 'CI/CD, containerization & IaC.', icon: <Build sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'Web App Development', description: 'Robust & scalable web applications.', icon: <DeveloperMode sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'Cybersecurity & Zero Trust', description: 'Secure applications with zero-trust architecture.', icon: <Security sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'IoT with AI & 5G', description: 'Connected devices with intelligent automation.', icon: <Wifi sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'AI-Powered BI', description: 'Smart dashboards & insights for business decisions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> },
-  { title: 'GreenTech / Sustainable IT', description: 'Eco-friendly and energy-efficient IT solutions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> }
-];
+// const services = [
+//   { title: 'Web Development', description: 'Responsive websites with React, Next.js, Node.js.', icon: <Web sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'Mobile App Development', description: 'High-performance iOS & Android apps.', icon: <PhoneIphone sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'UI/UX Design', description: 'Intuitive interfaces to boost engagement.', icon: <DesignServices sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'SEO Optimization', description: 'Increase rankings & organic traffic.', icon: <Search sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'AI / ML Services', description: 'Predictive analytics & intelligent automation.', icon: <Memory sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'Cloud Services', description: 'AWS, Azure & scalable cloud infrastructure.', icon: <Cloud sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'Data Services', description: 'Database design, analytics & pipelines.', icon: <Storage sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'DevOps Practices', description: 'CI/CD, containerization & IaC.', icon: <Build sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'Web App Development', description: 'Robust & scalable web applications.', icon: <DeveloperMode sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'Cybersecurity & Zero Trust', description: 'Secure applications with zero-trust architecture.', icon: <Security sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'IoT with AI & 5G', description: 'Connected devices with intelligent automation.', icon: <Wifi sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'AI-Powered BI', description: 'Smart dashboards & insights for business decisions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> },
+//   { title: 'GreenTech / Sustainable IT', description: 'Eco-friendly and energy-efficient IT solutions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> }
+// ];
 
-const ClientOurService = () => {
-  return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ width: '100%', py: 3 }}>
-        <Typography variant="h4" align="center" sx={{ mb: 1, fontWeight: 'bold', color: '#1976d2' }}>
-          Our Services
-        </Typography>
+// const ClientOurService = () => {
+//   return (
+//     <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+//       <Box sx={{ width: '100%', py: 3 }}>
+//         <Typography variant="h4" align="center" sx={{ mb: 1, fontWeight: 'bold', color: '#1976d2' }}>
+//           Our Services
+//         </Typography>
 
-        {/* Center container with left-right margins */}
-        <Box sx={{ maxWidth: '80%', mx: 'auto' }}>
-          <Grid container spacing={3} justifyContent="center" alignItems="stretch">
-            {services.map((service, idx) => (
-              <Grid key={idx} item xs={12} sm={6} md={3}>
-                <div className="feature-card">
-                  <div className="feature-icon">{service.icon}</div>
-                  <h3 className="feature-title">{service.title}</h3>
-                  <p className="feature-desc">{service.description}</p>
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      </Box>
+//         {/* Center container with left-right margins */}
+//         <Box sx={{ maxWidth: '80%', mx: 'auto' }}>
+//           <Grid container spacing={3} justifyContent="center" alignItems="stretch">
+//             {services.map((service, idx) => (
+//               <Grid key={idx} item xs={12} sm={6} md={3}>
+//                 <div className="feature-card">
+//                   <div className="feature-icon">{service.icon}</div>
+//                   <h3 className="feature-title">{service.title}</h3>
+//                   <p className="feature-desc">{service.description}</p>
+//                 </div>
+//               </Grid>
+//             ))}
+//           </Grid>
+//         </Box>
+//       </Box>
 
-      <Footer />
-    </Box>
-  );
-};
+//       <Footer />
+//     </Box>
+//   );
+// };
 
-export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
+// export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
 
 
 // 'use client';
@@ -363,4 +363,154 @@ export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, ne
 // };
 
 // export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
+
+// 'use client';
+// import React, { memo } from 'react';
+// import eq from 'lodash/eq';
+// import { Box, Grid, Typography } from '@mui/material';
+// import Footer from '@/app/custom-components/my-footer/MyFooter';
+// import {
+//   Web,
+//   PhoneIphone,
+//   DesignServices,
+//   Search,
+//   Cloud,
+//   Storage,
+//   Memory,
+//   Build,
+//   DeveloperMode,
+//   Security,
+//   Wifi,
+//   Insights,
+// } from '@mui/icons-material';
+// import './services.css'; // make sure your feature-card CSS is here
+// import MyCard from '@/app/custom-components/MyCard';
+
+// const services = [
+  // { title: 'Web Development',  icon: <Web sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'Mobile App Development', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'UI/UX Design',  icon: <DesignServices sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'SEO Optimization', icon: <Search sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'AI / ML Services',  icon: <Memory sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'Cloud Services', icon: <Cloud sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'Data Services',  icon: <Storage sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'DevOps Practices',  icon: <Build sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'Web App Development',  icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'Cybersecurity & Zero Trust',  icon: <Security sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'IoT with AI & 5G',  icon: <Wifi sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'AI-Powered BI',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> },
+  // { title: 'GreenTech / Sustainable IT',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> }
+// ];
+
+// const ClientOurService = () => {
+//   return (
+//     <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column'  }}>
+//       <Box sx={{ width: '100%', py: 4, }}>
+//         <Typography variant="h4" align="center" sx={{ mb: 1, fontWeight: 'bold', color: '#1976d2' }}>
+//           Our Services
+//         </Typography>
+
+//         {/* Center container with left-right margins */}
+//         <MyCard sx={{ backgroundColor:'rgb(238, 242, 246)' }}>
+//         <Box >
+//           <Grid container spacing={3} justifyContent="center" alignItems="stretch">
+//             {services.map((service, idx) => (
+//               <Grid key={idx} item xs={12} sm={6} md={3}>
+//                 <div className="feature-card">
+//                   <div className="feature-icon">{service.icon}</div>
+//                   <h3 className="feature-title">{service.title}</h3>
+//                   {/* <p className="feature-desc">{service.description}</p> */}
+//                 </div>
+//               </Grid>
+//             ))}
+//           </Grid>
+//         </Box>
+//         </MyCard>
+//       </Box>
+
+//       <Footer />
+//     </Box>
+//   );
+// };
+
+// export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
+
+'use client';
+import React, { memo } from 'react';
+import eq from 'lodash/eq';
+import { Grid, Typography } from '@mui/material';
+import Footer from '@/app/custom-components/my-footer/MyFooter';
+import {
+  Web,
+  PhoneIphone,
+  DesignServices,
+  Search  ,
+  Cloud,
+  Storage,
+  Memory,
+  Build,
+  DeveloperMode,
+  Security,
+  Wifi,
+  Insights,
+} from '@mui/icons-material';
+import './services.css'; // Ensure your feature-card CSS is here
+import MyCard from '@/app/custom-components/MyCard';
+
+const services = [
+  // { title: 'Artificial Intelligence', icon: <Web sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Machine Learning', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Natural Language Processing', icon: <DesignServices sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Java', icon: <Terminal   sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Python', icon: <Cloud sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'AWS', icon: <Storage sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'React', icon: <Memory sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Angular', icon: <Build sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Javascript', icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Cloud', icon: <Security sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'Database', icon: <DataUsage sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  // { title: 'User Interface', icon: <Insights sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> }
+  { title: 'Web Development', icon: <Web sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'Mobile App Development', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'UI/UX Design', icon: <DesignServices sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'SEO Optimization', icon: <Search sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'AI / ML Services', icon: <Memory sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'Cloud Services', icon: <Cloud sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'Data Services', icon: <Storage sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'DevOps Practices', icon: <Build sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'Web App Development', icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'Cybersecurity & Zero Trust', icon: <Security sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'IoT with AI & 5G', icon: <Wifi sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'AI-Powered BI', icon: <Insights sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+];
+
+const ClientOurService = () => {
+  return (
+    <div >
+
+      <MyCard sx={{mt:5, mb: 10,  height: '500px' }}>
+        <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily:'sans-serif' }}>
+          Our <span style={{  color: '#f56b2a', fontSize:'50px',fontFamily: 'Brush Script MT, Dancing Script' }} >Expertise</span>
+        </Typography>
+        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
+          {services.map((service, idx) => (
+            <Grid key={idx} item xs={12} sm={6} md={2} mb={3}> {/* Changed md={2} for 6 items per row */}
+              {/* Directly displaying icon and title without the box wrapper */}
+              <div className="feature-icon" style={{ textAlign: 'center' }}>
+                {service.icon}
+              </div>
+              <Typography  align="center" sx={{ color: '#333' }}>
+                {service.title}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
+      </MyCard>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
 
