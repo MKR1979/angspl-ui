@@ -17,7 +17,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import MyTypography from '@/app/custom-components/MyTypography';
+// import MyTypography from '@/app/custom-components/MyTypography';
 
 export default function ClientHomePage() {
   const { companyInfo } = useSelector((state) => state.globalState);
@@ -161,7 +161,7 @@ export default function ClientHomePage() {
             }}
           >
             {/* Button inside the image */}
-            <a
+            {/* <a
               href="#start"
               style={{
                 position: 'absolute',
@@ -194,7 +194,46 @@ export default function ClientHomePage() {
               }}
             >
               Start Now
-            </a>
+            </a> */}
+            <a
+  href="#start"
+  style={{
+    position: 'absolute',
+    bottom: '39px',
+    left: '118px',
+    padding: '8px 52px',
+    backgroundColor: 'white',
+    color: buttonColor,
+    textDecoration: 'none',
+    fontSize: '22px',
+    borderRadius: '8px',
+    border: `2px solid ${buttonColor}`,
+    transition: 'all 0.3s ease',
+    boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.15)',
+    cursor: 'pointer',
+  }}
+  onMouseEnter={(e) => {
+    const t = e.currentTarget as HTMLAnchorElement;
+    t.style.cssText += `
+      background-color: ${buttonColor};
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    `;
+  }}
+  onMouseLeave={(e) => {
+    const t = e.currentTarget as HTMLAnchorElement;
+    t.style.cssText += `
+      background-color: white;
+      color: ${buttonColor};
+      transform: scale(1);
+      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+    `;
+  }}
+>
+  Start Now
+</a>
+
 
             {/* Slider Controls (Previous & Next Buttons) */}
             {bannerImages.length > 1 && (
@@ -259,7 +298,7 @@ export default function ClientHomePage() {
         <div>
           <MyBox>
             <MyCard>
-              <MyCardContent >
+              <MyCardContent>
                 <div className={styles.rollingContainer}>
                   <Box sx={{ textAlign: 'center', position: 'relative' }}>
                     <Typography
@@ -494,152 +533,144 @@ export default function ClientHomePage() {
                   </MyGrid>
                 </MyGrid> */}
 
+                <MyGrid size={{ xs: 12 }}>
+                  <MyCard
+                    elevation={3}
+                    sx={{
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      background: 'linear-gradient(145deg, #f8fafc, #ffffff)',
+                      boxShadow: '0 6px 20px rgba(0, 0, 0, 0.08)',
+                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-6px)',
+                        boxShadow: '0 12px 25px rgba(0, 0, 0, 0.15)'
+                      }
+                    }}
+                  >
+                    <CardHeader
+                      avatar={<MyApiIcon sx={{ color: '#00bcd4' }} />}
+                      title={
+                        <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#2b3a67' }}>
+                          Welcome to {companyInfo.company_name}
+                        </span>
+                      }
+                      sx={{
+                        backgroundColor: '#eef2f6',
+                        borderBottom: '2px solid #00bcd4',
+                        py: 1
+                      }}
+                    />
+                    <MyCardContent sx={{ fontSize: '15px', color: '#444', lineHeight: 1.7 }}>
+                      At {companyInfo.company_name}, we are committed to driving digital transformation by delivering innovative, scalable,
+                      and industry-focused technology solutions. Our expertise spans ERP, CRM, AI-powered automation, e-learning, billing
+                      systems, cloud solutions, and cybersecurity—helping businesses optimize operations, enhance customer engagement, and
+                      accelerate growth.
+                    </MyCardContent>
+                  </MyCard>
+                </MyGrid>
 
-<MyGrid size={{ xs: 12 }}>
-  <MyCard
-    elevation={3}
-    sx={{
-      borderRadius: '16px',
-      overflow: 'hidden',
-      background: 'linear-gradient(145deg, #f8fafc, #ffffff)',
-      boxShadow: '0 6px 20px rgba(0, 0, 0, 0.08)',
-      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-      '&:hover': {
-        transform: 'translateY(-6px)',
-        boxShadow: '0 12px 25px rgba(0, 0, 0, 0.15)',
-      },
-    }}
-  >
-    <CardHeader
-      avatar={<MyApiIcon sx={{ color: '#00bcd4' }} />}
-      title={
-        <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#2b3a67' }}>
-          Welcome to {companyInfo.company_name}
-        </span>
-      }
-      sx={{
-        backgroundColor: '#eef2f6',
-        borderBottom: '2px solid #00bcd4',
-        py: 1,
-      }}
-    />
-    <MyCardContent sx={{ fontSize: '15px', color: '#444', lineHeight: 1.7 }}>
-      At {companyInfo.company_name}, we are committed to driving digital transformation by delivering innovative,
-      scalable, and industry-focused technology solutions. Our expertise spans ERP, CRM, AI-powered automation,
-      e-learning, billing systems, cloud solutions, and cybersecurity—helping businesses optimize operations,
-      enhance customer engagement, and accelerate growth.
-    </MyCardContent>
-  </MyCard>
-</MyGrid>
-
-<MyGrid container spacing={3} sx={{ mt: 1 }}>
-  {[
-    {
-      title: 'Streamlined Business Operations',
-      points: [
-        'Automate workflows with ERP solutions tailored for enterprises, colleges, and universities.',
-        'Simplify stock & inventory management with real-time tracking.',
-        'Enhance billing & payment processing with secure, automated invoicing.',
-      ],
-    },
-    {
-      title: 'Enhanced Customer Engagement and Sales Performance',
-      points: [
-        'Intelligent CRM solutions for tracking leads, customer interactions, and sales pipelines.',
-        'Data-driven insights for upselling and cross-selling opportunities.',
-        'Automated follow-ups and appointment scheduling, freeing up sales teams for high-value tasks.',
-      ],
-    },
-    {
-      title: 'Revolutionizing Education with Digital Solutions',
-      points: [
-        'AI-powered admission systems that cut manual work by 80% and boost enrollments.',
-        'E-learning platforms for seamless digital education.',
-        'College & university ERP for efficient administration and student management.',
-      ],
-    },
-    {
-      title: 'Data-Driven Decision Making and Analytics',
-      points: [
-        'Gain real-time insights into customer behavior, market trends, and business performance.',
-        'AI-powered analytics & predictive modeling for proactive decision-making.',
-        'Secure and centralized data storage for seamless collaboration.',
-      ],
-    },
-    {
-      title: 'Cybersecurity and Compliance',
-      points: [
-        'Protect critical business data with cutting-edge security solutions.',
-        'Ensure regulatory compliance with secure document management.',
-        'Prevent fraud and cyber threats with advanced risk monitoring tools.',
-      ],
-    },
-    {
-      title: 'Scalable and Future-Ready Solutions',
-      points: [
-        'Cloud-based architecture that grows with your business.',
-        'Integration with ERP, CRM, and helpdesk platforms.',
-        'AI-driven automation for smarter business processes.',
-      ],
-    },
-    {
-      title: 'Scalability for Business Growth',
-      points: [
-        'Adapts to growing customer bases and evolving business needs.',
-        'Integrates with marketing and helpdesk tools.',
-        'Supports AI-driven analytics and predictive modeling.',
-      ],
-    },
-    {
-      title: 'Innovative Solutions for a Digital-First Future',
-      description: `At ${companyInfo.company_name}, we don’t just build software—we create impact. 
-      Whether you are a startup, large enterprise, or educational institution, 
-      we deliver high-performance solutions designed to keep you ahead in the digital era.`,
-    },
-  ].map((card, index) => (
-    <MyGrid key={index} size={{ xs: 12, sm: 6 }} sx={{ display: 'flex' }}>
-      <MyCard
-        elevation={1}
-        sx={{
-          flex: 1,
-          p: 2,
-          borderRadius: '14px',
-          backgroundColor: '#ffffff',
-          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-          '&:hover': {
-            transform: 'translateY(-5px)',
-            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.12)',
-          },
-        }}
-      >
-        <CardHeader
-          avatar={<MyCheckCircleIcon sx={{ color: '#00bcd4' }} />}
-          title={
-            <Typography sx={{ fontSize: '17px', fontWeight: 600, color: '#1a237e' }}>
-              {card.title}
-            </Typography>
-          }
-          sx={{ pb: 0 }}
-        />
-        <MyCardContent>
-          {card.points ? (
-            <ul style={{ paddingLeft: '20px', color: '#444', lineHeight: '1.7' }}>
-              {card.points.map((point, i) => (
-                <li key={i}>{point}</li>
-              ))}
-            </ul>
-          ) : (
-            <Typography sx={{ fontSize: '15px', color: '#444', lineHeight: 1.7 }}>
-              {card.description}
-            </Typography>
-          )}
-        </MyCardContent>
-      </MyCard>
-    </MyGrid>
-  ))}
-</MyGrid>
-
+                <MyGrid container spacing={3} sx={{ mt: 1 }}>
+                  {[
+                    {
+                      title: 'Streamlined Business Operations',
+                      points: [
+                        'Automate workflows with ERP solutions tailored for enterprises, colleges, and universities.',
+                        'Simplify stock & inventory management with real-time tracking.',
+                        'Enhance billing & payment processing with secure, automated invoicing.'
+                      ]
+                    },
+                    {
+                      title: 'Enhanced Customer Engagement and Sales Performance',
+                      points: [
+                        'Intelligent CRM solutions for tracking leads, customer interactions, and sales pipelines.',
+                        'Data-driven insights for upselling and cross-selling opportunities.',
+                        'Automated follow-ups and appointment scheduling, freeing up sales teams for high-value tasks.'
+                      ]
+                    },
+                    {
+                      title: 'Revolutionizing Education with Digital Solutions',
+                      points: [
+                        'AI-powered admission systems that cut manual work by 80% and boost enrollments.',
+                        'E-learning platforms for seamless digital education.',
+                        'College & university ERP for efficient administration and student management.'
+                      ]
+                    },
+                    {
+                      title: 'Data-Driven Decision Making and Analytics',
+                      points: [
+                        'Gain real-time insights into customer behavior, market trends, and business performance.',
+                        'AI-powered analytics & predictive modeling for proactive decision-making.',
+                        'Secure and centralized data storage for seamless collaboration.'
+                      ]
+                    },
+                    {
+                      title: 'Cybersecurity and Compliance',
+                      points: [
+                        'Protect critical business data with cutting-edge security solutions.',
+                        'Ensure regulatory compliance with secure document management.',
+                        'Prevent fraud and cyber threats with advanced risk monitoring tools.'
+                      ]
+                    },
+                    {
+                      title: 'Scalable and Future-Ready Solutions',
+                      points: [
+                        'Cloud-based architecture that grows with your business.',
+                        'Integration with ERP, CRM, and helpdesk platforms.',
+                        'AI-driven automation for smarter business processes.'
+                      ]
+                    },
+                    {
+                      title: 'Scalability for Business Growth',
+                      points: [
+                        'Adapts to growing customer bases and evolving business needs.',
+                        'Integrates with marketing and helpdesk tools.',
+                        'Supports AI-driven analytics and predictive modeling.'
+                      ]
+                    },
+                    {
+                      title: 'Innovative Solutions for a Digital-First Future',
+                      description: `At ${companyInfo.company_name}, we don’t just build software—we create impact. 
+                       Whether you are a startup, large enterprise, or educational institution, 
+                       we deliver high-performance solutions designed to keep you ahead in the digital era.`
+                    }
+                  ].map((card, index) => (
+                    <MyGrid key={index} size={{ xs: 12, sm: 6 }} sx={{ display: 'flex' }}>
+                      <MyCard
+                        elevation={1}
+                        sx={{
+                          flex: 1,
+                          p: 2,
+                          borderRadius: '14px',
+                          backgroundColor: '#ffffff',
+                          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)',
+                          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                          '&:hover': {
+                            transform: 'translateY(-5px)',
+                            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.12)'
+                          }
+                        }}
+                      >
+                        <CardHeader
+                          avatar={<MyCheckCircleIcon sx={{ color: '#00bcd4' }} />}
+                          title={<Typography sx={{ fontSize: '17px', fontWeight: 600, color: '#1a237e' }}>{card.title}</Typography>}
+                          sx={{ pb: 0 }}
+                        />
+                        <MyCardContent>
+                          {card.points ? (
+                            <ul style={{ paddingLeft: '20px', color: '#444', lineHeight: '1.7' }}>
+                              {card.points.map((point, i) => (
+                                <li key={i}>{point}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <Typography sx={{ fontSize: '15px', color: '#444', lineHeight: 1.7 }}>{card.description}</Typography>
+                          )}
+                        </MyCardContent>
+                      </MyCard>
+                    </MyGrid>
+                  ))}
+                </MyGrid>
               </MyCardContent>
             </MyCard>
           </MyBox>
