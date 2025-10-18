@@ -159,91 +159,107 @@ export default function ClientHomePage() {
           <h2 className="rolling-header">{companyInfo.company_name}</h2>
         </div>
         <div>
-          <MyBox
-            sx={{
-              backgroundImage: `url(${bannerImages[currentIndex]})`,
-              display: 'block',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              width: '100%',
-              position: 'relative',
-              height: { xs: 140, sm: 200, md: 500 }
-            }}
-          >
-            {/* Button inside the image */}
-            <a
-              href="#start"
-              style={{
-                position: 'absolute',
-                bottom: '39px',
-                left: '118px',
-                padding: '8px 52px',
-                backgroundColor: 'white',
-                color: buttonColor,
-                textDecoration: 'none',
-                fontSize: '22px',
-                borderRadius: '8px',
-                border: `2px solid ${buttonColor}`,
-                transition: 'all 0.3s ease',
-                boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.15)',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                const t = e.currentTarget as HTMLAnchorElement;
-                t.style.cssText += `
-                background-color: ${buttonColor};
-                color: white;
-                transform: scale(1.1);
-                box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-              `;
-              }}
-              onMouseLeave={(e) => {
-                const t = e.currentTarget as HTMLAnchorElement;
-                t.style.cssText += `
-                background-color: white;
-                color: ${buttonColor};
-                transform: scale(1);
-                box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
-              `;
-              }}
-              onClick={handleStartClick}
-            >
-              Start Now
-            </a>
+<MyBox
+  sx={{
+    backgroundImage: `url(${bannerImages[currentIndex]})`,
+    display: 'block',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    width: '100%',
+    position: 'relative',
+    height: { xs: 140, sm: 200, md: 500 },
+  }}
+>
+  {/* Button inside the image */}
+  <a
+    href="#start"
+    style={{
+      position: 'absolute',
+      bottom: '39px',
+      left: '118px',
+      padding: '8px 52px',
+      backgroundColor: 'white',
+      color: buttonColor,
+      textDecoration: 'none',
+      fontSize: '22px',
+      borderRadius: '8px',
+      border: `2px solid ${buttonColor}`,
+      transition: 'all 0.3s ease',
+      boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.15)',
+      cursor: 'pointer',
+    }}
+    onMouseEnter={(e) => {
+      const t = e.currentTarget as HTMLAnchorElement;
+      t.style.cssText += `
+        background-color: ${buttonColor};
+        color: white;
+        transform: scale(1.1);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      `;
+    }}
+    onMouseLeave={(e) => {
+      const t = e.currentTarget as HTMLAnchorElement;
+      t.style.cssText += `
+        background-color: white;
+        color: ${buttonColor};
+        transform: scale(1);
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+      `;
+    }}
+    onClick={handleStartClick}
+    className="start-btn"
+  >
+    Start Now
+  </a>
 
-            {/* Slider Controls (Previous & Next Buttons) */}
-            {bannerImages.length > 1 && (
-              <>
-                <IconButton
-                  className="banner-arrow left"
-                  onClick={goToPrev}
-                  style={{
-                    position: 'absolute',
-                    left: '10px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'black'
-                  }}
-                >
-                  <ArrowBackIos />
-                </IconButton>
-                <IconButton
-                  className="banner-arrow right"
-                  onClick={goToNext}
-                  style={{
-                    position: 'absolute',
-                    right: '10px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'black'
-                  }}
-                >
-                  <ArrowForwardIos />
-                </IconButton>
-              </>
-            )}
-          </MyBox>
+  {/* Slider Controls */}
+  {bannerImages.length > 1 && (
+    <>
+      <IconButton
+        className="banner-arrow left"
+        onClick={goToPrev}
+        style={{
+          position: 'absolute',
+          left: '2px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'black',
+        }}
+      >
+        <ArrowBackIos />
+      </IconButton>
+      <IconButton
+        className="banner-arrow right"
+        onClick={goToNext}
+        style={{
+          position: 'absolute',
+          right: '2px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'black',
+        }}
+      >
+        <ArrowForwardIos />
+      </IconButton>
+    </>
+  )}
+</MyBox>
+
+{/* Add this CSS (responsive tweak) */}
+<style>
+  {`
+    @media (max-width: 600px) {
+      .start-btn {
+        bottom: 5px !important;
+        left: 30px !important;
+        padding: 6px 20px !important;
+        font-size: 10px !important;
+      }
+    }
+  `}
+</style>
+
         </div>
         <style>
           {`
@@ -477,7 +493,7 @@ export default function ClientHomePage() {
                 <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef1}>
                 <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
                     <MyCardContent>
-                      <h1
+                      <p
                         style={{
                           fontSize: '30px', // Adjust font size to match image style
                           fontFamily:'Sans-serif',
@@ -493,7 +509,7 @@ export default function ClientHomePage() {
                           {' '}
                           Scale & Innovation.{' '}
                         </span>
-                      </h1>
+                      </p>
 
                       {/* Paragraph with appropriate font size and spacing */}
                       <p
@@ -522,7 +538,7 @@ export default function ClientHomePage() {
                   </MyGrid>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
                     <MyCardContent>
-                      <h1
+                      <p
                         style={{
                           fontSize: '25px', // Adjust font size to match image style
                           fontFamily:'Sans-serif',
@@ -532,7 +548,7 @@ export default function ClientHomePage() {
                       >
                         Work with the
                         <span
-                          style={{ color: '#E00000', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
+                          style={{ color: '#F32D5A', fontWeight: 'bold', fontFamily: 'Dancing Script , Pacifico', fontSize: '60px' }}
                         >
                           {' '}
                           Best Developers{' '}
@@ -542,7 +558,7 @@ export default function ClientHomePage() {
                           {' '}
                           time zone
                         </span>
-                      </h1>
+                      </p>
 
                       {/* Paragraph with appropriate font size and spacing */}
                       <p
