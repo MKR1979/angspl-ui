@@ -39,6 +39,17 @@ export default function ClientHomePage() {
     }
   }
 
+  
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  const handleStartClick = useCallback(() => {
+    if (sectionRef.current) {
+      const yOffset = -60; // adjust for header offset if needed
+      const y = sectionRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, []);
+
   // *** this is used to test the rolling lines in home page on local host ****
   //   const categories = [
   //   { name: 'School ERP', icon: '/imgPrograms/rolling/tech/schlERP.webp' },
@@ -196,44 +207,47 @@ export default function ClientHomePage() {
               Start Now
             </a> */}
             <a
-  href="#start"
-  style={{
-    position: 'absolute',
-    bottom: '39px',
-    left: '118px',
-    padding: '8px 52px',
-    backgroundColor: 'white',
-    color: buttonColor,
-    textDecoration: 'none',
-    fontSize: '22px',
-    borderRadius: '8px',
-    border: `2px solid ${buttonColor}`,
-    transition: 'all 0.3s ease',
-    boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.15)',
-    cursor: 'pointer',
-  }}
-  onMouseEnter={(e) => {
-    const t = e.currentTarget as HTMLAnchorElement;
-    t.style.cssText += `
-      background-color: ${buttonColor};
-      color: white;
-      transform: scale(1.1);
-      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    `;
-  }}
-  onMouseLeave={(e) => {
-    const t = e.currentTarget as HTMLAnchorElement;
-    t.style.cssText += `
-      background-color: white;
-      color: ${buttonColor};
-      transform: scale(1);
-      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
-    `;
-  }}
->
-  Start Now
-</a>
-
+              href="#start"
+              style={{
+                position: 'absolute',
+                bottom: '39px',
+                left: '118px',
+                padding: '8px 52px',
+                backgroundColor: 'white',
+                color: buttonColor,
+                textDecoration: 'none',
+                fontSize: '22px',
+                borderRadius: '8px',
+                border: `2px solid ${buttonColor}`,
+                transition: 'all 0.3s ease',
+                boxShadow: '0px 6px 18px rgba(0, 0, 0, 0.15)',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                const t = e.currentTarget as HTMLAnchorElement;
+                t.style.cssText += `
+                background-color: ${buttonColor};
+                color: white;
+                transform: scale(1.1);
+                box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+              `;
+              }}
+              onMouseLeave={(e) => {
+                const t = e.currentTarget as HTMLAnchorElement;
+                t.style.cssText += `
+                background-color: white;
+                color: ${buttonColor};
+                transform: scale(1);
+                box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+              `;
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleStartClick(); // scroll to the section
+              }}
+            >
+              Start Now
+            </a>
 
             {/* Slider Controls (Previous & Next Buttons) */}
             {bannerImages.length > 1 && (
@@ -246,7 +260,7 @@ export default function ClientHomePage() {
                     left: '10px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    color: 'white'
+                    color: 'black'
                   }}
                 >
                   <ArrowBackIos />
@@ -259,7 +273,7 @@ export default function ClientHomePage() {
                     right: '10px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    color: 'white'
+                    color: 'black'
                   }}
                 >
                   <ArrowForwardIos />
@@ -359,180 +373,6 @@ export default function ClientHomePage() {
                     </div>
                   </div>
                 </div>
-                {/* <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-                  <MyCard elevation={0} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <CardHeader
-                      avatar={<MyApiIcon></MyApiIcon>}
-                      title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Welcome to {companyInfo.company_name}</span>}
-                      sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                    />
-                    <MyCardContent>
-                      At {companyInfo.company_name}, we are committed to driving digital transformation by delivering innovative, scalable,
-                      and industry-focused technology solutions. Our expertise spans ERP, CRM, AI-powered automation, e-learning, billing
-                      systems, cloud solutions, and cybersecurity—helping businesses optimize operations, enhance customer engagement, and
-                      accelerate growth.
-                    </MyCardContent>
-                  </MyCard>
-                </MyGrid>
-                <MyGrid container spacing={2} alignItems="stretch">
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Streamlined Business Operations</span>}
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>Automate workflows with ERP solutions tailored for enterprises, colleges, and universities.</li>
-                          <li>Simplify stock & inventory management with real-time tracking.</li>
-                          <li>Enhance billing & payment processing with secure, automated invoicing.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={
-                          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>Enhanced Customer Engagement And Sales Performance</span>
-                        }
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>Intelligent CRM solutions for tracking leads, customer interactions, and sales pipelines.</li>
-                          <li>Data-driven insights for upselling and cross-selling opportunities.</li>
-                          <li>Automated follow-ups and appointment scheduling, freeing up sales teams for high-value tasks.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={
-                          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>Revolutionizing Education with Digital Solutions</span>
-                        }
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>AI-powered admission systems that cut manual work by 80% and boost enrollments.</li>
-                          <li>E-learning platforms for seamless digital education.</li>
-                          <li>College & university ERP for efficient administration and student management.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}> Data-Driven Decision Making And Analytics</span>}
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>Gain real-time insights into customer behavior, market trends, and business performance.</li>
-                          <li>AI-powered analytics & predictive modeling for proactive decision-making.</li>
-                          <li>Secure and centralized data storage, ensuring seamless collaboration across departments.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Cybersecurity And Compliance</span>}
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>Protect critical business data with cutting-edge security solutions.</li>
-                          <li>Ensure regulatory compliance with secure document management.</li>
-                          <li>Prevent fraud and cyber threats with advanced risk monitoring tools.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Scalable And Future-Ready Solutions</span>}
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>Cloud-based architecture that grows with your business.</li>
-                          <li>Integration with ERP, CRM, marketing, and helpdesk platforms for a seamless experience.</li>
-                          <li>AI-driven automation for smarter business processes and customer interactions.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={<span style={{ fontSize: '18px', fontWeight: 'bold' }}>Scalability for Business Growth</span>}
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        <ul style={{ paddingLeft: '20px' }}>
-                          <li>Adapts to growing customer bases and evolving business needs.</li>
-                          <li>Integrates with other tools like ERP systems, marketing platforms, or helpdesk software.</li>
-                          <li>Supports advanced features like AI-driven nalytics and predictive modeling as the business expands.</li>
-                        </ul>
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex' }}>
-                    <MyCard
-                      elevation={0}
-                      style={{ display: 'flex', flexDirection: 'column', width: '100%', border: '3px solid rgb(238, 242, 246)' }}
-                    >
-                      <CardHeader
-                        avatar={<MyCheckCircleIcon></MyCheckCircleIcon>}
-                        title={
-                          <span style={{ fontSize: '18px', fontWeight: 'bold' }}>Innovative Solutions for a Digital-First Future</span>
-                        }
-                        sx={{ height: '40px', backgroundColor: 'rgb(238, 242, 246)' }}
-                      />
-                      <MyCardContent>
-                        At {companyInfo.company_name}, we donot just build software—we create impact. Whether you are a startup, a large
-                        enterprise, or an educational institution, we provide customized, high-performance solutions designed to help you
-                        stay ahead in the digital era.
-                      </MyCardContent>
-                    </MyCard>
-                  </MyGrid>
-                </MyGrid> */}
-
                 <MyGrid size={{ xs: 12 }}>
                   <MyCard
                     elevation={3}
@@ -569,7 +409,6 @@ export default function ClientHomePage() {
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-
                 <MyGrid container spacing={3} sx={{ mt: 1 }}>
                   {[
                     {
@@ -670,6 +509,95 @@ export default function ClientHomePage() {
                       </MyCard>
                     </MyGrid>
                   ))}
+                </MyGrid>
+                <MyCard sx={{marginTop:'50px', boxShadow:'0px 3px 8px rgba(0, 0, 0, 0.1)', backgroundColor:'rgb(238, 242, 246)'}}>
+                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef}>
+                <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
+                    <MyCardContent>
+                      <h1
+                        style={{
+                          fontSize: '30px', // Adjust font size to match image style
+                          fontFamily:'Sans-serif',
+                          color: '#2e3a59',
+                          lineHeight: '1'
+                        }}
+                      >
+                        Your Extended Team for Global 
+                        <br></br>
+                        <span
+                          style={{ color: '#E00000', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
+                        >
+                          {' '}
+                          Scale & Innovation.{' '}
+                        </span>
+                      </h1>
+
+                      {/* Paragraph with appropriate font size and spacing */}
+                      <p
+                        style={{
+                          fontSize: '1.1rem', // Adjust paragraph font size
+                          color: '#555', // Greyish color for text
+                          lineHeight: '1.8' // Increase line height for better readability
+                        }}
+                      >
+                    If we look at the long term prospects, an enhancement in the product life cycle is the key to run any
+                     successful business. Getting a one-time boost is a common goal but to increase the life cycle of the 
+                     product on a long term basis is what sets us apart from other competitors in the industry. With offshore
+                      software development, you get a broader perspective on managing softwares you require which further gets
+                       you rid of the scarce resources and sets no boundaries for software
+                      </p>
+                    </MyCardContent>
+                  </MyGrid>
+                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src="/home-page/homedown.PNG" alt="Image description" style={{ width: '100%', height: '300px' }} />
+                  </MyGrid>
+                </MyGrid>
+                </MyCard>
+                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef}>
+                  <MyGrid size={{ xs: 12, sm: 6 }} style={{marginTop:'10px', display: 'flex', alignItems: 'center' }}>
+                    <img src="/home-page/homedown.PNG" alt="Image description" style={{ width: '100%', height: 'auto' }} />
+                  </MyGrid>
+                  <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
+                    <MyCardContent>
+                      <h1
+                        style={{
+                          fontSize: '25px', // Adjust font size to match image style
+                          fontFamily:'Sans-serif',
+                          color: '#2e3a59',
+                          lineHeight: '1'
+                        }}
+                      >
+                        Work with the
+                        <span
+                          style={{ color: '#E00000', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
+                        >
+                          {' '}
+                          Best Developers{' '}
+                        </span>
+                        in your
+                        <span style={{ color: 'green', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}>
+                          {' '}
+                          time zone
+                        </span>
+                      </h1>
+
+                      {/* Paragraph with appropriate font size and spacing */}
+                      <p
+                        style={{
+                          fontSize: '1.1rem', // Adjust paragraph font size
+                          color: '#555', // Greyish color for text
+                          lineHeight: '1.8' // Increase line height for better readability
+                        }}
+                      >
+                        Across varied boundaries and time zones, Sroniyan helps you work without any hassle. For us, communication is the
+                        key to resolving any issue that may arise in an agreement. We try to limit ourselves to one time zone so that it
+                        becomes easier and efficient for every client involved in the agreement to segregate their requirements as per their
+                        need. To omit the difference we see it as a golden opportunity to make advantage out of the time gaps between
+                        different clients involved. Through proper allocated goals and work procedures, we carve out a smooth experience for
+                        both the service seeker and provider.
+                      </p>
+                    </MyCardContent>
+                  </MyGrid>
                 </MyGrid>
               </MyCardContent>
             </MyCard>
