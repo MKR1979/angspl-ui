@@ -560,26 +560,38 @@ const ClientOurService = () => {
       {/* <p style={{ fontSize: '20px', textAlign:'center' }}>And Other Talent</p> */}
     </div>
         
-      <MyCard sx={{ mt: 5, mb: 2, height: '500px',backgroundColor:'rgb(238, 242, 246)' }}>
-        <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
-          Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
-        </Typography>
-        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
-          {services.map((service, idx) => (
-            <Grid key={idx} item xs={12} sm={6} md={2} mb={3}>
-              {' '}
-              {/* Changed md={2} for 6 items per row */}
-              {/* Directly displaying icon and title without the box wrapper */}
-              <div className="feature-icon" style={{ textAlign: 'center' }}>
-                {service.icon}
-              </div>
-              <Typography align="center" sx={{ color: '#333' }}>
-                {service.title}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </MyCard>
+    <MyCard sx={{
+      mt: 3,
+      height: 'auto',
+      maxWidth: '1520px',
+      backgroundColor: 'rgb(238, 242, 246)',
+      margin: 'auto',
+      padding: '20px'
+    }}>
+      <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
+        Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
+      </Typography>
+      <Grid container spacing={1} justifyContent="center" alignItems="stretch">
+        {services.map((service, idx) => (
+          <Grid
+            key={idx}
+            item
+            xs={6}   // Full-width on mobile
+            sm={6}    // 2 items per row on tablets
+            md={3}    // 4 items per row on desktops
+            lg={2}    // 6 items per row on larger screens
+            mb={3}
+          >
+            <div className="feature-icon" style={{ textAlign: 'center', padding: '10px' }}>
+              {service.icon}
+            </div>
+            <Typography align="center" sx={{ color: '#333', padding: '10px' }}>
+              {service.title}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </MyCard>
 
             <div style={{ marginTop: '10px' }} id="section4">
         {/* Header Typography */}
@@ -588,7 +600,7 @@ const ClientOurService = () => {
         </Typography>
         <div className="card-container">
           <div className="card">
-            <img src="/home-page/ai1.png" alt="ML/DL Icon" className="card-image" />
+            <img src="/home-page/ai-auto.jpg" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">AI & Automation</h3>
             <p className="card-description">Transform your business with intelligent solutions powered by Artificial Intelligence and Machine Learning.
             We design custom models for automation, decision support, and predictive insights — enabling smarter operations and faster innovation.
@@ -617,7 +629,7 @@ const ClientOurService = () => {
              Our analytics stack integrates with AI and cloud systems to deliver real-time insights through dashboards, KPIs, and predictive models.</p>
           </div>
           <div className="card">
-            <img src="/home-page/on-team.png" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <img src="/home-page/on-team.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">On-Demand Tech Team</h3>
             <p className="card-description">Accelerate your projects with the right technical talent.
             Through our Build Resource Model, we provide flexible, on-demand resource teams across technologies and domains.
@@ -629,6 +641,13 @@ const ClientOurService = () => {
             <p className="card-description">Gain access to a dedicated network of elite developers and engineers.
              Our talent pool combines technical depth with professional discipline — ensuring clean code, innovation, and on-time delivery.
              Whether you need dedicated resources or project-based hiring, we help you build reliable, high-performing tech teams.</p>
+          </div>
+            <div className="card">
+            <img src="/home-page/out-dev.webp" alt="Online Learning Icon" className="card-image" />
+            <h3 className="card-title">Smart Outsourcing Solutions</h3>
+            <p className="card-description">Focus on growth while we handle your development needs.
+            We provide remote and offshore development teams skilled in full-stack, cloud, and AI technologies — enabling cost efficiency without compromising quality.
+              Our flexible engagement models ensure smooth collaboration, transparency, and results.</p>
           </div>
         </div>
       </div>
@@ -684,14 +703,14 @@ const ClientOurService = () => {
                   From predictive analytics to computer vision, we transform raw data into actionable insights and automation.</p>
           </div>
           <div className="card">
-            <img src="/home-page/nlp.webp" alt="NLP Icon" className="card-image" />
+            <img src="/home-page/npl.webp" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">NLP Intelligence</h3>
             <p className="card-description">Empower your apps with Natural Language Processing that understands, interprets, and generates human language.
               Perfect for chatbots, voice assistants, document analysis, and content automation.</p>
           </div>
 
           <div className="card">
-            <img src="/home-page/modal.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <img src="/home-page/modal1.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Model Optimization</h3>
             <p className="card-description">Enhance your AI performance with Hyperparameter Tuning and AutoML.
             We optimize training workflows for better accuracy, faster learning, and scalable results.</p>
