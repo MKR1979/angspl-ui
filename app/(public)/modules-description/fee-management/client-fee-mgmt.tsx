@@ -91,7 +91,7 @@ const ClientFeeMgmt = () => {
               <MyGrid container justifyContent="center" spacing={2}>
                 <MyGrid container justifyContent="center">
                   <MyGrid size={{ xs: 12, sm: 12 }} textAlign="center">
-                    <div className="section-heading">Payment Management System</div>
+                    <div className="section-heading">PAYMENT MANAGEMENT SYSTEM</div>
                     <div className="section-underline">
                       <div></div>
                       <div></div>
