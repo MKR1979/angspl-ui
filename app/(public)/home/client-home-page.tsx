@@ -17,6 +17,8 @@ import BusinessIcon from '@mui/icons-material/Business';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
+
 // import MyTypography from '@/app/custom-components/MyTypography';
 
 export default function ClientHomePage() {
@@ -39,29 +41,29 @@ export default function ClientHomePage() {
     }
   }
 
-  const sectionRef1 = useRef<HTMLDivElement | null>(null);
-  const sectionRef2 = useRef<HTMLDivElement | null>(null);
+  // const sectionRef1 = useRef<HTMLDivElement | null>(null);
+  // const sectionRef2 = useRef<HTMLDivElement | null>(null);
 
-  // array for convenience
-  const sectionRefs = [sectionRef1, sectionRef2];
+  // // array for convenience
+  // const sectionRefs = [sectionRef1, sectionRef2];
 
-  // track which section to scroll next
-  const [currentSection, setCurrentSection] = useState(0);
+  // // track which section to scroll next
+  // const [currentSection, setCurrentSection] = useState(0);
 
-  // handle button click
-  const handleStartClick = useCallback(() => {
-    const target = sectionRefs[currentSection]?.current;
-    if (target) {
-      const yOffset = -60; // adjust for header
-      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+  // // handle button click
+  // const handleStartClick = useCallback(() => {
+  //   const target = sectionRefs[currentSection]?.current;
+  //   if (target) {
+  //     const yOffset = -60; // adjust for header
+  //     const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  //     window.scrollTo({ top: y, behavior: "smooth" });
 
-      // move to next section for next click
-      // setCurrentSection((prev) => (prev + 1 < sectionRefs.length ? prev + 1 : prev));
-      // 👆 if you want it to loop back to first, use:
-      setCurrentSection((prev) => (prev + 1) % sectionRefs.length);
-    }
-  }, [currentSection]);
+  //     // move to next section for next click
+  //     // setCurrentSection((prev) => (prev + 1 < sectionRefs.length ? prev + 1 : prev));
+  //     // 👆 if you want it to loop back to first, use:
+  //     setCurrentSection((prev) => (prev + 1) % sectionRefs.length);
+  //   }
+  // }, [currentSection]);
 
   // *** this is used to test the rolling lines in home page on local host ****
   //   const categories = [
@@ -100,33 +102,93 @@ export default function ClientHomePage() {
   ];
   const bannerImages = [
     '/home-page/home2.jpg',
-    '/home-page/home3.jpg',
+    '/home-page/home5.jpg',   
     '/home-page/home7.jpg',
-    '/home-page/home5.jpg',
+    '/home-page/home3.jpg',
     '/home-page/home6.jpg'
   ];
-  const buttonColors = ['#3c77efff', '#098d8aff', '#FF7F32', '#FFD700', '#ed5d70ff'];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [buttonColor, setButtonColor] = useState(buttonColors[currentIndex]);
+  const buttonColors = ['#3c77efff','#FFD700',  '#FF7F32', '#098d8aff', '#ed5d70ff'];
+// const [currentIndex, setCurrentIndex] = useState(0);
+//   const [buttonColor, setButtonColor] = useState(buttonColors[0]);
+
+//   // Section references for topic explanation sections
+//   const sectionRef = useRef<HTMLDivElement | null>(null);
+//   const sectionRef1 = useRef<HTMLDivElement | null>(null);
+//   const sectionRef2 = useRef<HTMLDivElement | null>(null);
+//   const sectionRef3 = useRef<HTMLDivElement | null>(null);
+//   const sectionRef4 = useRef<HTMLDivElement | null>(null);
+
+//   // Map each image index to a topic section ref
+//   const sectionRefs = [sectionRef,sectionRef1, sectionRef2, sectionRef3, sectionRef4, ];
+
+//   // Auto-slide every 3s
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+//     }, 5000);
+
+//     return () => clearInterval(interval);
+//   }, [bannerImages.length]);
+
+//   // Change button color when image changes
+//   useEffect(() => {
+//     setButtonColor(buttonColors[currentIndex]);
+//   }, [currentIndex]);
+
+//   // Slider controls
+//   const goToNext = useCallback(() => {
+//     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+//   }, []);
+
+//   const goToPrev = useCallback(() => {
+//     setCurrentIndex((prev) => (prev - 1 + bannerImages.length) % bannerImages.length);
+//   }, []);
+
+//   // Scroll to related topic on button click
+//   const handleStartClick = useCallback(() => {
+//     const ref = sectionRefs[currentIndex];
+//     if (ref?.current) {
+//       const y = ref.current.getBoundingClientRect().top + window.scrollY - 60;
+//       window.scrollTo({ top: y, behavior: 'smooth' });
+//     }
+//   }, [currentIndex]);
+const [currentIndex, setCurrentIndex] = useState(0);
+  const [buttonColor, setButtonColor] = useState(buttonColors[0]);
+  const router = useRouter();
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef1 = useRef<HTMLDivElement>(null);
+
+  const bannerTopicMap = [
+    { page: 'home', ref: sectionRef },
+    { page: 'home', ref: sectionRef1 },
+    { page: 'our-service', id: 'section2' },
+    { page: 'our-service', id: 'section3' },
+    { page: 'our-service', id: 'section4' },
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
     }, 3000);
-
-    // Update button color whenever the image changes
-    setButtonColor(buttonColors[currentIndex]);
-
     return () => clearInterval(interval);
-  }, [currentIndex, bannerImages.length, buttonColors]);
+  }, []);
 
-  const goToNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
-  }, [bannerImages.length]);
+  useEffect(() => {
+    setButtonColor(buttonColors[currentIndex]);
+  }, [currentIndex]);
 
-  const goToPrev = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + bannerImages.length) % bannerImages.length);
-  }, [bannerImages.length]);
+  const handleStartClick = useCallback(() => {
+    const topic = bannerTopicMap[currentIndex];
+
+    if (topic.page === 'home' && topic.ref?.current) {
+      const y = topic.ref.current.getBoundingClientRect().top + window.scrollY - 60;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    } else if (topic.page === 'our-service') {
+      router.push(`/our-service#${topic.id}`);
+    }
+  }, [currentIndex, router]);
+
 
   // ✅ Close when clicking outside
   useEffect(() => {
@@ -218,7 +280,7 @@ export default function ClientHomePage() {
     <>
       <IconButton
         className="banner-arrow left"
-        onClick={goToPrev}
+        // onClick={goToPrev}
         style={{
           position: 'absolute',
           left: '2px',
@@ -231,7 +293,7 @@ export default function ClientHomePage() {
       </IconButton>
       <IconButton
         className="banner-arrow right"
-        onClick={goToNext}
+        // onClick={goToNext}
         style={{
           position: 'absolute',
           right: '2px',
@@ -504,7 +566,7 @@ export default function ClientHomePage() {
                         Your Extended Team for Global 
                         <br></br>
                         <span
-                          style={{ color: '#E41C40', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
+                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
                         >
                           {' '}
                           Scale & Innovation.{' '}
@@ -532,7 +594,7 @@ export default function ClientHomePage() {
                   </MyGrid>
                 </MyGrid>
                 </MyCard>
-                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef2}>
+                <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef}>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{marginTop:'10px', display: 'flex', alignItems: 'center' }}>
                     <img src="/home-page/homedown.jpg" alt="Image description" style={{ width: '100%', height: 'auto' }} />
                   </MyGrid>
@@ -548,13 +610,13 @@ export default function ClientHomePage() {
                       >
                         Work with the
                         <span
-                          style={{ color: '#F32D5A', fontWeight: 'bold', fontFamily: 'Dancing Script , Pacifico', fontSize: '60px' }}
+                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}
                         >
                           {' '}
                           Best Developers{' '}
                         </span>
                         in your
-                        <span style={{ color: 'green', fontWeight: 'bold', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}>
+                        <span style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}>
                           {' '}
                           time zone
                         </span>
@@ -568,7 +630,7 @@ export default function ClientHomePage() {
                           lineHeight: '1.8' // Increase line height for better readability
                         }}
                       >
-                        Across varied boundaries and time zones, Sroniyan helps you work without any hassle. For us, communication is the
+                        Across varied boundaries and time zones, {companyInfo.company_name} helps you work without any hassle. For us, communication is the
                         key to resolving any issue that may arise in an agreement. We try to limit ourselves to one time zone so that it
                         becomes easier and efficient for every client involved in the agreement to segregate their requirements as per their
                         need. To omit the difference we see it as a golden opportunity to make advantage out of the time gaps between

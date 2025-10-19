@@ -255,7 +255,6 @@
 
 // export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
 
-
 // 'use client';
 // import React, { memo } from 'react';
 // import eq from 'lodash/eq';
@@ -275,7 +274,6 @@
 //   Wifi,
 //   Insights,
 // } from '@mui/icons-material';
-
 
 // const services = [
 //   { title: 'Web Development', description: 'Responsive websites with React, Next.js, Node.js.', icon: <Web sx={{ fontSize: 40, color: '#1976d2' }} /> },
@@ -358,7 +356,6 @@
 //   <Footer />
 // </Box>
 
-
 //   );
 // };
 
@@ -387,19 +384,19 @@
 // import MyCard from '@/app/custom-components/MyCard';
 
 // const services = [
-  // { title: 'Web Development',  icon: <Web sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'Mobile App Development', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'UI/UX Design',  icon: <DesignServices sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'SEO Optimization', icon: <Search sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'AI / ML Services',  icon: <Memory sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'Cloud Services', icon: <Cloud sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'Data Services',  icon: <Storage sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'DevOps Practices',  icon: <Build sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'Web App Development',  icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'Cybersecurity & Zero Trust',  icon: <Security sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'IoT with AI & 5G',  icon: <Wifi sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'AI-Powered BI',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> },
-  // { title: 'GreenTech / Sustainable IT',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> }
+// { title: 'Web Development',  icon: <Web sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'Mobile App Development', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'UI/UX Design',  icon: <DesignServices sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'SEO Optimization', icon: <Search sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'AI / ML Services',  icon: <Memory sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'Cloud Services', icon: <Cloud sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'Data Services',  icon: <Storage sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'DevOps Practices',  icon: <Build sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'Web App Development',  icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'Cybersecurity & Zero Trust',  icon: <Security sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'IoT with AI & 5G',  icon: <Wifi sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'AI-Powered BI',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> },
+// { title: 'GreenTech / Sustainable IT',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> }
 // ];
 
 // const ClientOurService = () => {
@@ -436,15 +433,15 @@
 // export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
 
 'use client';
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import eq from 'lodash/eq';
-import { Grid, Typography } from '@mui/material';
+import { Grid, IconButton, Typography } from '@mui/material';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
 import {
   Web,
   PhoneIphone,
   DesignServices,
-  Search  ,
+  Search,
   Cloud,
   Storage,
   Memory,
@@ -453,23 +450,17 @@ import {
   Security,
   Wifi,
   Insights,
+  ArrowBackIos,
+  ArrowForwardIos
 } from '@mui/icons-material';
 import './services.css'; // Ensure your feature-card CSS is here
 import MyCard from '@/app/custom-components/MyCard';
+import MyCardContent from '@/app/custom-components/MyCardContent';
+import MyGrid from '@/app/custom-components/MyGrid';
+import { useSelector } from '../../store';
+import { usePathname } from 'next/navigation';
 
 const services = [
-  // { title: 'Artificial Intelligence', icon: <Web sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Machine Learning', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Natural Language Processing', icon: <DesignServices sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Java', icon: <Terminal   sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Python', icon: <Cloud sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'AWS', icon: <Storage sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'React', icon: <Memory sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Angular', icon: <Build sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Javascript', icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Cloud', icon: <Security sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'Database', icon: <DataUsage sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  // { title: 'User Interface', icon: <Insights sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> }
   { title: 'Web Development', icon: <Web sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
   { title: 'Mobile App Development', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
   { title: 'UI/UX Design', icon: <DesignServices sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
@@ -481,25 +472,108 @@ const services = [
   { title: 'Web App Development', icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
   { title: 'Cybersecurity & Zero Trust', icon: <Security sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
   { title: 'IoT with AI & 5G', icon: <Wifi sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
-  { title: 'AI-Powered BI', icon: <Insights sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> },
+  { title: 'AI-Powered BI', icon: <Insights sx={{ fontSize: 100, color: '#757575', '&:hover': { color: '#f56b2a' } }} /> }
+];
+
+const services1 = [
+  { title: 'Full Stack Engineer', image: '/home-page/ser4.jpg' },
+  { title: 'Technology Analyst', image: '/home-page/ser5.png' },
+  { title: 'Technical Architect', image: '/home-page/tec-art.png' },
+  { title: 'Cloud Expert', image: '/home-page/cloud.webp' },
+  { title: 'DevOps Engineer', image: '/home-page/devops.jpg' },
+  { title: 'AI Engineer', image: '/home-page/ai2.jpg' },
 ];
 
 const ClientOurService = () => {
-  return (
-    <div >
+  const { companyInfo } = useSelector((state: { globalState: any }) => state.globalState);
+    const bannerImages = ['/home-page/ser.jpg'];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [bannerImages.length]);
 
-      <MyCard sx={{mt:5, mb: 10,  height: '500px' }}>
-        <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily:'sans-serif' }}>
-          Our <span style={{  color: '#f56b2a', fontSize:'50px',fontFamily: 'Brush Script MT, Dancing Script' }} >Expertise</span>
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+  }, [bannerImages.length]);
+
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + bannerImages.length) % bannerImages.length);
+  }, [bannerImages.length]);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 60;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    };
+
+    const timeout = setTimeout(scrollToHash, 100); // Give time for content to render
+
+    return () => clearTimeout(timeout);
+  }, [pathname]);
+
+  return (
+
+    <div>
+       <div className="about-banner">
+          <img src={bannerImages[currentIndex]} alt="institute Management Demo" className="about-banner-img" />
+          {bannerImages.length > 1 && (
+            <>
+              <IconButton className="banner-arrow left" onClick={goToPrev}>
+                <ArrowBackIos />
+              </IconButton>
+              <IconButton className="banner-arrow right" onClick={goToNext}>
+                <ArrowForwardIos />
+              </IconButton>
+            </>
+          )}
+        </div>
+
+       <div className="services-section">
+      <Typography 
+        variant="h4" 
+        className="services-heading"
+      >
+        Out Source Best <span className="highlight-word">Talents</span>
+      </Typography>
+      <p style={{ fontSize: '20px' }}>We are your partner for building amazing distributed teams, providing end-to-end solutions to achieve every goal, and helping you drive your digital transformation.</p>
+      <div className="services-container">
+        {services1.map((service, index) => (
+          <div className="service-card" key={index}>
+            <img src={service.image} alt={service.title} className="service-icon" />
+            <h3 className="service-title">{service.title}</h3>
+          </div>
+        ))}
+        
+      </div>
+      {/* <p style={{ fontSize: '20px', textAlign:'center' }}>And Other Talent</p> */}
+    </div>
+        
+      <MyCard sx={{ mt: 5, mb: 2, height: '500px',backgroundColor:'rgb(238, 242, 246)' }}>
+        <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
+          Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
         </Typography>
         <Grid container spacing={3} justifyContent="center" alignItems="stretch">
           {services.map((service, idx) => (
-            <Grid key={idx} item xs={12} sm={6} md={2} mb={3}> {/* Changed md={2} for 6 items per row */}
+            <Grid key={idx} item xs={12} sm={6} md={2} mb={3}>
+              {' '}
+              {/* Changed md={2} for 6 items per row */}
               {/* Directly displaying icon and title without the box wrapper */}
               <div className="feature-icon" style={{ textAlign: 'center' }}>
                 {service.icon}
               </div>
-              <Typography  align="center" sx={{ color: '#333' }}>
+              <Typography align="center" sx={{ color: '#333' }}>
                 {service.title}
               </Typography>
             </Grid>
@@ -507,10 +581,144 @@ const ClientOurService = () => {
         </Grid>
       </MyCard>
 
+            <div style={{ marginTop: '10px' }} id="section4">
+        {/* Header Typography */}
+        <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
+          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>service</span>
+        </Typography>
+        <div className="card-container">
+          <div className="card">
+            <img src="/home-page/ai1.png" alt="ML/DL Icon" className="card-image" />
+            <h3 className="card-title">AI & Automation</h3>
+            <p className="card-description">Transform your business with intelligent solutions powered by Artificial Intelligence and Machine Learning.
+            We design custom models for automation, decision support, and predictive insights — enabling smarter operations and faster innovation.
+            Our expertise spans NLP, computer vision, generative AI, and workflow automation, all built for scalability and security.</p>
+          </div>
+
+          <div className="card">
+            <img src="/home-page/cloud-dev.png" alt="NLP Icon" className="card-image" />
+            <h3 className="card-title">Cloud & DevOps</h3>
+            <p className="card-description">Empower your infrastructure with cloud-native architecture and DevOps automation.
+            We specialize in AWS, Azure, and GCP to help you migrate, optimize, and maintain high-performance cloud environments.
+            With CI/CD pipelines, containerization (Docker, Kubernetes), and monitoring frameworks, we ensure seamless delivery, resilience, and agility.</p>
+          </div>
+           <div className="card">
+            <img src="/home-page/mobile.png" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <h3 className="card-title">Mobile App Development</h3>
+            <p className="card-description">Create engaging digital experiences that connect your customers anytime, anywhere.
+            We build cross-platform and native mobile apps using React Native, Flutter, and Kotlin, ensuring intuitive interfaces, speed, and reliability.
+            From concept to deployment, every app we build reflects innovation, usability, and business alignment.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/data-ans.png" alt="Online Learning Icon" className="card-image" />
+            <h3 className="card-title">Data Analytics</h3>
+            <p className="card-description">Turn data into a competitive advantage.
+             We help organizations collect, clean, visualize, and interpret data for informed decisions and measurable growth.
+             Our analytics stack integrates with AI and cloud systems to deliver real-time insights through dashboards, KPIs, and predictive models.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/on-team.png" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <h3 className="card-title">On-Demand Tech Team</h3>
+            <p className="card-description">Accelerate your projects with the right technical talent.
+            Through our Build Resource Model, we provide flexible, on-demand resource teams across technologies and domains.
+            You define the requirement — we assemble the right mix of developers, cloud engineers, and AI experts to deliver results faster and smarter.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/hiring.png" alt="Online Learning Icon" className="card-image" />
+            <h3 className="card-title">Top-Tier Engineering Talent Hiring</h3>
+            <p className="card-description">Gain access to a dedicated network of elite developers and engineers.
+             Our talent pool combines technical depth with professional discipline — ensuring clean code, innovation, and on-time delivery.
+             Whether you need dedicated resources or project-based hiring, we help you build reliable, high-performing tech teams.</p>
+          </div>
+        </div>
+      </div>
+      <MyGrid container spacing={1} alignItems="stretch" className="card-container" id="section3">
+        <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/home-page/ser1.png" alt="Image description" style={{ marginLeft: '20px',width: '100%', height: 'auto' }} />
+        </MyGrid>
+        <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
+          <MyCardContent>
+            <p
+              style={{
+                fontSize: '25px', // Adjust font size to match image style
+                fontFamily: 'Sans-serif',
+                lineHeight: '1'
+              }}
+            >
+              Hire the Top Programmer at an
+              <span style={{ color: '#f56b2a', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}>
+                {' '}
+                Unbeatable Price
+              </span>
+            </p>
+
+            {/* Paragraph with appropriate font size and spacing */}
+            <p
+              style={{
+                fontSize: '1.1rem', // Adjust paragraph font size
+                color: '#555', // Greyish color for text
+                lineHeight: '1.8' // Increase line height for better readability
+              }}
+            >
+              In today’s competitive digital world, hiring the right programmer can make or break your project. At{' '}
+              {companyInfo.company_name}, we help you hire top-tier developers who combine expertise, innovation, and efficiency—without
+              breaking your budget. Our programmers are handpicked for their technical excellence, problem-solving skills, and proven track
+              record in delivering high-quality solutions on time. Whether you need a web developer, mobile app expert, or full-stack
+              engineer, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster delivery, and
+              long-term success—all while keeping costs optimized.
+            </p>
+          </MyCardContent>
+        </MyGrid>
+      </MyGrid>
+
+      <div style={{ marginTop: '10px' }}>
+        {/* Header Typography */}
+        <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
+          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solution</span>
+        </Typography>
+        <div className="card-container">
+          <div className="card">
+            <img src="/home-page/machine.jpg" alt="ML/DL Icon" className="card-image" />
+            <h3 className="card-title">ML & DL Engineering</h3>
+            <p className="card-description">We design and deploy intelligent systems using advanced Machine Learning and Deep Learning techniques.
+                  From predictive analytics to computer vision, we transform raw data into actionable insights and automation.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/nlp.webp" alt="NLP Icon" className="card-image" />
+            <h3 className="card-title">NLP Intelligence</h3>
+            <p className="card-description">Empower your apps with Natural Language Processing that understands, interprets, and generates human language.
+              Perfect for chatbots, voice assistants, document analysis, and content automation.</p>
+          </div>
+
+          <div className="card">
+            <img src="/home-page/modal.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <h3 className="card-title">Model Optimization</h3>
+            <p className="card-description">Enhance your AI performance with Hyperparameter Tuning and AutoML.
+            We optimize training workflows for better accuracy, faster learning, and scalable results.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/adaptive.webp" alt="Online Learning Icon" className="card-image" />
+            <h3 className="card-title">Adaptive Learning</h3>
+            <p className="card-description">Keep your models continuously updated through Online and Incremental Learning.
+             Your AI evolves with new data—staying accurate, adaptive, and future-ready.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/transfer.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <h3 className="card-title">Transfer Learning</h3>
+            <p className="card-description">Accelerate AI development by leveraging pre-trained models fine-tuned for your domain.
+              Reduce time, cost, and data requirements while achieving enterprise-grade performance.</p>
+          </div>
+          <div className="card">
+            <img src="/home-page/ger-ai.webp" alt="Online Learning Icon" className="card-image" />
+            <h3 className="card-title">Generative AI</h3>
+            <p className="card-description">Create intelligent, original content using the power of Generative AI.
+              We build text, image, and code generation systems tailored to your business needs.</p>
+          </div>
+        </div>
+      </div>
       <Footer />
     </div>
   );
 };
 
 export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
-

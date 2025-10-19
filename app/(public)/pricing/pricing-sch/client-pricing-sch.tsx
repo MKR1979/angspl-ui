@@ -908,7 +908,7 @@ const ClientPricingSch = () => {
                         fullWidth
                         onClick={() => goToCompanyModule('School', plan.title, 'Monthly', plan.price)}
                       >
-                        Subscribe Now
+                        Buy Now
                       </MyButton>
                     </MyBox>
                   </MyCardContent>
@@ -997,7 +997,7 @@ const ClientPricingSch = () => {
                     <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
                     <MyBox sx={{ mt: 'auto', width: '100%' }}>
                       <MyButton variant="contained" fullWidth onClick={() => goToCompanyModule('School', plan.title, 'Yearly', plan.price)}>
-                        Subscribe Now
+                        Buy Now
                       </MyButton>
                     </MyBox>
                   </MyCardContent>
