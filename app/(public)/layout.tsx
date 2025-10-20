@@ -952,7 +952,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   // Update menuFlags based on siteConfig (similar to your previous switch-case)
-   if (Array.isArray(siteConfig)) {
+  if (Array.isArray(siteConfig)) {
     siteConfig.forEach((config) => {
       switch (config.key.toUpperCase()) {
         case 'ENABLE_HOME':
@@ -1060,7 +1060,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     });
   }
 
-
   const drawerWidth = 240;
 
   const handleDrawerToggle = () => setMobileOpen((prev) => !prev);
@@ -1091,7 +1090,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   // Navigation items
   const navItems = [
-   ...(menuFlags.publicHome ? [{ text: 'Home', href: '/home' }] : []),
+    ...(menuFlags.publicHome ? [{ text: 'Home', href: '/home' }] : []),
     ...(menuFlags.publicPricing
       ? [
           {
@@ -1123,45 +1122,75 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {
                 text: 'School',
                 children: [
-                  ...(menuFlags.publicAdmissionMng ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }] : []),
-                  ...(menuFlags.publicStudentMng ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }] : []),
+                  ...(menuFlags.publicAdmissionMng
+                    ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }]
+                    : []),
+                  ...(menuFlags.publicStudentMng
+                    ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }]
+                    : []),
                   ...(menuFlags.publicFeeMng ? [{ text: 'Finance & Payments', href: `/${Constants.MOD_DESC}/fee-management` }] : []),
-                  ...(menuFlags.publicAttendanceMng ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }] : []),
-                  ...(menuFlags.publicAffiliateMng ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }] : []),
+                  ...(menuFlags.publicAttendanceMng
+                    ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }]
+                    : []),
+                  ...(menuFlags.publicAffiliateMng
+                    ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }]
+                    : []),
                   ...(menuFlags.publicCourseMng ? [{ text: 'Assessments & Exams', href: `/${Constants.MOD_DESC}/exam-management` }] : []),
-                  ...(menuFlags.publicExaminationMng ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }] : [])
+                  ...(menuFlags.publicExaminationMng
+                    ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }]
+                    : [])
                 ]
               },
               {
                 text: 'College',
                 children: [
-                  ...(menuFlags.publicAdmissionMng ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }] : []),
-                  ...(menuFlags.publicStudentMng ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }] : []),
+                  ...(menuFlags.publicAdmissionMng
+                    ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }]
+                    : []),
+                  ...(menuFlags.publicStudentMng
+                    ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }]
+                    : []),
                   ...(menuFlags.publicFeeMng ? [{ text: 'Finance & Payments', href: `/${Constants.MOD_DESC}/fee-management` }] : []),
-                  ...(menuFlags.publicAttendanceMng ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }] : []),
-                  ...(menuFlags.publicAffiliateMng ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }] : []),
+                  ...(menuFlags.publicAttendanceMng
+                    ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }]
+                    : []),
+                  ...(menuFlags.publicAffiliateMng
+                    ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }]
+                    : []),
                   ...(menuFlags.publicCourseMng ? [{ text: 'Assessments & Exams', href: `/${Constants.MOD_DESC}/exam-management` }] : []),
-                  ...(menuFlags.publicExaminationMng ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }] : [])
+                  ...(menuFlags.publicExaminationMng
+                    ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }]
+                    : [])
                 ]
               },
               {
                 text: 'Institute',
                 children: [
-                  ...(menuFlags.publicAdmissionMng ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }] : []),
-                  ...(menuFlags.publicStudentMng ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }] : []),
+                  ...(menuFlags.publicAdmissionMng
+                    ? [{ text: 'Admissions & Enrollment', href: `/${Constants.MOD_DESC}/adm-management` }]
+                    : []),
+                  ...(menuFlags.publicStudentMng
+                    ? [{ text: 'Student Information System', href: `/${Constants.MOD_DESC}/student-management` }]
+                    : []),
                   ...(menuFlags.publicFeeMng ? [{ text: 'Finance & Payments', href: `/${Constants.MOD_DESC}/fee-management` }] : []),
-                  ...(menuFlags.publicAttendanceMng ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }] : []),
-                  ...(menuFlags.publicAffiliateMng ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }] : []),
+                  ...(menuFlags.publicAttendanceMng
+                    ? [{ text: 'Attendance & Time Tracking', href: `/${Constants.MOD_DESC}/attendance-management` }]
+                    : []),
+                  ...(menuFlags.publicAffiliateMng
+                    ? [{ text: 'Courses & Curriculum', href: `/${Constants.MOD_DESC}/course-management` }]
+                    : []),
                   ...(menuFlags.publicCourseMng ? [{ text: 'Assessments & Exams', href: `/${Constants.MOD_DESC}/exam-management` }] : []),
-                  ...(menuFlags.publicExaminationMng ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }] : [])
+                  ...(menuFlags.publicExaminationMng
+                    ? [{ text: 'Affiliations & Partnerships', href: `/${Constants.MOD_DESC}/affiliate-management` }]
+                    : [])
                 ]
               }
             ]
           }
         ]
       : []),
-        ...(menuFlags.publicAboutUs ? [{ text: 'About Us', href: '/about-us' }] : []),
-      ...(menuFlags.publicAffiliates ? [{ text: 'Affiliate', href: '/affiliate' }] : []),
+    ...(menuFlags.publicAboutUs ? [{ text: 'About Us', href: '/about-us' }] : []),
+    ...(menuFlags.publicAffiliates ? [{ text: 'Affiliate', href: '/affiliate' }] : []),
     ...(menuFlags.publicContactUs ? [{ text: 'Contact Us', href: '/contact-us' }] : []),
     ...(menuFlags.publicDemo
       ? [
@@ -1190,7 +1219,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         return (
           <Box key={item.text}>
             <ListItem disablePadding>
-              <ListItemButton onClick={() => toggleMobileSubmenu(item.text)} sx={{ pl: paddingLeft }} >
+              <ListItemButton onClick={() => toggleMobileSubmenu(item.text)} sx={{ pl: paddingLeft }}>
                 <ListItemText primary={item.text} />
                 {openMobileSubmenus[item.text] ? <KeyboardArrowDown /> : <KeyboardArrowRight />}
               </ListItemButton>
@@ -1202,23 +1231,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       return (
         <ListItem key={item.text} disablePadding>
           <ListItemButton sx={{ pl: paddingLeft }}>
- <MyLink
-  href={item.href || '/'}
-  style={{ textDecoration: 'none', color: 'inherit' }}
-  onClick={handleCloseDrawer} // ✅ closes the drawer on link click
->
-  <ListItemText primary={item.text} />
-</MyLink>
+            <MyLink
+              href={item.href || '/'}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              onClick={handleCloseDrawer} // ✅ closes the drawer on link click
+            >
+              <ListItemText primary={item.text} />
+            </MyLink>
           </ListItemButton>
         </ListItem>
       );
     });
 
   const drawer = (
-    <Box sx={{ width: drawerWidth }} role="presentation" >
+    <Box sx={{ width: drawerWidth }} role="presentation">
       <Typography variant="h6" sx={{ my: 2 }}>
         <MyBox sx={{ textShadow: '2px 2px 5px black', fontWeight: 'bold', fontSize: '26px', paddingTop: '5px', width: '96px' }}>
-          <MyLink href="/" >
+          <MyLink href="/">
             <MyLogo hostName={currentHost} />
           </MyLink>
         </MyBox>
@@ -1236,10 +1265,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       if (child.children && child.children.length > 0) {
         return (
           <Box key={child.text} sx={{ position: 'relative', '&:hover > .submenu': { display: 'block' } }}>
-            <Box sx={{ padding: '5px 8px', cursor: 'pointer', '&:hover': { backgroundColor: '#f5f5f5', color: '#1976d2' }, borderBottom: '1px solid #ddd' }}>
+            <Box
+              sx={{
+                padding: '5px 8px',
+                cursor: 'pointer',
+                '&:hover': { backgroundColor: '#f5f5f5', color: '#1976d2' },
+                borderBottom: '1px solid #ddd'
+              }}
+            >
               {child.text}
             </Box>
-            <Box className="submenu" sx={{ display: 'none', position: 'absolute', top: 0, left: '100%', backgroundColor: '#fff', boxShadow: 3, borderRadius: 1, zIndex: 15, minWidth: '160px' }}>
+            <Box
+              className="submenu"
+              sx={{
+                display: 'none',
+                position: 'absolute',
+                top: 0,
+                left: '100%',
+                backgroundColor: '#fff',
+                boxShadow: 3,
+                borderRadius: 1,
+                zIndex: 15,
+                minWidth: '160px'
+              }}
+            >
               {renderDesktopSubmenu(child.children)}
             </Box>
           </Box>
@@ -1259,7 +1308,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <MyBox sx={{ display: 'flex' }}>
         <AppBar component="nav" elevation={1} sx={{ backgroundColor: '#fff', color: '#000' }} position="fixed">
           <Toolbar>
-            <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
               <MyMenuIcon />
             </IconButton>
 
@@ -1286,66 +1341,63 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Box>
               ))} */}
               {navItems.map((item) => (
-  <Box
-    key={item.text}
-    onMouseEnter={() => setHoveredMenu(item.text)}
-    onMouseLeave={() => setHoveredMenu(null)}
-    sx={{ display: 'inline-block', position: 'relative' }}
-  >
-    {item.children ? (
-      // 🔹 If item has submenu
-      <>
-        <MyButton
-          variant="outlined"
-          sx={{
-            backgroundColor: '#fff',
-            border: 'none',
-            color: '#000',
-            '&:hover': { color: '#1976d2', backgroundColor: 'transparent' },
-          }}
-        >
-          {item.text}
-        </MyButton>
+                <Box
+                  key={item.text}
+                  onMouseEnter={() => setHoveredMenu(item.text)}
+                  onMouseLeave={() => setHoveredMenu(null)}
+                  sx={{ display: 'inline-block', position: 'relative' }}
+                >
+                  {item.children ? (
+                    // 🔹 If item has submenu
+                    <>
+                      <MyButton
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: '#fff',
+                          border: 'none',
+                          color: '#000',
+                          '&:hover': { color: '#1976d2', backgroundColor: 'transparent' }
+                        }}
+                      >
+                        {item.text}
+                      </MyButton>
 
-        {hoveredMenu === item.text && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              backgroundColor: '#fff',
-              boxShadow: 3,
-              borderRadius: 1,
-              zIndex: 10,
-              minWidth: '180px',
-              px: '5px',
-            }}
-          >
-            {renderDesktopSubmenu(item.children)}
-          </Box>
-        )}
-      </>
-    ) : (
-      // 🔹 If item is a simple link (e.g. Home)
-      <MyLink
-        href={item.href ?? '#'}
-        style={{ textDecoration: 'none' }}
-      >
-        <MyButton
-          variant="outlined"
-          sx={{
-            backgroundColor: '#fff',
-            border: 'none',
-            color: '#000',
-            '&:hover': { color: '#1976d2', backgroundColor: 'transparent' },
-          }}
-        >
-          {item.text}
-        </MyButton>
-      </MyLink>
-    )}
-  </Box>
-))}
+                      {hoveredMenu === item.text && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            backgroundColor: '#fff',
+                            boxShadow: 3,
+                            borderRadius: 1,
+                            zIndex: 10,
+                            minWidth: '180px',
+                            px: '5px'
+                          }}
+                        >
+                          {renderDesktopSubmenu(item.children)}
+                        </Box>
+                      )}
+                    </>
+                  ) : (
+                    // 🔹 If item is a simple link (e.g. Home)
+                    <MyLink href={item.href ?? '#'} style={{ textDecoration: 'none' }}>
+                      <MyButton
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: '#fff',
+                          border: 'none',
+                          color: '#000',
+                          '&:hover': { color: '#1976d2', backgroundColor: 'transparent' }
+                        }}
+                      >
+                        {item.text}
+                      </MyButton>
+                    </MyLink>
+                  )}
+                </Box>
+              ))}
             </Box>
           </Toolbar>
         </AppBar>
@@ -1370,4 +1422,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </>
   );
 }
-
