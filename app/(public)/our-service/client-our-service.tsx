@@ -187,250 +187,6 @@
 //   return eq(prevProps, nextProps); // Don't re-render!
 // });
 
-// 'use client';
-// import React, { memo } from 'react';
-// import eq from 'lodash/eq';
-// import { Box, Grid, Typography } from '@mui/material';
-// import Footer from '@/app/custom-components/my-footer/MyFooter';
-// import {
-//   Web,
-//   PhoneIphone,
-//   DesignServices,
-//   Search,
-//   Cloud,
-//   Storage,
-//   Memory,
-//   Build,
-//   DeveloperMode,
-//   Security,
-//   Wifi,
-//   Insights,
-// } from '@mui/icons-material';
-// import './services.css'; // make sure your feature-card CSS is here
-
-// const services = [
-//   { title: 'Web Development', description: 'Responsive websites with React, Next.js, Node.js.', icon: <Web sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Mobile App Development', description: 'High-performance iOS & Android apps.', icon: <PhoneIphone sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'UI/UX Design', description: 'Intuitive interfaces to boost engagement.', icon: <DesignServices sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'SEO Optimization', description: 'Increase rankings & organic traffic.', icon: <Search sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'AI / ML Services', description: 'Predictive analytics & intelligent automation.', icon: <Memory sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Cloud Services', description: 'AWS, Azure & scalable cloud infrastructure.', icon: <Cloud sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Data Services', description: 'Database design, analytics & pipelines.', icon: <Storage sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'DevOps Practices', description: 'CI/CD, containerization & IaC.', icon: <Build sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Web App Development', description: 'Robust & scalable web applications.', icon: <DeveloperMode sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Cybersecurity & Zero Trust', description: 'Secure applications with zero-trust architecture.', icon: <Security sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'IoT with AI & 5G', description: 'Connected devices with intelligent automation.', icon: <Wifi sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'AI-Powered BI', description: 'Smart dashboards & insights for business decisions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'GreenTech / Sustainable IT', description: 'Eco-friendly and energy-efficient IT solutions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> }
-// ];
-
-// const ClientOurService = () => {
-//   return (
-//     <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-//       <Box sx={{ width: '100%', py: 3 }}>
-//         <Typography variant="h4" align="center" sx={{ mb: 1, fontWeight: 'bold', color: '#1976d2' }}>
-//           Our Services
-//         </Typography>
-
-//         {/* Center container with left-right margins */}
-//         <Box sx={{ maxWidth: '80%', mx: 'auto' }}>
-//           <Grid container spacing={3} justifyContent="center" alignItems="stretch">
-//             {services.map((service, idx) => (
-//               <Grid key={idx} item xs={12} sm={6} md={3}>
-//                 <div className="feature-card">
-//                   <div className="feature-icon">{service.icon}</div>
-//                   <h3 className="feature-title">{service.title}</h3>
-//                   <p className="feature-desc">{service.description}</p>
-//                 </div>
-//               </Grid>
-//             ))}
-//           </Grid>
-//         </Box>
-//       </Box>
-
-//       <Footer />
-//     </Box>
-//   );
-// };
-
-// export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
-
-// 'use client';
-// import React, { memo } from 'react';
-// import eq from 'lodash/eq';
-// import { Box, Grid, Card, Typography } from '@mui/material';
-// import Footer from '@/app/custom-components/my-footer/MyFooter';
-// import {
-//   Web,
-//   PhoneIphone,
-//   DesignServices,
-//   Search,
-//   Cloud,
-//   Storage,
-//   Memory,
-//   Build,
-//   DeveloperMode,
-//   Security,
-//   Wifi,
-//   Insights,
-// } from '@mui/icons-material';
-
-// const services = [
-//   { title: 'Web Development', description: 'Responsive websites with React, Next.js, Node.js.', icon: <Web sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Mobile App Development', description: 'High-performance iOS & Android apps.', icon: <PhoneIphone sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'UI/UX Design', description: 'Intuitive interfaces to boost engagement.', icon: <DesignServices sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'SEO Optimization', description: 'Increase rankings & organic traffic.', icon: <Search sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'AI / ML Services', description: 'Predictive analytics & intelligent automation.', icon: <Memory sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Cloud Services', description: 'AWS, Azure & scalable cloud infrastructure.', icon: <Cloud sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Data Services', description: 'Database design, analytics & pipelines.', icon: <Storage sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'DevOps Practices', description: 'CI/CD, containerization & IaC.', icon: <Build sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Web App Development', description: 'Robust & scalable web applications.', icon: <DeveloperMode sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'Cybersecurity & Zero Trust', description: 'Secure applications with zero-trust architecture.', icon: <Security sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'IoT with AI & 5G', description: 'Connected devices with intelligent automation.', icon: <Wifi sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'AI-Powered BI', description: 'Smart dashboards & insights for business decisions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> },
-//   { title: 'GreenTech / Sustainable IT', description: 'Eco-friendly and energy-efficient IT solutions.', icon: <Insights sx={{ fontSize: 40, color: '#1976d2' }} /> }
-// ];
-
-// const ClientOurService = () => {
-//   return (
-//     <Box
-//   sx={{
-//     minHeight: '100vh',
-//     display: 'flex',
-//     flexDirection: 'column',
-//   }}
-// >
-//   <Box sx={{ width: '100%', py: 3 }}>
-//     <Typography
-//       variant="h4"
-//       align="center"
-//       sx={{ mb: 1, fontWeight: 'bold', color: '#1976d2' }}
-//     >
-//       Our Services
-//     </Typography>
-
-//     {/* Centered container with max width */}
-//     <Box sx={{ maxWidth: '80%', mx: 'auto',  }}>
-//       <Grid container spacing={3} justifyContent="center">
-//         {services.map((service, idx) => (
-//           <Grid key={idx} item xs={12} sm={6} md={3}>
-//             <Card
-//               sx={{
-//                 height: '100%',
-//                 display: 'flex',
-//                 backgroundColor: '#f5f5f5', //'#e0e0e0',
-//                 flexDirection: 'column',
-//                 alignItems: 'center',
-//                 textAlign: 'center',
-//                 px: 2,
-//                 py: 3,
-//                 borderRadius: 3,
-//                 boxShadow: '0 6px 18px rgba(0,0,0,0.06)',
-//                 transition: 'transform 0.3s, box-shadow 0.3s',
-//                 '&:hover': {
-//                   transform: 'translateY(-8px)',
-//                   boxShadow: '0 12px 30px rgba(0,0,0,0.15)',
-//                 },
-//               }}
-//             >
-//               {service.icon}
-//               <Typography
-//                 variant="h6"
-//                 sx={{ mt: 1.5, fontWeight: 'bold', color: '#333' }}
-//               >
-//                 {service.title}
-//               </Typography>
-//               <Typography
-//                 variant="body2"
-//                 sx={{ mt: 0.5, color: '#555', fontSize: '0.875rem' }}
-//               >
-//                 {service.description}
-//               </Typography>
-//             </Card>
-//           </Grid>
-//         ))}
-//       </Grid>
-//     </Box>
-//   </Box>
-
-//   <Footer />
-// </Box>
-
-//   );
-// };
-
-// export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
-
-// 'use client';
-// import React, { memo } from 'react';
-// import eq from 'lodash/eq';
-// import { Box, Grid, Typography } from '@mui/material';
-// import Footer from '@/app/custom-components/my-footer/MyFooter';
-// import {
-//   Web,
-//   PhoneIphone,
-//   DesignServices,
-//   Search,
-//   Cloud,
-//   Storage,
-//   Memory,
-//   Build,
-//   DeveloperMode,
-//   Security,
-//   Wifi,
-//   Insights,
-// } from '@mui/icons-material';
-// import './services.css'; // make sure your feature-card CSS is here
-// import MyCard from '@/app/custom-components/MyCard';
-
-// const services = [
-// { title: 'Web Development',  icon: <Web sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'Mobile App Development', icon: <PhoneIphone sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'UI/UX Design',  icon: <DesignServices sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'SEO Optimization', icon: <Search sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'AI / ML Services',  icon: <Memory sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'Cloud Services', icon: <Cloud sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'Data Services',  icon: <Storage sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'DevOps Practices',  icon: <Build sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'Web App Development',  icon: <DeveloperMode sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'Cybersecurity & Zero Trust',  icon: <Security sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'IoT with AI & 5G',  icon: <Wifi sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'AI-Powered BI',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> },
-// { title: 'GreenTech / Sustainable IT',  icon: <Insights sx={{ fontSize: 100, color: '#757575' }} /> }
-// ];
-
-// const ClientOurService = () => {
-//   return (
-//     <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column'  }}>
-//       <Box sx={{ width: '100%', py: 4, }}>
-//         <Typography variant="h4" align="center" sx={{ mb: 1, fontWeight: 'bold', color: '#1976d2' }}>
-//           Our Services
-//         </Typography>
-
-//         {/* Center container with left-right margins */}
-//         <MyCard sx={{ backgroundColor:'rgb(238, 242, 246)' }}>
-//         <Box >
-//           <Grid container spacing={3} justifyContent="center" alignItems="stretch">
-//             {services.map((service, idx) => (
-//               <Grid key={idx} item xs={12} sm={6} md={3}>
-//                 <div className="feature-card">
-//                   <div className="feature-icon">{service.icon}</div>
-//                   <h3 className="feature-title">{service.title}</h3>
-//                   {/* <p className="feature-desc">{service.description}</p> */}
-//                 </div>
-//               </Grid>
-//             ))}
-//           </Grid>
-//         </Box>
-//         </MyCard>
-//       </Box>
-
-//       <Footer />
-//     </Box>
-//   );
-// };
-
-// export default memo(ClientOurService, (prevProps, nextProps) => eq(prevProps, nextProps));
 
 'use client';
 import React, { memo, useCallback, useEffect, useState } from 'react';
@@ -478,10 +234,12 @@ const services = [
 const services1 = [
   { title: 'Full Stack Engineer', image: '/home-page/ser4.jpg' },
   { title: 'Technology Analyst', image: '/home-page/ser5.png' },
-  { title: 'Technical Architect', image: '/home-page/tec-art.png' },
+  { title: 'Technical Architect', image: '/home-page/art-tech.png' },
   { title: 'Cloud Expert', image: '/home-page/cloud.webp' },
   { title: 'DevOps Engineer', image: '/home-page/devops.jpg' },
   { title: 'AI Engineer', image: '/home-page/ai2.jpg' },
+  { title: 'Data Engineer', image: '/home-page/data-eng.jpg' },
+  { title: 'Cybersecurity Specialist', image: '/home-page/ai2.jpg' },
 ];
 
 const ClientOurService = () => {
@@ -560,54 +318,66 @@ const ClientOurService = () => {
       {/* <p style={{ fontSize: '20px', textAlign:'center' }}>And Other Talent</p> */}
     </div>
         
-      <MyCard sx={{ mt: 5, mb: 2, height: '500px',backgroundColor:'rgb(238, 242, 246)' }}>
-        <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
-          Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
-        </Typography>
-        <Grid container spacing={3} justifyContent="center" alignItems="stretch">
-          {services.map((service, idx) => (
-            <Grid key={idx} item xs={12} sm={6} md={2} mb={3}>
-              {' '}
-              {/* Changed md={2} for 6 items per row */}
-              {/* Directly displaying icon and title without the box wrapper */}
-              <div className="feature-icon" style={{ textAlign: 'center' }}>
-                {service.icon}
-              </div>
-              <Typography align="center" sx={{ color: '#333' }}>
-                {service.title}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </MyCard>
+    <MyCard sx={{
+      mt: 3,
+      height: 'auto',
+      maxWidth: '1520px',
+      backgroundColor: 'rgb(238, 242, 246)',
+      margin: 'auto',
+      padding: '20px'
+    }}>
+      <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
+        Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
+      </Typography>
+      <Grid container spacing={1} justifyContent="center" alignItems="stretch">
+        {services.map((service, idx) => (
+          <Grid
+            key={idx}
+            item
+            xs={6}   // Full-width on mobile
+            sm={6}    // 2 items per row on tablets
+            md={3}    // 4 items per row on desktops
+            lg={2}    // 6 items per row on larger screens
+            mb={3}
+          >
+            <div className="feature-icon" style={{ textAlign: 'center', padding: '10px' }}>
+              {service.icon}
+            </div>
+            <Typography align="center" sx={{ color: '#333', padding: '10px' }}>
+              {service.title}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </MyCard>
 
             <div style={{ marginTop: '10px' }} id="section4">
         {/* Header Typography */}
         <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
-          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>service</span>
+          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>services</span>
         </Typography>
         <div className="card-container">
           <div className="card">
-            <img src="/home-page/ai1.png" alt="ML/DL Icon" className="card-image" />
+            <img src="/home-page/ai-auto.jpg" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">AI & Automation</h3>
-            <p className="card-description">Transform your business with intelligent solutions powered by Artificial Intelligence and Machine Learning.
-            We design custom models for automation, decision support, and predictive insights — enabling smarter operations and faster innovation.
-            Our expertise spans NLP, computer vision, generative AI, and workflow automation, all built for scalability and security.</p>
+            <p className="card-description">Empower your business with AI and ML solutions that drive automation, decision intelligence,
+               and predictive analytics. From NLP and computer vision to generative AI, we create scalable, secure, and high-performance
+                systems for smarter operations and faster innovation.</p>
           </div>
 
           <div className="card">
             <img src="/home-page/cloud-dev.png" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">Cloud & DevOps</h3>
             <p className="card-description">Empower your infrastructure with cloud-native architecture and DevOps automation.
-            We specialize in AWS, Azure, and GCP to help you migrate, optimize, and maintain high-performance cloud environments.
-            With CI/CD pipelines, containerization (Docker, Kubernetes), and monitoring frameworks, we ensure seamless delivery, resilience, and agility.</p>
+               We leverage AWS, Azure, and GCP to migrate, optimize, and scale systems using CI/CD, Docker, and Kubernetes — ensuring
+                seamless delivery, agility, and high-performance cloud operations.</p>
           </div>
            <div className="card">
             <img src="/home-page/mobile.png" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Mobile App Development</h3>
-            <p className="card-description">Create engaging digital experiences that connect your customers anytime, anywhere.
-            We build cross-platform and native mobile apps using React Native, Flutter, and Kotlin, ensuring intuitive interfaces, speed, and reliability.
-            From concept to deployment, every app we build reflects innovation, usability, and business alignment.</p>
+            <p className="card-description">Create engaging digital experiences with powerful mobile apps built using React Native, Flutter,
+               and Kotlin. We deliver fast, reliable, and intuitive apps that blend innovation with usability — ensuring seamless performance
+               and stronger customer connections across platforms.</p>
           </div>
           <div className="card">
             <img src="/home-page/data-ans.png" alt="Online Learning Icon" className="card-image" />
@@ -617,18 +387,24 @@ const ClientOurService = () => {
              Our analytics stack integrates with AI and cloud systems to deliver real-time insights through dashboards, KPIs, and predictive models.</p>
           </div>
           <div className="card">
-            <img src="/home-page/on-team.png" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <img src="/home-page/on-team.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">On-Demand Tech Team</h3>
-            <p className="card-description">Accelerate your projects with the right technical talent.
-            Through our Build Resource Model, we provide flexible, on-demand resource teams across technologies and domains.
-            You define the requirement — we assemble the right mix of developers, cloud engineers, and AI experts to deliver results faster and smarter.</p>
+            <p className="card-description">Accelerate your projects with the right technical talent. Our Build Resource Model offers flexible, on-demand
+               teams across technologies. You define requirements, and we provide developers, cloud engineers, and AI experts to deliver faster,
+                smarter results.</p>
           </div>
           <div className="card">
             <img src="/home-page/hiring.png" alt="Online Learning Icon" className="card-image" />
-            <h3 className="card-title">Top-Tier Engineering Talent Hiring</h3>
-            <p className="card-description">Gain access to a dedicated network of elite developers and engineers.
-             Our talent pool combines technical depth with professional discipline — ensuring clean code, innovation, and on-time delivery.
-             Whether you need dedicated resources or project-based hiring, we help you build reliable, high-performing tech teams.</p>
+            <h3 className="card-title">Hiring Top Engineering Talent</h3>
+            <p className="card-description">Access a dedicated network of elite developers and engineers. Our talent pool ensures technical
+               expertise, clean code, innovation, and timely delivery. Whether for dedicated resources or project-based hiring, we help build
+                reliable, high-performing tech teams.</p>
+          </div>
+            <div className="card">
+            <img src="/home-page/out-dev.webp" alt="Online Learning Icon" className="card-image" />
+            <h3 className="card-title">Smart Outsourcing Solutions</h3>
+            <p className="card-description">Focus on growth while we manage your development needs. Our remote and offshore teams, skilled in full-stack, cloud, and AI technologies, deliver cost-effective,
+               high-quality solutions with flexible, transparent, and collaborative engagement models.</p>
           </div>
         </div>
       </div>
@@ -664,7 +440,7 @@ const ClientOurService = () => {
               {companyInfo.company_name}, we help you hire top-tier developers who combine expertise, innovation, and efficiency—without
               breaking your budget. Our programmers are handpicked for their technical excellence, problem-solving skills, and proven track
               record in delivering high-quality solutions on time. Whether you need a web developer, mobile app expert, or full-stack
-              engineer, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster delivery, and
+              engineer or Architect, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster delivery, and
               long-term success—all while keeping costs optimized.
             </p>
           </MyCardContent>
@@ -674,7 +450,7 @@ const ClientOurService = () => {
       <div style={{ marginTop: '10px' }}>
         {/* Header Typography */}
         <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
-          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solution</span>
+          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solutions</span>
         </Typography>
         <div className="card-container">
           <div className="card">
@@ -684,14 +460,14 @@ const ClientOurService = () => {
                   From predictive analytics to computer vision, we transform raw data into actionable insights and automation.</p>
           </div>
           <div className="card">
-            <img src="/home-page/nlp.webp" alt="NLP Icon" className="card-image" />
+            <img src="/home-page/npl.webp" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">NLP Intelligence</h3>
             <p className="card-description">Empower your apps with Natural Language Processing that understands, interprets, and generates human language.
               Perfect for chatbots, voice assistants, document analysis, and content automation.</p>
           </div>
 
           <div className="card">
-            <img src="/home-page/modal.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <img src="/home-page/modal1.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Model Optimization</h3>
             <p className="card-description">Enhance your AI performance with Hyperparameter Tuning and AutoML.
             We optimize training workflows for better accuracy, faster learning, and scalable results.</p>
