@@ -17,6 +17,7 @@ import Footer from '@/app/custom-components/my-footer/MyFooter';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 const ClientDemoClg = () => {
   const { bannerImages, currentIndex, goToNext, goToPrev, getYouTubeVideoId, handleModuleClick, moduleRefs } = useDemoClg();
@@ -67,12 +68,12 @@ const ClientDemoClg = () => {
     },
     {
       icon: <GroupIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
-      title: 'Student & Staff Records',
+      title: 'Student And Staff Records',
       description: 'Manage student and teacher data securely in one central database.',
       content: (
         <div style={{ lineHeight: 1.6 }}>
           <p>
-            The <strong>Student & Staff Records</strong> module is a comprehensive solution for maintaining and organizing all data related to
+            The <strong>Student & Staff Records</strong> modules are comprehensive solution for maintaining and organizing all data related to
             students, teachers, and staff members. It provides a secure, centralized database for easy access, efficient management,
             and accurate tracking of every individual associated with your college. AI analytics help detect inconsistencies or gaps in data entries for improved data quality.
           </p>
@@ -329,7 +330,7 @@ const ClientDemoClg = () => {
       )
     },
     {
-      icon: <HowToRegIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+      icon: <EventAvailableIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
       title: 'Attendance Management',
       description: 'Streamline attendance tracking with location-based verification, bulk marking, and detailed student records.',
       content: (

@@ -17,6 +17,7 @@ import Footer from '@/app/custom-components/my-footer/MyFooter';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 const ClientDemoTech = () => {
   const { bannerImages,
@@ -374,7 +375,7 @@ const ClientDemoTech = () => {
       )
     },
     {
-      icon: <HowToRegIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
+      icon: <EventAvailableIcon sx={{ fontSize: 40, color: '#334D6E' }} />,
       title: 'Attendance Management',
       description: 'Streamline attendance tracking with location-based verification, bulk marking, and detailed learner records.',
       content: (

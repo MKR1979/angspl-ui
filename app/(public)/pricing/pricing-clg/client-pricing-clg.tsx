@@ -913,7 +913,7 @@ const ClientPricing = () => {
                         fullWidth
                         onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                       >
-                        Subscribe Now
+                        Buy Now
                       </MyButton>
                     </MyBox>
                   </MyCardContent>
@@ -1006,7 +1006,7 @@ const ClientPricing = () => {
                         fullWidth
                         onClick={() => goToCompanyModule('college', plan.title, 'Yearly', plan.price)}
                       >
-                        Subscribe Now
+                        Buy Now
                       </MyButton>
                     </MyBox>
                   </MyCardContent>
