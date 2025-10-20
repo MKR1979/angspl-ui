@@ -478,10 +478,12 @@ const services = [
 const services1 = [
   { title: 'Full Stack Engineer', image: '/home-page/ser4.jpg' },
   { title: 'Technology Analyst', image: '/home-page/ser5.png' },
-  { title: 'Technical Architect', image: '/home-page/tec-art.png' },
+  { title: 'Technical Architect', image: '/home-page/art-tech.png' },
   { title: 'Cloud Expert', image: '/home-page/cloud.webp' },
   { title: 'DevOps Engineer', image: '/home-page/devops.jpg' },
   { title: 'AI Engineer', image: '/home-page/ai2.jpg' },
+  { title: 'Data Engineer', image: '/home-page/data-eng.jpg' },
+  { title: 'Cybersecurity Specialist', image: '/home-page/ai2.jpg' },
 ];
 
 const ClientOurService = () => {
@@ -596,30 +598,30 @@ const ClientOurService = () => {
             <div style={{ marginTop: '10px' }} id="section4">
         {/* Header Typography */}
         <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
-          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>service</span>
+          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>services</span>
         </Typography>
         <div className="card-container">
           <div className="card">
             <img src="/home-page/ai-auto.jpg" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">AI & Automation</h3>
-            <p className="card-description">Transform your business with intelligent solutions powered by Artificial Intelligence and Machine Learning.
-            We design custom models for automation, decision support, and predictive insights — enabling smarter operations and faster innovation.
-            Our expertise spans NLP, computer vision, generative AI, and workflow automation, all built for scalability and security.</p>
+            <p className="card-description">Empower your business with AI and ML solutions that drive automation, decision intelligence,
+               and predictive analytics. From NLP and computer vision to generative AI, we create scalable, secure, and high-performance
+                systems for smarter operations and faster innovation.</p>
           </div>
 
           <div className="card">
             <img src="/home-page/cloud-dev.png" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">Cloud & DevOps</h3>
             <p className="card-description">Empower your infrastructure with cloud-native architecture and DevOps automation.
-            We specialize in AWS, Azure, and GCP to help you migrate, optimize, and maintain high-performance cloud environments.
-            With CI/CD pipelines, containerization (Docker, Kubernetes), and monitoring frameworks, we ensure seamless delivery, resilience, and agility.</p>
+               We leverage AWS, Azure, and GCP to migrate, optimize, and scale systems using CI/CD, Docker, and Kubernetes — ensuring
+                seamless delivery, agility, and high-performance cloud operations.</p>
           </div>
            <div className="card">
             <img src="/home-page/mobile.png" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Mobile App Development</h3>
-            <p className="card-description">Create engaging digital experiences that connect your customers anytime, anywhere.
-            We build cross-platform and native mobile apps using React Native, Flutter, and Kotlin, ensuring intuitive interfaces, speed, and reliability.
-            From concept to deployment, every app we build reflects innovation, usability, and business alignment.</p>
+            <p className="card-description">Create engaging digital experiences with powerful mobile apps built using React Native, Flutter,
+               and Kotlin. We deliver fast, reliable, and intuitive apps that blend innovation with usability — ensuring seamless performance
+               and stronger customer connections across platforms.</p>
           </div>
           <div className="card">
             <img src="/home-page/data-ans.png" alt="Online Learning Icon" className="card-image" />
@@ -631,23 +633,22 @@ const ClientOurService = () => {
           <div className="card">
             <img src="/home-page/on-team.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">On-Demand Tech Team</h3>
-            <p className="card-description">Accelerate your projects with the right technical talent.
-            Through our Build Resource Model, we provide flexible, on-demand resource teams across technologies and domains.
-            You define the requirement — we assemble the right mix of developers, cloud engineers, and AI experts to deliver results faster and smarter.</p>
+            <p className="card-description">Accelerate your projects with the right technical talent. Our Build Resource Model offers flexible, on-demand
+               teams across technologies. You define requirements, and we provide developers, cloud engineers, and AI experts to deliver faster,
+                smarter results.</p>
           </div>
           <div className="card">
             <img src="/home-page/hiring.png" alt="Online Learning Icon" className="card-image" />
-            <h3 className="card-title">Top-Tier Engineering Talent Hiring</h3>
-            <p className="card-description">Gain access to a dedicated network of elite developers and engineers.
-             Our talent pool combines technical depth with professional discipline — ensuring clean code, innovation, and on-time delivery.
-             Whether you need dedicated resources or project-based hiring, we help you build reliable, high-performing tech teams.</p>
+            <h3 className="card-title">Hiring Top Engineering Talent</h3>
+            <p className="card-description">Access a dedicated network of elite developers and engineers. Our talent pool ensures technical
+               expertise, clean code, innovation, and timely delivery. Whether for dedicated resources or project-based hiring, we help build
+                reliable, high-performing tech teams.</p>
           </div>
             <div className="card">
             <img src="/home-page/out-dev.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Smart Outsourcing Solutions</h3>
-            <p className="card-description">Focus on growth while we handle your development needs.
-            We provide remote and offshore development teams skilled in full-stack, cloud, and AI technologies — enabling cost efficiency without compromising quality.
-              Our flexible engagement models ensure smooth collaboration, transparency, and results.</p>
+            <p className="card-description">Focus on growth while we manage your development needs. Our remote and offshore teams, skilled in full-stack, cloud, and AI technologies, deliver cost-effective,
+               high-quality solutions with flexible, transparent, and collaborative engagement models.</p>
           </div>
         </div>
       </div>
@@ -683,7 +684,7 @@ const ClientOurService = () => {
               {companyInfo.company_name}, we help you hire top-tier developers who combine expertise, innovation, and efficiency—without
               breaking your budget. Our programmers are handpicked for their technical excellence, problem-solving skills, and proven track
               record in delivering high-quality solutions on time. Whether you need a web developer, mobile app expert, or full-stack
-              engineer, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster delivery, and
+              engineer or Architect, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster delivery, and
               long-term success—all while keeping costs optimized.
             </p>
           </MyCardContent>
@@ -693,7 +694,7 @@ const ClientOurService = () => {
       <div style={{ marginTop: '10px' }}>
         {/* Header Typography */}
         <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
-          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solution</span>
+          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solutions</span>
         </Typography>
         <div className="card-container">
           <div className="card">

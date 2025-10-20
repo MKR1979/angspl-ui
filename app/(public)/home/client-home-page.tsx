@@ -170,13 +170,22 @@ const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     setButtonColor(buttonColors[currentIndex]);
   }, [currentIndex]);
+
+    // Slider controls
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+  }, []);
+
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + bannerImages.length) % bannerImages.length);
+  }, []);
 
   const handleStartClick = useCallback(() => {
     const topic = bannerTopicMap[currentIndex];
@@ -280,7 +289,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
     <>
       <IconButton
         className="banner-arrow left"
-        // onClick={goToPrev}
+        onClick={goToPrev}
         style={{
           position: 'absolute',
           left: '2px',
@@ -293,7 +302,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
       </IconButton>
       <IconButton
         className="banner-arrow right"
-        // onClick={goToNext}
+        onClick={goToNext}
         style={{
           position: 'absolute',
           right: '2px',

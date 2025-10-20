@@ -264,10 +264,11 @@ export default function RootLayout({
     ...(menuFlags.publicProducts
       ? [
         {
-          text: 'Products',
+          text: 'Digital Solutions',
           children: [
             ...(menuFlags.publicServices ? [{ text: 'Services', href: '/our-service' }] : []),
             ...(menuFlags.publicTechnology ? [{ text: 'Technology', href: '/technology' }] : []),
+            ...(menuFlags.publicTechnology ? [{ text: 'Products', href: '/products' }] : []),
           ]
         }
       ]

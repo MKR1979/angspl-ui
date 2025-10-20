@@ -36,6 +36,7 @@ export const MOD_DESC = "modules-description"
 export const MODULE_DEMO = "demo"
 export const MODULE_PRICING = "pricing"
 
+
 export const SCHOOL_PRICING = {
   STARTUP_MONTHLY: 3000,
   PREMIUM_MONTHLY: 5000,
