@@ -41,30 +41,6 @@ export default function ClientHomePage() {
     }
   }
 
-  // const sectionRef1 = useRef<HTMLDivElement | null>(null);
-  // const sectionRef2 = useRef<HTMLDivElement | null>(null);
-
-  // // array for convenience
-  // const sectionRefs = [sectionRef1, sectionRef2];
-
-  // // track which section to scroll next
-  // const [currentSection, setCurrentSection] = useState(0);
-
-  // // handle button click
-  // const handleStartClick = useCallback(() => {
-  //   const target = sectionRefs[currentSection]?.current;
-  //   if (target) {
-  //     const yOffset = -60; // adjust for header
-  //     const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  //     window.scrollTo({ top: y, behavior: "smooth" });
-
-  //     // move to next section for next click
-  //     // setCurrentSection((prev) => (prev + 1 < sectionRefs.length ? prev + 1 : prev));
-  //     // 👆 if you want it to loop back to first, use:
-  //     setCurrentSection((prev) => (prev + 1) % sectionRefs.length);
-  //   }
-  // }, [currentSection]);
-
   // *** this is used to test the rolling lines in home page on local host ****
   //   const categories = [
   //   { name: 'School ERP', icon: '/imgPrograms/rolling/tech/schlERP.webp' },
@@ -108,50 +84,6 @@ export default function ClientHomePage() {
     '/home-page/home6.jpg'
   ];
   const buttonColors = ['#3c77efff','#FFD700',  '#FF7F32', '#098d8aff', '#ed5d70ff'];
-// const [currentIndex, setCurrentIndex] = useState(0);
-//   const [buttonColor, setButtonColor] = useState(buttonColors[0]);
-
-//   // Section references for topic explanation sections
-//   const sectionRef = useRef<HTMLDivElement | null>(null);
-//   const sectionRef1 = useRef<HTMLDivElement | null>(null);
-//   const sectionRef2 = useRef<HTMLDivElement | null>(null);
-//   const sectionRef3 = useRef<HTMLDivElement | null>(null);
-//   const sectionRef4 = useRef<HTMLDivElement | null>(null);
-
-//   // Map each image index to a topic section ref
-//   const sectionRefs = [sectionRef,sectionRef1, sectionRef2, sectionRef3, sectionRef4, ];
-
-//   // Auto-slide every 3s
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
-//     }, 5000);
-
-//     return () => clearInterval(interval);
-//   }, [bannerImages.length]);
-
-//   // Change button color when image changes
-//   useEffect(() => {
-//     setButtonColor(buttonColors[currentIndex]);
-//   }, [currentIndex]);
-
-//   // Slider controls
-//   const goToNext = useCallback(() => {
-//     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
-//   }, []);
-
-//   const goToPrev = useCallback(() => {
-//     setCurrentIndex((prev) => (prev - 1 + bannerImages.length) % bannerImages.length);
-//   }, []);
-
-//   // Scroll to related topic on button click
-//   const handleStartClick = useCallback(() => {
-//     const ref = sectionRefs[currentIndex];
-//     if (ref?.current) {
-//       const y = ref.current.getBoundingClientRect().top + window.scrollY - 60;
-//       window.scrollTo({ top: y, behavior: 'smooth' });
-//     }
-//   }, [currentIndex]);
 const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonColor, setButtonColor] = useState(buttonColors[0]);
   const router = useRouter();
@@ -575,7 +507,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                         Your Extended Team for Global 
                         <br></br>
                         <span
-                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '60px' }}
+                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '55px' }}
                         >
                           {' '}
                           Scale & Innovation.{' '}

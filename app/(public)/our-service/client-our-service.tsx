@@ -244,7 +244,7 @@ const services1 = [
 
 const ClientOurService = () => {
   const { companyInfo } = useSelector((state: { globalState: any }) => state.globalState);
-    const bannerImages = ['/home-page/ser.jpg'];
+    const bannerImages = ['/home-page/ser-top.jpg'];
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -326,7 +326,7 @@ const ClientOurService = () => {
       margin: 'auto',
       padding: '20px'
     }}>
-      <Typography variant="h4" marginLeft={10} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
+      <Typography variant="h4" marginLeft={6} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
         Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
       </Typography>
       <Grid container spacing={1} justifyContent="center" alignItems="stretch">
@@ -353,8 +353,8 @@ const ClientOurService = () => {
 
             <div style={{ marginTop: '10px' }} id="section4">
         {/* Header Typography */}
-        <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
-          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>services</span>
+        <Typography variant="h4" marginLeft={9} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
+          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Services</span>
         </Typography>
         <div className="card-container">
           <div className="card">
@@ -449,7 +449,7 @@ const ClientOurService = () => {
 
       <div style={{ marginTop: '10px' }}>
         {/* Header Typography */}
-        <Typography variant="h4" marginLeft={20} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
+        <Typography variant="h4" marginLeft={9} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
           Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solutions</span>
         </Typography>
         <div className="card-container">
