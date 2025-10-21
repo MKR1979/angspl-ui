@@ -1286,7 +1286,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 boxShadow: 3,
                 borderRadius: 1,
                 zIndex: 15,
-                minWidth: '160px'
+                minWidth: '230px'
               }}
             >
               {renderDesktopSubmenu(child.children)}
@@ -1372,7 +1372,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             boxShadow: 3,
                             borderRadius: 1,
                             zIndex: 10,
-                            minWidth: '180px',
+                            minWidth: '150px',
                             px: '5px'
                           }}
                         >
