@@ -35,6 +35,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     onSaveClick,
     onPhoneNoChange,
     onDomainPrefixChange,
+    onUndertakingChange,
     onSendOtpClick,
     onVerifyOtpClick,
     onResendOtpClick,
@@ -176,7 +177,57 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               {state.otpVerified && <MyTypography sx={{ color: 'green', mt: 1 }}>OTP Verified Successfully!</MyTypography>}
             </MyGrid>
           )}
-
+          <MyGrid size={{ xs: 12, sm: 3 }}>
+            <MyTextField
+              label="Company Type"
+              name="company_type"
+              value={company_type}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </MyGrid>
+          <MyGrid size={{ xs: 12, sm: 3 }}>
+            <MyTextField
+              label="Plan Name"
+              name="plan_type"
+              value={plan_type}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </MyGrid>
+          <MyGrid size={{ xs: 12, sm: 3 }}>
+            <MyTextField
+              label="Payment Type"
+              name="payment_type"
+              value={payment_type}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </MyGrid>
+          <MyGrid size={{ xs: 12, sm: 3 }}>
+            <MyTextField
+              label="Amount"
+              name="amount"
+              value={payment_amount}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </MyGrid>
+            <MyGrid size={{ xs: 12, sm: 6 }}>
+            <MyPhoneNumber
+              label="Phone #"
+              onChange={onPhoneNoChange}
+              value={state.dtoCompany.phone_no}
+              onBlur={onPhoneNoBlur}
+              disabled={!state.otpVerified}
+              error={state.errorMessages.phone_no ? true : false}
+            />
+            <MyTypography className="error"> {state.errorMessages.phone_no}</MyTypography>
+          </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyTextField
               label="Company Name"
@@ -188,6 +239,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
                 maxLength: gConstants.COMPANY_NAME_LENGTH,
                 pattern: '^[A-Za-z]{1,2}$'
               }}
+              disabled={!state.otpVerified}
               onBlur={onCompanyNameBlur}
               error={state.errorMessages.company_name ? true : false}
             />
@@ -204,20 +256,11 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
                 maxLength: gConstants.CODE_LENGTH,
                 pattern: '^[A-Z0-9]+$'
               }}
+              disabled={!state.otpVerified}
               onBlur={onCompanyCodeBlur}
               error={state.errorMessages.company_code ? true : false}
             />
             <MyTypography className="error">{state.errorMessages.company_code}</MyTypography>
-          </MyGrid>
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyPhoneNumber
-              label="Phone #"
-              onChange={onPhoneNoChange}
-              value={state.dtoCompany.phone_no}
-              onBlur={onPhoneNoBlur}
-              error={state.errorMessages.phone_no ? true : false}
-            />
-            <MyTypography className="error"> {state.errorMessages.phone_no}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyTextField
@@ -225,6 +268,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               name="domain_prefix"
               value={state.dtoCompany.domain_prefix}
               onChange={onDomainPrefixChange(company_type)}
+              disabled={!state.otpVerified}
               placeholder="Enter Domain Name"
               inputProps={{
                 maxLength: gConstants.PHONE_NO_LENGTH,
@@ -254,6 +298,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               value={state.dtoCompany.address}
               onChange={onInputChange}
               onBlur={onAddressBlur}
+              disabled={!state.otpVerified}
               placeholder="Enter Company Address"
               error={state.errorMessages.address ? true : false}
               multiline
@@ -263,50 +308,54 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             />
             <MyTypography className="error">{state.errorMessages.address}</MyTypography>
           </MyGrid>
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField
-              label="Company Type"
-              name="company_type"
-              value={company_type}
-              InputProps={{
-                readOnly: true
-              }}
-            />
+
+          <MyGrid size={{ xs: 12, sm: 12 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: '4px' }}>
+              <input
+                type="checkbox"
+                style={{ transform: 'scale(1.5)' }}
+                checked={state.dtoCompany.undertaking === 'Yes'}
+                onChange={(e) => onUndertakingChange(e.target.checked)}
+              />
+              I agree to the below undertaking.
+            </label>
           </MyGrid>
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField
-              label="Plan Type"
-              name="plan_type"
-              value={plan_type}
-              InputProps={{
-                readOnly: true
-              }}
-            />
-          </MyGrid>
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField
-              label="Payment Type"
-              name="payment_type"
-              value={payment_type}
-              InputProps={{
-                readOnly: true
-              }}
-            />
-          </MyGrid>
-          <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField
-              label="Amount"
-              name="amount"
-              value={payment_amount}
-              InputProps={{
-                readOnly: true
-              }}
-            />
-          </MyGrid>
+          <MyGrid size={{ xs: 12 }}>
+            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold',mb: 1  }}>
+              Undertaking/Declaration:
+            </MyTypography>
+            <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize:'13px' }}>
+              <li>
+                I confirm that I’m authorized to register on behalf of my company, and that all information provided is accurate and
+                complete. I understand that registration does not guarantee any outcomes beyond what’s stated in the subscription or SLA.
+              </li>
+              <li>
+                I authorize <strong>Adhyayan NextGen Solutions Pvt Ltd</strong> to store and process our company’s data on cloud
+                infrastructure as required to provide services, in accordance with their Privacy Policy and applicable laws.
+              </li>
+              <li>I agree to comply with all terms of service, data policies, and applicable regulations.</li>
+              <li>I acknowledge that any misuse or violation may lead to suspension or termination of access.</li>
+              <li>I understand that all payments are subject to Adhyayan’s billing, refund, and cancellation policies.</li>
+            </ul>
+
+            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1}}>
+              Instructions:
+            </MyTypography>
+            <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize:'13px' }}>
+              <li>
+                Registration is <strong>non-transferable</strong> to other entities or individuals.
+              </li>
+              <li>Platform access is granted upon successful verification and plan activation.</li>
+              <li>Required documents (e.g., business registration, ID proof) must be submitted if requested.</li>
+              <li>Incomplete or unverifiable registrations may be delayed or rejected.</li>
+            </ul>
+          </MyGrid>         
           <MyGrid size={{ xs: 12, sm: 12 }}>
             <div>
               <img src="pay-methods-branding.png" width="160px" alt="Payment Methods" />
-              <button onClick={(e) => onSaveClick(e, company_type, payment_amount)} className="pay-now-button">
+              <button onClick={(e) => onSaveClick(e, company_type, payment_amount)}
+              //  disabled={!state.undertaking}
+               className="pay-now-button">
                 Pay Now ₹{payment_amount}
               </button>
             </div>

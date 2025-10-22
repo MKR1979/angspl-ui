@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/examination/exams.jpg', '/examination/exams3.jpg'];
+const bannerImages = ['/examination/exams.webp', '/examination/exams3.webp'];
 
 const ClientExamMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
