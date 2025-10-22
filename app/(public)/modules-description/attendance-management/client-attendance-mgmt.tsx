@@ -12,11 +12,11 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/ModulesImgs/attendance1.jpg', '/attendanceImgs/attendance3.jpg'];
+const bannerImages = ['/attendanceImgs/attendance1.webp', '/attendanceImgs/attendance3.webp'];
 const ClientAboutUs = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const images = ['/ModulesImgs/login.png', '/ModulesImgs/emp.png', '/ModulesImgs/emp2.png', '/ModulesImgs/student.png'];
+  const images = ['/attendanceImgs/login.webp', '/attendanceImgs/emp.webp', '/attendanceImgs/emp2.webp', '/attendanceImgs/student.webp'];
 
   const [current, setCurrent] = useState(0);
 

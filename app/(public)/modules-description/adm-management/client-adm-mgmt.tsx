@@ -12,7 +12,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
 
-const bannerImages = ['/admissionImgs/adm6.jpg', '/admissionImgs/adm7.jpg'];
+const bannerImages = ['/admissionImgs/adm6.webp', '/admissionImgs/adm7.webp'];
 
 const ClientAdmMgmt = () => {
   const images = [
