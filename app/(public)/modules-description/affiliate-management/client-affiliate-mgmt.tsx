@@ -50,7 +50,7 @@ const ClientAffiliateMgmt = () => {
     return matches ? matches[1] : null;
   };
 
-  const videoSrc = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
+  const videoSrc = 'https://youtu.be/XPa2b_Vpa8M';
   const videoSrc1 = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
 
   return (

@@ -17,6 +17,7 @@ export default interface CompanyDTO extends BaseDTO {
   amount: number;
   source_flag: string;
   status: string;
+  undertaking:string;
 }
 
 export const COMPANY: CompanyDTO = Object.freeze({
@@ -37,6 +38,7 @@ export const COMPANY: CompanyDTO = Object.freeze({
   amount: 0,
   source_flag: '',
   status: '',
+  undertaking:'Yes',
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

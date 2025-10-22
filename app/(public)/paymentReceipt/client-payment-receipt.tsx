@@ -1,31 +1,31 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { GET_COM_PAY_RECEIPT_BY_PAYMENT_ID } from '@/app/graphql/Receipt';
+import { GET_COMPANY_PAY_RECEIPT_BY_PAYMENT_ID } from '@/app/graphql/Receipt';
 import { useLazyQuery } from '@apollo/client';
-import PaymentReceipt from '../../custom-components/payment-receipt/MyPaymentReceipt';
+import PaymentReceipt from '../../custom-components/payment-receipt/MyCompanyReceipt';
 
 interface ClientReceiptProps {
   id?: number;
   userName?: string;
   isDataExist?: string;
 }
-const ClientReceipt: React.FC<ClientReceiptProps> = ({ id, userName, isDataExist }) => {
-  const [getComPayReceiptByPaymentId] = useLazyQuery(GET_COM_PAY_RECEIPT_BY_PAYMENT_ID, { fetchPolicy: 'network-only' });
+const ClientReceipt: React.FC<ClientReceiptProps> = ({ id }) => {
+  const [getCompanyPayReceiptByPaymentId] = useLazyQuery(GET_COMPANY_PAY_RECEIPT_BY_PAYMENT_ID, { fetchPolicy: 'network-only' });
   const [generateReceipt, setGenerateReceipt] = useState(false);
   const [receiptData, setReceiptData] = useState<any>(null);
 
   const getPayReceiptInfo = useCallback(async (): Promise<void> => {
     if (!id) return;
-    const { data } = await getComPayReceiptByPaymentId({
+    const { data } = await getCompanyPayReceiptByPaymentId({
       variables: {
         payment_id: id,
       }
     });
-    if (data?.getComPayReceiptByPaymentId) {
-      setReceiptData(data.getComPayReceiptByPaymentId);
+    if (data?.getCompanyPayReceiptByPaymentId) {
+      setReceiptData(data.getCompanyPayReceiptByPaymentId);
       setGenerateReceipt(true);
     }
-  }, [id, getComPayReceiptByPaymentId]);
+  }, [id, getCompanyPayReceiptByPaymentId]);
 
   useEffect(() => {
     if (!generateReceipt) {
@@ -35,19 +35,14 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ id, userName, isDataExist
 
   return (
     <PaymentReceipt
-      course_name={receiptData?.course_name}
-      learner_id={receiptData?.learner_id ?? 0}
-      user_name={userName ?? ''}
-      is_data_exist={isDataExist ?? ''}
-      student_name={receiptData?.student_name}
+      company_id={receiptData?.company_id ?? 0}
+      company_name={receiptData?.company_name}
+      company_code={receiptData?.company_code}
+      domain_name={receiptData?.domain_name}
       receipt_number={receiptData?.receipt_number}
       payment_date={receiptData?.payment_date}
       payment_mode={receiptData?.payment_mode}
-      cheque_number={receiptData?.cheque_number}
-      fee_head={receiptData?.fee_head}
       fee_amount={receiptData?.fee_amount}
-      remarks={receiptData?.remarks}
-      status={receiptData?.status}
     />
   );
 };

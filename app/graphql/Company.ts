@@ -12,6 +12,7 @@ export const ADD_COMPANY = gql`
     $logo_height: Int
     $logo_width: Int
     $status: String
+     $undertaking: String
   ) {
     addCompany(
       addCompanyInput: {
@@ -25,6 +26,7 @@ export const ADD_COMPANY = gql`
         logo_height: $logo_height
         logo_width: $logo_width
         status: $status
+        undertaking: $undertaking
       }
     )
   }
@@ -41,6 +43,7 @@ export const ADD_COMPANY_RETURN_ID = gql`
     $status: String
     $domain_name: String
     $source_flag: String
+     $undertaking: String
   ) {
     addCompanyReturnId(
       addCompanyReturnIdInput: {
@@ -53,6 +56,7 @@ export const ADD_COMPANY_RETURN_ID = gql`
         status: $status
         domain_name: $domain_name
         source_flag: $source_flag
+        undertaking: $undertaking
       }
     )
   }
@@ -71,6 +75,7 @@ export const UPDATE_COMPANY = gql`
     $logo_height: Int
     $logo_width: Int
     $status: String
+     $undertaking: String
   ) {
     updateCompany(
       updateCompanyInput: {
@@ -85,6 +90,7 @@ export const UPDATE_COMPANY = gql`
         logo_height: $logo_height
         logo_width: $logo_width
         status: $status
+         undertaking: $undertaking
       }
     )
   }
@@ -129,6 +135,7 @@ export const COMPANY_LIST = gql`
         logo_height
         logo_width
         status
+        undertaking
         created_by
         created_by_first_name
         created_by_last_name
@@ -158,6 +165,7 @@ export const GET_COMPANY = gql`
       logo_height
       logo_width
       status
+      undertaking
       created_by
       created_by_first_name
       created_by_last_name
@@ -186,6 +194,7 @@ export const GET_COMPANY_ALL = gql`
       logo_height
       logo_width
       status
+      undertaking
     }
   }
 `;

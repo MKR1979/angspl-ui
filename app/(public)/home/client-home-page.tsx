@@ -254,13 +254,24 @@ const [currentIndex, setCurrentIndex] = useState(0);
   {`
     @media (max-width: 600px) {
       .start-btn {
-        bottom: 5px !important;
-        left: 30px !important;
-        padding: 6px 20px !important;
-        font-size: 10px !important;
+        bottom: 1px !important;
+        padding: 2px 10px !important;
+        left: 80px !important;
+         font-size: 5px !important;
       }
     }
   `}
+     {`
+     @media (max-width: 768px) {
+    .start-btn {
+      bottom: 5px !important;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      padding: 5px 20px !important;
+      font-size: 14px !important;
+    }
+  `}
+  
 </style>
 
         </div>

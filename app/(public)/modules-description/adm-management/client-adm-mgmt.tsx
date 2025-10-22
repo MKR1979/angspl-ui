@@ -57,7 +57,7 @@ const ClientAdmMgmt = () => {
   };
 
   const videoSrc = 'https://youtu.be/NtPCZu2WZQE';
-  const videoSrc2 = 'https://youtu.be/-4nrNYPaLcU';
+  const videoSrc2 = 'https://youtu.be/fEgXY4DTjU0';
   const videoSrc1 = 'https://youtu.be/MUA4cQ4TmCE';
   return (
     <>

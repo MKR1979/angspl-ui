@@ -27,6 +27,7 @@ type ErrorMessageType = {
   logo_width: number | null;
   status: string | null;
   email_otp: string | null;
+  undertaking: string | null;
 };
 
 type StateType = {
@@ -58,7 +59,8 @@ const useCompany = () => {
     logo_height: null,
     logo_width: null,
     status: null,
-    email_otp: null
+    email_otp: null,
+     undertaking:  null
   } as ErrorMessageType);
 
   const INITIAL_STATE: StateType = Object.freeze({
@@ -432,7 +434,7 @@ const useCompany = () => {
             razorpay_signature: response.razorpay_signature,
             remarks: '',
             status: gConstants.STATUS_PAID,
-            source_flag: gConstants.SOURCE_FLAG_PUBLIC
+            source_flag: gConstants.SOURCE_FLAG_PUBLIC,
           }
         });
         const newPaymentId = result?.data?.addFeeCollectCompanyReturnId ?? 0;
@@ -496,38 +498,6 @@ const useCompany = () => {
     });
   };
 
-  // const onSendEmail = useCallback(async () => {
-  //   try {
-  //     const { data } = await addEmail({
-  //       variables: {
-  //         addEmailInput: {
-  //           to_address: state.dtoCompany.email,
-  //           subject: gMessageConstants.AFFILIATE_REGISTRATION_MAIL_SUBJECT,
-  //           body: gMessageConstants.AFFILIATE_REGISTRATION_EMAIL_BODY,
-  //           template_name: '',
-  //           attachment_path: '',
-  //           status: '',
-  //           retry_count: 0,
-  //           email_source: 'affiliate'
-  //         },
-  //         emailConfigInput: {
-  //           smtpHost: MAIL_CONFIG.smtpHost,
-  //           smtpPort: MAIL_CONFIG.smtpPort,
-  //           smtpUser: MAIL_CONFIG.smtpUser,
-  //           smtpPassword: MAIL_CONFIG.smtpPassword,
-  //           secure: MAIL_CONFIG.secure,
-  //           fromAddress: MAIL_CONFIG.fromAddress
-  //         }
-  //       }
-  //     });
-  //     if (data) {
-  //       console.log('Email sent Successfully :', data);
-  //     }
-  //   } catch (error: any) {
-  //     console.error('Error while sending email:', error);
-  //   }
-  // }, [addEmail, state.dtoCompany.email]);
-
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
       event.preventDefault();
@@ -535,6 +505,12 @@ const useCompany = () => {
       setSaving(true);
       if (!(await validateForm())) return;
       if (state.dtoCompany.id !== 0) return;
+      const isUndertakingAccepted = state.dtoCompany.undertaking === 'Yes';
+          if (!isUndertakingAccepted) {
+            showSnackbar('You must agree to the undertaking before submitting.', 'warning');
+            setSaving(false);
+            return;
+          }
       try {
         const result = await addCompanyReturnId({
           variables: {
@@ -545,8 +521,9 @@ const useCompany = () => {
             phone_no: state.dtoCompany.phone_no,
             address: state.dtoCompany.address,
             status: gConstants.STATUS_ACTIVE,
+            undertaking: state.dtoCompany.undertaking,
             domain_name: state.dtoCompany.domain_name,
-            source_flag: gConstants.SOURCE_FLAG_PUBLIC
+            source_flag: gConstants.SOURCE_FLAG_PUBLIC,
           }
         });
         const newCompanyId = result?.data?.addCompanyReturnId;
@@ -703,6 +680,16 @@ const useCompany = () => {
     setState({ open2: false } as StateType);
   }, []);
 
+    const onUndertakingChange = (checked: boolean) => {
+    setState({
+      ...state,
+      dtoCompany: {
+        ...state.dtoCompany,
+        undertaking: checked ? 'Yes' : 'No'
+      }
+    });
+  };
+
   return {
     state,
     onInputChange,
@@ -724,7 +711,8 @@ const useCompany = () => {
     onSendOtpClick,
     onVerifyOtpClick,
     onResendOtpClick,
-    timeLeft
+    timeLeft,
+    onUndertakingChange
   };
 };
 
