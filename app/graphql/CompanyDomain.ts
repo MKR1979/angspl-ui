@@ -61,6 +61,12 @@ export const COMPANY_DOMAIN_LOOKUP = gql`
   }
 `;
 
+export const GET_COMPANY_DOMAIN_NAME_EXIST = gql`
+  query getCompanyDomainNameExist($id: Int!, $domain_name: String!) {
+    getCompanyDomainNameExist(id: $id, domain_name: $domain_name)
+  }
+`;
+
 export const COMPANY_DOMAIN_LIST = gql`
   query getCompanyDomainList($filter_text: String, $sort_direction: String, $sort_field: String, $offset: Int, $limit: Int) {
     getCompanyDomainList(

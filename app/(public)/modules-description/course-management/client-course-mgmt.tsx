@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/coursemngImgs/course12.jpg', '/coursemngImgs/course14.jpg'];
+const bannerImages = ['/coursemngImgs/course12.webp', '/coursemngImgs/course14.webp'];
 
 const ClientCourseMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +32,7 @@ const ClientCourseMgmt = () => {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   };
 
-  const images = ['/coursemngImgs/course.webp', '/coursemngImgs/courses.PNG', '/coursemngImgs/courses1.jpg', '/coursemngImgs/courses3.webp.jpg'];
+  const images = ['/coursemngImgs/course.webp', '/coursemngImgs/courses.webp', '/coursemngImgs/courses1.webp', '/coursemngImgs/courses3.webp.webp'];
 
   const [current, setCurrent] = useState(0);
 

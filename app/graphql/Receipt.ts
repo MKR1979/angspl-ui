@@ -15,35 +15,35 @@ export const GET_RECEIPT = gql`
 
 
 
-export const GET_COM_PAY_RECEIPT_BY_PAYMENT_ID = gql`
-  query getComPayReceiptByPaymentId($payment_id: Int!) {
-    getComPayReceiptByPaymentId(getPayReceiptByPaymentIdInput: { payment_id: $payment_id }) {
-      id
-      course_id
-      course_name
-      learner_id
-      student_name
-      receipt_number
-      payment_date
-      payment_mode
-      fee_head
-      cheque_number
-      fee_amount
-      remarks
-      status
-      created_by
-      created_by_first_name
-      created_by_last_name
-      created_by_user_name
-      created_at
-      modified_by
-      modified_by_first_name
-      modified_by_last_name
-      modified_by_user_name
-      modified_at
+export const GET_COMPANY_PAY_RECEIPT_BY_PAYMENT_ID = gql`
+  query getCompanyPayReceiptByPaymentId($payment_id: Int!) {
+    getCompanyPayReceiptByPaymentId(getPayReceiptByPaymentIdInput: { payment_id: $payment_id }) {
+    id
+    company_id
+    company_name
+    company_code
+    company_type
+    domain_name
+    payment_id
+    receipt_number
+    fee_amount
+    payment_mode
+    payment_date
+    generated_by
+    created_by
+    created_by_first_name
+    created_by_last_name
+    created_by_user_name
+    created_at
+    modified_by
+    modified_by_first_name
+    modified_by_last_name
+    modified_by_user_name
+    modified_at
     }
   }
 `;
+
 
 
 export const GET_PAY_RECEIPT_LIST = gql`

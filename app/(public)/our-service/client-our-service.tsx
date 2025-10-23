@@ -232,19 +232,19 @@ const services = [
 ];
 
 const services1 = [
-  { title: 'Full Stack Engineer', image: '/home-page/ser4.jpg' },
-  { title: 'Technology Analyst', image: '/home-page/ser5.png' },
-  { title: 'Technical Architect', image: '/home-page/art-tech.png' },
+  { title: 'Full Stack Engineer', image: '/home-page/ser4.webp' },
+  { title: 'Technology Analyst', image: '/home-page/ser5.webp' },
+  { title: 'Technical Architect', image: '/home-page/art-tech.webp' },
   { title: 'Cloud Expert', image: '/home-page/cloud.webp' },
-  { title: 'DevOps Engineer', image: '/home-page/devops.jpg' },
-  { title: 'AI Engineer', image: '/home-page/ai2.jpg' },
-  { title: 'Data Engineer', image: '/home-page/data-eng.jpg' },
-  { title: 'Cybersecurity Specialist', image: '/home-page/ai2.jpg' },
+  { title: 'DevOps Engineer', image: '/home-page/devops.webp' },
+  { title: 'AI Engineer', image: '/home-page/ai2.webp' },
+  { title: 'Data Engineer', image: '/home-page/data-eng.webp' },
+  { title: 'Cybersecurity Specialist', image: '/home-page/ai2.webp' },
 ];
 
 const ClientOurService = () => {
   const { companyInfo } = useSelector((state: { globalState: any }) => state.globalState);
-    const bannerImages = ['/home-page/ser-top.jpg'];
+    const bannerImages = ['/home-page/ser-top.webp'];
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -326,7 +326,7 @@ const ClientOurService = () => {
       margin: 'auto',
       padding: '20px'
     }}>
-      <Typography variant="h4" marginLeft={6} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
+      <Typography variant="h4" marginLeft={7} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
         Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
       </Typography>
       <Grid container spacing={1} justifyContent="center" alignItems="stretch">
@@ -353,12 +353,12 @@ const ClientOurService = () => {
 
             <div style={{ marginTop: '10px' }} id="section4">
         {/* Header Typography */}
-        <Typography variant="h4" marginLeft={9} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
+        <Typography variant="h4" marginLeft={10} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
           Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Services</span>
         </Typography>
         <div className="card-container">
           <div className="card">
-            <img src="/home-page/ai-auto.jpg" alt="ML/DL Icon" className="card-image" />
+            <img src="/home-page/ai-auto.webp" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">AI & Automation</h3>
             <p className="card-description">Empower your business with AI and ML solutions that drive automation, decision intelligence,
                and predictive analytics. From NLP and computer vision to generative AI, we create scalable, secure, and high-performance
@@ -366,21 +366,21 @@ const ClientOurService = () => {
           </div>
 
           <div className="card">
-            <img src="/home-page/cloud-dev.png" alt="NLP Icon" className="card-image" />
+            <img src="/home-page/cloud-dev.webp" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">Cloud & DevOps</h3>
             <p className="card-description">Empower your infrastructure with cloud-native architecture and DevOps automation.
                We leverage AWS, Azure, and GCP to migrate, optimize, and scale systems using CI/CD, Docker, and Kubernetes — ensuring
                 seamless delivery, agility, and high-performance cloud operations.</p>
           </div>
            <div className="card">
-            <img src="/home-page/mobile.png" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <img src="/home-page/mobile.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Mobile App Development</h3>
             <p className="card-description">Create engaging digital experiences with powerful mobile apps built using React Native, Flutter,
                and Kotlin. We deliver fast, reliable, and intuitive apps that blend innovation with usability — ensuring seamless performance
                and stronger customer connections across platforms.</p>
           </div>
           <div className="card">
-            <img src="/home-page/data-ans.png" alt="Online Learning Icon" className="card-image" />
+            <img src="/home-page/data-ans.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Data Analytics</h3>
             <p className="card-description">Turn data into a competitive advantage.
              We help organizations collect, clean, visualize, and interpret data for informed decisions and measurable growth.
@@ -394,7 +394,7 @@ const ClientOurService = () => {
                 smarter results.</p>
           </div>
           <div className="card">
-            <img src="/home-page/hiring.png" alt="Online Learning Icon" className="card-image" />
+            <img src="/home-page/hiring.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Hiring Top Engineering Talent</h3>
             <p className="card-description">Access a dedicated network of elite developers and engineers. Our talent pool ensures technical
                expertise, clean code, innovation, and timely delivery. Whether for dedicated resources or project-based hiring, we help build
@@ -410,7 +410,7 @@ const ClientOurService = () => {
       </div>
       <MyGrid container spacing={1} alignItems="stretch" className="card-container" id="section3">
         <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/home-page/ser1.png" alt="Image description" style={{ marginLeft: '20px',width: '100%', height: 'auto' }} />
+          <img src="/home-page/ser1.webp" alt="Image description" style={{ marginLeft: '20px',width: '100%', height: 'auto' }} />
         </MyGrid>
         <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
           <MyCardContent>
@@ -449,12 +449,12 @@ const ClientOurService = () => {
 
       <div style={{ marginTop: '10px' }}>
         {/* Header Typography */}
-        <Typography variant="h4" marginLeft={9} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
+        <Typography variant="h4" marginLeft={10} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
           Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solutions</span>
         </Typography>
         <div className="card-container">
           <div className="card">
-            <img src="/home-page/machine.jpg" alt="ML/DL Icon" className="card-image" />
+            <img src="/home-page/machine.webp" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">ML & DL Engineering</h3>
             <p className="card-description">We design and deploy intelligent systems using advanced Machine Learning and Deep Learning techniques.
                   From predictive analytics to computer vision, we transform raw data into actionable insights and automation.</p>

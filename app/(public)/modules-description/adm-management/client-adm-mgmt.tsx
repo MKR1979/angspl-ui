@@ -12,7 +12,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
 
-const bannerImages = ['/admissionImgs/adm6.jpg', '/admissionImgs/adm7.jpg'];
+const bannerImages = ['/admissionImgs/adm6.webp', '/admissionImgs/adm7.webp'];
 
 const ClientAdmMgmt = () => {
   const images = [
@@ -57,7 +57,7 @@ const ClientAdmMgmt = () => {
   };
 
   const videoSrc = 'https://youtu.be/NtPCZu2WZQE';
-  const videoSrc2 = 'https://youtu.be/-4nrNYPaLcU';
+  const videoSrc2 = 'https://youtu.be/fEgXY4DTjU0';
   const videoSrc1 = 'https://youtu.be/MUA4cQ4TmCE';
   return (
     <>

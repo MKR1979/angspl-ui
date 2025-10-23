@@ -77,11 +77,11 @@ export default function ClientHomePage() {
     }
   ];
   const bannerImages = [
-    '/home-page/home2.jpg',
-    '/home-page/home5.jpg',   
-    '/home-page/home7.jpg',
-    '/home-page/home3.jpg',
-    '/home-page/home6.jpg'
+    '/home-page/home2.webp',
+    '/home-page/home5.webp',   
+    '/home-page/home7.webp',
+    '/home-page/home3.webp',
+    '/home-page/home6.webp'
   ];
   const buttonColors = ['#3c77efff','#FFD700',  '#FF7F32', '#098d8aff', '#ed5d70ff'];
 const [currentIndex, setCurrentIndex] = useState(0);
@@ -254,13 +254,24 @@ const [currentIndex, setCurrentIndex] = useState(0);
   {`
     @media (max-width: 600px) {
       .start-btn {
-        bottom: 5px !important;
-        left: 30px !important;
-        padding: 6px 20px !important;
-        font-size: 10px !important;
+        bottom: 1px !important;
+        padding: 2px 10px !important;
+        left: 80px !important;
+         font-size: 5px !important;
       }
     }
   `}
+     {`
+     @media (max-width: 768px) {
+    .start-btn {
+      bottom: 5px !important;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      padding: 5px 20px !important;
+      font-size: 14px !important;
+    }
+  `}
+  
 </style>
 
         </div>
@@ -531,13 +542,13 @@ const [currentIndex, setCurrentIndex] = useState(0);
                     </MyCardContent>
                   </MyGrid>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src="/home-page/homedown1.png" alt="Image description" style={{ width: '100%', height: '500px' }} />
+                    <img src="/home-page/homedown1.webp" alt="Image description" style={{ width: '100%', height: '500px' }} />
                   </MyGrid>
                 </MyGrid>
                 </MyCard>
                 <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef}>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{marginTop:'10px', display: 'flex', alignItems: 'center' }}>
-                    <img src="/home-page/homedown.jpg" alt="Image description" style={{ width: '100%', height: 'auto' }} />
+                    <img src="/home-page/homedown.webp" alt="Image description" style={{ width: '100%', height: 'auto' }} />
                   </MyGrid>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
                     <MyCardContent>

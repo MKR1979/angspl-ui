@@ -24,6 +24,7 @@ const ClientPricing = () => {
   const rows = [
     {
       name: 'Admin Dashboard',
+      free: '✔',
       startup: '✖',
       premium: '✔',
       enterprise: '✔',
@@ -31,6 +32,7 @@ const ClientPricing = () => {
       children: [
         {
           name: 'User Access Management',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -38,6 +40,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Roles',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -45,6 +48,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Users',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -52,6 +56,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Role Permission',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -59,6 +64,7 @@ const ClientPricing = () => {
             },
             {
               name: 'User Permission',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -68,6 +74,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Academics',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -75,6 +82,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Courses',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -82,6 +90,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Online Admission',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -89,6 +98,7 @@ const ClientPricing = () => {
               children: [
                 {
                   name: 'Admission',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -96,6 +106,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Enrollments',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -103,6 +114,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Admission Summary',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -112,6 +124,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Study Kits',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -119,6 +132,7 @@ const ClientPricing = () => {
               children: [
                 {
                   name: 'Code Projects',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -126,6 +140,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Study Notes',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -133,6 +148,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Upload Videos',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -142,6 +158,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Online Exams',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -149,6 +166,7 @@ const ClientPricing = () => {
               children: [
                 {
                   name: 'Add Exam',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -156,6 +174,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Exam Questions',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -163,6 +182,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Exam Bulk Import',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -170,6 +190,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Exam Results',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -182,6 +203,7 @@ const ClientPricing = () => {
 
         {
           name: 'Employee Services',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -189,6 +211,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Employee Master',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -196,6 +219,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Review Attendance',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -203,6 +227,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Attendance Report',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -210,6 +235,7 @@ const ClientPricing = () => {
               children: [
                 {
                   name: 'Time Log Report',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -217,6 +243,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Day Wise Attendance',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -224,6 +251,7 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Presence Overview',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -233,6 +261,7 @@ const ClientPricing = () => {
             },
             {
               name: 'User Devices',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -240,6 +269,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Bulk Attendance',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -247,6 +277,7 @@ const ClientPricing = () => {
               children: [
                 {
                   name: 'Mark Attendance',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
@@ -254,17 +285,27 @@ const ClientPricing = () => {
                 },
                 {
                   name: 'Lock Attendance',
+                  free: '✔',
                   startup: '✖',
                   premium: '✔',
                   enterprise: '✔',
                   dedicated: '✔'
                 }
               ]
+            },
+               {
+              name: 'Student Attendance',
+              free: '✔',
+              startup: '✖',
+              premium: '✔',
+              enterprise: '✔',
+              dedicated: '✔'
             }
           ]
         },
         {
           name: 'Payment Management',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -272,6 +313,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Schedule Fee',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -279,6 +321,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Collect Pay',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -286,6 +329,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Receipts',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -293,6 +337,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Fee Head',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -302,6 +347,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Communications',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -309,6 +355,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Emails',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -316,6 +363,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Email Templates',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -323,6 +371,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Notifications',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -332,6 +381,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Engagements',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -339,6 +389,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Enquiry',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -346,6 +397,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Events',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -353,6 +405,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Meetings',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -362,6 +415,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Geography',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -369,6 +423,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Countries',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -376,6 +431,7 @@ const ClientPricing = () => {
             },
             {
               name: 'States',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -383,6 +439,15 @@ const ClientPricing = () => {
             },
             {
               name: 'Locations',
+              free: '✔',
+              startup: '✖',
+              premium: '✔',
+              enterprise: '✔',
+              dedicated: '✔'
+            },
+            {
+              name: 'Districts',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -392,6 +457,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Affiliates',
+          free: '✔',
           startup: '✖',
           premium: '✔',
           enterprise: '✔',
@@ -399,6 +465,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Review Affiliates',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -406,6 +473,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Referrals',
+              free: '✔',
               startup: '✖',
               premium: '✔',
               enterprise: '✔',
@@ -417,6 +485,7 @@ const ClientPricing = () => {
     },
     {
       name: 'Student Dashboard',
+      free: '✔',
       startup: '✖',
       premium: '✖',
       enterprise: '✔',
@@ -424,6 +493,7 @@ const ClientPricing = () => {
       children: [
         {
           name: 'Course Contents',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -431,6 +501,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Enrolled Courses',
+              free: '✔',
               startup: '✖',
               premium: '✖',
               enterprise: '✔',
@@ -438,6 +509,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Free Courses',
+              free: '✔',
               startup: '✖',
               premium: '✖',
               enterprise: '✔',
@@ -447,6 +519,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Study Kits',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -454,6 +527,7 @@ const ClientPricing = () => {
           children: [
             {
               name: 'Code Insight',
+              free: '✔',
               startup: '✖',
               premium: '✖',
               enterprise: '✔',
@@ -461,6 +535,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Notes Insight',
+              free: '✔',
               startup: '✖',
               premium: '✖',
               enterprise: '✔',
@@ -468,6 +543,7 @@ const ClientPricing = () => {
             },
             {
               name: 'Video Insight',
+              free: '✔',
               startup: '✖',
               premium: '✖',
               enterprise: '✔',
@@ -477,6 +553,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Online Exams / Skill Tests',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -484,6 +561,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Payments / Fees',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -491,6 +569,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Student Info',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -498,6 +577,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Online Homework',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -505,6 +585,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Login',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -512,6 +593,7 @@ const ClientPricing = () => {
         },
         {
           name: 'View Profile',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -519,6 +601,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Change Password',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✔',
@@ -529,6 +612,7 @@ const ClientPricing = () => {
 
     {
       name: 'Employee Dashboard',
+      free: '✔',
       startup: '✖',
       premium: '✖',
       enterprise: '✖',
@@ -536,6 +620,7 @@ const ClientPricing = () => {
       children: [
         {
           name: 'Location Based Online Attendance',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✖',
@@ -543,6 +628,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Login',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✖',
@@ -550,6 +636,7 @@ const ClientPricing = () => {
         },
         {
           name: 'View Profile',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✖',
@@ -557,59 +644,17 @@ const ClientPricing = () => {
         },
         {
           name: 'Change Password',
+          free: '✔',
           startup: '✖',
           premium: '✖',
           enterprise: '✖',
           dedicated: '✔'
         }
       ]
-    },
-    {
-      name: 'Affiliate Dashboard',
-      startup: '✖',
-      premium: '✖',
-      enterprise: '✖',
-      dedicated: '✔',
-      children: [
-        {
-          name: 'Referral Trekking',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'Login',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'View Profile',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'Change Password',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        }
-      ]
-    },
-    {
-      name: 'Location Based Attendance',
-      startup: '✖',
-      premium: '✖',
-      enterprise: '✖',
-      dedicated: '✔'
     },
     {
       name: 'Dynamic Web Application',
+      free: '✔',
       startup: '✔',
       premium: '✖',
       enterprise: '✔',
@@ -617,6 +662,7 @@ const ClientPricing = () => {
       children: [
         {
           name: 'Home Page',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -624,6 +670,7 @@ const ClientPricing = () => {
         },
         {
           name: 'About Us',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -631,6 +678,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Programs Enrollment',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -638,6 +686,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Services / Offerings',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -645,6 +694,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Affiliate Registration',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -652,6 +702,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Contact Us',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -659,6 +710,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Admission Enquiry',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -666,6 +718,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Login',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -673,6 +726,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Registration',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -680,6 +734,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Forget Password',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -687,6 +742,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Social Media Links',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -694,6 +750,7 @@ const ClientPricing = () => {
         },
         {
           name: 'Image Gallery',
+          free: '✔',
           startup: '✔',
           premium: '✖',
           enterprise: '✔',
@@ -707,6 +764,7 @@ const ClientPricing = () => {
 
   interface RowData {
     name: string;
+    free: string,
     startup: string;
     premium: string;
     enterprise: string;
@@ -733,6 +791,9 @@ const ClientPricing = () => {
           >
             {hasChildren && <span style={{ marginRight: '8px' }}>{isExpanded ? '▼' : '▶'}</span>}
             {row.name}
+          </TableCell>
+            <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+            {row.free}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
             {row.startup}
@@ -832,6 +893,14 @@ const ClientPricing = () => {
           <MyGrid container spacing={2} alignItems="stretch">
             {[
               {
+                title: 'Free',
+                price: 0,
+                description: `The Free Plan lets colleges build a professional online presence free for 5 weeks. 
+                      Enjoy a fully managed website with key features to showcase programs, achievements, and admission details 
+                      before upgrading to a paid plan.`,
+                extra: 'Free for 5 weeks — no billing required',
+              },
+              {
                 title: 'Startup',
                 price: Constants.COLLEGE_PRICING.STARTUP_MONTHLY,
                 description: `A perfect starting point for colleges to establish a strong online presence. This fully managed website
@@ -850,22 +919,19 @@ const ClientPricing = () => {
               {
                 title: 'Enterprise',
                 price: Constants.COLLEGE_PRICING.ENTERPRISE_MONTHLY,
-                description: `An advanced web application featuring Online Admission, Course Enrollment, Integrated Payments, and a
-                     powerful Admin Panel for managing Students, Faculty, Roles, and Courses. Includes a dedicated Student Dashboard with
-                      Online Exams, Study Materials, Assignments, Projects, and Fee Payments — perfect for colleges looking for a complete
-                       digital learning and management solution.`,
+                description: `An advanced web application with Online Admission, Course Enrollment, Integrated Payments, and a powerful Admin Panel to manage
+                 Students, Faculty, Roles, and Courses. It includes a Student Dashboard for Online Exams, Study Materials, Assignments, Projects, and Fee Payments — ideal for colleges.`,
                 extra: 'Billed Monthly, Excludes VAT / GST'
               },
               {
                 title: 'Dedicated',
                 price: Constants.COLLEGE_PRICING.DEDICATED_MONTHLY,
-                description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and maximum
-                     flexibility. Includes all features from the Enterprise Plan, plus a Faculty Dashboard with attendance tracking, timetable
-                      management, and centralized reporting — ideal for large colleges and university groups`,
+                description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and flexibility. Includes all Enterprise
+                 Plan features plus a Faculty Dashboard for attendance tracking, timetable management, and centralized reporting — ideal for large colleges and university groups.`,
                 extra: 'Excludes VAT/GST & Application Support'
               }
             ].map((plan) => (
-              <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
+              <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}
                   style={{
@@ -911,9 +977,13 @@ const ClientPricing = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
+                        // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
+                         onClick={() => {
+                          const finalPrice = plan.title === 'Free' ? 99 : plan.price;
+                          goToCompanyModule('College', plan.title, 'Monthly', finalPrice);
+                        }}
                       >
-                        Buy Now
+                        {plan.title === 'Free' ? 'Start Free' : 'Buy Now'}
                       </MyButton>
                     </MyBox>
                   </MyCardContent>
@@ -1025,7 +1095,7 @@ const ClientPricing = () => {
                 <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
                   <TableHead>
                     <TableRow sx={{ backgroundColor: '#e2e8f0' }}>
-                      {['Features', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
+                      {['Features', 'free', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
                         <TableCell
                           key={text}
                           align={index === 0 ? 'left' : 'center'}
@@ -1049,7 +1119,7 @@ const ClientPricing = () => {
           </MyGrid>
         </MyCardContent>
       </MyBox>
-            <Footer />
+      <Footer />
     </div>
   );
 };

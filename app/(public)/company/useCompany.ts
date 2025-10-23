@@ -4,7 +4,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
 import { arrCompanyStatus, arrCompanyType, regExEMail } from '@/app/common/Configuration';
-import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST } from '@/app/graphql/Company';
+import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST, GET_COMPANY_CODE_EXIST } from '@/app/graphql/Company';
 import * as gConstants from '../../constants/constants';
 import { ADD_FEE_COLLECT_COMPANY_RETURN_ID } from '@/app/graphql/FeeCollection';
 import { isValidPhoneNumber } from 'libphonenumber-js';
@@ -12,6 +12,8 @@ import * as gMessageConstants from '@/app/constants/messages-constants';
 import { SEND_OTP, VERIFY_OTP, RESEND_OTP } from '@/app/graphql/Email';
 import EmailDTO, { EMAIL } from '@/app/types/EmailDTO';
 import { useSnackbar } from '../../custom-components/SnackbarProvider';
+import { useSelector } from '../../store';
+import { GET_COMPANY_DOMAIN_NAME_EXIST } from '@/app/graphql/CompanyDomain';
 
 type ErrorMessageType = {
   company_code: string | null;
@@ -27,6 +29,7 @@ type ErrorMessageType = {
   logo_width: number | null;
   status: string | null;
   email_otp: string | null;
+  undertaking: string | null;
 };
 
 type StateType = {
@@ -58,7 +61,8 @@ const useCompany = () => {
     logo_height: null,
     logo_width: null,
     status: null,
-    email_otp: null
+    email_otp: null,
+     undertaking:  null
   } as ErrorMessageType);
 
   const INITIAL_STATE: StateType = Object.freeze({
@@ -91,7 +95,12 @@ const useCompany = () => {
   const [addFeeCollectCompanyReturnId] = useMutation(ADD_FEE_COLLECT_COMPANY_RETURN_ID);
   const [getCompanyEmailExist] = useLazyQuery(GET_COMPANY_EMAIL_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyNameExist] = useLazyQuery(GET_COMPANY_NAME_EXIST, { fetchPolicy: 'network-only' });
+   const [getCompanyCodeExist] = useLazyQuery(GET_COMPANY_CODE_EXIST, { fetchPolicy: 'network-only' });
+   const [getCompanyDomainNameExist] = useLazyQuery(GET_COMPANY_DOMAIN_NAME_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
+   const { siteConfig } = useSelector((state) => state.siteConfigState);
+
+    
 
   const MAIL_CONFIG = {
     smtpHost: 'smtp.gmail.com',
@@ -102,7 +111,13 @@ const useCompany = () => {
     fromAddress: 'adhyayan.solution@gmail.com',
     resendOtpTime: 2
   };
-
+ console.log('print value',siteConfig)
+    const COMPANY_DOMAIN_INFORMATION = {
+    logoUrl: String(siteConfig.find((c) => c.key === 'LOGO_URL')?.value ?? ''),
+    logoWidth: Number(siteConfig.find((c) => c.key === 'LOGO_WIDTH')?.value ?? 0),
+    logoHeight: Number(siteConfig.find((c) => c.key === 'LOGO_HEIGHT')?.value ?? 0),
+    userPassword: String(siteConfig.find((c) => c.key === 'USER_PASSWORD')?.value ?? ''),
+  };
   useEffect(() => {
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
       const firstItem = state.arrCompanyStatusLookup[0];
@@ -154,6 +169,34 @@ const useCompany = () => {
     }
     return exist;
   }, [getCompanyNameExist, state.dtoCompany.id, state.dtoCompany.company_name]);
+
+    const IsCompanyCodeExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyCodeExist({
+      variables: {
+        id: state.dtoCompany.id,
+        company_code: state.dtoCompany.company_code
+      }
+    });
+    if (!error && data) {
+      exist = data.getCompanyCodeExist;
+    }
+    return exist;
+  }, [getCompanyCodeExist, state.dtoCompany.id, state.dtoCompany.company_code]);
+
+    const IsCompanyDomainNameExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyDomainNameExist({
+      variables: {
+        id: state.dtoCompany.id,
+        domain_name: state.dtoCompany.domain_name
+      }
+    });
+    if (!error && data) {
+      exist = data.getCompanyDomainNameExist;
+    }
+    return exist;
+  }, [getCompanyDomainNameExist, state.dtoCompany.id, state.dtoCompany.domain_name]);
 
   const IsMobileNoExist = useCallback(async (): Promise<boolean> => {
     let exist: boolean = false;
@@ -286,13 +329,33 @@ const useCompany = () => {
     setState({ errorMessages: { ...state.errorMessages, domain_prefix: domain_prefix } } as StateType);
   }, [validateDomainPrefix, state.errorMessages]);
 
+    const validateDomainName = useCallback(async () => {
+    if (state.dtoCompany.domain_name.trim() === '') {
+      return gMessageConstants.REQUIRED_FIELD;
+    }else if (await IsCompanyDomainNameExist()) {
+      return gMessageConstants.ALREADY_EXIST;
+    } 
+     else {
+      return null;
+    }
+  }, [state.dtoCompany.domain_name,IsCompanyDomainNameExist]);
+
+  const onDomainNameBlur = useCallback(async () => {
+    const domain_name = await validateDomainName();
+    setState({ errorMessages: { ...state.errorMessages, domain_name: domain_name } } as StateType);
+  }, [validateDomainName, state.errorMessages]);
+
+
   const validateCompanyCode = useCallback(async () => {
     if (state.dtoCompany.company_code.trim() === '') {
       return gMessageConstants.REQUIRED_FIELD;
-    } else {
+    } else if (await IsCompanyCodeExist()) {
+      return gMessageConstants.ALREADY_EXIST;
+    } 
+    else {
       return null;
     }
-  }, [state.dtoCompany.company_code]);
+  }, [state.dtoCompany.company_code,IsCompanyCodeExist]);
 
   const onCompanyCodeBlur = useCallback(async () => {
     const company_code = await validateCompanyCode();
@@ -392,6 +455,10 @@ const useCompany = () => {
     if (errorMessages.company_code) {
       isFormValid = false;
     }
+    errorMessages.domain_name = await validateDomainName();
+    if (errorMessages.domain_name) {
+      isFormValid = false;
+    }
     errorMessages.email = await validateEmail();
     if (errorMessages.email) {
       isFormValid = false;
@@ -432,7 +499,7 @@ const useCompany = () => {
             razorpay_signature: response.razorpay_signature,
             remarks: '',
             status: gConstants.STATUS_PAID,
-            source_flag: gConstants.SOURCE_FLAG_PUBLIC
+            source_flag: gConstants.SOURCE_FLAG_PUBLIC,
           }
         });
         const newPaymentId = result?.data?.addFeeCollectCompanyReturnId ?? 0;
@@ -496,38 +563,6 @@ const useCompany = () => {
     });
   };
 
-  // const onSendEmail = useCallback(async () => {
-  //   try {
-  //     const { data } = await addEmail({
-  //       variables: {
-  //         addEmailInput: {
-  //           to_address: state.dtoCompany.email,
-  //           subject: gMessageConstants.AFFILIATE_REGISTRATION_MAIL_SUBJECT,
-  //           body: gMessageConstants.AFFILIATE_REGISTRATION_EMAIL_BODY,
-  //           template_name: '',
-  //           attachment_path: '',
-  //           status: '',
-  //           retry_count: 0,
-  //           email_source: 'affiliate'
-  //         },
-  //         emailConfigInput: {
-  //           smtpHost: MAIL_CONFIG.smtpHost,
-  //           smtpPort: MAIL_CONFIG.smtpPort,
-  //           smtpUser: MAIL_CONFIG.smtpUser,
-  //           smtpPassword: MAIL_CONFIG.smtpPassword,
-  //           secure: MAIL_CONFIG.secure,
-  //           fromAddress: MAIL_CONFIG.fromAddress
-  //         }
-  //       }
-  //     });
-  //     if (data) {
-  //       console.log('Email sent Successfully :', data);
-  //     }
-  //   } catch (error: any) {
-  //     console.error('Error while sending email:', error);
-  //   }
-  // }, [addEmail, state.dtoCompany.email]);
-
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
       event.preventDefault();
@@ -535,6 +570,12 @@ const useCompany = () => {
       setSaving(true);
       if (!(await validateForm())) return;
       if (state.dtoCompany.id !== 0) return;
+      const isUndertakingAccepted = state.dtoCompany.undertaking === 'Yes';
+          if (!isUndertakingAccepted) {
+            showSnackbar('You must agree to the undertaking before submitting.', 'warning');
+            setSaving(false);
+            return;
+          }
       try {
         const result = await addCompanyReturnId({
           variables: {
@@ -544,9 +585,14 @@ const useCompany = () => {
             email: state.dtoCompany.email,
             phone_no: state.dtoCompany.phone_no,
             address: state.dtoCompany.address,
+            logo_url: COMPANY_DOMAIN_INFORMATION.logoUrl,
+            logo_height: COMPANY_DOMAIN_INFORMATION.logoHeight,
+            logo_width: COMPANY_DOMAIN_INFORMATION.logoWidth,
             status: gConstants.STATUS_ACTIVE,
+            undertaking: state.dtoCompany.undertaking,
+            user_password: COMPANY_DOMAIN_INFORMATION.userPassword,
             domain_name: state.dtoCompany.domain_name,
-            source_flag: gConstants.SOURCE_FLAG_PUBLIC
+            source_flag: gConstants.SOURCE_FLAG_PUBLIC,
           }
         });
         const newCompanyId = result?.data?.addCompanyReturnId;
@@ -703,6 +749,16 @@ const useCompany = () => {
     setState({ open2: false } as StateType);
   }, []);
 
+    const onUndertakingChange = (checked: boolean) => {
+    setState({
+      ...state,
+      dtoCompany: {
+        ...state.dtoCompany,
+        undertaking: checked ? 'Yes' : 'No'
+      }
+    });
+  };
+
   return {
     state,
     onInputChange,
@@ -724,7 +780,9 @@ const useCompany = () => {
     onSendOtpClick,
     onVerifyOtpClick,
     onResendOtpClick,
-    timeLeft
+    onDomainNameBlur,
+    timeLeft,
+    onUndertakingChange
   };
 };
 

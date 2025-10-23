@@ -1229,17 +1229,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         );
       }
       return (
-        <ListItem key={item.text} disablePadding>
-          <ListItemButton sx={{ pl: paddingLeft }}>
-            <MyLink
-              href={item.href || '/'}
-              style={{ textDecoration: 'none', color: 'inherit' }}
-              onClick={handleCloseDrawer} // ✅ closes the drawer on link click
-            >
-              <ListItemText primary={item.text} />
-            </MyLink>
+        // <ListItem key={item.text} disablePadding>
+        //   <ListItemButton sx={{ pl: paddingLeft }}>
+        //     <MyLink
+        //       href={item.href || '/'}
+        //       style={{ textDecoration: 'none', color: 'inherit' }}
+        //       onClick={handleCloseDrawer} // ✅ closes the drawer on link click
+        //     >
+        //       <ListItemText primary={item.text} />
+        //     </MyLink>
+        //   </ListItemButton>
+        // </ListItem>
+             <ListItem key={item.text} disablePadding>
+        {/* ✅ Move MyLink around the entire ListItemButton */}
+        <MyLink
+          href={item.href || '/'}
+          style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}
+          onClick={handleCloseDrawer} // closes drawer on click
+        >
+          <ListItemButton
+            sx={{
+              pl: paddingLeft,
+              pr: 2,
+              width: '100%', // make entire row clickable
+              textAlign: 'left',
+            }}
+          >
+            <ListItemText primary={item.text} />
           </ListItemButton>
-        </ListItem>
+        </MyLink>
+      </ListItem>
       );
     });
 

@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/studentMngImgs/student6.jpg', '/studentMngImgs/student8.jpg'];
+const bannerImages = ['/studentMngImgs/student6.webp', '/studentMngImgs/student8.webp'];
 
 const ClientStuMgmt = () => {
   const images = ['/studentMngImgs/stu1.webp', '/studentMngImgs/stu2.webp', '/studentMngImgs/stu3.webp'];

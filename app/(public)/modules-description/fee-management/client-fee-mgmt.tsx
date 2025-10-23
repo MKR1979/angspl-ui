@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import MyTypography from '@/app/custom-components/MyTypography';
 
-const bannerImages = ['/paymentMngImgs/pay3.png', '/paymentMngImgs/pay5.png'];
+const bannerImages = ['/paymentMngImgs/pay3.webp', '/paymentMngImgs/pay5.webp'];
 
 const ClientFeeMgmt = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
