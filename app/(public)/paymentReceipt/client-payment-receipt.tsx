@@ -38,6 +38,7 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ id }) => {
       company_id={receiptData?.company_id ?? 0}
       company_name={receiptData?.company_name}
       company_code={receiptData?.company_code}
+      company_type={receiptData?.company_type}
       domain_name={receiptData?.domain_name}
       receipt_number={receiptData?.receipt_number}
       payment_date={receiptData?.payment_date}

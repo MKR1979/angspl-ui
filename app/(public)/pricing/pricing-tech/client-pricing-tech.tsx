@@ -1026,7 +1026,7 @@ const ClientPricingTech = () => {
                         // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                         onClick={() => {
                           const finalPrice = plan.title === 'Free' ? 99 : plan.price;
-                          goToCompanyModule('College', plan.title, 'Monthly', finalPrice);
+                          goToCompanyModule('Institute', plan.title, 'Monthly', finalPrice);
                         }}
                       >
                         {plan.title === 'Free' ? 'Start Free' : 'Buy Now'}

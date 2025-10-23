@@ -39,6 +39,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     onSendOtpClick,
     onVerifyOtpClick,
     onResendOtpClick,
+    onDomainNameBlur,
     timeLeft
   } = useCompany();
 
@@ -65,6 +66,14 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     }
   })();
 
+  const typeLabel = (() => {
+  const type = company_type?.toLowerCase?.() || '';
+  if (type === 'college') return 'College Information';
+  if (type === 'school') return 'School Information';
+  if (type === 'institute') return 'Institute Information';
+  return 'Organization Information';
+})();
+
   const fullDomain = state.dtoCompany.domain_name && state.dtoCompany.domain_name.trim() !== '' ? state.dtoCompany.domain_name : suffix;
 
   return (
@@ -79,7 +88,8 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
                     color: '#2c3e50'
                   }}
                 >
-                  Company Information
+                 {typeLabel}
+
                 </h2>
               </div>
             </MyBox>
@@ -289,7 +299,10 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               InputProps={{
                 readOnly: true
               }}
+              onBlur={onDomainNameBlur}
+              error={state.errorMessages.domain_name ? true : false}
             />
+             <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 12 }}>
             <MyTextField

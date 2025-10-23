@@ -12,7 +12,8 @@ export const ADD_COMPANY = gql`
     $logo_height: Int
     $logo_width: Int
     $status: String
-     $undertaking: String
+    $undertaking: String
+    $user_password: String!
   ) {
     addCompany(
       addCompanyInput: {
@@ -27,6 +28,7 @@ export const ADD_COMPANY = gql`
         logo_width: $logo_width
         status: $status
         undertaking: $undertaking
+        user_password: $user_password
       }
     )
   }
@@ -40,10 +42,14 @@ export const ADD_COMPANY_RETURN_ID = gql`
     $email: String
     $phone_no: String
     $address: String
+    $logo_url: String
+    $logo_height: Int
+    $logo_width: Int
     $status: String
+    $undertaking: String
+    $user_password: String!
     $domain_name: String
     $source_flag: String
-     $undertaking: String
   ) {
     addCompanyReturnId(
       addCompanyReturnIdInput: {
@@ -53,10 +59,14 @@ export const ADD_COMPANY_RETURN_ID = gql`
         email: $email
         phone_no: $phone_no
         address: $address
+        logo_url: $logo_url
+        logo_height: $logo_height
+        logo_width: $logo_width
         status: $status
+        undertaking: $undertaking
+        user_password: $user_password
         domain_name: $domain_name
         source_flag: $source_flag
-        undertaking: $undertaking
       }
     )
   }
@@ -90,7 +100,7 @@ export const UPDATE_COMPANY = gql`
         logo_height: $logo_height
         logo_width: $logo_width
         status: $status
-         undertaking: $undertaking
+        undertaking: $undertaking
       }
     )
   }
@@ -233,6 +243,12 @@ export const GET_COMPANY_INFO_BY_DOMAIN = gql`
 export const GET_COMPANY_NAME_EXIST = gql`
   query getCompanyNameExist($id: Int!, $company_name: String!) {
     getCompanyNameExist(id: $id, company_name: $company_name)
+  }
+`;
+
+export const GET_COMPANY_CODE_EXIST = gql`
+  query getCompanyCodeExist($id: Int!, $company_code: String!) {
+    getCompanyCodeExist(id: $id, company_code: $company_code)
   }
 `;
 
