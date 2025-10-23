@@ -10,6 +10,7 @@ interface SuccessMessageProps {
   company_id: number;
   company_name: string;
   company_code: string;
+  company_type: string;
   domain_name: string;
   receipt_number: string;
   payment_date: Date | null;
@@ -22,6 +23,7 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
   company_id,
   company_name,
   company_code,
+  company_type,
   domain_name,
   receipt_number,
   payment_date,
@@ -83,7 +85,7 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
             </div>
           </div>
           <div className="thank-you">
-           <p>🎉 Congratulations! Your company <strong>{company_name}</strong> has been successfully registered. Your site <strong>{domain_name}</strong> will be activated within 24 hours after review. You’ll receive an email notification once your company is fully activated.</p>
+           🎉Congratulations! Your {company_type} <strong>{company_name}</strong> has been successfully registered. Your website domain <strong>{domain_name}</strong> is now active and ready to use.
            </div>
           <table className="fee-table">
             <thead>

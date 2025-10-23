@@ -4,7 +4,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
 import { arrCompanyStatus, arrCompanyType, regExEMail } from '@/app/common/Configuration';
-import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST } from '@/app/graphql/Company';
+import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST, GET_COMPANY_CODE_EXIST } from '@/app/graphql/Company';
 import * as gConstants from '../../constants/constants';
 import { ADD_FEE_COLLECT_COMPANY_RETURN_ID } from '@/app/graphql/FeeCollection';
 import { isValidPhoneNumber } from 'libphonenumber-js';
@@ -12,6 +12,8 @@ import * as gMessageConstants from '@/app/constants/messages-constants';
 import { SEND_OTP, VERIFY_OTP, RESEND_OTP } from '@/app/graphql/Email';
 import EmailDTO, { EMAIL } from '@/app/types/EmailDTO';
 import { useSnackbar } from '../../custom-components/SnackbarProvider';
+import { useSelector } from '../../store';
+import { GET_COMPANY_DOMAIN_NAME_EXIST } from '@/app/graphql/CompanyDomain';
 
 type ErrorMessageType = {
   company_code: string | null;
@@ -93,7 +95,12 @@ const useCompany = () => {
   const [addFeeCollectCompanyReturnId] = useMutation(ADD_FEE_COLLECT_COMPANY_RETURN_ID);
   const [getCompanyEmailExist] = useLazyQuery(GET_COMPANY_EMAIL_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyNameExist] = useLazyQuery(GET_COMPANY_NAME_EXIST, { fetchPolicy: 'network-only' });
+   const [getCompanyCodeExist] = useLazyQuery(GET_COMPANY_CODE_EXIST, { fetchPolicy: 'network-only' });
+   const [getCompanyDomainNameExist] = useLazyQuery(GET_COMPANY_DOMAIN_NAME_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
+   const { siteConfig } = useSelector((state) => state.siteConfigState);
+
+    
 
   const MAIL_CONFIG = {
     smtpHost: 'smtp.gmail.com',
@@ -104,7 +111,13 @@ const useCompany = () => {
     fromAddress: 'adhyayan.solution@gmail.com',
     resendOtpTime: 2
   };
-
+ console.log('print value',siteConfig)
+    const COMPANY_DOMAIN_INFORMATION = {
+    logoUrl: String(siteConfig.find((c) => c.key === 'LOGO_URL')?.value ?? ''),
+    logoWidth: Number(siteConfig.find((c) => c.key === 'LOGO_WIDTH')?.value ?? 0),
+    logoHeight: Number(siteConfig.find((c) => c.key === 'LOGO_HEIGHT')?.value ?? 0),
+    userPassword: String(siteConfig.find((c) => c.key === 'USER_PASSWORD')?.value ?? ''),
+  };
   useEffect(() => {
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
       const firstItem = state.arrCompanyStatusLookup[0];
@@ -156,6 +169,34 @@ const useCompany = () => {
     }
     return exist;
   }, [getCompanyNameExist, state.dtoCompany.id, state.dtoCompany.company_name]);
+
+    const IsCompanyCodeExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyCodeExist({
+      variables: {
+        id: state.dtoCompany.id,
+        company_code: state.dtoCompany.company_code
+      }
+    });
+    if (!error && data) {
+      exist = data.getCompanyCodeExist;
+    }
+    return exist;
+  }, [getCompanyCodeExist, state.dtoCompany.id, state.dtoCompany.company_code]);
+
+    const IsCompanyDomainNameExist = useCallback(async (): Promise<boolean> => {
+    let exist: boolean = false;
+    const { error, data } = await getCompanyDomainNameExist({
+      variables: {
+        id: state.dtoCompany.id,
+        domain_name: state.dtoCompany.domain_name
+      }
+    });
+    if (!error && data) {
+      exist = data.getCompanyDomainNameExist;
+    }
+    return exist;
+  }, [getCompanyDomainNameExist, state.dtoCompany.id, state.dtoCompany.domain_name]);
 
   const IsMobileNoExist = useCallback(async (): Promise<boolean> => {
     let exist: boolean = false;
@@ -288,13 +329,33 @@ const useCompany = () => {
     setState({ errorMessages: { ...state.errorMessages, domain_prefix: domain_prefix } } as StateType);
   }, [validateDomainPrefix, state.errorMessages]);
 
+    const validateDomainName = useCallback(async () => {
+    if (state.dtoCompany.domain_name.trim() === '') {
+      return gMessageConstants.REQUIRED_FIELD;
+    }else if (await IsCompanyDomainNameExist()) {
+      return gMessageConstants.ALREADY_EXIST;
+    } 
+     else {
+      return null;
+    }
+  }, [state.dtoCompany.domain_name,IsCompanyDomainNameExist]);
+
+  const onDomainNameBlur = useCallback(async () => {
+    const domain_name = await validateDomainName();
+    setState({ errorMessages: { ...state.errorMessages, domain_name: domain_name } } as StateType);
+  }, [validateDomainName, state.errorMessages]);
+
+
   const validateCompanyCode = useCallback(async () => {
     if (state.dtoCompany.company_code.trim() === '') {
       return gMessageConstants.REQUIRED_FIELD;
-    } else {
+    } else if (await IsCompanyCodeExist()) {
+      return gMessageConstants.ALREADY_EXIST;
+    } 
+    else {
       return null;
     }
-  }, [state.dtoCompany.company_code]);
+  }, [state.dtoCompany.company_code,IsCompanyCodeExist]);
 
   const onCompanyCodeBlur = useCallback(async () => {
     const company_code = await validateCompanyCode();
@@ -392,6 +453,10 @@ const useCompany = () => {
     }
     errorMessages.company_code = await validateCompanyCode();
     if (errorMessages.company_code) {
+      isFormValid = false;
+    }
+    errorMessages.domain_name = await validateDomainName();
+    if (errorMessages.domain_name) {
       isFormValid = false;
     }
     errorMessages.email = await validateEmail();
@@ -520,8 +585,12 @@ const useCompany = () => {
             email: state.dtoCompany.email,
             phone_no: state.dtoCompany.phone_no,
             address: state.dtoCompany.address,
+            logo_url: COMPANY_DOMAIN_INFORMATION.logoUrl,
+            logo_height: COMPANY_DOMAIN_INFORMATION.logoHeight,
+            logo_width: COMPANY_DOMAIN_INFORMATION.logoWidth,
             status: gConstants.STATUS_ACTIVE,
             undertaking: state.dtoCompany.undertaking,
+            user_password: COMPANY_DOMAIN_INFORMATION.userPassword,
             domain_name: state.dtoCompany.domain_name,
             source_flag: gConstants.SOURCE_FLAG_PUBLIC,
           }
@@ -711,6 +780,7 @@ const useCompany = () => {
     onSendOtpClick,
     onVerifyOtpClick,
     onResendOtpClick,
+    onDomainNameBlur,
     timeLeft,
     onUndertakingChange
   };

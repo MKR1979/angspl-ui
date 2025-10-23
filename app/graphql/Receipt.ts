@@ -22,6 +22,7 @@ export const GET_COMPANY_PAY_RECEIPT_BY_PAYMENT_ID = gql`
     company_id
     company_name
     company_code
+    company_type
     domain_name
     payment_id
     receipt_number

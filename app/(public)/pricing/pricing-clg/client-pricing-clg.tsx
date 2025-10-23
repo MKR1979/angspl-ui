@@ -653,56 +653,6 @@ const ClientPricing = () => {
       ]
     },
     {
-      name: 'Affiliate Dashboard',
-      free: '✔',
-      startup: '✖',
-      premium: '✖',
-      enterprise: '✖',
-      dedicated: '✔',
-      children: [
-        {
-          name: 'Referral Trekking',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'Login',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'View Profile',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'Change Password',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        }
-      ]
-    },
-    {
-      name: 'Location Based Attendance',
-      free: '✔',
-      startup: '✖',
-      premium: '✖',
-      enterprise: '✖',
-      dedicated: '✔'
-    },
-    {
       name: 'Dynamic Web Application',
       free: '✔',
       startup: '✔',

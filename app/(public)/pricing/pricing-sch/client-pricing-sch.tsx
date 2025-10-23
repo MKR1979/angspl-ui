@@ -652,56 +652,6 @@ const ClientPricingSch = () => {
       ]
     },
     {
-      name: 'Affiliate Dashboard',
-      free: '✔',
-      startup: '✖',
-      premium: '✖',
-      enterprise: '✖',
-      dedicated: '✔',
-      children: [
-        {
-          name: 'Referral Trekking',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'Login',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'View Profile',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        },
-        {
-          name: 'Change Password',
-          free: '✔',
-          startup: '✖',
-          premium: '✖',
-          enterprise: '✖',
-          dedicated: '✔'
-        }
-      ]
-    },
-    {
-      name: 'Location Based Attendance',
-      free: '✔',
-      startup: '✖',
-      premium: '✖',
-      enterprise: '✖',
-      dedicated: '✔'
-    },
-    {
       name: 'Dynamic Web Application',
       free: '✔',
       startup: '✔',
@@ -940,7 +890,7 @@ const ClientPricingSch = () => {
           <MyGrid container spacing={2} alignItems="stretch">
             {[
               {
-                title: 'Free',
+                title: 'Free Trial',
                 price: 0,
                 description: `The Free Plan lets schools build a professional online presence free for 5 weeks. 
               Get a fully managed website with essential features to highlight academics, activities, and achievements 
@@ -1024,11 +974,11 @@ const ClientPricingSch = () => {
                         fullWidth
                         // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                          onClick={() => {
-                          const finalPrice = plan.title === 'Free' ? 1 : plan.price;
-                          goToCompanyModule('College', plan.title, 'Monthly', finalPrice);
+                          const finalPrice = plan.title === 'Free Trial' ? 1 : plan.price;
+                          goToCompanyModule('School', plan.title, 'Monthly', finalPrice);
                         }}
                       >
-                        {plan.title === 'Free' ? 'Start Free' : 'Buy Now'}
+                        {plan.title === 'Free Trial' ? 'Start Free' : 'Buy Now'}
                       </MyButton>
                     </MyBox>
                   </MyCardContent>
