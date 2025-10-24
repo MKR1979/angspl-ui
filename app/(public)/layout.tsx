@@ -916,7 +916,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [container, setContainer] = useState<HTMLElement | null>(null);
   const [openMobileSubmenus, setOpenMobileSubmenus] = useState<Record<string, boolean>>({});
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
-
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const { companyInfo } = useSelector((state) => state.globalState);
   const { siteConfig } = useSelector((state) => state.siteConfigState);
 
@@ -1229,36 +1229,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         );
       }
       return (
-        // <ListItem key={item.text} disablePadding>
-        //   <ListItemButton sx={{ pl: paddingLeft }}>
-        //     <MyLink
-        //       href={item.href || '/'}
-        //       style={{ textDecoration: 'none', color: 'inherit' }}
-        //       onClick={handleCloseDrawer} // ✅ closes the drawer on link click
-        //     >
-        //       <ListItemText primary={item.text} />
-        //     </MyLink>
-        //   </ListItemButton>
-        // </ListItem>
-             <ListItem key={item.text} disablePadding>
-        {/* ✅ Move MyLink around the entire ListItemButton */}
-        <MyLink
-          href={item.href || '/'}
-          style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}
-          onClick={handleCloseDrawer} // closes drawer on click
-        >
-          <ListItemButton
-            sx={{
-              pl: paddingLeft,
-              pr: 2,
-              width: '100%', // make entire row clickable
-              textAlign: 'left',
-            }}
+        <ListItem key={item.text} disablePadding>
+          {/* ✅ Move MyLink around the entire ListItemButton */}
+          <MyLink
+            href={item.href || '/'}
+            style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}
+            onClick={handleCloseDrawer} // closes drawer on click
           >
-            <ListItemText primary={item.text} />
-          </ListItemButton>
-        </MyLink>
-      </ListItem>
+            <ListItemButton
+              sx={{
+                pl: paddingLeft,
+                pr: 2,
+                width: '100%', // make entire row clickable
+                textAlign: 'left'
+              }}
+            >
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </MyLink>
+        </ListItem>
       );
     });
 
@@ -1348,18 +1337,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Desktop Menu */}
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {/* {navItems.map((item) => (
-                <Box key={item.text} onMouseEnter={() => setHoveredMenu(item.text)} onMouseLeave={() => setHoveredMenu(null)} sx={{ display: 'inline-block', position: 'relative' }}>
-                  <MyButton variant="outlined" sx={{ backgroundColor: '#fff', border: 'none', color: '#000', '&:hover': { color: '#1976d2', backgroundColor: 'transparent' } }}>
-                    {item.text}
-                  </MyButton>
-                  {hoveredMenu === item.text && item.children && (
-                    <Box sx={{ position: 'absolute', top: '100%', left: 0, backgroundColor: '#fff', boxShadow: 3, borderRadius: 1, zIndex: 10, minWidth: '180px', paddingX: '5px' }}>
-                      {renderDesktopSubmenu(item.children)}
-                    </Box>
-                  )}
-                </Box>
-              ))} */}
-              {navItems.map((item) => (
                 <Box
                   key={item.text}
                   onMouseEnter={() => setHoveredMenu(item.text)}
@@ -1409,6 +1386,98 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                           border: 'none',
                           color: '#000',
                           '&:hover': { color: '#1976d2', backgroundColor: 'transparent' }
+                        }}
+                      >
+                        {item.text}
+                      </MyButton>
+                    </MyLink>
+                  )}
+                </Box>
+              ))} */}
+              {navItems.map((item) => (
+                <Box
+                  key={item.text}
+                  onMouseEnter={() => setHoveredMenu(item.text)}
+                  onMouseLeave={() => setHoveredMenu(null)}
+                  sx={{ display: 'inline-block', position: 'relative' }}
+                >
+                  {item.children ? (
+                    <>
+                      <MyButton
+                        variant="outlined"
+                        onClick={() => setActiveMenu(item.text)} // 👈 active on click
+                        sx={{
+                          backgroundColor: '#fff',
+                          border: 'none',
+                          color: activeMenu === item.text ? '#1976d2' : '#000', // active color
+                          position: 'relative',
+                          '&:hover': {
+                            color: '#1976d2',
+                            backgroundColor: 'transparent'
+                          },
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            left: '25%', // center align underline
+                            bottom: 0,
+                            width: activeMenu === item.text ? '50%' : '0%',
+                            height: '3px',
+                            borderRadius: '2px',
+                            transition: 'width 0.3s ease'
+                          },
+                          '&:hover::after': {
+                            width: '50%'
+                          }
+                        }}
+                      >
+                        {item.text}
+                      </MyButton>
+
+                      {hoveredMenu === item.text && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            backgroundColor: '#fff',
+                            boxShadow: 3,
+                            borderRadius: 1,
+                            zIndex: 10,
+                            minWidth: '150px',
+                            px: '5px'
+                          }}
+                        >
+                          {renderDesktopSubmenu(item.children)}
+                        </Box>
+                      )}
+                    </>
+                  ) : (
+                    <MyLink href={item.href ?? '#'} style={{ textDecoration: 'none' }}>
+                      <MyButton
+                        variant="outlined"
+                        onClick={() => setActiveMenu(item.text)} // 👈 active on click
+                        sx={{
+                          backgroundColor: '#fff',
+                          border: 'none',
+                          color: activeMenu === item.text ? '#1976d2' : '#000', // active color
+                          position: 'relative',
+                          '&:hover': {
+                            color: '#1976d2',
+                            backgroundColor: 'transparent'
+                          },
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            left: '25%',
+                            bottom: 0,
+                            width: activeMenu === item.text ? '50%' : '0%',
+                            height: '3px',
+                            borderRadius: '2px',
+                            transition: 'width 0.3s ease'
+                          },
+                          '&:hover::after': {
+                            width: '50%'
+                          }
                         }}
                       >
                         {item.text}

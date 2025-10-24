@@ -66,10 +66,26 @@ const ClientAdmMgmt = () => {
           <img src={bannerImages[currentIndex]} alt="Admission Management" className="about-banner-img" />
 
           {/* Arrows */}
-          <IconButton className="banner-arrow left" onClick={goToPrev}>
+          <IconButton className="banner-arrow left" onClick={goToPrev}
+        style={{
+          position: 'absolute',
+          left: '2px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'black',
+        }}
+          >
             <ArrowBackIos />
           </IconButton>
-          <IconButton className="banner-arrow right" onClick={goToNext}>
+          <IconButton className="banner-arrow right" onClick={goToNext}
+            style={{
+          position: 'absolute',
+          right: '2px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'black',
+        }}
+          >
             <ArrowForwardIos />
           </IconButton>
         </div>

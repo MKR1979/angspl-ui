@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { GET_COMPANY_PAY_RECEIPT_BY_PAYMENT_ID } from '@/app/graphql/Receipt';
 import { useLazyQuery } from '@apollo/client';
 import PaymentReceipt from '../../custom-components/payment-receipt/MyCompanyReceipt';
+import { useSelector } from '../../store';
 
 interface ClientReceiptProps {
   id?: number;
@@ -13,6 +14,11 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ id }) => {
   const [getCompanyPayReceiptByPaymentId] = useLazyQuery(GET_COMPANY_PAY_RECEIPT_BY_PAYMENT_ID, { fetchPolicy: 'network-only' });
   const [generateReceipt, setGenerateReceipt] = useState(false);
   const [receiptData, setReceiptData] = useState<any>(null);
+  const { siteConfig } = useSelector((state) => state.siteConfigState);
+
+  const USER_PASSWORD ={
+    userPassword: String(siteConfig.find((c) => c.key === 'USER_PASSWORD')?.value ?? '')
+  }
 
   const getPayReceiptInfo = useCallback(async (): Promise<void> => {
     if (!id) return;
@@ -44,6 +50,7 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ id }) => {
       payment_date={receiptData?.payment_date}
       payment_mode={receiptData?.payment_mode}
       fee_amount={receiptData?.fee_amount}
+      user_password={USER_PASSWORD?.userPassword}
     />
   );
 };

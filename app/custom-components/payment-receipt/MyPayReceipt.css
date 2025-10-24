@@ -82,6 +82,11 @@
   text-align: center;
   color: #333;
 }
+.user-pass {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: #333;
+}
 
 /* 🔹 Mobile View Adjustments */
 @media (max-width: 600px) {

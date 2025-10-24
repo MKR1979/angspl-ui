@@ -1025,7 +1025,7 @@ const ClientPricingTech = () => {
                         fullWidth
                         // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                         onClick={() => {
-                          const finalPrice = plan.title === 'Free' ? 99 : plan.price;
+                          const finalPrice = plan.title === 'Free' ? 5 : plan.price;
                           goToCompanyModule('Institute', plan.title, 'Monthly', finalPrice);
                         }}
                       >

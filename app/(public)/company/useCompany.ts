@@ -252,6 +252,86 @@ const useCompany = () => {
     },
     [state.dtoCompany]
   );
+// const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//   const name = e.target.value;
+//   const words = name.trim().split(/\s+/).filter(Boolean);
+
+//   let code = '';
+
+//   if (words.length === 1) {
+//     // single word → take first 2 letters
+//     code = words[0].substring(0, 2).toUpperCase();
+//   } else if (words.length === 2) {
+//     // two words → first letters + 2-digit random number
+//     const letters = (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+
+//     // agar pehle se random number exist nahi karta, generate new
+//     const existingCode = state.dtoCompany.company_code || '';
+//     const existingDigits = existingCode.replace(/\D/g, '');
+
+//     const randomDigits = existingDigits.length === 2
+//       ? existingDigits
+//       : Math.floor(10 + Math.random() * 90).toString(); // generate once
+
+//     code = `${letters}${randomDigits}`;
+//   } else if (words.length > 1) {
+//     // more than 2 words → code same as after 2 words
+//     code = state.dtoCompany.company_code;
+//   }
+
+//   // clean unwanted characters
+//   code = code.replace(/[^A-Z0-9]/g, '');
+
+//   // update state
+//   setState({
+//     ...state,
+//     dtoCompany: {
+//       ...state.dtoCompany,
+//       company_name: name,
+//       company_code: code,
+//     },
+//   });
+// };
+
+const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const name = e.target.value;
+  const words = name.trim().split(/\s+/).filter(Boolean);
+
+  let code = '';
+  let randomDigits = '';
+
+  // check if random digits already exist
+  const existingCode = state.dtoCompany.company_code || '';
+  const existingDigits = existingCode.replace(/[^0-9]/g, '');
+  if (existingDigits.length === 2) {
+    randomDigits = existingDigits;
+  } else if (words.length >= 1) {
+    randomDigits = Math.floor(10 + Math.random() * 90).toString(); // 10–99
+  }
+
+  if (words.length === 1) {
+    // 1 word → first letter + 2 random digits
+    code = `${words[0].charAt(0).toUpperCase()}${randomDigits}`;
+  } else if (words.length >= 2) {
+    // 2 words → first letters of each word + same 2 random digits
+    code = `${words[0].charAt(0).toUpperCase()}${words[1].charAt(0).toUpperCase()}${randomDigits}`;
+  }
+
+  // 3rd word or more → code stays same
+  if (words.length > 2) {
+    code = state.dtoCompany.company_code;
+  }
+
+  // update state
+  setState({
+    ...state,
+    dtoCompany: {
+      ...state.dtoCompany,
+      company_name: name,
+      company_code: code,
+    },
+  });
+};
 
   const onDomainPrefixChange = useCallback(
     (company_type?: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -287,19 +367,19 @@ const useCompany = () => {
     [state.dtoCompany, state.errorMessages]
   );
 
-  const onCodeChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      let value = event.target.value.toUpperCase();
-      value = value.replace(/[^A-Z0-9]/g, '');
-      setState({
-        dtoCompany: {
-          ...state.dtoCompany,
-          company_code: value
-        }
-      } as StateType);
-    },
-    [state.dtoCompany]
-  );
+  // const onCodeChange = useCallback(
+  //   (event: ChangeEvent<HTMLInputElement>) => {
+  //     let value = event.target.value.toUpperCase();
+  //     value = value.replace(/[^A-Z0-9]/g, '');
+  //     setState({
+  //       dtoCompany: {
+  //         ...state.dtoCompany,
+  //         company_code: value
+  //       }
+  //     } as StateType);
+  //   },
+  //   [state.dtoCompany]
+  // );
 
   const validateCompanyName = useCallback(async () => {
     if (state.dtoCompany.company_name.trim() === '') {
@@ -763,7 +843,7 @@ const useCompany = () => {
     state,
     onInputChange,
     onNormalizedInputChange,
-    onCodeChange,
+    // onCodeChange,
     onCompanyNameBlur,
     onEmailBlur,
     onPhoneNoBlur,
@@ -782,6 +862,7 @@ const useCompany = () => {
     onResendOtpClick,
     onDomainNameBlur,
     timeLeft,
+    onCompanyNameChange,
     onUndertakingChange
   };
 };
