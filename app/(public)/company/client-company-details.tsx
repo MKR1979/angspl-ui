@@ -25,7 +25,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     state,
     onInputChange,
     onNormalizedInputChange,
-    onCodeChange,
+    // onCodeChange,
     onCompanyNameBlur,
     onEmailBlur,
     onPhoneNoBlur,
@@ -40,6 +40,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
     onVerifyOtpClick,
     onResendOtpClick,
     onDomainNameBlur,
+    onCompanyNameChange,
     timeLeft
   } = useCompany();
 
@@ -67,12 +68,12 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
   })();
 
   const typeLabel = (() => {
-  const type = company_type?.toLowerCase?.() || '';
-  if (type === 'college') return 'College Information';
-  if (type === 'school') return 'School Information';
-  if (type === 'institute') return 'Institute Information';
-  return 'Organization Information';
-})();
+    const type = company_type?.toLowerCase?.() || '';
+    if (type === 'college') return 'College Information';
+    if (type === 'school') return 'School Information';
+    if (type === 'institute') return 'Institute Information';
+    return 'Organization Information';
+  })();
 
   const fullDomain = state.dtoCompany.domain_name && state.dtoCompany.domain_name.trim() !== '' ? state.dtoCompany.domain_name : suffix;
 
@@ -88,8 +89,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
                     color: '#2c3e50'
                   }}
                 >
-                 {typeLabel}
-
+                  {typeLabel}
                 </h2>
               </div>
             </MyBox>
@@ -227,7 +227,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               }}
             />
           </MyGrid>
-            <MyGrid size={{ xs: 12, sm: 6 }}>
+          <MyGrid size={{ xs: 12, sm: 6 }}>
             <MyPhoneNumber
               label="Phone #"
               onChange={onPhoneNoChange}
@@ -239,7 +239,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             <MyTypography className="error"> {state.errorMessages.phone_no}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
-            <MyTextField
+            {/* <MyTextField
               label="Company Name"
               name="company_name"
               value={state.dtoCompany.company_name}
@@ -252,6 +252,19 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               disabled={!state.otpVerified}
               onBlur={onCompanyNameBlur}
               error={state.errorMessages.company_name ? true : false}
+            /> */}
+            <MyTextField
+              label="Company Name"
+              name="company_name"
+              value={state.dtoCompany.company_name}
+              onChange={onCompanyNameChange} // 👈 use this function
+              placeholder="Enter Company Name"
+              inputProps={{
+                maxLength: gConstants.COMPANY_NAME_LENGTH
+              }}
+              disabled={!state.otpVerified}
+              onBlur={onCompanyNameBlur}
+              error={!!state.errorMessages.company_name}
             />
             <MyTypography className="error">{state.errorMessages.company_name}</MyTypography>
           </MyGrid>
@@ -260,11 +273,10 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               label="Company Code"
               name="company_code"
               value={state.dtoCompany.company_code}
-              onChange={onCodeChange}
+              // onChange={onCodeChange}
               placeholder="Enter Company Code"
               inputProps={{
-                maxLength: gConstants.CODE_LENGTH,
-                pattern: '^[A-Z0-9]+$'
+               readOnly: true
               }}
               disabled={!state.otpVerified}
               onBlur={onCompanyCodeBlur}
@@ -302,7 +314,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               onBlur={onDomainNameBlur}
               error={state.errorMessages.domain_name ? true : false}
             />
-             <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
+            <MyTypography className="error">{state.errorMessages.domain_name}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 12 }}>
             <MyTextField
@@ -334,10 +346,10 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             </label>
           </MyGrid>
           <MyGrid size={{ xs: 12 }}>
-            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold',mb: 1  }}>
+            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
               Undertaking/Declaration:
             </MyTypography>
-            <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize:'13px' }}>
+            <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize: '13px' }}>
               <li>
                 I confirm that I’m authorized to register on behalf of my company, and that all information provided is accurate and
                 complete. I understand that registration does not guarantee any outcomes beyond what’s stated in the subscription or SLA.
@@ -351,10 +363,10 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               <li>I understand that all payments are subject to Adhyayan’s billing, refund, and cancellation policies.</li>
             </ul>
 
-            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1}}>
+            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1 }}>
               Instructions:
             </MyTypography>
-            <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize:'13px' }}>
+            <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize: '13px' }}>
               <li>
                 Registration is <strong>non-transferable</strong> to other entities or individuals.
               </li>
@@ -362,13 +374,15 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
               <li>Required documents (e.g., business registration, ID proof) must be submitted if requested.</li>
               <li>Incomplete or unverifiable registrations may be delayed or rejected.</li>
             </ul>
-          </MyGrid>         
+          </MyGrid>
           <MyGrid size={{ xs: 12, sm: 12 }}>
             <div>
               <img src="pay-methods-branding.png" width="160px" alt="Payment Methods" />
-              <button onClick={(e) => onSaveClick(e, company_type, payment_amount)}
-              //  disabled={!state.undertaking}
-               className="pay-now-button">
+              <button
+                onClick={(e) => onSaveClick(e, company_type, payment_amount)}
+                //  disabled={!state.undertaking}
+                className="pay-now-button"
+              >
                 Pay Now ₹{payment_amount}
               </button>
             </div>
