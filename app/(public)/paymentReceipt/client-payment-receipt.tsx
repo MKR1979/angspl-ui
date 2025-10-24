@@ -44,6 +44,7 @@ const ClientReceipt: React.FC<ClientReceiptProps> = ({ id }) => {
       payment_date={receiptData?.payment_date}
       payment_mode={receiptData?.payment_mode}
       fee_amount={receiptData?.fee_amount}
+      user_password={receiptData?.user_password}
     />
   );
 };

@@ -16,6 +16,7 @@ interface SuccessMessageProps {
   payment_date: Date | null;
   payment_mode: string;
   fee_amount: number;
+  user_password: string;
   onCancel?: () => void;
 }
 
@@ -29,9 +30,9 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
   payment_date,
   payment_mode,
   fee_amount,
+  user_password,
   onCancel
 }) => {
-
   const printRef = useRef<HTMLDivElement>(null);
   const handlePrint = () => {
     if (printRef.current) {
@@ -48,16 +49,15 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
     <>
       <div className="receipt-container-outer">
         <div ref={printRef} className="receipt-container">
-
           <div className="school-info">
-          <div className="receipt-logo">
+            <div className="receipt-logo">
               <MyLogo />
             </div>
             <div>
               <strong style={{ fontSize: '20px' }}>{gConstants.COMPANY}</strong>
               <p>RECEIPT - CUSTOMER COPY</p>
             </div>
-          </div> 
+          </div>
           <div className="receipt-top">
             <div className="receipt-line">
               <span>
@@ -85,8 +85,9 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
             </div>
           </div>
           <div className="thank-you">
-           🎉Congratulations! Your {company_type} <strong>{company_name}</strong> has been successfully registered. Your website domain <strong>{domain_name}</strong> is now active and ready to use.
-           </div>
+            🎉Congratulations! Your {company_type} <strong>{company_name}</strong> has been successfully registered. Your website domain{' '}
+            <strong>{domain_name}</strong> is now active and ready to use.
+          </div>
           <table className="fee-table">
             <thead>
               <tr>
@@ -109,7 +110,17 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
               </tr>
             </tbody>
           </table>
-
+          <div className="user-pass">
+            <p>
+              <strong>Login ID:</strong> {(company_code || '').toLowerCase()}
+            </p>
+            <p>
+              <strong>Password:</strong> {user_password}
+            </p>
+            <p >
+              <strong>Note:</strong> <span style={{fontSize:'12px',color:'orange',fontWeight:'bold' }}>***Please change your password immediately after your first login for security reasons.</span>
+            </p>
+          </div>
           <div className="thank-you">
             <p>
               <strong>Thank you for your payment, {company_name}.</strong> We appreciate your timely transaction towards becoming our valued
@@ -118,7 +129,6 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
             <p>This is a system generated receipt and does not require any signature.</p>
           </div>
         </div>
-
         <MyCardActions sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
           <MyButton onClick={handlePrint}>Print</MyButton>
           <MyButton onClick={() => (onCancel ? onCancel() : window.history.back())}>Cancel</MyButton>
