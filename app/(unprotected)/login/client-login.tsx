@@ -68,7 +68,7 @@ const ClientLogin = () => {
                   <MyGrid>
                     <MyStack alignItems="center" justifyContent="center" spacing={1}>
                       <MyTypography
-                        sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+                        sx={{ width: '100%', display: 'flex', textAlign: 'center' }}
                         component="h1"
                         variant="h6"
                         gutterBottom
