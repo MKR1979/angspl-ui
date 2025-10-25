@@ -87,6 +87,17 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
           <div className="thank-you">
             🎉Congratulations! Your {company_type} <strong>{company_name}</strong> has been successfully registered. Your website domain{' '}
             <strong>{domain_name}</strong> is now active and ready to use.
+            <p>
+              <strong>Your Site URL:</strong>{' '}
+              <a
+                href={`https://${domain_name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '18px', color: '#1976d2', textDecoration: 'none' }}
+              >
+                https://{domain_name}
+              </a>
+            </p>
           </div>
           <table className="fee-table">
             <thead>
@@ -117,8 +128,11 @@ const SuccessMessageAdm: React.FC<SuccessMessageProps> = ({
             <p>
               <strong>Password:</strong> {user_password}
             </p>
-            <p >
-              <strong>Note:</strong> <span style={{fontSize:'12px',color:'orange',fontWeight:'bold' }}>***Please change your password immediately after your first login for security reasons.</span>
+            <p>
+              <strong>Note:</strong>{' '}
+              <span style={{ fontSize: '12px', color: 'orange', fontWeight: 'bold' }}>
+                ***Please change your password immediately after your first login for security reasons.
+              </span>
             </p>
           </div>
           <div className="thank-you">

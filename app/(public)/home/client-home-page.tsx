@@ -304,7 +304,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
 
         <div>
           <MyBox>
-            <MyCard>
+
               <MyCardContent>
                 <div className={styles.rollingContainer}>
                   <Box sx={{ textAlign: 'center', position: 'relative' }}>
@@ -402,7 +402,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
-                <MyGrid container spacing={3} sx={{ mt: 1 }}>
+                <MyGrid container spacing={1} sx={{ mt: 1 }}>
                   {[
                     {
                       title: 'Streamlined Business Operations',
@@ -472,14 +472,14 @@ const [currentIndex, setCurrentIndex] = useState(0);
                         elevation={1}
                         sx={{
                           flex: 1,
-                          p: 2,
-                          borderRadius: '14px',
+                          p: 0,
+                          borderRadius: '10px',
                           backgroundColor: '#ffffff',
-                          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)',
+                          boxShadow: '0 4px 5px rgba(0, 0, 0, 0.05)',
                           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                           '&:hover': {
                             transform: 'translateY(-5px)',
-                            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.12)'
+                            boxShadow: '0 10px 5px rgba(0, 0, 0, 0.12)'
                           }
                         }}
                       >
@@ -503,7 +503,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                     </MyGrid>
                   ))}
                 </MyGrid>
-                <MyCard sx={{marginTop:'50px', boxShadow:'0px 3px 8px rgba(0, 0, 0, 0.1)', backgroundColor:'rgb(238, 242, 246)'}}>
+                <MyCard sx={{marginTop:'10px', boxShadow:'0px 3px 8px rgba(0, 0, 0, 0.1)', backgroundColor:'rgb(238, 242, 246)'}}>
                 <MyGrid container spacing={2} alignItems="stretch" ref={sectionRef1}>
                 <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
                     <MyCardContent>
@@ -593,7 +593,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                   </MyGrid>
                 </MyGrid>
               </MyCardContent>
-            </MyCard>
+
           </MyBox>
         </div>
         <Footer />
