@@ -7,6 +7,8 @@ export const ADD_COMPANY_DOMAIN = gql`
     $logo_url: String
     $logo_height: Int
     $logo_width: Int
+    $home_img: String
+    $about_img: String
     $status: String
   ) {
     addCompanyDomain(
@@ -16,6 +18,8 @@ export const ADD_COMPANY_DOMAIN = gql`
         logo_url: $logo_url
         logo_height: $logo_height
         logo_width: $logo_width
+        home_img: $home_img
+        about_img: $about_img
         status: $status
       }
     )
@@ -30,6 +34,8 @@ export const UPDATE_COMPANY_DOMAIN = gql`
     $logo_url: String
     $logo_height: Int
     $logo_width: Int
+    $home_img: String
+    $about_img: String
     $status: String
   ) {
     updateCompanyDomain(
@@ -40,6 +46,8 @@ export const UPDATE_COMPANY_DOMAIN = gql`
         logo_url: $logo_url
         logo_height: $logo_height
         logo_width: $logo_width
+        home_img: $home_img
+        about_img: $about_img
         status: $status
       }
     )
@@ -87,6 +95,8 @@ export const COMPANY_DOMAIN_LIST = gql`
         logo_url
         logo_height
         logo_width
+        home_img
+        about_img
         status
         created_by
         created_by_first_name
@@ -113,6 +123,8 @@ export const GET_COMPANY_DOMAIN = gql`
       logo_url
       logo_height
       logo_width
+      home_img
+      about_img
       status
       created_by
       created_by_first_name
@@ -138,6 +150,8 @@ export const GET_COMPANY_DOMAIN_ALL = gql`
       logo_url
       logo_height
       logo_width
+      home_img
+      about_img
       status
     }
   }

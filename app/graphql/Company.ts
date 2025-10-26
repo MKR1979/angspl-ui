@@ -8,9 +8,6 @@ export const ADD_COMPANY = gql`
     $email: String
     $phone_no: String
     $address: String
-    $logo_url: String
-    $logo_height: Int
-    $logo_width: Int
     $status: String
     $undertaking: String
     $user_password: String!
@@ -23,9 +20,6 @@ export const ADD_COMPANY = gql`
         email: $email
         phone_no: $phone_no
         address: $address
-        logo_url: $logo_url
-        logo_height: $logo_height
-        logo_width: $logo_width
         status: $status
         undertaking: $undertaking
         user_password: $user_password
@@ -45,6 +39,8 @@ export const ADD_COMPANY_RETURN_ID = gql`
     $logo_url: String
     $logo_height: Int
     $logo_width: Int
+    $home_img: String
+    $about_img: String
     $status: String
     $undertaking: String
     $user_password: String!
@@ -62,6 +58,8 @@ export const ADD_COMPANY_RETURN_ID = gql`
         logo_url: $logo_url
         logo_height: $logo_height
         logo_width: $logo_width
+        home_img: $home_img
+        about_img: $about_img
         status: $status
         undertaking: $undertaking
         user_password: $user_password
@@ -81,9 +79,6 @@ export const UPDATE_COMPANY = gql`
     $email: String
     $phone_no: String
     $address: String
-    $logo_url: String
-    $logo_height: Int
-    $logo_width: Int
     $status: String
      $undertaking: String
   ) {
@@ -96,9 +91,6 @@ export const UPDATE_COMPANY = gql`
         email: $email
         phone_no: $phone_no
         address: $address
-        logo_url: $logo_url
-        logo_height: $logo_height
-        logo_width: $logo_width
         status: $status
         undertaking: $undertaking
       }
@@ -144,6 +136,8 @@ export const COMPANY_LIST = gql`
         logo_url
         logo_height
         logo_width
+        home_img
+        about_img
         status
         undertaking
         created_by
@@ -174,6 +168,8 @@ export const GET_COMPANY = gql`
       logo_url
       logo_height
       logo_width
+      home_img
+      about_img
       status
       undertaking
       created_by
@@ -203,6 +199,8 @@ export const GET_COMPANY_ALL = gql`
       logo_url
       logo_height
       logo_width
+      home_img
+      about_img
       status
       undertaking
     }
@@ -224,6 +222,8 @@ export const GET_COMPANY_INFO_BY_DOMAIN = gql`
     logo_url
     logo_height
     logo_width
+    home_img
+    about_img
     status
     role_id
     created_by

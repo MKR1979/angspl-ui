@@ -111,13 +111,45 @@ const useCompany = () => {
     fromAddress: 'adhyayan.solution@gmail.com',
     resendOtpTime: 2
   };
- console.log('print value',siteConfig)
-    const COMPANY_DOMAIN_INFORMATION = {
-    logoUrl: String(siteConfig.find((c) => c.key === 'LOGO_URL')?.value ?? ''),
-    logoWidth: Number(siteConfig.find((c) => c.key === 'LOGO_WIDTH')?.value ?? 0),
-    logoHeight: Number(siteConfig.find((c) => c.key === 'LOGO_HEIGHT')?.value ?? 0),
-    userPassword: String(siteConfig.find((c) => c.key === 'USER_PASSWORD')?.value ?? ''),
-  };
+  
+   const COMPANY_DOMAIN_INFORMATION = {
+    userPassword: String(siteConfig.find((c) => c.key === 'USER_PASSWORD')?.value ?? '')
+   };
+
+function getImageConfigs(siteConfig: any[], companyType: string) {
+  try {
+    // 🔹 Correct variable name
+    const imageConfig = siteConfig.find((c) => c.key === 'IMAGE_CONFIG');
+    if (!imageConfig?.business_config?.business_config) return {};
+
+    const rawConfig = imageConfig.business_config.business_config;
+    let parsedConfig: any;
+
+    // 🔹 Safely parse the config (JSON or JS object)
+    try {
+      parsedConfig = JSON.parse(rawConfig);
+    } catch {
+      parsedConfig = new Function(`return ${rawConfig}`)();
+    }
+
+    // 🔹 Determine whether to use school or college section
+    const typeKey = companyType.toLowerCase() === 'college' ? 'college' : 'school';
+    const selected = parsedConfig[typeKey] ?? {};
+
+    // 🔹 Return final formatted object
+    return {
+      logoUrl: selected.logoUrl ?? '',
+      logoWidth: selected.logoWidth ?? 0,
+      logoHeight: selected.logoHeight ?? 0,
+      customerHomeImage: selected.homeImageURL ?? '',
+      customerAboutUsImage: selected.aboutUsImageURL ?? '',
+    };
+  } catch (err) {
+    console.error('❌ Failed to read image config:', err);
+    return {};
+  }
+}
+
   useEffect(() => {
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
       const firstItem = state.arrCompanyStatusLookup[0];
@@ -252,46 +284,6 @@ const useCompany = () => {
     },
     [state.dtoCompany]
   );
-// const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//   const name = e.target.value;
-//   const words = name.trim().split(/\s+/).filter(Boolean);
-
-//   let code = '';
-
-//   if (words.length === 1) {
-//     // single word → take first 2 letters
-//     code = words[0].substring(0, 2).toUpperCase();
-//   } else if (words.length === 2) {
-//     // two words → first letters + 2-digit random number
-//     const letters = (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
-
-//     // agar pehle se random number exist nahi karta, generate new
-//     const existingCode = state.dtoCompany.company_code || '';
-//     const existingDigits = existingCode.replace(/\D/g, '');
-
-//     const randomDigits = existingDigits.length === 2
-//       ? existingDigits
-//       : Math.floor(10 + Math.random() * 90).toString(); // generate once
-
-//     code = `${letters}${randomDigits}`;
-//   } else if (words.length > 1) {
-//     // more than 2 words → code same as after 2 words
-//     code = state.dtoCompany.company_code;
-//   }
-
-//   // clean unwanted characters
-//   code = code.replace(/[^A-Z0-9]/g, '');
-
-//   // update state
-//   setState({
-//     ...state,
-//     dtoCompany: {
-//       ...state.dtoCompany,
-//       company_name: name,
-//       company_code: code,
-//     },
-//   });
-// };
 
 const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const name = e.target.value;
@@ -656,6 +648,7 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             setSaving(false);
             return;
           }
+    const IMAGE_CONFIGS = getImageConfigs(siteConfig, company_type);  
       try {
         const result = await addCompanyReturnId({
           variables: {
@@ -665,9 +658,11 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             email: state.dtoCompany.email,
             phone_no: state.dtoCompany.phone_no,
             address: state.dtoCompany.address,
-            logo_url: COMPANY_DOMAIN_INFORMATION.logoUrl,
-            logo_height: COMPANY_DOMAIN_INFORMATION.logoHeight,
-            logo_width: COMPANY_DOMAIN_INFORMATION.logoWidth,
+            logo_url: IMAGE_CONFIGS.logoUrl,
+            logo_height: IMAGE_CONFIGS.logoHeight,
+            logo_width: IMAGE_CONFIGS.logoWidth,
+            home_img: IMAGE_CONFIGS.customerHomeImage,
+            about_img: IMAGE_CONFIGS.customerAboutUsImage,
             status: gConstants.STATUS_ACTIVE,
             undertaking: state.dtoCompany.undertaking,
             user_password: COMPANY_DOMAIN_INFORMATION.userPassword,
