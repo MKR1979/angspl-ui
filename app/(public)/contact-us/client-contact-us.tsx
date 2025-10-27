@@ -209,7 +209,8 @@ const ClientContactUs = () => {
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <FaEnvelope size={24} style={{ marginRight: '1rem', color: '#1976d2' }} />
-                <Typography><strong>Site URL:</strong> <a href={formatUrl(gConstants.SITE_URL_COMPANY)} target="_blank" rel="noopener noreferrer">{gConstants.SITE_URL_COMPANY}</a>,and <a href={formatUrl(gConstants.SITE_URL_ONLINE)} target="_blank" rel="noopener noreferrer">{gConstants.SITE_URL_ONLINE}</a></Typography>
+                <Typography><strong>Site URL:</strong> <a href={formatUrl(gConstants.SITE_URL_COMPANY)} target="_blank" rel="noopener noreferrer">{gConstants.SITE_URL_COMPANY}</a>
+                 </Typography>
               </Box>              
               </Box>
           </StyledPaper>
