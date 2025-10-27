@@ -488,18 +488,18 @@ const ClientDemoSch = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: { xs: 335, sm: 615 },
+          bottom: { xs: 410, sm: 615 },
           right: { xs: 10, sm: 10 },
           borderRadius: '90px',
           bgcolor: '#FFD700',
           color: '#334D6E',
           boxShadow: 3,
-          px: { xs: 1.5, sm: 2 },
-          py: { xs: 1, sm: 1.5 },
+          px: { xs: 0.8, sm: 2 },
+          py: { xs: 0.5, sm: 1.5 },
           display: 'flex',
           alignItems: 'center',
           gap: { xs: 1, sm: 1 },
-          fontSize: { xs: 10, sm: 12 },
+          fontSize: { xs: 8, sm: 12 },
           textAlign: 'center',
         }}
       >
@@ -525,14 +525,14 @@ const ClientDemoSch = () => {
         variant="contained"
         sx={{
           position: 'fixed',
-          bottom: { xs: 165, sm: 80 },
-          right: { xs: 15, sm: 20 },
+          bottom: { xs: 155, sm: 80 },
+          right: { xs: 10, sm: 20 },
           borderRadius: '50px',
           bgcolor: '#FFD700',
           color: '#334D6E',
           boxShadow: 3,
-          px: { xs: 1, sm: 1.5 },
-          py: { xs: 1, sm: 1.5 },
+          px: { xs: 0.8, sm: 1.5 },
+          py: { xs: 0.5, sm: 1.5 },
           display: 'flex',
           alignItems: 'center',
           gap: { xs: 1, sm: 1 },

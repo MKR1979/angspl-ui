@@ -241,10 +241,10 @@ const ClientAdhyayanContactUs = () => {
                     <a href={formatUrl(companyInfo.domain_name)} target="_blank" rel="noopener noreferrer">
                       {companyInfo.domain_name}
                     </a>
-                    ,and{' '}
+                    {/* ,and{' '}
                     <a href={formatUrl(gConstants.SITE_URL_ANGSPL)} target="_blank" rel="noopener noreferrer">
                       {gConstants.SITE_URL_ANGSPL}
-                    </a>
+                    </a> */}
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>

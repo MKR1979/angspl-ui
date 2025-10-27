@@ -187,7 +187,6 @@
 //   return eq(prevProps, nextProps); // Don't re-render!
 // });
 
-
 'use client';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import eq from 'lodash/eq';
@@ -239,12 +238,12 @@ const services1 = [
   { title: 'DevOps Engineer', image: '/home-page/devops.webp' },
   { title: 'AI Engineer', image: '/home-page/ai2.webp' },
   { title: 'Data Engineer', image: '/home-page/data-eng.webp' },
-  { title: 'Cybersecurity Specialist', image: '/home-page/ai2.webp' },
+  { title: 'Cybersecurity Specialist', image: '/home-page/cyber.webp' }
 ];
 
 const ClientOurService = () => {
   const { companyInfo } = useSelector((state: { globalState: any }) => state.globalState);
-    const bannerImages = ['/home-page/ser-top.webp'];
+  const bannerImages = ['/home-page/ser-top.webp'];
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -282,135 +281,149 @@ const ClientOurService = () => {
   }, [pathname]);
 
   return (
-
     <div>
-       <div className="about-banner">
-          <img src={bannerImages[currentIndex]} alt="institute Management Demo" className="about-banner-img" />
-          {bannerImages.length > 1 && (
-            <>
-              <IconButton className="banner-arrow left" onClick={goToPrev}>
-                <ArrowBackIos />
-              </IconButton>
-              <IconButton className="banner-arrow right" onClick={goToNext}>
-                <ArrowForwardIos />
-              </IconButton>
-            </>
-          )}
-        </div>
-
-       <div className="services-section">
-      <Typography 
-        variant="h4" 
-        className="services-heading"
-      >
-        Out Source Best <span className="highlight-word">Talents</span>
-      </Typography>
-      <p style={{ fontSize: '20px' }}>We are your partner for building amazing distributed teams, providing end-to-end solutions to achieve every goal, and helping you drive your digital transformation.</p>
-      <div className="services-container">
-        {services1.map((service, index) => (
-          <div className="service-card" key={index}>
-            <img src={service.image} alt={service.title} className="service-icon" />
-            <h3 className="service-title">{service.title}</h3>
-          </div>
-        ))}
-        
+      <div className="about-banner">
+        <img src={bannerImages[currentIndex]} alt="institute Management Demo" className="about-banner-img" />
+        {bannerImages.length > 1 && (
+          <>
+            <IconButton className="banner-arrow left" onClick={goToPrev}>
+              <ArrowBackIos />
+            </IconButton>
+            <IconButton className="banner-arrow right" onClick={goToNext}>
+              <ArrowForwardIos />
+            </IconButton>
+          </>
+        )}
       </div>
-      {/* <p style={{ fontSize: '20px', textAlign:'center' }}>And Other Talent</p> */}
-    </div>
-        
-    <MyCard sx={{
-      mt: 3,
-      height: 'auto',
-      maxWidth: '1520px',
-      backgroundColor: 'rgb(238, 242, 246)',
-      margin: 'auto',
-      padding: '20px'
-    }}>
-      <Typography variant="h4" marginLeft={7} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
-        Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: 'Brush Script MT, Dancing Script' }}>Expertise</span>
-      </Typography>
-      <Grid container spacing={1} justifyContent="center" alignItems="stretch">
-        {services.map((service, idx) => (
-          <Grid
-            key={idx}
-            item
-            xs={6}   // Full-width on mobile
-            sm={6}    // 2 items per row on tablets
-            md={3}    // 4 items per row on desktops
-            lg={2}    // 6 items per row on larger screens
-            mb={3}
-          >
-            <div className="feature-icon" style={{ textAlign: 'center', padding: '10px' }}>
-              {service.icon}
-            </div>
-            <Typography align="center" sx={{ color: '#333', padding: '10px' }}>
-              {service.title}
-            </Typography>
-          </Grid>
-        ))}
-      </Grid>
-    </MyCard>
 
-            <div style={{ marginTop: '10px' }} id="section4">
+      <div className="services-section">
+        <Typography variant="h4" className="services-heading">
+          Out Source Best <span className="highlight-word">Talents</span>
+        </Typography>
+        <p style={{ fontSize: '20px' }}>
+          We are your partner for building amazing distributed teams, providing end-to-end solutions to achieve every goal, and helping you
+          drive your digital transformation.
+        </p>
+        <div className="services-container">
+          {services1.map((service, index) => (
+            <div className="service-card" key={index}>
+              <img src={service.image} alt={service.title} className="service-icon" />
+              <h3 className="service-title">{service.title}</h3>
+            </div>
+          ))}
+        </div>
+        {/* <p style={{ fontSize: '20px', textAlign:'center' }}>And Other Talent</p> */}
+      </div>
+
+      <MyCard
+        sx={{
+          mt: 3,
+          height: 'auto',
+          maxWidth: '1520px',
+          backgroundColor: 'rgb(238, 242, 246)',
+          margin: 'auto',
+          padding: '20px'
+        }}
+      >
+        <Typography variant="h4" marginLeft={7} sx={{ mb: 2, fontFamily: 'sans-serif' }}>
+          Our <span style={{ color: '#f56b2a', fontSize: '50px', fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive' }}>Expertise</span>
+        </Typography>
+        <Grid container spacing={1} justifyContent="center" alignItems="stretch">
+          {services.map((service, idx) => (
+            <Grid
+              key={idx}
+              item
+              xs={6} // Full-width on mobile
+              sm={6} // 2 items per row on tablets
+              md={3} // 4 items per row on desktops
+              lg={2} // 6 items per row on larger screens
+              mb={3}
+            >
+              <div className="feature-icon" style={{ textAlign: 'center', padding: '10px' }}>
+                {service.icon}
+              </div>
+              <Typography align="center" sx={{ color: '#333', padding: '10px' }}>
+                {service.title}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
+      </MyCard>
+
+      <div style={{ marginTop: '10px' }} id="section4">
         {/* Header Typography */}
         <Typography variant="h4" marginLeft={10} sx={{ mb: 1, fontFamily: 'sans-serif' }}>
-          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Services</span>
+          Our <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive' }}>Services</span>
         </Typography>
         <div className="card-container">
           <div className="card">
-            <img src="/home-page/ai-auto.webp" alt="ML/DL Icon" className="card-image" />
+            <img src="/home-page/ai-auto2.webp" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">AI & Automation</h3>
-            <p className="card-description">Empower your business with AI and ML solutions that drive automation, decision intelligence,
-               and predictive analytics. From NLP and computer vision to generative AI, we create scalable, secure, and high-performance
-                systems for smarter operations and faster innovation.</p>
+            <p className="card-description">
+              Empower your business with AI and ML solutions that drive automation, decision intelligence, and predictive analytics. From
+              NLP and computer vision to generative AI, we create scalable, secure, and high-performance systems for smarter operations and
+              faster innovation.
+            </p>
           </div>
 
           <div className="card">
-            <img src="/home-page/cloud-dev.webp" alt="NLP Icon" className="card-image" />
+            <img src="/home-page/cloud-dev2.webp" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">Cloud & DevOps</h3>
-            <p className="card-description">Empower your infrastructure with cloud-native architecture and DevOps automation.
-               We leverage AWS, Azure, and GCP to migrate, optimize, and scale systems using CI/CD, Docker, and Kubernetes — ensuring
-                seamless delivery, agility, and high-performance cloud operations.</p>
-          </div>
-           <div className="card">
-            <img src="/home-page/mobile.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
-            <h3 className="card-title">Mobile App Development</h3>
-            <p className="card-description">Create engaging digital experiences with powerful mobile apps built using React Native, Flutter,
-               and Kotlin. We deliver fast, reliable, and intuitive apps that blend innovation with usability — ensuring seamless performance
-               and stronger customer connections across platforms.</p>
+            <p className="card-description">
+              Empower your infrastructure with cloud-native architecture and DevOps automation. We leverage AWS, Azure, and GCP to migrate,
+              optimize, and scale systems using CI/CD, Docker, and Kubernetes — ensuring seamless delivery, agility, and high-performance
+              cloud operations.
+            </p>
           </div>
           <div className="card">
-            <img src="/home-page/data-ans.webp" alt="Online Learning Icon" className="card-image" />
+            <img src="/home-page/mobile2.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
+            <h3 className="card-title">Mobile App Development</h3>
+            <p className="card-description">
+              Create engaging digital experiences with powerful mobile apps built using React Native, Flutter, and Kotlin. We deliver fast,
+              reliable, and intuitive apps that blend innovation with usability — ensuring seamless performance and stronger customer
+              connections across platforms.
+            </p>
+          </div>
+          <div className="card">
+            <img src="/home-page/data-ans1.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Data Analytics</h3>
-            <p className="card-description">Turn data into a competitive advantage.
-             We help organizations collect, clean, visualize, and interpret data for informed decisions and measurable growth.
-             Our analytics stack integrates with AI and cloud systems to deliver real-time insights through dashboards, KPIs, and predictive models.</p>
+            <p className="card-description">
+              Turn data into a competitive advantage. We help organizations collect, clean, visualize, and interpret data for informed
+              decisions and measurable growth. Our analytics stack integrates with AI and cloud systems to deliver real-time insights
+              through dashboards, KPIs, and predictive models.
+            </p>
           </div>
           <div className="card">
             <img src="/home-page/on-team.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">On-Demand Tech Team</h3>
-            <p className="card-description">Accelerate your projects with the right technical talent. Our Build Resource Model offers flexible, on-demand
-               teams across technologies. You define requirements, and we provide developers, cloud engineers, and AI experts to deliver faster,
-                smarter results.</p>
+            <p className="card-description">
+              Accelerate your projects with the right technical talent. Our Build Resource Model offers flexible, on-demand teams across
+              technologies. You define requirements, and we provide developers, cloud engineers, and AI experts to deliver faster, smarter
+              results.
+            </p>
           </div>
           <div className="card">
             <img src="/home-page/hiring.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Hiring Top Engineering Talent</h3>
-            <p className="card-description">Access a dedicated network of elite developers and engineers. Our talent pool ensures technical
-               expertise, clean code, innovation, and timely delivery. Whether for dedicated resources or project-based hiring, we help build
-                reliable, high-performing tech teams.</p>
+            <p className="card-description">
+              Access a dedicated network of elite developers and engineers. Our talent pool ensures technical expertise, clean code,
+              innovation, and timely delivery. Whether for dedicated resources or project-based hiring, we help build reliable,
+              high-performing tech teams.
+            </p>
           </div>
-            <div className="card">
+          <div className="card">
             <img src="/home-page/out-dev.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Smart Outsourcing Solutions</h3>
-            <p className="card-description">Focus on growth while we manage your development needs. Our remote and offshore teams, skilled in full-stack, cloud, and AI technologies, deliver cost-effective,
-               high-quality solutions with flexible, transparent, and collaborative engagement models.</p>
+            <p className="card-description">
+              Focus on growth while we manage your development needs. Our remote and offshore teams, skilled in full-stack, cloud, and AI
+              technologies, deliver cost-effective, high-quality solutions with flexible, transparent, and collaborative engagement models.
+            </p>
           </div>
         </div>
       </div>
       <MyGrid container spacing={1} alignItems="stretch" className="card-container" id="section3">
         <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/home-page/ser1.webp" alt="Image description" style={{ marginLeft: '20px',width: '100%', height: 'auto' }} />
+          <img src="/home-page/ser1.webp" alt="Image description" style={{ marginLeft: '20px', width: '100%', height: 'auto' }} />
         </MyGrid>
         <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
           <MyCardContent>
@@ -422,7 +435,13 @@ const ClientOurService = () => {
               }}
             >
               Hire the Top Programmer at an
-              <span style={{ color: '#f56b2a', fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}>
+              <span
+                style={{
+                  color: '#f56b2a',
+                  fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive',
+                  fontSize: '50px'
+                }}
+              >
                 {' '}
                 Unbeatable Price
               </span>
@@ -440,8 +459,8 @@ const ClientOurService = () => {
               {companyInfo.company_name}, we help you hire top-tier developers who combine expertise, innovation, and efficiency—without
               breaking your budget. Our programmers are handpicked for their technical excellence, problem-solving skills, and proven track
               record in delivering high-quality solutions on time. Whether you need a web developer, mobile app expert, or full-stack
-              engineer or Architect, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster delivery, and
-              long-term success—all while keeping costs optimized.
+              engineer or Architect, we connect you with the best talent at an unbeatable price, ensuring you get maximum value, faster
+              delivery, and long-term success—all while keeping costs optimized.
             </p>
           </MyCardContent>
         </MyGrid>
@@ -450,45 +469,57 @@ const ClientOurService = () => {
       <div style={{ marginTop: '10px' }}>
         {/* Header Typography */}
         <Typography variant="h4" marginLeft={10} sx={{ mb: 1, fontFamily: 'sans-serif' }} id="section2">
-          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: 'Brush Script MT, Dancing Script' }}>Solutions</span>
+          Next-Gen AI <span style={{ color: '#f56b2a', fontSize: '60px', fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive' }}>Solutions</span>
         </Typography>
         <div className="card-container">
           <div className="card">
             <img src="/home-page/machine.webp" alt="ML/DL Icon" className="card-image" />
             <h3 className="card-title">ML & DL Engineering</h3>
-            <p className="card-description">We design and deploy intelligent systems using advanced Machine Learning and Deep Learning techniques.
-                  From predictive analytics to computer vision, we transform raw data into actionable insights and automation.</p>
+            <p className="card-description">
+              We design and deploy intelligent systems using advanced Machine Learning and Deep Learning techniques. From predictive
+              analytics to computer vision, we transform raw data into actionable insights and automation.
+            </p>
           </div>
           <div className="card">
             <img src="/home-page/npl.webp" alt="NLP Icon" className="card-image" />
             <h3 className="card-title">NLP Intelligence</h3>
-            <p className="card-description">Empower your apps with Natural Language Processing that understands, interprets, and generates human language.
-              Perfect for chatbots, voice assistants, document analysis, and content automation.</p>
+            <p className="card-description">
+              Empower your apps with Natural Language Processing that understands, interprets, and generates human language. Perfect for
+              chatbots, voice assistants, document analysis, and content automation.
+            </p>
           </div>
 
           <div className="card">
             <img src="/home-page/modal1.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Model Optimization</h3>
-            <p className="card-description">Enhance your AI performance with Hyperparameter Tuning and AutoML.
-            We optimize training workflows for better accuracy, faster learning, and scalable results.</p>
+            <p className="card-description">
+              Enhance your AI performance with Hyperparameter Tuning and AutoML. We optimize training workflows for better accuracy, faster
+              learning, and scalable results.
+            </p>
           </div>
           <div className="card">
             <img src="/home-page/adaptive.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Adaptive Learning</h3>
-            <p className="card-description">Keep your models continuously updated through Online and Incremental Learning.
-             Your AI evolves with new data—staying accurate, adaptive, and future-ready.</p>
+            <p className="card-description">
+              Keep your models continuously updated through Online and Incremental Learning. Your AI evolves with new data—staying accurate,
+              adaptive, and future-ready.
+            </p>
           </div>
           <div className="card">
             <img src="/home-page/transfer.webp" alt="Hyperparameter Tuning Icon" className="card-image" />
             <h3 className="card-title">Transfer Learning</h3>
-            <p className="card-description">Accelerate AI development by leveraging pre-trained models fine-tuned for your domain.
-              Reduce time, cost, and data requirements while achieving enterprise-grade performance.</p>
+            <p className="card-description">
+              Accelerate AI development by leveraging pre-trained models fine-tuned for your domain. Reduce time, cost, and data
+              requirements while achieving enterprise-grade performance.
+            </p>
           </div>
           <div className="card">
             <img src="/home-page/ger-ai.webp" alt="Online Learning Icon" className="card-image" />
             <h3 className="card-title">Generative AI</h3>
-            <p className="card-description">Create intelligent, original content using the power of Generative AI.
-              We build text, image, and code generation systems tailored to your business needs.</p>
+            <p className="card-description">
+              Create intelligent, original content using the power of Generative AI. We build text, image, and code generation systems
+              tailored to your business needs.
+            </p>
           </div>
         </div>
       </div>
