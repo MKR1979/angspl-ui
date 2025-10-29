@@ -62,7 +62,7 @@ const useCompany = () => {
     logo_width: null,
     status: null,
     email_otp: null,
-     undertaking:  null
+    undertaking: null
   } as ErrorMessageType);
 
   const INITIAL_STATE: StateType = Object.freeze({
@@ -95,12 +95,12 @@ const useCompany = () => {
   const [addFeeCollectCompanyReturnId] = useMutation(ADD_FEE_COLLECT_COMPANY_RETURN_ID);
   const [getCompanyEmailExist] = useLazyQuery(GET_COMPANY_EMAIL_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyNameExist] = useLazyQuery(GET_COMPANY_NAME_EXIST, { fetchPolicy: 'network-only' });
-   const [getCompanyCodeExist] = useLazyQuery(GET_COMPANY_CODE_EXIST, { fetchPolicy: 'network-only' });
-   const [getCompanyDomainNameExist] = useLazyQuery(GET_COMPANY_DOMAIN_NAME_EXIST, { fetchPolicy: 'network-only' });
+  const [getCompanyCodeExist] = useLazyQuery(GET_COMPANY_CODE_EXIST, { fetchPolicy: 'network-only' });
+  const [getCompanyDomainNameExist] = useLazyQuery(GET_COMPANY_DOMAIN_NAME_EXIST, { fetchPolicy: 'network-only' });
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
-   const { siteConfig } = useSelector((state) => state.siteConfigState);
+  const { siteConfig, newCompanyConfig } = useSelector((state) => state.siteConfigState);
 
-    
+  console.log('new company config in company page:-', newCompanyConfig);
 
   const MAIL_CONFIG = {
     smtpHost: 'smtp.gmail.com',
@@ -111,44 +111,44 @@ const useCompany = () => {
     fromAddress: 'adhyayan.solution@gmail.com',
     resendOtpTime: 2
   };
-  
-   const COMPANY_DOMAIN_INFORMATION = {
+
+  const COMPANY_DOMAIN_INFORMATION = {
     userPassword: String(siteConfig.find((c) => c.key === 'USER_PASSWORD')?.value ?? '')
-   };
+  };
 
-function getImageConfigs(siteConfig: any[], companyType: string) {
-  try {
-    // 🔹 Correct variable name
-    const imageConfig = siteConfig.find((c) => c.key === 'IMAGE_CONFIG');
-    if (!imageConfig?.business_config?.business_config) return {};
-
-    const rawConfig = imageConfig.business_config.business_config;
-    let parsedConfig: any;
-
-    // 🔹 Safely parse the config (JSON or JS object)
+  function getImageConfigs(siteConfig: any[], companyType: string) {
     try {
-      parsedConfig = JSON.parse(rawConfig);
-    } catch {
-      parsedConfig = new Function(`return ${rawConfig}`)();
+      // 🔹 Correct variable name
+      const imageConfig = siteConfig.find((c) => c.key === 'IMAGE_CONFIG');
+      if (!imageConfig?.business_config?.business_config) return {};
+
+      const rawConfig = imageConfig.business_config.business_config;
+      let parsedConfig: any;
+
+      // 🔹 Safely parse the config (JSON or JS object)
+      try {
+        parsedConfig = JSON.parse(rawConfig);
+      } catch {
+        parsedConfig = new Function(`return ${rawConfig}`)();
+      }
+
+      // 🔹 Determine whether to use school or college section
+      const typeKey = companyType.toLowerCase() === 'college' ? 'college' : 'school';
+      const selected = parsedConfig[typeKey] ?? {};
+
+      // 🔹 Return final formatted object
+      return {
+        logoUrl: selected.logoUrl ?? '',
+        logoWidth: selected.logoWidth ?? 0,
+        logoHeight: selected.logoHeight ?? 0,
+        customerHomeImage: selected.homeImageURL ?? '',
+        customerAboutUsImage: selected.aboutUsImageURL ?? '',
+      };
+    } catch (err) {
+      console.error('❌ Failed to read image config:', err);
+      return {};
     }
-
-    // 🔹 Determine whether to use school or college section
-    const typeKey = companyType.toLowerCase() === 'college' ? 'college' : 'school';
-    const selected = parsedConfig[typeKey] ?? {};
-
-    // 🔹 Return final formatted object
-    return {
-      logoUrl: selected.logoUrl ?? '',
-      logoWidth: selected.logoWidth ?? 0,
-      logoHeight: selected.logoHeight ?? 0,
-      customerHomeImage: selected.homeImageURL ?? '',
-      customerAboutUsImage: selected.aboutUsImageURL ?? '',
-    };
-  } catch (err) {
-    console.error('❌ Failed to read image config:', err);
-    return {};
   }
-}
 
   useEffect(() => {
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
@@ -202,7 +202,7 @@ function getImageConfigs(siteConfig: any[], companyType: string) {
     return exist;
   }, [getCompanyNameExist, state.dtoCompany.id, state.dtoCompany.company_name]);
 
-    const IsCompanyCodeExist = useCallback(async (): Promise<boolean> => {
+  const IsCompanyCodeExist = useCallback(async (): Promise<boolean> => {
     let exist: boolean = false;
     const { error, data } = await getCompanyCodeExist({
       variables: {
@@ -216,7 +216,7 @@ function getImageConfigs(siteConfig: any[], companyType: string) {
     return exist;
   }, [getCompanyCodeExist, state.dtoCompany.id, state.dtoCompany.company_code]);
 
-    const IsCompanyDomainNameExist = useCallback(async (): Promise<boolean> => {
+  const IsCompanyDomainNameExist = useCallback(async (): Promise<boolean> => {
     let exist: boolean = false;
     const { error, data } = await getCompanyDomainNameExist({
       variables: {
@@ -285,45 +285,45 @@ function getImageConfigs(siteConfig: any[], companyType: string) {
     [state.dtoCompany]
   );
 
-const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const name = e.target.value;
-  const words = name.trim().split(/\s+/).filter(Boolean);
+  const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+    const words = name.trim().split(/\s+/).filter(Boolean);
 
-  let code = '';
-  let randomDigits = '';
+    let code = '';
+    let randomDigits = '';
 
-  // check if random digits already exist
-  const existingCode = state.dtoCompany.company_code || '';
-  const existingDigits = existingCode.replace(/[^0-9]/g, '');
-  if (existingDigits.length === 2) {
-    randomDigits = existingDigits;
-  } else if (words.length >= 1) {
-    randomDigits = Math.floor(10 + Math.random() * 90).toString(); // 10–99
-  }
+    // check if random digits already exist
+    const existingCode = state.dtoCompany.company_code || '';
+    const existingDigits = existingCode.replace(/[^0-9]/g, '');
+    if (existingDigits.length === 2) {
+      randomDigits = existingDigits;
+    } else if (words.length >= 1) {
+      randomDigits = Math.floor(10 + Math.random() * 90).toString(); // 10–99
+    }
 
-  if (words.length === 1) {
-    // 1 word → first letter + 2 random digits
-    code = `${words[0].charAt(0).toUpperCase()}${randomDigits}`;
-  } else if (words.length >= 2) {
-    // 2 words → first letters of each word + same 2 random digits
-    code = `${words[0].charAt(0).toUpperCase()}${words[1].charAt(0).toUpperCase()}${randomDigits}`;
-  }
+    if (words.length === 1) {
+      // 1 word → first letter + 2 random digits
+      code = `${words[0].charAt(0).toUpperCase()}${randomDigits}`;
+    } else if (words.length >= 2) {
+      // 2 words → first letters of each word + same 2 random digits
+      code = `${words[0].charAt(0).toUpperCase()}${words[1].charAt(0).toUpperCase()}${randomDigits}`;
+    }
 
-  // 3rd word or more → code stays same
-  if (words.length > 2) {
-    code = state.dtoCompany.company_code;
-  }
+    // 3rd word or more → code stays same
+    if (words.length > 2) {
+      code = state.dtoCompany.company_code;
+    }
 
-  // update state
-  setState({
-    ...state,
-    dtoCompany: {
-      ...state.dtoCompany,
-      company_name: name,
-      company_code: code,
-    },
-  });
-};
+    // update state
+    setState({
+      ...state,
+      dtoCompany: {
+        ...state.dtoCompany,
+        company_name: name,
+        company_code: code,
+      },
+    });
+  };
 
   const onDomainPrefixChange = useCallback(
     (company_type?: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -401,16 +401,16 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ errorMessages: { ...state.errorMessages, domain_prefix: domain_prefix } } as StateType);
   }, [validateDomainPrefix, state.errorMessages]);
 
-    const validateDomainName = useCallback(async () => {
+  const validateDomainName = useCallback(async () => {
     if (state.dtoCompany.domain_name.trim() === '') {
       return gMessageConstants.REQUIRED_FIELD;
-    }else if (await IsCompanyDomainNameExist()) {
+    } else if (await IsCompanyDomainNameExist()) {
       return gMessageConstants.ALREADY_EXIST;
-    } 
-     else {
+    }
+    else {
       return null;
     }
-  }, [state.dtoCompany.domain_name,IsCompanyDomainNameExist]);
+  }, [state.dtoCompany.domain_name, IsCompanyDomainNameExist]);
 
   const onDomainNameBlur = useCallback(async () => {
     const domain_name = await validateDomainName();
@@ -423,11 +423,11 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       return gMessageConstants.REQUIRED_FIELD;
     } else if (await IsCompanyCodeExist()) {
       return gMessageConstants.ALREADY_EXIST;
-    } 
+    }
     else {
       return null;
     }
-  }, [state.dtoCompany.company_code,IsCompanyCodeExist]);
+  }, [state.dtoCompany.company_code, IsCompanyCodeExist]);
 
   const onCompanyCodeBlur = useCallback(async () => {
     const company_code = await validateCompanyCode();
@@ -635,6 +635,11 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     });
   };
 
+  //   const formatSourceCode = (sourceCode: any) => {
+  //   const escapedSource = sourceCode.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+  //   return `\n\"${escapedSource}\\n\"`;
+  // };
+
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
       event.preventDefault();
@@ -643,12 +648,12 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!(await validateForm())) return;
       if (state.dtoCompany.id !== 0) return;
       const isUndertakingAccepted = state.dtoCompany.undertaking === 'Yes';
-          if (!isUndertakingAccepted) {
-            showSnackbar('You must agree to the undertaking before submitting.', 'warning');
-            setSaving(false);
-            return;
-          }
-    const IMAGE_CONFIGS = getImageConfigs(siteConfig, company_type);  
+      if (!isUndertakingAccepted) {
+        showSnackbar('You must agree to the undertaking before submitting.', 'warning');
+        setSaving(false);
+        return;
+      }
+      const IMAGE_CONFIGS = getImageConfigs(siteConfig, company_type);
       try {
         const result = await addCompanyReturnId({
           variables: {
@@ -668,6 +673,7 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             user_password: COMPANY_DOMAIN_INFORMATION.userPassword,
             domain_name: state.dtoCompany.domain_name,
             source_flag: gConstants.SOURCE_FLAG_PUBLIC,
+            customer_site_config: JSON.stringify(newCompanyConfig)
           }
         });
         const newCompanyId = result?.data?.addCompanyReturnId;
@@ -824,7 +830,7 @@ const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ open2: false } as StateType);
   }, []);
 
-    const onUndertakingChange = (checked: boolean) => {
+  const onUndertakingChange = (checked: boolean) => {
     setState({
       ...state,
       dtoCompany: {
