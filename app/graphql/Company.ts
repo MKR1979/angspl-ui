@@ -46,6 +46,7 @@ export const ADD_COMPANY_RETURN_ID = gql`
     $user_password: String!
     $domain_name: String
     $source_flag: String
+    $customer_site_config: jsonb
   ) {
     addCompanyReturnId(
       addCompanyReturnIdInput: {
@@ -65,6 +66,7 @@ export const ADD_COMPANY_RETURN_ID = gql`
         user_password: $user_password
         domain_name: $domain_name
         source_flag: $source_flag
+        customer_site_config: $customer_site_config
       }
     )
   }

@@ -458,8 +458,7 @@ interface PricingConfig {
 // ---------------- MAIN COMPONENT ----------------
 const ClientPricingMsme = () => {
   const router = useRouter();
-  const { goToCompanyModule, siteConfig } = usePricingMsme();
-
+  const { goToCompanyModule, siteConfig, handleFeatureToggle } = usePricingMsme();
   const [tabIndex, setTabIndex] = useState(0);
   const [pricingData, setPricingData] = useState<PricingConfig | null>(null);
 
@@ -666,7 +665,13 @@ const ClientPricingMsme = () => {
                               control={
                                 <Checkbox
                                   checked={selectedFeaturesMonthly[plan.plan_name]?.includes(feature.name) || false}
-                                  onChange={() => toggleFeature(plan.plan_name, feature.name, feature.price, false)}
+                                  // onChange={() => toggleFeature(plan.plan_name, feature.name, feature.price, false)}
+                                  onChange={(e) => {
+                                    const checked = e.target.checked;
+                                    toggleFeature(plan.plan_name, feature.name, feature.price, false);
+                                    console.log('calling handleFeatureToogle method from client ');
+                                    handleFeatureToggle(feature.name, checked); // <-- 👈 this updates modifiedSiteConfig
+                                  }}
                                 />
                               }
                               label={`${feature.name} (+₹${feature.price})`}

@@ -153,3 +153,29 @@ export const GET_SITE_CONFIG_By_COMPANY = gql`
     }
   }
 `;
+
+export const GET_SITE_CONFIG_By_COMPANY_TYPE = gql`
+  query getSiteConfigByCompanyType($company_type: String!) {
+    getSiteConfigByCompanyType(company_type: $company_type) {
+      id
+      key
+      value
+      type
+      description
+      status
+      company_id
+      company_name
+      business_config
+      created_by
+      created_by_first_name
+      created_by_last_name
+      created_by_user_name
+      created_at
+      modified_by
+      modified_by_first_name
+      modified_by_last_name
+      modified_by_user_name
+      modified_at
+    }
+  }
+`; 

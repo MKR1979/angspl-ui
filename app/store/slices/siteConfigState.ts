@@ -30,6 +30,7 @@ export interface UserPermission {
 
 interface SiteConfigState {
   siteConfig: SiteConfig[];
+  newCompanyConfig: SiteConfig[];
   userPermission: UserPermission[];
   isEditMode: boolean;
   showQuiz: boolean;
@@ -37,6 +38,15 @@ interface SiteConfigState {
 
 const initialState: SiteConfigState = {
   siteConfig: [
+    {
+      key: '',
+      value: '',
+      type: '',
+      description: '',
+      status: ''
+    }
+  ],
+   newCompanyConfig: [
     {
       key: '',
       value: '',
@@ -67,6 +77,9 @@ const siteConfigState = createSlice({
     setSiteConfig: (state, action) => {
       state.siteConfig = action.payload;
     },
+     setNewCompanyConfig: (state, action) => {
+      state.newCompanyConfig = action.payload;
+    },
     setUserPermission: (state, action) => {
       state.userPermission = action.payload;
     },
@@ -81,6 +94,7 @@ const siteConfigState = createSlice({
 
 export const {
   setSiteConfig,
+  setNewCompanyConfig,
   setUserPermission,
   setIsEditMode,
   setShowQuiz

@@ -12,16 +12,19 @@ const CompanyContent = () => {
   const payment_type = searchParams.get('payment_type') ?? '';
   const payment_amount = searchParams.get('payment_amount');
   const parsedAmount = payment_amount ? parseFloat(payment_amount) : 0;
+  // const configString = searchParams.get('config') ?? '';
+  // const newCompanyConfig = configString ? JSON.parse(decodeURIComponent(configString)) : [];
+  // console.log('Received Config:', newCompanyConfig);
 
   return <ClientCompany company_type={company_type} plan_type={plan_type} payment_type={payment_type} payment_amount={parsedAmount} />;
 };
 
 export default function CompanyPage() {
   return (
-    <SnackbarProvider> 
-    <Suspense fallback={<p>Loading...</p>}>
-      <CompanyContent />
-    </Suspense>
+    <SnackbarProvider>
+      <Suspense fallback={<p>Loading...</p>}>
+        <CompanyContent />
+      </Suspense>
     </SnackbarProvider>
   );
 }
