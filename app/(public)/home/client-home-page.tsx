@@ -63,12 +63,12 @@ export default function ClientHomePage() {
     {
       name: 'School Demo',
       url: 'https://adhyayan.school',
-      icon: <SchoolIcon fontSize="small" />
+      icon: <AccountBalanceIcon fontSize="small" />
     },
     {
       name: 'College Demo',
       url: 'https://adhyayan.college',
-      icon: <AccountBalanceIcon fontSize="small" />
+      icon: <SchoolIcon fontSize="small" />
     },
     {
       name: 'Institute Demo',
@@ -518,7 +518,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                         Your Extended Team for Global 
                         <br></br>
                         <span
-                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT', fontSize: '55px' }}
+                          style={{ color: '#f56b2a',  fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive', fontSize: '55px' }}
                         >
                           {' '}
                           Scale & Innovation.{' '}

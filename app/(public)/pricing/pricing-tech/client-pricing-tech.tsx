@@ -895,7 +895,7 @@ const ClientPricingTech = () => {
                 fontSize: '1rem',
                 padding: 0
               }}
-              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-msme`)}
             >
               <ArrowBack />
             </MyButton>

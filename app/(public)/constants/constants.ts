@@ -35,6 +35,7 @@ export const CURRENCY = "INR"
 export const MOD_DESC = "modules-description"
 export const MODULE_DEMO = "demo"
 export const MODULE_PRICING = "pricing"
+export const MODULE_COMPANY = "company"
 
 
 export const SCHOOL_PRICING = {
