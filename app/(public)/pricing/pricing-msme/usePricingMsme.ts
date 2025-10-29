@@ -1,6 +1,8 @@
 import { useCallback, useReducer } from 'react';
 // import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { useRouter } from 'next/navigation';
+import { useSelector } from '@/app/store';
+
 
 type StateType = {
   // breadcrumbsItems: BreadcrumbsItem[];
@@ -20,6 +22,7 @@ const usePricingMsme = () => {
   };
   const router = useRouter();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
+  const { siteConfig } = useSelector((state) => state.siteConfigState);
 
   const toggleRowExpansion = useCallback(
     (rowKey: string) => {
@@ -49,6 +52,7 @@ const usePricingMsme = () => {
 
   return {
     state,
+    siteConfig,
     goToCompanyModule,
     handleTabChange,
     toggleRowExpansion

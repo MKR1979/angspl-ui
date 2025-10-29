@@ -62,6 +62,8 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
         return `${placeholderPrefix}.adhyayan.college`;
       case 'institute':
         return `${placeholderPrefix}.adhyayan.online`;
+      case 'MSME':
+        return `${placeholderPrefix}.adhyayan.online`;
       default:
         return `${placeholderPrefix}.adhyayan.online`;
     }
@@ -78,7 +80,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
   const fullDomain = state.dtoCompany.domain_name && state.dtoCompany.domain_name.trim() !== '' ? state.dtoCompany.domain_name : suffix;
 
   return (
-    <Card variant="outlined" sx={{ p: 1, borderRadius: 2, marginTop: 2, border: 'none' }}>
+    <Card variant="outlined" sx={{ p: 1, borderRadius: 2, marginTop: 1, border: 'none' }}>
       <MyBox sx={{ width: { xs: '100%', sm: '65%' }, margin: '0 auto' }}>
         <MyGrid container spacing={2} style={{ border: '3px solid rgb(238, 242, 246)', padding: '0.1rem 1rem' }}>
           <MyGrid size={{ xs: 12 }}>
@@ -346,33 +348,30 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             </label>
           </MyGrid>
           <MyGrid size={{ xs: 12 }}>
-            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
+            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
               Undertaking/Declaration:
             </MyTypography>
             <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize: '13px' }}>
               <li>
-                I confirm that I’m authorized to register on behalf of my company, and that all information provided is accurate and
-                complete. I understand that registration does not guarantee any outcomes beyond what’s stated in the subscription or SLA.
+            I confirm I’m authorized to register on behalf of my company and that all information provided is accurate 
+             and complete. Registration does not guarantee outcomes beyond the subscription or SLA. All payments follow Adhyayan’s billing, refund, and cancellation policies.
               </li>
               <li>
-                I authorize <strong>Adhyayan NextGen Solutions Pvt Ltd</strong> to store and process our company’s data on cloud
-                infrastructure as required to provide services, in accordance with their Privacy Policy and applicable laws.
+             I authorize <strong>Adhyayan NextGen Solutions Pvt Ltd</strong> to store and process our company’s data on secure cloud Infra per its Privacy Policy and applicable laws.
               </li>
-              <li>I agree to comply with all terms of service, data policies, and applicable regulations.</li>
-              <li>I acknowledge that any misuse or violation may lead to suspension or termination of access.</li>
-              <li>I understand that all payments are subject to Adhyayan’s billing, refund, and cancellation policies.</li>
+              <li>I agree to comply with all terms, data policies, and regulations, acknowledging that misuse may lead to suspension or termination.</li>
+              {/* <li>I acknowledge that any misuse or violation may lead to suspension or termination of access.</li>
+              <li>I understand that all payments are subject to Adhyayan’s billing, refund, and cancellation policies.</li> */}
             </ul>
 
-            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1 }}>
+            <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
               Instructions:
             </MyTypography>
             <ul style={{ paddingLeft: '1.5rem', listStyleType: 'disc', fontSize: '13px' }}>
               <li>
-                Registration is <strong>non-transferable</strong> to other entities or individuals.
-              </li>
-              <li>Platform access is granted upon successful verification and plan activation.</li>
-              <li>Required documents (e.g., business registration, ID proof) must be submitted if requested.</li>
-              <li>Incomplete or unverifiable registrations may be delayed or rejected.</li>
+                Registration is <strong>non-transferable</strong> to other entities or individuals. Platform access is granted upon successful verification and plan activation.
+              </li>       
+              <li>Submit required documents (e.g., business registration, ID proof) upon request. Incomplete or unverifiable registrations may be delayed or rejected</li>
             </ul>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 12 }}>

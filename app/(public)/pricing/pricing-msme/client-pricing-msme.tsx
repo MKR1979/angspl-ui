@@ -1,878 +1,178 @@
+
 // 'use client';
-// import React, { memo } from 'react';
-// import eq from 'lodash/eq';
-// import MyTypography from '@/app/custom-components/MyTypography';
+// import React, { useState, useEffect } from 'react';
+// import {
+//   Accordion,
+//   AccordionSummary,
+//   AccordionDetails,
+//   Checkbox,
+//   FormControlLabel,
+//   CardHeader
+// } from '@mui/material';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import { ArrowBack, ArrowForward } from '@mui/icons-material';
 // import MyGrid from '@/app/custom-components/MyGrid';
 // import MyButton from '@/app/custom-components/MyButton';
 // import MyBox from '@/app/custom-components/MyBox';
 // import MyCard from '@/app/custom-components/MyCard';
 // import MyCardContent from '@/app/custom-components/MyCardContent';
-// import { CardHeader, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-// import MyTabPanel from '@/app/custom-components/MyTabPanel';
-// import MyTabs from '@/app/custom-components/MyTabs';
+// import MyTypography from '@/app/custom-components/MyTypography';
 // import MyTab from '@/app/custom-components/MyTab';
-// import './pricingMsme.css';
+// import MyTabs from '@/app/custom-components/MyTabs';
+// import MyTabPanel from '@/app/custom-components/MyTabPanel';
+// import { useRouter } from 'next/navigation';
 // import usePricingMsme from './usePricingMsme';
 // import * as Constants from '../../constants/constants';
-// import { ArrowBack, ArrowForward } from '@mui/icons-material';
-// import Footer from '@/app/custom-components/my-footer/MyFooter';
-// import { useRouter } from 'next/navigation';
+// import './pricingMsme.css';
 
+// // ---------------- TYPES ----------------
+// interface Feature {
+//   name: string;
+//   price: number;
+// }
+
+// interface PricingPlan {
+//   plan_name: string;
+//   price: number;
+//   features: Feature[];
+// }
+
+// interface PricingConfig {
+//   monthly_plans: PricingPlan[];
+//   annual_plans: PricingPlan[];
+// }
+
+// // ---------------- MAIN COMPONENT ----------------
 // const ClientPricingMsme = () => {
-//   const { state, handleTabChange, toggleRowExpansion, goToCompanyModule } = usePricingMsme();
-//   const rows = [
-//     {
-//       name: 'Admin Dashboard',
-//       free: '✔',
-//       startup: '✖',
-//       premium: '✔',
-//       enterprise: '✔',
-//       dedicated: '✔',
-//       children: [
-//         {
-//           name: 'User Access Management',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Roles',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Users',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Role Permission',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'User Permission',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Academics',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Courses',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Online Admission',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔',
-//               children: [
-//                 {
-//                   name: 'Admission',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Enrollments',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Admission Summary',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 }
-//               ]
-//             },
-//             {
-//               name: 'Study Kits',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔',
-//               children: [
-//                 {
-//                   name: 'Code Projects',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Study Notes',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Upload Videos',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 }
-//               ]
-//             },
-//             {
-//               name: 'Online Exams',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔',
-//               children: [
-//                 {
-//                   name: 'Add Exam',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Exam Questions',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Exam Bulk Import',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Exam Results',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 }
-//               ]
-//             }
-//           ]
-//         },
+//   const router = useRouter();
+//   const { goToCompanyModule, siteConfig } = usePricingMsme();
 
-//         {
-//           name: 'Employee Services',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Employee Master',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Review Attendance',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Attendance Report',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔',
-//               children: [
-//                 {
-//                   name: 'Time Log Report',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Day Wise Attendance',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Presence Overview',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 }
-//               ]
-//             },
-//             {
-//               name: 'User Devices',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Bulk Attendance',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔',
-//               children: [
-//                 {
-//                   name: 'Mark Attendance',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 },
-//                 {
-//                   name: 'Lock Attendance',
-//                   free: '✔',
-//                   startup: '✖',
-//                   premium: '✔',
-//                   enterprise: '✔',
-//                   dedicated: '✔'
-//                 }
-//               ]
-//             },
-//              {
-//               name: 'Student Attendance',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Payment Management',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Schedule Fee',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Collect Pay',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Receipts',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Fee Head',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Communications',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Emails',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Email Templates',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Notifications',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Engagements',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Enquiry',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Events',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Meetings',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Geography',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Countries',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'States',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Locations',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//              {
-//               name: 'Districts',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Affiliates',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✔',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Review Affiliates',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Referrals',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✔',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         }
-//       ]
-//     },
-//     {
-//       name: 'Student Dashboard',
-//       free: '✔',
-//       startup: '✖',
-//       premium: '✖',
-//       enterprise: '✔',
-//       dedicated: '✔',
-//       children: [
-//         {
-//           name: 'Course Contents',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Enrolled Courses',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✖',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Free Courses',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✖',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Study Kits',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔',
-//           children: [
-//             {
-//               name: 'Code Insight',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✖',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Notes Insight',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✖',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             },
-//             {
-//               name: 'Video Insight',
-//               free: '✔',
-//               startup: '✖',
-//               premium: '✖',
-//               enterprise: '✔',
-//               dedicated: '✔'
-//             }
-//           ]
-//         },
-//         {
-//           name: 'Online Exams / Skill Tests',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Payments / Fees',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Student Info',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Online Homework',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Login',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'View Profile',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Change Password',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         }
-//       ]
-//     },
+//   const [tabIndex, setTabIndex] = useState(0);
+//   const [pricingData, setPricingData] = useState<PricingConfig | null>(null);
 
-//     {
-//       name: 'Employee Dashboard',
-//       free: '✔',
-//       startup: '✖',
-//       premium: '✖',
-//       enterprise: '✖',
-//       dedicated: '✔',
-//       children: [
-//         {
-//           name: 'Location Based Online Attendance',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Login',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'View Profile',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Change Password',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         }
-//       ]
-//     },
-//     {
-//       name: 'Affiliate Dashboard',
-//       free: '✔',
-//       startup: '✖',
-//       premium: '✖',
-//       enterprise: '✖',
-//       dedicated: '✔',
-//       children: [
-//         {
-//           name: 'Referral Trekking',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Login',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'View Profile',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Change Password',
-//           free: '✔',
-//           startup: '✖',
-//           premium: '✖',
-//           enterprise: '✖',
-//           dedicated: '✔'
-//         }
-//       ]
-//     },
-//     {
-//       name: 'Location Based Attendance',
-//       free: '✔',
-//       startup: '✖',
-//       premium: '✖',
-//       enterprise: '✖',
-//       dedicated: '✔'
-//     },
-//     {
-//       name: 'Dynamic Web Application',
-//       free: '✔',
-//       startup: '✔',
-//       premium: '✖',
-//       enterprise: '✔',
-//       dedicated: '✔',
-//       children: [
-//         {
-//           name: 'Home Page',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'About Us',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Programs Enrollment',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Services / Offerings',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Affiliate Registration',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Contact Us',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Admission Enquiry',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Login',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Registration',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Forget Password',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Social Media Links',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         },
-//         {
-//           name: 'Image Gallery',
-//           free: '✔',
-//           startup: '✔',
-//           premium: '✖',
-//           enterprise: '✔',
-//           dedicated: '✔'
-//         }
-//       ]
+//   // Separate states for monthly and annual
+//   const [selectedFeaturesMonthly, setSelectedFeaturesMonthly] = useState<Record<string, string[]>>({});
+//   const [customPricesMonthly, setCustomPricesMonthly] = useState<Record<string, number>>({});
+//   const [selectedFeaturesAnnual, setSelectedFeaturesAnnual] = useState<Record<string, string[]>>({});
+//   const [customPricesAnnual, setCustomPricesAnnual] = useState<Record<string, number>>({});
+//   const [expandedAccordions, setExpandedAccordions] = useState<Record<string, boolean>>({});
+
+//   // ✅ Load from siteConfig → PRICING_CONFIG
+//   useEffect(() => {
+//     try {
+//       const configItem: any = (siteConfig as any)?.find((c: any) => c.key === 'PRICING_CONFIG');
+//       if (!configItem?.business_config?.business_config) return;
+
+//       const rawConfig = configItem.business_config.business_config;
+//       let parsedConfig: PricingConfig;
+
+//       try {
+//         parsedConfig = JSON.parse(rawConfig);
+//       } catch {
+//         parsedConfig = new Function(`return ${rawConfig}`)();
+//       }
+
+//       setPricingData(parsedConfig);
+
+//       // ✅ Initialize monthly
+//       const defaultsMonthly: Record<string, string[]> = {};
+//       const defaultPricesMonthly: Record<string, number> = {};
+//       parsedConfig.monthly_plans.forEach((plan) => {
+//         defaultsMonthly[plan.plan_name] = plan.features.map((f) => f.name);
+//         const totalPrice = plan.price + plan.features.reduce((sum, f) => sum + f.price, 0);
+//         defaultPricesMonthly[plan.plan_name] = totalPrice;
+//       });
+
+//       // ✅ Initialize annual
+//       const defaultsAnnual: Record<string, string[]> = {};
+//       const defaultPricesAnnual: Record<string, number> = {};
+//       parsedConfig.annual_plans.forEach((plan) => {
+//         defaultsAnnual[plan.plan_name] = plan.features.map((f) => f.name);
+//         const totalPrice = plan.price + plan.features.reduce((sum, f) => sum + f.price, 0);
+//         defaultPricesAnnual[plan.plan_name] = totalPrice;
+//       });
+
+//       setSelectedFeaturesMonthly(defaultsMonthly);
+//       setCustomPricesMonthly(defaultPricesMonthly);
+//       setSelectedFeaturesAnnual(defaultsAnnual);
+//       setCustomPricesAnnual(defaultPricesAnnual);
+
+//       // Expand all accordions by default
+//       const defaultExpanded: Record<string, boolean> = {};
+//       [...parsedConfig.monthly_plans, ...parsedConfig.annual_plans].forEach(
+//         (plan) => (defaultExpanded[plan.plan_name] = true)
+//       );
+//       setExpandedAccordions(defaultExpanded);
+//     } catch (error) {
+//       console.error('Error parsing PRICING_CONFIG:', error);
 //     }
-//   ];
+//   }, [siteConfig]);
 
-//   interface RowData {
-//     name: string;
-//     free: string;
-//     startup: string;
-//     premium: string;
-//     enterprise: string;
-//     dedicated: string;
-//     children?: RowData[];
+//   // ✅ Toggle Accordion Open/Close
+//   const handleAccordionToggle = (planTitle: string) => {
+//     setExpandedAccordions({
+//       ...expandedAccordions,
+//       [planTitle]: !expandedAccordions[planTitle]
+//     });
+//   };
+
+//   // ✅ Toggle feature selection (works for both Monthly and Annual)
+//   const toggleFeature = (plan: string, feature: string, price: number) => {
+//     const isAnnual = tabIndex === 1;
+//     const currentPlans = isAnnual
+//       ? pricingData?.annual_plans
+//       : pricingData?.monthly_plans;
+
+//     const currentSelected = isAnnual ? { ...selectedFeaturesAnnual } : { ...selectedFeaturesMonthly };
+//     const currentPrices = isAnnual ? { ...customPricesAnnual } : { ...customPricesMonthly };
+
+//     const current = currentSelected[plan] || [];
+//     const basePrice = currentPlans?.find((p) => p.plan_name === plan)?.price || 0;
+//     const isSelected = current.includes(feature);
+
+//     let updatedFeatures: string[] = [];
+//     let newTotal = basePrice;
+
+//     if (isSelected) {
+//       updatedFeatures = current.filter((f) => f !== feature);
+//       newTotal = (currentPrices[plan] || basePrice) - price;
+//     } else {
+//       updatedFeatures = [...current, feature];
+//       newTotal = (currentPrices[plan] || basePrice) + price;
+//     }
+
+//     if (isAnnual) {
+//       setSelectedFeaturesAnnual({ ...currentSelected, [plan]: updatedFeatures });
+//       setCustomPricesAnnual({ ...currentPrices, [plan]: newTotal });
+//     } else {
+//       setSelectedFeaturesMonthly({ ...currentSelected, [plan]: updatedFeatures });
+//       setCustomPricesMonthly({ ...currentPrices, [plan]: newTotal });
+//     }
+//   };
+
+//   const handleTabChange = (_: any, newValue: number) => {
+//     setTabIndex(newValue);
+//   };
+
+//   if (!pricingData) {
+//     return <div style={{ textAlign: 'center', padding: '20px' }}>Loading pricing...</div>;
 //   }
 
-//   const router = useRouter();
-
-//   const renderRow = (row: RowData, level: number = 0): React.ReactNode => {
-//     const isExpanded = !!state.expandedRows[row.name];
-//     const hasChildren = Array.isArray(row.children) && row.children.length > 0;
-
-//     return (
-//       <React.Fragment key={row.name}>
-//         <TableRow>
-//           <TableCell
-//             onClick={() => hasChildren && toggleRowExpansion(row.name)}
-//             sx={{
-//               pl: 3 + level * 2,
-//               cursor: hasChildren ? 'pointer' : 'default',
-//               border: '1px solid #e0e0e0'
-//             }}
-//           >
-//             {hasChildren && <span style={{ marginRight: '8px' }}>{isExpanded ? '▼' : '▶'}</span>}
-//             {row.name}
-//           </TableCell>
-//            <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-//             {row.free}
-//           </TableCell>
-//           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-//             {row.startup}
-//           </TableCell>
-//           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-//             {row.premium}
-//           </TableCell>
-//           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-//             {row.enterprise}
-//           </TableCell>
-//           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
-//             {row.dedicated}
-//           </TableCell>
-//         </TableRow>
-
-//         {isExpanded && hasChildren && row.children!.map((child) => renderRow(child, level + 1))}
-//       </React.Fragment>
-//     );
-//   };
+//   // ---------------- UI ----------------
 //   return (
 //     <div style={{ width: '100%', paddingTop: '0px' }}>
 //       <MyCardContent>
+//         {/* ---------- HEADER ---------- */}
 //         <MyBox
 //           sx={{
 //             width: '100%',
 //             display: 'flex',
 //             alignItems: 'center',
 //             justifyContent: 'space-between',
-//             position: 'relative',
 //             mb: 2,
 //             flexDirection: { xs: 'column', sm: 'row' },
-//             gap: { xs: 2, sm: 0 }
+//             gap: { xs: 2, sm: 0 },
+//             position: 'relative'
 //           }}
 //         >
 //           <MyBox
@@ -899,11 +199,8 @@
 //             >
 //               <ArrowBack />
 //             </MyButton>
-//             <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
-//               Choose the right plan for your{' '}
-//               <strong>
-//                 <span style={{ fontSize: '1.1rem' }}>MSME</span>
-//               </strong>
+//             <MyTypography variant="h6" sx={{ fontSize: '1rem' }}>
+//               Choose the right plan for your <strong>MSME</strong>
 //             </MyTypography>
 //             <MyButton
 //               variant="outlined"
@@ -914,11 +211,13 @@
 //                 fontSize: '1rem',
 //                 padding: 0
 //               }}
-//               onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
+//               onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
 //             >
 //               <ArrowForward />
 //             </MyButton>
 //           </MyBox>
+
+//           {/* ---------- TABS ---------- */}
 //           <MyBox
 //             sx={{
 //               margin: { xs: '0', sm: '0 auto' },
@@ -928,260 +227,203 @@
 //               width: { xs: '100%', sm: 'auto' }
 //             }}
 //           >
-//             <MyTabs value={state.tabIndex} onChange={handleTabChange} sx={{ marginBottom: 0, paddingBottom: 0 }}>
+//             <MyTabs value={tabIndex} onChange={handleTabChange}>
 //               <MyTab label="Monthly Billing" />
 //               <MyTab label="Annual Billing" />
 //             </MyTabs>
 //           </MyBox>
 //         </MyBox>
-//         <MyTabPanel value={state.tabIndex} index={0}>
+
+//         {/* ---------- MONTHLY ---------- */}
+//         <MyTabPanel value={tabIndex} index={0}>
 //           <MyGrid container spacing={2} alignItems="stretch">
-//             {[
-//               {
-//                 title: 'Free',
-//                 price: 0,
-//                 description: `The Free Plan lets institutes build a professional online presence free for 5 weeks. 
-//               Experience a fully managed website with essential features to showcase courses, training programs, 
-//               achievements, and admission details before upgrading to a paid plan.`,
-//                 extra: 'Free for 5 weeks — no billing required'
-//               },
-//               {
-//                 title: 'Startup',
-//                 price: Constants.INSTITUTE_PRICING.STARTUP_MONTHLY,
-//                 description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-//                                   online presence. This fully managed static web application includes all essential features for sharing information
-//                                   and managing admission enquiries.`,
-//                 extra: 'Billed Monthly, Excludes VAT / GST'
-//               },
-//               {
-//                 title: 'Premium',
-//                 price: Constants.INSTITUTE_PRICING.PREMIUM_MONTHLY,
-//                 description: `A dynamic web application with Online Admission, Course Enrollment, Payment Gateway, and an Admin Dashboard to manage Users,
-//                  Roles, and Courses efficiently — ideal for institutes seeking advanced features and centralized management.`,
-//                 extra: 'Billed Monthly, Excludes VAT / GST'
-//               },
-//               {
-//                 title: 'Enterprise',
-//                 price: Constants.INSTITUTE_PRICING.ENTERPRISE_MONTHLY,
-//                 description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-//                                   managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-//                                   course content, and fee payment.`,
-//                 extra: 'Billed Monthly, Excludes VAT / GST'
-//               },
-//               {
-//                 title: 'Dedicated',
-//                 price: Constants.INSTITUTE_PRICING.DEDICATED_MONTHLY,
-//                 description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-//                                   Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-//                                   Admin Reporting.`,
-//                 extra: 'Excludes VAT/GST & Application Support'
-//               }
-//             ].map((plan) => (
-//               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
-//                 <MyCard
-//                   elevation={3}
-//                   style={{
-//                     display: 'flex',
-//                     flexDirection: 'column',
-//                     width: '100%',
-//                     borderRadius: '16px',
-//                     overflow: 'hidden',
-//                     transition: 'transform 0.3s ease',
-//                     boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-//                   }}
-//                   onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-//                   onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-//                 >
-//                   <CardHeader
-//                     title={<span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
-//                     sx={{
-//                       textAlign: 'center',
-//                       height: '40px',
-//                       backgroundColor: '#e2e8f0',
-//                       display: 'flex',
-//                       alignItems: 'center',
-//                       justifyContent: 'center'
-//                     }}
-//                   />
-//                   <MyCardContent
+//             {pricingData.monthly_plans.map((plan) => {
+//               const finalPrice = customPricesMonthly[plan.plan_name] || plan.price;
+//               return (
+//                 <MyGrid key={plan.plan_name} size={{ xs: 12, sm: 6, md: 3 }}>
+//                   <MyCard
 //                     sx={{
 //                       display: 'flex',
 //                       flexDirection: 'column',
-//                       alignItems: 'center',
-//                       padding: '10px',
-//                       backgroundColor: '#f7fafc',
-//                       border: '1px solid #e2e8f0',
-//                       flexGrow: 1 // fills space to align buttons at bottom
+//                       justifyContent: 'space-between',
+//                       height: '100%',
+//                       borderRadius: '20px',
+//                       boxShadow: '0px 4px 12px rgba(0,0,0,0.1)'
 //                     }}
 //                   >
-//                     <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
-//                       ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Month</span>
-//                     </div>
-//                     <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
-//                     <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
-//                     <MyBox sx={{ mt: 'auto', width: '100%' }}>
-//                       <MyButton
-//                         variant="contained"
-//                         fullWidth
-//                         // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
-//                         onClick={() => {
-//                           const finalPrice = plan.title === 'Free' ? 5 : plan.price;
-//                           goToCompanyModule('Institute', plan.title, 'Monthly', finalPrice);
+//                     <CardHeader
+//                       title={plan.plan_name}
+//                       sx={{
+//                         textAlign: 'center',
+//                         fontWeight: 'bold',
+//                         backgroundColor: '#e2e8f0'
+//                       }}
+//                     />
+//                     <MyCardContent sx={{ textAlign: 'center' }}>
+//                       <div
+//                         style={{
+//                           fontSize: '22px',
+//                           fontWeight: 'bold',
+//                           color: '#2d3748',
+//                           marginBottom: '10px'
 //                         }}
 //                       >
-//                         {plan.title === 'Free' ? 'Start Free' : 'Buy Now'}
-//                       </MyButton>
-//                     </MyBox>
-//                   </MyCardContent>
-//                 </MyCard>
-//               </MyGrid>
-//             ))}
-//           </MyGrid>
-//         </MyTabPanel>
-//         <MyTabPanel value={state.tabIndex} index={1}>
-//           <MyGrid container spacing={2} alignItems="stretch">
-//             {[
-//               {
-//                 title: 'Startup',
-//                 price: Constants.INSTITUTE_PRICING.STARTUP_YEARLY,
-//                 description: ` A perfect starting point for institutes to establish a professional online presence. This fully managed website includes all essential features to showcase institute information, highlight courses and achievements, and efficiently manage admission enquiries.`,
-//                 extra: 'Billed Monthly, Excludes VAT / GST'
-//               },
-//               {
-//                 title: 'Premium',
-//                 price: Constants.INSTITUTE_PRICING.PREMIUM_YEARLY,
-//                 description: `A dynamic web application with Online Admission, Fee Payment Integration, and an intuitive Admin Dashboard
-//                      for efficiently managing Students, Trainers, Batches, and Courses. Ideal for institutes seeking advanced functionality 
-//                      and streamlined administration.`,
-//                 extra: 'Billed Monthly, Excludes VAT / GST'
-//               },
-//               {
-//                 title: 'Enterprise',
-//                 price: Constants.INSTITUTE_PRICING.ENTERPRISE_YEARLY,
-//                 description: ` An advanced web application with Online Admission, Course Enrollment, Integrated Payments, and an Admin Panel to manage Students, Trainers, Roles, and Courses.
-//                  Includes a Student Dashboard for Online Tests, Study Materials, Assignments, Projects, and Fee Payments.`,
-//                 extra: 'Billed Monthly, Excludes VAT / GST'
-//               },
-//               {
-//                 title: 'Dedicated',
-//                 price: Constants.INSTITUTE_PRICING.DEDICATED_YEARLY,
-//                 description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and maximum
-//                      flexibility. Includes all features from the Enterprise Plan, plus a Trainer Dashboard with attendance tracking, batch
-//                      scheduling, and centralized performance reporting — ideal for large institutes and multi-branch training organizations.`,
-//                 extra: 'Excludes VAT/GST & Application Support'
-//               }
-//             ].map((plan) => (
-//               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
-//                 <MyCard
-//                   elevation={3}
-//                   style={{
-//                     display: 'flex',
-//                     flexDirection: 'column',
-//                     width: '100%',
-//                     borderRadius: '16px',
-//                     overflow: 'hidden',
-//                     transition: 'transform 0.3s ease',
-//                     boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
-//                   }}
-//                   onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-//                   onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-//                 >
-//                   <CardHeader
-//                     title={<span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1a202c' }}>{plan.title}</span>}
-//                     sx={{
-//                       textAlign: 'center',
-//                       height: '40px',
-//                       backgroundColor: '#e2e8f0',
-//                       display: 'flex',
-//                       alignItems: 'center',
-//                       justifyContent: 'center'
-//                     }}
-//                   />
-//                   <MyCardContent
-//                     sx={{
-//                       display: 'flex',
-//                       flexDirection: 'column',
-//                       alignItems: 'center',
-//                       padding: '10px',
-//                       backgroundColor: '#f7fafc',
-//                       border: '1px solid #e2e8f0',
-//                       flexGrow: 1
-//                     }}
-//                   >
-//                     <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
-//                       ₹{plan.price} /<span style={{ fontSize: '14px', color: '#2d3748' }}>Year</span>
-//                     </div>
-//                     <div style={{ fontSize: '14px', color: '#a0aec0', marginBottom: '10px' }}>{plan.extra}</div>
-//                     <div style={{ fontSize: '14px', textAlign: 'center', color: '#4a5568', marginBottom: '10px' }}>{plan.description}</div>
-//                     <MyBox sx={{ mt: 'auto', width: '100%' }}>
+//                         ₹{finalPrice} / Month
+//                       </div>
+
 //                       <MyButton
 //                         variant="contained"
+//                         color="primary"
 //                         fullWidth
-//                         onClick={() => goToCompanyModule('Institute', plan.title, 'Yearly', plan.price)}
+//                         sx={{ mt: 2 }}
+//                         onClick={() =>
+//                           goToCompanyModule('MSME', plan.plan_name, 'Monthly', finalPrice)
+//                         }
 //                       >
 //                         Buy Now
 //                       </MyButton>
-//                     </MyBox>
-//                   </MyCardContent>
-//                 </MyCard>
-//               </MyGrid>
-//             ))}
+
+//                       <Accordion
+//                         expanded={expandedAccordions[plan.plan_name] || false}
+//                         onChange={() => handleAccordionToggle(plan.plan_name)}
+//                         sx={{ mt: 2 }}
+//                       >
+//                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+//                           Customize Features
+//                         </AccordionSummary>
+//                         <AccordionDetails>
+//                           {plan.features.map((feature) => (
+//                             <FormControlLabel
+//                               key={feature.name}
+//                               control={
+//                                 <Checkbox
+//                                   checked={
+//                                     selectedFeaturesMonthly[plan.plan_name]?.includes(feature.name) ||
+//                                     false
+//                                   }
+//                                   onChange={() =>
+//                                     toggleFeature(plan.plan_name, feature.name, feature.price)
+//                                   }
+//                                 />
+//                               }
+//                               label={`${feature.name} (+₹${feature.price})`}
+//                             />
+//                           ))}
+//                         </AccordionDetails>
+//                       </Accordion>
+//                     </MyCardContent>
+//                   </MyCard>
+//                 </MyGrid>
+//               );
+//             })}
+//           </MyGrid>
+//         </MyTabPanel>
+
+//         {/* ---------- ANNUAL ---------- */}
+//         <MyTabPanel value={tabIndex} index={1}>
+//           <MyGrid container spacing={2} alignItems="stretch">
+//             {pricingData.annual_plans.map((plan) => {
+//               const finalPrice = customPricesAnnual[plan.plan_name] || plan.price;
+//               return (
+//                 <MyGrid key={plan.plan_name} size={{ xs: 12, sm: 6, md: 3 }}>
+//                   <MyCard
+//                     sx={{
+//                       display: 'flex',
+//                       flexDirection: 'column',
+//                       justifyContent: 'space-between',
+//                       height: '100%',
+//                       borderRadius: '20px',
+//                       boxShadow: '0px 4px 12px rgba(0,0,0,0.1)'
+//                     }}
+//                   >
+//                     <CardHeader
+//                       title={plan.plan_name}
+//                       sx={{
+//                         textAlign: 'center',
+//                         fontWeight: 'bold',
+//                         backgroundColor: '#edf2f7'
+//                       }}
+//                     />
+//                     <MyCardContent sx={{ textAlign: 'center' }}>
+//                       <div
+//                         style={{
+//                           fontSize: '22px',
+//                           fontWeight: 'bold',
+//                           color: '#2d3748',
+//                           marginBottom: '10px'
+//                         }}
+//                       >
+//                         ₹{finalPrice} / Year
+//                       </div>
+
+//                       <MyButton
+//                         variant="contained"
+//                         color="primary"
+//                         fullWidth
+//                         sx={{ mt: 2 }}
+//                         onClick={() =>
+//                           goToCompanyModule('MSME', plan.plan_name, 'Annual', finalPrice)
+//                         }
+//                       >
+//                         Buy Now
+//                       </MyButton>
+
+//                       <Accordion
+//                         expanded={expandedAccordions[plan.plan_name] || false}
+//                         onChange={() => handleAccordionToggle(plan.plan_name)}
+//                         sx={{ mt: 2 }}
+//                       >
+//                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+//                           Customize Features
+//                         </AccordionSummary>
+//                         <AccordionDetails>
+//                           {plan.features.map((feature) => (
+//                             <FormControlLabel
+//                               key={feature.name}
+//                               control={
+//                                 <Checkbox
+//                                   checked={
+//                                     selectedFeaturesAnnual[plan.plan_name]?.includes(feature.name) ||
+//                                     false
+//                                   }
+//                                   onChange={() =>
+//                                     toggleFeature(plan.plan_name, feature.name, feature.price)
+//                                   }
+//                                 />
+//                               }
+//                               label={`${feature.name} (+₹${feature.price})`}
+//                             />
+//                           ))}
+//                         </AccordionDetails>
+//                       </Accordion>
+//                     </MyCardContent>
+//                   </MyCard>
+//                 </MyGrid>
+//               );
+//             })}
 //           </MyGrid>
 //         </MyTabPanel>
 //       </MyCardContent>
-//       <MyBox>
-//         <MyCardContent>
-//           <MyGrid container spacing={2} alignItems="stretch">
-//             <MyGrid size={{ xs: 12 }} style={{ display: 'flex' }}>
-//               <TableContainer component={Paper} sx={{ mt: -2 }}>
-//                 <Table sx={{ minWidth: 650 }} aria-label="pricing comparison table">
-//                   <TableHead>
-//                     <TableRow sx={{ backgroundColor: '#e2e8f0' }}>
-//                       {['Features', 'free', 'Startup', 'Premium', 'Enterprise', 'Dedicated'].map((text, index) => (
-//                         <TableCell
-//                           key={text}
-//                           align={index === 0 ? 'left' : 'center'}
-//                           sx={{
-//                             fontWeight: 'bold',
-//                             fontSize: '1.1rem',
-//                             border: '1px solid #e0e0e0',
-//                             padding: '10px 14px',
-//                             lineHeight: 1.2
-//                           }}
-//                         >
-//                           {text}
-//                         </TableCell>
-//                       ))}
-//                     </TableRow>
-//                   </TableHead>
-//                   <TableBody>{rows.map((row) => renderRow(row))}</TableBody>
-//                 </Table>
-//               </TableContainer>
-//             </MyGrid>
-//           </MyGrid>
-//         </MyCardContent>
-//       </MyBox>
-//       <Footer />
 //     </div>
 //   );
 // };
 
-// export default memo(ClientPricingMsme, (prevProps, nextProps) => {
-//   return eq(prevProps, nextProps);
-// });
+// export default ClientPricingMsme;
+
+
 
 'use client';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Checkbox,
   FormControlLabel,
-  CardHeader,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+  CardHeader
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import MyGrid from '@/app/custom-components/MyGrid';
 import MyButton from '@/app/custom-components/MyButton';
 import MyBox from '@/app/custom-components/MyBox';
@@ -1191,157 +433,195 @@ import MyTypography from '@/app/custom-components/MyTypography';
 import MyTab from '@/app/custom-components/MyTab';
 import MyTabs from '@/app/custom-components/MyTabs';
 import MyTabPanel from '@/app/custom-components/MyTabPanel';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import usePricingMsme from './usePricingMsme';
-import * as Constants from "../../constants/constants";
+import * as Constants from '../../constants/constants';
 import './pricingMsme.css';
 
-// ------------------ TYPES ------------------
-type PlanName = "Startup" | "Premium" | "Enterprise" | "Dedicated";
-
+// ---------------- TYPES ----------------
 interface Feature {
   name: string;
   price: number;
 }
 
-interface Plan {
-  title: string;
+interface PricingPlan {
+  plan_name: string;
   price: number;
+  features: Feature[];
 }
 
-// ------------------ FEATURE PRICING ------------------
-const featurePricing: Record<PlanName, Feature[]> = {
-  Startup: [
-    { name: "Admin Dashboard", price: 200 },
-    { name: "Student Dashboard", price: 300 },
-    { name: "Dynamic Web Application", price: 400 },
-  ],
-  Premium: [
-    { name: "Online Admission", price: 500 },
-    { name: "Fee Payment Integration", price: 300 },
-    { name: "Admin Dashboard", price: 400 },
-  ],
-  Enterprise: [
-    { name: "Online Exams", price: 400 },
-    { name: "Study Materials", price: 300 },
-    { name: "Faculty Management", price: 600 },
-  ],
-  Dedicated: [
-    { name: "Faculty Dashboard", price: 800 },
-    { name: "Attendance Tracking", price: 400 },
-    { name: "Timetable Management", price: 500 },
-  ],
-};
+interface PricingConfig {
+  monthly_plans: PricingPlan[];
+  annual_plans: PricingPlan[];
+}
 
-// ------------------ PLANS ------------------
-const plans: Plan[] = [
-  { title: "Startup", price: 0 },
-  { title: "Premium", price: 0 },
-  { title: "Enterprise", price: 0 },
-  { title: "Dedicated", price: 0 },
-];
-
-// ------------------ MAIN COMPONENT ------------------
+// ---------------- MAIN COMPONENT ----------------
 const ClientPricingMsme = () => {
   const router = useRouter();
-  const { goToCompanyModule } = usePricingMsme();
+  const { goToCompanyModule, siteConfig } = usePricingMsme();
 
   const [tabIndex, setTabIndex] = useState(0);
-  const [selectedFeatures, setSelectedFeatures] = useState<Record<string, string[]>>({});
-  const [customPrices, setCustomPrices] = useState<Record<string, number>>({});
+  const [pricingData, setPricingData] = useState<PricingConfig | null>(null);
 
-  // ✅ Default selection (All features selected initially)
+  // Separate states for monthly and annual tabs
+  const [selectedFeaturesMonthly, setSelectedFeaturesMonthly] = useState<Record<string, string[]>>({});
+  const [customPricesMonthly, setCustomPricesMonthly] = useState<Record<string, number>>({});
+  const [expandedAccordionsMonthly, setExpandedAccordionsMonthly] = useState<Record<string, boolean>>({});
+
+  const [selectedFeaturesAnnual, setSelectedFeaturesAnnual] = useState<Record<string, string[]>>({});
+  const [customPricesAnnual, setCustomPricesAnnual] = useState<Record<string, number>>({});
+  const [expandedAccordionsAnnual, setExpandedAccordionsAnnual] = useState<Record<string, boolean>>({});
+
+  // ✅ Load from siteConfig → PRICING_CONFIG
   useEffect(() => {
-    const defaults: Record<string, string[]> = {};
-    const defaultPrices: Record<string, number> = {};
+    try {
+      const configItem: any = (siteConfig as any)?.find((c: any) => c.key === 'PRICING_CONFIG');
+      if (!configItem?.business_config?.business_config) return;
 
-    plans.forEach((plan) => {
-      const features = featurePricing[plan.title as PlanName] || [];
-      defaults[plan.title] = features.map((f) => f.name);
-      const totalPrice = plan.price + features.reduce((sum, f) => sum + f.price, 0);
-      defaultPrices[plan.title] = totalPrice;
-    });
+      const rawConfig = configItem.business_config.business_config;
+      let parsedConfig: PricingConfig;
 
-    setSelectedFeatures(defaults);
-    setCustomPrices(defaultPrices);
-  }, []);
+      try {
+        parsedConfig = JSON.parse(rawConfig);
+      } catch {
+        parsedConfig = new Function(`return ${rawConfig}`)();
+      }
 
-  const toggleFeature = (plan: string, feature: string, price: number) => {
-    const current = selectedFeatures[plan] || [];
-    const basePrice = plans.find((p) => p.title === plan)?.price || 0;
+      setPricingData(parsedConfig);
+
+      // ✅ Initialize Monthly Defaults
+      const defaultsM: Record<string, string[]> = {};
+      const pricesM: Record<string, number> = {};
+      const expandedM: Record<string, boolean> = {};
+
+      parsedConfig.monthly_plans.forEach((plan) => {
+        defaultsM[plan.plan_name] = plan.features.map((f) => f.name);
+        pricesM[plan.plan_name] = plan.price + plan.features.reduce((sum, f) => sum + f.price, 0);
+        expandedM[plan.plan_name] = true;
+      });
+
+      setSelectedFeaturesMonthly(defaultsM);
+      setCustomPricesMonthly(pricesM);
+      setExpandedAccordionsMonthly(expandedM);
+
+      // ✅ Initialize Annual Defaults
+      const defaultsA: Record<string, string[]> = {};
+      const pricesA: Record<string, number> = {};
+      const expandedA: Record<string, boolean> = {};
+
+      parsedConfig.annual_plans.forEach((plan) => {
+        defaultsA[plan.plan_name] = plan.features.map((f) => f.name);
+        pricesA[plan.plan_name] = plan.price + plan.features.reduce((sum, f) => sum + f.price, 0);
+        expandedA[plan.plan_name] = true;
+      });
+
+      setSelectedFeaturesAnnual(defaultsA);
+      setCustomPricesAnnual(pricesA);
+      setExpandedAccordionsAnnual(expandedA);
+    } catch (error) {
+      console.error('Error parsing PRICING_CONFIG:', error);
+    }
+  }, [siteConfig]);
+
+  // ✅ Handle Accordion Toggle
+  const handleAccordionToggle = (planTitle: string, isAnnual = false) => {
+    if (isAnnual) {
+      setExpandedAccordionsAnnual({
+        ...expandedAccordionsAnnual,
+        [planTitle]: !expandedAccordionsAnnual[planTitle],
+      });
+    } else {
+      setExpandedAccordionsMonthly({
+        ...expandedAccordionsMonthly,
+        [planTitle]: !expandedAccordionsMonthly[planTitle],
+      });
+    }
+  };
+
+  // ✅ Toggle feature with min one feature selected rule
+  const toggleFeature = (plan: string, feature: string, price: number, isAnnual = false) => {
+    const planList = isAnnual ? pricingData?.annual_plans : pricingData?.monthly_plans;
+    const currentSelected = isAnnual ? selectedFeaturesAnnual : selectedFeaturesMonthly;
+    const currentPrices = isAnnual ? customPricesAnnual : customPricesMonthly;
+
+    const current = currentSelected[plan] || [];
+    const basePrice = planList?.find((p) => p.plan_name === plan)?.price || 0;
     const isSelected = current.includes(feature);
 
     let updatedFeatures: string[] = [];
     let newTotal = basePrice;
 
     if (isSelected) {
+      // 🔒 Prevent removing the last feature
+      if (current.length === 1) {
+        alert('At least one feature must remain selected.');
+        return;
+      }
       updatedFeatures = current.filter((f) => f !== feature);
-      newTotal = (customPrices[plan] || basePrice) - price;
+      newTotal = (currentPrices[plan] || basePrice) - price;
     } else {
       updatedFeatures = [...current, feature];
-      newTotal = (customPrices[plan] || basePrice) + price;
+      newTotal = (currentPrices[plan] || basePrice) + price;
     }
 
-    setSelectedFeatures({ ...selectedFeatures, [plan]: updatedFeatures });
-    setCustomPrices({ ...customPrices, [plan]: newTotal });
+    if (isAnnual) {
+      setSelectedFeaturesAnnual({ ...currentSelected, [plan]: updatedFeatures });
+      setCustomPricesAnnual({ ...currentPrices, [plan]: newTotal });
+    } else {
+      setSelectedFeaturesMonthly({ ...currentSelected, [plan]: updatedFeatures });
+      setCustomPricesMonthly({ ...currentPrices, [plan]: newTotal });
+    }
   };
 
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
   };
 
+  if (!pricingData) {
+    return <div style={{ textAlign: 'center', padding: '20px' }}>Loading pricing...</div>;
+  }
+
+  // ---------------- UI ----------------
   return (
-    <div style={{ width: "100%", paddingTop: "0px" }}>
+    <div style={{ width: '100%', paddingTop: '0px' }}>
       <MyCardContent>
-        {/* ---------- HEADER BAR ---------- */}
+        {/* ---------- HEADER ---------- */}
         <MyBox
           sx={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
             mb: 2,
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: { xs: 'column', sm: 'row' },
             gap: { xs: 2, sm: 0 },
-            position: "relative",
+            position: 'relative'
           }}
         >
           <MyBox
             sx={{
-              display: "flex",
-              alignItems: "center",
+              display: 'flex',
+              alignItems: 'center',
               gap: 2,
-              position: { xs: "static", sm: "absolute" },
+              position: { xs: 'static', sm: 'absolute' },
               left: { sm: 0 },
-              justifyContent: { xs: "center", sm: "flex-start" },
-              width: { xs: "100%", sm: "auto" },
+              justifyContent: { xs: 'center', sm: 'flex-start' },
+              width: { xs: '100%', sm: 'auto' }
             }}
           >
             <MyButton
               variant="outlined"
-              sx={{
-                minWidth: "28px",
-                height: "28px",
-                borderRadius: "50%",
-                fontSize: "1rem",
-                padding: 0,
-              }}
+              sx={{ minWidth: '28px', height: '28px', borderRadius: '50%', fontSize: '1rem', padding: 0 }}
               onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-tech`)}
             >
               <ArrowBack />
             </MyButton>
-            <MyTypography variant="h6" sx={{ fontSize: "1rem" }}>
+            <MyTypography variant="h6" sx={{ fontSize: '1rem' }}>
               Choose the right plan for your <strong>MSME</strong>
             </MyTypography>
             <MyButton
               variant="outlined"
-              sx={{
-                minWidth: "28px",
-                height: "28px",
-                borderRadius: "50%",
-                fontSize: "1rem",
-                padding: 0,
-              }}
+              sx={{ minWidth: '28px', height: '28px', borderRadius: '50%', fontSize: '1rem', padding: 0 }}
               onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
             >
               <ArrowForward />
@@ -1349,15 +629,7 @@ const ClientPricingMsme = () => {
           </MyBox>
 
           {/* ---------- TABS ---------- */}
-          <MyBox
-            sx={{
-              margin: { xs: "0", sm: "0 auto" },
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: { xs: "100%", sm: "auto" },
-            }}
-          >
+          <MyBox sx={{ margin: { xs: '0', sm: '0 auto' }, display: 'flex', alignItems: 'center', justifyContent: 'center', width: { xs: '100%', sm: 'auto' } }}>
             <MyTabs value={tabIndex} onChange={handleTabChange}>
               <MyTab label="Monthly Billing" />
               <MyTab label="Annual Billing" />
@@ -1365,69 +637,36 @@ const ClientPricingMsme = () => {
           </MyBox>
         </MyBox>
 
-        {/* ---------- TAB 1: MONTHLY ---------- */}
+        {/* ---------- MONTHLY ---------- */}
         <MyTabPanel value={tabIndex} index={0}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {plans.map((plan) => {
-              const finalPrice = customPrices[plan.title] || plan.price;
+            {pricingData.monthly_plans.map((plan) => {
+              const finalPrice = customPricesMonthly[plan.plan_name] || plan.price;
               return (
-                <MyGrid key={plan.title} size={{ xs: 12, sm: 6, md: 3 }}>
-                  <MyCard
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      height: "100%",
-                      borderRadius: "20px",
-                      boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    <CardHeader
-                      title={plan.title}
-                      sx={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        backgroundColor: "#e2e8f0",
-                      }}
-                    />
-                    <MyCardContent sx={{ textAlign: "center" }}>
-                      <div
-                        style={{
-                          fontSize: "22px",
-                          fontWeight: "bold",
-                          color: "#2d3748",
-                          marginBottom: "10px",
-                        }}
-                      >
-                        ₹{finalPrice} / Month
-                      </div>
-
+                <MyGrid key={plan.plan_name} size={{ xs: 12, sm: 6, md: 3 }}>
+                  <MyCard sx={{ borderRadius: '20px', boxShadow: '0px 4px 12px rgba(0,0,0,0.1)' }}>
+                    <CardHeader title={plan.plan_name} sx={{ textAlign: 'center', fontWeight: 'bold', backgroundColor: '#e2e8f0' }} />
+                    <MyCardContent sx={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>₹{finalPrice} / Month</div>
                       <MyButton
                         variant="contained"
                         color="primary"
                         fullWidth
                         sx={{ mt: 2 }}
-                        onClick={() => goToCompanyModule('MSME', plan.title, 'Monthly', finalPrice)}
+                        onClick={() => goToCompanyModule('MSME', plan.plan_name, 'Monthly', finalPrice)}
                       >
                         Buy Now
                       </MyButton>
-
-                      <Accordion sx={{ mt: 2 }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                          Customize Features
-                        </AccordionSummary>
+                      <Accordion expanded={expandedAccordionsMonthly[plan.plan_name] || false} onChange={() => handleAccordionToggle(plan.plan_name, false)} sx={{ mt: 2 }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>Customize Features</AccordionSummary>
                         <AccordionDetails>
-                          {(featurePricing[plan.title as PlanName] || []).map((feature) => (
+                          {plan.features.map((feature) => (
                             <FormControlLabel
                               key={feature.name}
                               control={
                                 <Checkbox
-                                  checked={
-                                    selectedFeatures[plan.title]?.includes(feature.name) || false
-                                  }
-                                  onChange={() =>
-                                    toggleFeature(plan.title, feature.name, feature.price)
-                                  }
+                                  checked={selectedFeaturesMonthly[plan.plan_name]?.includes(feature.name) || false}
+                                  onChange={() => toggleFeature(plan.plan_name, feature.name, feature.price, false)}
                                 />
                               }
                               label={`${feature.name} (+₹${feature.price})`}
@@ -1443,52 +682,44 @@ const ClientPricingMsme = () => {
           </MyGrid>
         </MyTabPanel>
 
-        {/* ---------- TAB 2: ANNUAL ---------- */}
+        {/* ---------- ANNUAL ---------- */}
         <MyTabPanel value={tabIndex} index={1}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {plans.map((plan) => {
-              const finalPrice = (customPrices[plan.title] || plan.price) * 12 * 0.9; // 10% discount
+            {pricingData.annual_plans.map((plan) => {
+              const finalPrice = customPricesAnnual[plan.plan_name] || plan.price;
               return (
-                <MyGrid key={plan.title} size={{ xs: 12, sm: 6, md: 3 }}>
-                  <MyCard
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      height: "100%",
-                      borderRadius: "20px",
-                      boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    <CardHeader
-                      title={plan.title}
-                      sx={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        backgroundColor: "#edf2f7",
-                      }}
-                    />
-                    <MyCardContent sx={{ textAlign: "center" }}>
-                      <div
-                        style={{
-                          fontSize: "22px",
-                          fontWeight: "bold",
-                          color: "#2d3748",
-                          marginBottom: "10px",
-                        }}
-                      >
-                        ₹{finalPrice} / Year
-                      </div>
-
+                <MyGrid key={plan.plan_name} size={{ xs: 12, sm: 6, md: 3 }}>
+                  <MyCard sx={{ borderRadius: '20px', boxShadow: '0px 4px 12px rgba(0,0,0,0.1)' }}>
+                    <CardHeader title={plan.plan_name} sx={{ textAlign: 'center', fontWeight: 'bold', backgroundColor: '#edf2f7' }} />
+                    <MyCardContent sx={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>₹{finalPrice} / Year</div>
                       <MyButton
                         variant="contained"
                         color="primary"
                         fullWidth
                         sx={{ mt: 2 }}
-                        onClick={() => goToCompanyModule('MSME', plan.title, 'Annual', finalPrice)}
+                        onClick={() => goToCompanyModule('MSME', plan.plan_name, 'Annual', finalPrice)}
                       >
                         Buy Now
                       </MyButton>
+
+                      <Accordion expanded={expandedAccordionsAnnual[plan.plan_name] || false} onChange={() => handleAccordionToggle(plan.plan_name, true)} sx={{ mt: 2 }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>Customize Features</AccordionSummary>
+                        <AccordionDetails>
+                          {plan.features.map((feature) => (
+                            <FormControlLabel
+                              key={feature.name}
+                              control={
+                                <Checkbox
+                                  checked={selectedFeaturesAnnual[plan.plan_name]?.includes(feature.name) || false}
+                                  onChange={() => toggleFeature(plan.plan_name, feature.name, feature.price, true)}
+                                />
+                              }
+                              label={`${feature.name} (+₹${feature.price})`}
+                            />
+                          ))}
+                        </AccordionDetails>
+                      </Accordion>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
@@ -1503,182 +734,3 @@ const ClientPricingMsme = () => {
 
 export default ClientPricingMsme;
 
-
-//  'use client';
-// import React, { useState } from "react";
-// import {
-//   Box,
-//   Card,
-//   CardContent,
-//   Checkbox,
-//   FormControlLabel,
-//   Typography,
-// } from "@mui/material";
-
-// type Feature = {
-//   name: string;
-//   price: number;
-// };
-
-// // ✅ All plan-wise features
-// const featurePricing: Record<
-//   "Startup" | "Premium" | "Enterprise" | "Dedicated",
-//   Feature[]
-// > = {
-//   Startup: [
-//     { name: "Basic Support", price: 0 },
-//     { name: "Email Integration", price: 200 },
-//     { name: "Analytics Dashboard", price: 300 },
-//   ],
-//   Premium: [
-//     { name: "Priority Support", price: 500 },
-//     { name: "Advanced Analytics", price: 700 },
-//     { name: "Custom Branding", price: 400 },
-//   ],
-//   Enterprise: [
-//     { name: "Dedicated Account Manager", price: 1000 },
-//     { name: "Custom Reports", price: 800 },
-//     { name: "Role-Based Access", price: 600 },
-//   ],
-//   Dedicated: [
-//     { name: "24/7 Support", price: 1500 },
-//     { name: "On-premise Deployment", price: 2000 },
-//     { name: "White Label Solution", price: 1800 },
-//   ],
-// };
-
-// const PricingFeatureSelector: React.FC = () => {
-//   // ✅ Default plan
-//   const [selectedPlan, setSelectedPlan] =
-//     useState<keyof typeof featurePricing>("Startup");
-
-//   // ✅ Default selected features for initial plan
-//   const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>(
-//     () =>
-//       Object.fromEntries(
-//         featurePricing["Startup"].map((feature) => [feature.name, true])
-//       )
-//   );
-
-//   // ✅ Plan change handler
-//   const handlePlanChange = (plan: keyof typeof featurePricing) => {
-//     setSelectedPlan(plan);
-//     // Auto-select all features for new plan
-//     const defaultSelected = Object.fromEntries(
-//       featurePricing[plan].map((feature) => [feature.name, true])
-//     );
-//     setSelectedFeatures(defaultSelected);
-//   };
-
-//   // ✅ Toggle feature selection
-//   const handleFeatureToggle = (featureName: string) => {
-//     setSelectedFeatures((prev) => ({
-//       ...prev,
-//       [featureName]: !prev[featureName],
-//     }));
-//   };
-
-//   // ✅ Calculate total price
-//   const totalPrice = featurePricing[selectedPlan]
-//     .filter((f) => selectedFeatures[f.name])
-//     .reduce((sum, f) => sum + f.price, 0);
-
-//   return (
-//     <Box
-//       sx={{
-//         display: "flex",
-//         flexDirection: "column",
-//         gap: 3,
-//         maxWidth: 600,
-//         margin: "auto",
-//         mt: 4,
-//         mb: 6,
-//       }}
-//     >
-//       <Typography
-//         variant="h5"
-//         sx={{ textAlign: "center", mb: 2, fontWeight: "bold", color: "#2e3a59" }}
-//       >
-//         Select Plan & Customize Features
-//       </Typography>
-
-//       {/* 🔹 Plan Selection */}
-//       <Box sx={{ display: "flex", justifyContent: "center", gap: 2, flexWrap: "wrap" }}>
-//         {(Object.keys(featurePricing) as (keyof typeof featurePricing)[]).map((plan) => (
-//           <Card
-//             key={plan}
-//             onClick={() => handlePlanChange(plan)}
-//             sx={{
-//               width: 130,
-//               textAlign: "center",
-//               cursor: "pointer",
-//               border: selectedPlan === plan ? "2px solid #1976d2" : "1px solid #ccc",
-//               transition: "0.3s",
-//               "&:hover": { boxShadow: 3 },
-//             }}
-//           >
-//             <CardContent>
-//               <Typography
-//                 variant="subtitle1"
-//                 fontWeight="bold"
-//                 color={selectedPlan === plan ? "primary" : "text.primary"}
-//               >
-//                 {plan}
-//               </Typography>
-//             </CardContent>
-//           </Card>
-//         ))}
-//       </Box>
-
-//       {/* 🔹 Feature Selection */}
-//       <Card sx={{ p: 2 }}>
-//         <Typography
-//           variant="h6"
-//           sx={{ mb: 1, fontWeight: "bold", color: "#2e3a59" }}
-//         >
-//           {selectedPlan} Plan Features
-//         </Typography>
-//         {featurePricing[selectedPlan].map((feature) => (
-//           <FormControlLabel
-//             key={feature.name}
-//             control={
-//               <Checkbox
-//                 checked={!!selectedFeatures[feature.name]}
-//                 onChange={() => handleFeatureToggle(feature.name)}
-//                 color="primary"
-//               />
-//             }
-//             label={`${feature.name} — ₹${feature.price}`}
-//           />
-//         ))}
-//       </Card>
-
-//       {/* 🔹 Selected Summary */}
-//       <Card sx={{ p: 2 }}>
-//         <Typography
-//           variant="h6"
-//           sx={{ mb: 1, fontWeight: "bold", color: "#2e3a59" }}
-//         >
-//           Selected Features
-//         </Typography>
-//         {Object.entries(selectedFeatures)
-//           .filter(([_, selected]) => selected)
-//           .map(([name]) => (
-//             <Typography key={name}>✅ {name}</Typography>
-//           ))}
-//         <Typography
-//           sx={{
-//             mt: 1,
-//             fontWeight: "bold",
-//             textAlign: "right",
-//             color: "#1976d2",
-//           }}
-//         >
-//           Total Price: ₹{totalPrice}
-//         </Typography>
-//       </Card>
-//     </Box>
-//   );
-// };
-
-// export default PricingFeatureSelector;

@@ -8,6 +8,16 @@ export interface SiteConfig {
   status: string;
 }
 
+
+export interface pricingConfig {
+  key: string;
+  value: string;
+  type: string;
+  description: string;
+  status: string;
+}
+
+
 export interface UserPermission {
   option_id: number;
   option_code: number;
