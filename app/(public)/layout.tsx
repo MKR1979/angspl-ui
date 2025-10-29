@@ -929,6 +929,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     publicPricingSch: true,
     publicPricingClg: true,
     publicPricingTech: true,
+    publicPricingMSME: true,
     publicModules: true,
     publicAdmissionMng: true,
     publicStudentMng: true,
@@ -987,6 +988,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           break;
         case 'ENABLE_PRICING_TECH':
           menuFlags.publicPricingTech = config.value === 'true';
+          break;
+        case 'ENABLE_PRICING_MSME':
+          menuFlags.publicPricingMSME = config.value === 'true';
           break;
         case 'ENABLE_PRICING_SCH':
           menuFlags.publicPricingSch = config.value === 'true';
@@ -1098,7 +1102,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             children: [
               ...(menuFlags.publicPricingSch ? [{ text: 'School', href: `/${Constants.MODULE_PRICING}/pricing-sch` }] : []),
               ...(menuFlags.publicPricingClg ? [{ text: 'College', href: `/${Constants.MODULE_PRICING}/pricing-clg` }] : []),
-              ...(menuFlags.publicPricingTech ? [{ text: 'Institute', href: `/${Constants.MODULE_PRICING}/pricing-tech` }] : [])
+              ...(menuFlags.publicPricingTech ? [{ text: 'Institute', href: `/${Constants.MODULE_PRICING}/pricing-tech` }] : []),
+              ...(menuFlags.publicPricingMSME ? [{ text: 'MSME', href: `/${Constants.MODULE_PRICING}/pricing-msme` }] : [])
             ]
           }
         ]

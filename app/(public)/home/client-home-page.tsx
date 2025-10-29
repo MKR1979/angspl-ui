@@ -63,12 +63,12 @@ export default function ClientHomePage() {
     {
       name: 'School Demo',
       url: 'https://adhyayan.school',
-      icon: <SchoolIcon fontSize="small" />
+      icon: <AccountBalanceIcon fontSize="small" />
     },
     {
       name: 'College Demo',
       url: 'https://adhyayan.college',
-      icon: <AccountBalanceIcon fontSize="small" />
+      icon: <SchoolIcon fontSize="small" />
     },
     {
       name: 'Institute Demo',
@@ -518,7 +518,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                         Your Extended Team for Global 
                         <br></br>
                         <span
-                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '55px' }}
+                          style={{ color: '#f56b2a',  fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive', fontSize: '55px' }}
                         >
                           {' '}
                           Scale & Innovation.{' '}
@@ -542,7 +542,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
                     </MyCardContent>
                   </MyGrid>
                   <MyGrid size={{ xs: 12, sm: 6 }} style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src="/home-page/homedown1.webp" alt="Image description" style={{ width: '100%', height: '500px' }} />
+                    <img src="/home-page/homedown1.webp" alt="Image description" style={{ width: '100%', height: 'auto' }} />
                   </MyGrid>
                 </MyGrid>
                 </MyCard>
@@ -562,13 +562,13 @@ const [currentIndex, setCurrentIndex] = useState(0);
                       >
                         Work with the
                         <span
-                          style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}
+                          style={{ color: '#f56b2a',  fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive', fontSize: '50px' }}
                         >
                           {' '}
                           Best Developers{' '}
                         </span>
                         in your
-                        <span style={{ color: '#f56b2a',  fontFamily: 'Brush Script MT, Dancing Script', fontSize: '50px' }}>
+                        <span style={{ color: '#f56b2a',  fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive', fontSize: '50px' }}>
                           {' '}
                           time zone
                         </span>
