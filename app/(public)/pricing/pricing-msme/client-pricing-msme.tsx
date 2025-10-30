@@ -522,6 +522,59 @@ const ClientPricingMsme = () => {
     }
   }, [siteConfig]);
 
+//   useEffect(() => {
+//   try {
+//     const configItem: any = (siteConfig as any)?.find((c: any) => c.key === 'PRICING_CONFIG');
+//     if (!configItem) return;
+
+//     // ✅ Handle both object and string business_config
+//     const rawConfig = configItem.business_config;
+//     const businessConfig =
+//       typeof rawConfig === 'string'
+//         ? JSON.parse(rawConfig)
+//         : rawConfig;
+
+//     if (!businessConfig) return;
+
+//     setPricingData(businessConfig);
+
+//     // ✅ Initialize Monthly Defaults
+//     const defaultsM: Record<string, string[]> = {};
+//     const pricesM: Record<string, number> = {};
+//     const expandedM: Record<string, boolean> = {};
+
+//     businessConfig.monthly_plans.forEach((plan: any) => {
+//       defaultsM[plan.plan_name] = plan.features.map((f: any) => f.name);
+//       pricesM[plan.plan_name] = plan.price + plan.features.reduce((sum: number, f: any) => sum + f.price, 0);
+//       expandedM[plan.plan_name] = true;
+//     });
+
+//     setSelectedFeaturesMonthly(defaultsM);
+//     setCustomPricesMonthly(pricesM);
+//     setExpandedAccordionsMonthly(expandedM);
+
+//     // ✅ Initialize Annual Defaults
+//     const defaultsA: Record<string, string[]> = {};
+//     const pricesA: Record<string, number> = {};
+//     const expandedA: Record<string, boolean> = {};
+
+//     businessConfig.annual_plans.forEach((plan: any) => {
+//       defaultsA[plan.plan_name] = plan.features.map((f: any) => f.name);
+//       pricesA[plan.plan_name] = plan.price + plan.features.reduce((sum: number, f: any) => sum + f.price, 0);
+//       expandedA[plan.plan_name] = true;
+//     });
+
+//     setSelectedFeaturesAnnual(defaultsA);
+//     setCustomPricesAnnual(pricesA);
+//     setExpandedAccordionsAnnual(expandedA);
+
+//     console.log('✅ Loaded PRICING_CONFIG:', businessConfig);
+//   } catch (error) {
+//     console.error('❌ Error parsing PRICING_CONFIG:', error);
+//   }
+// }, [siteConfig]);
+
+
   // ✅ Handle Accordion Toggle
   const handleAccordionToggle = (planTitle: string, isAnnual = false) => {
     if (isAnnual) {

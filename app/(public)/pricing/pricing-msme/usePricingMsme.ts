@@ -99,7 +99,7 @@ const usePricingMsme = () => {
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
   const router = useRouter();
   const dispatch = useDispatch();
-  const { siteConfig } = useSelector((state) => state.siteConfigState);
+  // const { siteConfig } = useSelector((state) => state.siteConfigState);
   const [getSiteConfigByCompanyType] = useLazyQuery(GET_SITE_CONFIG_By_COMPANY_TYPE, { fetchPolicy: 'network-only' });
   const companyInfo = useSelector((state: RootState) => state.globalState.companyInfo);
 
@@ -113,11 +113,10 @@ const usePricingMsme = () => {
   //   }
   // }, [siteConfig]);
 
-
     const getSiteConfig = useCallback(async () => {
     try {
       const { data } = await getSiteConfigByCompanyType({
-        variables: { company_type: companyInfo.company_type },
+        variables: { company_type: "Institute" },
       });
       if (data?.getSiteConfigByCompanyType?.length > 0) {
         const fetchedConfig = data.getSiteConfigByCompanyType;
@@ -205,8 +204,27 @@ const usePricingMsme = () => {
   );
 
   const goToCompanyModule = (companyType: string, planType: string, paymentType: string, amount: number) => {
-    // const configData = encodeURIComponent(JSON.stringify(state.newCompanyConfig));
-     dispatch(setNewCompanyConfig(state.newCompanyConfig));
+  // console.log('filtered_config in gotoCompanyModule: ', state.newCompanyConfig);
+  //   dispatch(setNewCompanyConfig(state.newCompanyConfig));
+
+  console.log('🧾 Original newCompanyConfig before sanitize:', state.newCompanyConfig);
+
+  // 🧹 Sanitize all configs — flatten one level of nested business_config
+  const sanitizedConfig = state.newCompanyConfig.map((item: any) => {
+    if (item.business_config?.business_config) {
+      return {
+        ...item,
+        business_config: item.business_config.business_config,
+      };
+    }
+    return item;
+  });
+
+  console.log('✅ Sanitized Config before storing in Redux:', sanitizedConfig);
+
+  // 🧭 Dispatch only the sanitized version
+  dispatch(setNewCompanyConfig(sanitizedConfig));
+
     router.push(
       `/company?company_type=${companyType}&plan_type=${planType}&payment_type=${paymentType}&payment_amount=${amount}`
     );
@@ -214,7 +232,8 @@ const usePricingMsme = () => {
 
   return {
     state,
-    siteConfig,
+    // siteConfig,
+    siteConfig: state.originalSiteConfig,
     handleFeatureToggle,
     toggleRowExpansion,
     goToCompanyModule,

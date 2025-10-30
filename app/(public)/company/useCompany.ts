@@ -151,6 +151,8 @@ const useCompany = () => {
   }
 
   useEffect(() => {
+    console.log('its in company page what we are sending back to backend with stringify', JSON.stringify(newCompanyConfig));
+    console.log('its in company page what we are sending back to backend without stringify', newCompanyConfig);
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
       const firstItem = state.arrCompanyStatusLookup[0];
       setState({
@@ -634,11 +636,6 @@ const useCompany = () => {
       }
     });
   };
-
-  //   const formatSourceCode = (sourceCode: any) => {
-  //   const escapedSource = sourceCode.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
-  //   return `\n\"${escapedSource}\\n\"`;
-  // };
 
   const onSaveClick = useCallback(
     async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
