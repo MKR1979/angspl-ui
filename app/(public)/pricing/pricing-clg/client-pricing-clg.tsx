@@ -17,10 +17,10 @@ import * as Constants from '../../constants/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
-// import { constant } from 'lodash';
 
 const ClientPricing = () => {
-  const { state, handleTabChange, goToCompanyModule, toggleRowExpansion } = usePricingClg();
+  const { state, handleTabChange, goToCompanyModule, toggleRowExpansion, siteConfig } = usePricingClg();
+  console.log('site config in pricing clg client psge :', siteConfig);
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -759,8 +759,6 @@ const ClientPricing = () => {
       ]
     }
   ];
-
-  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
 
   interface RowData {
     name: string;

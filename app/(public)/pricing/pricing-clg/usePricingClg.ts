@@ -1,25 +1,56 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
-import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
+import { GET_SITE_CONFIG_By_COMPANY_TYPE } from '@/app/graphql/SiteConfig';
+import { RootState } from '@/app/store';
+import { useSelector } from '@/app/store';
+import { SiteConfig } from '@/app/store/slices/siteConfigState';
+import { useLazyQuery } from '@apollo/client';
 
 type StateType = {
-  breadcrumbsItems: BreadcrumbsItem[];
+  originalSiteConfig: SiteConfig[];
   tabIndex: number;
   expandedRows: Record<string, boolean>;
 };
 
 const usePricingClg = () => {
   const INITIAL_STATE: StateType = Object.freeze({
-    breadcrumbsItems: [{ label: 'Terms', href: '/terms/list' }, { label: 'Add Term' }],
+    originalSiteConfig: [],
     tabIndex: 0,
     expandedRows: {}
   });
 
-  const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
+  // const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
+  //   return { ...state, ...action };
+  // };
+  
+  const reducer = (state = INITIAL_STATE, action: Partial<StateType>): StateType => {
     return { ...state, ...action };
   };
   const router = useRouter();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
+  const [getSiteConfigByCompanyType] = useLazyQuery(GET_SITE_CONFIG_By_COMPANY_TYPE, { fetchPolicy: 'network-only' });
+  const companyInfo = useSelector((state: RootState) => state.globalState.companyInfo);
+
+  const getSiteConfig = useCallback(async () => {
+    try {
+      const { data } = await getSiteConfigByCompanyType({
+        variables: { company_type: "Institute" },
+      });
+      if (data?.getSiteConfigByCompanyType?.length > 0) {
+        const fetchedConfig = data.getSiteConfigByCompanyType;
+        setState({
+          originalSiteConfig: fetchedConfig
+        });
+      }
+      console.log('✅ Site Config fetched from GraphQL:', data);
+    } catch (error) {
+      console.error('❌ Error fetching site config:', error);
+    }
+  }, [getSiteConfigByCompanyType, companyInfo.company_type]);
+
+  useEffect(() => {
+    getSiteConfig();
+  }, [getSiteConfig]);
 
   const toggleRowExpansion = useCallback(
     (rowKey: string) => {
@@ -46,6 +77,7 @@ const usePricingClg = () => {
 
   return {
     state,
+    siteConfig: state.originalSiteConfig,
     goToCompanyModule,
     handleTabChange,
     toggleRowExpansion
