@@ -83,7 +83,6 @@ const useCompany = () => {
     return { ...state, ...action };
   };
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
-  // const [addEmail] = useMutation(ADD_EMAIL, {});
   const [sendOtp] = useMutation(SEND_OTP, {});
   const [verifyOtp] = useMutation(VERIFY_OTP, {});
   const [resendOtp] = useMutation(RESEND_OTP, {});
@@ -100,8 +99,6 @@ const useCompany = () => {
   const [getCompanyPhoneNoExist] = useLazyQuery(GET_COMPANY_PHONE_NO_EXIST, { fetchPolicy: 'network-only' });
   const { siteConfig, newCompanyConfig } = useSelector((state) => state.siteConfigState);
 
-  console.log('new company config in company page:-', newCompanyConfig);
-
   const MAIL_CONFIG = {
     smtpHost: 'smtp.gmail.com',
     smtpPort: 465,
@@ -117,42 +114,55 @@ const useCompany = () => {
   };
 
   function getImageConfigs(siteConfig: any[], companyType: string) {
+  try {
+    const imageConfig = siteConfig.find((c) => c.key === 'IMAGE_CONFIG');
+    if (!imageConfig?.business_config?.business_config) return {};
+
+    const rawConfig = imageConfig.business_config.business_config;
+    let parsedConfig: any;
+
+    // 🔹 Safely parse config (JSON or JS object)
     try {
-      // 🔹 Correct variable name
-      const imageConfig = siteConfig.find((c) => c.key === 'IMAGE_CONFIG');
-      if (!imageConfig?.business_config?.business_config) return {};
-
-      const rawConfig = imageConfig.business_config.business_config;
-      let parsedConfig: any;
-
-      // 🔹 Safely parse the config (JSON or JS object)
-      try {
-        parsedConfig = JSON.parse(rawConfig);
-      } catch {
-        parsedConfig = new Function(`return ${rawConfig}`)();
-      }
-
-      // 🔹 Determine whether to use school or college section
-      const typeKey = companyType.toLowerCase() === 'college' ? 'college' : 'school';
-      const selected = parsedConfig[typeKey] ?? {};
-
-      // 🔹 Return final formatted object
-      return {
-        logoUrl: selected.logoUrl ?? '',
-        logoWidth: selected.logoWidth ?? 0,
-        logoHeight: selected.logoHeight ?? 0,
-        customerHomeImage: selected.homeImageURL ?? '',
-        customerAboutUsImage: selected.aboutUsImageURL ?? '',
-      };
-    } catch (err) {
-      console.error('❌ Failed to read image config:', err);
-      return {};
+      parsedConfig = JSON.parse(rawConfig);
+    } catch {
+      parsedConfig = new Function(`return ${rawConfig}`)();
     }
+    // 🔹 Determine correct section based on companyType
+    const normalizedType = companyType?.toLowerCase();
+    let typeKey: string;
+    switch (normalizedType) {
+      case 'college':
+        typeKey = 'college';
+        break;
+      case 'institute':
+        typeKey = 'institute';
+        break;
+      case 'msme':
+        typeKey = 'msme';
+        break;
+      case 'school':
+      default:
+        typeKey = 'school';
+        break;
+    }
+
+    const selected = parsedConfig[typeKey] ?? {};
+
+    // 🔹 Return formatted config
+    return {
+      logoUrl: selected.logoUrl ?? '',
+      logoWidth: selected.logoWidth ?? 0,
+      logoHeight: selected.logoHeight ?? 0,
+      customerHomeImage: selected.homeImageURL ?? '',
+      customerAboutUsImage: selected.aboutUsImageURL ?? '',
+    };
+  } catch (err) {
+    console.error('❌ Failed to read image config:', err);
+    return {};
   }
+}
 
   useEffect(() => {
-    console.log('its in company page what we are sending back to backend with stringify', JSON.stringify(newCompanyConfig));
-    console.log('its in company page what we are sending back to backend without stringify', newCompanyConfig);
     if (state.arrCompanyStatusLookup.length > 0 && !state.dtoCompany.status) {
       const firstItem = state.arrCompanyStatusLookup[0];
       setState({
@@ -310,8 +320,6 @@ const useCompany = () => {
       // 2 words → first letters of each word + same 2 random digits
       code = `${words[0].charAt(0).toUpperCase()}${words[1].charAt(0).toUpperCase()}${randomDigits}`;
     }
-
-    // 3rd word or more → code stays same
     if (words.length > 2) {
       code = state.dtoCompany.company_code;
     }
@@ -360,20 +368,6 @@ const useCompany = () => {
     },
     [state.dtoCompany, state.errorMessages]
   );
-
-  // const onCodeChange = useCallback(
-  //   (event: ChangeEvent<HTMLInputElement>) => {
-  //     let value = event.target.value.toUpperCase();
-  //     value = value.replace(/[^A-Z0-9]/g, '');
-  //     setState({
-  //       dtoCompany: {
-  //         ...state.dtoCompany,
-  //         company_code: value
-  //       }
-  //     } as StateType);
-  //   },
-  //   [state.dtoCompany]
-  // );
 
   const validateCompanyName = useCallback(async () => {
     if (state.dtoCompany.company_name.trim() === '') {
@@ -626,9 +620,7 @@ const useCompany = () => {
         }
       };
       try {
-        console.log('[Razorpay] Creating Razorpay instance with options:', options);
         const rzp = new (window as any).Razorpay(options);
-        console.log('[Razorpay] Opening Razorpay checkout');
         rzp.open();
       } catch (err) {
         console.error('[Razorpay] Error creating Razorpay instance:', err);
@@ -638,7 +630,7 @@ const useCompany = () => {
   };
 
   const onSaveClick = useCallback(
-    async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number) => {
+    async (event: React.MouseEvent<HTMLElement>, company_type: string, payment_amount: number, plan_id: number) => {
       event.preventDefault();
       if (saving) return;
       setSaving(true);
@@ -670,13 +662,13 @@ const useCompany = () => {
             user_password: COMPANY_DOMAIN_INFORMATION.userPassword,
             domain_name: state.dtoCompany.domain_name,
             source_flag: gConstants.SOURCE_FLAG_PUBLIC,
-            customer_site_config: JSON.stringify(newCompanyConfig)
+            customer_site_config: JSON.stringify(newCompanyConfig),
+            plan_id: plan_id,
           }
         });
         const newCompanyId = result?.data?.addCompanyReturnId;
         const paymentSuccess = openRazorpay(payment_amount, newCompanyId, event);
         if (!paymentSuccess) {
-          console.warn('Payment failed or cancelled');
           showSnackbar(gMessageConstants.SNACKBAR_PAYMENT_FAILED, 'error');
           return;
         }
@@ -784,7 +776,7 @@ const useCompany = () => {
           variables: {
             resendOtpInput: {
               to_address: state.dtoCompany.email,
-              purpose: state.dtoEmail.purpose || 'Email verification' // fallback if undefined
+              purpose: state.dtoEmail.purpose || 'Email verification' 
             },
             emailConfigInput: {
               smtpHost: MAIL_CONFIG.smtpHost,
@@ -807,7 +799,7 @@ const useCompany = () => {
         console.error('Error while resending OTP:', error);
         showSnackbar(gMessageConstants.SNACKBAR_OTP_ERROR, 'error');
       } finally {
-        setState({ resendingOtp: false }); // <-- fixed from setSaving
+        setState({ resendingOtp: false });
       }
     },
     [resendOtp, state.dtoCompany.email]
@@ -841,7 +833,6 @@ const useCompany = () => {
     state,
     onInputChange,
     onNormalizedInputChange,
-    // onCodeChange,
     onCompanyNameBlur,
     onEmailBlur,
     onPhoneNoBlur,

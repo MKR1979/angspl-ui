@@ -759,8 +759,6 @@ const ClientPricingSch = () => {
     }
   ];
 
-  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
-
   interface RowData {
     name: string;
     free: string;
@@ -782,7 +780,7 @@ const ClientPricingSch = () => {
           <TableCell
             onClick={() => hasChildren && toggleRowExpansion(row.name)}
             sx={{
-              pl: 3 + level * 2, // Indentation
+              pl: 3 + level * 2, 
               cursor: hasChildren ? 'pointer' : 'default',
               border: '1px solid #e0e0e0'
             }}
@@ -972,7 +970,6 @@ const ClientPricingSch = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                          onClick={() => {
                           const finalPrice = plan.title === 'Free Trial' ? 5 : plan.price;
                           goToCompanyModule('School', plan.title, 'Monthly', finalPrice);
@@ -1077,7 +1074,6 @@ const ClientPricingSch = () => {
           </MyGrid>
         </MyTabPanel>
       </MyCardContent>
-
       <MyBox>
         <MyCardContent>
           <MyGrid container spacing={2} alignItems="stretch">

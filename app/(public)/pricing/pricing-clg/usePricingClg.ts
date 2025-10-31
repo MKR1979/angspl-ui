@@ -18,10 +18,6 @@ const usePricingClg = () => {
     tabIndex: 0,
     expandedRows: {}
   });
-
-  // const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
-  //   return { ...state, ...action };
-  // };
   
   const reducer = (state = INITIAL_STATE, action: Partial<StateType>): StateType => {
     return { ...state, ...action };
@@ -42,7 +38,6 @@ const usePricingClg = () => {
           originalSiteConfig: fetchedConfig
         });
       }
-      console.log('✅ Site Config fetched from GraphQL:', data);
     } catch (error) {
       console.error('❌ Error fetching site config:', error);
     }

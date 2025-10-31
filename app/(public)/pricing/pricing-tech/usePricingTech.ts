@@ -1,16 +1,13 @@
 import { useCallback, useReducer } from 'react';
-// import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
 import { useRouter } from 'next/navigation';
 
 type StateType = {
-  // breadcrumbsItems: BreadcrumbsItem[];
   tabIndex: number;
   expandedRows: Record<string, boolean>;
 };
 
 const usePricingTech = () => {
   const INITIAL_STATE: StateType = Object.freeze({
-    // breadcrumbsItems: [{ label: 'Terms', href: '/terms/list' }, { label: 'Add Term' }],
     tabIndex: 0,
     expandedRows: {}
   });
@@ -45,7 +42,6 @@ const usePricingTech = () => {
       `/company?company_type=${companyType}&plan_type=${planType}&payment_type=${paymentType}&payment_amount=${amount}`
     );
   };
-    //router.push(`/paymentReceipt?id=${newPaymentId}&userName=${encodeURIComponent('')}`);
 
   return {
     state,

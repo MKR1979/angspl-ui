@@ -179,7 +179,6 @@ const usePrograms = () => {
             payment_date: paymentDate,
             payment_mode: gConstants.PAY_MODE,
             cheque_number: '',
-            // fee_head_id: gConstants.FEE_HEAD_COURSE,
             fee_amount: price,
             fee_month: feeMonth,
             fee_year: feeYear,
@@ -238,20 +237,19 @@ const usePrograms = () => {
           ...state.dtoPaymentDetails,
           [name]: formattedValue
         },
-        // Reset OTP if email is changed
         ...(name === 'email' && formattedValue !== state.dtoPaymentDetails.email
           ? {
-              otpVerified: false,
-              otpSent: false,
-              dtoPaymentDetails: {
-                ...state.dtoPaymentDetails,
-                [name]: formattedValue,
-                email_otp: '',
-                first_name: '',
-                last_name: '',
-                mobile_no: ''
-              }
+            otpVerified: false,
+            otpSent: false,
+            dtoPaymentDetails: {
+              ...state.dtoPaymentDetails,
+              [name]: formattedValue,
+              email_otp: '',
+              first_name: '',
+              last_name: '',
+              mobile_no: ''
             }
+          }
           : {})
       } as StateType);
       setIsDataExist(false);
@@ -404,7 +402,7 @@ const usePrograms = () => {
         handler: async (response: any) => {
           const newPaymentId = await addPaymentDetails(event, response, price, user_id, course_id);
           router.push(`/paymentReceipt?id=${newPaymentId}&userName=${encodeURIComponent(userName)}&isDataExist=${isDataExist}`);
-          resolve(true); // ✅ Payment succeeded
+          resolve(true);
         },
         prefill: {
           name: 'Student Name',
@@ -417,7 +415,7 @@ const usePrograms = () => {
         modal: {
           ondismiss: () => {
             console.warn('Payment popup was closed by user');
-            resolve(false); // Payment failed or cancelled
+            resolve(false);
           }
         }
       };
@@ -434,8 +432,6 @@ const usePrograms = () => {
       if (!(await validateForm())) return;
 
       if (state.dtoPaymentDetails.id !== 0) return;
-
-      // const userName = String(await generateUserName(toLower(state.dtoPaymentDetails.first_name)));
       let userName: string;
       if (isDataExist) {
         userName = state.dtoPaymentDetails.user_name;
@@ -445,13 +441,11 @@ const usePrograms = () => {
       const { exists, user_id } = await isEmailExistUserId();
 
       let userId = 0;
-      //2. After payment succeeds, proceed with user/enrollment logic
       try {
         if (exists) {
           userId = user_id || 0;
           dispatch(setEnrolledUserId(user_id || 0));
           console.log('for exists user ', enrolledUserId);
-          // Get existing userId from backend
           const { data } = await addEnrollment({
             variables: {
               user_id: user_id,
@@ -464,7 +458,6 @@ const usePrograms = () => {
           });
           console.log('Enrollment response for existing user:', data);
         } else {
-          // Add new user
           const { data: userData } = await addUserReturnId({
             variables: {
               first_name: state.dtoPaymentDetails.first_name,
@@ -481,7 +474,6 @@ const usePrograms = () => {
           });
           const newUserId = userData?.addUserReturnId;
           userId = newUserId;
-          // dispatch(setEnrolledUserId(newUserId||0));
           dispatch(setEnrolledUserId(userData?.addUserReturnId));
           if (!newUserId) throw new Error('User creation failed');
 
@@ -498,9 +490,7 @@ const usePrograms = () => {
           console.log('Enrollment response for new user:qqqq', enrollmentData);
         }
 
-        // Open payment first
         const paymentSuccess = openRazorpay(price, course_id, userId, course, userName, event);
-
         if (!paymentSuccess) {
           console.warn('Payment failed or cancelled');
           return;
@@ -529,7 +519,7 @@ const usePrograms = () => {
             sendOtpInput: {
               to_address: state.dtoPaymentDetails.email,
               template_name: 'Email template',
-              purpose: state.dtoEmail.purpose || 'Email verification' // fallback if undefined
+              purpose: state.dtoEmail.purpose || 'Email verification'
             },
             emailConfigInput: {
               smtpHost: MAIL_CONFIG.smtpHost,
@@ -568,7 +558,7 @@ const usePrograms = () => {
             verifyOtpInput: {
               to_address: state.dtoPaymentDetails.email,
               otp: state.dtoPaymentDetails.email_otp || '',
-              purpose: state.dtoEmail.purpose || 'Email verification' // fallback if undefined
+              purpose: state.dtoEmail.purpose || 'Email verification'
             },
             emailConfigInput: {
               smtpHost: MAIL_CONFIG.smtpHost,
@@ -607,7 +597,7 @@ const usePrograms = () => {
           variables: {
             resendOtpInput: {
               to_address: state.dtoPaymentDetails.email,
-              purpose: state.dtoEmail.purpose || 'Email verification' // fallback if undefined
+              purpose: state.dtoEmail.purpose || 'Email verification'
             },
             emailConfigInput: {
               smtpHost: MAIL_CONFIG.smtpHost,
@@ -630,7 +620,7 @@ const usePrograms = () => {
         console.error('Error while resending OTP:', error);
         showSnackbar(gMessageConstants.SNACKBAR_OTP_ERROR, 'error');
       } finally {
-        setState({ resendingOtp: false }); // <-- fixed from setSaving
+        setState({ resendingOtp: false });
       }
     },
     [resendOtp, state.dtoPaymentDetails.email, state.dtoEmail]

@@ -292,7 +292,7 @@ const ClientPricingTech = () => {
                 }
               ]
             },
-             {
+            {
               name: 'Student Attendance',
               free: '✔',
               startup: '✖',
@@ -444,7 +444,7 @@ const ClientPricingTech = () => {
               enterprise: '✔',
               dedicated: '✔'
             },
-             {
+            {
               name: 'Districts',
               free: '✔',
               startup: '✖',
@@ -839,7 +839,7 @@ const ClientPricingTech = () => {
             {hasChildren && <span style={{ marginRight: '8px' }}>{isExpanded ? '▼' : '▶'}</span>}
             {row.name}
           </TableCell>
-           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
             {row.free}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
@@ -1011,7 +1011,7 @@ const ClientPricingTech = () => {
                       padding: '10px',
                       backgroundColor: '#f7fafc',
                       border: '1px solid #e2e8f0',
-                      flexGrow: 1 // fills space to align buttons at bottom
+                      flexGrow: 1
                     }}
                   >
                     <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#2d3748', marginBottom: '10px' }}>
@@ -1023,7 +1023,6 @@ const ClientPricingTech = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                         onClick={() => {
                           const finalPrice = plan.title === 'Free' ? 5 : plan.price;
                           goToCompanyModule('Institute', plan.title, 'Monthly', finalPrice);
