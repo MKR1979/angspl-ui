@@ -18,9 +18,10 @@ interface ClientCompanyProps {
   plan_type: string;
   payment_type: string;
   payment_amount: number;
+  plan_id: number;
 }
 
-const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }: ClientCompanyProps) => {
+const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount, plan_id }: ClientCompanyProps) => {
   const {
     state,
     onInputChange,
@@ -62,7 +63,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
         return `${placeholderPrefix}.adhyayan.college`;
       case 'institute':
         return `${placeholderPrefix}.adhyayan.online`;
-      case 'MSME':
+      case 'msme':
         return `${placeholderPrefix}.adhyayan.online`;
       default:
         return `${placeholderPrefix}.adhyayan.online`;
@@ -78,7 +79,6 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
   })();
 
   const fullDomain = state.dtoCompany.domain_name && state.dtoCompany.domain_name.trim() !== '' ? state.dtoCompany.domain_name : suffix;
-
   return (
     <Card variant="outlined" sx={{ p: 1, borderRadius: 2, marginTop: 1, border: 'none' }}>
       <MyBox sx={{ width: { xs: '100%', sm: '65%' }, margin: '0 auto' }}>
@@ -241,25 +241,11 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             <MyTypography className="error"> {state.errorMessages.phone_no}</MyTypography>
           </MyGrid>
           <MyGrid size={{ xs: 12, sm: 6 }}>
-            {/* <MyTextField
-              label="Company Name"
-              name="company_name"
-              value={state.dtoCompany.company_name}
-              onChange={onInputChange}
-              placeholder="Enter Company Name"
-              inputProps={{
-                maxLength: gConstants.COMPANY_NAME_LENGTH,
-                pattern: '^[A-Za-z]{1,2}$'
-              }}
-              disabled={!state.otpVerified}
-              onBlur={onCompanyNameBlur}
-              error={state.errorMessages.company_name ? true : false}
-            /> */}
             <MyTextField
               label="Company Name"
               name="company_name"
               value={state.dtoCompany.company_name}
-              onChange={onCompanyNameChange} // 👈 use this function
+              onChange={onCompanyNameChange} 
               placeholder="Enter Company Name"
               inputProps={{
                 maxLength: gConstants.COMPANY_NAME_LENGTH
@@ -360,8 +346,6 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
              I authorize <strong>Adhyayan NextGen Solutions Pvt Ltd</strong> to store and process our company’s data on secure cloud Infra per its Privacy Policy and applicable laws.
               </li>
               <li>I agree to comply with all terms, data policies, and regulations, acknowledging that misuse may lead to suspension or termination.</li>
-              {/* <li>I acknowledge that any misuse or violation may lead to suspension or termination of access.</li>
-              <li>I understand that all payments are subject to Adhyayan’s billing, refund, and cancellation policies.</li> */}
             </ul>
 
             <MyTypography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
@@ -378,8 +362,7 @@ const ClientCompany = ({ company_type, plan_type, payment_type, payment_amount }
             <div>
               <img src="pay-methods-branding.png" width="160px" alt="Payment Methods" />
               <button
-                onClick={(e) => onSaveClick(e, company_type, payment_amount)}
-                //  disabled={!state.undertaking}
+                onClick={(e) => onSaveClick(e, company_type, payment_amount, plan_id)}
                 className="pay-now-button"
               >
                 Pay Now ₹{payment_amount}

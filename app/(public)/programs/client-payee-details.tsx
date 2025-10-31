@@ -53,7 +53,6 @@ const ClientPrograms: React.FC<SuccessMessageProps> = ({ course, course_id, pric
           sx={{
             display: 'flex',
             flexDirection: 'column'
-            //minHeight: '80vh' // makes it stretch full screen
           }}
         >
           <MyTypography
@@ -83,7 +82,6 @@ const ClientPrograms: React.FC<SuccessMessageProps> = ({ course, course_id, pric
                 {state.errorMessages.email}
               </MyTypography>
             </MyGrid>
-            {/* OTP Section */}
             <MyGrid size={{ xs: 12 }}>
               {!state.otpSent && (
                 <MyButton

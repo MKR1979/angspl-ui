@@ -18,6 +18,8 @@ export default interface CompanyDTO extends BaseDTO {
   source_flag: string;
   status: string;
   undertaking:string;
+  customer_site_config: Record<string, any>;
+  plan_id: number;
 }
 
 export const COMPANY: CompanyDTO = Object.freeze({
@@ -39,6 +41,8 @@ export const COMPANY: CompanyDTO = Object.freeze({
   source_flag: '',
   status: '',
   undertaking:'Yes',
+  customer_site_config: {},
+  plan_id: 0,
   created_by: 0,
   created_by_first_name: '',
   created_by_last_name: '',

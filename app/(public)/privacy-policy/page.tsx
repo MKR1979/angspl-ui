@@ -95,12 +95,10 @@ const PrivacyPolicy = () => {
         For any privacy concerns, contact us at <strong>info@adhyayan.online</strong>.
       </MyTypography>
 
-      {/* ← Back Link at Bottom */}
-      <MyTypography
+     <MyTypography
         className="already-msg2"
         component="div"
         sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%', size: '12px', mt: 4 }} >
-        {/* <a href="/ "> Back to Home</a> */}
         <a
           onClick={() => window.history.back()} style={{ marginLeft: '16px', cursor: 'pointer', }} >
        ← Go Back

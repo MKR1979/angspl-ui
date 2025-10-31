@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import './programs.css';
 import usePrograms from './usePrograms';
-import SuccessMessage from './client-payee-details'; // Ensure this is imported
+import SuccessMessage from './client-payee-details';
 import MyIconSearch from '@/app/custom-components/MyIconSearch';
 import CourseAllDTO from '@/app/types/CourseAllDTO';
 import * as Constants from '../constants/constants';
@@ -47,12 +47,11 @@ const ClientPrograms = () => {
               .filter(
                 (item: CourseAllDTO) =>
                   item.is_paid &&
-                  // item.group_name?.toLowerCase() === companyInfo?.company_type?.toLowerCase() &&
                   item.course_type_name?.toLowerCase() === Constants.PROGRAMS_COURSE_TYPE
               )
               .map(
                 (course) =>
-                  course.course_name.toLowerCase().includes(searchQuery.toLowerCase()) && ( // Apply search filter here
+                  course.course_name.toLowerCase().includes(searchQuery.toLowerCase()) && (
                     <div key={course.course_code} className="course-category">
                       <img
                         src={course?.logo_url && course.logo_url.trim() !== '' ? course.logo_url : '/common/default-image.webp'}

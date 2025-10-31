@@ -17,10 +17,10 @@ import * as Constants from '../../constants/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
-// import { constant } from 'lodash';
 
 const ClientPricing = () => {
-  const { state, handleTabChange, goToCompanyModule, toggleRowExpansion } = usePricingClg();
+  const { state, handleTabChange, goToCompanyModule, toggleRowExpansion, siteConfig } = usePricingClg();
+  console.log('site config in pricing clg client psge :', siteConfig);
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -760,8 +760,6 @@ const ClientPricing = () => {
     }
   ];
 
-  // const formatUrl = (url: any) => (url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`);
-
   interface RowData {
     name: string;
     free: string,
@@ -784,7 +782,7 @@ const ClientPricing = () => {
           <TableCell
             onClick={() => hasChildren && toggleRowExpansion(row.name)}
             sx={{
-              pl: 3 + level * 2, // Indentation
+              pl: 3 + level * 2, 
               cursor: hasChildren ? 'pointer' : 'default',
               border: '1px solid #e0e0e0'
             }}
@@ -854,7 +852,6 @@ const ClientPricing = () => {
               <ArrowBack />
             </MyButton>
             <MyTypography variant="h6" component="h4" align="center" gutterBottom sx={{ fontSize: '1rem', mb: 0 }}>
-              {/* Choose the right plan for your <strong>College</strong> */}
               Choose the right plan for your{' '}
               <strong>
                 <span style={{ fontSize: '1.1rem' }}>College</span>
@@ -977,7 +974,6 @@ const ClientPricing = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                        // onClick={() => goToCompanyModule('College', plan.title, 'Monthly', plan.price)}
                          onClick={() => {
                           const finalPrice = plan.title === 'Free' ? 5 : plan.price;
                           goToCompanyModule('College', plan.title, 'Monthly', finalPrice);
