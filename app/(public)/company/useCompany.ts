@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import CompanyDTO, { COMPANY } from '@/app/types/CompanyDTO';
 import LookupDTO from '@/app/types/LookupDTO';
-import { arrCompanyStatus, arrCompanyType, regExEMail } from '@/app/common/Configuration';
+import { arrCompanyStatus, arrCompanyType, capitalizeWords, regExEMail } from '@/app/common/Configuration';
 import { ADD_COMPANY_RETURN_ID, GET_COMPANY_NAME_EXIST, GET_COMPANY_EMAIL_EXIST, GET_COMPANY_PHONE_NO_EXIST, GET_COMPANY_CODE_EXIST } from '@/app/graphql/Company';
 import * as gConstants from '../../constants/constants';
 import { ADD_FEE_COLLECT_COMPANY_RETURN_ID } from '@/app/graphql/FeeCollection';
@@ -286,7 +286,6 @@ const useCompany = () => {
   const onInputChange = useCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
-      // const capitalizedValue = capitalizeWords(value);
       setState({
         dtoCompany: {
           ...state.dtoCompany,
@@ -298,12 +297,11 @@ const useCompany = () => {
   );
 
   const onCompanyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
+    const rawName = e.target.value;
+    const name = capitalizeWords(rawName);
     const words = name.trim().split(/\s+/).filter(Boolean);
-
     let code = '';
     let randomDigits = '';
-
     // check if random digits already exist
     const existingCode = state.dtoCompany.company_code || '';
     const existingDigits = existingCode.replace(/[^0-9]/g, '');
@@ -312,7 +310,6 @@ const useCompany = () => {
     } else if (words.length >= 1) {
       randomDigits = Math.floor(10 + Math.random() * 90).toString(); // 10–99
     }
-
     if (words.length === 1) {
       // 1 word → first letter + 2 random digits
       code = `${words[0].charAt(0).toUpperCase()}${randomDigits}`;
@@ -323,7 +320,6 @@ const useCompany = () => {
     if (words.length > 2) {
       code = state.dtoCompany.company_code;
     }
-
     // update state
     setState({
       ...state,

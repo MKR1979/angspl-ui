@@ -1,25 +1,78 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
-import { BreadcrumbsItem } from '@/app/custom-components/MyBreadcrumbs';
+import { GET_SITE_CONFIG_By_COMPANY_TYPE } from '@/app/graphql/SiteConfig';
+import { dispatch } from '@/app/store';
+import { SiteConfig } from '@/app/store/slices/siteConfigState';
+import { useLazyQuery } from '@apollo/client';
+import { setNewCompanyConfig } from '../../../store/slices/siteConfigState';
 
 type StateType = {
-  breadcrumbsItems: BreadcrumbsItem[];
+  originalSiteConfig: SiteConfig[];
   tabIndex: number;
   expandedRows: Record<string, boolean>;
 };
 
 const usePricingSch = () => {
   const INITIAL_STATE: StateType = Object.freeze({
-    breadcrumbsItems: [{ label: 'Terms', href: '/terms/list' }, { label: 'Add Term' }],
+    originalSiteConfig: [],
     tabIndex: 0,
     expandedRows: {}
   });
 
-  const reducer = (state = INITIAL_STATE, action: StateType): StateType => {
-    return { ...state, ...action };
-  };
+  const reducer = (state = INITIAL_STATE, action: Partial<StateType>): StateType => { return { ...state, ...action }; };
   const router = useRouter();
   const [state, setState] = useReducer(reducer, INITIAL_STATE);
+  const [getSiteConfigByCompanyType] = useLazyQuery(GET_SITE_CONFIG_By_COMPANY_TYPE, { fetchPolicy: 'network-only' });
+
+  const getSiteConfig = useCallback(async () => {
+    try {
+      const { data } = await getSiteConfigByCompanyType({
+        variables: { company_type: "school" },
+      });
+      if (data?.getSiteConfigByCompanyType?.length > 0) {
+        const fetchedConfig = data.getSiteConfigByCompanyType;
+        // 🔹 Deep clone
+        const clonedConfig = structuredClone(fetchedConfig);
+        const customerHome = {
+          customerHomeImage: String(clonedConfig.find((c: any) => c.key === 'CUSTOMER_HOME_IMAGE_URL')?.value ?? ''),
+        };
+        const customerAbout = {
+          customerAboutImage: String(clonedConfig.find((c: any) => c.key === 'CUSTOMER_ABT_US_IMAGE')?.value ?? ''),
+        };
+        // 🔹 Replace target keys in cloned config
+        const updatedConfig = clonedConfig.map((item: any) => {
+          if (item.key === "HOME_IMAGE" && customerHome.customerHomeImage) {
+            return { ...item, value: customerHome.customerHomeImage };
+          }
+          if (item.key === "ABT_US_IMAGE" && customerAbout.customerAboutImage) {
+            return { ...item, value: customerAbout.customerAboutImage };
+          }
+          return item;
+        });
+        // removing extra business_config from site config
+        const sanitizedConfig = updatedConfig.map((item: any) => {
+          if (item.business_config?.business_config) {
+            return {
+              ...item,
+              business_config: item.business_config.business_config,
+            };
+          }
+          return item;
+        });
+        setState({
+          originalSiteConfig: fetchedConfig,
+          // newCompanyConfig: updatedConfig,
+        });
+        dispatch(setNewCompanyConfig(sanitizedConfig));
+      }
+    } catch (error) {
+      console.error("Error fetching site config:", error);
+    }
+  }, [getSiteConfigByCompanyType]);
+
+  useEffect(() => {
+    getSiteConfig();
+  }, [getSiteConfig]);
 
   const toggleRowExpansion = useCallback(
     (rowKey: string) => {
@@ -46,6 +99,7 @@ const usePricingSch = () => {
 
   return {
     state,
+    siteConfig: state.originalSiteConfig,
     goToCompanyModule,
     handleTabChange,
     toggleRowExpansion
