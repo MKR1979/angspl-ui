@@ -1,5 +1,5 @@
 'use client';
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import eq from 'lodash/eq';
 import MyTypography from '@/app/custom-components/MyTypography';
 import MyGrid from '@/app/custom-components/MyGrid';
@@ -19,7 +19,27 @@ import { useRouter } from 'next/navigation';
 import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const ClientPricingSch = () => {
-  const { state, goToCompanyModule, handleTabChange, toggleRowExpansion } = usePricingSch();
+  const { state, goToCompanyModule, handleTabChange, toggleRowExpansion, siteConfig } = usePricingSch();
+
+  const [monthlyPlans, setMonthlyPlans] = useState<any[]>([]);
+  const [yearlyPlans, setYearlyPlans] = useState<any[]>([]);
+
+  useEffect(() => {
+    const pricingConfig = siteConfig.find((c: any) => c.key === 'PRICING_CONFIG') as any;
+
+    if (pricingConfig?.business_config?.business_config) {
+      try {
+        const parsedConfig = JSON.parse(pricingConfig.business_config.business_config);
+        const monthly = parsedConfig?.business_config?.monthly || [];
+        const yearly = parsedConfig?.business_config?.yearly || [];
+        setMonthlyPlans(monthly);
+        setYearlyPlans(yearly);
+      } catch (error) {
+        console.error('Error parsing pricing config:', error);
+      }
+    }
+  }, [siteConfig]);
+  
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -886,44 +906,7 @@ const ClientPricingSch = () => {
         </MyBox>
         <MyTabPanel value={state.tabIndex} index={0}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {[
-              {
-                title: 'Free Trial',
-                price: 0,
-                description: `The Free Plan lets schools build a professional online presence free for 5 weeks. 
-              Get a fully managed website with essential features to highlight academics, activities, and achievements 
-              before moving to a paid plan for more advanced tools.`,
-                extra: 'Free for 5 weeks — no billing required'
-              },
-              {
-                title: 'Startup',
-                price: Constants.SCHOOL_PRICING.STARTUP_MONTHLY,
-                description: `A perfect starting point for schools to build a strong online presence. This fully managed website includes all essential features to share school information, highlight achievements, and efficiently manage admission enquiries.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Premium',
-                price: Constants.SCHOOL_PRICING.PREMIUM_MONTHLY,
-                description: `A dynamic web application with Online Admission, Fee Payment Integration, and an intuitive Admin Dashboard
-                     for efficiently managing Students, Staff, Classes, and Courses. Ideal for schools looking for advanced functionality and
-                     streamlined administration.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Enterprise',
-                price: Constants.SCHOOL_PRICING.ENTERPRISE_MONTHLY,
-                description: `A complete web platform for Online Admission, Course Enrollment, Integrated Payments, and an Admin Panel to manage Students, Staff, Roles, and Courses. It features
-                 a Student Dashboard for Online Exams, Notes, Projects, Homework, Materials, and Fee Payments.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Dedicated',
-                price: Constants.SCHOOL_PRICING.DEDICATED_MONTHLY,
-                description: `An enterprise-grade, fully managed solution offering dedicated resources, scalability, and flexibility. Includes all Enterprise Plan features plus an Employee records
-                and centralized reporting — ideal for large schools and education groups.`,
-                extra: 'Excludes VAT/GST & Application Support'
-              }
-            ].map((plan) => (
+            {monthlyPlans.map((plan) => (
               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}
@@ -971,7 +954,7 @@ const ClientPricingSch = () => {
                         variant="contained"
                         fullWidth
                          onClick={() => {
-                          const finalPrice = plan.title === 'Free Trial' ? 5 : plan.price;
+                          const finalPrice = plan.title === 'Free' ? 5 : plan.price;
                           goToCompanyModule('School', plan.title, 'Monthly', finalPrice);
                         }}
                       >
@@ -986,40 +969,7 @@ const ClientPricingSch = () => {
         </MyTabPanel>
         <MyTabPanel value={state.tabIndex} index={1}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {[
-              {
-                title: 'Startup',
-                price: Constants.SCHOOL_PRICING.STARTUP_YEARLY,
-                description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-                        online presence. This fully managed static web application includes all essential features for sharing information
-                        and managing admission enquiries.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Premium',
-                price: Constants.SCHOOL_PRICING.PREMIUM_YEARLY,
-                description: `A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for effectively managing Users, Roles, and Courses. Ideal for Schools needing advanced functionality and
-                        streamlined management.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Enterprise',
-                price: Constants.SCHOOL_PRICING.ENTERPRISE_YEARLY,
-                description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                        course content, and fee payment.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Dedicated',
-                price: Constants.SCHOOL_PRICING.DEDICATED_YEARLY,
-                description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                        Admin Reporting.`,
-                extra: 'Excludes VAT/GST & Application Support'
-              }
-            ].map((plan) => (
+            {yearlyPlans.map((plan) => (
               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}

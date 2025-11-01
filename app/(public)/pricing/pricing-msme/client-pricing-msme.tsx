@@ -243,9 +243,7 @@ const ClientPricingMsme = () => {
                         fontSize: '1.1rem',
                       }}
                     />
-                    <MyCardContent
-                      sx={{ textAlign: 'center' }}
-                    >
+                    <MyCardContent sx={{ textAlign: 'center' }}>
                       {plan.plan_name === 'Premium' && (
                         <Box
                           sx={{

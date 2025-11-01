@@ -1,5 +1,5 @@
 'use client';
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import eq from 'lodash/eq';
 import MyTypography from '@/app/custom-components/MyTypography';
 import MyGrid from '@/app/custom-components/MyGrid';
@@ -20,7 +20,26 @@ import Footer from '@/app/custom-components/my-footer/MyFooter';
 
 const ClientPricing = () => {
   const { state, handleTabChange, goToCompanyModule, toggleRowExpansion, siteConfig } = usePricingClg();
-  console.log('site config in pricing clg client psge :', siteConfig);
+
+  const [monthlyPlans, setMonthlyPlans] = useState<any[]>([]);
+const [yearlyPlans, setYearlyPlans] = useState<any[]>([]);
+
+useEffect(() => {
+  const pricingConfig = siteConfig.find((c: any) => c.key === 'PRICING_CONFIG') as any;
+
+  if (pricingConfig?.business_config?.business_config) {
+    try {
+      const parsedConfig = JSON.parse(pricingConfig.business_config.business_config);
+      const monthly = parsedConfig?.business_config?.monthly || [];
+      const yearly = parsedConfig?.business_config?.yearly || [];
+      setMonthlyPlans(monthly);
+      setYearlyPlans(yearly);
+    } catch (error) {
+      console.error('Error parsing pricing config:', error);
+    }
+  }
+}, [siteConfig]);
+
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -293,7 +312,7 @@ const ClientPricing = () => {
                 }
               ]
             },
-               {
+            {
               name: 'Student Attendance',
               free: '✔',
               startup: '✖',
@@ -782,7 +801,7 @@ const ClientPricing = () => {
           <TableCell
             onClick={() => hasChildren && toggleRowExpansion(row.name)}
             sx={{
-              pl: 3 + level * 2, 
+              pl: 3 + level * 2,
               cursor: hasChildren ? 'pointer' : 'default',
               border: '1px solid #e0e0e0'
             }}
@@ -790,7 +809,7 @@ const ClientPricing = () => {
             {hasChildren && <span style={{ marginRight: '8px' }}>{isExpanded ? '▼' : '▶'}</span>}
             {row.name}
           </TableCell>
-            <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
+          <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
             {row.free}
           </TableCell>
           <TableCell align="center" sx={{ border: '1px solid #e0e0e0' }}>
@@ -886,48 +905,10 @@ const ClientPricing = () => {
             </MyTabs>
           </MyBox>
         </MyBox>
+
         <MyTabPanel value={state.tabIndex} index={0}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {[
-              {
-                title: 'Free',
-                price: 0,
-                description: `The Free Plan lets colleges build a professional online presence free for 5 weeks. 
-                      Enjoy a fully managed website with key features to showcase programs, achievements, and admission details 
-                      before upgrading to a paid plan.`,
-                extra: 'Free for 5 weeks — no billing required',
-              },
-              {
-                title: 'Startup',
-                price: Constants.COLLEGE_PRICING.STARTUP_MONTHLY,
-                description: `A perfect starting point for colleges to establish a strong online presence. This fully managed website
-                     includes all essential features to showcase college information, highlight programs and achievements, and efficiently
-                      manage admission enquiries.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Premium',
-                price: Constants.COLLEGE_PRICING.PREMIUM_MONTHLY,
-                description: `A dynamic web application with Online Admission, Fee Payment Integration, and an intuitive Admin Dashboard
-                     for efficiently managing Students, Faculty, Departments, and Courses. Ideal for colleges seeking advanced functionality
-                      and streamlined academic administration.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Enterprise',
-                price: Constants.COLLEGE_PRICING.ENTERPRISE_MONTHLY,
-                description: `An advanced web application with Online Admission, Course Enrollment, Integrated Payments, and a powerful Admin Panel to manage
-                 Students, Faculty, Roles, and Courses. It includes a Student Dashboard for Online Exams, Study Materials, Assignments, Projects, and Fee Payments — ideal for colleges.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Dedicated',
-                price: Constants.COLLEGE_PRICING.DEDICATED_MONTHLY,
-                description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and flexibility. Includes all Enterprise
-                 Plan features plus a Faculty Dashboard for attendance tracking, timetable management, and centralized reporting — ideal for large colleges and university groups.`,
-                extra: 'Excludes VAT/GST & Application Support'
-              }
-            ].map((plan) => (
+            {monthlyPlans.map((plan) => (
               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}
@@ -974,7 +955,7 @@ const ClientPricing = () => {
                       <MyButton
                         variant="contained"
                         fullWidth
-                         onClick={() => {
+                        onClick={() => {
                           const finalPrice = plan.title === 'Free' ? 5 : plan.price;
                           goToCompanyModule('College', plan.title, 'Monthly', finalPrice);
                         }}
@@ -990,40 +971,7 @@ const ClientPricing = () => {
         </MyTabPanel>
         <MyTabPanel value={state.tabIndex} index={1}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {[
-              {
-                title: 'Startup',
-                price: Constants.COLLEGE_PRICING.STARTUP_YEARLY,
-                description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-                        online presence. This fully managed static web application includes all essential features for sharing information
-                        and managing admission enquiries.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Premium',
-                price: Constants.COLLEGE_PRICING.PREMIUM_YEARLY,
-                description: `A dynamic web application with Online Admission, Course Enrollment, Integrated Payment Gateway, and an Admin
-                        Dashboard for efficiently managing Users, Roles, and Courses. Ideal for Colleges needing advanced functionality and
-                        streamlined management.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Enterprise',
-                price: Constants.COLLEGE_PRICING.ENTERPRISE_YEARLY,
-                description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                        managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                        course content, and fee payment.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Dedicated',
-                price: Constants.COLLEGE_PRICING.DEDICATED_YEARLY,
-                description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                        Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                        Admin Reporting.`,
-                extra: 'Excludes VAT/GST & Application Support'
-              }
-            ].map((plan) => (
+            {yearlyPlans.map((plan) => (
               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}

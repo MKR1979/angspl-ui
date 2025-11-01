@@ -1,5 +1,5 @@
 'use client';
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import eq from 'lodash/eq';
 import MyTypography from '@/app/custom-components/MyTypography';
 import MyGrid from '@/app/custom-components/MyGrid';
@@ -19,7 +19,27 @@ import Footer from '@/app/custom-components/my-footer/MyFooter';
 import { useRouter } from 'next/navigation';
 
 const ClientPricingTech = () => {
-  const { state, handleTabChange, toggleRowExpansion, goToCompanyModule } = usePricingTech();
+  const { state, handleTabChange, toggleRowExpansion, goToCompanyModule, siteConfig } = usePricingTech();
+
+  const [monthlyPlans, setMonthlyPlans] = useState<any[]>([]);
+  const [yearlyPlans, setYearlyPlans] = useState<any[]>([]);
+
+  useEffect(() => {
+    const pricingConfig = siteConfig.find((c: any) => c.key === 'COLLEGE_PRICING_PLANS') as any;
+
+    if (pricingConfig?.business_config?.business_config) {
+      try {
+        const parsedConfig = JSON.parse(pricingConfig.business_config.business_config);
+        const monthly = parsedConfig?.business_config?.monthly || [];
+        const yearly = parsedConfig?.business_config?.yearly || [];
+        setMonthlyPlans(monthly);
+        setYearlyPlans(yearly);
+      } catch (error) {
+        console.error('Error parsing pricing config:', error);
+      }
+    }
+  }, [siteConfig]);
+
   const rows = [
     {
       name: 'Admin Dashboard',
@@ -936,47 +956,7 @@ const ClientPricingTech = () => {
         </MyBox>
         <MyTabPanel value={state.tabIndex} index={0}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {[
-              {
-                title: 'Free',
-                price: 0,
-                description: `The Free Plan lets institutes build a professional online presence free for 5 weeks. 
-              Experience a fully managed website with essential features to showcase courses, training programs, 
-              achievements, and admission details before upgrading to a paid plan.`,
-                extra: 'Free for 5 weeks — no billing required'
-              },
-              {
-                title: 'Startup',
-                price: Constants.INSTITUTE_PRICING.STARTUP_MONTHLY,
-                description: `A perfect starting point for Schools, Colleges, Universities, and Training Centers to establish a professional
-                                  online presence. This fully managed static web application includes all essential features for sharing information
-                                  and managing admission enquiries.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Premium',
-                price: Constants.INSTITUTE_PRICING.PREMIUM_MONTHLY,
-                description: `A dynamic web application with Online Admission, Course Enrollment, Payment Gateway, and an Admin Dashboard to manage Users,
-                 Roles, and Courses efficiently — ideal for institutes seeking advanced features and centralized management.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Enterprise',
-                price: Constants.INSTITUTE_PRICING.ENTERPRISE_MONTHLY,
-                description: `A dynamic web application with online admission, course enrollment, payments, and a powerful admin panel for
-                                  managing users, roles, and courses. Includes a student dashboard with online exams, notes, projects, homework,
-                                  course content, and fee payment.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Dedicated',
-                price: Constants.INSTITUTE_PRICING.DEDICATED_MONTHLY,
-                description: `Enterprise-grade, fully managed hosting with Dedicated Resources, Unmatched Scalability, and Maximum Flexibility.
-                                  Includes all features from Premium plans, plus an Employee Dashboard with location-based Attendance and centralized
-                                  Admin Reporting.`,
-                extra: 'Excludes VAT/GST & Application Support'
-              }
-            ].map((plan) => (
+            {monthlyPlans.map((plan) => (
               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 2.4 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}
@@ -1039,37 +1019,7 @@ const ClientPricingTech = () => {
         </MyTabPanel>
         <MyTabPanel value={state.tabIndex} index={1}>
           <MyGrid container spacing={2} alignItems="stretch">
-            {[
-              {
-                title: 'Startup',
-                price: Constants.INSTITUTE_PRICING.STARTUP_YEARLY,
-                description: ` A perfect starting point for institutes to establish a professional online presence. This fully managed website includes all essential features to showcase institute information, highlight courses and achievements, and efficiently manage admission enquiries.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Premium',
-                price: Constants.INSTITUTE_PRICING.PREMIUM_YEARLY,
-                description: `A dynamic web application with Online Admission, Fee Payment Integration, and an intuitive Admin Dashboard
-                     for efficiently managing Students, Trainers, Batches, and Courses. Ideal for institutes seeking advanced functionality 
-                     and streamlined administration.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Enterprise',
-                price: Constants.INSTITUTE_PRICING.ENTERPRISE_YEARLY,
-                description: ` An advanced web application with Online Admission, Course Enrollment, Integrated Payments, and an Admin Panel to manage Students, Trainers, Roles, and Courses.
-                 Includes a Student Dashboard for Online Tests, Study Materials, Assignments, Projects, and Fee Payments.`,
-                extra: 'Billed Monthly, Excludes VAT / GST'
-              },
-              {
-                title: 'Dedicated',
-                price: Constants.INSTITUTE_PRICING.DEDICATED_YEARLY,
-                description: `An enterprise-grade, fully managed solution with dedicated resources, unmatched scalability, and maximum
-                     flexibility. Includes all features from the Enterprise Plan, plus a Trainer Dashboard with attendance tracking, batch
-                     scheduling, and centralized performance reporting — ideal for large institutes and multi-branch training organizations.`,
-                extra: 'Excludes VAT/GST & Application Support'
-              }
-            ].map((plan) => (
+            {yearlyPlans.map((plan) => (
               <MyGrid key={plan.title} size={{ xs: 12, sm: 12, md: 3 }} style={{ display: 'flex' }}>
                 <MyCard
                   elevation={3}
