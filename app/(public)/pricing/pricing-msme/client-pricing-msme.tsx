@@ -1,15 +1,16 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  // Accordion,
+  // AccordionSummary,
+  // AccordionDetails,
   Checkbox,
   FormControlLabel,
-  CardHeader,
-  Box
+  // CardHeader,
+  Box,
+  FormGroup
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import MyGrid from '@/app/custom-components/MyGrid';
 import MyButton from '@/app/custom-components/MyButton';
@@ -24,6 +25,7 @@ import { useRouter } from 'next/navigation';
 import usePricingMsme from './usePricingMsme';
 import * as Constants from '../../constants/constants';
 import './pricingMsme.css';
+import TuneIcon from '@mui/icons-material/Tune';
 
 // ---------------- TYPES ----------------
 interface Feature {
@@ -53,11 +55,11 @@ const ClientPricingMsme = () => {
   // Separate states for monthly and annual tabs
   const [selectedFeaturesMonthly, setSelectedFeaturesMonthly] = useState<Record<string, string[]>>({});
   const [customPricesMonthly, setCustomPricesMonthly] = useState<Record<string, number>>({});
-  const [expandedAccordionsMonthly, setExpandedAccordionsMonthly] = useState<Record<string, boolean>>({});
+  // const [expandedAccordionsMonthly, setExpandedAccordionsMonthly] = useState<Record<string, boolean>>({});
 
   const [selectedFeaturesAnnual, setSelectedFeaturesAnnual] = useState<Record<string, string[]>>({});
   const [customPricesAnnual, setCustomPricesAnnual] = useState<Record<string, number>>({});
-  const [expandedAccordionsAnnual, setExpandedAccordionsAnnual] = useState<Record<string, boolean>>({});
+  // const [expandedAccordionsAnnual, setExpandedAccordionsAnnual] = useState<Record<string, boolean>>({});
 
   // ✅ Load from siteConfig → PRICING_CONFIG
   useEffect(() => {
@@ -89,7 +91,7 @@ const ClientPricingMsme = () => {
 
       setSelectedFeaturesMonthly(defaultsM);
       setCustomPricesMonthly(pricesM);
-      setExpandedAccordionsMonthly(expandedM);
+      // setExpandedAccordionsMonthly(expandedM);
 
       // ✅ Initialize Annual Defaults
       const defaultsA: Record<string, string[]> = {};
@@ -104,26 +106,26 @@ const ClientPricingMsme = () => {
 
       setSelectedFeaturesAnnual(defaultsA);
       setCustomPricesAnnual(pricesA);
-      setExpandedAccordionsAnnual(expandedA);
+      // setExpandedAccordionsAnnual(expandedA);
     } catch (error) {
       console.error('Error parsing PRICING_CONFIG:', error);
     }
   }, [siteConfig]);
 
   // ✅ Handle Accordion Toggle
-  const handleAccordionToggle = (planTitle: string, isAnnual = false) => {
-    if (isAnnual) {
-      setExpandedAccordionsAnnual({
-        ...expandedAccordionsAnnual,
-        [planTitle]: !expandedAccordionsAnnual[planTitle],
-      });
-    } else {
-      setExpandedAccordionsMonthly({
-        ...expandedAccordionsMonthly,
-        [planTitle]: !expandedAccordionsMonthly[planTitle],
-      });
-    }
-  };
+  // const handleAccordionToggle = (planTitle: string, isAnnual = false) => {
+  //   if (isAnnual) {
+  //     setExpandedAccordionsAnnual({
+  //       ...expandedAccordionsAnnual,
+  //       [planTitle]: !expandedAccordionsAnnual[planTitle],
+  //     });
+  //   } else {
+  //     setExpandedAccordionsMonthly({
+  //       ...expandedAccordionsMonthly,
+  //       [planTitle]: !expandedAccordionsMonthly[planTitle],
+  //     });
+  //   }
+  // };
 
   // ✅ Toggle feature with min one feature selected rule
   const toggleFeature = (plan: string, feature: string, price: number, isAnnual = false) => {
@@ -179,7 +181,7 @@ const ClientPricingMsme = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            mb: 2,
+            mb: 0,
             flexDirection: { xs: 'column', sm: 'row' },
             gap: { xs: 2, sm: 0 },
             position: 'relative'
@@ -209,7 +211,7 @@ const ClientPricingMsme = () => {
             <MyButton
               variant="outlined"
               sx={{ minWidth: '28px', height: '28px', borderRadius: '50%', fontSize: '1rem', padding: 0 }}
-              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-clg`)}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
             >
               <ArrowForward />
             </MyButton>
@@ -226,7 +228,212 @@ const ClientPricingMsme = () => {
 
         {/* ---------- MONTHLY ---------- */}
         <MyTabPanel value={tabIndex} index={0}>
-          <MyGrid container spacing={2} alignItems="stretch">
+          <MyGrid container spacing={2} sx={{ mt: 0 }}>
+            {pricingData.monthly_plans.map((plan) => {
+              const finalPrice = customPricesMonthly[plan.plan_name] || plan.price;
+              return (
+                <MyGrid key={plan.plan_name} size={{ xs: 12, sm: 6, md: 3 }}>
+                  <MyCard
+                    sx={{
+                      borderRadius: '20px',
+                      background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                      transition: 'all 0.3s ease',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      border: '1px solid #e2e8f0',
+                      '&:hover': {
+                        transform: 'translateY(-6px)',
+                        boxShadow: '0 12px 25px rgba(0,0,0,0.1)',
+                      },
+                    }}
+                  >
+                    {/* Subtle gradient top border accent */}
+                    <Box
+                      sx={{
+                        height: '6px',
+                        width: '100%',
+                        background:
+                          plan.plan_name === 'Premium'
+                            ? 'linear-gradient(90deg, #7e22ce, #ec4899)'
+                            : 'linear-gradient(90deg, #2563eb, #1e40af)',
+                      }}
+                    />
+
+                    {/* Header */}
+                    <Box sx={{ textAlign: 'center', p: 1 }}>
+                      <MyTypography
+                        variant="h6"
+                        sx={{ fontWeight: 700, color: '#1e293b', mb: 0.7 }}
+                      >
+                        {plan.plan_name}
+                      </MyTypography>
+
+                      <MyTypography
+                        variant="body2"
+                        sx={{
+                          fontSize: '1.2rem',
+                          fontWeight: 700,
+                          color: '#0f172a',
+                          mb: 0.7,
+                        }}
+                      >
+                        ₹{finalPrice}
+                        <span style={{ fontSize: '1rem', color: '#64748b' }}> /month</span>
+                      </MyTypography>
+
+
+                    </Box>
+
+                    {/* Feature Section */}
+                    <Box
+                      sx={{
+                        background: '#f8fafc',
+                        borderTop: '1px solid #e2e8f0',
+                        p: 1,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          mb: 1.5,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            fontWeight: 600,
+                            fontSize: '0.90rem',
+                            color: '#1e293b',
+                          }}
+                        >
+                          <TuneIcon sx={{ fontSize: '1.1rem', color: '#2563eb', ml: { xs: 0, md: 1.8 } }} />
+                          Customize Features
+                        </Box>
+                      </Box>
+
+                      <FormGroup
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 1,
+                          mt: 0,
+                        }}
+                      >
+                        {plan.features.map((feature) => (
+                          <Box
+                            key={feature.name}
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              backgroundColor: '#fff',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '10px',
+                              px: 1.5,
+                              py: 0,
+                              transition: 'all 0.2s ease',
+                              '&:hover': {
+                                backgroundColor: '#f1f5f9',
+                              },
+                            }}
+                          >
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={
+                                    selectedFeaturesMonthly[plan.plan_name]?.includes(
+                                      feature.name
+                                    ) || false
+                                  }
+                                  onChange={(e) => {
+                                    const checked = e.target.checked;
+                                    toggleFeature(
+                                      plan.plan_name,
+                                      feature.name,
+                                      feature.price,
+                                      false
+                                    );
+                                    handleFeatureToggle(feature.name, checked, 'monthly');
+                                  }}
+                                  sx={{
+                                    color: '#2563eb',
+                                    '&.Mui-checked': {
+                                      color: '#1e40af',
+                                    },
+                                  }}
+                                />
+                              }
+                              label={
+                                <Box
+                                  sx={{
+                                    ml: 1,
+                                    fontSize: '0.90rem',
+                                    color: '#334155',
+                                    fontWeight: 500,
+                                  }}
+                                >
+                                  {feature.name}
+                                </Box>
+                              }
+                            />
+                            <Box
+                              sx={{
+                                fontWeight: 600,
+                                fontSize: '0.88rem',
+                                color: '#1e40af',
+                              }}
+                            >
+                              +₹{feature.price}
+                            </Box>
+                          </Box>
+                        ))}
+                      </FormGroup>
+                      <MyBox sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <MyButton
+                        // fullWidth
+                        variant="contained"
+                        sx={{
+                          mt: 2,
+                          py: 0.5,
+                          width: '70%',
+                          mx: 'auto',
+                          fontWeight: 400,
+                           fontSize: '0.73rem',
+                          borderRadius: '12px',
+                          background:
+                            plan.plan_name === 'Premium'
+                              ? 'linear-gradient(90deg, #7e22ce, #ec4899)'
+                              : 'linear-gradient(90deg, #2563eb, #1e40af)',
+                          '&:hover': {
+                            opacity: 0.95,
+                          },
+                        }}
+                        onClick={() =>
+                          goToCompanyModule(
+                            'MSME',
+                            plan.plan_name,
+                            'Monthly',
+                            finalPrice,
+                            plan.plan_id
+                          )
+                        }
+                      >
+                        Buy Now
+                      </MyButton>
+                      </MyBox>
+                    </Box>
+                  </MyCard>
+                </MyGrid>
+              );
+            })}
+          </MyGrid>
+
+          {/* <MyGrid container spacing={2} alignItems="stretch">
             {pricingData.monthly_plans.map((plan) => {
               const finalPrice = customPricesMonthly[plan.plan_name] || plan.price;
               return (
@@ -288,29 +495,31 @@ const ClientPricingMsme = () => {
                       >
                         BUY NOW
                       </MyButton>
-                      <Accordion
-                        expanded={expandedAccordionsMonthly[plan.plan_name] || false}
-                        onChange={() => handleAccordionToggle(plan.plan_name, false)}
+                      <Box
                         sx={{
                           mt: 2,
-                          boxShadow: 'none',
                           border: '1px solid #e2e8f0',
-                          borderRadius: '12px !important',
-                          '&:before': { display: 'none' },
+                          borderRadius: '12px',
+                          p: 1.5,
+                          backgroundColor: '#f7fafc',
                         }}
                       >
-                        <AccordionSummary
-                          expandIcon={<ExpandMoreIcon sx={{ color: '#4a5568' }} />}
+                        <Box
                           sx={{
+                            px: 1.5,
+                            py: 1,
+                            borderBottom: '2px solid #e2e8f0',
+                            backgroundColor: '#edf2f7',
                             fontWeight: 600,
                             color: '#2d3748',
-                            backgroundColor: '#f7fafc',
-                            borderBottom: '2px solid #e2e8f0',
+                            fontSize: '1rem',
+                            borderTopLeftRadius: '12px',
+                            borderTopRightRadius: '12px',
                           }}
                         >
                           Customize Features
-                        </AccordionSummary>
-                        <AccordionDetails sx={{ p: 1.5 }}>
+                        </Box>
+                        <FormGroup sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
                           {plan.features.map((feature) => (
                             <FormControlLabel
                               key={feature.name}
@@ -320,8 +529,7 @@ const ClientPricingMsme = () => {
                                   onChange={(e) => {
                                     const checked = e.target.checked;
                                     toggleFeature(plan.plan_name, feature.name, feature.price, false);
-                                    handleFeatureToggle(feature.name, checked, 'monthly'
-                                    );
+                                    handleFeatureToggle(feature.name, checked, 'monthly');
                                   }}
                                   sx={{ p: 0.5 }}
                                 />
@@ -331,22 +539,223 @@ const ClientPricingMsme = () => {
                                   {feature.name} <strong>(+₹{feature.price})</strong>
                                 </Box>
                               }
-                              sx={{ alignItems: 'center', mb: 0.5 }}
                             />
                           ))}
-                        </AccordionDetails>
-                      </Accordion>
+                        </FormGroup>
+                      </Box>
                     </MyCardContent>
                   </MyCard>
                 </MyGrid>
               );
             })}
-          </MyGrid>
+          </MyGrid> */}
         </MyTabPanel>
 
         {/* ---------- ANNUAL ---------- */}
         <MyTabPanel value={tabIndex} index={1}>
-          <MyGrid container spacing={2} alignItems="stretch">
+           <MyGrid container spacing={2} sx={{ mt: 0 }}>
+            {pricingData.annual_plans.map((plan) => {
+              const finalPrice = customPricesAnnual[plan.plan_name] || plan.price;
+              return (
+                <MyGrid key={plan.plan_name} size={{ xs: 12, sm: 6, md: 3 }}>
+                  <MyCard
+                    sx={{
+                      borderRadius: '20px',
+                      background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                      transition: 'all 0.3s ease',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      border: '1px solid #e2e8f0',
+                      '&:hover': {
+                        transform: 'translateY(-6px)',
+                        boxShadow: '0 12px 25px rgba(0,0,0,0.1)',
+                      },
+                    }}
+                  >
+                    {/* Subtle gradient top border accent */}
+                    <Box
+                      sx={{
+                        height: '6px',
+                        width: '100%',
+                        background:
+                          plan.plan_name === 'Premium'
+                            ? 'linear-gradient(90deg, #7e22ce, #ec4899)'
+                            : 'linear-gradient(90deg, #2563eb, #1e40af)',
+                      }}
+                    />
+
+                    {/* Header */}
+                    <Box sx={{ textAlign: 'center', p: 1 }}>
+                      <MyTypography
+                        variant="h6"
+                        sx={{ fontWeight: 700, color: '#1e293b', mb: 0.7 }}
+                      >
+                        {plan.plan_name}
+                      </MyTypography>
+
+                      <MyTypography
+                        variant="body2"
+                        sx={{
+                          fontSize: '1.2rem',
+                          fontWeight: 700,
+                          color: '#0f172a',
+                          mb: 0.7,
+                        }}
+                      >
+                        ₹{finalPrice}
+                        <span style={{ fontSize: '1rem', color: '#64748b' }}> /year</span>
+                      </MyTypography>
+                    </Box>
+
+                    {/* Feature Section */}
+                    <Box
+                      sx={{
+                        background: '#f8fafc',
+                        borderTop: '1px solid #e2e8f0',
+                        p: 1,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          mb: 1.5,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            fontWeight: 600,
+                            fontSize: '0.90rem',
+                            color: '#1e293b',
+                          }}
+                        >
+                          <TuneIcon sx={{ fontSize: '1.1rem', color: '#2563eb', ml: { xs: 0, md: 1.8 } }} />
+                          Customize Features
+                        </Box>
+                      </Box>
+
+                      <FormGroup
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 1,
+                          mt: 0,
+                        }}
+                      >
+                        {plan.features.map((feature) => (
+                          <Box
+                            key={feature.name}
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              backgroundColor: '#fff',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '10px',
+                              px: 1.5,
+                              py: 0.4,
+                              transition: 'all 0.2s ease',
+                              '&:hover': {
+                                backgroundColor: '#f1f5f9',
+                              },
+                            }}
+                          >
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={
+                                    selectedFeaturesAnnual[plan.plan_name]?.includes(
+                                      feature.name
+                                    ) || false
+                                  }
+                                  onChange={(e) => {
+                                    const checked = e.target.checked;
+                                    toggleFeature(
+                                      plan.plan_name,
+                                      feature.name,
+                                      feature.price,
+                                      false
+                                    );
+                                    handleFeatureToggle(feature.name, checked, 'annual');
+                                  }}
+                                  sx={{
+                                    color: '#2563eb',
+                                    '&.Mui-checked': {
+                                      color: '#1e40af',
+                                    },
+                                  }}
+                                />
+                              }
+                              label={
+                                <Box
+                                  sx={{
+                                    ml: 1,
+                                    fontSize: '0.90rem',
+                                    color: '#334155',
+                                    fontWeight: 500,
+                                  }}
+                                >
+                                  {feature.name}
+                                </Box>
+                              }
+                            />
+                            <Box
+                              sx={{
+                                fontWeight: 600,
+                                fontSize: '0.88rem',
+                                color: '#1e40af',
+                              }}
+                            >
+                              +₹{feature.price}
+                            </Box>
+                          </Box>
+                        ))}
+                      </FormGroup>
+                      <MyBox sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <MyButton
+                        // fullWidth
+                        variant="contained"
+                        sx={{
+                          mt: 2,
+                          py: 0.5,
+                          width: '70%',
+                          mx: 'auto',
+                          fontWeight: 400,
+                           fontSize: '0.73rem',
+                          borderRadius: '12px',
+                          background:
+                            plan.plan_name === 'Premium'
+                              ? 'linear-gradient(90deg, #7e22ce, #ec4899)'
+                              : 'linear-gradient(90deg, #2563eb, #1e40af)',
+                          '&:hover': {
+                            opacity: 0.95,
+                          },
+                        }}
+                        onClick={() =>
+                          goToCompanyModule(
+                            'MSME',
+                            plan.plan_name,
+                            'annual',
+                            finalPrice,
+                            plan.plan_id
+                          )
+                        }
+                      >
+                        Buy Now
+                      </MyButton>
+                      </MyBox>
+                    </Box>
+                  </MyCard>
+                </MyGrid>
+              );
+            })}
+          </MyGrid>
+          {/* <MyGrid container spacing={2} alignItems="stretch">
             {pricingData.annual_plans.map((plan) => {
               const finalPrice = customPricesAnnual[plan.plan_name] || plan.price;
               return (
@@ -377,24 +786,30 @@ const ClientPricingMsme = () => {
 
                       <Accordion expanded={expandedAccordionsAnnual[plan.plan_name] || false} onChange={() => handleAccordionToggle(plan.plan_name, true)} sx={{ mt: 2 }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>Customize Features</AccordionSummary>
-                        <AccordionDetails>
-                          {plan.features.map((feature) => (
-                            <FormControlLabel
-                              key={feature.name}
-                              control={
-                                <Checkbox
-                                  checked={selectedFeaturesAnnual[plan.plan_name]?.includes(feature.name) || false}
-                                  onChange={(e) => {
-                                    const checked = e.target.checked;
-                                    toggleFeature(plan.plan_name, feature.name, feature.price, false);
-                                    handleFeatureToggle(feature.name, checked, 'annual'
-                                    );
-                                  }}
-                                />
-                              }
-                              label={`${feature.name} (+₹${feature.price})`}
-                            />
-                          ))}
+                        <AccordionDetails sx={{ p: 1.5 }}>
+                          <FormGroup sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                            {plan.features.map((feature) => (
+                              <FormControlLabel
+                                key={feature.name}
+                                control={
+                                  <Checkbox
+                                    checked={selectedFeaturesAnnual[plan.plan_name]?.includes(feature.name) || false}
+                                    onChange={(e) => {
+                                      const checked = e.target.checked;
+                                      toggleFeature(plan.plan_name, feature.name, feature.price, false);
+                                      handleFeatureToggle(feature.name, checked, 'annual');
+                                    }}
+                                    sx={{ p: 0.5 }}
+                                  />
+                                }
+                                label={
+                                  <Box sx={{ ml: 1, fontSize: '1rem', color: '#2d3748', lineHeight: 1.4 }}>
+                                    {feature.name} <strong>(+₹{feature.price})</strong>
+                                  </Box>
+                                }
+                              />
+                            ))}
+                          </FormGroup>
                         </AccordionDetails>
                       </Accordion>
                     </MyCardContent>
@@ -402,7 +817,7 @@ const ClientPricingMsme = () => {
                 </MyGrid>
               );
             })}
-          </MyGrid>
+          </MyGrid> */}
         </MyTabPanel>
       </MyCardContent>
     </div>

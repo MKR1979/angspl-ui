@@ -106,7 +106,7 @@ const useCompany = () => {
     smtpPassword: 'bnfwtqfzbcdsdgbd',
     secure: true,
     fromAddress: 'adhyayan.solution@gmail.com',
-    resendOtpTime: 2
+    resendOtpTime: 120
   };
 
   const COMPANY_DOMAIN_INFORMATION = {

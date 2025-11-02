@@ -866,7 +866,7 @@ useEffect(() => {
                 fontSize: '1rem',
                 padding: 0
               }}
-              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-tech`)}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
             >
               <ArrowBack />
             </MyButton>
@@ -885,7 +885,7 @@ useEffect(() => {
                 fontSize: '1rem',
                 padding: 0
               }}
-              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-sch`)}
+              onClick={() => router.push(`/${Constants.MODULE_PRICING}/pricing-tech`)}
             >
               <ArrowForward />
             </MyButton>

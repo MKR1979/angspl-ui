@@ -48,11 +48,12 @@ const ClientAboutUs = () => {
     return matches ? matches[1] : null;
   };
 
-   const videoSrc = 'https://www.youtube.com/watch?v=X-uUKRDntmM';
+   const videoSrc = 'https://www.youtube.com/watch?v=DvC0fh5J5iI';
   const videoSrc1 = 'https://youtu.be/Oj7nV7QSyCw';
-  const videoSrc2 = 'https://youtu.be/0aV6puN6xwM';
+  //const videoSrc2 = 'https://youtu.be/0aV6puN6xwM';
   const videoSrc3 = 'https://youtu.be/eeIkOHgr_oI';
   const videoSrc4 = 'https://youtu.be/9K74xt-sswM';
+  const videoSrc5 = 'https://www.youtube.com/watch?v=ynB_8LRCc_k'; // bulk attendance video
 
   return (
     <>
@@ -229,7 +230,7 @@ const ClientAboutUs = () => {
                   <h2 className="section-subheading">How Bulk Attendance Works</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc2)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc5)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen

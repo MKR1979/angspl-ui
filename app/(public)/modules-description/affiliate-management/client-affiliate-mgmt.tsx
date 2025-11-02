@@ -50,8 +50,10 @@ const ClientAffiliateMgmt = () => {
     return matches ? matches[1] : null;
   };
 
-  const videoSrc = 'https://youtu.be/XPa2b_Vpa8M';
+  // const videoSrc = 'https://youtu.be/XPa2b_Vpa8M';
   const videoSrc1 = 'https://youtu.be/DJ72Ir6YgHg?si=njWTcWnXg5YO00oH';
+  const videoSrc2 = 'https://youtu.be/H6wnkwCQREI'; // Review Affiliate
+  const videoSrc3 = 'https://youtu.be/R5-MnXv0eco'; // affiliate dashboard
 
   return (
     <>
@@ -191,7 +193,7 @@ const ClientAffiliateMgmt = () => {
                   <h2 className="section-subheading">Affiliate Dashboard</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc3)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
@@ -236,7 +238,7 @@ const ClientAffiliateMgmt = () => {
                   <h2 className="section-subheading">Review Affiliates</h2>
                   <div className="responsive-video">
                     <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc1)}?rel=0`}
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(videoSrc2)}?rel=0`}
                       title="How to Add New Students | Step-by-Step Guide"
                       frameBorder="0"
                       allowFullScreen
