@@ -53,8 +53,15 @@ const usePricingClg = () => {
           }
           return item;
         });
-        // removing extra business_config from site config
-        const sanitizedConfig = updatedConfig.map((item: any) => {
+        // 🔹 Remove CUSTOMER_HOME_IMAGE_URL and CUSTOMER_ABT_US_IMAGE
+        const filteredConfig = updatedConfig.filter(
+          (item: any) =>
+            item.key !== "CUSTOMER_HOME_IMAGE_URL" &&
+            item.key !== "CUSTOMER_ABT_US_IMAGE"
+        );
+
+        // 🔹 Remove nested business_config
+        const sanitizedConfig = filteredConfig.map((item: any) => {
           if (item.business_config?.business_config) {
             return {
               ...item,
@@ -65,8 +72,8 @@ const usePricingClg = () => {
         });
         setState({
           originalSiteConfig: fetchedConfig,
-          // newCompanyConfig: updatedConfig,
         });
+
         dispatch(setNewCompanyConfig(sanitizedConfig));
       }
     } catch (error) {

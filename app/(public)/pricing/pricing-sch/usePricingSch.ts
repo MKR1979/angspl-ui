@@ -49,8 +49,14 @@ const usePricingSch = () => {
           }
           return item;
         });
+        // 🔹 Remove CUSTOMER_HOME_IMAGE_URL and CUSTOMER_ABT_US_IMAGE
+        const filteredConfig = updatedConfig.filter(
+          (item: any) =>
+            item.key !== "CUSTOMER_HOME_IMAGE_URL" &&
+            item.key !== "CUSTOMER_ABT_US_IMAGE"
+        );
         // removing extra business_config from site config
-        const sanitizedConfig = updatedConfig.map((item: any) => {
+        const sanitizedConfig = filteredConfig.map((item: any) => {
           if (item.business_config?.business_config) {
             return {
               ...item,

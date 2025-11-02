@@ -14,9 +14,6 @@ export type ContextMenuType = {
 
 export const MAX_COLUMN_WIDTH = 300;
 
-//export const regExEMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-// export const regExEMail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
 export const regExEMail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$/;
 
 export const regExUrl =
@@ -88,14 +85,6 @@ export const arrReferralStatus: any[] = [
   { text: 'Completed' },
   { text: 'Rejected' }
 ];
-
-// export const arrPresenceLookup: any[] = [
-//   { text: 'All' },
-//   { text: 'Present' },
-//   { text: 'Absent' },
-//   { text: 'Half Day' },
-//   { text: 'On Leave' }
-// ];
 
 export const arrPresenceLookup: any[] = [
   { text: 'All', value: 'All' },
@@ -344,9 +333,6 @@ export const numberFormat = (value: number, decimalPlaces: number) => {
     }, '') + (p[1] ? '.' + p[1] : '')
   );
 };
-
-// export const capitalizeWords = (text: string) =>
-//   text.replace(/\b\w/g, (char) => char.toUpperCase());
 
 export const capitalizeWords = (text: string) =>
   text.charAt(0).toUpperCase() + text.slice(1);
